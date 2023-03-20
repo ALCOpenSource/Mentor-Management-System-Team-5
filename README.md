@@ -7,8 +7,8 @@ coordination of mentors needed to execute projects, ranging from recruitment to 
 
 
 ## Techonologies 
-* Frontend - React TypeScript
-* Backend - Nodejs
+* Frontend - 
+* Backend - 
 * Database -
 * Deployment env - 
 
@@ -38,7 +38,7 @@ To get it up and running on your local machine, follow the steps below:
 - NOTE: Stickly adhere to the style guide on the design, buttons, texts etc. 
 
 # Creating issue 
-- Raise any identified issue with your mentor.
+- Raise any identified issue with your TTL
 
 #### Other commands available
 - `npm run build` - Builds the app for production to the `dist` folder.
