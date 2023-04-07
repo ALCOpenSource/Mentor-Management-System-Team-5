@@ -58,7 +58,7 @@ To get it up and running on your local machine, follow the steps below:
 
 * Start the app with the command `dotnet run --project mms.api.csproj`
 
-* Navigate to the swagger documentation on your browser with the url `http://localhost:****/swagger/index.html` where \*\*\*\* is the port number displayed on your terminal.
+* Navigate to the swagger documentation on your browser with the url `http://localhost:****/swagger/index.html` where **** is the port number displayed on your terminal.
 
 ## Design
 
