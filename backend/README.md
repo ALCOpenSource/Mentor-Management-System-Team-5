@@ -7,48 +7,45 @@ coordination of mentors needed to execute projects, ranging from recruitment to 
 
 ## Techonologies
 
-* Frontend
-* Backend
-* Database
-* Deployment env
+- Frontend
+- Backend
+- Database
+- Deployment env
 
 ## How to contributing to this project
 
 To get it up and running on your local machine, follow the steps below:
 
-* Clone the repo with the command `git clonn
-  
-* Indicate your interest to work on any issue. "eg. I want to work on this issue or I am interested in this issue"
-  
-* Open a feature branch from the 'develop' branch. eg feat/
+- Clone the repo with the command `git clonn
+- Indicate your interest to work on any issue. "eg. I want to work on this issue or I am interested in this issue"
+- Open a feature branch from the 'develop' branch. eg feat/
 
-* Make sure the name is descriptive for your branch but not too long. Lead with what the the branch is doing eg new feature or bug but follow this pattern `type/branch-description` eg `feature/add-login-functionality`.
-  
-* Ensure your branch is up to date with latest changes before pushing
-  
-* Create a pull request against develop branch
-  
-* Reference the issue you worked on in your PR
-  
-* Open a pull request against the develop branch and request a review from your
+- Make sure the name is descriptive for your branch but not too long. Lead with what the the branch is doing eg new feature or bug but follow this pattern `type/branch-description` eg `feature/add-login-functionality`.
+- Ensure your branch is up to date with latest changes before pushing
+- Create a pull request against develop branch
+- Reference the issue you worked on in your PR
+- Open a pull request against the develop branch and request a review from your
 
 ### Frontend
 
-* Navigate to the project directory with the command `cd Mentor-Management-System-Team`
-  
-* Navigate to the frontend directory with the command `cd frontend`
-  
-* Navigate to the frontend directory with the command `cd frontend mms-Admin`
-  
-* Install all the dependencies with the command `npm install`
-  
-* Start the app with the command `npm run dev`
-  
-* Navigate to the app on your browser with the url `http://localhost:****` where **** is the port number displayed on your terminal.
-  
+- Navigate to the project directory with the command `cd Mentor-Management-System-Team`
+- Navigate to the frontend directory with the command `cd frontend`
+- Navigate to the frontend directory with the command `cd frontend mms-Admin`
+- Install all the dependencies with the command `npm install`
+- Start the app with the command `npm run dev`
+- Navigate to the app on your browser with the url `http://localhost:****` where \*\*\*\* is the port number displayed on your terminal.
+
 #### Backend
 
-* Beckend is available here.
+- Navigate to the project directory with the command `cd Mentor-Management-System-Team`
+- Navigate to the backend directory with the command `cd backend`
+- Navigate to the backend directory with the command `cd src`
+
+- Navigate to the backend directory with the command `cd mms.api`
+
+- Start the app with the command `dotnet run --project mms.api.csproj`
+
+- Navigate to the swagger documentation on your browser with the url `http://localhost:****/swagger/index.html` where \*\*\*\* is the port number displayed on your terminal.
 
 ## Design
 
@@ -112,5 +109,7 @@ $ yarn run test:cov
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
