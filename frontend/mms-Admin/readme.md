@@ -11,10 +11,10 @@ To get started, you will need to have Node.js installed on your machine. If you 
 
 Once you have Node.js installed, follow these steps:
 
-* Clone the repository to your local machine.
-* Navigate to the project directory in your terminal.
-* Run `npm install` or `yarn` to install all dependencies.
-* Run `npm run dev` or `yarn dev` to start the development server.
+-  Clone the repository to your local machine.
+-  Navigate to the project directory in your terminal.
+-  Run `npm install` or `yarn` to install all dependencies.
+-  Run `npm run dev` or `yarn dev` to start the development server.
 
 The application should now be running at http://localhost:3000. Any changes you make to the code will be automatically reloaded in the browser.
 
