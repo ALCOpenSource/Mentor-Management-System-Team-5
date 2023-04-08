@@ -12,8 +12,11 @@ To get started, you will need to have Node.js installed on your machine. If you 
 Once you have Node.js installed, follow these steps:
 
 1. Clone the repository to your local machine.
+
 2. Navigate to the project directory in your terminal.
+
 3. Run `npm install` or `yarn` to install all dependencies.
+
 4. Run `npm run dev` or `yarn dev` to start the development server.
 
 The application should now be running at http://localhost:3000. Any changes you make to the code will be automatically reloaded in the browser.
@@ -38,8 +41,10 @@ This project uses environment variables to store sensitive information such as A
 ### Development Environment
 To access environment variables in the development environment, you can create a `.env.development` file in the root of your project and define your variables like this:
 
-* **VITE_API_KEY**=your_api_key_here
-* **VITE_API_URL**=https://api.example.com
+
+* **VITE_API_KEY** = your_api_key_here
+
+* **VITE_API_URL** = https://api.example.com
 
 Note that any environment variable starting with  `VITE_` will be automatically loaded into your Vite application.
 
@@ -51,8 +56,10 @@ To access these variables in your code, you can use the `import.meta.env` object
 ### Production Environment
 To access environment variables in the production environment, you can create a `.env.production` file in the root of your project and define your variables like this:
 
-* **VITE_API_KEY**=your_api_key_here
-* **VITE_API_URL**=https://api.example.com
+
+* **VITE_API_KEY** = your_api_key_here
+
+* **VITE_API_URL** = https://api.example.com
 
 Note that any environment variable starting with  `VITE_` will be automatically loaded into your Vite application.
 
