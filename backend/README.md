@@ -50,7 +50,7 @@ To get it up and running on your local machine, follow the steps below:
 
 *  Navigate to the project directory with the command `cd Mentor-Management-System-Team`
 
-* Navigate to the backend directory with the command `cd backend`
+*  Navigate to the backend directory with the command `cd backend`
 
 *  Navigate to the backend directory with the command `cd src`
 
