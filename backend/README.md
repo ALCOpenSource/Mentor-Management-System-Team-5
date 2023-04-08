@@ -50,15 +50,15 @@ To get it up and running on your local machine, follow the steps below:
 
 *  Navigate to the project directory with the command `cd Mentor-Management-System-Team`
 
-*  Navigate to the backend directory with the command `cd backend`
+*   Navigate to the backend directory with the command `cd backend`
 
-*  Navigate to the backend directory with the command `cd src`
+*   Navigate to the backend directory with the command `cd src`
 
-*  Navigate to the backend directory with the command `cd mms.api`
+*   Navigate to the backend directory with the command `cd mms.api`
 
-*  Start the app with the command `dotnet run --project mms.api.csproj`
+*   Start the app with the command `dotnet run --project mms.api.csproj`
 
-*  Navigate to the swagger documentation on your browser with the url `http://localhost:****/swagger/index.html` where **** is the port number displayed on your terminal.
+*   Navigate to the swagger documentation on your browser with the url `http://localhost:****/swagger/index.html` where **** is the port number displayed on your terminal.
 
 ## Design
 
