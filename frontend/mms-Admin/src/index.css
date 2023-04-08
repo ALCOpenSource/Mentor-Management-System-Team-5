@@ -9,8 +9,8 @@
 }
 
 @font-face {
-  font-family: 'Mukta';
-  src: local('Mukta'), url("./assets/fonts/Mukta-Regular.ttf"), format('truetype');
+  font-family: "Mukta";
+  src: local("Mukta"), url("./assets/fonts/Mukta-Regular.ttf"), format("truetype");
 }
 
 * {
@@ -19,7 +19,7 @@
   box-sizing: border-box;
 }
 
-#root{
+#root {
   max-width: 1920px;
   display: flex;
   flex-direction: column;

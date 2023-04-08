@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "@/pages/LandingPage/LandingPage";
-LandingPage
+
 const RoutesComponent: React.FC = () => {
   return (
     <BrowserRouter>
