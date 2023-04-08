@@ -10,9 +10,7 @@
 
 @font-face {
   font-family: 'Mukta';
-  src: local('Mukta'), 
-  url("./assets/fonts/Mukta-Regular.ttf") 
-  format('truetype');
+  src: local('Mukta'), url("./assets/fonts/Mukta-Regular.ttf"), format('truetype');
 }
 
 * {
