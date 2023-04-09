@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["mms.api/mms.api.csproj", "mms.api/"]
 RUN dotnet restore "mms.api/mms.api.csproj"
 COPY . .
-WORKDIR "/src/mms.api"
+WORKDIR /src/mms.api
 RUN dotnet build "mms.api.csproj" -c Release -o /app/build
 
 FROM build AS publish
