@@ -5,21 +5,18 @@ import searchIcon from "@/assets/icons/search-icon.svg";
 import PropTypes from "prop-types";
 
 const Input = forwardRef(
-  (
-    {
-      label,
-      placeholder,
-      required,
-      type = "text",
-      onChange,
-      error,
-      icon,
-      marginbottom,
-      border,
-      ...props
-    },
-    ref
-  ) => {
+  ({
+    label,
+    placeholder,
+    required,
+    type = "text",
+    onChange,
+    error,
+    icon,
+    marginbottom,
+    border,
+    ...props
+  }) => {
     const [inputType, setInputType] = useState(type);
     const [isActive, setIsActive] = useState(false);
 

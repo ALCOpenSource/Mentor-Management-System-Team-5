@@ -31,13 +31,9 @@ export const setRefreshToken = (token) => {
 };
 
 export const isExpired = (token) => {
-  try {
-    const decoded = decodeToken(token);
-    const milliseconds = decoded.exp * 1000;
-    return Date.now() > milliseconds;
-  } catch (err) {
-    return true;
-  }
+  const decoded = decodeToken(token);
+  const milliseconds = decoded.exp * 1000;
+  return Date.now() > milliseconds;
 };
 
 const clearStorage = () => {

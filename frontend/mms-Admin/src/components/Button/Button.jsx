@@ -14,14 +14,22 @@ padding: 0.625rem 1.125rem;
   justify-content: center;
   border-radius: ${(props) => props.borderRadius};
 
+  &:disabled {
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
+    border: none;
+    pointer-events: none;
+  }
+
 input{
-      margin: 0rem 0.375rem 0rem 0rem;
+      margin: 0 0.375rem 0 0;
   }
   a{
       width: 100%;
   }
 span{
-      margin-right: 0rem;
+      margin-right: 0;
       font-size: 1.25rem;
   }
 &:hover{ 
@@ -116,7 +124,6 @@ Button.defaultProps = {
   suffixIcon: null,
   disabled: false,
   loading: false,
-  onClick: () => {},
   hoverBg: "",
   hoverColor: "",
   type: "button"

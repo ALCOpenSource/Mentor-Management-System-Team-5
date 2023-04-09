@@ -20,15 +20,13 @@ export const FormGroup = styled(Form.Group)`
     color: #808080;
     text-align: left;
     ${({ required }) =>
-      required
-        ? `
-      ::after {
+    required
+      ? `::after {
         content: '*';
         color: red;
         padding-left: 5px;
-      }
-      `
-        : ""}
+      } `
+      : ""}
   }
 
   input {
@@ -39,7 +37,7 @@ export const FormGroup = styled(Form.Group)`
     transition: 0.3s;
     background: #fff;
     font-size: 16px;
-    padding: 0.125rem 0rem 0rem 0rem;
+    padding: 0.125rem 0 0 0;
     line-height: 1;
     &:focus {
       outline: none;
@@ -67,6 +65,7 @@ export const FormGroup = styled(Form.Group)`
     &:focus-within label {
       transform: translate(0, -12px) scale(0.7);
     }
+
     img {
       position: absolute;
       margin-right: 0.75rem;

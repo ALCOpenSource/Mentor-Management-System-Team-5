@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
@@ -11,14 +11,14 @@ import InputField from "@/components/Input/Input";
 import { useForm, Controller } from "react-hook-form";
 import { loginSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { RootState } from "@/redux/store";
 import { login } from "@/redux/Auth/AuthSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loading = useSelector((state: any) => state?.loading?.loginLoading);
+  const loading = useSelector((state: RootState) => state?.loading?.loginLoading);
 
   console.log(loading, "loading");
 
@@ -41,8 +41,7 @@ const Login = () => {
   const {
     handleSubmit,
     formState: { errors },
-    control,
-    reset
+    control
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   const handleForgotPassword = () => {

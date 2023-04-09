@@ -41,15 +41,14 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: 1px solid none;
   -webkit-text-fill-color: var(--primaryTextColor);
-  /* box-shadow: 0 0 0 1000px rgb(255 255 255 / 0%) inset; */
-  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-box-shadow: 0 0 0 30px white inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 button:disabled,
 button[disabled] {
-  background-color: gray !important;
-  color: white !important;
+  background-color: gray;
+  color: white;
   cursor: not-allowed;
   border: none;
   pointer-events: none;
