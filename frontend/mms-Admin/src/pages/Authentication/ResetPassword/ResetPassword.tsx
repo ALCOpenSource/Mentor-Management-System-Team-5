@@ -22,11 +22,9 @@ const ResetPassword = () => {
   const displayModal = useSelector((state: RootState) => state.modal.show);
   const modalName = useSelector((state: RootState) => state.modal.modalName);
 
-  console.log(loading, "loading");
 
   const handleResetPassword = async (data) => {
     const response = await dispatch(resetPassword(data));
-    console.log(response, "reset password response");
 
     // Temporary code for success modal
     dispatch(showModal({ name: "resetPassword", modalData: response }));
