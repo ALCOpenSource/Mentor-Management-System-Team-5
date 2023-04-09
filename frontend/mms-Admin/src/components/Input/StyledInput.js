@@ -49,7 +49,6 @@ export const FormGroup = styled(Form.Group)`
   }
   .input-container {
     position: relative;
-
     display: flex;
     flex-direction: row;
     padding: 15px 10px 7px 10px;
@@ -59,14 +58,16 @@ export const FormGroup = styled(Form.Group)`
     color: #5e6c84;
     transition: 0.3s;
     background: #fff;
+
     &:focus {
       border: 1px solid #022b69;
     }
+
     &:focus-within label {
       transform: translate(0, -12px) scale(0.7);
     }
 
-    img {
+    & img {
       position: absolute;
       margin-right: 0.75rem;
       right: 0%;
