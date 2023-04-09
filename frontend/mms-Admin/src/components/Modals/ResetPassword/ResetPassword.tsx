@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import cx from "classNames";
 import styles from "./ResetPassword.module.scss";
+import PropTypes from "prop-types";
 
 import headerImage from "@/assets/images/reset-password-success.png";
 import Button from "@/components/Button/Button";
@@ -42,6 +43,11 @@ const PasswordReset = ({ show, size }) => {
       </div>
     </ModalContainer>
   );
+};
+
+PasswordReset.propTypes = {
+  show: PropTypes.bool.isRequired,
+  size: PropTypes.string.isRequired
 };
 
 export default PasswordReset;

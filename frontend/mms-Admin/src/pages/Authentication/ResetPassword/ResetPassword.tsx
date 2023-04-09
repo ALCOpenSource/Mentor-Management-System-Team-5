@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./ResetPassword.module.scss";
 
@@ -18,10 +17,8 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const loading = useSelector((state: RootState) => state?.loading?.resetPasswordLoading);
-  const modalData = useSelector((state: RootState) => state.modal.modalData);
   const displayModal = useSelector((state: RootState) => state.modal.show);
   const modalName = useSelector((state: RootState) => state.modal.modalName);
 
