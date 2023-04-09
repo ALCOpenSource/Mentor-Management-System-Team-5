@@ -1,0 +1,28 @@
+.generic-modal-wrapper {
+  background-color: transparent;
+}
+.generic-modal-wrapper .modal-content {
+  background-color: #fff;
+  background-color: transparent;
+  border: none;
+  // height: 75vh;
+  height: auto;
+  padding: 1rem 1rem;
+  width: 100%;
+}
+.generic-modal-wrapper .generic-modal-body {
+  background-color: transparent;
+  height: 100%;
+  // display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0rem 0rem;
+}
+
+@media all and (min-width: 768px) {
+  .generic-modal-wrapper .modal-content {
+    // height: 70.5vh;
+    height: auto;
+  }
+}

@@ -60,7 +60,7 @@ export const login = (data) => async (dispatch) => {
   } catch (e) {
     toast.error(e?.message);
     dispatch(loginLoading(false));
-    return dispatch(hasError(e.message));
+    return dispatch(hasError(e?.response?.data));
   }
 };
 export const forgotPassword = (data) => async (dispatch) => {
@@ -74,7 +74,7 @@ export const forgotPassword = (data) => async (dispatch) => {
   } catch (e) {
     toast.error(e.message);
     dispatch(forgotPasswordLoading(false));
-    return dispatch(hasError(e.message));
+    return dispatch(hasError(e?.response?.data));
   }
 };
 
@@ -88,7 +88,7 @@ export const resetPassword = (data) => async (dispatch) => {
   } catch (e) {
     toast.error(e.message);
     dispatch(resetPasswordLoading(false));
-    return dispatch(hasError(e.response.data));
+    return dispatch(hasError(e?.response?.data));
   }
 };
 

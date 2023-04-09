@@ -1,0 +1,30 @@
+.authSideHeroContainer {
+  background-color: var(--pageBackgroundColor);
+  width: 100%;
+  height: 100vh;
+
+  .pageLogo {
+    width: clamp(15rem, 20vw, 20rem);
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+  .tagLine {
+    font-size: 1.5rem;
+    color: var(--whiteTextColor);
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .authSideHeroContainer {
+    .pageLogo {
+      width: clamp(13rem, 20vw, 15rem);
+    }
+
+    .tagLine {
+      font-size: 2rem;
+    }
+  }
+}
