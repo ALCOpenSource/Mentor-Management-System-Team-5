@@ -47,7 +47,7 @@ To get it up and running on your local machine, follow the steps below:
 * Navigate to the app on your browser with the url `http://localhost:****` where **** is the port number displayed on your terminal.
   
 #### Backend
-
+To run the application via command line
 *  Navigate to the project directory with the command `cd Mentor-Management-System-Team`
 
 *  Navigate to the backend directory with the command `cd backend`
@@ -60,6 +60,18 @@ To get it up and running on your local machine, follow the steps below:
 
 *  Navigate to the swagger documentation on your browser with the url `http://localhost:****/swagger/index.html` where **** is the port number displayed on your terminal.
 
+To run the application on docker compose
+*  Download docker desktop
+
+*  Navigate to the project directory with the command `cd Mentor-Management-System-Team`
+
+*  Navigate to the backend directory with the command `cd backend`
+
+*  Navigate to the backend directory with the command `cd src`
+
+*  On your terminal, execute the following `docker build -t mmsbackend:latest .`
+
+*  Navigate to the swagger documentation on your browser with the url `http://localhost:8000/swagger/index.html`.
 ## Design
 
 The design can be find [here](https://www.figma.com/file/JNZKj3lachPypSOMBOhC1e/MMS-ALC-0pen-Source-Project?node-id=6784%3A7593&t=dnwBBGHPZRxryUnJ-0)
