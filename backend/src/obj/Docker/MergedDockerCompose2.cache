@@ -1,0 +1,32 @@
+name: dockercompose9526541519036468038
+services:
+  mms.api:
+    build:
+      context: C:\Users\kehin\source\repos\AndelaOpenSource\Mentor-Management-System-Team-5\backend\src
+      dockerfile: mms.api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: mmsapi
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "8000"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\kehin\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\kehin\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: dockercompose9526541519036468038_default
