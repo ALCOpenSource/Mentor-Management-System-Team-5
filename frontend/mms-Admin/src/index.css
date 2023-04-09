@@ -10,13 +10,14 @@
 
 @font-face {
   font-family: "Mukta";
-  src: local("Mukta"), url("./assets/fonts/Mukta-Regular.ttf"), format("truetype");
+  src: local("Mukta"), url("./assets/fonts/Mukta-Regular.ttf") format("truetype");
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Mukta, Arial, Helvetica, sans-serif;
 }
 
 #root {
@@ -27,4 +28,29 @@
   width: 100%;
   min-height: 100vh;
   font-family: Mukta, Arial, Helvetica, sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid none;
+  -webkit-text-fill-color: var(--primaryTextColor);
+  /* box-shadow: 0 0 0 1000px rgb(255 255 255 / 0%) inset; */
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+button:disabled,
+button[disabled] {
+  background-color: gray !important;
+  color: white !important;
+  cursor: not-allowed;
+  border: none;
+  pointer-events: none;
 }
