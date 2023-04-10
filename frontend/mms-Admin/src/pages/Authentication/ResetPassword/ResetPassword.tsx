@@ -86,9 +86,9 @@ const ResetPassword = () => {
                   disabled={loading}
                   title='Reset Password'
                   textColor='#FFF'
-                  bgColor='#035D63'
+                  bgColor='#058b94'
                   hoverColor='#fff'
-                  hoverBg='#058b94'
+                  hoverBg='#035D63'
                 />
               </div>
             </form>

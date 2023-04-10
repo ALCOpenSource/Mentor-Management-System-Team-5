@@ -72,9 +72,9 @@ const ForgotPassword = () => {
                   <Button
                     title='Done'
                     textColor='#FFF'
-                    bgColor='#035D63'
+                    bgColor='#058b94'
                     hoverColor='#fff'
-                    hoverBg='#058b94'
+                    hoverBg='#035D63'
                     onClick={() => navigate("/login")}
                   />
                 </div>
@@ -105,9 +105,9 @@ const ForgotPassword = () => {
                     disabled={loading}
                     title='Get Reset Link'
                     textColor='#FFF'
-                    bgColor='#035D63'
+                    bgColor='#058b94'
                     hoverColor='#fff'
-                    hoverBg='#058b94'
+                    hoverBg='#035D63'
                   />
                 </div>
 
