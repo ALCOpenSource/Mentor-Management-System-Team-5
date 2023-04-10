@@ -63,15 +63,15 @@ To get it up and running on your local machine, follow the steps below:
 To run the application on docker compose
 *   Download docker desktop
 
-*  Navigate to the project directory with the command `cd Mentor-Management-System-Team`
+*   Navigate to the project directory with the command `cd Mentor-Management-System-Team`
 
-*    Navigate to the backend directory with the command `cd backend`
+*   Navigate to the backend directory with the command `cd backend`
 
-*    Navigate to the backend directory with the command `cd src`
+*   Navigate to the backend directory with the command `cd src`
 
 *   On your terminal, execute the following `docker build -t mmsbackend:latest .`
 
-*  Navigate to the swagger documentation on your browser with the url `http://localhost:8000/swagger/index.html`.
+*   Navigate to the swagger documentation on your browser with the url `http://localhost:8000/swagger/index.html`.
 
 ## Design
 
