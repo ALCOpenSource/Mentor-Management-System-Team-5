@@ -13,6 +13,9 @@ import { forgotPasswordSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotPassword } from "@/redux/Auth/AuthSlice";
 
+type FormData = {
+  email: string;
+};
 
 const ForgotPassword = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +24,7 @@ const ForgotPassword = () => {
   const loading = useAppSelector((state) => state?.loading?.forgotPasswordLoading);
   const [showOutcome, setShowOutcome] = useState(false);
 
-  const handleForgotPassword = async (data: any ) => {
+  const handleForgotPassword = async (data: FormData ) => {
     const response = await dispatch(forgotPassword(data));
     console.log(response, "ForgotPassword response");
     // if (response?.payload?.success) {

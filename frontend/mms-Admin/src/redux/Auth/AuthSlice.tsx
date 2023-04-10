@@ -1,10 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, Dispatch } from "@reduxjs/toolkit";
 
 import { loginApi, forgotPasswordApi, resetPasswordApi } from "../api/auth";
 import { toast } from "react-toastify";
 
 import { setToken } from "@/utils/auth";
-import { setAuthToken } from "@/utils/setAuthToken";
 
 import {
   loginLoading,
@@ -56,7 +55,7 @@ export default authSlice.reducer;
 // Actions
 const { hasError, loginAction, forgotPasswordAction, resetPasswordAction } = authSlice.actions;
 
-export const login = (data: Record<string, unknown>) => async (dispatch: any) => {
+export const login = (data: Record<string, unknown>) => async (dispatch: Dispatch) => {
   dispatch(loginLoading(true));
 
   try {
@@ -66,14 +65,16 @@ export const login = (data: Record<string, unknown>) => async (dispatch: any) =>
     toast.success(response?.data?.message);
     dispatch(loginLoading(false));
     return dispatch(loginAction(response?.data));
-  } catch (e: any) {
-    toast.error(e?.message);
-    dispatch(loginLoading(false));
-    return dispatch(hasError(e?.message));
+  } catch (e) {
+    if(e instanceof Error){
+      toast.error(e?.message);
+      dispatch(loginLoading(false));
+      return dispatch(hasError(e?.message));
+    }
   }
-  
+
 };
-export const forgotPassword = (data: Record<string, unknown>) => async (dispatch: any) => {
+export const forgotPassword = (data: Record<string, unknown>) => async (dispatch: Dispatch) => {
   dispatch(forgotPasswordLoading(true));
 
   try {
@@ -81,33 +82,37 @@ export const forgotPassword = (data: Record<string, unknown>) => async (dispatch
     toast.success(response.data.message);
     dispatch(forgotPasswordLoading(false));
     return dispatch(forgotPasswordAction(response?.data));
-  } catch (e: any) {
-    toast.error(e.message);
-    dispatch(forgotPasswordLoading(false));
-    return dispatch(hasError(e?.response?.data));
+  } catch (e) {
+    if(e instanceof Error){
+      toast.error(e?.message);
+      dispatch(loginLoading(false));
+      return dispatch(hasError(e?.message));
+    }
   }
 };
 
-export const resetPassword = (data: Record<string, unknown>) => async (dispatch: any) => {
+export const resetPassword = (data: Record<string, unknown>) => async (dispatch: Dispatch) => {
   dispatch(resetPasswordLoading(true));
   try {
     const response = await resetPasswordApi(data);
     toast.success(response.data.message);
     dispatch(resetPasswordLoading(false));
     return dispatch(resetPasswordAction(response?.data));
-  } catch (e: any) {
-    toast.error(e.message);
-    dispatch(resetPasswordLoading(false));
-    return dispatch(hasError(e?.response?.data));
+  } catch (e) {
+    if(e instanceof Error){
+      toast.error(e?.message);
+      dispatch(loginLoading(false));
+      return dispatch(hasError(e?.message));
+    }
   }
 };
 
-export const logout = () => () => {
-  try {
-    localStorage.clear();
-    setAuthToken("");
-    window.location.href = "/login";
-  } catch (e: any) {
-    toast.error(e.response.data.message);
-  }
-};
+// export const logout = () => () => {
+//   try {
+//     localStorage.clear();
+//     setAuthToken("");
+//     window.location.href = "/login";
+//   } catch (e) {
+//     toast.error(e.response.data.message);
+//   }
+// };

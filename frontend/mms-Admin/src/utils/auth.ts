@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import { setAuthToken } from "./setAuthToken";
-
+import { RootState } from "@/redux/store";
 export const isAuthenticated = (): boolean => {
   const token = getToken();
   return !!token;
@@ -30,23 +30,27 @@ export const setRefreshToken = (token: string | null): void => {
   }
 };
 
-export const isExpired = (token: string): boolean => {
-  let decoded: any = {};
-  decoded = decodeToken(token);
-  const milliseconds = decoded.exp * 1000;
-  return Date.now() > milliseconds;
+type DecodedToken = {
+  email: string;
+  name: string;
+  id: string;
+  iat: number;
+  exp: number;
 };
-
-const clearStorage = (): void => {
-  localStorage.clear();
+export const isExpired = (token: string) => {
+  if(token){
+    const decoded: DecodedToken = decodeToken(token);
+    const currentTime = Date.now() / 1000;
+    return decoded.exp < currentTime;
+  }
 };
 
 export const decodeToken = (token: string | null) => {
-  let decoded = {};
+  let decoded: DecodedToken = {} as DecodedToken;
   if(token){
     decoded = jwtDecode(token);
-    return decoded;
   }
+  return decoded;
 };
 
 export const login = (token: string): void => {
@@ -54,17 +58,18 @@ export const login = (token: string): void => {
 };
 
 export const logout = (): void => {
-  clearStorage();
+  localStorage.clear();
+  setAuthToken("");
+  window.location.href = "/login";
 };
 
-export const checkAuth = (store: any): void => {
+export const checkAuth = (): void => {
   if (localStorage.accessToken) {
     setAuthToken(localStorage.accessToken);
-    const decoded: any = jwtDecode(localStorage.accessToken);
+    const decoded: DecodedToken = jwtDecode(localStorage.accessToken);
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
-      store.dispatch(logout());
-      window.location.href = "/";
+      logout();
     }
   }
 };

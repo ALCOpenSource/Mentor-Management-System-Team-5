@@ -31,7 +31,7 @@ const ResetPassword = () => {
     const response = await dispatch(resetPassword(data));
 
     // Temporary code for success modal
-    dispatch(showModal({ name: "resetPassword", modalData: response }));
+    response && dispatch(showModal({ name: "resetPassword", modalData: response }));
     reset();
   };
 

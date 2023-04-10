@@ -25,7 +25,6 @@ const Input = forwardRef(
       required,
       type = "text",
       onChange,
-      onBlur,
       error,
       icon,
       marginbottom,
