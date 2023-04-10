@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./ForgotPassword.module.scss";
@@ -11,17 +11,17 @@ import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 import { useForm, Controller } from "react-hook-form";
 import { forgotPasswordSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RootState } from "@/redux/store";
 import { forgotPassword } from "@/redux/Auth/AuthSlice";
 
+
 const ForgotPassword = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const loading = useSelector((state: RootState) => state?.loading?.forgotPasswordLoading);
+  const loading = useAppSelector((state) => state?.loading?.forgotPasswordLoading);
   const [showOutcome, setShowOutcome] = useState(false);
 
-  const handleForgotPassword = async (data) => {
+  const handleForgotPassword = async (data: any ) => {
     const response = await dispatch(forgotPassword(data));
     console.log(response, "ForgotPassword response");
     // if (response?.payload?.success) {

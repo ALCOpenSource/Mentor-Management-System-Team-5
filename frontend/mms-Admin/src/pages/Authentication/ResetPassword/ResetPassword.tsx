@@ -1,5 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+
 import cx from "classnames";
 import styles from "./ResetPassword.module.scss";
 
@@ -11,19 +12,22 @@ import ResetPasswordModal from "@/components/Modals/ResetPassword/ResetPassword"
 import { useForm, Controller } from "react-hook-form";
 import { resetPasswordSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RootState } from "@/redux/store";
 import { resetPassword } from "@/redux/Auth/AuthSlice";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
+type FormData = {
+  password: string;
+}
+
 const ResetPassword = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const loading = useSelector((state: RootState) => state?.loading?.resetPasswordLoading);
-  const displayModal = useSelector((state: RootState) => state.modal.show);
-  const modalName = useSelector((state: RootState) => state.modal.modalName);
+  const loading = useAppSelector((state) => state?.loading?.resetPasswordLoading);
+  const displayModal = useAppSelector((state) => state.modal.show);
+  const modalName = useAppSelector((state) => state.modal.modalName);
 
 
-  const handleResetPassword = async (data) => {
+  const handleResetPassword = async (data: FormData) => {
     const response = await dispatch(resetPassword(data));
 
     // Temporary code for success modal
@@ -75,11 +79,9 @@ const ResetPassword = () => {
                 *Your new password must be different from previously used password.
               </p>
 
-              <div
-                onClick={handleSubmit((data) => handleResetPassword(data))}
-                className={cx(styles.submitBtnDiv, "flexRow")}
-              >
+              <div className={cx(styles.submitBtnDiv, "flexRow")}>
                 <Button
+                  onClick={handleSubmit((data) => handleResetPassword(data))}
                   loading={loading}
                   disabled={loading}
                   title='Reset Password'

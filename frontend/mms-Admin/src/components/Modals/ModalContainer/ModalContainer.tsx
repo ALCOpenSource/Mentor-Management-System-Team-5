@@ -1,12 +1,22 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Modal } from "react-bootstrap";
 import "./ModalContainer.scss";
-import { useDispatch } from "react-redux";
 import { hideModal } from "@/redux/Modal/ModalSlice";
-import PropTypes from "prop-types";
+import { useAppDispatch } from "@/hooks/useReduxHooks";
 
-const ModalContainer = ({ children, show, size = "md", modalName }) => {
-  const dispatch = useDispatch();
+
+type ModalSize = "sm" | "md" | "lg" | "xl";
+
+type ModalContainerProps = {
+  children: ReactNode;
+  show: boolean;
+  size?: ModalSize;
+  modalName?: string;
+};
+
+const ModalContainer = ({ children, show, size = "md", modalName }: ModalContainerProps ) => {
+
+  const dispatch = useAppDispatch();
   const handleClose = () => dispatch(hideModal({ name: modalName }));
 
   return (
@@ -25,13 +35,6 @@ const ModalContainer = ({ children, show, size = "md", modalName }) => {
       </div>
     </>
   );
-};
-
-ModalContainer.propTypes = {
-  children: PropTypes.node,
-  show: PropTypes.bool,
-  size: PropTypes.string,
-  modalName: PropTypes.string
 };
 
 export default ModalContainer;

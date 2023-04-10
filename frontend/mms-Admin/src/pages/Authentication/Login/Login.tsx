@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./Login.module.scss";
@@ -11,18 +11,24 @@ import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 import { useForm, Controller } from "react-hook-form";
 import { loginSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RootState } from "@/redux/store";
+
 import { login } from "@/redux/Auth/AuthSlice";
 
+
+type FormData = {
+  email: string;
+  password: string;
+};
+
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const loading = useSelector((state: RootState) => state?.loading?.loginLoading);
+  const loading = useAppSelector((state) => state?.loading?.loginLoading);
 
   console.log(loading, "loading");
 
-  const signIn = async (data) => {
+  const signIn = async (data: FormData) => {
     const response = await dispatch(login(data));
     console.log(response, "login response");
     // if (response?.payload?.success) {

@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/hooks/useReduxHooks";
+
 import ModalContainer from "../ModalContainer/ModalContainer";
-import cx from "classNames";
+import cx from "classnames";
 import styles from "./ResetPassword.module.scss";
-import PropTypes from "prop-types";
 
 import headerImage from "@/assets/images/reset-password-success.png";
 import Button from "@/components/Button/Button";
@@ -11,8 +11,14 @@ import Button from "@/components/Button/Button";
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useNavigate } from "react-router";
 
-const PasswordReset = ({ show, size }) => {
-  const dispatch = useDispatch();
+interface ResetPasswordProps {
+show: boolean;
+size?: "sm" | "lg" | "xl" | "md";
+modalName?: string;
+}
+
+const ResetPassword: React.FC<ResetPasswordProps> = ({ show, size, modalName }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -21,7 +27,7 @@ const PasswordReset = ({ show, size }) => {
   };
 
   return (
-    <ModalContainer show={show} size={size}>
+    <ModalContainer show={show} size={size} modalName={modalName}>
       <div className={cx(styles.modalWrapper, "flexCol")}>
         <div className={cx(styles.modalHeader, "flexCol")}>
           <h6 className={cx(styles.headerTitle)}>Password Reset Successful</h6>
@@ -45,9 +51,4 @@ const PasswordReset = ({ show, size }) => {
   );
 };
 
-PasswordReset.propTypes = {
-  show: PropTypes.bool.isRequired,
-  size: PropTypes.string.isRequired
-};
-
-export default PasswordReset;
+export default ResetPassword;
