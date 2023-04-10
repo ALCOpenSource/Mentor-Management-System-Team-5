@@ -71,6 +71,8 @@ To run the application on docker compose
 
 *   On your terminal, execute the following `docker build -t mmsbackend:latest .`
 
+*   Then still on your terminal in same directory run `docker-compose up`
+
 *   Navigate to the swagger documentation on your browser with the url `http://localhost:8000/swagger/index.html`.
 
 ## Design
