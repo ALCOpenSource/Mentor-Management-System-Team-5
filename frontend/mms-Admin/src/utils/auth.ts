@@ -1,6 +1,5 @@
 import jwtDecode from "jwt-decode";
 import { setAuthToken } from "./setAuthToken";
-import { RootState } from "@/redux/store";
 export const isAuthenticated = (): boolean => {
   const token = getToken();
   return !!token;
