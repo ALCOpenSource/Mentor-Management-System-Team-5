@@ -1,10 +1,28 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import cx from "classnames";
 import imageLoader from "@/assets/icons/loading.svg";
 import styled from "styled-components";
 
-const ButtonComponent = styled.button`
+interface ButtonProps {
+  title: string;
+  borderRadius?: string;
+  textColor?: string;
+  bgColor?: string;
+  bordercolor?: string;
+  checked?: boolean;
+  checkedBtn?: boolean;
+  prefixIcon?: React.ReactNode;
+  suffixIcon?: React.ReactNode;
+  disabled?: boolean;
+  loading?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  hoverBg?: string;
+  hoverColor?: string;
+  type?: "button" | "submit" | "reset";
+  }
+
+const ButtonComponent = styled.button<ButtonProps>`
 padding: 0.625rem 1.125rem;
   border: 0.5px solid;
   font-size: 1rem;
@@ -51,23 +69,24 @@ span{
 }
 `;
 
-const Button = (props) => {
+const Button: React.FC<ButtonProps> = (props) => {
+  
   const {
     title,
-    borderRadius,
+    borderRadius = "10px",
     textColor,
     bgColor,
     bordercolor,
-    checked,
-    checkedBtn,
-    prefixIcon,
-    suffixIcon,
+    checked = false,
+    checkedBtn = false,
+    prefixIcon = null,
+    suffixIcon = null,
     disabled = false,
-    loading,
+    loading = false,
     onClick,
     hoverBg,
     hoverColor,
-    type
+    type = "button"
   } = props;
 
   // const handleClick = (event) => {
@@ -86,6 +105,7 @@ const Button = (props) => {
       hoverBg={hoverBg}
       hoverColor={hoverColor}
       disabled={disabled}
+      title={title}
       className={cx("flexRow")}
       style={{
         color: `${textColor}`,
@@ -110,40 +130,6 @@ const Button = (props) => {
       )}
     </ButtonComponent>
   );
-};
-
-Button.defaultProps = {
-  borderRadius: "10px",
-  title: "",
-  textColor: "",
-  bgColor: "",
-  bordercolor: "",
-  checked: false,
-  checkedBtn: false,
-  prefixIcon: null,
-  suffixIcon: null,
-  disabled: false,
-  loading: false,
-  hoverBg: "",
-  hoverColor: "",
-  type: "button"
-};
-Button.propTypes = {
-  borderRadius: PropTypes.string,
-  title: PropTypes.string,
-  textColor: PropTypes.string,
-  bgColor: PropTypes.string,
-  bordercolor: PropTypes.string,
-  checked: PropTypes.bool,
-  checkedBtn: PropTypes.bool,
-  prefixIcon: PropTypes.element,
-  suffixIcon: PropTypes.element,
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-  onClick: PropTypes.func,
-  hoverBg: PropTypes.string,
-  hoverColor: PropTypes.string,
-  type: PropTypes.string
 };
 
 export default Button;

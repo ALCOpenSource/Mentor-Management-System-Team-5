@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const setAuthToken = (token) => {
+export const setAuthToken = (token: string) => {
   if (token) {
     // Apply to every requests
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
