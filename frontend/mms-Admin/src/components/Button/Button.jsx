@@ -8,9 +8,9 @@ const ButtonComponent = styled.button`
 font-size: ${props => props.size === "small" ? "var(--primaryBtnSmallFontSize)" : "var(--primaryBtnFontSize)"};
 padding: ${props => props.size === "small" ? "var(--primaryBtnSmallPadding)" : "var(--primaryBtnPadding)"};
 border-radius: ${props => props.size === "small" ? "var(--primaryBtnSmallBorderRadius)" : "var(--primaryBtnBorderRadius)"};
-background-color: var(--primaryBtnBg);
-color: var(--primaryBtnTextColor);
-border: 1px solid var(--primaryBtnBorderColor);
+background-color: ${props => props.type === "primary" ? "var(--primaryBtnBg)" : "var(--secondaryBtnBg)"};
+color: ${props => props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)"};
+border: 1px solid ${props => props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)"};
 
   width: fit-content;
   white-space: nowrap;
@@ -30,14 +30,14 @@ span{
       font-size: 1.25rem;
   }
 &:hover{ 
-  background-color: var(--primaryBtnHoverBg) !important; 
-  color: var(--primaryBtnHoverTextColor) !important; 
-  border: 1px solid var(--primaryBtnHoverBorderColor) !important;
+  background-color: ${props => props.type === "primary" ? "var(--primaryBtnHoverBg)" : "var(--secondaryBtnHoverBg)"}; 
+  color: ${props => props.type === "primary" ? "var(--primaryBtnHoverTextColor)" : "var(--secondaryBtnHoverTextColor)"}; 
+  border: 1px solid ${props => props.type === "primary" ? "var(--primaryBtnHoverBorderColor)" : "var(--secondaryBtnHoverBorderColor)"};
 }
 }
 `;
 
-const PrimaryButton = props => {
+const Button = props => {
 
   const { title, checked, checkedBtn, prefixIcon, suffixIcon, disabled = false, loading, onClick, type, size } = props;
 
@@ -63,7 +63,7 @@ const PrimaryButton = props => {
   );
 };
 
-PrimaryButton.defaultProps = {
+Button.defaultProps = {
   title: "",
   checked: false,
   checkedBtn: false,
@@ -72,9 +72,9 @@ PrimaryButton.defaultProps = {
   disabled: false,
   loading: false,
   onClick: () => { },
-  type: "button"
+  type: "primary"
 };
-PrimaryButton.propTypes = {
+Button.propTypes = {
   title: PropTypes.string,
   checked: PropTypes.bool,
   checkedBtn: PropTypes.bool,
@@ -86,6 +86,6 @@ PrimaryButton.propTypes = {
   type: PropTypes.string
 };
 
-export default PrimaryButton;
+export default Button;
 
 

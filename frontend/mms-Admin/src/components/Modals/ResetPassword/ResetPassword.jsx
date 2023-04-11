@@ -6,7 +6,7 @@ import cx from "classnames";
 import styles from "./ResetPassword.module.scss";
 
 import headerImage from "@/assets/images/reset-password-success.png";
-import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useNavigate } from "react-router";
@@ -31,7 +31,7 @@ const ResetPassword = ({ show, size, modalName }) => {
 
         <div className={cx(styles.modalBody, "flexCol")}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <PrimaryButton
+            <Button
               onClick={handleClick}
               title='Done'
             />

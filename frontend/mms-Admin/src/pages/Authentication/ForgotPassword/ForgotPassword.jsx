@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./ForgotPassword.module.scss";
 
-import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 
@@ -66,7 +66,7 @@ const ForgotPassword = () => {
                 </p>
 
                 <div className={cx(styles.btnDiv, "flexRow")}>
-                  <PrimaryButton
+                  <Button
                     title='Done'
                     onClick={() => navigate("/login")}
                   />
@@ -92,7 +92,7 @@ const ForgotPassword = () => {
                 />
 
                 <div className={cx(styles.submitBtnDiv, "flexRow")}>
-                  <PrimaryButton
+                  <Button
                     onClick={handleSubmit((data) => handleForgotPassword(data))}
                     loading={loading}
                     disabled={loading}

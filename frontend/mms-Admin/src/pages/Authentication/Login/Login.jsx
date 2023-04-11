@@ -12,7 +12,7 @@ import { loginSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { login } from "@/redux/Auth/AuthSlice";
-import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import Button from "@/components/Button/Button";
 
 
 const Login = () => {
@@ -95,7 +95,7 @@ const Login = () => {
               />
 
               <div className={cx(styles.submitBtnDiv, "flexRow")}>
-                <PrimaryButton
+                <Button
                   onClick={handleSubmit((data) => signIn(data))}
                   loading={loading}
                   disabled={loading}
