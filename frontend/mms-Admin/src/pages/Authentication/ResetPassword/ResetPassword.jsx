@@ -82,6 +82,7 @@ const ResetPassword = () => {
                   loading={loading}
                   disabled={loading}
                   title='Reset Password'
+                  type="primary"
                 />
               </div>
             </form>

@@ -100,6 +100,7 @@ const Login = () => {
                   loading={loading}
                   disabled={loading}
                   title='Login'
+                  type="primary"
                 />
               </div>
 

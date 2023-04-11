@@ -67,8 +67,9 @@ const ForgotPassword = () => {
 
                 <div className={cx(styles.btnDiv, "flexRow")}>
                   <Button
-                    title='Done'
                     onClick={() => navigate("/login")}
+                    title='Done'
+                    type="primary"
                   />
                 </div>
               </div>
@@ -97,6 +98,7 @@ const ForgotPassword = () => {
                     loading={loading}
                     disabled={loading}
                     title='Get Reset Link'
+                    type="primary"
                   />
                 </div>
 
