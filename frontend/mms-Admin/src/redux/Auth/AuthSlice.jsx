@@ -77,7 +77,7 @@ export const forgotPassword = (data) => async (dispatch) => {
   } catch (e) {
     if (e instanceof Error) {
       toast.error(e?.message);
-      dispatch(loginLoading(false));
+      dispatch(forgotPasswordLoading(false));
       return dispatch(hasError(e?.message));
     }
   }
@@ -93,7 +93,7 @@ export const resetPassword = (data) => async (dispatch) => {
   } catch (e) {
     if (e instanceof Error) {
       toast.error(e?.message);
-      dispatch(loginLoading(false));
+      dispatch(resetPasswordLoading(false));
       return dispatch(hasError(e?.message));
     }
   }
