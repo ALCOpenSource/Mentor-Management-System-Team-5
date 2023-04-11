@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./Login.module.scss";
 
-import Button from "@/components/Buttons/Button";
-
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 
@@ -15,7 +13,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { login } from "@/redux/Auth/AuthSlice";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
-import SecondaryButton from "@/components/Buttons/SecondaryButton";
 
 
 const Login = () => {
@@ -33,6 +30,9 @@ const Login = () => {
     //   dispatch(showModal({ action: "hide", type: "logIn" }));
     //   navigate("/home");
     // }
+
+    // Temporary login redirection
+    navigate("/dashboard");
   };
 
   const resolver = yupResolver(loginSchema);
@@ -102,7 +102,6 @@ const Login = () => {
                   title='Login'
                 />
               </div>
-
 
               <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
                 <p onClick={handleForgotPassword}>Forgot Password?</p>

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.0.1",
+    "@iconify/react": "^4.1.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/react-redux": "^7.1.25",
     "@types/react-router-dom": "^5.3.3",
