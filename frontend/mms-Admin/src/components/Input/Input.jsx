@@ -2,20 +2,8 @@ import React, { useState, useEffect, forwardRef, Ref } from "react";
 import { FormGroup } from "./StyledInput";
 import eyeIcon from "@/assets/icons/eye.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
+import PropTypes from "prop-types";
 
-interface InputProps {
-  label: string;
-  placeholder?: string;
-  required?: boolean;
-  type?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string;
-  icon?: boolean;
-  marginbottom?: string;
-  border?: string;
-  value?: string | number;
-}
 
 const Input = forwardRef(
   (
@@ -30,28 +18,28 @@ const Input = forwardRef(
       marginbottom,
       border,
       ...props
-    }: InputProps,
-    ref: Ref<HTMLInputElement>
+    },
+    ref
   ) => {
-    const [inputType, setInputType] = useState<string>(type);
-    const [isActive, setIsActive] = useState<boolean>(false);
+    const [inputType, setInputType] = useState(type);
+    const [isActive, setIsActive] = useState(false);
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-      e.target.value !== "" ? setIsActive(true) : setIsActive(false);      
+    const handleTextChange = (e) => {
+      e.target.value !== "" ? setIsActive(true) : setIsActive(false);
     };
 
-    const handleLabelClick = (e: React.MouseEvent<HTMLLabelElement, MouseEvent>): void => {
+    const handleLabelClick = (e) => {
       e.preventDefault();
 
-      const element = e.target as Element;
-      const inputElement = element.previousSibling as HTMLInputElement; 
+      const element = e.target;
+      const inputElement = element.previousSibling;
       const inputValue = inputElement?.nodeValue;
 
       inputValue !== "" ? inputElement.focus() : setIsActive(false);
-  
+
     };
-    
-    const handleVisibility = (): void => {
+
+    const handleVisibility = () => {
       if (inputType === "password") {
         return setInputType("text");
       }
@@ -94,6 +82,19 @@ const Input = forwardRef(
 );
 
 Input.displayName = "Input";
+
+Input.propTypes = {
+  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+  type: PropTypes.string,
+  onChange: PropTypes.func,
+  error: PropTypes.string,
+  icon: PropTypes.bool,
+  marginbottom: PropTypes.string,
+  border: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 
 export default Input;

@@ -1,10 +1,11 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./Login.module.scss";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Buttons/Button";
+
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 
@@ -13,22 +14,19 @@ import { loginSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { login } from "@/redux/Auth/AuthSlice";
+import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import SecondaryButton from "@/components/Buttons/SecondaryButton";
 
-
-type FormData = {
-  email: string;
-  password: string;
-};
 
 const Login = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loading = useAppSelector((state) => state?.loading?.loginLoading);
+  const loading = useSelector((state) => state?.loading?.loginLoading);
 
   console.log(loading, "loading");
 
-  const signIn = async (data: FormData) => {
+  const signIn = async (data) => {
     const response = await dispatch(login(data));
     console.log(response, "login response");
     // if (response?.payload?.success) {
@@ -96,20 +94,15 @@ const Login = () => {
                 )}
               />
 
-              <div
-                onClick={handleSubmit((data) => signIn(data))}
-                className={cx(styles.submitBtnDiv, "flexRow")}
-              >
-                <Button
+              <div className={cx(styles.submitBtnDiv, "flexRow")}>
+                <PrimaryButton
+                  onClick={handleSubmit((data) => signIn(data))}
                   loading={loading}
                   disabled={loading}
                   title='Login'
-                  textColor='#FFF'
-                  bgColor='#058b94'
-                  hoverColor='#fff'
-                  hoverBg='#035D63'
                 />
               </div>
+
 
               <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
                 <p onClick={handleForgotPassword}>Forgot Password?</p>

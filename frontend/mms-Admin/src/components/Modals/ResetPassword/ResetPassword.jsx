@@ -1,24 +1,19 @@
 import React from "react";
-import { useAppDispatch } from "@/hooks/useReduxHooks";
+import { useDispatch } from "react-redux";
 
 import ModalContainer from "../ModalContainer/ModalContainer";
 import cx from "classnames";
 import styles from "./ResetPassword.module.scss";
 
 import headerImage from "@/assets/images/reset-password-success.png";
-import Button from "@/components/Button/Button";
+import PrimaryButton from "@/components/Buttons/PrimaryButton";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useNavigate } from "react-router";
 
-interface ResetPasswordProps {
-show: boolean;
-size?: "sm" | "lg" | "xl" | "md";
-modalName?: string;
-}
 
-const ResetPassword: React.FC<ResetPasswordProps> = ({ show, size, modalName }) => {
-  const dispatch = useAppDispatch();
+const ResetPassword = ({ show, size, modalName }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -36,13 +31,9 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({ show, size, modalName }) 
 
         <div className={cx(styles.modalBody, "flexCol")}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <Button
+            <PrimaryButton
               onClick={handleClick}
               title='Done'
-              textColor='#FFF'
-              bgColor='#058b94'
-              hoverColor='#fff'
-              hoverBg='#035D63'
             />
           </div>
         </div>

@@ -5,7 +5,7 @@ import Login from "@/pages/Authentication/Login/Login";
 import ForgotPassword from "@/pages/Authentication/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/pages/Authentication/ResetPassword/ResetPassword";
 
-const RoutesComponent: React.FC = () => {
+const RoutesComponent = () => {
   return (
     <BrowserRouter>
       <Routes>

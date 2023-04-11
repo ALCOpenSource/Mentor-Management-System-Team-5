@@ -1,28 +1,11 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import cx from "classnames";
 import imageLoader from "@/assets/icons/loading.svg";
 import styled from "styled-components";
 
-interface ButtonProps {
-  title: string;
-  borderRadius?: string;
-  textColor?: string;
-  bgColor?: string;
-  bordercolor?: string;
-  checked?: boolean;
-  checkedBtn?: boolean;
-  prefixIcon?: React.ReactNode;
-  suffixIcon?: React.ReactNode;
-  disabled?: boolean;
-  loading?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  hoverBg?: string;
-  hoverColor?: string;
-  type?: "button" | "submit" | "reset";
-  }
 
-const ButtonComponent = styled.button<ButtonProps>`
+const ButtonComponent = styled.button`
 padding: 0.625rem 1.125rem;
   border: 0.5px solid;
   font-size: 1rem;
@@ -30,7 +13,7 @@ padding: 0.625rem 1.125rem;
   white-space: nowrap;
   align-items: center;
   justify-content: center;
-  border-radius: ${(props) => props.borderRadius};
+  border-radius: ${(props) => props.borderradius};
 
   &:disabled {
     background-color: gray;
@@ -69,11 +52,11 @@ span{
 }
 `;
 
-const Button: React.FC<ButtonProps> = (props) => {
-  
+const Button = (props) => {
+
   const {
     title,
-    borderRadius = "10px",
+    borderradius = "10px",
     textColor,
     bgColor,
     bordercolor,
@@ -101,7 +84,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     <ButtonComponent
       type={type}
       onClick={onClick}
-      borderRadius={borderRadius}
+      borderradius={borderradius}
       hoverBg={hoverBg}
       hoverColor={hoverColor}
       disabled={disabled}
@@ -111,7 +94,8 @@ const Button: React.FC<ButtonProps> = (props) => {
         color: `${textColor}`,
         backgroundColor: `${bgColor}`,
         borderColor: `${bordercolor}`,
-        border: bordercolor ? `1px solid ${bordercolor}` : `1px solid ${bgColor}`
+        border: bordercolor ? `1px solid ${bordercolor}` : `1px solid ${bgColor}`,
+        borderRadius: borderradius,
       }}
     >
       {loading ? (
@@ -131,5 +115,42 @@ const Button: React.FC<ButtonProps> = (props) => {
     </ButtonComponent>
   );
 };
+
+Button.defaultProps = {
+  borderradius: "10px",
+  title: "",
+  textColor: "",
+  bgColor: "",
+  bordercolor: "",
+  checked: false,
+  checkedBtn: false,
+  prefixIcon: null,
+  suffixIcon: null,
+  disabled: false,
+  loading: false,
+  onClick: () => { },
+  hoverBg: "",
+  hoverColor: "",
+  type: "button"
+
+};
+Button.propTypes = {
+  borderradius: PropTypes.string,
+  title: PropTypes.string,
+  textColor: PropTypes.string,
+  bgColor: PropTypes.string,
+  bordercolor: PropTypes.string,
+  checked: PropTypes.bool,
+  checkedBtn: PropTypes.bool,
+  prefixIcon: PropTypes.element,
+  suffixIcon: PropTypes.element,
+  disabled: PropTypes.bool,
+  loading: PropTypes.bool,
+  onClick: PropTypes.func,
+  hoverBg: PropTypes.string,
+  hoverColor: PropTypes.string,
+  type: PropTypes.string
+};
+
 
 export default Button;
