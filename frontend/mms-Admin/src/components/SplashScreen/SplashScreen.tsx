@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import cx from "classnames";
 import styles from "./SplashScreen.module.scss";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/logo.svg";
 
 const SplashScreen = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const SplashScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       navigate("/login");
-    }, 2000);
+    }, 3000);
   }, []);
 
   return (
