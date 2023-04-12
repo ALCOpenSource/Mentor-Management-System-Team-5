@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": [
@@ -18,20 +18,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
-    "src"
+    "./src"
   ],
   "references": [
     {
       "path": "./tsconfig.node.json"
     }
-  ],
-  "baseUrl": ".",
-  "paths": {
-    "@/*": [
-      "src/*"
-    ]
-  }
+  ]
 }
