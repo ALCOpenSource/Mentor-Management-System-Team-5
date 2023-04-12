@@ -1,12 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface ModalState {
-  modalData: Record<string, unknown>;
-  modalName: string | undefined;
-  show: boolean;
-};
-
-const initialState: ModalState = {
+const initialState = {
   modalData: {},
   modalName: "",
   show: false
@@ -19,13 +13,13 @@ export const modalSlice = createSlice({
 
   reducers: {
 
-    showModal: (state, action: PayloadAction<{ name: string; modalData: Record<string, unknown>; }>) => {
+    showModal: (state, action) => {
       state.modalData = action.payload.modalData;
       state.modalName = action.payload.name;
       state.show = true;
     },
 
-    hideModal: (state, action: PayloadAction<{ name: string | undefined ; }>) => {
+    hideModal: (state, action) => {
       state.modalData = {};
       state.modalName = action.payload.name;
       state.show = false;

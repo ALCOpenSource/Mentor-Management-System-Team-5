@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./ForgotPassword.module.scss";
@@ -13,18 +13,15 @@ import { forgotPasswordSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotPassword } from "@/redux/Auth/AuthSlice";
 
-type FormData = {
-  email: string;
-};
 
 const ForgotPassword = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loading = useAppSelector((state) => state?.loading?.forgotPasswordLoading);
+  const loading = useSelector((state) => state?.loading?.forgotPasswordLoading);
   const [showOutcome, setShowOutcome] = useState(false);
 
-  const handleForgotPassword = async (data: FormData ) => {
+  const handleForgotPassword = async (data) => {
     const response = await dispatch(forgotPassword(data));
     console.log(response, "ForgotPassword response");
     // if (response?.payload?.success) {
@@ -70,12 +67,9 @@ const ForgotPassword = () => {
 
                 <div className={cx(styles.btnDiv, "flexRow")}>
                   <Button
-                    title='Done'
-                    textColor='#FFF'
-                    bgColor='#058b94'
-                    hoverColor='#fff'
-                    hoverBg='#035D63'
                     onClick={() => navigate("/login")}
+                    title='Done'
+                    type="primary"
                   />
                 </div>
               </div>
@@ -104,10 +98,7 @@ const ForgotPassword = () => {
                     loading={loading}
                     disabled={loading}
                     title='Get Reset Link'
-                    textColor='#FFF'
-                    bgColor='#058b94'
-                    hoverColor='#fff'
-                    hoverBg='#035D63'
+                    type="primary"
                   />
                 </div>
 

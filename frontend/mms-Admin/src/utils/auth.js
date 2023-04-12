@@ -1,11 +1,11 @@
 import jwtDecode from "jwt-decode";
 import { setAuthToken } from "./setAuthToken";
-export const isAuthenticated = (): boolean => {
+export const isAuthenticated = () => {
   const token = getToken();
   return !!token;
 };
 
-export const getToken = (): string | null => {
+export const getToken = () => {
   const token = localStorage.getItem("accessToken");
   if (token) {
     return JSON.parse(token);
@@ -13,7 +13,7 @@ export const getToken = (): string | null => {
   return null;
 };
 
-export const setToken = (token: string | null) => {
+export const setToken = (token) => {
   if (token) {
     localStorage.setItem("accessToken", JSON.stringify(token));
   } else {
@@ -21,7 +21,7 @@ export const setToken = (token: string | null) => {
   }
 };
 
-export const setRefreshToken = (token: string | null): void => {
+export const setRefreshToken = (token) => {
   if (token) {
     localStorage.setItem("refreshToken", JSON.stringify(token));
   } else {
@@ -29,43 +29,36 @@ export const setRefreshToken = (token: string | null): void => {
   }
 };
 
-type DecodedToken = {
-  email: string;
-  name: string;
-  id: string;
-  iat: number;
-  exp: number;
-};
-export const isExpired = (token: string) => {
+export const isExpired = (token) => {
   if(token){
-    const decoded: DecodedToken = decodeToken(token);
+    const decoded = decodeToken(token);
     const currentTime = Date.now() / 1000;
     return decoded.exp < currentTime;
   }
 };
 
-export const decodeToken = (token: string | null) => {
-  let decoded: DecodedToken = {} as DecodedToken;
+export const decodeToken = (token) => {
+  let decoded = {};
   if(token){
     decoded = jwtDecode(token);
   }
   return decoded;
 };
 
-export const login = (token: string): void => {
+export const login = (token) => {
   token && setToken(token);
 };
 
-export const logout = (): void => {
+export const logout = () => {
   localStorage.clear();
   setAuthToken("");
   window.location.href = "/login";
 };
 
-export const checkAuth = (): void => {
+export const checkAuth = () => {
   if (localStorage.accessToken) {
     setAuthToken(localStorage.accessToken);
-    const decoded: DecodedToken = jwtDecode(localStorage.accessToken);
+    const decoded = jwtDecode(localStorage.accessToken);
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
       logout();

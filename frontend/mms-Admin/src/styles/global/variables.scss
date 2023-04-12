@@ -6,4 +6,54 @@
   --grayTextColor: #808080;
   --primaryTextColor: #141414;
   --modalBgColor: #fff;
+
+  // Primary Button Big
+  --primaryBtnBg: #058B94;
+  --primaryBtnTextColor: #fff;
+  --primaryBtnBorderColor: #058B94;
+  --primaryBtnHoverBg: #035D63;
+  --primaryBtnHoverTextColor: #fff;
+  --primaryBtnHoverBorderColor: #035D63;
+  --primaryBtnBorderRadius: 10px;
+  --primaryBtnFontSize: 14px;
+  --primaryBtnPadding: 0.625rem 1.5rem;
+
+
+  // Primary Button Small
+  --primaryBtnSmallBorderRadius: 5px;
+  --primaryBtnSmallFontSize: 0.75rem;
+  --primaryBtnSmallPadding: 0.375rem 0.5rem;
+
+  // Secondary Button Big
+  --secondaryBtnBg: #fff;
+  --secondaryBtnTextColor: #023C40;
+  --secondaryBtnBorderColor: #058B94;
+  --secondaryBtnHoverBg: #E6FDFE;
+  --secondaryBtnHoverTextColor: #023C40;
+  --secondaryBtnHoverBorderColor: #058B94;
+  --secondaryBtnBorderRadius: 10px;
+
+  // Secondary Button Small
+  --secondaryBtnSmallBorderRadius: 5px;
+  --secondaryBtnSmallFontSize: 0.75rem;
+  --secondaryBtnSmallPadding: 0.375rem 0.5rem;
+
+  @media all and (min-width: 992px) {
+    // Primary Button Big
+    --primaryBtnFontSize: 1rem;
+    --primaryBtnPadding: 0.625rem 1.625rem;
+
+    // Primary Button Small
+    --primaryBtnSmallFontSize: 0.875rem;
+    --primaryBtnSmallPadding: 0.25rem 0.5rem;
+
+    // Secondary Button Big
+    --secondaryBtnFontSize: 1rem;
+    --secondaryBtnPadding: 0.625rem 1.625rem;
+
+    // Secondary Button Small
+    --secondaryBtnSmallFontSize: 0.875rem;
+    --secondaryBtnSmallPadding: 0.25rem 0.5rem;
+  }
+  
 }

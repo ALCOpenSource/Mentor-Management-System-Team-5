@@ -1,12 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface LoadingState {
-  loginLoading: boolean;
-  forgotPasswordLoading: boolean;
-  resetPasswordLoading: boolean;
-}
-
-const initialState: LoadingState = {
+const initialState = {
   loginLoading: false,
   forgotPasswordLoading: false,
   resetPasswordLoading: false
@@ -18,13 +12,13 @@ export const loadingSlice = createSlice({
   initialState,
 
   reducers: {
-    loginLoading: (state, action: PayloadAction<boolean>) => {
+    loginLoading: (state, action) => {
       state.loginLoading = action.payload;
     },
-    forgotPasswordLoading: (state, action: PayloadAction<boolean>) => {
+    forgotPasswordLoading: (state, action) => {
       state.forgotPasswordLoading = action.payload;
     },
-    resetPasswordLoading: (state, action: PayloadAction<boolean>) => {
+    resetPasswordLoading: (state, action) => {
       state.resetPasswordLoading = action.payload;
     }
   }

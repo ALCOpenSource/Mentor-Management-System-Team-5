@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks/useReduxHooks";
+import { useSelector, useDispatch } from "react-redux";
 
 import cx from "classnames";
 import styles from "./ResetPassword.module.scss";
@@ -15,19 +15,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/redux/Auth/AuthSlice";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-type FormData = {
-  password: string;
-}
 
 const ResetPassword = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
-  const loading = useAppSelector((state) => state?.loading?.resetPasswordLoading);
-  const displayModal = useAppSelector((state) => state.modal.show);
-  const modalName = useAppSelector((state) => state.modal.modalName);
+  const loading = useSelector((state) => state?.loading?.resetPasswordLoading);
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
 
 
-  const handleResetPassword = async (data: FormData) => {
+  const handleResetPassword = async (data) => {
     const response = await dispatch(resetPassword(data));
 
     // Temporary code for success modal
@@ -85,10 +82,7 @@ const ResetPassword = () => {
                   loading={loading}
                   disabled={loading}
                   title='Reset Password'
-                  textColor='#FFF'
-                  bgColor='#058b94'
-                  hoverColor='#fff'
-                  hoverBg='#035D63'
+                  type="primary"
                 />
               </div>
             </form>
