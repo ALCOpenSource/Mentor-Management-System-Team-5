@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "@/pages/LandingPage/LandingPage";
 
 const RoutesComponent: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Test route */}
-        <Route path='/' element={<p>Hello World</p>} />
+        <Route path='/' element={<LandingPage />} />
       </Routes>
     </BrowserRouter>
   );
