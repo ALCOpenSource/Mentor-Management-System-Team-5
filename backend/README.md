@@ -18,8 +18,6 @@ To get it up and running on your local machine, follow the steps below:
 
 *   Fork this repo following this [guideline](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 
-*
-
 *   Clone the repo with the command `git clone`
 
 *   Indicate your interest to work on any issue. "eg. I want to work on this issue or I am interested in this issue"
