@@ -20,6 +20,7 @@
         color: var(--blackTextColor);
         font-weight: 700;
       }
+
       .role {
         color: var(--grayTextColor);
       }
@@ -39,7 +40,7 @@
 
         &:nth-child(1) {
           font-weight: 700;
-          color: #333333;
+          color: #333;
         }
       }
     }

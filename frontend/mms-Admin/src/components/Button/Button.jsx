@@ -6,17 +6,17 @@ import styled from "styled-components";
 
 const ButtonComponent = styled.button`
 font-size: ${(props) =>
-  props.size === "small" ? "var(--primaryBtnSmallFontSize)" : "var(--primaryBtnFontSize)"};
+    props.size === "small" ? "var(--primaryBtnSmallFontSize)" : "var(--primaryBtnFontSize)"};
 padding: ${(props) =>
-  props.size === "small" ? "var(--primaryBtnSmallPadding)" : "var(--primaryBtnPadding)"};
+    props.size === "small" ? "var(--primaryBtnSmallPadding)" : "var(--primaryBtnPadding)"};
 border-radius: ${(props) =>
-  props.size === "small" ? "var(--primaryBtnSmallBorderRadius)" : "var(--primaryBtnBorderRadius)"};
+    props.size === "small" ? "var(--primaryBtnSmallBorderRadius)" : "var(--primaryBtnBorderRadius)"};
 background-color: ${(props) =>
-  props.type === "primary" ? "var(--primaryBtnBg)" : "var(--secondaryBtnBg)"};
+    props.type === "primary" ? "var(--primaryBtnBg)" : "var(--secondaryBtnBg)"};
 color: ${(props) =>
-  props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)"};
+    props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)"};
 border: 1px solid ${(props) =>
-  props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)"};
+    props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)"};
 
   width: fit-content;
   white-space: nowrap;
@@ -26,13 +26,13 @@ border: 1px solid ${(props) =>
 
 
 input{
-      margin: 0rem 0.375rem 0rem 0rem;
+      margin: 0 0.375rem 0 0;
   }
   a{
       width: 100%;
   }
 span{
-      margin-right: 0rem;
+      margin-right: 0;
       font-size: 1.25rem;
   }
 &:hover{ 
@@ -98,7 +98,7 @@ Button.defaultProps = {
   suffixIcon: null,
   disabled: false,
   loading: false,
-  onClick: () => {},
+  onClick: () => { },
   type: "primary"
 };
 Button.propTypes = {
