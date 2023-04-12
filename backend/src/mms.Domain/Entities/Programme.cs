@@ -10,7 +10,7 @@ namespace mms.Domain.Entities
         public string Status { get; set; }
         public Guid ArchivedBy { get; set; }
         public string ProgrammePicture { get; set; }
-        public IList<Task> Tasks { get; set; }
+        public IList<UserTask> UserTasks { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateCompleted { get; set; }
         public DateTime? DateArchived { get; set; }
