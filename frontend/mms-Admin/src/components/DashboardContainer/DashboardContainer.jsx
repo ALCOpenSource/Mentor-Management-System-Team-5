@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 import styles from "./DashboardContainer.module.scss";
 
-
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import DashboardSideBar from "../DashboardSideBar/DashboardSideBar";
 import DashboardChildren from "@/components/DashboardChildren/DashboardChildren";
@@ -29,7 +28,7 @@ const DashboardContainer = (props) => {
 };
 
 DashboardContainer.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired
 };
 
 export default DashboardContainer;

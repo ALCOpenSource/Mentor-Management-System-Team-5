@@ -3,7 +3,7 @@ import AuthReducer from "./Auth/AuthSlice";
 import ModalReducer from "./Modal/ModalSlice";
 import LoadingReducer from "./Loading/LoadingSlice";
 
-const store= configureStore({
+const store = configureStore({
   reducer: {
     auth: AuthReducer,
     modal: ModalReducer,
@@ -13,8 +13,3 @@ const store= configureStore({
 });
 
 export default store;
-
-
-
-
-

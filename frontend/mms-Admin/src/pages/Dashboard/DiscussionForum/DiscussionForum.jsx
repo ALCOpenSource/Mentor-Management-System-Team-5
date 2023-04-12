@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const DiscussionForum = () => {
-    return (
-        <div>DiscussionForum</div>
-    )
-}
+  return <div>DiscussionForum</div>;
+};
 
-export default DiscussionForum
+export default DiscussionForum;

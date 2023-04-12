@@ -31,21 +31,27 @@ const RoutesComponent = () => {
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
 
-        <Route path='/dashboard' element={<DashboardContainer><Outlet /></DashboardContainer>}>
+        <Route
+          path='/dashboard'
+          element={
+            <DashboardContainer>
+              <Outlet />
+            </DashboardContainer>
+          }
+        >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />} />
-          <Route path="approval-requests" element={<ApprovalRequests />} />
+          <Route path='approval-requests' element={<ApprovalRequests />} />
           <Route index path='certificates' element={<Certificates />} />
           <Route path='discussion-forum' element={<DiscussionForum />} />
-          <Route path="mentor-managers" element={<MentorManagers />} />
+          <Route path='mentor-managers' element={<MentorManagers />} />
           <Route path='mentors' element={<Mentors />} />
-          <Route path="messages" element={<Messages />} />
+          <Route path='messages' element={<Messages />} />
           <Route index path='profile' element={<Profile />} />
           <Route path='programs' element={<Programs />} />
-          <Route path="reports" element={<Reports />} />
-          <Route path="tasks" element={<Tasks />} />
+          <Route path='reports' element={<Reports />} />
+          <Route path='tasks' element={<Tasks />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   );

@@ -10,14 +10,12 @@ import {
   resetPasswordLoading
 } from "@/redux/Loading/LoadingSlice";
 
-
 const initialState = {
   error: "",
   loginData: {},
   forgotPasswordData: {},
   resetPasswordData: {}
 };
-
 
 export const authSlice = createSlice({
   name: "auth",
@@ -64,7 +62,6 @@ export const login = (data) => async (dispatch) => {
       return dispatch(hasError(e?.message));
     }
   }
-
 };
 export const forgotPassword = (data) => async (dispatch) => {
   dispatch(forgotPasswordLoading(true));

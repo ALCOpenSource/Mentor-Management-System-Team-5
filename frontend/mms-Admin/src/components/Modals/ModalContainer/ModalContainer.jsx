@@ -4,9 +4,7 @@ import "./ModalContainer.scss";
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useDispatch } from "react-redux";
 
-
 const ModalContainer = ({ children, show, size = "md", modalName }) => {
-
   const dispatch = useDispatch();
   const handleClose = () => dispatch(hideModal({ name: modalName }));
 
