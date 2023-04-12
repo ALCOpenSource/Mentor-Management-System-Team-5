@@ -1,0 +1,61 @@
+.dashboardContainer{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .header {
+        width: 100%;
+        position: fixed;
+        top: 0rem;
+        z-index: 10;
+        max-width: 1920px;
+        height: var(--topNavbarHeight);
+        background-color: var(--pageBgColor);
+    }
+
+    .body{
+        flex: 1;
+        width: 100%;
+        position: relative;
+        margin-top: var(--topNavbarHeight);
+
+        .sideBar {
+            // flex: 1;
+            background-color: var(--sideBarBgColor);
+            width: auto;
+        }
+
+        .children{
+            flex: 1;
+            background-color: var(--dashboardChildrenBgColor);
+            height: 100%;
+        }
+    }
+}
+
+@media all and (min-width: 1200px){
+    .dashboardContainer{  
+        min-height: 100vh;
+    
+        .body{
+            margin-top: var(--topNavbarHeight);
+            height: calc(100vh - var(--topNavbarHeight));
+    
+            .sideBar {
+                height: inherit;
+                overflow-y: auto;
+            }
+    
+            .children{
+                height: inherit;
+                overflow-y: auto;
+            }
+        }
+    }
+    
+    
+}

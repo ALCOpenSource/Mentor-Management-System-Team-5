@@ -1,0 +1,64 @@
+.dashboardSideBarContainer{
+    height: 100%;
+    width: fit-content;
+
+    .sidebar{
+        margin-top: var(--topNavbarHeight);
+
+        .userInfoDiv{
+            padding: 2rem 1rem 2rem 1.5rem;
+            text-align: left;
+            gap: 0.25rem;
+
+            .name, .role{
+                line-height: 1;
+                margin: 0;
+            }
+
+            .name{
+                color: var(--blackTextColor);
+                font-weight: 700;
+            }
+            .role{
+                color: var(--grayTextColor)
+            }
+          }
+
+        [data-testid="ps-sidebar-container-test-id"] {
+            background-color: var(--sideBarBgColor);
+          }
+
+          [data-testid="ps-menu-button-test-id"] {
+            padding: 0.25rem 1rem;
+            height: auto;
+            color: var(--grayTextColor);
+
+            &:hover{
+                background-color: #fff;
+
+                &:nth-child(1){
+                        font-weight: 700;
+                        color: #333333;
+                }
+            }
+          }
+    }
+}
+
+@media all and (min-width: 1200px){
+    .dashboardSideBarContainer{
+        .sidebar{
+            margin-top: 0;
+
+            .userInfoDiv{
+                margin-bottom: 0.5rem;
+                padding-left: 2.5rem;
+              }
+
+              [data-testid="ps-menu-button-test-id"] {
+                padding: 0.25rem 1rem 0.25rem 2rem;
+                font-size: 0.9rem;                
+              }
+        }
+    }
+}
