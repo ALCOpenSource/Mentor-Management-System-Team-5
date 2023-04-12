@@ -1,7 +1,17 @@
+.row {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+[class*="col-"] {
+  padding: 0;
+  margin: 0;
+}
+
 .flexRow {
   display: flex;
   flex-direction: row;
-  width: 100%;
 }
 
 .flexRow-align-center {
