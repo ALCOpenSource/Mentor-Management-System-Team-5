@@ -24,7 +24,6 @@ export const loadingSlice = createSlice({
   }
 });
 
-
 // Actions
 export const { loginLoading, forgotPasswordLoading, resetPasswordLoading } = loadingSlice.actions;
 

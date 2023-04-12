@@ -15,14 +15,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/redux/Auth/AuthSlice";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-
 const ResetPassword = () => {
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state?.loading?.resetPasswordLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
-
 
   const handleResetPassword = async (data) => {
     const response = await dispatch(resetPassword(data));
@@ -82,7 +80,7 @@ const ResetPassword = () => {
                   loading={loading}
                   disabled={loading}
                   title='Reset Password'
-                  type="primary"
+                  type='primary'
                 />
               </div>
             </form>

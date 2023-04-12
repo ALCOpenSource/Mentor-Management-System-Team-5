@@ -1,23 +1,25 @@
 :root {
+  --topNavbarHeight: 4.5rem;
   --primaryColor: #035d63;
-  --pageBackgroundColor: #058b94;
+  --pageBgColor: #058b94;
   --whiteTextColor: #fff;
   --blackTextColor: #141414;
   --grayTextColor: #808080;
   --primaryTextColor: #141414;
   --modalBgColor: #fff;
+  --sideBarBgColor: #f7feff;
+  --dashboardChildrenBgColor: #fff;
 
   // Primary Button Big
-  --primaryBtnBg: #058B94;
+  --primaryBtnBg: #058b94;
   --primaryBtnTextColor: #fff;
-  --primaryBtnBorderColor: #058B94;
-  --primaryBtnHoverBg: #035D63;
+  --primaryBtnBorderColor: #058b94;
+  --primaryBtnHoverBg: #035d63;
   --primaryBtnHoverTextColor: #fff;
-  --primaryBtnHoverBorderColor: #035D63;
+  --primaryBtnHoverBorderColor: #035d63;
   --primaryBtnBorderRadius: 10px;
   --primaryBtnFontSize: 14px;
   --primaryBtnPadding: 0.625rem 1.5rem;
-
 
   // Primary Button Small
   --primaryBtnSmallBorderRadius: 5px;
@@ -26,11 +28,11 @@
 
   // Secondary Button Big
   --secondaryBtnBg: #fff;
-  --secondaryBtnTextColor: #023C40;
-  --secondaryBtnBorderColor: #058B94;
-  --secondaryBtnHoverBg: #E6FDFE;
-  --secondaryBtnHoverTextColor: #023C40;
-  --secondaryBtnHoverBorderColor: #058B94;
+  --secondaryBtnTextColor: #023c40;
+  --secondaryBtnBorderColor: #058b94;
+  --secondaryBtnHoverBg: #e6fdfe;
+  --secondaryBtnHoverTextColor: #023c40;
+  --secondaryBtnHoverBorderColor: #058b94;
   --secondaryBtnBorderRadius: 10px;
 
   // Secondary Button Small
@@ -55,5 +57,4 @@
     --secondaryBtnSmallFontSize: 0.875rem;
     --secondaryBtnSmallPadding: 0.25rem 0.5rem;
   }
-  
 }

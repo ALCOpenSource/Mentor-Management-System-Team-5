@@ -14,7 +14,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "@/redux/Auth/AuthSlice";
 import Button from "@/components/Button/Button";
 
-
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -100,7 +99,7 @@ const Login = () => {
                   loading={loading}
                   disabled={loading}
                   title='Login'
-                  type="primary"
+                  type='primary'
                 />
               </div>
 

@@ -12,7 +12,6 @@ export const modalSlice = createSlice({
   initialState,
 
   reducers: {
-
     showModal: (state, action) => {
       state.modalData = action.payload.modalData;
       state.modalName = action.payload.name;

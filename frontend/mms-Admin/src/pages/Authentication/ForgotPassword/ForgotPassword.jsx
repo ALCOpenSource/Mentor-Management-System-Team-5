@@ -13,7 +13,6 @@ import { forgotPasswordSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotPassword } from "@/redux/Auth/AuthSlice";
 
-
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -66,11 +65,7 @@ const ForgotPassword = () => {
                 </p>
 
                 <div className={cx(styles.btnDiv, "flexRow")}>
-                  <Button
-                    onClick={() => navigate("/login")}
-                    title='Done'
-                    type="primary"
-                  />
+                  <Button onClick={() => navigate("/login")} title='Done' type='primary' />
                 </div>
               </div>
             )}
@@ -98,7 +93,7 @@ const ForgotPassword = () => {
                     loading={loading}
                     disabled={loading}
                     title='Get Reset Link'
-                    type="primary"
+                    type='primary'
                   />
                 </div>
 

@@ -30,7 +30,7 @@ export const setRefreshToken = (token) => {
 };
 
 export const isExpired = (token) => {
-  if(token){
+  if (token) {
     const decoded = decodeToken(token);
     const currentTime = Date.now() / 1000;
     return decoded.exp < currentTime;
@@ -39,7 +39,7 @@ export const isExpired = (token) => {
 
 export const decodeToken = (token) => {
   let decoded = {};
-  if(token){
+  if (token) {
     decoded = jwtDecode(token);
   }
   return decoded;

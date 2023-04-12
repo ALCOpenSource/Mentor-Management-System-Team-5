@@ -4,7 +4,6 @@ import eyeIcon from "@/assets/icons/eye.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
 import PropTypes from "prop-types";
 
-
 const Input = forwardRef(
   (
     {
@@ -36,7 +35,6 @@ const Input = forwardRef(
       const inputValue = inputElement?.nodeValue;
 
       inputValue !== "" ? inputElement.focus() : setIsActive(false);
-
     };
 
     const handleVisibility = () => {
@@ -95,6 +93,5 @@ Input.propTypes = {
   border: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
-
 
 export default Input;

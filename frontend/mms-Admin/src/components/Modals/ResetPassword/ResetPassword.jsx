@@ -11,7 +11,6 @@ import Button from "@/components/Button/Button";
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useNavigate } from "react-router";
 
-
 const ResetPassword = ({ show, size, modalName }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,10 +30,7 @@ const ResetPassword = ({ show, size, modalName }) => {
 
         <div className={cx(styles.modalBody, "flexCol")}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <Button
-              onClick={handleClick}
-              title='Done'
-            />
+            <Button onClick={handleClick} title='Done' />
           </div>
         </div>
       </div>
