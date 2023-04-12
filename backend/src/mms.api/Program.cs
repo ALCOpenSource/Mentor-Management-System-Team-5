@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using mms.api.Configurations;
 using mms.Infrastructure.Context;
+using mms.Infrastructure.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 MySqlDbConfiguration.Configure(builder.Configuration);
 MySqlDbConfiguration.ConfigureContainer(builder.Services);
+IdentityConfiguration.ConfigureIdentity(builder.Services);
+SwaggerConfiguration.ConfigureSwagger(builder.Services);
 
 
 var app = builder.Build();
@@ -36,8 +39,9 @@ app.UseCors(builder => builder
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
-
+app.UseRouting();
 app.UseHttpsRedirection();
+Seeder.SeedData(app).Wait();
 
 app.UseAuthentication();
 app.UseAuthorization();
