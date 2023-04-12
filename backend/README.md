@@ -1,4 +1,4 @@
-# Mentor-Management-System-Team-5
+# Mentor-Management-System
 
 Mentors Management system is a people management app that enables proper.
 coordination of mentors needed to execute projects, ranging from recruitment to off-boarding. Ensure to go through the app doc below to read more and follow all the instructions.
@@ -18,7 +18,7 @@ To get it up and running on your local machine, follow the steps below:
 
 *   Fork this repo following this [guideline](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
 
-*   Clone the repo with the command \`git clone\`
+*   Clone the repo with the command `git clone`
 
 *   Indicate your interest to work on any issue. "eg. I want to work on this issue or I am interested in this issue"
 
@@ -36,7 +36,7 @@ To get it up and running on your local machine, follow the steps below:
 
 ### Frontend
 
-*   Navigate to the project directory with the command `cd Mentor-Management-System-Team-5`
+*   Navigate to the project directory with the command `cd Mentor-Management-System-Team`
 
 *   Navigate to the frontend directory with the command `cd frontend`
 
@@ -50,13 +50,38 @@ To get it up and running on your local machine, follow the steps below:
 
 #### Backend
 
-*   Beckend
+*   Navigate to the project directory with the command `cd Mentor-Management-System-Team`
+
+*   Navigate to the backend directory with the command `cd backend`
+
+*   Navigate to the backend directory with the command `cd src`
+
+*   Navigate to the backend directory with the command `cd mms.api`
+
+*   Start the app with the command `dotnet run --project mms.api.csproj`
+
+*   Navigate to the swagger documentation on your browser with the url `http://localhost:****/swagger/index.html` where \*\*\*\* is the port number displayed on your terminal.
+
+To run the application on docker compose
+
+*   Download docker desktop
+
+*   Navigate to the project directory with the command `cd Mentor-Management-System-Team`
+
+*   Navigate to the backend directory with the command `cd backend`
+
+*   Navigate to the backend directory with the command `cd src`
+
+*   On your terminal, execute the following `docker build -t mmsbackend:latest .`
+
+*   Then still on your terminal in same directory run `docker-compose up`
+
+*   Navigate to the swagger documentation on your browser with the url `http://localhost:8000/swagger/index.html`.
 
 ## Design
 
 The design can be find [here](https://www.figma.com/file/JNZKj3lachPypSOMBOhC1e/MMS-ALC-0pen-Source-Project?node-id=6784%3A7593\&t=dnwBBGHPZRxryUnJ-0)
 Find the Prototype [here](https://www.figma.com/proto/JNZKj3lachPypSOMBOhC1e/MMS-ALC-0pen-Source-Project?page-id=6782%3A4428\&node-id=6784%3A6712\&viewport=565%2C382%2C0.02\&scaling=min-zoom\&starting-point-node-id=6784%3A6712)
-
 Work on your Team assigned task eg. Team 1, Team 2 etc.
 
 NOTE: Stickly adhere to the style guide on the design, buttons, texts etc.
@@ -65,12 +90,60 @@ NOTE: Stickly adhere to the style guide on the design, buttons, texts etc.
 
 Raise any identified issue with your mentor.
 
-#### Other commands available
+#### Local Database Setup
 
-*   `npm run build` - Builds the app for production to the `dist` folder.
+1.  Install and create a MySQL database (Can be change)
+2.  Create a .env file in the root directory
+3.  Set the environment variables with your local database credentials (see .env.example for reference)
 
-*   `npm run lint` - Lints the codebase.
+##### Installation
 
-*   `npm run lint:fix` - Lints the codebase and fixes auto-fixable error.
+```bash
+$yarn install
+```
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/098d739ea9504dadabbcc4898eaff86e)](https://app.codacy.com/gh/ALCOpenSource/Mentor-Management-System-Team-1/dashboard?utm_source=gh\&utm_medium=referral\&utm_content=\&utm_campaign=Badge_grade)
+##### Running the app
+
+```bash
+# development
+$ yarn start
+
+# watch mode
+$ yarn dev
+
+# production mode
+$ yarn start:prod
+```
+
+##### Test
+
+```bash
+# unit tests
+$ yarn run test
+
+# e2e tests
+$ yarn run test:e2e
+
+# test coverage
+$ yarn run test:cov
+```
+
+##### Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
+<!-- prettier-ignore-start -->
+
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->

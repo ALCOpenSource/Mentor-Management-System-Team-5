@@ -1,0 +1,30 @@
+:root {
+  line-height: 1.5;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@font-face {
+  font-family: 'Mukta';
+  src: local('Mukta'), url("./assets/fonts/Mukta-Regular.ttf"), format('truetype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  max-width: 1920px;
+  width: 100%;
+  min-height: 100vh;
+  font-family: Mukta, Arial, Helvetica, sans-serif;
+}
