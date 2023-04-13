@@ -1,0 +1,39 @@
+.dashboardProgramsOverviewContainer {
+    padding: 1rem;
+
+    .body {
+       gap: 1rem;
+       
+       .icon {
+            width: 5rem;
+       }
+
+       .mainContent {
+            gap: 0.25rem;
+
+            .title {
+                font-size: 1.25rem;
+                font-weight: bold;
+                color: var(--blackTextColor);
+            }
+
+            .statistics {
+                font-size: 0.75rem;
+
+                .percentValue {
+                    color: var(--grayTextColor);
+                }
+
+                .indicator {
+                    background-color: var(--primaryColor);
+                    width: 5rem;
+                }
+            }
+       }
+    }
+
+    .date {
+        font-size: 0.75rem;
+        color: var(--grayTextColor);
+    }
+}

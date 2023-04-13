@@ -1,0 +1,74 @@
+.dashboardSummaryContainer {
+    border-radius: 0.5rem;
+    background-color: var(--dashboardSummaryCardBgColor);
+    align-items: center;
+
+    padding: 1rem;
+    width: 100%;
+
+    .leftSection{
+        gap: 0.25rem;
+
+        .heading {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--blackTextColor);
+            margin: 0;
+        }
+
+        .body {
+            gap: 0.5rem;
+            align-items: center;
+            margin: 0;
+
+            .value {
+                font-size: 1.25rem;
+                font-family: var(--boldFontWeight);
+                color: var(--blackTextColor);
+                line-height: 1;
+            }
+
+            .percentChange {
+                font-size: 1rem;
+                font-weight: bolder;
+                color: var(--grayTextColor);
+                line-height: 1;
+            }
+        }
+    }
+
+    .icon {
+        width: 2.25rem;
+        object-fit: contain;
+    }
+}
+
+@media all and (min-width: 768px){
+    .dashboardSummaryContainer {    
+        width: auto;
+    
+        .leftSection{
+            gap: 0.25rem;
+    
+            .heading {
+                font-size: 1.125rem;
+            }
+    
+            .body {
+                gap: 0.5rem;
+    
+                .value {
+                    font-size: 1.25rem;
+                }
+    
+                .percentChange {
+                    font-size: 1rem;
+                }
+            }
+        }
+    
+        .icon {
+            width: 2.25rem;
+        }
+    }
+}

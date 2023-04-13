@@ -1,0 +1,49 @@
+.homeContainer {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+
+    .heading {
+        align-items: flex-end;
+
+        .title {
+            font-size: 1.5rem;
+            font-family: var(--boldFontWeight);
+            color: var(--blackTextColor);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .dateRangeSelector {     
+            select {
+                background-color: var(--sectionContainerBgColor);
+                border: 1px solid var(--sectionContainerBorderColor);
+                border-radius: 0.25rem;
+                color: var(--grayTextColor);
+                padding: 0.125rem 0.5rem;
+                outline: none;
+                cursor: pointer;
+
+            }
+        }
+
+    }
+}
+
+@media all and (min-width: 768px) {
+    .homeContainer {
+        padding: 2rem 1rem;
+    }
+}
+
+@media all and (min-width: 992px) {
+    .homeContainer {
+        padding: 2rem 2rem;
+        gap: 1.5rem;
+    }
+}
+
+@media all and (min-width: 1200px) {
+    .homeContainer {
+        padding: 2rem 1rem;
+    }
+}

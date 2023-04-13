@@ -1,0 +1,36 @@
+.programsOverviewContainer {
+    border-radius: 0.25rem;
+    border: 1px solid var(--sectionContainerBorderColor);
+    background-color: var(--sectionContainerBgColor);
+    padding: 1rem;
+
+    .heading {
+        align-items: flex-end;
+
+        .leftSection {
+            font-weight: bold;
+        }
+
+        .rightSection {
+            p {
+                background-color: var(--bgWhiteTextColor);
+                border: 1px solid var(--bgWhiteTextColor);
+                border-radius: 0.25rem;
+                color: var(--grayTextColor);
+                padding: 0.125rem 0.5rem;
+                outline: none;
+                cursor: pointer;
+            }
+            
+        }
+    }
+
+    .cardsGroup {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .btnDiv {
+        align-items: flex-end;
+    }
+}

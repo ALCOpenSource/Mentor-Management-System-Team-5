@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/fonts/Mukta-Regular.ttf";
+import "./assets/fonts/Mukta-Bold.ttf";
 
 import "./styles/global/flexAndGrid.scss";
 import "./styles/global/variables.scss";
