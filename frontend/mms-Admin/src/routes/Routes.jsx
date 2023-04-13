@@ -10,7 +10,6 @@ import ResetPassword from "@/pages/Authentication/ResetPassword/ResetPassword";
 // Dashboard
 import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
 import Home from "@/pages/Dashboard/Home/Home";
-import Settings from "@/pages/Dashboard/Settings/Settings";
 import ApprovalRequests from "@/pages/Dashboard/ApprovalRequests/ApprovalRequests";
 import Certificates from "@/pages/Dashboard/Certificates/Certificates";
 import DiscussionForum from "@/pages/Dashboard/DiscussionForum/DiscussionForum";
@@ -21,6 +20,16 @@ import Profile from "@/pages/Dashboard/Profile/Profile";
 import Programs from "@/pages/Dashboard/Programs/Programs";
 import Reports from "@/pages/Dashboard/Reports/Reports";
 import Tasks from "@/pages/Dashboard/Tasks/Tasks";
+
+import Settings from "@/pages/Dashboard/Settings/Settings";
+import SettingsGeneral from "@/pages/Dashboard/Settings/General/General";
+import SettingsPassword from "@/pages/Dashboard/Settings/Password/Password";
+import SettingsFAQ from "@/pages/Dashboard/Settings/FAQ/FAQ";
+import SettingsSupport from "@/pages/Dashboard/Settings/Support/Support";
+import SettingsArchive from "@/pages/Dashboard/Settings/Archive/Archive";
+import SettingsPrivacy from "@/pages/Dashboard/Settings/Privacy/Privacy";
+import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Notifications";
+
 
 const RoutesComponent = () => {
   return (
@@ -40,7 +49,15 @@ const RoutesComponent = () => {
           }
         >
           <Route index path='' element={<Home />} />
-          <Route path='settings' element={<Settings />} />
+          <Route path='settings' element={<Settings />}>
+            <Route index path='' element={<SettingsGeneral />} />
+            <Route path='password' element={<SettingsPassword />} />
+            <Route path='faq' element={<SettingsFAQ />} />
+            <Route path='support' element={<SettingsSupport />} />
+            <Route path='archive' element={<SettingsArchive />} />
+            <Route path='privacy' element={<SettingsPrivacy />} />
+            <Route path='notifications' element={<SettingsNotifications />} />
+          </Route>
           <Route path='approval-requests' element={<ApprovalRequests />} />
           <Route index path='certificates' element={<Certificates />} />
           <Route path='discussion-forum' element={<DiscussionForum />} />

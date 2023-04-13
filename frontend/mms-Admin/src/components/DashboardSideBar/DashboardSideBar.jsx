@@ -3,7 +3,7 @@ import cx from "classnames";
 import styles from "./DashboardSideBar.module.scss";
 import "./DashboardActiveMenu.scss";
 
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom";
 
 import { ReactComponent as ProfileIcon } from "@/assets/icons/profile-icon.svg";
@@ -21,6 +21,7 @@ import { ReactComponent as SettingsIcon } from "@/assets/icons/settings-icon.svg
 
 const DashboardSideBar = () => {
   const location = useLocation();
+  const { toggleSidebar, toggled } = useProSidebar();
 
   const currentPage = location.pathname.split("/")[2] || "";
 
@@ -87,24 +88,24 @@ const DashboardSideBar = () => {
     }
   ];
 
-  console.log(currentPage, "location");
   const [activeIndex, setActiveIndex] = useState(
     menuItemsArray.findIndex((item) => item.link === currentPage)
   );
 
   const handleMenuClick = (index) => {
     setActiveIndex(index);
+    toggleSidebar();
   };
 
   return (
     <div className={cx(styles.dashboardSideBarContainer, "flexCol")}>
-      <Sidebar collapsed={false} breakPoint='xl' className={cx(styles.sidebar)}>
+      <Sidebar breakPoint='xl' className={cx(styles.sidebar)}>
         <div className={cx(styles.userInfoDiv, "flexCol")}>
           <h5 className={cx(styles.name)}>Hi Kabiru</h5>
           <p className={cx(styles.role)}>Admin</p>
         </div>
 
-        <Menu>
+        <Menu >
           {menuItemsArray.map((item, index) => {
             return (
               <MenuItem

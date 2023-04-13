@@ -1,0 +1,37 @@
+.settingsContainer {
+    gap: 1rem;
+    height: calc(100dvh - var(--topNavbarHeight));
+    overflow: hidden;
+
+    .heading {
+        gap: 0.5rem;
+    padding: 1rem 1rem 0 3rem;
+
+
+        svg {
+            width: 1rem;
+        }
+
+        svg path {
+            stroke: var(--primaryColor);
+        }
+
+        .title {
+            margin: 0;
+        }
+    }
+
+    .body{
+        position: relative;
+        overflow: auto;
+        height: 100%;
+
+        .sidebarWrapper{
+            height: 100%;
+        }
+
+        .content {
+            overflow: auto;
+        }
+    }
+}
