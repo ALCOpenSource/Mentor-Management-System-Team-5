@@ -1,0 +1,80 @@
+.reportsOverviewContainer {
+  border-radius: 0.25rem;
+  border: 1px solid var(--sectionContainerBorderColor);
+  background-color: var(--sectionContainerBgColor);
+  padding: 1rem;
+  gap: 1.5rem;
+
+  .heading {
+    align-items: flex-end;
+
+    .leftSection {
+      font-weight: bold;
+      margin: 0;
+      line-height: 1;
+      font-size: 1.25rem;
+    }
+
+    .rightSection {
+      p {
+        background-color: var(--whiteTextColor);
+        border: 1px solid var(--whiteTextColor);
+        border-radius: 0.25rem;
+        color: var(--darkTextColor);
+        font-family: var(--boldFontWeight);
+        padding: 0.5rem 0.75rem;
+        outline: none;
+        cursor: pointer;
+        line-height: 1;
+        margin: 0;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .cardsGroup {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+
+  .btnDiv {
+    justify-content: flex-end;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .reportsOverviewContainer {
+    gap: 1.5rem;
+
+    .heading {
+      .leftSection {
+        font-size: 1.25rem;
+      }
+
+      .rightSection {
+        p {
+          padding: 0.5rem 0.75rem;
+        }
+      }
+    }
+
+    .cardsGroup {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .reportsOverviewContainer {
+    .heading {
+      .leftSection {
+        font-size: 1.25rem;
+      }
+    }
+
+    .cardsGroup {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

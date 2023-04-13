@@ -16,13 +16,16 @@ const Header = (props) => {
   const [expanded, setExpanded] = useState(false);
   const { toggleSidebar, toggled } = useProSidebar();
 
-  console.log(toggled, "toggled navbar");
-
   return (
     <section className={cx(styles.dashboardHeaderContainer)}>
       <Navbar expanded={expanded} expand='lg' className={cx(styles.navbarContainer, "flexRow")}>
         <div className={cx(styles.sideBarToggler)}>
-          <Icon onClick={() => toggleSidebar()} icon='bi:layout-text-sidebar-reverse' width={24} />
+          <Icon
+            onClick={() => toggleSidebar()}
+            icon='bi:layout-text-sidebar-reverse'
+            color='#fff'
+            width={24}
+          />
         </div>
 
         <Navbar.Brand className={cx(styles.logoDiv, "flexRow")}>

@@ -1,0 +1,131 @@
+.tasksOverviewContainer {
+  border-radius: 0.25rem;
+  border: 1px solid var(--sectionContainerBorderColor);
+  background-color: var(--sectionContainerBgColor);
+  padding: 1rem;
+  gap: 2rem;
+
+  .heading {
+    align-items: flex-end;
+
+    .leftSection {
+      font-weight: bold;
+      margin: 0;
+      line-height: 1;
+      font-size: 1.25rem;
+    }
+  }
+
+  .taskWrapper {
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .titleDiv {
+      background-color: var(--pageBgColor);
+      padding: 1rem 2rem;
+      border-radius: 0.25rem;
+      width: 100%;
+      justify-content: center;
+
+      .title {
+        font-size: 1.125rem;
+        color: var(--whiteTextColor);
+        font-weight: bold;
+        font-family: var(--boldFontWeight);
+        text-align: center;
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    .cardsGroupDiv {
+      width: 100%;
+      gap: 1rem;
+
+      .cardsGroup {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+      }
+
+      .btnDiv {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .tasksOverviewContainer {
+    gap: 1.5rem;
+
+    .heading {
+      .leftSection {
+        font-size: 1.25rem;
+      }
+    }
+
+    .taskWrapper {
+      .titleDiv {
+        padding: 1rem 2rem;
+
+        .title {
+          font-size: 1.125rem;
+        }
+      }
+
+      .cardsGroupDiv {
+        gap: 1.5rem;
+
+        .cardsGroup {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .tasksOverviewContainer {
+    gap: 2rem;
+
+    .heading {
+      .leftSection {
+        font-size: 1.25rem;
+      }
+    }
+
+    .taskWrapper {
+      flex-wrap: nowrap;
+
+      .titleDiv {
+        padding: 1rem 2rem;
+        align-items: center;
+        width: 20%;
+
+        .title {
+          font-size: 1.25rem;
+        }
+      }
+
+      .cardsGroupDiv {
+        gap: 1rem;
+        flex-grow: 1;
+
+        .cardsGroup {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .tasksOverviewContainer {
+    .taskWrapper {
+      .titleDiv {
+        width: 15%;
+      }
+    }
+  }
+}
