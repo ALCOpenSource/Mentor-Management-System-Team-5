@@ -1,44 +1,44 @@
 .summaryContainer {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 
-    .activeProgramsDiv {
-        gap: 0.5rem;
-        padding: 1rem;
-        background-color: var(--pageBgColor);
-        border-radius: 0.5rem;
-        color: var(--whiteTextColor);
-        width: 18rem;
-        align-items: center;
+  .activeProgramsDiv {
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: var(--pageBgColor);
+    border-radius: 0.5rem;
+    color: var(--whiteTextColor);
+    width: 18rem;
+    align-items: center;
 
-        .value {
-            font-size: 5rem;
-            line-height: 1;
-            margin: 0;
-            padding: 0;
-            font-family: var(--boldFontWeight);
-        }
-
-        .rightSection {
-            gap: 0.75rem;
-            flex-grow: 1;
-            justify-content: space-between;
-
-            button {
-                align-self: flex-end;
-            }
-
-            .heading {
-                font-size: 1.25rem;
-                font-weight: 600;
-                margin: 0;
-                padding: 0;
-            }
-        }
+    .value {
+      font-size: 5rem;
+      line-height: 1;
+      margin: 0;
+      padding: 0;
+      font-family: var(--boldFontWeight);
     }
 
-    .cardsGroup {
+    .rightSection {
+      gap: 0.75rem;
+      flex-grow: 1;
+      justify-content: space-between;
+
+      button {
+        align-self: flex-end;
+      }
+
+      .heading {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .cardsGroup {
     flex-wrap: wrap;
     width: 18rem;
     gap: 1rem;
@@ -47,81 +47,80 @@
     border-radius: 0.5rem;
     border: 1px solid var(--sectionContainerBorderColor);
     justify-content: center;
-    }
-    
+  }
 }
 
 @media all and (min-width: 768px) {
-    .summaryContainer {
-        justify-content: space-between;
-        gap: 1rem;
-    
-        .activeProgramsDiv {
-            width: auto;
-    
-            .value {
-                font-size: 4.5rem;
-            }
-    
-            .rightSection {
-                gap: 0.75rem;
-    
-                .heading {
-                    font-size: 1.25rem;
-                }
-            }
+  .summaryContainer {
+    justify-content: space-between;
+    gap: 1rem;
+
+    .activeProgramsDiv {
+      width: auto;
+
+      .value {
+        font-size: 4.5rem;
+      }
+
+      .rightSection {
+        gap: 0.75rem;
+
+        .heading {
+          font-size: 1.25rem;
         }
-    
-        .cardsGroup {
-        flex: 1;
-        gap: 1rem;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        }
+      }
     }
+
+    .cardsGroup {
+      flex: 1;
+      gap: 1rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 }
 
 @media all and (min-width: 992px) {
-    .summaryContainer {
-        gap: 2rem;
-    
-        .activeProgramsDiv {    
-            .value {
-                font-size: 4.5rem;
-            }
-    
-            .rightSection {
-                gap: 0.75rem;
-    
-                .heading {
-                    font-size: 1.25rem;
-                }
-            }
+  .summaryContainer {
+    gap: 2rem;
+
+    .activeProgramsDiv {
+      .value {
+        font-size: 4.5rem;
+      }
+
+      .rightSection {
+        gap: 0.75rem;
+
+        .heading {
+          font-size: 1.25rem;
         }
+      }
     }
+  }
 }
 
 @media all and (min-width: 1200px) {
-    .summaryContainer {
-        gap: 2rem;
-    
-        .activeProgramsDiv {    
-            width: 15rem;
-            .value {
-                font-size: 4.5rem;
-            }
-    
-            .rightSection {
-                gap: 0.75rem;
-    
-                .heading {
-                    font-size: 1.25rem;
-                }
-            }
-        }
+  .summaryContainer {
+    gap: 2rem;
 
-        .cardsGroup{
-            grid-template-columns: repeat(4, 1fr);
+    .activeProgramsDiv {
+      width: 15rem;
+      .value {
+        font-size: 4.5rem;
+      }
+
+      .rightSection {
+        gap: 0.75rem;
+
+        .heading {
+          font-size: 1.25rem;
         }
+      }
     }
+
+    .cardsGroup {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 }

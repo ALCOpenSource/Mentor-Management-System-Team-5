@@ -1,4 +1,4 @@
-.programsOverviewContainer {
+.reportsOverviewContainer {
   border-radius: 0.25rem;
   border: 1px solid var(--sectionContainerBorderColor);
   background-color: var(--sectionContainerBgColor);
@@ -44,7 +44,7 @@
 }
 
 @media all and (min-width: 768px) {
-  .programsOverviewContainer {
+  .reportsOverviewContainer {
     gap: 1.5rem;
 
     .heading {
@@ -66,7 +66,7 @@
 }
 
 @media all and (min-width: 992px) {
-  .programsOverviewContainer {
+  .reportsOverviewContainer {
     .heading {
       .leftSection {
         font-size: 1.25rem;
