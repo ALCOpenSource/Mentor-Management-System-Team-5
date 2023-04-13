@@ -1,9 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using mms.api.Configurations;
+using mms.Application;
+using mms.Infrastructure;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Add logging
+builder.Logging.AddConsole();
 
 // Add services to the container.
 
@@ -11,11 +16,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureJwtAuthentication(builder.Configuration);
+
+
 MySqlDbConfiguration.Configure(builder.Configuration);
 MySqlDbConfiguration.ConfigureContainer(builder.Services);
-IdentityConfiguration.ConfigureIdentity(builder.Services);
 SwaggerConfiguration.ConfigureSwagger(builder.Services);
 
+ApplicationInjection.ApplicationDiContainer(builder.Services);
+InfrastructureInjection.InjectInfrastructure(builder.Services);
 
 var app = builder.Build();
 
