@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import styles from "./DashboardSideBar.module.scss";
-import "./DashboardActiveMenu.scss"
+import "./DashboardActiveMenu.scss";
 
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom";
