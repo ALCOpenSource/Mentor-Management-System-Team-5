@@ -16,8 +16,6 @@ const Header = (props) => {
   const [expanded, setExpanded] = useState(false);
   const { toggleSidebar, toggled } = useProSidebar();
 
-  console.log(toggled, "toggled navbar");
-
   return (
     <section className={cx(styles.dashboardHeaderContainer)}>
       <Navbar expanded={expanded} expand='lg' className={cx(styles.navbarContainer, "flexRow")}>

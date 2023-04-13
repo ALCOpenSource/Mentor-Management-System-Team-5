@@ -17,9 +17,8 @@
         font-size: 1.25rem;
         font-weight: bold;
         color: var(--blackTextColor);
-        margin: 0rem;
+        margin: 0;
         line-height: 1;
-
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -36,7 +35,6 @@
         -moz-box-orient: vertical;
         -ms-box-orient: vertical;
         -o-box-orient: vertical;
-        box-orient: vertical;
         white-space: normal;
       }
 

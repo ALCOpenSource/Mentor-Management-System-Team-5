@@ -44,6 +44,22 @@
         }
       }
     }
+
+    // This is to style the active menu item
+    :global(.sidebar-active-menu) {
+      background-color: white;
+
+      & span:nth-child(1) {
+        svg path {
+          stroke: var(--blackTextColor);
+        }
+      }
+
+      & span:nth-child(2) {
+        color: var(--blackTextColor);
+        font-family: var(--boldFontWeight);
+      }
+    }
   }
 }
 
