@@ -40,7 +40,7 @@ namespace mms.Infrastructure.Implementation
                 authClaims.Add(new Claim(ClaimTypes.GivenName, user.FirstName));
             }
 
-            if (!string.IsNullOrWhiteSpace(user.FirstName))
+            if (!string.IsNullOrWhiteSpace(user.LastName))
             {
                 authClaims.Add(new Claim(ClaimTypes.Surname, user.LastName));
             }

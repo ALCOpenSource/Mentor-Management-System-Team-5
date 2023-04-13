@@ -27,7 +27,7 @@ namespace mms.Application.Account.Login
         {
             var roles = await _userManager.GetRolesAsync(user);
 
-            LoginResponseDto result = new LoginResponseDto()
+            var result = new LoginResponseDto
             {
                 Id = user.Id,
                 Email = user.Email,
