@@ -16,7 +16,10 @@ namespace mms.api.Controllers
         {
             var result = await Mediator.Send(command);
             if (result.Succeeded == false)
+            {
                 return BadRequest(result);
+            }
+
             return Ok(result);
         }
     }

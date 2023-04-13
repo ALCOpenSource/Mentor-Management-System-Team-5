@@ -7,7 +7,7 @@ using mms.Infrastructure.Policy;
 
 namespace mms.Infrastructure.Seeder
 {
-    public class Seeder
+    public static class Seeder
     {
         private const string Password = "Password@123";
 
@@ -34,7 +34,7 @@ namespace mms.Infrastructure.Seeder
 
                 if (!context.Users.Any())
                 {
-                    var user = new AppUser()
+                    var user = new AppUser
                     {
                         Id = Guid.NewGuid().ToString(),
                         FirstName = "John",

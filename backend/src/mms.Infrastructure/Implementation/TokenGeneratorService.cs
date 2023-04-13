@@ -36,13 +36,19 @@ namespace mms.Infrastructure.Implementation
             };
 
             if (!string.IsNullOrWhiteSpace(user.FirstName))
+            {
                 authClaims.Add(new Claim(ClaimTypes.GivenName, user.FirstName));
+            }
 
             if (!string.IsNullOrWhiteSpace(user.FirstName))
+            {
                 authClaims.Add(new Claim(ClaimTypes.Surname, user.LastName));
+            }
 
             if (!string.IsNullOrWhiteSpace(user.PhoneNumber))
+            {
                 authClaims.Add(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber));
+            }
 
             //Gets the roles of the logged in user and adds it to Claims
             var roles = await _userManager.GetRolesAsync(user);
@@ -89,7 +95,7 @@ namespace mms.Infrastructure.Implementation
 
         public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
-            var tokenValidationParameters = new TokenValidationParameters()
+            var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = false,
                 ValidateIssuer = false,

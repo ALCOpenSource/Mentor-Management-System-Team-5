@@ -22,13 +22,19 @@ namespace mms.Application.Account.Login
             var user = await ValidateUser(request.Email, request.Password);
 
             if (user == null)
+            {
                 return await Result<LoginResponseDto>.FailAsync("Invalid credentials");
+            }
 
             if (!user.EmailConfirmed)
+            {
                 return await Result<LoginResponseDto>.FailAsync("Email not confirmed");
+            }
 
             if (!user.IsActive)
+            {
                 return await Result<LoginResponseDto>.FailAsync("Account not active");
+            }
 
             var result = await GetLoginSuccessResponse(user);
 

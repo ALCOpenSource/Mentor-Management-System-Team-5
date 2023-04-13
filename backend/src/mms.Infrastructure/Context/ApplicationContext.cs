@@ -21,7 +21,12 @@ namespace mms.Infrastructure.Context
         public DbSet<TechStack> TechStacks { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public async Task<int> SaveChangesAsync()
+        {
+            return await SaveChangesAsync(default(CancellationToken));
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             foreach (var item in ChangeTracker.Entries<BaseEntity>())
             {
@@ -35,7 +40,7 @@ namespace mms.Infrastructure.Context
                         item.Entity.CreatedAt = DateTime.UtcNow;
                         break;
                     default:
-                        break;
+                        throw new NotSupportedException();
                 }
             }
 

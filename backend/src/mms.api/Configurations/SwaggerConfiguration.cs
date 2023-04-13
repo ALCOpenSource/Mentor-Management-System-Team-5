@@ -2,7 +2,7 @@
 
 namespace mms.api.Configurations
 {
-    public class SwaggerConfiguration
+    public static class SwaggerConfiguration
     {
         public static void ConfigureSwagger(IServiceCollection services)
         {

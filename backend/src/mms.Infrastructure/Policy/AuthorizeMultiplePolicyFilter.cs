@@ -27,7 +27,6 @@ namespace mms.Infrastructure.Policy
             }
 
             context.Result = new ForbidResult();
-            return;
         }
     }
 }

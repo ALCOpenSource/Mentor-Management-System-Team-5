@@ -4,9 +4,9 @@ namespace mms.Infrastructure.Policy
 {
     public static class Policies
     {
-        public const string Mentor = "Mentor";
-        public const string Manager = "Manager";
-        public const string Admin = "Admin";
+        public static string Mentor = "Mentor";
+        public static string Manager = "Manager";
+        public static string Admin = "Admin";
 
         public static AuthorizationPolicy MentorPolicy()
         {

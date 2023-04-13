@@ -4,7 +4,7 @@ using mms.Infrastructure.Interface;
 
 namespace mms.Infrastructure
 {
-    public class InfrastructureInjection
+    public static class InfrastructureInjection
     {
         public static void InjectInfrastructure(IServiceCollection services)
         {

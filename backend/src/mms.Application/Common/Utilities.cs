@@ -2,7 +2,7 @@
 
 namespace mms.Application.Common
 {
-    public class Utilities
+    public static class Utilities
     {
         public static string GetUserFullName(AppUser user)
         {
