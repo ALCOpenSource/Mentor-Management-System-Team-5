@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./General.module.scss";
 import Button from "@/components/Button/Button";
@@ -6,6 +7,8 @@ import InputField from "@/components/Input/Input";
 import SelectField from "@/components/Select/Select";
 import TextArea from "@/components/TextArea/TextArea";
 import { Country, State, City } from "country-state-city";
+import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
+import { showModal } from "@/redux/Modal/ModalSlice";
 
 import githubIcon from "@/assets/icons/settings-github-icon.svg";
 import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
@@ -18,6 +21,12 @@ import { settingsGeneralSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const General = () => {
+  const dispatch = useDispatch();
+
+  // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
+
   const socialMediaInputArray = [
     {
       name: "Github",
@@ -253,8 +262,19 @@ const General = () => {
       </div>
 
       <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
-        <Button title='Save Changes' />
+        <Button
+          onClick={() =>
+            dispatch(
+              showModal({ name: "successNotification", modalData: "Profile Saved Successfully" })
+            )
+          }
+          title='Save Changes'
+        />
       </div>
+
+      {displayModal && modalName === "successNotification" ? (
+        <SuccessNotificationModal show size='md' />
+      ) : null}
     </div>
   );
 };

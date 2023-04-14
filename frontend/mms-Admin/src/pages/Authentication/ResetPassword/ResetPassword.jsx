@@ -7,7 +7,7 @@ import styles from "./ResetPassword.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
-import ResetPasswordModal from "@/components/Modals/ResetPassword/ResetPassword";
+import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 
 import { useForm, Controller } from "react-hook-form";
 import { resetPasswordSchema } from "@/helpers/validation";
@@ -26,7 +26,8 @@ const ResetPassword = () => {
     const response = await dispatch(resetPassword(data));
 
     // Temporary code for success modal
-    response && dispatch(showModal({ name: "resetPassword", modalData: response }));
+    response &&
+      dispatch(showModal({ name: "successNotification", modalData: "Password Reset Successful" }));
     reset();
   };
 
@@ -88,7 +89,9 @@ const ResetPassword = () => {
         </div>
       </div>
 
-      {displayModal && modalName === "resetPassword" ? <ResetPasswordModal show size='md' /> : null}
+      {displayModal && modalName === "successNotification" ? (
+        <SuccessNotificationModal show size='md' />
+      ) : null}
     </div>
   );
 };

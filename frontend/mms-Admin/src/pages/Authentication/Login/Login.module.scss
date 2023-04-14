@@ -16,14 +16,14 @@
 
         .formTitle {
           font-size: 2rem;
-          font-weight: 700;
+          font-family: var(--muktaBold);
           color: var(--blackTextColor);
         }
 
         .caption {
           font-size: 1rem;
           font-weight: 400;
-          color: var(--blackTextColor);
+          color: var(--grayTextColor);
         }
       }
 
@@ -46,7 +46,7 @@
             p {
               text-align: right;
               font-size: 1rem;
-              font-weight: 600;
+              font-family: var(--muktaSemiBold);
               color: var(--blackTextColor);
               width: fit-content;
               cursor: pointer;
@@ -79,7 +79,7 @@
           }
 
           .caption {
-            font-size: 1rem;
+            font-size: 1.25rem;
           }
         }
 
