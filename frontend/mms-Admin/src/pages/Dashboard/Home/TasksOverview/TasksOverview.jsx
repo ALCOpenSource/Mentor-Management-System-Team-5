@@ -39,36 +39,39 @@ const TasksOverview = () => {
         <h6 className={cx(styles.leftSection)}>Tasks Overview</h6>
       </div>
 
-      <div className={cx(styles.taskWrapper, "flexRow")}>
-        <div className={cx(styles.titleDiv, "flexRow")}>
-          <p className={cx(styles.title)}>In Progress</p>
+      <div className={cx(styles.taskWrapper, "flexCol")}>
+        <div className={cx(styles.top, "flexRow")}>
+          <div className={cx(styles.titleDiv, "flexRow")}>
+            <p className={cx(styles.title)}>In Progress</p>
+          </div>
+          <div className={cx(styles.cardsGroupDiv, "flexCol")}>
+            <div className={cx(styles.cardsGroup)}>
+              {cardDataArray.map((item, index) => (
+                <DashboardTasksOverviewCard key={index} data={item} />
+              ))}
+            </div>
+          </div>
         </div>
-        <div className={cx(styles.cardsGroupDiv, "flexCol")}>
-          <div className={cx(styles.cardsGroup)}>
-            {cardDataArray.map((item, index) => (
-              <DashboardTasksOverviewCard key={index} data={item} />
-            ))}
-          </div>
-
-          <div className={cx(styles.btnDiv, "flexRow")}>
-            <Button title='View All' type='primary' size='small' />
-          </div>
+        <div className={cx(styles.btnDiv, "flexRow")}>
+          <Button title='View All' type='primary' size='small' />
         </div>
       </div>
-      <div className={cx(styles.taskWrapper, "flexRow")}>
-        <div className={cx(styles.titleDiv, "flexRow")}>
-          <p className={cx(styles.title)}>Completed</p>
-        </div>
-        <div className={cx(styles.cardsGroupDiv, "flexCol")}>
-          <div className={cx(styles.cardsGroup)}>
-            {cardDataArray.map((item, index) => (
-              <DashboardTasksOverviewCard key={index} data={item} />
-            ))}
-          </div>
 
-          <div className={cx(styles.btnDiv, "flexRow")}>
-            <Button title='View All' type='primary' size='small' />
+      <div className={cx(styles.taskWrapper, "flexCol")}>
+        <div className={cx(styles.top, "flexRow")}>
+          <div className={cx(styles.titleDiv, "flexRow")}>
+            <p className={cx(styles.title)}>Completed</p>
           </div>
+          <div className={cx(styles.cardsGroupDiv, "flexCol")}>
+            <div className={cx(styles.cardsGroup)}>
+              {cardDataArray.map((item, index) => (
+                <DashboardTasksOverviewCard key={index} data={item} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className={cx(styles.btnDiv, "flexRow")}>
+          <Button title='View All' type='primary' size='small' />
         </div>
       </div>
     </div>

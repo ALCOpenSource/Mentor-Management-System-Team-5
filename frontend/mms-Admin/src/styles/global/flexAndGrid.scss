@@ -31,6 +31,12 @@
   align-items: center;
 }
 
+.flexRow-right-centered {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .flexRow-space-between {
   display: flex;
   justify-content: space-between;

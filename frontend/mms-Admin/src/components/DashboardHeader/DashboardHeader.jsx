@@ -12,9 +12,7 @@ import notificationIcon from "@/assets/icons/notification-icon.svg";
 import profileImage from "@/assets/images/sample-profile-image.png";
 import searchIcon from "@/assets/icons/search-icon.svg";
 
-
 const Header = (props) => {
-
   const [expanded, setExpanded] = useState(false);
   const { toggleSidebar } = useProSidebar();
 

@@ -105,7 +105,7 @@ const DashboardSideBar = () => {
           <p className={cx(styles.role)}>Admin</p>
         </div>
 
-        <Menu >
+        <Menu>
           {menuItemsArray.map((item, index) => {
             return (
               <MenuItem

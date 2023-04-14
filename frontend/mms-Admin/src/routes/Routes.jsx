@@ -30,7 +30,6 @@ import SettingsArchive from "@/pages/Dashboard/Settings/Archive/Archive";
 import SettingsPrivacy from "@/pages/Dashboard/Settings/Privacy/Privacy";
 import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Notifications";
 
-
 const RoutesComponent = () => {
   return (
     <BrowserRouter>

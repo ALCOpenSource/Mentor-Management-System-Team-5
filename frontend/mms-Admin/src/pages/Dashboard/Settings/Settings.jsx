@@ -13,10 +13,7 @@ import { ReactComponent as ArchiveIcon } from "@/assets/icons/settings-archive-i
 import { ReactComponent as SupportIcon } from "@/assets/icons/settings-support-icon.svg";
 import { ReactComponent as FAQIcon } from "@/assets/icons/settings-faq-icon.svg";
 
-
-
 const Settings = () => {
-
   const location = useLocation();
   const currentPage = location.pathname.split("/")[2] || "";
 
@@ -60,31 +57,18 @@ const Settings = () => {
 
   return (
     <div className={cx(styles.settingsContainer, "flexCol")}>
-
       <section className={cx(styles.heading, "flexRow-align-center")}>
         <h3 className={cx(styles.title)}>Settings</h3>
       </section>
 
       <section className={cx(styles.body, "flexRow")}>
-
         <div className={cx(styles.sidebarWrapper)}>
           <SettingsSideBar data={menuItemsArray} />
         </div>
 
         <div className={cx(styles.content)}>
           <Outlet />
-          {/* <Routes>
-            <Route path="/" element={<General />} />
-            <Route path="password" element={<h1>Password</h1>} />
-            <Route path="notifications" element={<h1>Notifications</h1>} />
-            <Route path="privacy" element={<h1>Privacy</h1>} />
-            <Route path="archive" element={<h1>Archive</h1>} />
-            <Route path="support" element={<h1>Support</h1>} />
-            <Route path="faq" element={<h1>FAQ</h1>} />
-          </Routes> */}
-
         </div>
-
       </section>
     </div>
   );

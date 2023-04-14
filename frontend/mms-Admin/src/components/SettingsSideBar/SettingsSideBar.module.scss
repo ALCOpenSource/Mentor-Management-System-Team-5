@@ -1,79 +1,75 @@
 .settingsSideBarContainer {
-    background-color: var(--sideBarBgColor);
-    z-index: 5;
-    left: 0;
-    padding-top: 0.25rem;
-    gap: 1rem;
+  background-color: var(--sideBarBgColor);
+  z-index: 5;
+  left: 0;
+  padding-top: 0.25rem;
+  gap: 1rem;
 
-    svg {
-        width: 3rem;
+  svg {
+    width: 3rem;
+
+    & path {
+      stroke: var(--pageBgColor);
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    li {
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--dashboardSummaryCardBgColor);
+
+      svg {
+        width: 1.5rem;
 
         & path {
-            stroke: var(--pageBgColor);
-        }
-    }
-
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-
-        li {
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            border: 1px solid var(--dashboardSummaryCardBgColor);
-            
-            svg {
-                width: 1.5rem;
-
-                & path {
-                    stroke: var(--grayTextColor);
-                }
-            }
-
-            &:hover {
-                background-color: var(--whiteTextColor);
-            }
-
-            a {
-                display: flex;
-                text-decoration: none;
-                width: 100%;
-                text-align: center;
-                color: var(--grayTextColor);
-
-                &:hover {
-                    color: var(--darkTextColor);
-                    font-family: var(--boldFontWeight);
-                }
-            }
-        }
-    }
-  }
-
-  @media all and (min-width: 992px) {
-    .settingsSideBarContainer {        
-        ul {    
-            li {
-                padding: 0.5rem 0.75rem;
-                
-                svg {
-                    display: none;
-                }
-
-                a {
-                    justify-content: center;
-                }
-            }
+          stroke: var(--grayTextColor);
         }
       }
-  }
-  
-  
 
-  
+      &:hover {
+        background-color: var(--whiteTextColor);
+      }
+
+      a {
+        display: flex;
+        text-decoration: none;
+        width: 100%;
+        text-align: center;
+        color: var(--grayTextColor);
+
+        &:hover {
+          color: var(--darkTextColor);
+          font-family: var(--muktaBold);
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .settingsSideBarContainer {
+    ul {
+      li {
+        padding: 0.5rem 0.75rem;
+
+        svg {
+          display: none;
+        }
+
+        a {
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

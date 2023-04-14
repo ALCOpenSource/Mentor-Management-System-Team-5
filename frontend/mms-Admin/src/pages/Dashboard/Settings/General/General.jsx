@@ -1,30 +1,262 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import cx from "classnames";
+import styles from "./General.module.scss";
+import Button from "@/components/Button/Button";
+import InputField from "@/components/Input/Input";
+import SelectField from "@/components/Select/Select";
+import TextArea from "@/components/TextArea/TextArea";
+import { Country, State, City } from "country-state-city";
+
+import githubIcon from "@/assets/icons/settings-github-icon.svg";
+import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
+import linkedinIcon from "@/assets/icons/settings-linkedin-icon.svg";
+import twitterIcon from "@/assets/icons/settings-twitter-icon.svg";
+import profileImage from "@/assets/images/sample-profile-image.png";
+
+import { useForm, Controller } from "react-hook-form";
+import { settingsGeneralSchema } from "@/helpers/validation";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const General = () => {
-    return (
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci optio hic sapiente! Ea quod facere nulla velit maiores praesentium culpa aliquid blanditiis ipsa, dolorum officiis incidunt! Cum quasi inventore quam!
-            Eum sunt accusamus quia adipisci temporibus laborum ullam reprehenderit, explicabo, praesentium suscipit ad ipsam saepe, illum enim officiis molestiae distinctio rem? Animi repudiandae a voluptas hic quis ipsam, explicabo obcaecati.
-            Asperiores fuga, vero fugit impedit inventore labore fugiat illum quam, quidem tenetur earum ad qui repellendus reiciendis pariatur tempora. Illo voluptates, minima iusto quaerat sed esse reiciendis voluptatibus architecto qui?
-            Dicta, nemo aspernatur. Delectus minus ratione suscipit quas voluptatum ipsam? Nostrum qui accusantium exercitationem autem asperiores quaerat at? Labore quidem tempora quo repellendus neque fugit voluptatum ex reiciendis molestiae optio!
-            Vitae excepturi doloribus dolorum tempora et repudiandae praesentium deserunt sit. Ducimus, modi delectus alias vitae, repellat eius fugit quo dicta itaque eveniet numquam ad esse incidunt eligendi error veniam dolorem?
-            Dolore corporis voluptas saepe, voluptatibus dolorum quisquam harum ut vel. Eos pariatur doloremque facere totam atque commodi architecto, voluptate reiciendis fuga incidunt repudiandae excepturi, sapiente et cum quod blanditiis molestias.
-            Iusto sint quam, temporibus ex provident, voluptatibus reiciendis placeat doloribus maxime nihil minus error deserunt perspiciatis voluptate beatae. Eos quod dolorem nostrum vel perferendis veniam, quia eum ratione fugiat voluptatem?
-            Quisquam corporis vero aliquid quo facere dolorem exercitationem minima! Dolorem repellendus soluta optio itaque obcaecati quisquam voluptas voluptatem possimus animi porro, quos saepe temporibus quo minima officiis beatae, autem perferendis?
-            Laborum aut animi quos, architecto voluptas blanditiis obcaecati magnam numquam sequi consequatur harum vero adipisci possimus itaque eius maxime dolorem et fugiat consectetur facere hic soluta distinctio repudiandae libero. Asperiores!
-            Placeat nisi amet accusantium soluta, fuga natus aliquam! Voluptate accusamus numquam quam ipsam quia doloribus dolorum similique, cupiditate nobis voluptas quis maxime praesentium laboriosam doloremque ex facere nemo ad magni.
-            Repellendus amet minus iusto minima reiciendis id nulla ducimus, aspernatur facere ea tempora numquam ratione recusandae sed, deserunt corporis alias labore magni quibusdam. Hic eligendi sunt nobis soluta, dignissimos veritatis.
-            Blanditiis cupiditate dicta vitae saepe nobis ab rerum aspernatur ipsum voluptas aliquam laudantium, commodi, autem voluptates, sint quidem facilis nihil amet distinctio incidunt qui aut eaque eligendi. Iure, vitae necessitatibus?
-            Saepe enim consectetur quis maxime iure molestiae nobis ducimus sint eos mollitia laudantium voluptate provident, sunt nostrum earum non obcaecati assumenda sequi ipsum quo dolorum architecto vitae magni! Praesentium, molestiae!
-            Rerum, blanditiis assumenda aut nostrum, omnis saepe quia optio eius aspernatur laborum alias provident! Ratione quod recusandae earum, non est at nesciunt odio hic autem fugit dolorem nostrum a velit?
-            Error, modi esse aliquid animi alias quod aspernatur cupiditate aliquam assumenda autem, omnis nam quo inventore obcaecati, ullam perferendis labore. Asperiores quo reprehenderit fugiat ex! Unde omnis fugit hic aperiam.
-            Eos culpa illo saepe reprehenderit dignissimos tempore vitae a ipsam et quos perferendis, error repudiandae! Animi ex fugiat numquam unde sit. Officiis repellendus distinctio ducimus incidunt magnam cupiditate, quidem consequatur.
-            Quasi nostrum iusto atque repudiandae illum itaque optio neque accusantium asperiores necessitatibus quos repellendus, eius qui quibusdam adipisci reiciendis natus ab odio! Rem eius fugiat dicta pariatur consequuntur, voluptatem veritatis!
-            Earum labore voluptas consequatur doloremque modi deleniti numquam assumenda libero esse totam eos, perspiciatis, cupiditate accusantium iste itaque ratione. Accusantium, ratione culpa quasi optio autem unde dolorum inventore maxime cum.
-            Sit laboriosam, cumque ab nisi quisquam aperiam provident omnis, voluptates laborum, sed error hic incidunt optio ipsum accusantium. Expedita culpa temporibus quis. Autem quos sequi magnam quis quisquam assumenda perspiciatis!
-            Neque molestiae exercitationem inventore tempora odit! Necessitatibus, excepturi delectus. Expedita quisquam est dolores laborum aspernatur distinctio, temporibus eius reiciendis numquam perferendis delectus alias iusto labore maxime sequi quibusdam architecto voluptates.
-        </div>
-    )
-}
+  const socialMediaInputArray = [
+    {
+      name: "Github",
+      placeholder: "@githubuser",
+      icon: githubIcon
+    },
+    {
+      name: "Instagram",
+      placeholder: "@instagramuser",
+      icon: instagramIcon
+    },
+    {
+      name: "LinkedIn",
+      placeholder: "@linkedinuser",
+      icon: linkedinIcon
+    },
+    {
+      name: "Twitter",
+      placeholder: "@twitteruser",
+      icon: twitterIcon
+    }
+  ];
 
-export default General
+  const [countries, setCountries] = useState([]);
+  const [state, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    const countries = Country.getAllCountries().map((country) => {
+      return { value: country.isoCode, label: country.name };
+    });
+    setCountries(countries);
+  }, []);
+
+  const resolver = yupResolver(settingsGeneralSchema);
+
+  const defaultValues = {
+    firstName: "",
+    lastName: ""
+  };
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+    setValue
+  } = useForm({ defaultValues, resolver, mode: "all" });
+
+  const handleSelectChange = (e, name) => {
+    if (name === "country") {
+      const country = Country.getCountryByCode(e.target.value);
+      const state = State.getStatesOfCountry(country.isoCode).map((state) => {
+        return { value: state.isoCode, label: state.name };
+      });
+      const city = City.getCitiesOfCountry(country.isoCode).map((city) => {
+        return { value: city.name, label: city.name };
+      });
+
+      setCities(city);
+      setStates(state.length > 0 ? state : [{ value: country.isoCode, label: country.name }]);
+    }
+    setValue(name, e.target.value, { shouldValidate: true });
+  };
+
+  console.log(cities, "cities");
+
+  return (
+    <div className={cx(styles.generalContainer, "flexCol")}>
+      <div className={cx(styles.wrapper, styles.header)}>
+        <div className={cx(styles.leftSection, styles.imageDiv)}>
+          <img src={profileImage} alt='thumbnail-img' />
+        </div>
+        <div className={cx(styles.rightSection, styles.profilePicture)}>
+          <h5 className={cx(styles.title)}>Set Profile Picture</h5>
+          <Button title='Upload Picture' size='small' />
+        </div>
+      </div>
+
+      <div className={cx(styles.wrapper, styles.nameDiv)}>
+        <div className={cx(styles.leftSection, styles.titleDiv)}>
+          <h6 className={cx(styles.title)}>Name</h6>
+        </div>
+        <div className={cx(styles.rightSection, styles.nameDetails)}>
+          <Controller
+            name='firstName'
+            control={control}
+            render={({ field }) => (
+              <InputField
+                {...field}
+                label={"First Name"}
+                placeholder=''
+                type='text'
+                error={errors?.firstName && errors?.firstName?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name='lastName'
+            control={control}
+            render={({ field }) => (
+              <InputField
+                {...field}
+                label={"Last Name"}
+                placeholder=''
+                type='text'
+                error={errors?.lastName && errors?.lastName?.message}
+              />
+            )}
+          />
+        </div>
+      </div>
+
+      <div className={cx(styles.wrapper, styles.bioDiv)}>
+        <div className={cx(styles.leftSection, styles.titleDiv)}>
+          <h6 className={cx(styles.title)}>About</h6>
+        </div>
+        <div className={cx(styles.rightSection, styles.bioDetails)}>
+          <Controller
+            name='bio'
+            control={control}
+            render={({ field }) => (
+              <TextArea
+                {...field}
+                placeholder={"Your Bio"}
+                label={""}
+                minHeight='150px'
+                error={errors?.bio && errors?.bio?.message}
+              />
+            )}
+          />
+        </div>
+      </div>
+
+      <div className={cx(styles.wrapper, styles.websiteDiv)}>
+        <div className={cx(styles.leftSection, styles.titleDiv)}>
+          <h6 className={cx(styles.title)}>Website</h6>
+        </div>
+        <div className={cx(styles.rightSection, styles.websiteDetails)}>
+          <InputField label='www.example.com' />
+        </div>
+      </div>
+
+      <div className={cx(styles.wrapper, styles.countryDiv)}>
+        <div className={cx(styles.leftSection, styles.titleDiv)}>
+          <h6 className={cx(styles.title)}>Country</h6>
+        </div>
+        <div className={cx(styles.rightSection, styles.countryDetails)}>
+          <div className={cx(styles.countryDiv)}>
+            <Controller
+              name='country'
+              control={control}
+              render={({ field }) => (
+                <SelectField
+                  {...field}
+                  defaultSelect={"Select Country"}
+                  label={"Country"}
+                  options={countries}
+                  error={errors?.country && errors?.country?.message}
+                  onChange={(e) => handleSelectChange(e, "country")}
+                  border={"#C8C8C8"}
+                  loading={countries.length > 0 ? false : true}
+                />
+              )}
+            />
+          </div>
+
+          {/* <div className={cx(styles.cityDiv)}>
+                        <label htmlFor="city" className={cx(styles.label)}>City</label>
+                        <Controller
+                            name="state"
+                            control={control}
+                            render={({ field }) => (
+                                <SelectField
+                                    {...field}
+                                    defaultSelect={"Select State"}
+                                    label={"State"}
+                                    options={state}
+                                    error={errors?.state && errors?.state?.message}
+                                    onChange={(e) => handleSelectChange(e, "state")}
+                                    border={"#C8C8C8"}
+                                loading={state.length > 0 ? false : true}
+                                />
+                            )}
+                        />
+                    </div> */}
+
+          <div className={cx(styles.cityDiv)}>
+            <label htmlFor='city' className={cx(styles.label)}>
+              City
+            </label>
+            <Controller
+              name='cities'
+              control={control}
+              render={({ field }) => (
+                <SelectField
+                  {...field}
+                  defaultSelect={"Select City"}
+                  label={"City"}
+                  options={cities}
+                  error={errors?.cities && errors?.cities?.message}
+                  onChange={(e) => handleSelectChange(e, "cities")}
+                  border={"#C8C8C8"}
+                  // loading={state.length > 0 ? false : true}
+                />
+              )}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={cx(styles.wrapper, styles.socialMediaDiv)}>
+        <div className={cx(styles.leftSection, styles.titleDiv)}>
+          <h6 className={cx(styles.title)}>Social</h6>
+        </div>
+        <div className={cx(styles.rightSection, styles.socialMediaDetails)}>
+          {socialMediaInputArray.map((item, index) => {
+            return (
+              <div className={cx(styles.infoWrapper, "flexRow-align-center")} key={index}>
+                <div className={cx(styles.left, "flexRow-fully-centered")}>
+                  <span>
+                    <img src={item?.icon} alt='logo' />
+                  </span>
+                  <span>{item?.name}</span>
+                </div>
+                <div className={cx(styles.right)}>
+                  <InputField marginbottom='0' border='none' label={item?.placeholder} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
+        <Button title='Save Changes' />
+      </div>
+    </div>
+  );
+};
+
+export default General;
