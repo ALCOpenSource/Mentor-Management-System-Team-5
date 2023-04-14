@@ -1,0 +1,89 @@
+.settingsContainer {
+  gap: 1rem;
+  height: calc(100dvh - var(--topNavbarHeight));
+  overflow: hidden;
+
+  .heading {
+    padding: 1rem 1rem 0 3rem;
+
+    .title {
+      margin: 0;
+    }
+  }
+
+  .body {
+    position: relative;
+    overflow: auto;
+    height: 100%;
+    padding-right: 0.5rem;
+
+    .sidebarWrapper {
+      height: 100%;
+    }
+
+    .content {
+      overflow: auto;
+      border: 1px solid #e6e6e6;
+      border-radius: 0.25rem;
+      padding: 1rem 0.5rem 2rem 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .settingsContainer {
+    .heading {
+      padding: 1rem 1rem 0 3rem;
+    }
+
+    .body {
+      gap: 1rem;
+      padding-right: 1rem;
+
+      .content {
+        padding: 2rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .settingsContainer {
+    .heading {
+      padding: 1rem 1rem 0 2rem;
+    }
+
+    .body {
+      gap: 1rem;
+      padding-right: 1rem;
+
+      .content {
+        padding: 1rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .settingsContainer {
+    .heading {
+      padding: 1.5rem 1rem 0 2rem;
+    }
+
+    .body {
+      gap: 2rem;
+      padding-right: 2rem;
+      padding-left: 2rem;
+
+      .sidebarWrapper {
+        height: fit-content;
+      }
+
+      .content {
+        padding: 1rem;
+      }
+    }
+  }
+}

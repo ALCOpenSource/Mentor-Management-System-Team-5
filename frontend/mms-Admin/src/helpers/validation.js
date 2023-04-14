@@ -18,3 +18,8 @@ export const resetPasswordSchema = Yup.object().shape({
     .max(50, "Must be 50 characters or less")
     .min(6, "Must be above 6 characters")
 });
+
+export const settingsGeneralSchema = Yup.object().shape({
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required")
+});

@@ -14,8 +14,33 @@
 }
 
 @font-face {
+  font-family: "MuktaMedium";
+  src: local("MuktaMedium"), url("./assets/fonts/Mukta-Medium.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "MuktaBold";
   src: local("Mukta"), url("./assets/fonts/Mukta-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MuktaSemiBold";
+  src: local("MuktaSemiBold"), url("./assets/fonts/Mukta-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MuktaExtraBold";
+  src: local("MuktaExtraBold"), url("./assets/fonts/Mukta-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MuktaLight";
+  src: local("Mukta"), url("./assets/fonts/Mukta-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MuktaExtraLight";
+  src: local("MuktaExtraLight"), url("./assets/fonts/Mukta-ExtraLight.ttf") format("truetype");
 }
 
 * {
