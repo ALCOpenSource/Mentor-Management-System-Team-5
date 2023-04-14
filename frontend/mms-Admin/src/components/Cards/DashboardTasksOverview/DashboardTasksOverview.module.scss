@@ -2,6 +2,7 @@
   padding: 0.875rem 0.75rem;
   background-color: var(--dashboardSummaryCardBgColor);
   border-radius: 0.5rem;
+  justify-content: center;
 
   .body {
     gap: 0.5rem;
@@ -17,6 +18,7 @@
         font-size: 1.25rem;
         font-weight: bold;
         color: var(--blackTextColor);
+        font-family: var(--mukta);
         margin: 0;
         line-height: 1;
         overflow: hidden;

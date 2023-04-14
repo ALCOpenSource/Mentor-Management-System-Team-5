@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import cx from "classnames";
 import styles from "./DashboardHeader.module.scss";
 import { Navbar, Nav } from "react-bootstrap";
@@ -14,7 +14,7 @@ import searchIcon from "@/assets/icons/search-icon.svg";
 
 const Header = (props) => {
   const [expanded, setExpanded] = useState(false);
-  const { toggleSidebar, toggled } = useProSidebar();
+  const { toggleSidebar } = useProSidebar();
 
   return (
     <section className={cx(styles.dashboardHeaderContainer)}>

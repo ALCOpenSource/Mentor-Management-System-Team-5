@@ -1,0 +1,61 @@
+.select-container {
+  position: relative;
+  width: inherit;
+
+  .select-wrapper {
+    display: block;
+    width: 100%;
+    position: relative;
+
+    box-sizing: border-box;
+    border-radius: 4px;
+    align-items: center;
+    padding: 12px;
+    padding: 15px 10px 7.5px 10px;
+    margin: 0;
+    select {
+      display: flex;
+      width: 100%;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 16px;
+      color: #5e6c84;
+      border: none;
+      background: none;
+    }
+    select:focus {
+      outline: 0;
+    }
+  }
+  .select-error {
+    color: #eb5757;
+    font-size: 0.75rem;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: -40%;
+    left: 0;
+  }
+  .select-label {
+    display: block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1;
+    margin-bottom: 0px;
+    color: #091e42;
+    text-align: left;
+
+    position: absolute;
+    top: 2px;
+  }
+
+  .select-loading-icon {
+    position: absolute;
+    top: 2px;
+    right: 1rem;
+    margin-bottom: 0px;
+    width: 1.25rem;
+    // background-color: turquoise;
+  }
+}

@@ -5,6 +5,8 @@ export const FormGroup = styled(Form.Group)`
   display: block;
   position: relative;
   margin-bottom: ${({ marginbottom }) => marginbottom};
+  width: inherit;
+
   label {
     position: absolute;
     transform: translate(0px, 0px) scale(1);
