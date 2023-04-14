@@ -11,4 +11,10 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Mail\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mail\" />
+  </ItemGroup>
 </Project>

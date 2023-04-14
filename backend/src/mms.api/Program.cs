@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using mms.api.Configurations;
 using mms.Application;
+using mms.Domain.Mail;
 using mms.Infrastructure;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Seeder;
@@ -25,6 +27,8 @@ SwaggerConfiguration.ConfigureSwagger(builder.Services);
 
 ApplicationInjection.ApplicationDiContainer(builder.Services);
 InfrastructureInjection.InjectInfrastructure(builder.Services);
+
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
 var app = builder.Build();
 
