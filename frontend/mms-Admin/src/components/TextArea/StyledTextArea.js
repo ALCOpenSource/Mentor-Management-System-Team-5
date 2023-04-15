@@ -11,31 +11,6 @@ export const FormGroup = styled(Form.Group)`
   padding: 4px 10px 7.5px 10px;
   margin-bottom: ${({ marginbottom }) => marginbottom};
 
-  label {
-    transform: scale(0.7);
-    margin-bottom: 0px;
-    transform-origin: top left;
-    transition: all 0.2s ease-out;
-
-    display: block;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 1;
-    color: #091e42;
-    text-align: left;
-    ${({ required }) =>
-      required
-        ? `
-      ::after {
-        content: '*';
-        color: red;
-        padding-left: 5px;
-      }
-      `
-        : ""};
-  }
-
   textarea {
     display: block;
     width: 100%;
@@ -50,6 +25,32 @@ export const FormGroup = styled(Form.Group)`
       color: #344563;
     }
   }
+
+  label {
+    transform: scale(0.7);
+    margin-bottom: 0px;
+    transform-origin: top left;
+    transition: all 0.2s ease-out;
+
+    display: block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1;
+    color: rgb(9, 30, 66);
+    text-align: left;
+    ${({ required }) =>
+      required
+        ? `
+      ::after {
+        content: '*';
+        color: red;
+        padding-left: 5px;
+      }
+      `
+        : ""};
+  }
+
   .error {
     font-size: 12px;
     color: #eb5757;

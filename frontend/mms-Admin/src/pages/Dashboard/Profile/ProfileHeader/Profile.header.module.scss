@@ -1,0 +1,15 @@
+.profileHeaderContainer {
+  padding: 0;
+
+  .userName {
+    font-size: 1.2rem;
+    font-family: var(--muktaSemiBold);
+    color: var(--black2TextColor);
+  }
+
+  .userRole {
+    font-size: 1rem;
+    font-family: var(--mukta);
+    color: var(--grayTextColor);
+  }
+}

@@ -40,10 +40,10 @@ const Summary = ({ data }) => {
 
   return (
     <div className={cx(styles.summaryContainer, "flexRow")}>
-      <div className={cx(styles.activeProgramsDiv, "flexRow")}>
-        <h1 className={cx(styles.value)}>60</h1>
-        <div className={cx(styles.rightSection, "flexCol")}>
-          <Button title='View All' type='secondary' size='small' />
+      <div className={cx(styles.activeProgramsDiv, "flexCol")}>
+        <Button title='View All' type='secondary' size='small' />
+        <div className={cx(styles.body, "flexRow")}>
+          <span className={cx(styles.value)}>60</span>
           <h6 className={cx(styles.heading)}>Active Programs</h6>
         </div>
       </div>
