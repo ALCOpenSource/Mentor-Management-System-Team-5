@@ -7,10 +7,6 @@ namespace mms.Application.Account.PasswordReset
 {
 	public class ResetPassword : IRequest<Result<string>>
     {
-		public ResetPassword()
-		{
-		}
-        
         [Required]
         public string Password { get; set; }
         [Compare("Password", ErrorMessage = "The password and Confirmation password do not match")]

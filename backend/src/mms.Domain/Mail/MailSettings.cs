@@ -3,9 +3,6 @@ namespace mms.Domain.Mail
 {
 	public class MailSettings
 	{
-		public MailSettings()
-		{
-		}
         public string Mail { get; set; }
         public string DisplayName { get; set; }
         public string Password { get; set; }
