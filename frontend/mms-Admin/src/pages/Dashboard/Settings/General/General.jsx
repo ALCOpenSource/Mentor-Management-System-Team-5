@@ -14,7 +14,7 @@ import githubIcon from "@/assets/icons/settings-github-icon.svg";
 import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
 import linkedinIcon from "@/assets/icons/settings-linkedin-icon.svg";
 import twitterIcon from "@/assets/icons/settings-twitter-icon.svg";
-import profileImage from "@/assets/images/sample-profile-image.png";
+import profileImage from "@/assets/images/sample-profile-image.svg";
 
 import { useForm, Controller } from "react-hook-form";
 import { settingsGeneralSchema } from "@/helpers/validation";
@@ -65,7 +65,12 @@ const General = () => {
 
   const defaultValues = {
     firstName: "",
-    lastName: ""
+    lastName: "",
+    website: "",
+    github: "",
+    instagram: "",
+    linkedin: "",
+    twitter: ""
   };
 
   const {
@@ -166,7 +171,19 @@ const General = () => {
           <h6 className={cx(styles.title)}>Website</h6>
         </div>
         <div className={cx(styles.rightSection, styles.websiteDetails)}>
-          <InputField label='www.example.com' />
+          <Controller
+            name='website'
+            control={control}
+            render={({ field }) => (
+              <InputField
+                {...field}
+                label={"www.example.com"}
+                placeholder=''
+                type='text'
+                error={errors?.website && errors?.website?.message}
+              />
+            )}
+          />
         </div>
       </div>
 
@@ -183,7 +200,7 @@ const General = () => {
                 <SelectField
                   {...field}
                   defaultSelect={"Select Country"}
-                  label={"Country"}
+                  label={""}
                   options={countries}
                   error={errors?.country && errors?.country?.message}
                   onChange={(e) => handleSelectChange(e, "country")}
@@ -193,26 +210,6 @@ const General = () => {
               )}
             />
           </div>
-
-          {/* <div className={cx(styles.cityDiv)}>
-                        <label htmlFor="city" className={cx(styles.label)}>City</label>
-                        <Controller
-                            name="state"
-                            control={control}
-                            render={({ field }) => (
-                                <SelectField
-                                    {...field}
-                                    defaultSelect={"Select State"}
-                                    label={"State"}
-                                    options={state}
-                                    error={errors?.state && errors?.state?.message}
-                                    onChange={(e) => handleSelectChange(e, "state")}
-                                    border={"#C8C8C8"}
-                                loading={state.length > 0 ? false : true}
-                                />
-                            )}
-                        />
-                    </div> */}
 
           <div className={cx(styles.cityDiv)}>
             <label htmlFor='city' className={cx(styles.label)}>
@@ -225,12 +222,12 @@ const General = () => {
                 <SelectField
                   {...field}
                   defaultSelect={"Select City"}
-                  label={"City"}
+                  label={""}
                   options={cities}
                   error={errors?.cities && errors?.cities?.message}
                   onChange={(e) => handleSelectChange(e, "cities")}
                   border={"#C8C8C8"}
-                  // loading={state.length > 0 ? false : true}
+                // loading={state.length > 0 ? false : true}
                 />
               )}
             />
@@ -253,7 +250,22 @@ const General = () => {
                   <span>{item?.name}</span>
                 </div>
                 <div className={cx(styles.right)}>
-                  <InputField marginbottom='0' border='none' label={item?.placeholder} />
+                  <Controller
+                    name={item?.name.toLowerCase()}
+                    control={control}
+                    render={({ field }) => (
+                      <InputField
+                        {...field}
+                        placeholder=''
+                        type='text'
+                        marginbottom='0'
+                        border='none'
+                        label={item?.placeholder}
+                      // error={errors?.website && errors?.website?.message}
+                      />
+                    )}
+                  />
+
                 </div>
               </div>
             );
