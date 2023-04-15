@@ -44,15 +44,15 @@ namespace mms.api.Controllers
                 return BadRequest(result.Message);
             }
 
-            var forgetPasswordLink = Url.Action(nameof(ResetPassword), "Authentication", new { token = result.Data.Token, email = result.Data.Email }, Request.Scheme);
+            var forgetPasswordLink = Url.Action(nameof(ResetPassword), "Account", new { token = result.Data.Token, email = result.Data.Email }, Request.Scheme);
             var mail = new Domain.Mail.MailRequest {
                 Subject = "Forgot Password Link",
                 ToEmail = result.Data.Email!,
                 Body = forgetPasswordLink!
             };
-            await _mailService.SendEmailAsync(mail);
+            //await _mailService.SendEmailAsync(mail);
 
-            return Ok(result.Message);
+            return Ok(result);
         }
 
         [AllowAnonymous]
