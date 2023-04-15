@@ -1,13 +1,3 @@
-:root {
-  line-height: 1.5;
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
 @font-face {
   font-family: "Mukta";
   src: local("Mukta"), url("./assets/fonts/Mukta-Regular.ttf") format("truetype");
@@ -51,15 +41,38 @@
 }
 
 #root {
+  width: 100%;
+}
+
+body {
+  font-family: Mukta, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   max-width: 1920px;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
+  min-height: 100vh;
   width: 100%;
   margin: 0 auto;
-  min-height: 100vh;
-  font-family: Mukta, Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
+
+body::-webkit-scrollbar {
+  height: 6px; /* height of horizontal scrollbar */
+  width: 8px;               /* width of vertical scrollbar */
+  border: 1px solid green;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+box-shadow: inset 0 0 5px #119A53;
+border-radius: 1rem;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+background: green;
+border-radius: 10px;
+}
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

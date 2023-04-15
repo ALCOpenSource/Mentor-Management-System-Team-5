@@ -9,7 +9,7 @@ import { Icon } from "@iconify/react";
 import logo from "@/assets/images/logo.svg";
 import messageIcon from "@/assets/icons/message-icon.svg";
 import notificationIcon from "@/assets/icons/notification-icon.svg";
-import profileImage from "@/assets/images/sample-profile-image.png";
+import profileImage from "@/assets/images/sample-profile-image.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
 
 const Header = (props) => {
