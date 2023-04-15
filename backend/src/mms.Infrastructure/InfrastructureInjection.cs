@@ -9,6 +9,7 @@ namespace mms.Infrastructure
         public static void InjectInfrastructure(IServiceCollection services)
         {
             services.AddTransient<ITokenGeneratorService, TokenGeneratorService>();
+            services.AddTransient<IMailService, MailService>();
         }
     }
 }

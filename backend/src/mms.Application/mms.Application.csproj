@@ -21,4 +21,10 @@
     <ProjectReference Include="..\mms.Infrastructure\mms.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Account\PasswordReset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Account\PasswordReset\" />
+  </ItemGroup>
 </Project>
