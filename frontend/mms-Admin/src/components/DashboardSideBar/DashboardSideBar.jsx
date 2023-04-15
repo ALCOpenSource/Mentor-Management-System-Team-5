@@ -18,6 +18,7 @@ import { ReactComponent as CertificatesIcon } from "@/assets/icons/certificates-
 import { ReactComponent as MessagesIcon } from "@/assets/icons/messages-icon.svg";
 import { ReactComponent as DiscussionForumIcon } from "@/assets/icons/discussion-forum-icon.svg";
 import { ReactComponent as SettingsIcon } from "@/assets/icons/settings-icon.svg";
+import { ReactComponent as LogoutIcon } from "@/assets/icons/logout-icon.svg";
 
 const DashboardSideBar = () => {
   const location = useLocation();
@@ -85,6 +86,11 @@ const DashboardSideBar = () => {
       name: "Settings",
       link: "settings",
       icon: <SettingsIcon />
+    },
+    {
+      name: "Logout",
+      link: "/login",
+      icon: <LogoutIcon />
     }
   ];
 
