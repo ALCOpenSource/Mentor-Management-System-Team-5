@@ -50,7 +50,7 @@ namespace mms.api.Controllers
                 ToEmail = result.Data.Email!,
                 Body = forgetPasswordLink!
             };
-            //await _mailService.SendEmailAsync(mail);
+            await _mailService.SendEmailAsync(mail);
 
             return Ok(result);
         }
