@@ -5,9 +5,16 @@
 
   .heading {
     padding: 1rem 1rem 0 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 
     .title {
       margin: 0;
+    }
+
+    .paginationWrapper {
+      width: 100%;
+      justify-content: center;
     }
   }
 
@@ -15,7 +22,7 @@
     position: relative;
     overflow: auto;
     height: 100%;
-    padding-right: 0.5rem;
+    padding-right: 0.125rem;
 
     .sidebarWrapper {
       height: 100%;
@@ -36,6 +43,12 @@
   .settingsContainer {
     .heading {
       padding: 1rem 1rem 0 3rem;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      .paginationWrapper {
+        justify-content: flex-end;
+      }
     }
 
     .body {
@@ -43,7 +56,7 @@
       padding-right: 1rem;
 
       .content {
-        padding: 2rem;
+        padding: 1.5rem;
       }
     }
   }
@@ -52,7 +65,7 @@
 @media all and (min-width: 992px) {
   .settingsContainer {
     .heading {
-      padding: 1rem 1rem 0 2rem;
+      padding: 1rem 2rem 0 2rem;
     }
 
     .body {
@@ -69,7 +82,7 @@
 @media all and (min-width: 1200px) {
   .settingsContainer {
     .heading {
-      padding: 1.5rem 1rem 0 2rem;
+      padding: 1.5rem 2rem 0 2rem;
     }
 
     .body {

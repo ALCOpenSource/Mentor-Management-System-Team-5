@@ -3,6 +3,7 @@ import cx from "classnames";
 import styles from "./Settings.module.scss";
 import { useLocation } from "react-router-dom";
 import SettingsSideBar from "@/components/SettingsSideBar/SettingsSideBar";
+import Pagination from "@/components/Pagination/Pagination";
 import { Outlet } from "react-router-dom";
 
 import { ReactComponent as GeneralIcon } from "@/assets/icons/settings-general-icon.svg";
@@ -15,7 +16,7 @@ import { ReactComponent as FAQIcon } from "@/assets/icons/settings-faq-icon.svg"
 
 const Settings = () => {
   const location = useLocation();
-  const currentPage = location.pathname.split("/")[2] || "";
+  const currentPage = location.pathname.split("/")[3] || "";
 
   const menuItemsArray = [
     {
@@ -57,8 +58,11 @@ const Settings = () => {
 
   return (
     <div className={cx(styles.settingsContainer, "flexCol")}>
-      <section className={cx(styles.heading, "flexRow-align-center")}>
+      <section className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Settings</h3>
+        <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
+          {currentPage === "archive" && <Pagination currentPage={currentPage} />}
+        </div>
       </section>
 
       <section className={cx(styles.body, "flexRow")}>
