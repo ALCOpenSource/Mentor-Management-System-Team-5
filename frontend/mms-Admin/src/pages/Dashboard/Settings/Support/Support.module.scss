@@ -1,0 +1,28 @@
+.supportContainer {
+  gap: 1.75rem;
+
+  .heading {
+    .title {
+      font-size: 1.25rem;
+      font-family: var(--bold);
+      margin: 0;
+      line-height: 1;
+    }
+  }
+
+  .body {
+    .formWrapper {
+      form {
+        .aubmitBtnDiv {
+          align-items: center;
+
+          .attachmentDiv {
+            img {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

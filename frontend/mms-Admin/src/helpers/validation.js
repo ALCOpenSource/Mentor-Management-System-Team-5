@@ -34,3 +34,10 @@ export const settingsPasswordSchema = Yup.object().shape({
     .min(8, "Must Contain at least 8 Characters")
     .oneOf([Yup.ref("newPassword")], "Passwords must and should match")
 });
+
+export const settingsSupportSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  email: Yup.string().email("Invalid email address").required("Email is required"),
+  title: Yup.string().required("Title is required"),
+  body: Yup.string().required("Body is required")
+});
