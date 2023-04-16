@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10.7.8
+    container_name: mmsmysqldb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: MySQL
+      MYSQL_DATABASE: mmsdb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: MySQL
+    volumes:
+      - mmsdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+
+  adminer:
+    image: adminer
+    container_name: mmsadminer
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+
+volumes:
+  mmsdata:
+    name: mmsdbdata
