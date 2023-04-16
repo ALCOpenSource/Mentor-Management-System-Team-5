@@ -96,8 +96,6 @@ const General = () => {
     setValue(name, e.target.value, { shouldValidate: true });
   };
 
-  console.log(cities, "cities");
-
   return (
     <div className={cx(styles.generalContainer, "flexCol")}>
       <div className={cx(styles.wrapper, styles.header)}>

@@ -16,7 +16,7 @@
 
       .title {
         font-size: 1.25rem;
-        font-weight: bold;
+        font-family: var(--regular);
         color: var(--blackTextColor);
         margin: 0;
         line-height: 1;
@@ -28,6 +28,7 @@
 
         .percentValue {
           color: var(--grayTextColor);
+          font-family: var(--regular);
         }
 
         .indicator {
@@ -43,5 +44,6 @@
   .date {
     font-size: 0.875rem;
     color: var(--grayTextColor);
+    font-family: var(--regular);
   }
 }

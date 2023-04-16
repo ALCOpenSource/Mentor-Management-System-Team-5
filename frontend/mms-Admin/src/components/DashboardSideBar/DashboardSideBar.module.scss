@@ -18,7 +18,7 @@
 
       .name {
         color: var(--blackTextColor);
-        font-weight: 700;
+        font-family: var(--bold);
       }
 
       .role {
@@ -28,6 +28,7 @@
 
     [data-testid="ps-sidebar-container-test-id"] {
       background-color: var(--sideBarBgColor);
+      padding-bottom: 1.5rem;
     }
 
     [data-testid="ps-menu-button-test-id"] {

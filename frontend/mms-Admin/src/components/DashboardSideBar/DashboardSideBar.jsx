@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import styles from "./DashboardSideBar.module.scss";
 import "./DashboardActiveMenu.scss";
@@ -25,6 +25,11 @@ const DashboardSideBar = () => {
   const { toggleSidebar, toggled } = useProSidebar();
 
   const currentPage = location.pathname.split("/")[2] || "";
+
+  useEffect(() => {
+    setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage))
+  }, [currentPage])
+
 
   const menuItemsArray = [
     {
