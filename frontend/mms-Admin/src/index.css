@@ -1,16 +1,6 @@
-:root {
-  line-height: 1.5;
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
 @font-face {
-  font-family: "Mukta";
-  src: local("Mukta"), url("./assets/fonts/Mukta-Regular.ttf") format("truetype");
+  font-family: "MuktaRegular";
+  src: local("MuktaRegular"), url("./assets/fonts/Mukta-Regular.ttf") format("truetype");
 }
 
 @font-face {
@@ -47,18 +37,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Mukta, Arial, Helvetica, sans-serif;
+  font-family: MuktaRegular, Arial, Helvetica, sans-serif;
 }
 
 #root {
+  width: 100%;
+}
+
+body {
+  font-family: MuktaRegular, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   max-width: 1920px;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
+  min-height: 100vh;
   width: 100%;
   margin: 0 auto;
-  min-height: 100vh;
-  font-family: Mukta, Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 input:-webkit-autofill,
@@ -83,4 +77,9 @@ button[disabled] {
   cursor: not-allowed;
   border: none;
   pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

@@ -9,7 +9,7 @@
     align-items: flex-end;
 
     .leftSection {
-      font-weight: bold;
+      font-family: var(--semiBold);
       margin: 0;
       line-height: 1;
       font-size: 1.25rem;
@@ -19,9 +19,9 @@
       p {
         background-color: var(--whiteTextColor);
         border: 1px solid var(--whiteTextColor);
+        font-family: var(--semiBold);
         border-radius: 0.25rem;
         color: var(--darkTextColor);
-        font-family: var(--muktaBold);
         padding: 0.5rem 0.75rem;
         outline: none;
         cursor: pointer;

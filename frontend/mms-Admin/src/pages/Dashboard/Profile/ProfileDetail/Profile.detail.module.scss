@@ -1,7 +1,7 @@
 .profileDetailContainer {
   .title {
     font-size: 1.5rem;
-    font-family: var(--muktaBold);
+    font-family: var(--bold);
     color: var(--black2TextColor);
     margin: 0;
     line-height: 1;
@@ -10,20 +10,20 @@
   .bio {
     background-color: #f7feff;
     font-size: 1rem;
-    font-family: var(--muktaRegular);
+    font-family: var(--regular);
     color: var(--black3TextColor);
   }
 
   .addressInfo {
     .title {
       font-size: 1.2rem;
-      font-family: var(--muktaSemiBold);
+      font-family: var(--semiBold);
       color: var(--black2TextColor);
     }
 
     .info {
       font-size: 1rem;
-      font-family: var(--mukta);
+      font-family: var(--regular);
       color: var(--grayTextColor);
     }
   }
@@ -33,7 +33,7 @@
 
     .socialUserName {
       font-size: 1.2rem;
-      font-family: var(--muktaSemiBold);
+      font-family: var(--semiBold);
       color: var(--black3TextColor);
     }
   }

@@ -9,7 +9,7 @@
     align-items: flex-end;
 
     .leftSection {
-      font-weight: bold;
+      font-family: var(--semiBold);
       margin: 0;
       line-height: 1;
       font-size: 1.25rem;
@@ -33,8 +33,7 @@
         .title {
           font-size: 1.125rem;
           color: var(--whiteTextColor);
-          font-weight: bold;
-          font-family: var(--muktaSemiBold);
+          font-family: var(--semiBold);
           text-align: center;
           margin: 0;
           line-height: 1;
