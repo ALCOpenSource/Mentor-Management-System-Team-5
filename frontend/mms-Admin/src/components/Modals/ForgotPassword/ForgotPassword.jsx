@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ModalContainer from "../ModalContainer/ModalContainer";
 import cx from "classnames";
-import styles from "./SuccessNotification.module.scss";
+import styles from "./ForgotPassword.module.scss";
 
-import successImage from "@/assets/images/reset-password-success.png";
+import headerImage from "@/assets/images/reset-password-success.png";
 import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useNavigate } from "react-router";
 
-const SuccessNotification = ({ show, size, modalName }) => {
+const ForgotPassword = ({ show, size, modalName }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const SuccessNotification = ({ show, size, modalName }) => {
   console.log(modalData, "modal data");
 
   const handleClick = () => {
-    dispatch(hideModal({ name: "successNotification" }));
+    dispatch(hideModal({ name: "forgotPassword" }));
     // navigate("/login");
   };
 
@@ -28,11 +28,13 @@ const SuccessNotification = ({ show, size, modalName }) => {
     <ModalContainer show={show} size={size} modalName={modalName}>
       <div className={cx(styles.modalWrapper, "flexCol")}>
         <div className={cx(styles.modalHeader, "flexCol")}>
-          <h6 className={cx(styles.headerTitle)}>{modalData}</h6>
+          <h6 className={cx(styles.headerTitle)}>Forgot Password</h6>
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
-          <img className={cx(styles.successImage)} src={successImage} alt='notification-image' />
+          <p className={cx(styles.content)}>
+            An email has been sent to your registered email. Follow the link to reset your password.
+          </p>
         </div>
 
         <div className={cx(styles.modalFooter)}>
@@ -45,4 +47,4 @@ const SuccessNotification = ({ show, size, modalName }) => {
   );
 };
 
-export default SuccessNotification;
+export default ForgotPassword;

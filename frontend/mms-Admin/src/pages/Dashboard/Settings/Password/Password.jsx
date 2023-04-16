@@ -6,6 +6,7 @@ import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
+import ForgotPasswordModal from "@/components/Modals/ForgotPassword/ForgotPassword";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
 import { useForm, Controller } from "react-hook-form";
@@ -32,10 +33,6 @@ const Password = () => {
     control,
     setValue
   } = useForm({ defaultValues, resolver, mode: "all" });
-
-  const handleForgotPassword = () => {
-    // navigate("/forgot-password");
-  };
 
   return (
     <div className={cx(styles.passwordContainer, "flexCol")}>
@@ -114,11 +111,17 @@ const Password = () => {
       </div>
 
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
-        <p onClick={handleForgotPassword}>Forgot Password?</p>
+        <p onClick={() => dispatch(showModal({ name: "forgotPassword", modalData: "" }))}>
+          Forgot Password?
+        </p>
       </div>
 
       {displayModal && modalName === "successNotification" ? (
         <SuccessNotificationModal show size='md' />
+      ) : null}
+
+      {displayModal && modalName === "forgotPassword" ? (
+        <ForgotPasswordModal show size='md' />
       ) : null}
     </div>
   );
