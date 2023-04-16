@@ -225,7 +225,7 @@ const General = () => {
                   error={errors?.cities && errors?.cities?.message}
                   onChange={(e) => handleSelectChange(e, "cities")}
                   border={"#C8C8C8"}
-                // loading={state.length > 0 ? false : true}
+                  // loading={state.length > 0 ? false : true}
                 />
               )}
             />
@@ -259,11 +259,10 @@ const General = () => {
                         marginbottom='0'
                         border='none'
                         label={item?.placeholder}
-                      // error={errors?.website && errors?.website?.message}
+                        // error={errors?.website && errors?.website?.message}
                       />
                     )}
                   />
-
                 </div>
               </div>
             );

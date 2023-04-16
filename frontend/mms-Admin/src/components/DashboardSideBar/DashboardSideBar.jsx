@@ -27,9 +27,8 @@ const DashboardSideBar = () => {
   const currentPage = location.pathname.split("/")[2] || "";
 
   useEffect(() => {
-    setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage))
-  }, [currentPage])
-
+    setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage));
+  }, [currentPage]);
 
   const menuItemsArray = [
     {
