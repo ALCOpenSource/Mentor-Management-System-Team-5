@@ -90,7 +90,7 @@ const Archive = () => {
                 <item.icon />
               </div>
               <div className={cx(styles.metaData, "flexCol")}>
-                <h6 className={cx(styles.title)}>{item.title}</h6>
+                <h6 className={cx(styles.metaDataTitle)}>{item.title}</h6>
                 <div className={cx(styles.dateTime, "flexRow")}>
                   <div className={cx(styles.infoWrapper, "flexRow")}>
                     <CalendarIcon />
