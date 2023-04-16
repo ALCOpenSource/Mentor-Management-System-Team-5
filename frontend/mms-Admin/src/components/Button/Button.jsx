@@ -17,6 +17,7 @@ color: ${(props) =>
   props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)"};
 border: 1px solid ${(props) =>
   props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)"};
+  font-family: var(--regular);
 
   width: fit-content;
   white-space: nowrap;
