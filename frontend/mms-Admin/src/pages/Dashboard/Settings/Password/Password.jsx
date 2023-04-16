@@ -106,7 +106,7 @@ const Password = () => {
         <Button
           onClick={() =>
             dispatch(
-              showModal({ name: "successNotification", modalData: "Profile Saved Successfully" })
+              showModal({ name: "successNotification", modalData: "Password Changed Successfully" })
             )
           }
           title='Save new password'
@@ -116,6 +116,10 @@ const Password = () => {
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
         <p onClick={handleForgotPassword}>Forgot Password?</p>
       </div>
+
+      {displayModal && modalName === "successNotification" ? (
+        <SuccessNotificationModal show size='md' />
+      ) : null}
     </div>
   );
 };
