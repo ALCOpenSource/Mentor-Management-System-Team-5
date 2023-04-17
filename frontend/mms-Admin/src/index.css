@@ -58,7 +58,7 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
   border-radius: 12px;
-  background-color: #ffffff00;
+  background-color: #fff0;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -69,7 +69,7 @@ body {
 
 ::-webkit-scrollbar-track {
   border-radius: 12px;
-  background-color: #ffffff00;
+  background-color: #fff0;
 }
 
 input:-webkit-autofill,
