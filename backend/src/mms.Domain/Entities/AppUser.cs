@@ -18,6 +18,7 @@ namespace mms.Domain.Entities
         public string? LinkedIn { get; set; }
         public string? Website { get; set; }
         public string? Bio { get; set; }
+        public string? About { get; set; }
         public string? Headline { get; set; }
         public string? ProfilePicture { get; set; }
 
