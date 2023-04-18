@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import styles from "./DashboardSideBar.module.scss";
 import "./DashboardActiveMenu.scss";
 
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 import { Link, useLocation } from "react-router-dom";
 
 import { ReactComponent as ProfileIcon } from "@/assets/icons/profile-icon.svg";
@@ -18,11 +18,17 @@ import { ReactComponent as CertificatesIcon } from "@/assets/icons/certificates-
 import { ReactComponent as MessagesIcon } from "@/assets/icons/messages-icon.svg";
 import { ReactComponent as DiscussionForumIcon } from "@/assets/icons/discussion-forum-icon.svg";
 import { ReactComponent as SettingsIcon } from "@/assets/icons/settings-icon.svg";
+import { ReactComponent as LogoutIcon } from "@/assets/icons/logout-icon.svg";
 
 const DashboardSideBar = () => {
   const location = useLocation();
+  const { toggleSidebar, toggled } = useProSidebar();
 
   const currentPage = location.pathname.split("/")[2] || "";
+
+  useEffect(() => {
+    setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage));
+  }, [currentPage]);
 
   const menuItemsArray = [
     {
@@ -84,21 +90,26 @@ const DashboardSideBar = () => {
       name: "Settings",
       link: "settings",
       icon: <SettingsIcon />
+    },
+    {
+      name: "Logout",
+      link: "/login",
+      icon: <LogoutIcon />
     }
   ];
 
-  console.log(currentPage, "location");
   const [activeIndex, setActiveIndex] = useState(
     menuItemsArray.findIndex((item) => item.link === currentPage)
   );
 
   const handleMenuClick = (index) => {
     setActiveIndex(index);
+    toggleSidebar();
   };
 
   return (
     <div className={cx(styles.dashboardSideBarContainer, "flexCol")}>
-      <Sidebar collapsed={false} breakPoint='xl' className={cx(styles.sidebar)}>
+      <Sidebar breakPoint='xl' className={cx(styles.sidebar)}>
         <div className={cx(styles.userInfoDiv, "flexCol")}>
           <h5 className={cx(styles.name)}>Hi Kabiru</h5>
           <p className={cx(styles.role)}>Admin</p>

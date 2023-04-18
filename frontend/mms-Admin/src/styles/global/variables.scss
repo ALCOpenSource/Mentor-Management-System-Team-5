@@ -5,6 +5,8 @@
   --whiteTextColor: #fff;
   --blackTextColor: #141414;
   --grayTextColor: #808080;
+  --black3TextColor: #4d4d4d;
+  --black2TextColor: #333333;
   --primaryTextColor: #141414;
   --modalBgColor: #fff;
   --sideBarBgColor: #f7feff;
@@ -12,7 +14,19 @@
   --sectionContainerBorderColor: #cefafd;
   --dashboardChildrenBgColor: #fff;
   --dashboardSummaryCardBgColor: #e6fdfe;
-  --boldFontWeight: MuktaBold;
+  --profileSocialBackgroundColor: #e6fdfe;
+  --grayBorderColor: #e6e6e6;
+  --toogleSwitchOnBgColor: #058b94;
+  --toogleSwitchOffBgColor: #b3b3b3;
+
+  // Fonts
+  --bold: MuktaBold;
+  --extraBold: MuktaExtraBold;
+  --extraLight: MuktaExtraLight;
+  --light: MuktaLight;
+  --medium: MuktaMedium;
+  --regular: MuktaRegular;
+  --semiBold: MuktaSemiBold;
 
   // Primary Button Big
   --primaryBtnBg: #058b94;

@@ -1,0 +1,46 @@
+.notificationsContainer {
+  gap: 2rem;
+  max-width: 65%;
+
+  .wrapper {
+    gap: 0.5rem;
+    padding-bottom: 2rem;
+
+    .heading {
+      font-size: 1.25rem;
+      font-family: var(--semiBold);
+      color: var(--black2TextColor);
+    }
+
+    .toggleHeadersWrapper {
+      gap: 1.5rem;
+
+      .title {
+        font-size: 1.13rem;
+        margin: 0;
+        font-family: var(--semiBold);
+        color: var(--black2TextColor);
+      }
+    }
+
+    .infoWrapper {
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 0.8rem;
+
+      .infoTitle {
+        font-size: 1.25rem;
+        margin: 0;
+        padding: 0;
+        font-family: var(--regular);
+        color: var(--black2TextColor);
+      }
+
+      .switchWrapper {
+        gap: 2.3rem;
+        padding-right: 0.5rem;
+        align-items: center;
+      }
+    }
+  }
+}

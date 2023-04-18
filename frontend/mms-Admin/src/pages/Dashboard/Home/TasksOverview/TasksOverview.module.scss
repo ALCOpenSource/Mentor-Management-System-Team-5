@@ -9,7 +9,7 @@
     align-items: flex-end;
 
     .leftSection {
-      font-weight: bold;
+      font-family: var(--semiBold);
       margin: 0;
       line-height: 1;
       font-size: 1.25rem;
@@ -17,40 +17,44 @@
   }
 
   .taskWrapper {
-    flex-wrap: wrap;
     gap: 1rem;
 
-    .titleDiv {
-      background-color: var(--pageBgColor);
-      padding: 1rem 2rem;
-      border-radius: 0.25rem;
-      width: 100%;
-      justify-content: center;
+    .top {
+      gap: 1rem;
+      flex-wrap: wrap;
 
-      .title {
-        font-size: 1.125rem;
-        color: var(--whiteTextColor);
-        font-weight: bold;
-        font-family: var(--boldFontWeight);
-        text-align: center;
-        margin: 0;
-        line-height: 1;
+      .titleDiv {
+        background-color: var(--pageBgColor);
+        padding: 1rem 2rem;
+        border-radius: 0.25rem;
+        width: 100%;
+        justify-content: center;
+
+        .title {
+          font-size: 1.125rem;
+          color: var(--whiteTextColor);
+          font-family: var(--semiBold);
+          text-align: center;
+          margin: 0;
+          line-height: 1;
+        }
+      }
+
+      .cardsGroupDiv {
+        width: 100%;
+        gap: 1rem;
+
+        .cardsGroup {
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          gap: 1rem;
+          height: 100%;
+        }
       }
     }
 
-    .cardsGroupDiv {
-      width: 100%;
-      gap: 1rem;
-
-      .cardsGroup {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 1rem;
-      }
-
-      .btnDiv {
-        justify-content: flex-end;
-      }
+    .btnDiv {
+      justify-content: flex-end;
     }
   }
 }
@@ -66,19 +70,23 @@
     }
 
     .taskWrapper {
-      .titleDiv {
-        padding: 1rem 2rem;
+      .top {
+        gap: 1rem;
 
-        .title {
-          font-size: 1.125rem;
+        .titleDiv {
+          padding: 1rem 2rem;
+
+          .title {
+            font-size: 1.125rem;
+          }
         }
-      }
 
-      .cardsGroupDiv {
-        gap: 1.5rem;
+        .cardsGroupDiv {
+          gap: 1.5rem;
 
-        .cardsGroup {
-          grid-template-columns: repeat(2, 1fr);
+          .cardsGroup {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
       }
     }
@@ -98,22 +106,26 @@
     .taskWrapper {
       flex-wrap: nowrap;
 
-      .titleDiv {
-        padding: 1rem 2rem;
-        align-items: center;
-        width: 20%;
-
-        .title {
-          font-size: 1.25rem;
-        }
-      }
-
-      .cardsGroupDiv {
+      .top {
         gap: 1rem;
-        flex-grow: 1;
+        flex-wrap: nowrap;
 
-        .cardsGroup {
-          grid-template-columns: repeat(3, 1fr);
+        .titleDiv {
+          padding: 2.5rem 2rem;
+          align-items: center;
+          width: 20%;
+
+          .title {
+            font-size: 1.25rem;
+          }
+        }
+
+        .cardsGroupDiv {
+          gap: 1rem;
+
+          .cardsGroup {
+            grid-template-columns: repeat(3, 1fr);
+          }
         }
       }
     }
@@ -123,8 +135,27 @@
 @media all and (min-width: 1200px) {
   .tasksOverviewContainer {
     .taskWrapper {
-      .titleDiv {
-        width: 15%;
+      .top {
+        gap: 1rem;
+        flex-wrap: nowrap;
+
+        .titleDiv {
+          padding: 3rem 2rem;
+          align-items: center;
+          width: 15%;
+
+          .title {
+            font-size: 1.25rem;
+          }
+        }
+
+        .cardsGroupDiv {
+          gap: 1rem;
+
+          .cardsGroup {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
       }
     }
   }

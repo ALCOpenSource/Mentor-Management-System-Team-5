@@ -1,0 +1,283 @@
+.generalContainer {
+  gap: 1rem;
+
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .leftSection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .title {
+        font-size: 1rem;
+        font-family: var(--semiBold);
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    .rightSection {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  .header {
+    flex-wrap: nowrap;
+    gap: 1rem;
+
+    .imageDiv {
+      width: fit-content;
+      justify-content: flex-start;
+
+      img {
+        width: 5rem;
+      }
+    }
+
+    .profilePicture {
+      flex-direction: column;
+      gap: 0.25rem;
+      justify-content: center;
+      align-items: flex-start;
+
+      .title {
+        font-size: 1.25rem;
+        font-family: var(--semiBold);
+        margin: 0;
+        line-height: 1;
+      }
+    }
+  }
+
+  .nameDiv {
+    .nameDetails {
+      width: 100%;
+    }
+  }
+
+  .bioDiv {
+    .bioDetails {
+      width: 100%;
+    }
+  }
+
+  .websiteDiv {
+    .websiteDetails {
+      width: 100%;
+    }
+  }
+
+  .countryDiv {
+    .countryDetails {
+      width: 100%;
+
+      .countryDiv {
+        width: 100%;
+      }
+
+      .cityDiv {
+        width: 100%;
+
+        .label {
+          font-family: var(--semiBold);
+          margin: 0 0 0.5rem 0;
+          line-height: 1;
+        }
+      }
+    }
+  }
+
+  .socialMediaDiv {
+    .socialMediaDetails {
+      width: 100%;
+      gap: 1.5rem;
+
+      .infoWrapper {
+        width: inherit;
+        justify-content: space-between;
+        border: 1px solid var(--grayTextColor);
+        border-radius: 0.25rem;
+
+        .left {
+          gap: 0.75rem;
+          width: 50%;
+        }
+
+        .right {
+          border-left: 1px solid var(--grayTextColor);
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  .btnDiv {
+    margin-top: 1.5rem;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .generalContainer {
+    gap: 0;
+
+    .header {
+      margin-bottom: 1.5rem;
+
+      .imageDiv {
+        img {
+          width: 5rem;
+        }
+      }
+
+      .profilePicture {
+        gap: 0.25rem;
+
+        .title {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .nameDiv {
+      .nameDetails {
+        flex-wrap: nowrap;
+        gap: 2rem;
+      }
+    }
+
+    .countryDiv {
+      .countryDetails {
+        flex-wrap: nowrap;
+        gap: 2rem;
+
+        .cityDiv {
+          .label {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .socialMediaDiv {
+      .socialMediaDetails {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .generalContainer {
+    gap: 0;
+
+    .header {
+      margin-bottom: 2rem;
+
+      .imageDiv {
+        img {
+          width: 6rem;
+        }
+      }
+
+      .profilePicture {
+        gap: 0.25rem;
+
+        .title {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .nameDiv {
+      .nameDetails {
+        flex-wrap: nowrap;
+        gap: 2rem;
+      }
+    }
+
+    .countryDiv {
+      .countryDetails {
+        flex-wrap: nowrap;
+        gap: 2rem;
+
+        .cityDiv {
+          .label {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .socialMediaDiv {
+      .socialMediaDetails {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .generalContainer {
+    .wrapper {
+      flex-wrap: nowrap;
+
+      .leftSection {
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 15%;
+
+        .title {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    .header {
+      .imageDiv {
+        img {
+          width: 7rem;
+        }
+      }
+    }
+
+    .countryDiv {
+      .countryDetails {
+        gap: 2.5rem;
+
+        .countryDiv {
+          width: 95%;
+        }
+
+        .cityDiv {
+          display: flex;
+          flex-wrap: nowrap;
+          gap: 0.75rem;
+          width: 100%;
+
+          .label {
+            display: block;
+            margin-top: 1rem;
+          }
+        }
+      }
+    }
+
+    .socialMediaDiv {
+      .socialMediaDetails {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+  }
+}

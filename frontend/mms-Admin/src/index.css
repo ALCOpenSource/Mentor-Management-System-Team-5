@@ -1,16 +1,11 @@
-:root {
-  line-height: 1.5;
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+@font-face {
+  font-family: "MuktaRegular";
+  src: local("MuktaRegular"), url("./assets/fonts/Mukta-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Mukta";
-  src: local("Mukta"), url("./assets/fonts/Mukta-Regular.ttf") format("truetype");
+  font-family: "MuktaMedium";
+  src: local("MuktaMedium"), url("./assets/fonts/Mukta-Medium.ttf") format("truetype");
 }
 
 @font-face {
@@ -18,22 +13,63 @@
   src: local("Mukta"), url("./assets/fonts/Mukta-Bold.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "MuktaSemiBold";
+  src: local("MuktaSemiBold"), url("./assets/fonts/Mukta-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MuktaExtraBold";
+  src: local("MuktaExtraBold"), url("./assets/fonts/Mukta-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MuktaLight";
+  src: local("Mukta"), url("./assets/fonts/Mukta-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MuktaExtraLight";
+  src: local("MuktaExtraLight"), url("./assets/fonts/Mukta-ExtraLight.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Mukta, Arial, Helvetica, sans-serif;
+  font-family: MuktaRegular, Arial, Helvetica, sans-serif;
 }
 
 #root {
+  width: 100%;
+}
+
+body {
+  font-family: MuktaRegular, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   max-width: 1920px;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
+  min-height: 100vh;
   width: 100%;
   margin: 0 auto;
-  min-height: 100vh;
-  font-family: Mukta, Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 12px;
+  background-color: #fff0;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #06b9c6;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background-color: #fff0;
 }
 
 input:-webkit-autofill,
@@ -58,4 +94,9 @@ button[disabled] {
   cursor: not-allowed;
   border: none;
   pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

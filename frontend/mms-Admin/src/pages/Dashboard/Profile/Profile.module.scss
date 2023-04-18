@@ -1,0 +1,23 @@
+.profileContainer {
+  padding: 2rem !important;
+  gap: 1rem;
+}
+
+@media all and (min-width: 768px) {
+  .profileContainer {
+    padding: 2rem 1rem;
+  }
+}
+
+@media all and (min-width: 992px) {
+  .profileContainer {
+    padding: 2rem 2rem;
+    gap: 1.5rem;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .profileContainer {
+    padding: 2rem 1rem;
+  }
+}

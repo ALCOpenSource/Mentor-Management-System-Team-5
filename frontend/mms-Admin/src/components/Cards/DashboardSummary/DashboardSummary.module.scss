@@ -11,6 +11,7 @@
     .heading {
       font-size: 1.125rem;
       font-weight: 600;
+      font-family: var(--regular);
       color: var(--blackTextColor);
       margin: 0;
     }
@@ -22,14 +23,14 @@
 
       .value {
         font-size: 1.25rem;
-        font-family: var(--boldFontWeight);
+        font-family: var(--semiBold);
         color: var(--blackTextColor);
         line-height: 1;
       }
 
       .percentChange {
         font-size: 1rem;
-        font-weight: bolder;
+        font-family: var(--regular);
         color: var(--grayTextColor);
         line-height: 1;
       }
