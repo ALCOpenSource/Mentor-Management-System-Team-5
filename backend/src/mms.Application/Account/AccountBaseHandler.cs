@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using mms.Application.Account.Profile;
 using mms.Domain.Entities;
 
 namespace mms.Application.Account
@@ -26,6 +27,26 @@ namespace mms.Application.Account
 
             return await _userManager.Users
                 .FirstOrDefaultAsync(x => x.Id == user.Id);
+        }
+
+        protected async Task<AppUser?> FromUpdateProfileCommandToAppUser(UpdateProfileCommand command, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            user.About = command.About;
+            user.Bio = command.Bio;
+            user.City = command.City;
+            user.Country = command.Country;
+            user.FirstName = command.Firtname;
+            user.GitHub = command.GitHub;
+            user.Headline = command.Headline;
+            user.LastName = command.Lastname;
+            user.LinkedIn = command.LinkedIn;
+            user.ProfilePicture = command.ProfilePicture;
+            user.Twitter = command.Twitter;
+            user.Website = command.Website;
+
+            return user;
         }
     }
 }
