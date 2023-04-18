@@ -1,8 +1,16 @@
-.dashboardTasksOverviewContainer {
-  padding: 0.875rem 0.75rem;
-  background-color: var(--dashboardSummaryCardBgColor);
-  border-radius: 0.5rem;
+.taskListItemContainer {
+  padding: 0.5rem 0.5rem;
+  background-color: var(--taskListBgColor);
+  border-radius: 5px;
   justify-content: center;
+  border: 1px solid var(--grayBorderColor);
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--taskListHoverBgColor);
+    border: 1px solid var(--taskListHoverBgColor);
+  }
 
   .body {
     gap: 0.5rem;
@@ -15,9 +23,9 @@
       gap: 0.5rem;
 
       .title {
-        font-size: 1.25rem;
+        font-size: 1rem;
         color: var(--blackTextColor);
-        font-family: var(--regular);
+        font-family: var(--semiBold);
         margin: 0;
         line-height: 1;
         overflow: hidden;

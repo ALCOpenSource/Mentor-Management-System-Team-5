@@ -120,7 +120,7 @@ const Archive = () => {
 
                 <div className={cx(styles.summaryDiv, "flexRow-space-between")}>
                   <div className={cx(styles.summary, "flexRow-align-center")}>
-                    <ReportIcon stroke='red' />
+                    <ReportIcon />
                     <span className={cx(styles.summaryValue)}>40</span>
                     <span>Program Reports</span>
                   </div>

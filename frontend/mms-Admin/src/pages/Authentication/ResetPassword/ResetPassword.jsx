@@ -22,11 +22,21 @@ const ResetPassword = () => {
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
-  const handleResetPassword = async (data) => {
-    const response = await dispatch(resetPassword(data));
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+  const email = urlParams.get("email");
 
-    // Temporary code for success modal
-    response &&
+  const handleResetPassword = async (data) => {
+    const response = await dispatch(
+      resetPassword({
+        Password: data.password,
+        ConfirmPassword: data.confirmPassword,
+        token,
+        email
+      })
+    );
+
+    response?.success &&
       dispatch(showModal({ name: "successNotification", modalData: "Password Reset Successful" }));
     reset();
   };
@@ -34,7 +44,8 @@ const ResetPassword = () => {
   const resolver = yupResolver(resetPasswordSchema);
 
   const defaultValues = {
-    password: ""
+    password: "",
+    confirmPassword: ""
   };
 
   const {
@@ -67,6 +78,20 @@ const ResetPassword = () => {
                     placeholder=''
                     type='password'
                     error={errors?.password && errors?.password?.message}
+                  />
+                )}
+              />
+
+              <Controller
+                name='confirmPassword'
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    {...field}
+                    label={"Must match your new password"}
+                    placeholder=''
+                    type='password'
+                    error={errors?.confirmPassword && errors?.confirmPassword?.message}
                   />
                 )}
               />

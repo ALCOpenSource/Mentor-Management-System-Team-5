@@ -20,18 +20,9 @@ const Login = () => {
 
   const loading = useSelector((state) => state?.loading?.loginLoading);
 
-  console.log(loading, "loading");
-
   const signIn = async (data) => {
     const response = await dispatch(login(data));
-    console.log(response, "login response");
-    // if (response?.payload?.success) {
-    //   dispatch(showModal({ action: "hide", type: "logIn" }));
-    //   navigate("/home");
-    // }
-
-    // Temporary login redirection
-    navigate("/dashboard");
+    response?.success && navigate("/dashboard");
   };
 
   const resolver = yupResolver(loginSchema);

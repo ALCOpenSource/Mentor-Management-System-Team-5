@@ -1,0 +1,16 @@
+.generic-sidebar-active-menu {
+  background-color: white;
+
+  a {
+    color: var(--blackTextColor) !important;
+    font-family: var(--bold);
+  }
+
+  span {
+    svg {
+      path {
+        stroke: var(--blackTextColor) !important;
+      }
+    }
+  }
+}

@@ -21,6 +21,7 @@ import Programs from "@/pages/Dashboard/Programs/Programs";
 import Reports from "@/pages/Dashboard/Reports/Reports";
 import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 
+// Settings
 import Settings from "@/pages/Dashboard/Settings/Settings";
 import SettingsGeneral from "@/pages/Dashboard/Settings/General/General";
 import SettingsPassword from "@/pages/Dashboard/Settings/Password/Password";
@@ -29,6 +30,13 @@ import SettingsSupport from "@/pages/Dashboard/Settings/Support/Support";
 import SettingsArchive from "@/pages/Dashboard/Settings/Archive/Archive";
 import SettingsPrivacy from "@/pages/Dashboard/Settings/Privacy/Privacy";
 import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Notifications";
+
+// Tasks
+import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
+
+// Authenticated Routes
+import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
+import userRoles from "@/constants/userRoles";
 
 const RoutesComponent = () => {
   return (
@@ -42,9 +50,11 @@ const RoutesComponent = () => {
         <Route
           path='/dashboard'
           element={
-            <DashboardContainer>
-              <Outlet />
-            </DashboardContainer>
+            <AuthenticatedRoutes roles={[userRoles.admin]}>
+              <DashboardContainer>
+                <Outlet />
+              </DashboardContainer>
+            </AuthenticatedRoutes>
           }
         >
           <Route index path='' element={<Home />} />
@@ -66,7 +76,10 @@ const RoutesComponent = () => {
           <Route index path='profile' element={<Profile />} />
           <Route path='programs' element={<Programs />} />
           <Route path='reports' element={<Reports />} />
-          <Route path='tasks' element={<Tasks />} />
+          <Route path='tasks' element={<Tasks />}>
+            <Route path='' element={<TaskDetails />} />
+            <Route path=':taskId' element={<TaskDetails />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
