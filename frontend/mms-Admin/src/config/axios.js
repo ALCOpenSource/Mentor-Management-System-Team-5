@@ -3,7 +3,7 @@ import axios from "axios";
 import { getToken } from "@/utils/auth";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL
 });
 
 instance.interceptors.request.use(
