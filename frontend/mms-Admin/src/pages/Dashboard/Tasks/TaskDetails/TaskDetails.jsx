@@ -45,6 +45,10 @@ const TaskDetails = () => {
     }
   ];
 
+  const handleDeleteTask = () => {
+    dispatch(showModal({ name: "taskDeleteNotification", modalData: "Task Deleted Successfully" }));
+  };
+
   return (
     <div className={cx(styles.taskDetailsContainer, "flexCol")}>
       {taskId && (
@@ -95,14 +99,7 @@ const TaskDetails = () => {
 
           <div className={cx(styles.btnGroup, "flexRow")}>
             <button
-              onClick={() =>
-                dispatch(
-                  showModal({
-                    name: "taskDeleteNotification",
-                    modalData: "Task Deleted Successfully"
-                  })
-                )
-              }
+              onClick={() => handleDeleteTask()}
               className={cx(styles.deleteBtn, "flexRow-align-center")}
             >
               <img src={deleteIcon} alt='delete-icon' /> <span>Delete</span>

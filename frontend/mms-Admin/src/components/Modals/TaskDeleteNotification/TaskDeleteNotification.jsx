@@ -34,6 +34,7 @@ const TaskDeleteNotification = ({ show, size, modalName }) => {
 
         <div className={cx(styles.modalFooter)}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
+            <Button onClick={handleClick} title='Undo' type='secondary' />
             <Button onClick={handleClick} title='Done' />
           </div>
         </div>

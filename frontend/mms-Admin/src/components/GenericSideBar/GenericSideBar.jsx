@@ -28,7 +28,6 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
 
   useEffect(() => {
     const active = data.find((menuItem) => menuItem.id.toString() === currentId);
-    console.log(active, "active element");
     setActiveLink(active ? active.id : "");
   }, [currentId, data]);
 

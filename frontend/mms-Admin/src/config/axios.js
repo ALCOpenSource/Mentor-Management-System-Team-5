@@ -3,7 +3,7 @@ import axios from "axios";
 import { getToken } from "@/utils/auth";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5068/api/v1/Account/"
+  baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 instance.interceptors.request.use(

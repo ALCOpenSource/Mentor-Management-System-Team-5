@@ -25,6 +25,8 @@
 
   .modalFooter {
     .btnDiv {
+      gap: 1.5rem;
+
       button {
         width: 100%;
       }
@@ -51,6 +53,8 @@
 
     .modalFooter {
       .btnDiv {
+        gap: 1rem;
+
         button {
           width: fit-content;
         }
