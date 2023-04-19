@@ -1,183 +1,182 @@
 .TasksContainer {
+  gap: 1rem;
+  height: calc(100dvh - var(--topNavbarHeight));
+  overflow: hidden;
+
+  .heading {
+    padding: 1rem 1rem 0 3rem;
+    flex-wrap: wrap;
     gap: 1rem;
-    height: calc(100dvh - var(--topNavbarHeight));
-    overflow: hidden;
-  
+    align-items: center;
+
+    .title {
+      margin: 0;
+      font-family: var(--semiBold);
+      color: var(--blackTextColor);
+      font-size: 1.5rem;
+    }
+
+    .searchSortDiv {
+      order: 2;
+      width: 100%;
+      justify-content: flex-end;
+      gap: 1rem;
+
+      svg {
+        cursor: pointer;
+      }
+
+      .searchInput {
+        width: 100%;
+        max-width: 20rem;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid var(--grayBorderColor);
+        border-radius: 0.25rem;
+        outline: none;
+      }
+    }
+
+    button {
+      order: 1;
+    }
+  }
+
+  .mainBody {
+    position: relative;
+    overflow: auto;
+    height: 100%;
+    padding-right: 0.125rem;
+
+    .sidebarWrapper {
+      height: 100%;
+      // overflow-y: auto;
+    }
+
+    .content {
+      overflow: auto;
+      border: 1px solid #e6e6e6;
+      border-radius: 0.25rem;
+      padding: 1rem 0.5rem 2rem 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+
+      .emptySelectionDiv {
+        height: 100%;
+        gap: 1rem;
+        padding: 1rem;
+
+        img {
+          width: 4rem;
+          height: 4rem;
+          object-fit: contain;
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+          line-height: 1;
+          font-family: var(--regular);
+          text-align: center;
+        }
+
+        p:nth-of-type(1) {
+          font-size: 1.25rem;
+          color: var(--black2TextColor);
+        }
+
+        p:nth-of-type(2) {
+          font-size: 1rem;
+          color: var(--grayTextColor);
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .TasksContainer {
     .heading {
       padding: 1rem 1rem 0 3rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-  
-      .title {
-        margin: 0;
-        font-family: var(--semiBold);
-        color: var(--blackTextColor);
-        font-size: 1.5rem;
-      }
-  
+      flex-wrap: nowrap;
+
       .searchSortDiv {
-        order: 2;
-        width: 100%;
-        justify-content: flex-end;
-        gap: 1rem;
-  
-        svg {
-          cursor: pointer;
-        }
-  
-        .searchInput {
-          width: 100%;
-          max-width: 20rem;
-          padding: 0.25rem 0.5rem;
-          border: 1px solid var(--grayBorderColor);
-          border-radius: 0.25rem;
-          outline: none;
-        }
-      }
-  
-      button {
         order: 1;
       }
-    }
-  
-    .mainBody {
-      position: relative;
-      overflow: auto;
-      height: 100%;
-      padding-right: 0.125rem;
-  
-      .sidebarWrapper {
-        height: 100%;
-        // overflow-y: auto;
+
+      button {
+        order: 2;
       }
-  
+    }
+
+    .mainBody {
+      gap: 1rem;
+      padding-right: 1rem;
+
       .content {
-        overflow: auto;
-        border: 1px solid #e6e6e6;
-        border-radius: 0.25rem;
-        padding: 1rem 0.5rem 2rem 1rem;
-        width: 100%;
-        margin-bottom: 1rem;
+        padding: 1.5rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .TasksContainer {
+    .heading {
+      padding: 1rem 2rem 0 2rem;
+    }
+
+    .mainBody {
+      gap: 1rem;
+      padding-right: 1rem;
+
+      .content {
+        padding: 1rem;
 
         .emptySelectionDiv {
-            height: 100%;
-            gap: 1rem;
-            padding: 1rem;
-        
-            img {
-              width: 4rem;
-              height: 4rem;
-              object-fit: contain;
-            }
-        
-            p {
-              margin: 0;
-              padding: 0;
-              line-height: 1;
-              font-family: var(--regular);
-              text-align: center;
-            }
-        
-            p:nth-of-type(1) {
-              font-size: 1.25rem;
-              color: var(--black2TextColor);
-            }
-        
-            p:nth-of-type(2) {
-              font-size: 1rem;
-              color: var(--grayTextColor);
-            }
+          img {
+            width: 5rem;
+            height: 5rem;
           }
-      }
-    }
-  }
-  
-  @media all and (min-width: 768px) {
-    .TasksContainer {
-      .heading {
-        padding: 1rem 1rem 0 3rem;
-        flex-wrap: nowrap;
-  
-        .searchSortDiv {
-          order: 1;
-        }
-  
-        button {
-          order: 2;
-        }
-      }
-  
-      .mainBody {
-        gap: 1rem;
-        padding-right: 1rem;
-  
-        .content {
-          padding: 1.5rem;
         }
       }
     }
   }
-  
-  @media all and (min-width: 992px) {
-    .TasksContainer {
-      .heading {
-        padding: 1rem 2rem 0 2rem;
-      }
-  
-      .mainBody {
-        gap: 1rem;
-        padding-right: 1rem;
-  
-        .content {
-          padding: 1rem;
+}
 
-          .emptySelectionDiv {
-            img {
-              width: 5rem;
-              height: 5rem;
-            }
-          }
+@media all and (min-width: 1200px) {
+  .TasksContainer {
+    .heading {
+      padding: 1.5rem 2rem 0 2rem;
+
+      .title {
+        margin-right: 9rem;
+      }
+
+      .searchSortDiv {
+        justify-content: flex-start;
+        position: relative;
+        gap: 0.875rem;
+
+        .searchInput {
+          position: absolute;
+          transform: translateX(-105%);
+          width: 9rem;
         }
+      }
+
+      button {
+        margin-left: auto;
+      }
+    }
+
+    .mainBody {
+      gap: 0.5rem;
+      padding-right: 2rem;
+      padding-left: 2rem;
+
+      .content {
+        padding: 1rem;
       }
     }
   }
-  
-  @media all and (min-width: 1200px) {
-    .TasksContainer {
-      .heading {
-        padding: 1.5rem 2rem 0 2rem;
-  
-        .title {
-          margin-right: 9rem;
-        }
-  
-        .searchSortDiv {
-          justify-content: flex-start;
-          position: relative;
-          gap: 0.875rem;
-  
-          .searchInput {
-            position: absolute;
-            transform: translateX(-105%);
-            width: 9rem;
-          }
-        }
-  
-        button {
-          margin-left: auto;
-        }
-      }
-  
-      .mainBody {
-        gap: 0.5rem;
-        padding-right: 2rem;
-        padding-left: 2rem;
-  
-        .content {
-          padding: 1rem;
-        }
-      }
-    }
-  }
-  
+}

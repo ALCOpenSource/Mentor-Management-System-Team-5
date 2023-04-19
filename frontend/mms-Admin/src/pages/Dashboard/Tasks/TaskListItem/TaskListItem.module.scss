@@ -71,17 +71,17 @@
 @media all and (min-width: 992px) {
   .taskListItemContainer {
     padding: 0.875rem 0.75rem;
-  
+
     .body {
       gap: 1rem;
-  
+
       .icon {
         width: 1.75rem;
       }
-  
+
       .mainContent {
         gap: 0.5rem;
-  
+
         .title {
           font-size: 1rem;
           color: var(--blackTextColor);
@@ -106,7 +106,7 @@
           -o-box-orient: vertical;
           white-space: normal;
         }
-  
+
         .metaData {
           font-size: 0.875rem;
           gap: 0.25rem;
@@ -114,11 +114,11 @@
           font-family: var(--regular);
           line-height: 1;
           align-items: flex-end;
-  
+
           .dateIcon {
             width: 1rem;
           }
-  
+
           .date {
             margin: 0;
             line-height: 1;

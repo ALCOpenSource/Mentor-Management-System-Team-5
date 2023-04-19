@@ -17,7 +17,6 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
   const [fixed, setFixed] = useState(false);
   const currentId = params?.id;
 
-
   const sidebarRef = useRef(null);
 
   const handleSidebarToggle = () => {
@@ -31,9 +30,8 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
   };
 
   useEffect(() => {
-
     const active = data.find((menuItem) => menuItem.id.toString() === currentId);
-    console.log(active, 'active element');
+    console.log(active, "active element");
     setActiveLink(active ? active.id : "");
   }, [currentId, data]);
 
@@ -73,12 +71,12 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
 
   const handleMenuClick = (itemId) => {
     if (isMobile && open) {
-      selectedMenuItem(itemId)
+      selectedMenuItem(itemId);
       setOpen(false);
     } else if (isMobile && !open) {
       setOpen(true);
     } else {
-      selectedMenuItem(itemId)
+      selectedMenuItem(itemId);
     }
   };
 
@@ -111,7 +109,7 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
       <ul
         style={{
           padding: open ? "0 1rem" : "0",
-          overflowX: isMobile && !open ? "hidden" : "auto",
+          overflowX: isMobile && !open ? "hidden" : "auto"
         }}
       >
         {data.map((item, index) => (

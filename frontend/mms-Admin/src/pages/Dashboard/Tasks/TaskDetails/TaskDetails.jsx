@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./TaskDetails.module.scss";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import headerIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
@@ -16,8 +16,8 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 
 const TaskDetails = ({ data }) => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const taskId = location.pathname.split("/")[4] || "";
+  const params = useParams();
+  const taskId = params.id;
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
@@ -44,8 +44,6 @@ const TaskDetails = ({ data }) => {
       count: 50
     }
   ];
-
-  console.log(taskId, 'taskid');
 
   return (
     <div className={cx(styles.taskDetailsContainer, "flexCol")}>
