@@ -26,6 +26,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    overflow-y: auto;
 
     li {
       cursor: pointer;
@@ -44,5 +45,9 @@
 @media all and (min-width: 1200px) {
   .genericSideBarContainer {
     padding-left: 0;
+
+    ul {
+      gap: 0.875rem;
+    }
   }
 }

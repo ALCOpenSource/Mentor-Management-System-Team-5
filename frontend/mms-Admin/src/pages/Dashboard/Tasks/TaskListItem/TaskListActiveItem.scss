@@ -1,16 +1,11 @@
-.task-list-active-menu {
-  background-color: white;
+.active-task-item {
+  > div {
+    background-color: var(--sectionContainerBgColor);
+    border: 1px solid #e6fdfe;
+  }
 
   a {
     color: var(--blackTextColor) !important;
     font-family: var(--bold);
-  }
-
-  span {
-    svg {
-      path {
-        stroke: var(--blackTextColor) !important;
-      }
-    }
   }
 }

@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import cx from "classnames";
 import styles from "./GenericSideBar.module.scss";
-import "./GenericSideBarActiveMenu.scss";
 import PropTypes from "prop-types";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as SettingsToggler } from "@/assets/icons/settings-toggler-icon.svg";
 import searchIcon from "@/assets/icons/settings-toggler-icon.svg";
 
-const GenericSideBar = ({ data }) => {
+const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const params = useParams();
   const [activeLink, setActiveLink] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentSideBarPosition, setCurrentSideBarPosition] = useState(0);
   const [fixed, setFixed] = useState(false);
+  const currentId = params?.id;
 
-  console.log(data, "data");
 
   const sidebarRef = useRef(null);
 
@@ -30,13 +30,12 @@ const GenericSideBar = ({ data }) => {
     }
   };
 
-  // useEffect(() => {
-  //   // Update the active link when the route changes
-  //   const path = location.pathname;
-  //   let currentPath = path.split("/")[3] || "";
-  //   const active = data.find((link) => link.link === currentPath);
-  //   setActiveLink(active ? active.link : "");
-  // }, [location.pathname, data]);
+  useEffect(() => {
+
+    const active = data.find((menuItem) => menuItem.id.toString() === currentId);
+    console.log(active, 'active element');
+    setActiveLink(active ? active.id : "");
+  }, [currentId, data]);
 
   useEffect(() => {
     const handleWindowSizeChange = () => {
@@ -74,12 +73,12 @@ const GenericSideBar = ({ data }) => {
 
   const handleMenuClick = (itemId) => {
     if (isMobile && open) {
-      navigate(`${itemId}`);
+      selectedMenuItem(itemId)
       setOpen(false);
     } else if (isMobile && !open) {
       setOpen(true);
     } else {
-      navigate(`${itemId}`);
+      selectedMenuItem(itemId)
     }
   };
 
@@ -111,14 +110,15 @@ const GenericSideBar = ({ data }) => {
       )}
       <ul
         style={{
-          padding: open ? "0 1rem" : "0"
+          padding: open ? "0 1rem" : "0",
+          overflowX: isMobile && !open ? "hidden" : "auto",
         }}
       >
         {data.map((item, index) => (
           <li
             key={index}
             onClick={() => handleMenuClick(item.id)}
-            className={activeLink === item.link ? "general-sidebar-active-menu" : ""}
+            className={activeLink.toString() === item.id.toString() ? activeMenuItemClass : ""}
           >
             {item?.component}
           </li>

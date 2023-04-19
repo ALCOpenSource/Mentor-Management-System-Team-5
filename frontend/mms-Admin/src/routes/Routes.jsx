@@ -19,7 +19,6 @@ import Messages from "@/pages/Dashboard/Messages/Messages";
 import Profile from "@/pages/Dashboard/Profile/Profile";
 import Programs from "@/pages/Dashboard/Programs/Programs";
 import Reports from "@/pages/Dashboard/Reports/Reports";
-import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 
 // Settings
 import Settings from "@/pages/Dashboard/Settings/Settings";
@@ -32,7 +31,9 @@ import SettingsPrivacy from "@/pages/Dashboard/Settings/Privacy/Privacy";
 import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Notifications";
 
 // Tasks
+import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
+import AddTask from "@/pages/Dashboard/Tasks/AddTask/AddTask";
 
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
@@ -76,9 +77,11 @@ const RoutesComponent = () => {
           <Route index path='profile' element={<Profile />} />
           <Route path='programs' element={<Programs />} />
           <Route path='reports' element={<Reports />} />
-          <Route path='tasks' element={<Tasks />}>
-            <Route path='' element={<TaskDetails />} />
-            <Route path=':taskId' element={<TaskDetails />} />
+          <Route path='tasks'>
+            <Route path='' element={<Tasks />}>
+              <Route path='task-details/:id' element={<TaskDetails />} />
+            </Route>
+            <Route path='add-task' element={<AddTask />} />
           </Route>
         </Route>
       </Routes>

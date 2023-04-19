@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import headerIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
-import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 // import { ReactComponent as ReportIcon } from "@/assets/icons/reports-icon.svg";
 import reportIcon from "@/assets/icons/task-report-icon-green.png";
 import mentorsIcon from "@/assets/icons/mentor-icon-green.png";
@@ -18,7 +17,7 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 const TaskDetails = ({ data }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const taskId = location.pathname.split("/")[3] || "";
+  const taskId = location.pathname.split("/")[4] || "";
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
@@ -46,9 +45,11 @@ const TaskDetails = ({ data }) => {
     }
   ];
 
+  console.log(taskId, 'taskid');
+
   return (
     <div className={cx(styles.taskDetailsContainer, "flexCol")}>
-      {taskId ? (
+      {taskId && (
         <>
           <div className={cx(styles.header, "flexCol")}>
             <div className={cx(styles.wrapper, "flexRow-align-center")}>
@@ -111,12 +112,6 @@ const TaskDetails = ({ data }) => {
             <Button title='Edit Task' />
           </div>
         </>
-      ) : (
-        <div className={cx(styles.emptySelectionDiv, "flexCol-fully-centered")}>
-          <img src={emptySelectionIcon} alt='empty-selection-icon' />
-          <p>No item selected yet </p>
-          <p>Select an item from the list to view task details</p>
-        </div>
       )}
 
       {displayModal && modalName === "taskDeleteNotification" ? (
