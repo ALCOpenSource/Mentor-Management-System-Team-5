@@ -52,7 +52,7 @@ export const FormGroup = styled(Form.Group)`
   }
 
   .error {
-    font-size: 12px;
+    font-size: 14px;
     color: #eb5757;
     position: absolute;
     left: 0;

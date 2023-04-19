@@ -27,11 +27,11 @@
         display: -ms-box;
         display: -o-box;
         display: box;
-        -webkit-line-clamp: 2; /* number of lines to show */
-        -moz-line-clamp: 2;
-        -ms-line-clamp: 2;
-        -o-line-clamp: 2;
-        line-clamp: 2;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -moz-line-clamp: 1;
+        -ms-line-clamp: 1;
+        -o-line-clamp: 1;
+        line-clamp: 1;
         -webkit-box-orient: vertical;
         -moz-box-orient: vertical;
         -ms-box-orient: vertical;

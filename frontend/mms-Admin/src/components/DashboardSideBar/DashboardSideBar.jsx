@@ -19,9 +19,12 @@ import { ReactComponent as MessagesIcon } from "@/assets/icons/messages-icon.svg
 import { ReactComponent as DiscussionForumIcon } from "@/assets/icons/discussion-forum-icon.svg";
 import { ReactComponent as SettingsIcon } from "@/assets/icons/settings-icon.svg";
 import { ReactComponent as LogoutIcon } from "@/assets/icons/logout-icon.svg";
+import { logout } from "@/redux/Auth/AuthSlice";
+import { useDispatch } from "react-redux";
 
 const DashboardSideBar = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const { toggleSidebar, toggled } = useProSidebar();
 
   const currentPage = location.pathname.split("/")[2] || "";
@@ -102,7 +105,11 @@ const DashboardSideBar = () => {
     menuItemsArray.findIndex((item) => item.link === currentPage)
   );
 
-  const handleMenuClick = (index) => {
+  const handleMenuClick = (index, menuItem) => {
+    if (menuItem === "Logout") {
+      dispatch(logout());
+    }
+
     setActiveIndex(index);
     toggleSidebar();
   };
@@ -119,11 +126,12 @@ const DashboardSideBar = () => {
           {menuItemsArray.map((item, index) => {
             return (
               <MenuItem
+                key={index}
                 className={cx(activeIndex === index && "sidebar-active-menu")}
                 active={activeIndex === index}
-                onClick={() => handleMenuClick(index)}
+                onClick={() => handleMenuClick(index, item.name)}
                 icon={item.icon}
-                component={<Link to={item.link} />}
+                component={<Link to={item?.link} />}
               >
                 {" "}
                 {item.name}
