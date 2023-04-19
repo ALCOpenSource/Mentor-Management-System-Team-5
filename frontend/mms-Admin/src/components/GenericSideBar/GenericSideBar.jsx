@@ -92,7 +92,7 @@ const GenericSideBar = ({ data }) => {
         height: sidebarHeight,
         position: open ? "fixed" : "relative",
         top: open ? currentSideBarPosition : "0",
-        transition: "width 0.1s",
+        transition: "width 0s",
         overflowX: isMobile && !open ? "hidden" : "auto",
         whiteSpace: open ? "normal" : "nowrap"
       }}
