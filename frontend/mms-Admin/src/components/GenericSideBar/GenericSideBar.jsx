@@ -2,19 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import cx from "classnames";
 import styles from "./GenericSideBar.module.scss";
 import PropTypes from "prop-types";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { ReactComponent as SettingsToggler } from "@/assets/icons/settings-toggler-icon.svg";
+import { useParams } from "react-router-dom";
+// import { ReactComponent as SettingsToggler } from "@/assets/icons/settings-toggler-icon.svg";
 import searchIcon from "@/assets/icons/settings-toggler-icon.svg";
 
 const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const params = useParams();
   const [activeLink, setActiveLink] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentSideBarPosition, setCurrentSideBarPosition] = useState(0);
-  const [fixed, setFixed] = useState(false);
   const currentId = params?.id;
 
   const sidebarRef = useRef(null);
@@ -127,7 +124,9 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
 };
 
 GenericSideBar.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  selectedMenuItem: PropTypes.func,
+  activeMenuItemClass: PropTypes.string
 };
 
 export default GenericSideBar;

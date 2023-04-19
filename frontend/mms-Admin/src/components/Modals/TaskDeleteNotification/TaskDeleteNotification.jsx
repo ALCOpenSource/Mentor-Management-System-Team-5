@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import ModalContainer from "../ModalContainer/ModalContainer";
 import cx from "classnames";
@@ -10,19 +11,14 @@ import successImage from "@/assets/images/task-delete-success.png";
 import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
-import { useNavigate } from "react-router";
 
 const TaskDeleteNotification = ({ show, size, modalName }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const modalData = useSelector((state) => state.modal.modalData);
 
-  console.log(modalData, "modal data");
-
   const handleClick = () => {
     dispatch(hideModal({ name: "taskDeleteNotification" }));
-    // navigate("/login");
   };
 
   return (
@@ -44,6 +40,12 @@ const TaskDeleteNotification = ({ show, size, modalName }) => {
       </div>
     </ModalContainer>
   );
+};
+
+TaskDeleteNotification.propTypes = {
+  show: PropTypes.bool,
+  size: PropTypes.string,
+  modalName: PropTypes.string
 };
 
 export default TaskDeleteNotification;

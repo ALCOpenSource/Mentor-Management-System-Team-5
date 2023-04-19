@@ -14,7 +14,7 @@ import deleteIcon from "@/assets/icons/delete-icon-red.svg";
 import TaskDeleteNotificationModal from "@/components/Modals/TaskDeleteNotification/TaskDeleteNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-const TaskDetails = ({ data }) => {
+const TaskDetails = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const taskId = params.id;
@@ -54,11 +54,11 @@ const TaskDetails = ({ data }) => {
               <img className={cx(styles.icon)} src={headerIcon} alt='task-icon' />
               <div className={cx(styles.mainContent, "flexCol")}>
                 <h5 className={cx(styles.title)}>
-                  {data?.title || `Room Library Article Written in Java ${taskId}`}
+                  {`Room Library Article Written in Java ${taskId}`}
                 </h5>
                 <div className={cx(styles.metaData, "flexRow")}>
                   <img className={cx(styles.dateIcon)} src={calendarIcon} alt='calendar-icon' />
-                  <span className={cx(styles.date)}>{data?.date || "3 days from now"}</span>
+                  <span className={cx(styles.date)}>{"3 days from now"}</span>
                 </div>
               </div>
             </div>

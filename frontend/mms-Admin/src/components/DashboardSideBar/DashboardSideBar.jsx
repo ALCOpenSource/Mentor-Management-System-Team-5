@@ -4,7 +4,7 @@ import styles from "./DashboardSideBar.module.scss";
 import "./DashboardActiveMenu.scss";
 
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { ReactComponent as ProfileIcon } from "@/assets/icons/profile-icon.svg";
 import { ReactComponent as DashboardIcon } from "@/assets/icons/dashboard-icon.svg";
@@ -24,7 +24,6 @@ import { useDispatch } from "react-redux";
 
 const DashboardSideBar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { toggleSidebar, toggled } = useProSidebar();
 
@@ -127,6 +126,7 @@ const DashboardSideBar = () => {
           {menuItemsArray.map((item, index) => {
             return (
               <MenuItem
+                key={index}
                 className={cx(activeIndex === index && "sidebar-active-menu")}
                 active={activeIndex === index}
                 onClick={() => handleMenuClick(index, item.name)}

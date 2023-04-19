@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import styles from "./Tasks.module.scss";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import { Outlet } from "react-router-dom";
 import Button from "@/components/Button/Button";
@@ -15,10 +15,8 @@ import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import TaskListItem from "./TaskListItem/TaskListItem";
 
 const Tasks = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const params = useParams();
-  const currentPage = location.pathname.split("/")[3] || "";
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
 
   const [showSearchInput, setShowSearchInput] = useState(false);

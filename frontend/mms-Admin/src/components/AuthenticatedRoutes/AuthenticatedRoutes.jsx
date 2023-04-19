@@ -1,16 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { isAuthenticated, getToken, isExpired } from "@/utils/auth";
+// import { useDispatch } from "react-redux";
+import { isAuthenticated } from "@/utils/auth";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 
 const AuthenticatedRoutes = ({ children, roles }) => {
   let location = useLocation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const checkIsAuthenticated = isAuthenticated();
 
-  const token = getToken();
+  // const token = getToken();
   const userDetails = JSON.parse(localStorage.getItem("userData"));
 
   // if (isExpired(token)) {
