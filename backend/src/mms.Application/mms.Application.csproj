@@ -26,5 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\PasswordReset\" />
+    <Folder Include="UserNotification\Query\" />
   </ItemGroup>
 </Project>
