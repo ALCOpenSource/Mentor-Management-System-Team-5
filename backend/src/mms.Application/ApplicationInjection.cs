@@ -1,19 +1,18 @@
-﻿using System.Reflection;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using mms.Application.Account.Login;
+using mms.Application.Common.Mapper;
+using System.Reflection;
 
 namespace mms.Application
 {
     public static class ApplicationInjection
     {
-
         public static void ApplicationDiContainer(IServiceCollection services)
         {
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+            services.AddAutoMapper(typeof(AutoMapperInitializer));
         }
     }
 }

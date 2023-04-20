@@ -10,8 +10,8 @@ namespace mms.Domain.Entities
         public string Blocker { get; set; }
         public string Recommendations { get; set; }
         public DateTime DateCreated { get; set; }
-        public Guid CreatedBy { get; set; }
-        public Guid TaskId { get; set; }
-        public Guid ProgramId { get; set; }
+        public string CreatedBy { get; set; }
+        public string TaskId { get; set; }
+        public string ProgramId { get; set; }
     }
 }

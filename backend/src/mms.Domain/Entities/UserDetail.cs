@@ -5,10 +5,10 @@ namespace mms.Domain.Entities
 {
     public class UserDetail : BaseEntity
     {
-        public Guid AppUserId { get; set; }
+        public string AppUserId { get; set; }
         public string PreviousHeldRole { get; set; }
         public string PreviousProgram { get; set; }
-        public Guid ProgrammeOfInterestId { get; set; }
+        public string ProgrammeOfInterestId { get; set; }
         public int YearOfTechnicalExperience { get; set; }
         public string Document { get; set; }
         public bool BeenMentorBefore { get; set; }
