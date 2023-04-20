@@ -3,7 +3,7 @@ using MediatR;
 
 namespace mms.Application.UserNotification.Query
 {
-    internal class GetUSerNotificationCommand : IRequest<IResult<GetUSerNotificationResponse>>
+    public class GetUSerNotificationCommand : IRequest<IResult<GetUSerNotificationResponse>>
     {
     }
 }
