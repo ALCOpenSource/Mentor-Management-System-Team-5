@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using mms.Application.Account.PasswordReset;
 using mms.Infrastructure.Interface;
+using mms.Application.Account.Profile;
+using mms.Application.Account.ChangePassword;
 
 namespace mms.api.Controllers
 {
@@ -69,6 +71,36 @@ namespace mms.api.Controllers
         [HttpPost("reset-password")]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ResetPasswordAsync(ResetPassword command)
+        {
+            var result = await Mediator.Send(command);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPut("update-profile")]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> UpdateProfileAsync(UpdateProfileCommand command)
+        {
+            var result = await Mediator.Send(command);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPut("change-password")]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> ChangePasswordAsync(ChangePasswordCommand command)
         {
             var result = await Mediator.Send(command);
             if (!result.Succeeded)
