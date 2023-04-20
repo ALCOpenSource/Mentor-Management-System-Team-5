@@ -4,7 +4,7 @@ namespace mms.Infrastructure.Interface
 {
     public interface ICurrentUserService
     {
-        Guid AppUserId { get; }
+        string AppUserId { get; }
         string UserRole { get; }
         string UserEmail { get; }
         string UserPhoneNumber { get; set; }

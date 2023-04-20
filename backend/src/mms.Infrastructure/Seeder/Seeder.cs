@@ -51,7 +51,8 @@ namespace mms.Infrastructure.Seeder
 
                     var userNotification = new UserNotification()
                     {
-                        UserId = Guid.Parse(user.Id),
+                        Id = Guid.NewGuid().ToString(),
+                        AppUserId = user.Id,
                     };
 
                     await userManager.CreateAsync(user, Password);

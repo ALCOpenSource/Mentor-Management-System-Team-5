@@ -17,7 +17,7 @@ namespace mms.Infrastructure.Implementation
             UserManager<AppUser> userManager,
             ApplicationContext context)
         {
-            AppUserId = Guid.Parse(httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier));
+            AppUserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
             UserRole = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Role);
             UserEmail = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Email);
             FullName = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.GivenName)
@@ -27,7 +27,7 @@ namespace mms.Infrastructure.Implementation
             _context = context;
         }
 
-        public Guid AppUserId { get; }
+        public string AppUserId { get; }
         public string UserRole { get; }
         public string UserEmail { get; }
         public string FullName { get; }

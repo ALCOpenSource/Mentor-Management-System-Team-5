@@ -23,13 +23,13 @@ namespace mms.Application.UserNotification.Command.EditUserNotification
 
         public async Task<IResult> Handle(EditUserNotificationCommand request, CancellationToken cancellationToken)
         {
-            if (_currentUserService.AppUserId == Guid.Empty)
+            if (string.IsNullOrEmpty(_currentUserService.AppUserId))
             {
                 return await Result.FailAsync("Invalid user");
             }
 
             var userNotification =
-                await _context.UserNotifications.FirstOrDefaultAsync(x => x.UserId == _currentUserService.AppUserId,
+                await _context.UserNotifications.FirstOrDefaultAsync(x => x.AppUserId == _currentUserService.AppUserId,
                     cancellationToken);
             if (userNotification == null)
             {

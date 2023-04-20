@@ -53,9 +53,6 @@ namespace mms.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AppUser>()
-                .Property(e => e.Id).HasConversion<Guid>();
-
             modelBuilder.Entity<ProgrammeApplication>()
                 .HasOne(p => p.Programme)
                 .WithMany(p => p.ProgrammeApplications)
