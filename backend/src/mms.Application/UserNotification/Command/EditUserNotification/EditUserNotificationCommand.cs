@@ -1,6 +1,9 @@
-﻿namespace mms.Application.UserNotification.Command.EditUserNotification
+﻿using AspNetCoreHero.Results;
+using MediatR;
+
+namespace mms.Application.UserNotification.Command.EditUserNotification
 {
-    public class EditUserNotificationCommand
+    public class EditUserNotificationCommand : IRequest<IResult>
     {
         public bool AllNotificationEmail { get; set; }
         public bool AllNotificationInApp { get; set; }

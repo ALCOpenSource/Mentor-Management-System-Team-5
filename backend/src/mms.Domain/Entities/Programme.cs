@@ -6,9 +6,9 @@ namespace mms.Domain.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public Guid CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public string Status { get; set; }
-        public Guid ArchivedBy { get; set; }
+        public string ArchivedBy { get; set; }
         public string ProgrammePicture { get; set; }
         public IList<UserTask> UserTasks { get; set; }
         public DateTime DateCreated { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
@@ -9,14 +10,14 @@ namespace mms.Infrastructure.Implementation
     public class CurrentUserService : ICurrentUserService
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly SQLContext _context;
+        private readonly ApplicationContext _context;
 
         public CurrentUserService(
             IHttpContextAccessor httpContextAccessor,
             UserManager<AppUser> userManager,
             ApplicationContext context)
         {
-            AppUserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            AppUserId = Guid.Parse(httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier));
             UserRole = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Role);
             UserEmail = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Email);
             FullName = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.GivenName)
@@ -32,9 +33,9 @@ namespace mms.Infrastructure.Implementation
         public string FullName { get; }
         public string UserPhoneNumber { get; set; }
 
-        public Task<AppUser> GetLoggedInUser()
+        public async Task<AppUser> GetLoggedInUser()
         {
-            return await _userManager.FindByIdAsync(userId: AppUserId);
+            return await _userManager.FindByIdAsync(userId: AppUserId.ToString());
         }
     }
 }

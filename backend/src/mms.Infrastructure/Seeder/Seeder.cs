@@ -49,8 +49,15 @@ namespace mms.Infrastructure.Seeder
                         State = "Lagos"
                     };
 
+                    var userNotification = new UserNotification()
+                    {
+                        UserId = Guid.Parse(user.Id),
+                    };
+
                     await userManager.CreateAsync(user, Password);
                     await userManager.AddToRoleAsync(user, Policies.Admin);
+                    await context.UserNotifications.AddAsync(userNotification);
+                    await context.SaveChangesAsync();
                 }
             }
             catch (Exception e)

@@ -22,31 +22,31 @@ namespace mms.Infrastructure.Context
         public DbSet<UserDetail> UserDetails { get; set; }
         public DbSet<UserNotification> UserNotifications { get; set; }
 
-        //public async Task<int> SaveChangesAsync()
-        //{
-        //    return await SaveChangesAsync(default(CancellationToken));
-        //}
+        public async Task<int> SaveChangesAsync()
+        {
+            return await SaveChangesAsync(default(CancellationToken));
+        }
 
-        //public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-        //{
-        //    foreach (var item in ChangeTracker.Entries<BaseEntity>())
-        //    {
-        //        switch (item.State)
-        //        {
-        //            case EntityState.Modified:
-        //                item.Entity.UpdatedAt = DateTime.UtcNow;
-        //                break;
-        //            case EntityState.Added:
-        //                item.Entity.Id = Guid.NewGuid();
-        //                item.Entity.CreatedAt = DateTime.UtcNow;
-        //                break;
-        //            default:
-        //                throw new NotSupportedException();
-        //        }
-        //    }
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            foreach (var item in ChangeTracker.Entries<BaseEntity>())
+            {
+                switch (item.State)
+                {
+                    case EntityState.Modified:
+                        item.Entity.UpdatedAt = DateTime.UtcNow;
+                        break;
+                    case EntityState.Added:
+                        item.Entity.Id = Guid.NewGuid().ToString();
+                        item.Entity.CreatedAt = DateTime.UtcNow;
+                        break;
+                    default:
+                        throw new NotSupportedException();
+                }
+            }
 
-        //    return await base.SaveChangesAsync(cancellationToken);
-        //}
+            return await base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.LogTo(Console.WriteLine);
@@ -64,6 +64,9 @@ namespace mms.Infrastructure.Context
             modelBuilder.Entity<ProgrammeApplication>()
                 .HasIndex(x => x.AppUserId);
 
+            modelBuilder.Entity<ProgramsMentor>()
+                .HasIndex(x => x.AppUserId);
+
             modelBuilder.Entity<UserDetail>()
                 .HasIndex(x => x.AppUserId);
 
@@ -71,7 +74,7 @@ namespace mms.Infrastructure.Context
                 .HasMany(x => x.Managers);
 
             modelBuilder.Entity<UserNotification>()
-                .HasIndex(x => x.UserId);
+                .HasIndex(x => x.AppUserId);
 
             base.OnModelCreating(modelBuilder);
         }

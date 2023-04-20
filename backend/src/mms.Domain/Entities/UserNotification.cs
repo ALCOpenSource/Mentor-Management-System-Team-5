@@ -4,7 +4,7 @@ namespace mms.Domain.Entities
 {
     public class UserNotification : BaseEntity
     {
-        public Guid UserId { get; set; }
+        public string AppUserId { get; set; }
         public bool AllNotificationEmail { get; set; }
         public bool AllNotificationInApp { get; set; }
         public bool ProgramEmail { get; set; }
