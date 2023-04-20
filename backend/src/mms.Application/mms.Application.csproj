@@ -24,9 +24,13 @@
 
   <ItemGroup>
     <None Remove="Account\PasswordReset\" />
+    <Folder Include="UserNotification\Query\" />
+    <None Remove="Account\Profile\" />
+    <None Remove="Account\ChangePassword\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\PasswordReset\" />
-    <Folder Include="UserNotification\Query\" />
+    <Folder Include="Account\Profile\" />
+    <Folder Include="Account\ChangePassword\" />
   </ItemGroup>
 </Project>

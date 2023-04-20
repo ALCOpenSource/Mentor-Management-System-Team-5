@@ -152,6 +152,9 @@ namespace mms.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("About")
+                        .HasColumnType("longtext");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 

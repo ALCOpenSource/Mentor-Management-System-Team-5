@@ -29,6 +29,7 @@ ApplicationInjection.ApplicationDiContainer(builder.Services);
 InfrastructureInjection.InjectInfrastructure(builder.Services);
 
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

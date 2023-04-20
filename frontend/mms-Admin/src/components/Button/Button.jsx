@@ -7,6 +7,7 @@ import styled from "styled-components";
 const ButtonComponent = styled.button`
 font-size: ${(props) =>
   props.size === "small" ? "var(--primaryBtnSmallFontSize)" : "var(--primaryBtnFontSize)"};
+  font-family: ${(props) => (props.size === "small" ? "var(--regular)" : "var(--semiBold)")};
 padding: ${(props) =>
   props.size === "small" ? "var(--primaryBtnSmallPadding)" : "var(--primaryBtnPadding)"};
 border-radius: ${(props) =>
@@ -17,7 +18,6 @@ color: ${(props) =>
   props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)"};
 border: 1px solid ${(props) =>
   props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)"};
-  font-family: var(--regular);
 
   width: fit-content;
   white-space: nowrap;

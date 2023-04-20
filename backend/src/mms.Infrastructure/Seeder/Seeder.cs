@@ -34,7 +34,8 @@ namespace mms.Infrastructure.Seeder
 
                 if (!context.Users.Any())
                 {
-                    var user = new AppUser
+                    List<AppUser> users = new();
+                    var user1 = new AppUser
                     {
                         Id = Guid.NewGuid().ToString(),
                         FirstName = "John",
@@ -46,19 +47,50 @@ namespace mms.Infrastructure.Seeder
                         UserName = "Andela",
                         Country = "Nigeria",
                         City = "Lagos",
+                        About = "I am just my simple self",
                         State = "Lagos"
                     };
 
-                    var userNotification = new UserNotification()
+                    var user = new AppUser
                     {
+                        About = "I am just my simple self",
                         Id = Guid.NewGuid().ToString(),
-                        AppUserId = user.Id,
+                        FirstName = "Samuel",
+                        LastName = "Kebede",
+                        IsActive = true,
+                        DateCreated = DateTime.Now,
+                        Email = "samuelkebede2000@gmail.com",
+                        EmailConfirmed = true,
+                        UserName = "Andela",
+                        Country = "Nigeria",
+                        City = "Lagos",
+                        State = "Lagos"
                     };
 
-                    await userManager.CreateAsync(user, Password);
-                    await userManager.AddToRoleAsync(user, Policies.Admin);
-                    await context.UserNotifications.AddAsync(userNotification);
-                    await context.SaveChangesAsync();
+                    var user2 = new AppUser
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        FirstName = "Temitope",
+                        LastName = "Doe",
+                        IsActive = true,
+                        DateCreated = DateTime.Now,
+                        Email = "tamsay2017@gmail.com",
+                        EmailConfirmed = true,
+                        UserName = "Andela",
+                        Country = "Nigeria",
+                        City = "Lagos",
+                        About = "I am just my simple self",
+                        State = "Lagos"
+                    };
+
+                    users.Add(user);
+                    users.Add(user1);
+                    users.Add(user2);
+
+                    foreach(AppUser appUser in users) {
+                        await userManager.CreateAsync(appUser, Password);
+                        await userManager.AddToRoleAsync(appUser, Policies.Admin);
+                    }
                 }
             }
             catch (Exception e)

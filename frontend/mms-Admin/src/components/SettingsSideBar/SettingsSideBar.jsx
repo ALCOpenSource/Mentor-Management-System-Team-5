@@ -110,7 +110,7 @@ const SettingsSideBar = ({ data }) => {
 };
 
 SettingsSideBar.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.array
 };
 
 export default SettingsSideBar;

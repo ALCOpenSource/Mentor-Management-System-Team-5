@@ -22,14 +22,7 @@ const ForgotPassword = () => {
 
   const handleForgotPassword = async (data) => {
     const response = await dispatch(forgotPassword(data));
-    console.log(response, "ForgotPassword response");
-    // if (response?.payload?.success) {
-    //   dispatch(showModal({ action: "hide", type: "ForgotPassword" }));
-    //   navigate("/home");
-    // }
-
-    // Temporary code
-    setShowOutcome(true);
+    response?.success && setShowOutcome(true);
   };
 
   const resolver = yupResolver(forgotPasswordSchema);
