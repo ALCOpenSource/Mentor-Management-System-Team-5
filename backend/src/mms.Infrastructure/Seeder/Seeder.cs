@@ -35,6 +35,7 @@ namespace mms.Infrastructure.Seeder
                 if (!context.Users.Any())
                 {
                     List<AppUser> users = new();
+                    List<UserNotification> usersNotifications = new();
                     var user1 = new AppUser
                     {
                         Id = Guid.NewGuid().ToString(),
@@ -48,7 +49,7 @@ namespace mms.Infrastructure.Seeder
                         Country = "Nigeria",
                         City = "Lagos",
                         About = "I am just my simple self",
-                        State = "Lagos"
+                        State = "Lagos",
                     };
 
                     var user = new AppUser
@@ -83,14 +84,37 @@ namespace mms.Infrastructure.Seeder
                         State = "Lagos"
                     };
 
+
                     users.Add(user);
                     users.Add(user1);
                     users.Add(user2);
 
-                    foreach(AppUser appUser in users) {
+                    usersNotifications.Add(new UserNotification()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AppUserId = user.Id,
+                    });
+
+                    usersNotifications.Add(new UserNotification()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AppUserId = user1.Id,
+                    });
+
+                    usersNotifications.Add(new UserNotification()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AppUserId = user2.Id,
+                    });
+
+                    foreach (AppUser appUser in users)
+                    {
                         await userManager.CreateAsync(appUser, Password);
                         await userManager.AddToRoleAsync(appUser, Policies.Admin);
                     }
+
+                    await context.UserNotifications.AddRangeAsync(usersNotifications);
+                    await context.SaveChangesAsync();
                 }
             }
             catch (Exception e)
