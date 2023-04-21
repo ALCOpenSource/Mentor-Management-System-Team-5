@@ -202,11 +202,11 @@ const Tasks = () => {
             onClick={() => setShowSearchInput(!showSearchInput)}
           />
           {showSearchInput && (
-            <input className={cx(styles.searchInput)} type='text' placeholder='Search for tasks' />
+            <input className={cx(styles.searchInput)} type="text" placeholder="Search for tasks" />
           )}
           <SortIcon className={cx(styles.sortIcon)} />
         </div>
-        <Button title='Create New Task' onClick={() => navigate("create-task")} />
+        <Button title="Create New Task" onClick={() => navigate("create-task")} />
       </section>
 
       <section className={cx(styles.mainBody, "flexRow")}>
@@ -214,7 +214,7 @@ const Tasks = () => {
           <GenericSideBar
             data={getMenuItems()}
             selectedMenuItem={handleSelectedMenuItem}
-            activeMenuItemClass='active-task-item'
+            activeMenuItemClass="active-task-item"
           />
         </div>
 
@@ -223,7 +223,7 @@ const Tasks = () => {
             <Outlet />
           ) : (
             <div className={cx(styles.emptySelectionDiv, "flexCol-fully-centered")}>
-              <img src={emptySelectionIcon} alt='empty-selection-icon' />
+              <img src={emptySelectionIcon} alt="empty-selection-icon" />
               <p>No item selected yet </p>
               <p>Select an item from the list to view task details</p>
             </div>

@@ -47,16 +47,16 @@ const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeS
           className={cx(styles.inputDiv, "flexRow-align-center")}
           style={{ visibility: showSearchInput ? "visible" : "hidden" }}
         >
-          <img src={searchIcon} alt='search-icon' className={cx(styles.icon)} />
+          <img src={searchIcon} alt="search-icon" className={cx(styles.icon)} />
           <input
             onChange={searchData}
             className={cx(styles.searchInput)}
-            type='text'
-            placeholder='Search for mentor...'
+            type="text"
+            placeholder="Search for mentor..."
           />
           <img
             src={closeIcon}
-            alt='close-icon'
+            alt="close-icon"
             className={cx(styles.icon)}
             onClick={() => handleCloseSearchInput()}
           />
@@ -66,7 +66,7 @@ const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeS
       {showSearchIcon && (
         <img
           src={searchIcon}
-          alt='search-icon'
+          alt="search-icon"
           className={cx(styles.icon)}
           onClick={() => handleShowSearchInput()}
         />
@@ -91,7 +91,7 @@ const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeS
         <div className={cx(styles.filterDiv, "flexCol")}>
           <img
             src={filterIcon}
-            alt='filter-icon'
+            alt="filter-icon"
             className={cx(styles.icon)}
             onClick={() => handleShowDropdown()}
           />
@@ -113,7 +113,7 @@ const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeS
         </div>
       )}
 
-      <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={closeSideBar} />
+      <img src={closeIcon} alt="close-icon" className={cx(styles.icon)} onClick={closeSideBar} />
     </div>
   );
 };

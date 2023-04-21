@@ -1,12 +1,9 @@
-import React, { forwardRef, useState, useEffect } from "react";
+import React, { forwardRef } from "react";
 import { FormGroup, StyledTextArea } from "./StyledTextArea";
 import PropTypes from "prop-types";
 
 const TextArea = forwardRef(
-  (
-    { label, placeholder, required, type, onChange, error, marginbottom, minHeight, ...props },
-    ref
-  ) => {
+  ({ label, placeholder, required, onChange, error, marginbottom, minHeight, ...props }) => {
     return (
       <FormGroup marginbottom={marginbottom || "2rem"} required={required}>
         <label>{label}</label>
@@ -17,7 +14,7 @@ const TextArea = forwardRef(
           minHeight={minHeight}
           {...props}
         />
-        {error ? <p className='error'>{error}</p> : ""}
+        {error ? <p className="error">{error}</p> : ""}
       </FormGroup>
     );
   }
@@ -29,7 +26,6 @@ TextArea.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
-  type: PropTypes.string,
   onChange: PropTypes.func,
   marginbottom: PropTypes.string,
   minHeight: PropTypes.string,

@@ -13,7 +13,7 @@ const DashboardSummaryCard = ({ data }) => {
           <span className={cx(styles.percentChange)}>{data.percentChange}</span>
         </p>
       </div>
-      <img className={cx(styles.icon)} src={data.icon} alt='icon' />
+      <img className={cx(styles.icon)} src={data.icon} alt="icon" />
     </div>
   );
 };

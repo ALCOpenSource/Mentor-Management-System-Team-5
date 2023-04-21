@@ -25,7 +25,7 @@ import { useDispatch } from "react-redux";
 const DashboardSideBar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { toggleSidebar, toggled } = useProSidebar();
+  const { toggleSidebar } = useProSidebar();
 
   const currentPage = location.pathname.split("/")[2] || "";
 
@@ -106,7 +106,7 @@ const DashboardSideBar = () => {
   );
 
   const handleMenuClick = (index, menuItem) => {
-    if (menuItem === "Logout") {
+    if (menuItem.toLowerCase() === "logout") {
       dispatch(logout());
     }
 
@@ -116,7 +116,7 @@ const DashboardSideBar = () => {
 
   return (
     <div className={cx(styles.dashboardSideBarContainer, "flexCol")}>
-      <Sidebar breakPoint='xl' className={cx(styles.sidebar)}>
+      <Sidebar breakPoint="xl" className={cx(styles.sidebar)}>
         <div className={cx(styles.userInfoDiv, "flexCol")}>
           <h5 className={cx(styles.name)}>Hi Kabiru</h5>
           <p className={cx(styles.role)}>Admin</p>

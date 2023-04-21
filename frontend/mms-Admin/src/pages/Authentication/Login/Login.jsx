@@ -57,28 +57,28 @@ const Login = () => {
           <div className={cx(styles.formWrapper, "flexCol")}>
             <form onSubmit={handleSubmit((data) => signIn(data))}>
               <Controller
-                name='email'
+                name="email"
                 control={control}
                 render={({ field }) => (
                   <InputField
                     {...field}
                     label={"Email"}
-                    placeholder=''
-                    type='email'
+                    placeholder=""
+                    type="email"
                     error={errors?.email && errors?.email?.message}
                   />
                 )}
               />
 
               <Controller
-                name='password'
+                name="password"
                 control={control}
                 render={({ field }) => (
                   <InputField
                     {...field}
                     label={"Password"}
-                    placeholder=''
-                    type='password'
+                    placeholder=""
+                    type="password"
                     error={errors?.password && errors?.password?.message}
                   />
                 )}
@@ -89,8 +89,8 @@ const Login = () => {
                   onClick={handleSubmit((data) => signIn(data))}
                   loading={loading}
                   disabled={loading}
-                  title='Login'
-                  type='primary'
+                  title="Login"
+                  type="primary"
                 />
               </div>
 

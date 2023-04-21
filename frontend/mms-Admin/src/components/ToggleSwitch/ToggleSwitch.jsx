@@ -16,35 +16,31 @@ const ToggleSwitch = () => {
       handleDiameter={16}
       height={19}
       width={32}
-      onColor='#058b94'
-      offColor='#b3b3b3'
+      onColor="#058b94"
+      offColor="#b3b3b3"
       checkedIcon={false}
       uncheckedIcon={false}
-      checkedHandleIcon={
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%"
-          }}
-        >
-          <ToggleOnIcon />
-        </div>
-      }
-      uncheckedHandleIcon={
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%"
-          }}
-        >
-          <ToggleOffIcon />
-        </div>
-      }
-      className='react-switch'
+      checkedHandleIcon={<div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%"
+        }}
+                         >
+        <ToggleOnIcon />
+      </div>}
+      uncheckedHandleIcon={<div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%"
+        }}
+                           >
+        <ToggleOffIcon />
+      </div>}
+      className="react-switch"
     />
   );
 };

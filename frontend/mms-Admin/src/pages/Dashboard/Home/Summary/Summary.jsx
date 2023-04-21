@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./Summary.module.scss";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import SummaryCard from "@/components/Cards/DashboardSummary/DashboardSummary";
 import Button from "@/components/Button/Button";
 
@@ -10,7 +10,7 @@ import reportsIcon from "@/assets/icons/summary-card-reports-icon.svg";
 import mentorsIcon from "@/assets/icons/summary-card-mentors-icon.svg";
 import mentorManagersIcon from "@/assets/icons/summary-card-mentor-managers-icon.svg";
 
-const Summary = ({ data }) => {
+const Summary = () => {
   const summaryCardsData = [
     {
       title: "Mentors",
@@ -41,7 +41,7 @@ const Summary = ({ data }) => {
   return (
     <div className={cx(styles.summaryContainer, "flexRow")}>
       <div className={cx(styles.activeProgramsDiv, "flexCol")}>
-        <Button title='View All' type='secondary' size='small' />
+        <Button title="View All" type="secondary" size="small" />
         <div className={cx(styles.body, "flexRow")}>
           <span className={cx(styles.value)}>60</span>
           <h6 className={cx(styles.heading)}>Active Programs</h6>
@@ -56,8 +56,8 @@ const Summary = ({ data }) => {
   );
 };
 
-Summary.propTypes = {
-  data: PropTypes.object.isRequired
-};
+// Summary.propTypes = {
+//   data: PropTypes.object.isRequired
+// };
 
 export default Summary;

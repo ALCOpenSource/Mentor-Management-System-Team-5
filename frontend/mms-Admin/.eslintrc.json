@@ -1,5 +1,6 @@
 {
     "env": {
+        "node": true,
         "browser": true,
         "es2021": true
     },
@@ -7,7 +8,6 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
-        // "plugin:jsx-a11y/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jest/recommended",
         "plugin:testing-library/react"
@@ -59,7 +59,6 @@
                 "html": true
             }
         ],
-        //   "react/jsx-closing-bracket-location": [2, {"selfClosing": "props-aligned", "nonEmpty": "after-props"}],
         "react/jsx-closing-bracket-location": [
             2,
             "tag-aligned"

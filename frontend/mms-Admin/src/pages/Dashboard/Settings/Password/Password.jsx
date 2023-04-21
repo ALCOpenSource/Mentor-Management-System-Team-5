@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./Password.module.scss";
@@ -28,10 +28,8 @@ const Password = () => {
   };
 
   const {
-    handleSubmit,
     formState: { errors },
-    control,
-    setValue
+    control
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   return (
@@ -42,14 +40,14 @@ const Password = () => {
         </div>
         <div className={cx(styles.rightSection, styles.currentPasswordDetails)}>
           <Controller
-            name='currentPassword'
+            name="currentPassword"
             control={control}
             render={({ field }) => (
               <InputField
                 {...field}
                 label={"Your current Password"}
-                placeholder=''
-                type='password'
+                placeholder=""
+                type="password"
                 error={errors?.currentPassword && errors?.currentPassword?.message}
               />
             )}
@@ -63,14 +61,14 @@ const Password = () => {
         </div>
         <div className={cx(styles.rightSection, styles.newPasswordDetails)}>
           <Controller
-            name='newPassword'
+            name="newPassword"
             control={control}
             render={({ field }) => (
               <InputField
                 {...field}
                 label={"Must be at least 8 characters"}
-                placeholder=''
-                type='password'
+                placeholder=""
+                type="password"
                 error={errors?.newPassword && errors?.newPassword?.message}
               />
             )}
@@ -84,14 +82,14 @@ const Password = () => {
         </div>
         <div className={cx(styles.rightSection, styles.confirmPasswordDetails)}>
           <Controller
-            name='confirmPassword'
+            name="confirmPassword"
             control={control}
             render={({ field }) => (
               <InputField
                 {...field}
                 label={"Must match your new password"}
-                placeholder=''
-                type='password'
+                placeholder=""
+                type="password"
                 error={errors?.confirmPassword && errors?.confirmPassword?.message}
               />
             )}
@@ -109,9 +107,8 @@ const Password = () => {
                   title: "Password changed successfully"
                 }
               })
-            )
-          }
-          title='Save new password'
+            )}
+          title="Save new password"
         />
       </div>
 
@@ -122,11 +119,11 @@ const Password = () => {
       </div>
 
       {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
+        <SuccessNotificationModal show size="md" />
       ) : null}
 
       {displayModal && modalName === "forgotPassword" ? (
-        <ForgotPasswordModal show size='md' />
+        <ForgotPasswordModal show size="md" />
       ) : null}
     </div>
   );

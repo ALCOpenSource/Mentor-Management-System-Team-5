@@ -12,8 +12,6 @@ const SettingsSideBar = ({ data }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentSideBarPosition, setCurrentSideBarPosition] = useState(0);
-  const [fixed, setFixed] = useState(false);
-
   const sidebarRef = useRef(null);
 
   const handleSidebarToggle = () => {

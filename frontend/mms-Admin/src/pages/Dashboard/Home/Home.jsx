@@ -14,12 +14,12 @@ const Home = () => {
         <h3 className={cx(styles.title)}>Dashboard</h3>
 
         <div className={cx(styles.dateRangeSelector)}>
-          <select name='date' id='duration'>
-            <option value='today'>Today</option>
-            <option value='yesterday'>Yesterday</option>
-            <option value='thisWeek'>This Week</option>
-            <option value='lastWeek'>Last Week</option>
-            <option value='thisMonth'>This Month</option>
+          <select name="date" id="duration">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="thisWeek">This Week</option>
+            <option value="lastWeek">Last Week</option>
+            <option value="thisMonth">This Month</option>
           </select>
         </div>
       </div>

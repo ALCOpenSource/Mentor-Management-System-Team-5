@@ -6,7 +6,7 @@ import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import SelectField from "@/components/Select/Select";
 import TextArea from "@/components/TextArea/TextArea";
-import { Country, State, City } from "country-state-city";
+import { Country, City } from "country-state-city";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successNotificationImage from "@/assets/images/default-success-notification-image.png";
@@ -52,7 +52,6 @@ const General = () => {
   ];
 
   const [countries, setCountries] = useState([]);
-  const [state, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
@@ -75,7 +74,6 @@ const General = () => {
   };
 
   const {
-    handleSubmit,
     formState: { errors },
     control,
     setValue
@@ -84,15 +82,11 @@ const General = () => {
   const handleSelectChange = (e, name) => {
     if (name === "country") {
       const country = Country.getCountryByCode(e.target.value);
-      const state = State.getStatesOfCountry(country.isoCode).map((state) => {
-        return { value: state.isoCode, label: state.name };
-      });
       const city = City.getCitiesOfCountry(country.isoCode).map((city) => {
         return { value: city.name, label: city.name };
       });
 
       setCities(city);
-      setStates(state.length > 0 ? state : [{ value: country.isoCode, label: country.name }]);
     }
     setValue(name, e.target.value, { shouldValidate: true });
   };
@@ -101,11 +95,11 @@ const General = () => {
     <div className={cx(styles.generalContainer, "flexCol")}>
       <div className={cx(styles.wrapper, styles.header)}>
         <div className={cx(styles.leftSection, styles.imageDiv)}>
-          <img src={profileImage} alt='thumbnail-img' />
+          <img src={profileImage} alt="thumbnail-img" />
         </div>
         <div className={cx(styles.rightSection, styles.profilePicture)}>
           <h5 className={cx(styles.title)}>Set Profile Picture</h5>
-          <Button title='Upload Picture' size='small' />
+          <Button title="Upload Picture" size="small" />
         </div>
       </div>
 
@@ -115,28 +109,28 @@ const General = () => {
         </div>
         <div className={cx(styles.rightSection, styles.nameDetails)}>
           <Controller
-            name='firstName'
+            name="firstName"
             control={control}
             render={({ field }) => (
               <InputField
                 {...field}
                 label={"First Name"}
-                placeholder=''
-                type='text'
+                placeholder=""
+                type="text"
                 error={errors?.firstName && errors?.firstName?.message}
               />
             )}
           />
 
           <Controller
-            name='lastName'
+            name="lastName"
             control={control}
             render={({ field }) => (
               <InputField
                 {...field}
                 label={"Last Name"}
-                placeholder=''
-                type='text'
+                placeholder=""
+                type="text"
                 error={errors?.lastName && errors?.lastName?.message}
               />
             )}
@@ -150,14 +144,14 @@ const General = () => {
         </div>
         <div className={cx(styles.rightSection, styles.bioDetails)}>
           <Controller
-            name='bio'
+            name="bio"
             control={control}
             render={({ field }) => (
               <TextArea
                 {...field}
                 placeholder={"Your Bio"}
                 label={""}
-                minHeight='150px'
+                minHeight="150px"
                 error={errors?.bio && errors?.bio?.message}
               />
             )}
@@ -171,14 +165,14 @@ const General = () => {
         </div>
         <div className={cx(styles.rightSection, styles.websiteDetails)}>
           <Controller
-            name='website'
+            name="website"
             control={control}
             render={({ field }) => (
               <InputField
                 {...field}
                 label={"www.example.com"}
-                placeholder=''
-                type='text'
+                placeholder=""
+                type="text"
                 error={errors?.website && errors?.website?.message}
               />
             )}
@@ -193,7 +187,7 @@ const General = () => {
         <div className={cx(styles.rightSection, styles.countryDetails)}>
           <div className={cx(styles.countryDiv)}>
             <Controller
-              name='country'
+              name="country"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -211,11 +205,11 @@ const General = () => {
           </div>
 
           <div className={cx(styles.cityDiv)}>
-            <label htmlFor='city' className={cx(styles.label)}>
+            <label htmlFor="city" className={cx(styles.label)}>
               City
             </label>
             <Controller
-              name='cities'
+              name="cities"
               control={control}
               render={({ field }) => (
                 <SelectField
@@ -226,7 +220,6 @@ const General = () => {
                   error={errors?.cities && errors?.cities?.message}
                   onChange={(e) => handleSelectChange(e, "cities")}
                   border={"#C8C8C8"}
-                  // loading={state.length > 0 ? false : true}
                 />
               )}
             />
@@ -244,7 +237,7 @@ const General = () => {
               <div className={cx(styles.infoWrapper, "flexRow-align-center")} key={index}>
                 <div className={cx(styles.left, "flexRow-fully-centered")}>
                   <span>
-                    <img src={item?.icon} alt='logo' />
+                    <img src={item?.icon} alt="logo" />
                   </span>
                   <span>{item?.name}</span>
                 </div>
@@ -255,12 +248,11 @@ const General = () => {
                     render={({ field }) => (
                       <InputField
                         {...field}
-                        placeholder=''
-                        type='text'
-                        marginbottom='0'
-                        border='none'
+                        placeholder=""
+                        type="text"
+                        marginbottom="0"
+                        border="none"
                         label={item?.placeholder}
-                        // error={errors?.website && errors?.website?.message}
                       />
                     )}
                   />
@@ -282,14 +274,13 @@ const General = () => {
                   image: successNotificationImage
                 }
               })
-            )
-          }
-          title='Save Changes'
+            )}
+          title="Save Changes"
         />
       </div>
 
       {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
+        <SuccessNotificationModal show size="md" />
       ) : null}
     </div>
   );

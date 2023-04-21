@@ -28,7 +28,7 @@ const AuthenticatedRoutes = ({ children, roles }) => {
 
   if (checkIsAuthenticated && !userHasRequiredRole) {
     toast.error("You are not authorized to access this page");
-    return <Navigate to='/login' state={{ from: location }} />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
 
   return children;

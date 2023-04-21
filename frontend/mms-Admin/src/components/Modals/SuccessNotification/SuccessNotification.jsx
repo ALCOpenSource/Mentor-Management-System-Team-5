@@ -31,13 +31,13 @@ const SuccessNotification = ({ show, size, modalName }) => {
           <img
             className={cx(styles.successImage)}
             src={modalData?.image || successImage}
-            alt='notification-image'
+            alt="notification-image"
           />
         </div>
 
         <div className={cx(styles.modalFooter)}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <Button onClick={handleClick} title='Done' />
+            <Button onClick={handleClick} title="Done" />
           </div>
         </div>
       </div>

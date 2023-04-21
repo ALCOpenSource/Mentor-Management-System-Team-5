@@ -220,31 +220,31 @@ const CreateTask = () => {
 
         <div className={cx(styles.formWrapper, "flexCol")}>
           <form onSubmit={handleSubmit((data) => sendMessage(data))}>
-            <label htmlFor='title'>Title</label>
+            <label htmlFor="title">Title</label>
             <Controller
-              name='title'
+              name="title"
               control={control}
               render={({ field }) => (
                 <InputField
                   {...field}
                   label={""}
-                  placeholder='Enter a title'
-                  type='text'
+                  placeholder="Enter a title"
+                  type="text"
                   error={errors?.title && errors?.title?.message}
                 />
               )}
             />
 
-            <label htmlFor='details'>Details</label>
+            <label htmlFor="details">Details</label>
             <Controller
-              name='details'
+              name="details"
               control={control}
               render={({ field }) => (
                 <TextArea
                   {...field}
                   placeholder={"Enter task details"}
                   label={""}
-                  minHeight='150px'
+                  minHeight="150px"
                   error={errors?.details && errors?.details?.message}
                 />
               )}
@@ -260,8 +260,8 @@ const CreateTask = () => {
                   </div>
                 </div>
                 <Button
-                  title='Select'
-                  size='small'
+                  title="Select"
+                  size="small"
                   onClick={() => handleOpenSideBar(true, "mentor-manager")}
                 />
               </div>
@@ -275,8 +275,8 @@ const CreateTask = () => {
                   </div>
                 </div>
                 <Button
-                  title='Select'
-                  size='small'
+                  title="Select"
+                  size="small"
                   onClick={() => handleOpenSideBar(true, "mentor")}
                 />
               </div>
@@ -287,8 +287,8 @@ const CreateTask = () => {
                 onClick={handleSubmit((data) => sendMessage(data))}
                 // loading={loading}
                 // disabled={loading}
-                title='Create Task'
-                type='primary'
+                title="Create Task"
+                type="primary"
               />
             </div>
           </form>
@@ -312,7 +312,7 @@ const CreateTask = () => {
       ) : null}
 
       {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
+        <SuccessNotificationModal show size="md" />
       ) : null}
     </div>
   );

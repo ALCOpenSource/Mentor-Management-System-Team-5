@@ -40,15 +40,15 @@ export const FormGroup = styled(Form.Group)`
     color: rgb(9, 30, 66);
     text-align: left;
     ${({ required }) =>
-      required
-        ? `
+    required
+      ? `
       ::after {
         content: '*';
         color: red;
         padding-left: 5px;
       }
       `
-        : ""};
+      : ""};
   }
 
   .error {

@@ -43,45 +43,43 @@ const RoutesComponent = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route
-          path='/dashboard'
-          element={
-            <AuthenticatedRoutes roles={[userRoles.admin]}>
-              <DashboardContainer>
-                <Outlet />
-              </DashboardContainer>
-            </AuthenticatedRoutes>
-          }
+          path="/dashboard"
+          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
+            <DashboardContainer>
+              <Outlet />
+            </DashboardContainer>
+          </AuthenticatedRoutes>}
         >
-          <Route index path='' element={<Home />} />
-          <Route path='settings' element={<Settings />}>
-            <Route index path='' element={<SettingsGeneral />} />
-            <Route path='password' element={<SettingsPassword />} />
-            <Route path='faq' element={<SettingsFAQ />} />
-            <Route path='support' element={<SettingsSupport />} />
-            <Route path='archive' element={<SettingsArchive />} />
-            <Route path='privacy' element={<SettingsPrivacy />} />
-            <Route path='notifications' element={<SettingsNotifications />} />
+          <Route index path="" element={<Home />} />
+          <Route path="settings" element={<Settings />}>
+            <Route index path="" element={<SettingsGeneral />} />
+            <Route path="password" element={<SettingsPassword />} />
+            <Route path="faq" element={<SettingsFAQ />} />
+            <Route path="support" element={<SettingsSupport />} />
+            <Route path="archive" element={<SettingsArchive />} />
+            <Route path="privacy" element={<SettingsPrivacy />} />
+            <Route path="notifications" element={<SettingsNotifications />} />
           </Route>
-          <Route path='approval-requests' element={<ApprovalRequests />} />
-          <Route index path='certificates' element={<Certificates />} />
-          <Route path='discussion-forum' element={<DiscussionForum />} />
-          <Route path='mentor-managers' element={<MentorManagers />} />
-          <Route path='mentors' element={<Mentors />} />
-          <Route path='messages' element={<Messages />} />
-          <Route index path='profile' element={<Profile />} />
-          <Route path='programs' element={<Programs />} />
-          <Route path='reports' element={<Reports />} />
-          <Route path='tasks'>
-            <Route path='' element={<Tasks />}>
-              <Route path='task-details/:id' element={<TaskDetails />} />
+          <Route path="approval-requests" element={<ApprovalRequests />} />
+          <Route index path="certificates" element={<Certificates />} />
+          <Route path="discussion-forum" element={<DiscussionForum />} />
+          <Route path="mentor-managers" element={<MentorManagers />} />
+          <Route path="mentors" element={<Mentors />} />
+          <Route path="messages" element={<Messages />} />
+          <Route index path="profile" element={<Profile />} />
+          <Route path="programs" element={<Programs />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="tasks">
+            <Route path="" element={<Tasks />}>
+              <Route path="task-details/:id" element={<TaskDetails />} />
             </Route>
-            <Route path='create-task' element={<CreateTask />} />
+            <Route path="create-task" element={<CreateTask />} />
           </Route>
         </Route>
       </Routes>
