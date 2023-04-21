@@ -107,7 +107,8 @@ const Password = () => {
                   title: "Password changed successfully"
                 }
               })
-            )}
+            )
+          }
           title='Save new password'
         />
       </div>

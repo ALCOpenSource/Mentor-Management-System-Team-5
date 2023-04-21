@@ -20,26 +20,30 @@ const ToggleSwitch = () => {
       offColor='#b3b3b3'
       checkedIcon={false}
       uncheckedIcon={false}
-      checkedHandleIcon={<div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%"
-        }}
-      >
-        <ToggleOnIcon />
-      </div>}
-      uncheckedHandleIcon={<div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%"
-        }}
-      >
-        <ToggleOffIcon />
-      </div>}
+      checkedHandleIcon={
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%"
+          }}
+        >
+          <ToggleOnIcon />
+        </div>
+      }
+      uncheckedHandleIcon={
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%"
+          }}
+        >
+          <ToggleOffIcon />
+        </div>
+      }
       className='react-switch'
     />
   );

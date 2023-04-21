@@ -39,11 +39,14 @@ export const FormGroup = styled(Form.Group)`
     line-height: 1;
     color: rgb(9, 30, 66);
     text-align: left;
-    ${({ required }) => required ? ` ::after {
+    ${({ required }) =>
+      required
+        ? ` ::after {
         content: '*';
         color: red;
         padding-left: 5px;
-      }` : ""};
+      }`
+        : ""};
   }
 
   .error {

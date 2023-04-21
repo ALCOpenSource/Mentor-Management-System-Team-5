@@ -274,7 +274,8 @@ const General = () => {
                   image: successNotificationImage
                 }
               })
-            )}
+            )
+          }
           title='Save Changes'
         />
       </div>
