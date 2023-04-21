@@ -2,15 +2,14 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using mms.Application.UserNotification.Command.EditUserNotification;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
 
 namespace mms.Application.UserNotification.Query
 {
     public class
-        GetUSerNotificationCommandHandler : IRequestHandler<GetUSerNotificationCommand,
-            IResult<GetUSerNotificationResponse>>
+        GetUSerNotificationCommandHandler : IRequestHandler<GetUserNotificationCommand,
+            IResult<GetUserNotificationResponse>>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ApplicationContext _context;
@@ -24,12 +23,12 @@ namespace mms.Application.UserNotification.Query
             _mapper = mapper;
         }
 
-        public async Task<IResult<GetUSerNotificationResponse>> Handle(GetUSerNotificationCommand request,
+        public async Task<IResult<GetUserNotificationResponse>> Handle(GetUserNotificationCommand request,
             CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(_currentUserService.AppUserId))
             {
-                return await Result<GetUSerNotificationResponse>.FailAsync("Invalid user");
+                return await Result<GetUserNotificationResponse>.FailAsync("Invalid user");
             }
 
             var userNotification =
@@ -37,12 +36,12 @@ namespace mms.Application.UserNotification.Query
                     cancellationToken);
             if (userNotification == null)
             {
-                return await Result<GetUSerNotificationResponse>.FailAsync("Notification does not exist for this user");
+                return await Result<GetUserNotificationResponse>.FailAsync("Notification does not exist for this user");
             }
 
-            var result = _mapper.Map<GetUSerNotificationResponse>(userNotification);
+            var result = _mapper.Map<GetUserNotificationResponse>(userNotification);
 
-            return await Result<GetUSerNotificationResponse>.SuccessAsync(result);
+            return await Result<GetUserNotificationResponse>.SuccessAsync(result);
         }
     }
 }

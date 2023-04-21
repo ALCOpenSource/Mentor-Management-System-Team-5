@@ -1,6 +1,6 @@
 ﻿namespace mms.Application.UserNotification.Query
 {
-    public class GetUSerNotificationResponse
+    public class GetUserNotificationResponse
     {
         public bool AllNotificationEmail { get; set; }
         public bool AllNotificationInApp { get; set; }
