@@ -9,6 +9,7 @@ import TextArea from "@/components/TextArea/TextArea";
 import { Country, State, City } from "country-state-city";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
+import successNotificationImage from "@/assets/images/default-success-notification-image.png";
 
 import githubIcon from "@/assets/icons/settings-github-icon.svg";
 import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
@@ -274,7 +275,13 @@ const General = () => {
         <Button
           onClick={() =>
             dispatch(
-              showModal({ name: "successNotification", modalData: "Profile Saved Successfully" })
+              showModal({
+                name: "successNotification",
+                modalData: {
+                  title: "Profile saved successfully",
+                  image: successNotificationImage
+                }
+              })
             )
           }
           title='Save Changes'

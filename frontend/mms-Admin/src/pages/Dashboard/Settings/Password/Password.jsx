@@ -103,7 +103,12 @@ const Password = () => {
         <Button
           onClick={() =>
             dispatch(
-              showModal({ name: "successNotification", modalData: "Password Changed Successfully" })
+              showModal({
+                name: "successNotification",
+                modalData: {
+                  title: "Password changed successfully"
+                }
+              })
             )
           }
           title='Save new password'

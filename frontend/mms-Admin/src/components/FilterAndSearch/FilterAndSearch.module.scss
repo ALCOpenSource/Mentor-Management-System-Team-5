@@ -1,0 +1,107 @@
+.filterAndSearchContainer {
+  justify-content: flex-end;
+  gap: 1.25rem;
+  padding: 1rem 0.5rem 1rem 0;
+  background-color: white;
+
+  .icon {
+    width: 1.25rem;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+  .inputDiv {
+    gap: 0.25rem;
+    background-color: var(--green3Color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    width: 100%;
+
+    .searchInput {
+      border: none;
+      outline: none;
+      padding: 0.5rem;
+      background-color: transparent;
+      font-family: var(--regular);
+      color: var(--black2TextColor);
+      font-size: 0.875rem;
+      width: 100%;
+    }
+  }
+
+  .filterDiv {
+    position: relative;
+
+    .dropdown {
+      position: absolute;
+      bottom: 0%;
+      right: 0%;
+      transform: translate(0%, 110%);
+      background-color: white;
+      border-radius: 0.25rem;
+      box-shadow: 0 0 0.25rem 0.125rem var(--grayBorderColor);
+      z-index: 10;
+      width: max-content;
+
+      .dropdownItem {
+        padding: 0.5rem 1rem;
+        font-family: var(--regular);
+        font-size: 0.875rem;
+        color: var(--black2TextColor);
+        cursor: pointer;
+        width: 100%;
+
+        &:hover {
+          background-color: var(--green3Color);
+        }
+      }
+    }
+  }
+
+  .selectDropdown {
+    position: relative;
+    background-color: var(--green3Color);
+    border-radius: 0.25rem;
+    border: 1px solid var(--green3Color);
+    padding-left: 0.5rem;
+    outline: none;
+  }
+}
+
+@media all and (min-width: 992px) {
+  .filterAndSearchContainer {
+    gap: 1.25rem;
+    padding: 0 0.5rem 0.5rem 0;
+
+    .icon {
+      width: 1.125rem;
+    }
+
+    .inputDiv {
+      padding: 0.25rem 0.5rem;
+
+      .searchInput {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .filterAndSearchContainer {
+    gap: 1.125rem;
+    padding: 0 0.5rem 0 0;
+
+    .icon {
+      width: 1.25rem;
+    }
+
+    .inputDiv {
+      padding: 0.25rem 0.5rem;
+
+      .searchInput {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
