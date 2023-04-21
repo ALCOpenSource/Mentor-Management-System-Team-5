@@ -6,7 +6,7 @@
   // overflow-y: auto;
 
   .mainSection {
-    gap: 1rem;
+    gap: 1.5rem;
     flex-grow: 1;
     height: 100%;
     overflow-y: auto;
@@ -93,8 +93,6 @@
     padding: 2rem;
 
     .mainSection {
-      gap: 1rem;
-
       .formWrapper {
         form {
           .selectionDiv {
@@ -119,10 +117,5 @@
         }
       }
     }
-  }
-}
-
-@media all and (min-width: 1200px) {
-  .createTaskContainer {
   }
 }

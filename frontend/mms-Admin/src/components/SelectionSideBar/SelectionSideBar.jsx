@@ -2,13 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import cx from "classnames";
 import styles from "./SelectionSideBar.module.scss";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
 
 const SelectionSideBar = ({ data, selectedMenuItem }) => {
-  const params = useParams();
   const [isMobile, setIsMobile] = useState(false);
-  const [open, setOpen] = useState(true);
-  const currentId = params?.id;
   const sidebarRef = useRef(null);
 
   // const handleClickOutside = (event) => {
@@ -43,7 +39,7 @@ const SelectionSideBar = ({ data, selectedMenuItem }) => {
   //     };
   // }, [isMobile, open]);
 
-  const sidebarWidth = isMobile ? (open ? "100%" : "0px") : "300px";
+  const sidebarWidth = isMobile ? "100%" : "300px";
 
   const handleMenuClick = (itemId) => {
     selectedMenuItem(itemId);
@@ -55,7 +51,7 @@ const SelectionSideBar = ({ data, selectedMenuItem }) => {
       className={cx(styles.selectionSideBarContainer, "flexCol")}
       style={{
         width: sidebarWidth,
-        position: open ? (isMobile ? "absolute" : "relative") : "relative",
+        position: isMobile ? "absolute" : "relative",
         transition: "width 0s"
       }}
     >
