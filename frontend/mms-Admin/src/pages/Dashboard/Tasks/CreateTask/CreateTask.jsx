@@ -16,10 +16,11 @@ import { useForm, Controller } from "react-hook-form";
 import { createTaskSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-// import TaskListItem from "@/pages/Dashboard/Tasks/TaskListItem/TaskListItem";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
+
+
 
 const CreateTask = () => {
   const dispatch = useDispatch();
@@ -94,7 +95,7 @@ const CreateTask = () => {
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
+    },
     // {
     //   id: 10,
     //   name: "Kabiru Omo Isaka",
@@ -158,15 +159,12 @@ const CreateTask = () => {
 
   const sendMessage = (data) => {
     console.log(data);
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Task created successfully",
-          image: successImage
-        }
-      })
-    );
+    dispatch(showModal({
+      name: "successNotification", modalData: {
+        title: "Task created successfully",
+        image: successImage
+      }
+    }));
   };
 
   const handleOpenSideBar = (open, category) => {
@@ -193,18 +191,11 @@ const CreateTask = () => {
       };
     });
 
-    let headerComponent = (
-      <FilterAndSearch
-        closeSideBar={handleCloseSidebar}
-        dropdownItems={[
-          { name: "All", id: 1 },
-          { name: "Mentors", id: 2 },
-          { name: "Mentor Managers", id: 3 }
-        ]}
-        searchData={handleSearchInput}
-        selectedFilterItem={handleSelectedFilterItem}
-      />
-    );
+    let headerComponent = <FilterAndSearch closeSideBar={handleCloseSidebar} dropdownItems={[
+      { name: "All", id: 1 },
+      { name: "Mentors", id: 2 },
+      { name: "Mentor Managers", id: 3 }
+    ]} searchData={handleSearchInput} selectedFilterItem={handleSelectedFilterItem} />;
 
     return {
       listItems,
@@ -220,12 +211,12 @@ const CreateTask = () => {
     <div className={cx(styles.createTaskContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
         <div className={cx(styles.heading, "flexRow")}>
-          <h3 className={cx(styles.title)}>Add Task</h3>
+          <h3 className={cx(styles.title)}>New Task</h3>
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
           <form onSubmit={handleSubmit((data) => sendMessage(data))}>
-            <label htmlFor='title'>Title</label>
+            <label htmlFor="title">Title</label>
             <Controller
               name='title'
               control={control}
@@ -240,7 +231,7 @@ const CreateTask = () => {
               )}
             />
 
-            <label htmlFor='details'>Details</label>
+            <label htmlFor="details">Details</label>
             <Controller
               name='details'
               control={control}
@@ -264,11 +255,7 @@ const CreateTask = () => {
                     <ClearListIcon />
                   </div>
                 </div>
-                <Button
-                  title='Select'
-                  size='small'
-                  onClick={() => handleOpenSideBar(true, "mentor-manager")}
-                />
+                <Button title="Select" size="small" onClick={() => handleOpenSideBar(true, "mentor-manager")} />
               </div>
 
               <div className={cx(styles.wrapper, "flexRow-align-center")}>
@@ -279,11 +266,7 @@ const CreateTask = () => {
                     <ClearListIcon />
                   </div>
                 </div>
-                <Button
-                  title='Select'
-                  size='small'
-                  onClick={() => handleOpenSideBar(true, "mentor")}
-                />
+                <Button title="Select" size="small" onClick={() => handleOpenSideBar(true, "mentor")} />
               </div>
             </div>
 
@@ -300,25 +283,23 @@ const CreateTask = () => {
         </div>
       </div>
 
-      {openSideBar.open && openSideBar.category === "mentor-manager" ? (
-        <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar
-            selectedMenuItem={handleSelectedItem}
-            data={getListComponents(mentorManagersArray)}
-          />
+      {
+        openSideBar.open && openSideBar.category === "mentor-manager" ? <div className={cx(styles.sideBarSection)}>
+          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorManagersArray)} />
         </div>
-      ) : openSideBar.open && openSideBar.category === "mentor" ? (
-        <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar
-            selectedMenuItem={handleSelectedItem}
-            data={getListComponents(mentorsArray)}
-          />
-        </div>
-      ) : null}
+          :
+          openSideBar.open && openSideBar.category === "mentor" ? <div className={cx(styles.sideBarSection)}>
+            <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
+          </div>
+            :
+            null
+
+      }
 
       {displayModal && modalName === "successNotification" ? (
         <SuccessNotificationModal show size='md' />
       ) : null}
+
     </div>
   );
 };
