@@ -33,7 +33,7 @@ import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Noti
 // Tasks
 import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
-import AddTask from "@/pages/Dashboard/Tasks/AddTask/AddTask";
+import CreateTask from "@/pages/Dashboard/Tasks/CreateTask/CreateTask";
 
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
@@ -81,7 +81,7 @@ const RoutesComponent = () => {
             <Route path='' element={<Tasks />}>
               <Route path='task-details/:id' element={<TaskDetails />} />
             </Route>
-            <Route path='add-task' element={<AddTask />} />
+            <Route path='create-task' element={<CreateTask />} />
           </Route>
         </Route>
       </Routes>

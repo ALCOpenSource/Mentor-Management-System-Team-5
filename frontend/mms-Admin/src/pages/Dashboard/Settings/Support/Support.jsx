@@ -38,7 +38,14 @@ const Support = () => {
 
   const sendMessage = (data) => {
     console.log(data);
-    dispatch(showModal({ name: "successNotification", modalData: "Message Sent Successfully" }));
+    dispatch(
+      showModal({
+        name: "successNotification",
+        modalData: {
+          title: "Message sent successfully"
+        }
+      })
+    );
   };
 
   return (

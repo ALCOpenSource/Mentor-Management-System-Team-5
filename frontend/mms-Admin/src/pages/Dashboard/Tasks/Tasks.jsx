@@ -206,7 +206,7 @@ const Tasks = () => {
           )}
           <SortIcon className={cx(styles.sortIcon)} />
         </div>
-        <Button title='Create New Task' onClick={() => navigate("add-task")} />
+        <Button title='Create New Task' onClick={() => navigate("create-task")} />
       </section>
 
       <section className={cx(styles.mainBody, "flexRow")}>

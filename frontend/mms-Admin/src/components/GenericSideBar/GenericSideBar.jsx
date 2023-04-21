@@ -123,7 +123,7 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
 };
 
 GenericSideBar.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
   selectedMenuItem: PropTypes.func,
   activeMenuItemClass: PropTypes.string
 };
