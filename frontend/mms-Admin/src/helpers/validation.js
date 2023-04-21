@@ -45,3 +45,10 @@ export const settingsSupportSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   body: Yup.string().required("Body is required")
 });
+
+export const createTaskSchema = Yup.object().shape({
+  title: Yup.string()
+    .required("Title is required")
+    .max(32, "The title must contain a maximum of 32 characters"),
+  details: Yup.string().required("Task details is required")
+});

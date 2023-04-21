@@ -29,10 +29,10 @@ const Header = (props) => {
         </div>
 
         <Navbar.Brand className={cx(styles.logoDiv, "flexRow")}>
-          <Link to='/'>
+          <Link to='/dashboard'>
             <img className={cx(styles.logo)} src={logo} alt='logo' />
           </Link>
-          <Link to='/'>
+          <Link to='/dashboard'>
             <p className={cx(styles.caption)}>Mentor's Managers System</p>
           </Link>
         </Navbar.Brand>

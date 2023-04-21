@@ -37,7 +37,14 @@ const ResetPassword = () => {
     );
 
     response?.success &&
-      dispatch(showModal({ name: "successNotification", modalData: "Password Reset Successful" }));
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Password reset successful"
+          }
+        })
+      );
     reset();
   };
 
