@@ -54,8 +54,8 @@ const Input = forwardRef(
         border={border || "#CCCCCC"}
         required={required}
       >
-        <div className="input-container">
-          {icon && <img src={searchIcon} alt="search icon" />}
+        <div className='input-container'>
+          {icon && <img src={searchIcon} alt='search icon' />}
           <input
             type={inputType}
             placeholder={placeholder}
@@ -63,17 +63,17 @@ const Input = forwardRef(
             onChange={onChange}
             onBlur={handleTextChange}
             {...props}
-            autoComplete="new-password"
+            autoComplete='new-password'
             ref={ref}
           />
           <label onClick={(e) => handleLabelClick(e)} className={isActive ? "Active" : ""}>
             {label}
           </label>
           {type === "password" && (
-            <img src={eyeIcon} alt="eye-icon" className="eye-icon" onClick={handleVisibility} />
+            <img src={eyeIcon} alt='eye-icon' className='eye-icon' onClick={handleVisibility} />
           )}
         </div>
-        {error ? <span className="error">{error}</span> : ""}
+        {error ? <span className='error'>{error}</span> : ""}
       </FormGroup>
     );
   }

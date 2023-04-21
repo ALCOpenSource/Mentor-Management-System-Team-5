@@ -125,7 +125,7 @@ const Archive = () => {
                     <span>Program Reports</span>
                   </div>
 
-                  <Button title="View" size="small" />
+                  <Button title='View' size='small' />
                 </div>
               </div>
             )}

@@ -9,7 +9,7 @@ import { Container, Row } from "react-bootstrap";
 const Profile = () => {
   return (
     <Container className={cx(styles.profileContainer)}>
-      <Row className="mb-5">
+      <Row className='mb-5'>
         <ProfileHeader />
       </Row>
       <Row>

@@ -99,7 +99,7 @@ const GenericSideBar = ({ data, selectedMenuItem, activeMenuItemClass }) => {
           className={cx(styles.toggler)}
           onClick={handleSidebarToggle}
           src={searchIcon}
-          alt="toggler"
+          alt='toggler'
         />
       )}
       <ul

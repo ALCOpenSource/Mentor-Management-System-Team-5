@@ -76,28 +76,28 @@ const ResetPassword = () => {
           <div className={cx(styles.formWrapper, "flexCol")}>
             <form onSubmit={handleSubmit((data) => handleResetPassword(data))}>
               <Controller
-                name="password"
+                name='password'
                 control={control}
                 render={({ field }) => (
                   <InputField
                     {...field}
                     label={"Password"}
-                    placeholder=""
-                    type="password"
+                    placeholder=''
+                    type='password'
                     error={errors?.password && errors?.password?.message}
                   />
                 )}
               />
 
               <Controller
-                name="confirmPassword"
+                name='confirmPassword'
                 control={control}
                 render={({ field }) => (
                   <InputField
                     {...field}
                     label={"Must match your new password"}
-                    placeholder=""
-                    type="password"
+                    placeholder=''
+                    type='password'
                     error={errors?.confirmPassword && errors?.confirmPassword?.message}
                   />
                 )}
@@ -112,8 +112,8 @@ const ResetPassword = () => {
                   onClick={handleSubmit((data) => handleResetPassword(data))}
                   loading={loading}
                   disabled={loading}
-                  title="Reset Password"
-                  type="primary"
+                  title='Reset Password'
+                  type='primary'
                 />
               </div>
             </form>
@@ -122,7 +122,7 @@ const ResetPassword = () => {
       </div>
 
       {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size="md" />
+        <SuccessNotificationModal show size='md' />
       ) : null}
     </div>
   );

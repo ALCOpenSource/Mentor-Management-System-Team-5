@@ -38,7 +38,7 @@ const ForgotPassword = ({ show, size, modalName }) => {
 
         <div className={cx(styles.modalFooter)}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <Button onClick={handleClick} title="Done" />
+            <Button onClick={handleClick} title='Done' />
           </div>
         </div>
       </div>

@@ -57,54 +57,54 @@ const Support = () => {
         <div className={cx(styles.formWrapper, "flexCol")}>
           <form onSubmit={handleSubmit((data) => sendMessage(data))}>
             <Controller
-              name="name"
+              name='name'
               control={control}
               render={({ field }) => (
                 <InputField
                   {...field}
                   label={"Name"}
-                  placeholder=""
-                  type="text"
+                  placeholder=''
+                  type='text'
                   error={errors?.name && errors?.name?.message}
                 />
               )}
             />
             <Controller
-              name="email"
+              name='email'
               control={control}
               render={({ field }) => (
                 <InputField
                   {...field}
                   label={"Email"}
-                  placeholder=""
-                  type="email"
+                  placeholder=''
+                  type='email'
                   error={errors?.email && errors?.email?.message}
                 />
               )}
             />
             <Controller
-              name="title"
+              name='title'
               control={control}
               render={({ field }) => (
                 <InputField
                   {...field}
                   label={"Title"}
-                  placeholder=""
-                  type="text"
+                  placeholder=''
+                  type='text'
                   error={errors?.title && errors?.title?.message}
                 />
               )}
             />
 
             <Controller
-              name="body"
+              name='body'
               control={control}
               render={({ field }) => (
                 <TextArea
                   {...field}
                   placeholder={"Body"}
                   label={""}
-                  minHeight="150px"
+                  minHeight='150px'
                   error={errors?.body && errors?.body?.message}
                 />
               )}
@@ -112,15 +112,15 @@ const Support = () => {
 
             <div className={cx(styles.submitBtnDiv, "flexRow-space-between")}>
               <div className={cx(styles.attachmentDiv)}>
-                <img src={attachmentIcon} alt="attachment-icon" />
+                <img src={attachmentIcon} alt='attachment-icon' />
               </div>
 
               <Button
                 onClick={handleSubmit((data) => sendMessage(data))}
                 // loading={loading}
                 // disabled={loading}
-                title="Send"
-                type="primary"
+                title='Send'
+                type='primary'
               />
             </div>
           </form>
@@ -128,7 +128,7 @@ const Support = () => {
       </div>
 
       {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size="md" />
+        <SuccessNotificationModal show size='md' />
       ) : null}
     </div>
   );

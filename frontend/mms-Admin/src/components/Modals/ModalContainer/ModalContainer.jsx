@@ -11,16 +11,16 @@ const ModalContainer = ({ children, show, size = "md", modalName }) => {
 
   return (
     <>
-      <div className="">
+      <div className=''>
         <Modal
           show={show}
           onHide={handleClose}
           scrollable={true}
           centered
           size={size}
-          dialogClassName="generic-modal-wrapper"
+          dialogClassName='generic-modal-wrapper'
         >
-          <Modal.Body className="generic-modal-body">{children}</Modal.Body>
+          <Modal.Body className='generic-modal-body'>{children}</Modal.Body>
         </Modal>
       </div>
     </>

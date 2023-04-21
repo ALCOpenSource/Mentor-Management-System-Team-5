@@ -29,13 +29,13 @@ const TaskDeleteNotification = ({ show, size, modalName }) => {
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
-          <img className={cx(styles.successImage)} src={successImage} alt="notification-image" />
+          <img className={cx(styles.successImage)} src={successImage} alt='notification-image' />
         </div>
 
         <div className={cx(styles.modalFooter)}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <Button onClick={handleClick} title="Undo" type="secondary" />
-            <Button onClick={handleClick} title="Done" />
+            <Button onClick={handleClick} title='Undo' type='secondary' />
+            <Button onClick={handleClick} title='Done' />
           </div>
         </div>
       </div>

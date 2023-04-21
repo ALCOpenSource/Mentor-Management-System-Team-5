@@ -10,7 +10,7 @@ const PersonelComponent = ({ data }) => {
 
   return (
     <div className={cx(styles.personelCompContainer, "flexRow-align-center")}>
-      <img className={cx(styles.avatar)} src={data?.image} alt="user-image" />
+      <img className={cx(styles.avatar)} src={data?.image} alt='user-image' />
       <div className={cx(styles.userInfo, "flexCol")}>
         <h5 className={cx(styles.name)}>{data?.name}</h5>
         <p className={cx(styles.designation)}>{data?.designation}</p>

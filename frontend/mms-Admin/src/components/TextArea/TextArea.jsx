@@ -14,7 +14,7 @@ const TextArea = forwardRef(
           minHeight={minHeight}
           {...props}
         />
-        {error ? <p className="error">{error}</p> : ""}
+        {error ? <p className='error'>{error}</p> : ""}
       </FormGroup>
     );
   }

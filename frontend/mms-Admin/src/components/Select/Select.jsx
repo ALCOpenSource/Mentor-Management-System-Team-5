@@ -18,17 +18,17 @@ const Select = forwardRef(
     required
   }) => {
     return (
-      <div className="select-container" style={{ marginBottom: marginbottom }}>
+      <div className='select-container' style={{ marginBottom: marginbottom }}>
         <div
-          className="select-wrapper"
+          className='select-wrapper'
           style={{ border: `1px solid ${border ? border : "#022B69"}` }}
         >
-          <div className="flexRow-space-between">
-            <label className="select-label">{label}</label>
-            {loading && <img className="select-loading-icon" src={loadingIcon} alt="icon" />}
+          <div className='flexRow-space-between'>
+            <label className='select-label'>{label}</label>
+            {loading && <img className='select-loading-icon' src={loadingIcon} alt='icon' />}
           </div>
           <select required={required} name={name} onChange={onChange} value={value}>
-            <option value="">{defaultSelect}</option>
+            <option value=''>{defaultSelect}</option>
             {options.map((option, index) => (
               <option value={option.value} key={index}>
                 {option.label}
@@ -36,7 +36,7 @@ const Select = forwardRef(
             ))}
           </select>
         </div>
-        <span className="select-error">{error}</span>
+        <span className='select-error'>{error}</span>
       </div>
     );
   }

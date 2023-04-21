@@ -55,13 +55,13 @@ const TaskDetails = () => {
         <>
           <div className={cx(styles.header, "flexCol")}>
             <div className={cx(styles.wrapper, "flexRow-align-center")}>
-              <img className={cx(styles.icon)} src={headerIcon} alt="task-icon" />
+              <img className={cx(styles.icon)} src={headerIcon} alt='task-icon' />
               <div className={cx(styles.mainContent, "flexCol")}>
                 <h5 className={cx(styles.title)}>
                   {`Room Library Article Written in Java ${taskId}`}
                 </h5>
                 <div className={cx(styles.metaData, "flexRow")}>
-                  <img className={cx(styles.dateIcon)} src={calendarIcon} alt="calendar-icon" />
+                  <img className={cx(styles.dateIcon)} src={calendarIcon} alt='calendar-icon' />
                   <span className={cx(styles.date)}>{"3 days from now"}</span>
                 </div>
               </div>
@@ -81,7 +81,7 @@ const TaskDetails = () => {
               return (
                 <div className={cx(styles.summaryDiv, "flexRow")} key={index}>
                   <div className={cx(styles.iconDiv, "flexRow")}>
-                    <img src={item.icon} alt="icon" />
+                    <img src={item.icon} alt='icon' />
                   </div>
                   <div className={cx(styles.summary, "flexRow")}>
                     <span className={cx(styles.summaryValue)}>{item.value}</span>
@@ -91,7 +91,7 @@ const TaskDetails = () => {
                     </div>
                   </div>
 
-                  <Button title="View" size="small" />
+                  <Button title='View' size='small' />
                 </div>
               );
             })}
@@ -102,15 +102,15 @@ const TaskDetails = () => {
               onClick={() => handleDeleteTask()}
               className={cx(styles.deleteBtn, "flexRow-align-center")}
             >
-              <img src={deleteIcon} alt="delete-icon" /> <span>Delete</span>
+              <img src={deleteIcon} alt='delete-icon' /> <span>Delete</span>
             </button>
-            <Button title="Edit Task" />
+            <Button title='Edit Task' />
           </div>
         </>
       )}
 
       {displayModal && modalName === "taskDeleteNotification" ? (
-        <TaskDeleteNotificationModal show size="md" />
+        <TaskDeleteNotificationModal show size='md' />
       ) : null}
     </div>
   );

@@ -53,7 +53,7 @@ const TasksOverview = () => {
           </div>
         </div>
         <div className={cx(styles.btnDiv, "flexRow")}>
-          <Button title="View All" type="primary" size="small" />
+          <Button title='View All' type='primary' size='small' />
         </div>
       </div>
 
@@ -71,7 +71,7 @@ const TasksOverview = () => {
           </div>
         </div>
         <div className={cx(styles.btnDiv, "flexRow")}>
-          <Button title="View All" type="primary" size="small" />
+          <Button title='View All' type='primary' size='small' />
         </div>
       </div>
     </div>

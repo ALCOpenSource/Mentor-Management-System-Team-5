@@ -13,7 +13,7 @@ const AuthSideHero = () => {
 
   return (
     <div className={cx(styles.authSideHeroContainer, "flexCol-fully-centered")}>
-      <img onClick={handleClick} className={cx(styles.pageLogo)} src={logo} alt="logo" />
+      <img onClick={handleClick} className={cx(styles.pageLogo)} src={logo} alt='logo' />
       <h6 onClick={handleClick} className={cx(styles.tagLine)}>
         Mentor Management System
       </h6>

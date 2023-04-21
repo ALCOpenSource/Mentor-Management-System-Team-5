@@ -58,7 +58,7 @@ const ForgotPassword = () => {
                 </p>
 
                 <div className={cx(styles.btnDiv, "flexRow")}>
-                  <Button onClick={() => navigate("/login")} title="Done" type="primary" />
+                  <Button onClick={() => navigate("/login")} title='Done' type='primary' />
                 </div>
               </div>
             )}
@@ -67,14 +67,14 @@ const ForgotPassword = () => {
             <div className={cx(styles.formWrapper, "flexCol")}>
               <form onSubmit={handleSubmit((data) => handleForgotPassword(data))}>
                 <Controller
-                  name="email"
+                  name='email'
                   control={control}
                   render={({ field }) => (
                     <InputField
                       {...field}
                       label={"Email"}
-                      placeholder=""
-                      type="email"
+                      placeholder=''
+                      type='email'
                       error={errors?.email && errors?.email?.message}
                     />
                   )}
@@ -85,8 +85,8 @@ const ForgotPassword = () => {
                     onClick={handleSubmit((data) => handleForgotPassword(data))}
                     loading={loading}
                     disabled={loading}
-                    title="Get Reset Link"
-                    type="primary"
+                    title='Get Reset Link'
+                    type='primary'
                   />
                 </div>
 

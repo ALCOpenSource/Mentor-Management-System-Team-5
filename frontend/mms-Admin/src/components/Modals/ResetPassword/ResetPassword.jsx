@@ -25,12 +25,12 @@ const ResetPassword = ({ show, size, modalName }) => {
       <div className={cx(styles.modalWrapper, "flexCol")}>
         <div className={cx(styles.modalHeader, "flexCol")}>
           <h6 className={cx(styles.headerTitle)}>Password reset successful</h6>
-          <img className={cx(styles.headerImage)} src={headerImage} alt="header-image" />
+          <img className={cx(styles.headerImage)} src={headerImage} alt='header-image' />
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <Button onClick={handleClick} title="Done" />
+            <Button onClick={handleClick} title='Done' />
           </div>
         </div>
       </div>
