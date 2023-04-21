@@ -7,7 +7,7 @@ import styled from "styled-components";
 const ButtonComponent = styled.button`
 font-size: ${(props) =>
   props.size === "small" ? "var(--primaryBtnSmallFontSize)" : "var(--primaryBtnFontSize)"};
-  font-family: ${(props) => (props.size === "small" ? "var(--regular)" : "var(--semiBold)")};
+font-family: ${(props) => (props.size === "small" ? "var(--regular)" : "var(--semiBold)")};
 padding: ${(props) =>
   props.size === "small" ? "var(--primaryBtnSmallPadding)" : "var(--primaryBtnPadding)"};
 border-radius: ${(props) =>
@@ -18,13 +18,11 @@ color: ${(props) =>
   props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)"};
 border: 1px solid ${(props) =>
   props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)"};
-
   width: fit-content;
   white-space: nowrap;
   align-items: center;
   justify-content: center;
   outline: none;
-
 
 input{
       margin: 0 0.375rem 0 0;

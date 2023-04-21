@@ -50,13 +50,11 @@ const RoutesComponent = () => {
 
         <Route
           path='/dashboard'
-          element={
-            <AuthenticatedRoutes roles={[userRoles.admin]}>
-              <DashboardContainer>
-                <Outlet />
-              </DashboardContainer>
-            </AuthenticatedRoutes>
-          }
+          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
+            <DashboardContainer>
+              <Outlet />
+            </DashboardContainer>
+          </AuthenticatedRoutes>}
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>

@@ -21,14 +21,11 @@ export const FormGroup = styled(Form.Group)`
     line-height: 16px;
     color: #808080;
     text-align: left;
-    ${({ required }) =>
-      required
-        ? `::after {
+    ${({ required }) => required ? `::after {
         content: '*';
         color: red;
         padding-left: 5px;
-      } `
-        : ""}
+      } ` : ""}
   }
 
   input {
