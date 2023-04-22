@@ -1,4 +1,4 @@
-.TasksContainer {
+.tasksContainer {
   gap: 1rem;
   height: calc(100dvh - var(--topNavbarHeight));
   overflow: hidden;
@@ -94,7 +94,7 @@
 }
 
 @media all and (min-width: 768px) {
-  .TasksContainer {
+  .tasksContainer {
     .heading {
       padding: 1rem 1rem 0 3rem;
       flex-wrap: nowrap;
@@ -120,7 +120,7 @@
 }
 
 @media all and (min-width: 992px) {
-  .TasksContainer {
+  .tasksContainer {
     .heading {
       padding: 1rem 2rem 0 2rem;
     }
@@ -144,7 +144,7 @@
 }
 
 @media all and (min-width: 1200px) {
-  .TasksContainer {
+  .tasksContainer {
     .heading {
       padding: 1.5rem 2rem 0 2rem;
 

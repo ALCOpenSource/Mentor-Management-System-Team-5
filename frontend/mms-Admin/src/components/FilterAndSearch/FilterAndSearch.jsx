@@ -7,7 +7,7 @@ import searchIcon from "@/assets/icons/search-icon-green.png";
 import filterIcon from "@/assets/icons/filter-icon.png";
 import closeIcon from "@/assets/icons/close-icon.png";
 
-function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeSideBar }) {
+function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeSideBar, showCloseIcon, inputPlaceholder }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [showSearchIcon, setShowSearchIcon] = useState(true);
   const [showCustomDropdown, setShowCustomDropdown] = useState(false);
@@ -51,7 +51,7 @@ function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeS
           onChange={searchData}
           className={cx(styles.searchInput)}
           type='text'
-          placeholder='Search for mentor...'
+          placeholder={inputPlaceholder}
         />
 
         <img
@@ -105,7 +105,7 @@ function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeS
         </div>
       )}
 
-      <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={closeSideBar} />
+      {showCloseIcon && <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={closeSideBar} />}
     </div>
   );
 }
@@ -114,7 +114,15 @@ FilterAndSearch.propTypes = {
   searchData: PropTypes.func,
   selectedFilterItem: PropTypes.func,
   dropdownItems: PropTypes.array,
-  closeSideBar: PropTypes.func
+  closeSideBar: PropTypes.func,
+  showCloseIcon: PropTypes.bool,
+  inputPlaceholder: PropTypes.string
+};
+
+FilterAndSearch.defaultProps = {
+  dropdownItems: [],
+  showCloseIcon: false,
+  inputPlaceholder: "Search"
 };
 
 export default FilterAndSearch;

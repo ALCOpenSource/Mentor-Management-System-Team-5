@@ -193,7 +193,7 @@ function Tasks() {
   };
 
   return (
-    <div className={cx(styles.TasksContainer, "flexCol")}>
+    <div className={cx(styles.tasksContainer, "flexCol")}>
       <section className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Tasks</h3>
         <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
