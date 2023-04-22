@@ -7,7 +7,7 @@ import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
 
 import DashboardReportsOverviewCard from "@/components/Cards/DashboardReportsOverview/DashboardReportsOverview";
 
-const ReportsOverview = () => {
+function ReportsOverview() {
   const cardDataArray = [
     {
       title: "Google Africa Scholarship",
@@ -50,6 +50,6 @@ const ReportsOverview = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ReportsOverview;

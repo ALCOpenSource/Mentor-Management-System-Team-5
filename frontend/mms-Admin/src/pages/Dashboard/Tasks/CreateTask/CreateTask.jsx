@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./CreateTask.module.scss";
 import Button from "@/components/Button/Button";
 import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
@@ -12,15 +14,13 @@ import SuccessNotificationModal from "@/components/Modals/SuccessNotification/Su
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
 
-import { useForm, Controller } from "react-hook-form";
 import { createTaskSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 
-const CreateTask = () => {
+function CreateTask() {
   const dispatch = useDispatch();
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -167,7 +167,8 @@ const CreateTask = () => {
     );
   };
 
-  const handleOpenSideBar = (open, category) => {
+  const handleOpenSideBar = (e, open, category) => {
+    e.preventDefault();
     setOpenSideBar({ open, category });
   };
 
@@ -184,14 +185,14 @@ const CreateTask = () => {
   };
 
   const getListComponents = (data) => {
-    let listItems = data.map((item, index) => {
+    const listItems = data.map((item, index) => {
       return {
         component: <PersonelComponent key={index} data={item} />,
         id: item.id
       };
     });
 
-    let headerComponent = (
+    const headerComponent = (
       <FilterAndSearch
         closeSideBar={handleCloseSidebar}
         dropdownItems={[
@@ -227,7 +228,7 @@ const CreateTask = () => {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label={""}
+                  label=''
                   placeholder='Enter a title'
                   type='text'
                   error={errors?.title && errors?.title?.message}
@@ -242,8 +243,8 @@ const CreateTask = () => {
               render={({ field }) => (
                 <TextArea
                   {...field}
-                  placeholder={"Enter task details"}
-                  label={""}
+                  placeholder='Enter task details'
+                  label=''
                   minHeight='150px'
                   error={errors?.details && errors?.details?.message}
                 />
@@ -259,11 +260,7 @@ const CreateTask = () => {
                     <ClearListIcon />
                   </div>
                 </div>
-                <Button
-                  title='Select'
-                  size='small'
-                  onClick={() => handleOpenSideBar(true, "mentor-manager")}
-                />
+                <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor-manager")} />
               </div>
 
               <div className={cx(styles.wrapper, "flexRow-align-center")}>
@@ -274,11 +271,7 @@ const CreateTask = () => {
                     <ClearListIcon />
                   </div>
                 </div>
-                <Button
-                  title='Select'
-                  size='small'
-                  onClick={() => handleOpenSideBar(true, "mentor")}
-                />
+                <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor")} />
               </div>
             </div>
 
@@ -297,25 +290,17 @@ const CreateTask = () => {
 
       {openSideBar.open && openSideBar.category === "mentor-manager" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar
-            selectedMenuItem={handleSelectedItem}
-            data={getListComponents(mentorManagersArray)}
-          />
+          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorManagersArray)} />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar
-            selectedMenuItem={handleSelectedItem}
-            data={getListComponents(mentorsArray)}
-          />
+          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
         </div>
       ) : null}
 
-      {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default CreateTask;

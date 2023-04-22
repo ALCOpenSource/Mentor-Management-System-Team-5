@@ -1,7 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./Summary.module.scss";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import SummaryCard from "@/components/Cards/DashboardSummary/DashboardSummary";
 import Button from "@/components/Button/Button";
 
@@ -10,7 +10,7 @@ import reportsIcon from "@/assets/icons/summary-card-reports-icon.svg";
 import mentorsIcon from "@/assets/icons/summary-card-mentors-icon.svg";
 import mentorManagersIcon from "@/assets/icons/summary-card-mentor-managers-icon.svg";
 
-const Summary = ({ data }) => {
+function Summary() {
   const summaryCardsData = [
     {
       title: "Mentors",
@@ -54,10 +54,10 @@ const Summary = ({ data }) => {
       </div>
     </div>
   );
-};
+}
 
-Summary.propTypes = {
-  data: PropTypes.object.isRequired
-};
+// Summary.propTypes = {
+//   data: PropTypes.object.isRequired
+// };
 
 export default Summary;

@@ -9,7 +9,7 @@ const store = configureStore({
     modal: ModalReducer,
     loading: LoadingReducer
   },
-  devTools: process.env.NODE_ENV === "development" ? true : false
+  devTools: process.env.NODE_ENV === "development"
 });
 
 export default store;

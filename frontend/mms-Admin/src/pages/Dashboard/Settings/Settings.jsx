@@ -1,10 +1,9 @@
 import React from "react";
 import cx from "classnames";
+import { useLocation, Outlet } from "react-router-dom";
 import styles from "./Settings.module.scss";
-import { useLocation } from "react-router-dom";
 import SettingsSideBar from "@/components/SettingsSideBar/SettingsSideBar";
 import Pagination from "@/components/Pagination/Pagination";
-import { Outlet } from "react-router-dom";
 
 import { ReactComponent as GeneralIcon } from "@/assets/icons/settings-general-icon.svg";
 import { ReactComponent as PasswordIcon } from "@/assets/icons/settings-password-icon.svg";
@@ -14,7 +13,7 @@ import { ReactComponent as ArchiveIcon } from "@/assets/icons/settings-archive-i
 import { ReactComponent as SupportIcon } from "@/assets/icons/settings-support-icon.svg";
 import { ReactComponent as FAQIcon } from "@/assets/icons/settings-faq-icon.svg";
 
-const Settings = () => {
+function Settings() {
   const location = useLocation();
   const currentPage = location.pathname.split("/")[3] || "";
 
@@ -76,6 +75,6 @@ const Settings = () => {
       </section>
     </div>
   );
-};
+}
 
 export default Settings;

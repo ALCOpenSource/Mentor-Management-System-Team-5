@@ -30,9 +30,7 @@ export const settingsGeneralSchema = Yup.object().shape({
 
 export const settingsPasswordSchema = Yup.object().shape({
   currentPassword: Yup.string().required("Current password is required"),
-  newPassword: Yup.string()
-    .required("Password is required")
-    .min(8, "Must Contain at least 8 Characters"),
+  newPassword: Yup.string().required("Password is required").min(8, "Must Contain at least 8 Characters"),
   confirmPassword: Yup.string()
     .required("Password is required")
     .min(8, "Must Contain at least 8 Characters")
@@ -47,8 +45,6 @@ export const settingsSupportSchema = Yup.object().shape({
 });
 
 export const createTaskSchema = Yup.object().shape({
-  title: Yup.string()
-    .required("Title is required")
-    .max(32, "The title must contain a maximum of 32 characters"),
+  title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
   details: Yup.string().required("Task details is required")
 });

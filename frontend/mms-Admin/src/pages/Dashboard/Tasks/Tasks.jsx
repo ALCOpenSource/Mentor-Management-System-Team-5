@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import cx from "classnames";
+import { useNavigate, useParams, Outlet } from "react-router-dom";
 import styles from "./Tasks.module.scss";
-import { useNavigate, useParams } from "react-router-dom";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
-import { Outlet } from "react-router-dom";
+
 import Button from "@/components/Button/Button";
 
 import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
@@ -14,7 +14,7 @@ import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 
 import TaskListItem from "./TaskListItem/TaskListItem";
 
-const Tasks = () => {
+function Tasks() {
   const navigate = useNavigate();
   const params = useParams();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
@@ -27,154 +27,154 @@ const Tasks = () => {
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 2,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 3,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 4,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 5,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 6,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 7,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 8,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 9,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 10,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 11,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 12,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 13,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 14,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 15,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 16,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 17,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 18,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 19,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 20,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 21,
       title: "Room Library Article Written in Java",
       date: "3 days from now",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       id: 22,
       title: "Room Library Article Written in Java",
       date: "3 days from now last",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     }
   ];
 
@@ -197,13 +197,8 @@ const Tasks = () => {
       <section className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Tasks</h3>
         <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
-          <SearchIcon
-            className={cx(styles.searchIcon)}
-            onClick={() => setShowSearchInput(!showSearchInput)}
-          />
-          {showSearchInput && (
-            <input className={cx(styles.searchInput)} type='text' placeholder='Search for tasks' />
-          )}
+          <SearchIcon className={cx(styles.searchIcon)} onClick={() => setShowSearchInput(!showSearchInput)} />
+          {showSearchInput && <input className={cx(styles.searchInput)} type='text' placeholder='Search for tasks' />}
           <SortIcon className={cx(styles.sortIcon)} />
         </div>
         <Button title='Create New Task' onClick={() => navigate("create-task")} />
@@ -232,6 +227,6 @@ const Tasks = () => {
       </section>
     </div>
   );
-};
+}
 
 export default Tasks;

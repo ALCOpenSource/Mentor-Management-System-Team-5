@@ -3,7 +3,7 @@ import cx from "classnames";
 import styles from "./Privacy.module.scss";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 
-const Privacy = () => {
+function Privacy() {
   return (
     <div className={cx(styles.privacyContainer, "flexCol")}>
       <div className={cx(styles.infoWrapper, "flexRow-space-between")}>
@@ -43,6 +43,6 @@ const Privacy = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Privacy;

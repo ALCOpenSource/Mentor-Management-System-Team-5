@@ -7,7 +7,7 @@ import cardIcon from "@/assets/icons/programs-overview-card-icon.svg";
 
 import DashboardProgramsOverviewCard from "@/components/Cards/DashboardProgramsOverview/DashboardProgramsOverview";
 
-const ProgramsOverview = () => {
+function ProgramsOverview() {
   const cardDataArray = [
     {
       title: "GADS Program 2023",
@@ -50,6 +50,6 @@ const ProgramsOverview = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ProgramsOverview;

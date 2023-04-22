@@ -7,7 +7,7 @@ import ProgramsOverview from "./ProgramsOverview/ProgramsOverview";
 import ReportsOverview from "./ReportsOverview/ReportsOverview";
 import TasksOverview from "./TasksOverview/TasksOverview";
 
-const Home = () => {
+function Home() {
   return (
     <div className={cx(styles.homeContainer, "flexCol")}>
       <div className={cx(styles.heading, "flexRow-space-between")}>
@@ -29,6 +29,6 @@ const Home = () => {
       <TasksOverview />
     </div>
   );
-};
+}
 
 export default Home;

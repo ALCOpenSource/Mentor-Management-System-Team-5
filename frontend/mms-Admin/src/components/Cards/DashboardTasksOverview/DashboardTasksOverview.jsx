@@ -1,9 +1,9 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./DashboardTasksOverview.module.scss";
 import PropTypes from "prop-types";
+import styles from "./DashboardTasksOverview.module.scss";
 
-const DashboardTasksOverview = ({ data }) => {
+function DashboardTasksOverview({ data }) {
   return (
     <div className={cx(styles.dashboardTasksOverviewContainer, "flexCol")}>
       <div className={cx(styles.body, "flexRow-align-center")}>
@@ -18,7 +18,7 @@ const DashboardTasksOverview = ({ data }) => {
       </div>
     </div>
   );
-};
+}
 
 DashboardTasksOverview.propTypes = {
   data: PropTypes.object

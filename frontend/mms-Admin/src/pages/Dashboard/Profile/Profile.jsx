@@ -1,12 +1,12 @@
 import React from "react";
 import cx from "classnames";
 
+import { Container, Row } from "react-bootstrap";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import ProfileDetail from "./ProfileDetail/ProfileDetail";
 import styles from "./Profile.module.scss";
-import { Container, Row } from "react-bootstrap";
 
-const Profile = () => {
+function Profile() {
   return (
     <Container className={cx(styles.profileContainer)}>
       <Row className='mb-5'>
@@ -17,6 +17,6 @@ const Profile = () => {
       </Row>
     </Container>
   );
-};
+}
 
 export default Profile;

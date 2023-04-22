@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./Support.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
@@ -10,11 +12,9 @@ import attachmentIcon from "@/assets/icons/attachment-icon.svg";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-import { useForm, Controller } from "react-hook-form";
 import { settingsSupportSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-const Support = () => {
+function Support() {
   const dispatch = useDispatch();
   // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
   const displayModal = useSelector((state) => state.modal.show);
@@ -32,8 +32,7 @@ const Support = () => {
   const {
     handleSubmit,
     formState: { errors },
-    control,
-    setValue
+    control
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   const sendMessage = (data) => {
@@ -63,7 +62,7 @@ const Support = () => {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label={"Name"}
+                  label='Name'
                   placeholder=''
                   type='text'
                   error={errors?.name && errors?.name?.message}
@@ -76,7 +75,7 @@ const Support = () => {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label={"Email"}
+                  label='Email'
                   placeholder=''
                   type='email'
                   error={errors?.email && errors?.email?.message}
@@ -89,7 +88,7 @@ const Support = () => {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label={"Title"}
+                  label='Title'
                   placeholder=''
                   type='text'
                   error={errors?.title && errors?.title?.message}
@@ -103,8 +102,8 @@ const Support = () => {
               render={({ field }) => (
                 <TextArea
                   {...field}
-                  placeholder={"Body"}
-                  label={""}
+                  placeholder='Body'
+                  label=''
                   minHeight='150px'
                   error={errors?.body && errors?.body?.message}
                 />
@@ -128,11 +127,9 @@ const Support = () => {
         </div>
       </div>
 
-      {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default Support;
