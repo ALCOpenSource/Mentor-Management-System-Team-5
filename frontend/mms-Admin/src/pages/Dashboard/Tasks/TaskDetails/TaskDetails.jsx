@@ -99,7 +99,7 @@ function TaskDetails() {
             <button onClick={() => handleDeleteTask()} className={cx(styles.deleteBtn, "flexRow-align-center")}>
               <img src={deleteIcon} alt='delete-icon' /> <span>Delete</span>
             </button>
-            <Button title='Edit Task' onClick={() => navigate(`edit-task/${taskId}`)} />
+            <Button title='Edit Task' onClick={() => navigate(`/dashboard/tasks/edit-task/${taskId}`)} />
           </div>
         </>
       )}
