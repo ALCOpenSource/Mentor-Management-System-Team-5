@@ -1,68 +1,56 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    // "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jest/recommended",
+    "plugin:testing-library/react",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:react/jsx-runtime",
-        // "plugin:jsx-a11y/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:jest/recommended",
-        "plugin:testing-library/react"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "indent": ["off"],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "comma-dangle": ["error", "never"],
+    "react/jsx-curly-spacing": [
+      2,
+      "never",
+      {
+        "allowMultiline": false
+      }
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
     ],
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "react/jsx-uses-react": "error",
-        "react/jsx-uses-vars": "error",
-        "comma-dangle": [
-            "error",
-            "never"
-        ],
-        "react/jsx-curly-spacing": [
-            2,
-            "never",
-            {
-                "allowMultiline": false
-            }
-        ],
-        "react/self-closing-comp": [
-            "error",
-            {
-                "component": true,
-                "html": true
-            }
-        ],
-        //   "react/jsx-closing-bracket-location": [2, {"selfClosing": "props-aligned", "nonEmpty": "after-props"}],
-        "react/jsx-closing-bracket-location": [
-            2,
-            "tag-aligned"
-        ]
-    }
+    // "react/jsx-closing-bracket-location": [
+    //     2,
+    //     {
+    //         "selfClosing": "props-aligned",
+    //         "nonEmpty": "after-props"
+    //     }
+    // ]
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"]
+  }
 }
