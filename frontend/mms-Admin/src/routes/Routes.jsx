@@ -34,6 +34,7 @@ import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Noti
 import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
 import CreateTask from "@/pages/Dashboard/Tasks/CreateTask/CreateTask";
+import EditTask from "@/pages/Dashboard/Tasks/EditTask/EditTask";
 
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
@@ -80,6 +81,7 @@ function RoutesComponent() {
               <Route path='task-details/:id' element={<TaskDetails />} />
             </Route>
             <Route path='create-task' element={<CreateTask />} />
+            <Route path='edit-task/:id' element={<EditTask />} />
           </Route>
         </Route>
       </Routes>

@@ -13,7 +13,7 @@ function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeS
   const [showCustomDropdown, setShowCustomDropdown] = useState(false);
   const [showSelectDropdown, setShowSelectDropdown] = useState(false);
   const [showFilterIcon, setShowFilterIcon] = useState(true);
-  const [selectedFilterValue, setSelectedFilterValue] = useState("red");
+  const [selectedFilterValue, setSelectedFilterValue] = useState("");
 
   const handleShowSearchInput = () => {
     setShowSearchInput(true);
@@ -53,7 +53,16 @@ function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeS
           type='text'
           placeholder='Search for mentor...'
         />
-        <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={() => handleCloseSearchInput()} />
+
+        <img
+          src={closeIcon}
+          alt='close-icon'
+          className={cx(styles.icon)}
+          onClick={() => {
+            handleCloseSearchInput();
+            setShowSelectDropdown(true);
+          }}
+        />
       </div>
 
       {showSearchIcon && (

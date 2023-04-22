@@ -1,0 +1,122 @@
+.editTaskContainer {
+  gap: 1rem;
+  padding: 1rem;
+  position: relative;
+  height: calc(100vh - var(--topNavbarHeight));
+
+  .mainSection {
+    gap: 1.5rem;
+    flex-grow: 1;
+    height: 100%;
+    overflow-y: auto;
+
+    .heading {
+      .title {
+        margin: 0;
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        font-size: 1.5rem;
+      }
+    }
+
+    .formWrapper {
+      form {
+        label {
+          font-family: var(--bold);
+          font-size: 1.125rem;
+          color: var(--black2TextColor);
+        }
+
+        .selectionDiv {
+          gap: 1rem;
+          flex-wrap: wrap;
+
+          .wrapper {
+            width: 100%;
+            background-color: var(--sectionContainerBgColor);
+            padding: 1rem;
+
+            .leftSide {
+              gap: 0;
+              align-items: center;
+              flex-grow: 1;
+
+              .title {
+                font-family: var(--semiBold);
+                font-size: 1.125rem;
+                color: var(--black2TextColor);
+                line-height: 1rem;
+              }
+
+              .statsDiv {
+                gap: 1.5rem;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                padding: 0.25rem 1.5rem;
+                border-radius: 0.25rem;
+
+                .stats {
+                  font-family: var(--regular);
+                  font-size: 1rem;
+                  color: var(--black2TextColor);
+                }
+
+                svg {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+
+        .submitBtnDiv {
+          align-items: center;
+          justify-content: flex-start;
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+
+  .sideBarSection {
+    // position: relative;
+    // overflow: auto;
+    // height: 100%;
+    width: auto;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .editTaskContainer {
+    padding: 2rem;
+
+    .mainSection {
+      .formWrapper {
+        form {
+          .selectionDiv {
+            gap: 1.5rem;
+            flex-wrap: nowrap;
+            margin-top: 3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .editTaskContainer {
+    .mainSection {
+      gap: 2.5rem;
+
+      .formWrapper {
+        form {
+          .selectionDiv {
+            gap: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

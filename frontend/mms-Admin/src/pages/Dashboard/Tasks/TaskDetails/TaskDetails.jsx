@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import { useParams } from "react-router-dom";
 import styles from "./TaskDetails.module.scss";
+import { useParams, useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import headerIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
@@ -16,6 +16,7 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 
 function TaskDetails() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const taskId = params.id;
   const displayModal = useSelector((state) => state.modal.show);
@@ -98,7 +99,7 @@ function TaskDetails() {
             <button onClick={() => handleDeleteTask()} className={cx(styles.deleteBtn, "flexRow-align-center")}>
               <img src={deleteIcon} alt='delete-icon' /> <span>Delete</span>
             </button>
-            <Button title='Edit Task' />
+            <Button title='Edit Task' onClick={() => navigate(`/dashboard/tasks/edit-task/${taskId}`)} />
           </div>
         </>
       )}
