@@ -1,15 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginApi, forgotPasswordApi, resetPasswordApi } from "../api/auth";
 import { toast } from "react-toastify";
+import { loginApi, forgotPasswordApi, resetPasswordApi } from "../api/auth";
 
 import { setToken, setRefreshToken } from "@/utils/auth";
 import { setAuthToken } from "@/utils/setAuthToken";
 
-import {
-  loginLoading,
-  forgotPasswordLoading,
-  resetPasswordLoading
-} from "@/redux/Loading/LoadingSlice";
+import { loginLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
   error: false,

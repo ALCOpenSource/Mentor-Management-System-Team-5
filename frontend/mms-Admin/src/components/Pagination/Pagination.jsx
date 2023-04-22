@@ -8,7 +8,7 @@ import navigateLast from "@/assets/icons/pagination-right-arrow.svg";
 import nextPage from "@/assets/icons/pagination-next-arrow.svg";
 import previousPage from "@/assets/icons/pagination-previous-arrow.svg";
 
-const Pagination = () => {
+function Pagination() {
   return (
     <div className={cx(styles.paginationContainer, "flexRow-align-center")}>
       <div className={cx(styles.inputDiv, "flexRow")}>
@@ -31,6 +31,6 @@ const Pagination = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Pagination;

@@ -1,12 +1,12 @@
 import React from "react";
 // import { useDispatch } from "react-redux";
-import { isAuthenticated } from "@/utils/auth";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
+import { isAuthenticated } from "@/utils/auth";
 
-const AuthenticatedRoutes = ({ children, roles }) => {
-  let location = useLocation();
+function AuthenticatedRoutes({ children, roles }) {
+  const location = useLocation();
   // const dispatch = useDispatch();
   const checkIsAuthenticated = isAuthenticated();
 
@@ -18,12 +18,11 @@ const AuthenticatedRoutes = ({ children, roles }) => {
   //   dispatch(refreshLogin({ refreshToken: refreshToken }));
   // }
 
-  const userHasRequiredRole =
-    userDetails && roles.includes(userDetails?.roles.toString().toLowerCase()) ? true : false;
+  const userHasRequiredRole = !!(userDetails && roles.includes(userDetails?.roles.toString().toLowerCase()));
 
   if (!checkIsAuthenticated) {
     toast.error("You must be logged in to access this page");
-    return <Navigate to={"/"} state={{ from: location }} />;
+    return <Navigate to='/' state={{ from: location }} />;
   }
 
   if (checkIsAuthenticated && !userHasRequiredRole) {
@@ -32,7 +31,7 @@ const AuthenticatedRoutes = ({ children, roles }) => {
   }
 
   return children;
-};
+}
 
 AuthenticatedRoutes.propTypes = {
   children: PropTypes.node,

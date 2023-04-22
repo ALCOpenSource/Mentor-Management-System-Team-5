@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as SettingsToggler } from "@/assets/icons/settings-toggler-icon.svg";
 
-const SettingsSideBar = ({ data }) => {
+function SettingsSideBar({ data }) {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -27,7 +27,7 @@ const SettingsSideBar = ({ data }) => {
   useEffect(() => {
     // Update the active link when the route changes
     const path = location.pathname;
-    let currentPath = path.split("/")[3] || "";
+    const currentPath = path.split("/")[3] || "";
     const active = data.find((link) => link.link === currentPath);
     setActiveLink(active ? active.link : "");
   }, [location.pathname, data]);
@@ -41,7 +41,7 @@ const SettingsSideBar = ({ data }) => {
 
     window.addEventListener("resize", handleWindowSizeChange);
 
-    let currentHeight = sidebarRef.current.getBoundingClientRect();
+    const currentHeight = sidebarRef.current.getBoundingClientRect();
     setCurrentSideBarPosition(currentHeight.top);
 
     return () => {
@@ -105,7 +105,7 @@ const SettingsSideBar = ({ data }) => {
       </ul>
     </div>
   );
-};
+}
 
 SettingsSideBar.propTypes = {
   data: PropTypes.array

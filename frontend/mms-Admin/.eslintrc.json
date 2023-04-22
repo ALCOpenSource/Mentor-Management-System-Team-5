@@ -1,16 +1,18 @@
 {
     "env": {
-        "node": true,
         "browser": true,
+        "node": true,
         "es2021": true
     },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
+        // "plugin:jsx-a11y/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jest/recommended",
-        "plugin:testing-library/react"
+        "plugin:testing-library/react",
+        "prettier"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -20,12 +22,12 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
         "indent": [
-            "error",
-            2
+            "off"
         ],
         "linebreak-style": [
             "error",
@@ -59,6 +61,13 @@
                 "html": true
             }
         ],
+        // "react/jsx-closing-bracket-location": [
+        //     2,
+        //     {
+        //         "selfClosing": "props-aligned",
+        //         "nonEmpty": "after-props"
+        //     }
+        // ]
         "react/jsx-closing-bracket-location": [
             2,
             "tag-aligned"

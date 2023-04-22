@@ -2,19 +2,19 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./Login.module.scss";
 
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 
-import { useForm, Controller } from "react-hook-form";
 import { loginSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import { login } from "@/redux/Auth/AuthSlice";
 import Button from "@/components/Button/Button";
 
-const Login = () => {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -62,7 +62,7 @@ const Login = () => {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label={"Email"}
+                    label='Email'
                     placeholder=''
                     type='email'
                     error={errors?.email && errors?.email?.message}
@@ -76,7 +76,7 @@ const Login = () => {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label={"Password"}
+                    label='Password'
                     placeholder=''
                     type='password'
                     error={errors?.password && errors?.password?.message}
@@ -103,6 +103,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

@@ -1,9 +1,9 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./DashboardSummary.module.scss";
 import PropTypes from "prop-types";
+import styles from "./DashboardSummary.module.scss";
 
-const DashboardSummaryCard = ({ data }) => {
+function DashboardSummaryCard({ data }) {
   return (
     <div className={cx(styles.dashboardSummaryContainer, "flexRow-space-between")}>
       <div className={cx(styles.leftSection, "flexCol")}>
@@ -16,7 +16,7 @@ const DashboardSummaryCard = ({ data }) => {
       <img className={cx(styles.icon)} src={data.icon} alt='icon' />
     </div>
   );
-};
+}
 
 DashboardSummaryCard.propTypes = {
   data: PropTypes.object.isRequired

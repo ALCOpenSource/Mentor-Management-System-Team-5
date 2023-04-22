@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-import ModalContainer from "../ModalContainer/ModalContainer";
 import cx from "classnames";
+import ModalContainer from "../ModalContainer/ModalContainer";
 import styles from "./SuccessNotification.module.scss";
 
 import successImage from "@/assets/images/default-success-notification-image.png";
@@ -11,7 +11,7 @@ import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 
-const SuccessNotification = ({ show, size, modalName }) => {
+function SuccessNotification({ show, size, modalName }) {
   const dispatch = useDispatch();
 
   const modalData = useSelector((state) => state.modal.modalData);
@@ -28,11 +28,7 @@ const SuccessNotification = ({ show, size, modalName }) => {
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
-          <img
-            className={cx(styles.successImage)}
-            src={modalData?.image || successImage}
-            alt='notification-image'
-          />
+          <img className={cx(styles.successImage)} src={modalData?.image || successImage} alt='notification-image' />
         </div>
 
         <div className={cx(styles.modalFooter)}>
@@ -43,7 +39,7 @@ const SuccessNotification = ({ show, size, modalName }) => {
       </div>
     </ModalContainer>
   );
-};
+}
 
 SuccessNotification.propTypes = {
   show: PropTypes.bool,

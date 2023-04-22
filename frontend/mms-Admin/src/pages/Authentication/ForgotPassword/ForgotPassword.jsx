@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./ForgotPassword.module.scss";
 
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 
-import { useForm, Controller } from "react-hook-form";
 import { forgotPasswordSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotPassword } from "@/redux/Auth/AuthSlice";
 
-const ForgotPassword = () => {
+function ForgotPassword() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -47,9 +47,7 @@ const ForgotPassword = () => {
           <div className={cx(styles.formHeader, "flexCol")}>
             <h3 className={cx(styles.formTitle)}>Forgot Password?</h3>
             {!showOutcome ? (
-              <p className={cx(styles.caption)}>
-                To reset your password, enter the email address you use to sign in.
-              </p>
+              <p className={cx(styles.caption)}>To reset your password, enter the email address you use to sign in.</p>
             ) : (
               <div className={cx(styles.outcomeDiv, "flexCol")}>
                 <p className={cx(styles.caption)}>
@@ -72,7 +70,7 @@ const ForgotPassword = () => {
                   render={({ field }) => (
                     <InputField
                       {...field}
-                      label={"Email"}
+                      label='Email'
                       placeholder=''
                       type='email'
                       error={errors?.email && errors?.email?.message}
@@ -100,6 +98,6 @@ const ForgotPassword = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ForgotPassword;

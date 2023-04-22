@@ -1,11 +1,11 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./DashboardChildren.module.scss";
 import PropTypes from "prop-types";
+import styles from "./DashboardChildren.module.scss";
 
-const DashboardChildren = ({ children }) => {
+function DashboardChildren({ children }) {
   return <div className={cx(styles.dashboardChildrenContainer, "flexCol")}>{children}</div>;
-};
+}
 
 DashboardChildren.propTypes = {
   children: PropTypes.node.isRequired

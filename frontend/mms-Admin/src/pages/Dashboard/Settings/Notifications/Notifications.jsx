@@ -3,7 +3,7 @@ import cx from "classnames";
 import styles from "./Notifications.module.scss";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 
-const Notifications = () => {
+function Notifications() {
   return (
     <div className={cx(styles.notificationsContainer, "flexCol")}>
       <div className={cx(styles.wrapper, "flexCol")}>
@@ -93,6 +93,6 @@ const Notifications = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Notifications;

@@ -1,25 +1,11 @@
 import React, { useState, useEffect, forwardRef } from "react";
+import PropTypes from "prop-types";
 import { FormGroup } from "./StyledInput";
 import eyeIcon from "@/assets/icons/eye.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
-import PropTypes from "prop-types";
 
 const Input = forwardRef(
-  (
-    {
-      label,
-      placeholder,
-      required,
-      type = "text",
-      onChange,
-      error,
-      icon,
-      marginbottom,
-      border,
-      ...props
-    },
-    ref
-  ) => {
+  ({ label, placeholder, required, type = "text", onChange, error, icon, marginbottom, border, ...props }, ref) => {
     const [inputType, setInputType] = useState(type);
     const [isActive, setIsActive] = useState(false);
 
@@ -49,11 +35,7 @@ const Input = forwardRef(
     }, [props.value]);
 
     return (
-      <FormGroup
-        marginbottom={marginbottom || "2rem"}
-        border={border || "#CCCCCC"}
-        required={required}
-      >
+      <FormGroup marginbottom={marginbottom || "2rem"} border={border || "#CCCCCC"} required={required}>
         <div className='input-container'>
           {icon && <img src={searchIcon} alt='search icon' />}
           <input
@@ -69,9 +51,7 @@ const Input = forwardRef(
           <label onClick={(e) => handleLabelClick(e)} className={isActive ? "Active" : ""}>
             {label}
           </label>
-          {type === "password" && (
-            <img src={eyeIcon} alt='eye-icon' className='eye-icon' onClick={handleVisibility} />
-          )}
+          {type === "password" && <img src={eyeIcon} alt='eye-icon' className='eye-icon' onClick={handleVisibility} />}
         </div>
         {error ? <span className='error'>{error}</span> : ""}
       </FormGroup>

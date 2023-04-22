@@ -1,17 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
-import ModalContainer from "../ModalContainer/ModalContainer";
 import cx from "classnames";
+import { useNavigate } from "react-router";
+import ModalContainer from "../ModalContainer/ModalContainer";
 import styles from "./ResetPassword.module.scss";
 
 import headerImage from "@/assets/images/reset-password-success.png";
 import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
-import { useNavigate } from "react-router";
 
-const ResetPassword = ({ show, size, modalName }) => {
+function ResetPassword({ show, size, modalName }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const ResetPassword = ({ show, size, modalName }) => {
       </div>
     </ModalContainer>
   );
-};
+}
 
 ResetPassword.propTypes = {
   show: PropTypes.bool,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import cx from "classnames";
 import styles from "./DashboardSideBar.module.scss";
 import "./DashboardActiveMenu.scss";
@@ -22,88 +22,89 @@ import { ReactComponent as LogoutIcon } from "@/assets/icons/logout-icon.svg";
 import { logout } from "@/redux/Auth/AuthSlice";
 import { useDispatch } from "react-redux";
 
-const DashboardSideBar = () => {
+function DashboardSideBar() {
   const location = useLocation();
   const dispatch = useDispatch();
   const { toggleSidebar } = useProSidebar();
 
   const currentPage = location.pathname.split("/")[2] || "";
 
+  const menuItemsArray = useMemo(
+    () => [
+      {
+        name: "Profile",
+        link: "profile",
+        icon: <ProfileIcon />
+      },
+      {
+        name: "Dashboard",
+        link: "",
+        icon: <DashboardIcon />
+      },
+      {
+        name: "Programs",
+        link: "programs",
+        icon: <ProgramsIcon />
+      },
+      {
+        name: "Tasks",
+        link: "tasks",
+        icon: <TasksIcon />
+      },
+      {
+        name: "Reports",
+        link: "reports",
+        icon: <ReportsIcon />
+      },
+      {
+        name: "Mentors",
+        link: "mentors",
+        icon: <MentorsIcon />
+      },
+      {
+        name: "Mentor Managers",
+        link: "mentor-managers",
+        icon: <MentorManagersIcon />
+      },
+      {
+        name: "Approval Requests",
+        link: "approval-requests",
+        icon: <ApprovalRequestsIcon />
+      },
+      {
+        name: "Certificates",
+        link: "certificates",
+        icon: <CertificatesIcon />
+      },
+      {
+        name: "Messages",
+        link: "messages",
+        icon: <MessagesIcon />
+      },
+      {
+        name: "Discussion Forum",
+        link: "discussion-forum",
+        icon: <DiscussionForumIcon />
+      },
+      {
+        name: "Settings",
+        link: "settings",
+        icon: <SettingsIcon />
+      },
+      {
+        name: "Logout",
+        link: "/login",
+        icon: <LogoutIcon />
+      }
+    ],
+    []
+  );
+
   useEffect(() => {
     setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage));
-  }, [currentPage]);
+  }, [currentPage, menuItemsArray]);
 
-  const menuItemsArray = [
-    {
-      name: "Profile",
-      link: "profile",
-      icon: <ProfileIcon />
-    },
-    {
-      name: "Dashboard",
-      link: "",
-      icon: <DashboardIcon />
-    },
-    {
-      name: "Programs",
-      link: "programs",
-      icon: <ProgramsIcon />
-    },
-    {
-      name: "Tasks",
-      link: "tasks",
-      icon: <TasksIcon />
-    },
-    {
-      name: "Reports",
-      link: "reports",
-      icon: <ReportsIcon />
-    },
-    {
-      name: "Mentors",
-      link: "mentors",
-      icon: <MentorsIcon />
-    },
-    {
-      name: "Mentor Managers",
-      link: "mentor-managers",
-      icon: <MentorManagersIcon />
-    },
-    {
-      name: "Approval Requests",
-      link: "approval-requests",
-      icon: <ApprovalRequestsIcon />
-    },
-    {
-      name: "Certificates",
-      link: "certificates",
-      icon: <CertificatesIcon />
-    },
-    {
-      name: "Messages",
-      link: "messages",
-      icon: <MessagesIcon />
-    },
-    {
-      name: "Discussion Forum",
-      link: "discussion-forum",
-      icon: <DiscussionForumIcon />
-    },
-    {
-      name: "Settings",
-      link: "settings",
-      icon: <SettingsIcon />
-    },
-    {
-      name: "Logout",
-      link: "/login",
-      icon: <LogoutIcon />
-    }
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(
-    menuItemsArray.findIndex((item) => item.link === currentPage)
-  );
+  const [activeIndex, setActiveIndex] = useState(menuItemsArray.findIndex((item) => item.link === currentPage));
 
   const handleMenuClick = (index, menuItem) => {
     if (menuItem.toLowerCase() === "logout") {
@@ -142,6 +143,6 @@ const DashboardSideBar = () => {
       </Sidebar>
     </div>
   );
-};
+}
 
 export default DashboardSideBar;

@@ -4,7 +4,7 @@ import styles from "./TaskListItem.module.scss";
 import "./TaskListActiveItem.scss";
 import PropTypes from "prop-types";
 
-const TaskListItem = ({ data }) => {
+function TaskListItem({ data }) {
   return (
     <div className={cx(styles.taskListItemContainer, "flexCol")}>
       <div className={cx(styles.body, "flexRow-align-center")}>
@@ -19,7 +19,7 @@ const TaskListItem = ({ data }) => {
       </div>
     </div>
   );
-};
+}
 
 TaskListItem.propTypes = {
   data: PropTypes.object

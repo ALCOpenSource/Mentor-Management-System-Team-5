@@ -10,7 +10,7 @@ import reportsIcon from "@/assets/icons/summary-card-reports-icon.svg";
 import mentorsIcon from "@/assets/icons/summary-card-mentors-icon.svg";
 import mentorManagersIcon from "@/assets/icons/summary-card-mentor-managers-icon.svg";
 
-const Summary = () => {
+function Summary() {
   const summaryCardsData = [
     {
       title: "Mentors",
@@ -54,7 +54,7 @@ const Summary = () => {
       </div>
     </div>
   );
-};
+}
 
 // Summary.propTypes = {
 //   data: PropTypes.object.isRequired

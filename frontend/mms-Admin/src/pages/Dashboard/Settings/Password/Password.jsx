@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./Password.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
@@ -9,11 +11,9 @@ import SuccessNotificationModal from "@/components/Modals/SuccessNotification/Su
 import ForgotPasswordModal from "@/components/Modals/ForgotPassword/ForgotPassword";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-import { useForm, Controller } from "react-hook-form";
 import { settingsPasswordSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-const Password = () => {
+function Password() {
   const dispatch = useDispatch();
   // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
   const displayModal = useSelector((state) => state.modal.show);
@@ -45,7 +45,7 @@ const Password = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label={"Your current Password"}
+                label='Your current Password'
                 placeholder=''
                 type='password'
                 error={errors?.currentPassword && errors?.currentPassword?.message}
@@ -66,7 +66,7 @@ const Password = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label={"Must be at least 8 characters"}
+                label='Must be at least 8 characters'
                 placeholder=''
                 type='password'
                 error={errors?.newPassword && errors?.newPassword?.message}
@@ -87,7 +87,7 @@ const Password = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label={"Must match your new password"}
+                label='Must match your new password'
                 placeholder=''
                 type='password'
                 error={errors?.confirmPassword && errors?.confirmPassword?.message}
@@ -107,27 +107,20 @@ const Password = () => {
                   title: "Password changed successfully"
                 }
               })
-            )
-          }
+            )}
           title='Save new password'
         />
       </div>
 
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
-        <p onClick={() => dispatch(showModal({ name: "forgotPassword", modalData: "" }))}>
-          Forgot Password?
-        </p>
+        <p onClick={() => dispatch(showModal({ name: "forgotPassword", modalData: "" }))}>Forgot Password?</p>
       </div>
 
-      {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
 
-      {displayModal && modalName === "forgotPassword" ? (
-        <ForgotPasswordModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "forgotPassword" ? <ForgotPasswordModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default Password;
