@@ -40,7 +40,7 @@ import EditTask from "@/pages/Dashboard/Tasks/EditTask/EditTask";
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
 import userRoles from "@/constants/userRoles";
 
-const RoutesComponent = () => {
+function RoutesComponent() {
   return (
     <BrowserRouter>
       <Routes>
@@ -51,13 +51,11 @@ const RoutesComponent = () => {
 
         <Route
           path='/dashboard'
-          element={
-            <AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>
-          }
+            </AuthenticatedRoutes>}
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>
@@ -89,6 +87,6 @@ const RoutesComponent = () => {
       </Routes>
     </BrowserRouter>
   );
-};
+}
 
 export default RoutesComponent;

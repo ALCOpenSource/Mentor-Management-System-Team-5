@@ -5,7 +5,7 @@ import styles from "./FAQ.module.scss";
 import { ReactComponent as ExpandIcon } from "@/assets/icons/faq-expand-icon.svg";
 import { ReactComponent as CollapseIcon } from "@/assets/icons/faq-collapse-icon.svg";
 
-const FAQ = () => {
+function FAQ() {
   const [toggle, setToggle] = useState({
     index: null,
     toggle: false
@@ -14,12 +14,12 @@ const FAQ = () => {
   const handleToggle = (index) => {
     if (toggle.index === index) {
       setToggle({
-        index: index,
+        index,
         toggle: !toggle.toggle
       });
     } else {
       setToggle({
-        index: index,
+        index,
         toggle: true
       });
     }
@@ -83,9 +83,7 @@ const FAQ = () => {
         </div>
         <div className={cx(styles.faqBody, "flexCol")}>
           <h6 className={cx(styles.question)}>{faq.question}</h6>
-          {toggle.index === `${type}${index}` && toggle.toggle && (
-            <p className={cx(styles.answer)}>{faq.answer}</p>
-          )}
+          {toggle.index === `${type}${index}` && toggle.toggle && <p className={cx(styles.answer)}>{faq.answer}</p>}
         </div>
       </div>
     );
@@ -108,6 +106,6 @@ const FAQ = () => {
       </div>
     </div>
   );
-};
+}
 
 export default FAQ;

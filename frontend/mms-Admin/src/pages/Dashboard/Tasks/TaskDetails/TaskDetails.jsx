@@ -14,7 +14,7 @@ import deleteIcon from "@/assets/icons/delete-icon-red.svg";
 import TaskDeleteNotificationModal from "@/components/Modals/TaskDeleteNotification/TaskDeleteNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-const TaskDetails = () => {
+function TaskDetails() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -58,12 +58,10 @@ const TaskDetails = () => {
             <div className={cx(styles.wrapper, "flexRow-align-center")}>
               <img className={cx(styles.icon)} src={headerIcon} alt='task-icon' />
               <div className={cx(styles.mainContent, "flexCol")}>
-                <h5 className={cx(styles.title)}>
-                  {`Room Library Article Written in Java ${taskId}`}
-                </h5>
+                <h5 className={cx(styles.title)}>{`Room Library Article Written in Java ${taskId}`}</h5>
                 <div className={cx(styles.metaData, "flexRow")}>
                   <img className={cx(styles.dateIcon)} src={calendarIcon} alt='calendar-icon' />
-                  <span className={cx(styles.date)}>{"3 days from now"}</span>
+                  <span className={cx(styles.date)}>3 days from now</span>
                 </div>
               </div>
             </div>
@@ -71,11 +69,10 @@ const TaskDetails = () => {
 
           <div className={cx(styles.body, "flexCol")}>
             <p className={cx(styles.description)}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in
-              hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur,
-              ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum
-              auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh,
-              at maximus ante fermentum sit amet. Pellentesque
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.
+              Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis
+              tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu.
+              Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque
             </p>
 
             {summaryDivData.map((item, index) => {
@@ -99,10 +96,7 @@ const TaskDetails = () => {
           </div>
 
           <div className={cx(styles.btnGroup, "flexRow")}>
-            <button
-              onClick={() => handleDeleteTask()}
-              className={cx(styles.deleteBtn, "flexRow-align-center")}
-            >
+            <button onClick={() => handleDeleteTask()} className={cx(styles.deleteBtn, "flexRow-align-center")}>
               <img src={deleteIcon} alt='delete-icon' /> <span>Delete</span>
             </button>
             <Button title='Edit Task' onClick={() => navigate(`edit-task/${taskId}`)} />
@@ -110,11 +104,9 @@ const TaskDetails = () => {
         </>
       )}
 
-      {displayModal && modalName === "taskDeleteNotification" ? (
-        <TaskDeleteNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "taskDeleteNotification" ? <TaskDeleteNotificationModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default TaskDetails;

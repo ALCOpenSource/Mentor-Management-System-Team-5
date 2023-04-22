@@ -7,7 +7,7 @@ import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import DashboardSideBar from "../DashboardSideBar/DashboardSideBar";
 import DashboardChildren from "@/components/DashboardChildren/DashboardChildren";
 
-const DashboardContainer = (props) => {
+function DashboardContainer(props) {
   const { children } = props;
 
   return (
@@ -25,7 +25,7 @@ const DashboardContainer = (props) => {
       </section>
     </div>
   );
-};
+}
 
 DashboardContainer.propTypes = {
   children: PropTypes.element.isRequired

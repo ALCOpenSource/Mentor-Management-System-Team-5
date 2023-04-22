@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import cx from "classnames";
+import PropTypes from "prop-types";
 import styles from "./PersonelComponent.module.scss";
 import { ReactComponent as AddIcon } from "@/assets/icons/add-icon.svg";
 import { ReactComponent as CheckIcon } from "@/assets/icons/check-icon.svg";
-import PropTypes from "prop-types";
 
-const PersonelComponent = ({ data }) => {
+function PersonelComponent({ data }) {
   const [toggleIcon, setToggleIcon] = useState(false);
 
   return (
@@ -30,7 +30,7 @@ const PersonelComponent = ({ data }) => {
       )}
     </div>
   );
-};
+}
 
 PersonelComponent.propTypes = {
   data: PropTypes.object.isRequired

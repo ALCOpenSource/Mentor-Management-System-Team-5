@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Col, Container, Row } from "react-bootstrap";
+import cx from "classnames";
 import Button from "@/components/Button/Button";
 import profileImage from "@/assets/images/sample-profile-image.svg";
 import flagImage from "@/assets/icons/flag-01.svg";
-import { Col, Container, Row } from "react-bootstrap";
-import cx from "classnames";
 import styles from "./Profile.header.module.scss";
 
-const ProfileHeader = () => {
+function ProfileHeader() {
   return (
     <Container className={cx(styles.profileHeaderContainer)}>
       <Row>
@@ -41,6 +41,6 @@ const ProfileHeader = () => {
       </Row>
     </Container>
   );
-};
+}
 
 export default ProfileHeader;

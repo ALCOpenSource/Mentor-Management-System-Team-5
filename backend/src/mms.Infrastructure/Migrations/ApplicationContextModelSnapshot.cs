@@ -663,6 +663,43 @@ namespace mms.Infrastructure.Migrations
                     b.ToTable("UserNotifications");
                 });
 
+            modelBuilder.Entity("mms.Domain.Entities.UserPrivacy", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("ShowContactInfo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("ShowGithub")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("ShowInstagram")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("ShowLinkedIn")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("ShowTwitter")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("UserPrivacy");
+                });
+
             modelBuilder.Entity("mms.Domain.Entities.UserTask", b =>
                 {
                     b.Property<string>("Id")

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import cx from "classnames";
-import styles from "./SelectionSideBar.module.scss";
 import PropTypes from "prop-types";
+import styles from "./SelectionSideBar.module.scss";
 
-const SelectionSideBar = ({ data, selectedMenuItem }) => {
+function SelectionSideBar({ data, selectedMenuItem }) {
   const [isMobile, setIsMobile] = useState(false);
   const sidebarRef = useRef(null);
 
@@ -66,7 +66,7 @@ const SelectionSideBar = ({ data, selectedMenuItem }) => {
       </ul>
     </div>
   );
-};
+}
 
 SelectionSideBar.propTypes = {
   data: PropTypes.object,

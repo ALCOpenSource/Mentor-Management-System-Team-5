@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import cx from "classnames";
-import styles from "./FilterAndSearch.module.scss";
 import PropTypes from "prop-types";
+import styles from "./FilterAndSearch.module.scss";
 
 import searchIcon from "@/assets/icons/search-icon-green.png";
 import filterIcon from "@/assets/icons/filter-icon.png";
 import closeIcon from "@/assets/icons/close-icon.png";
 
-const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeSideBar }) => {
+function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeSideBar }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [showSearchIcon, setShowSearchIcon] = useState(true);
   const [showCustomDropdown, setShowCustomDropdown] = useState(false);
@@ -42,34 +42,22 @@ const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeS
 
   return (
     <div className={cx(styles.filterAndSearchContainer, "flexRow-align-center")}>
-      {
-        <div
-          className={cx(styles.inputDiv, "flexRow-align-center")}
-          style={{ visibility: showSearchInput ? "visible" : "hidden" }}
-        >
-          <img src={searchIcon} alt='search-icon' className={cx(styles.icon)} />
-          <input
-            onChange={searchData}
-            className={cx(styles.searchInput)}
-            type='text'
-            placeholder='Search for mentor...'
-          />
-          <img
-            src={closeIcon}
-            alt='close-icon'
-            className={cx(styles.icon)}
-            onClick={() => handleCloseSearchInput()}
-          />
-        </div>
-      }
+      <div
+        className={cx(styles.inputDiv, "flexRow-align-center")}
+        style={{ visibility: showSearchInput ? "visible" : "hidden" }}
+      >
+        <img src={searchIcon} alt='search-icon' className={cx(styles.icon)} />
+        <input
+          onChange={searchData}
+          className={cx(styles.searchInput)}
+          type='text'
+          placeholder='Search for mentor...'
+        />
+        <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={() => handleCloseSearchInput()} />
+      </div>
 
       {showSearchIcon && (
-        <img
-          src={searchIcon}
-          alt='search-icon'
-          className={cx(styles.icon)}
-          onClick={() => handleShowSearchInput()}
-        />
+        <img src={searchIcon} alt='search-icon' className={cx(styles.icon)} onClick={() => handleShowSearchInput()} />
       )}
 
       {showSelectDropdown && (
@@ -89,12 +77,7 @@ const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeS
 
       {showFilterIcon && (
         <div className={cx(styles.filterDiv, "flexCol")}>
-          <img
-            src={filterIcon}
-            alt='filter-icon'
-            className={cx(styles.icon)}
-            onClick={() => handleShowDropdown()}
-          />
+          <img src={filterIcon} alt='filter-icon' className={cx(styles.icon)} onClick={() => handleShowDropdown()} />
 
           {showCustomDropdown && (
             <div className={cx(styles.dropdown, "flexCol")}>
@@ -116,7 +99,7 @@ const FilterAndSearch = ({ searchData, selectedFilterItem, dropdownItems, closeS
       <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={closeSideBar} />
     </div>
   );
-};
+}
 
 FilterAndSearch.propTypes = {
   searchData: PropTypes.func,

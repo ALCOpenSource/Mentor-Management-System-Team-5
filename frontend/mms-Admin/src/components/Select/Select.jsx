@@ -4,28 +4,10 @@ import "./Select.scss";
 import loadingIcon from "@/assets/icons/loading.gif";
 
 const Select = forwardRef(
-  (
-    {
-      options,
-      defaultSelect,
-      name,
-      onChange,
-      value,
-      label,
-      error,
-      border,
-      marginbottom,
-      loading,
-      required
-    },
-    ref
-  ) => {
+  ({ options, defaultSelect, name, onChange, value, label, error, border, marginbottom, loading, required }) => {
     return (
       <div className='select-container' style={{ marginBottom: marginbottom }}>
-        <div
-          className='select-wrapper'
-          style={{ border: `1px solid ${border ? border : "#022B69"}` }}
-        >
+        <div className='select-wrapper' style={{ border: `1px solid ${border || "#022B69"}` }}>
           <div className='flexRow-space-between'>
             <label className='select-label'>{label}</label>
             {loading && <img className='select-loading-icon' src={loadingIcon} alt='icon' />}
