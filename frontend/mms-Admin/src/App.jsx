@@ -1,15 +1,15 @@
 import React from "react";
-import { checkAuth } from "./utils/auth";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { checkAuth } from "./utils/auth";
 import store from "./redux/store";
 import Routes from "./routes/Routes";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ProSidebarProvider } from "react-pro-sidebar";
 
 checkAuth();
 
-const App = () => {
+function App() {
   return (
     <ProSidebarProvider>
       <Provider store={store}>
@@ -18,6 +18,6 @@ const App = () => {
       </Provider>
     </ProSidebarProvider>
   );
-};
+}
 
 export default App;

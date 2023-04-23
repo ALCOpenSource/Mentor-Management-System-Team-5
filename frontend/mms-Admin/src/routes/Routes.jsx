@@ -33,13 +33,14 @@ import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Noti
 // Tasks
 import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
-import AddTask from "@/pages/Dashboard/Tasks/AddTask/AddTask";
+import CreateTask from "@/pages/Dashboard/Tasks/CreateTask/CreateTask";
+import EditTask from "@/pages/Dashboard/Tasks/EditTask/EditTask";
 
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
 import userRoles from "@/constants/userRoles";
 
-const RoutesComponent = () => {
+function RoutesComponent() {
   return (
     <BrowserRouter>
       <Routes>
@@ -50,13 +51,11 @@ const RoutesComponent = () => {
 
         <Route
           path='/dashboard'
-          element={
-            <AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>
-          }
+            </AuthenticatedRoutes>}
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>
@@ -81,12 +80,13 @@ const RoutesComponent = () => {
             <Route path='' element={<Tasks />}>
               <Route path='task-details/:id' element={<TaskDetails />} />
             </Route>
-            <Route path='add-task' element={<AddTask />} />
+            <Route path='create-task' element={<CreateTask />} />
+            <Route path='edit-task/:id' element={<EditTask />} />
           </Route>
         </Route>
       </Routes>
     </BrowserRouter>
   );
-};
+}
 
 export default RoutesComponent;

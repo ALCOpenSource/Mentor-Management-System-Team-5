@@ -2,8 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-import ModalContainer from "../ModalContainer/ModalContainer";
 import cx from "classnames";
+import ModalContainer from "../ModalContainer/ModalContainer";
 import styles from "./TaskDeleteNotification.module.scss";
 
 import successImage from "@/assets/images/task-delete-success.png";
@@ -12,7 +12,7 @@ import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 
-const TaskDeleteNotification = ({ show, size, modalName }) => {
+function TaskDeleteNotification({ show, size, modalName }) {
   const dispatch = useDispatch();
 
   const modalData = useSelector((state) => state.modal.modalData);
@@ -41,7 +41,7 @@ const TaskDeleteNotification = ({ show, size, modalName }) => {
       </div>
     </ModalContainer>
   );
-};
+}
 
 TaskDeleteNotification.propTypes = {
   show: PropTypes.bool,

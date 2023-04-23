@@ -4,7 +4,7 @@ import cx from "classnames";
 import styles from "./AuthSideHero.module.scss";
 import logo from "@/assets/images/logo.svg";
 
-const AuthSideHero = () => {
+function AuthSideHero() {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -19,6 +19,6 @@ const AuthSideHero = () => {
       </h6>
     </div>
   );
-};
+}
 
 export default AuthSideHero;

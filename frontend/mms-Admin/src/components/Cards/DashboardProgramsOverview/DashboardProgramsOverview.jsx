@@ -1,9 +1,9 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./DashboardProgramsOverview.module.scss";
 import PropTypes from "prop-types";
+import styles from "./DashboardProgramsOverview.module.scss";
 
-const DashboardProgramsOverview = ({ data }) => {
+function DashboardProgramsOverview({ data }) {
   return (
     <div className={cx(styles.dashboardProgramsOverviewContainer, "flexCol")}>
       <div className={cx(styles.body, "flexRow-align-center")}>
@@ -19,7 +19,7 @@ const DashboardProgramsOverview = ({ data }) => {
       <small className={cx(styles.date)}>{data?.date}</small>
     </div>
   );
-};
+}
 
 DashboardProgramsOverview.propTypes = {
   data: PropTypes.object

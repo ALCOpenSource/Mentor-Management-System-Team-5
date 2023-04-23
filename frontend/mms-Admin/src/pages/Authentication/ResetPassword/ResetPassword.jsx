@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./ResetPassword.module.scss";
 
 import Button from "@/components/Button/Button";
@@ -9,13 +11,11 @@ import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 
-import { useForm, Controller } from "react-hook-form";
 import { resetPasswordSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/redux/Auth/AuthSlice";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-const ResetPassword = () => {
+function ResetPassword() {
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state?.loading?.resetPasswordLoading);
@@ -37,7 +37,14 @@ const ResetPassword = () => {
     );
 
     response?.success &&
-      dispatch(showModal({ name: "successNotification", modalData: "Password Reset Successful" }));
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Password reset successful"
+          }
+        })
+      );
     reset();
   };
 
@@ -74,7 +81,7 @@ const ResetPassword = () => {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label={"Password"}
+                    label='Password'
                     placeholder=''
                     type='password'
                     error={errors?.password && errors?.password?.message}
@@ -88,7 +95,7 @@ const ResetPassword = () => {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label={"Must match your new password"}
+                    label='Must match your new password'
                     placeholder=''
                     type='password'
                     error={errors?.confirmPassword && errors?.confirmPassword?.message}
@@ -96,9 +103,7 @@ const ResetPassword = () => {
                 )}
               />
 
-              <p className={cx(styles.caption)}>
-                *Your new password must be different from previously used password.
-              </p>
+              <p className={cx(styles.caption)}>*Your new password must be different from previously used password.</p>
 
               <div className={cx(styles.submitBtnDiv, "flexRow")}>
                 <Button
@@ -114,11 +119,9 @@ const ResetPassword = () => {
         </div>
       </div>
 
-      {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default ResetPassword;

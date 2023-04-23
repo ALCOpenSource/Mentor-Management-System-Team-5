@@ -36,6 +36,25 @@ namespace mms.Infrastructure.Seeder
                 {
                     List<AppUser> users = new();
                     List<UserNotification> usersNotifications = new();
+                    List<UserPrivacy> userPrivacy = new();
+
+
+                    var user = new AppUser
+                    {
+                        About = "I am just my simple self",
+                        Id = Guid.NewGuid().ToString(),
+                        FirstName = "Samuel",
+                        LastName = "Kebede",
+                        IsActive = true,
+                        DateCreated = DateTime.Now,
+                        Email = "samuelkebede2000@gmail.com",
+                        EmailConfirmed = true,
+                        UserName = "Samuel",
+                        Country = "Nigeria",
+                        City = "Lagos",
+                        State = "Lagos"
+                    };
+
                     var user1 = new AppUser
                     {
                         Id = Guid.NewGuid().ToString(),
@@ -52,22 +71,6 @@ namespace mms.Infrastructure.Seeder
                         State = "Lagos",
                     };
 
-                    var user = new AppUser
-                    {
-                        About = "I am just my simple self",
-                        Id = Guid.NewGuid().ToString(),
-                        FirstName = "Samuel",
-                        LastName = "Kebede",
-                        IsActive = true,
-                        DateCreated = DateTime.Now,
-                        Email = "samuelkebede2000@gmail.com",
-                        EmailConfirmed = true,
-                        UserName = "Andela",
-                        Country = "Nigeria",
-                        City = "Lagos",
-                        State = "Lagos"
-                    };
-
                     var user2 = new AppUser
                     {
                         Id = Guid.NewGuid().ToString(),
@@ -77,7 +80,7 @@ namespace mms.Infrastructure.Seeder
                         DateCreated = DateTime.Now,
                         Email = "tamsay2017@gmail.com",
                         EmailConfirmed = true,
-                        UserName = "Andela",
+                        UserName = "Temitope",
                         Country = "Nigeria",
                         City = "Lagos",
                         About = "I am just my simple self",
@@ -107,6 +110,24 @@ namespace mms.Infrastructure.Seeder
                         AppUserId = user2.Id,
                     });
 
+                    userPrivacy.Add(new UserPrivacy()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AppUserId = user.Id,
+                    });
+
+                    userPrivacy.Add(new UserPrivacy()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AppUserId = user1.Id,
+                    });
+
+                    userPrivacy.Add(new UserPrivacy()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AppUserId = user2.Id,
+                    });
+
                     foreach (AppUser appUser in users)
                     {
                         await userManager.CreateAsync(appUser, Password);
@@ -114,6 +135,7 @@ namespace mms.Infrastructure.Seeder
                     }
 
                     await context.UserNotifications.AddRangeAsync(usersNotifications);
+                    await context.UserPrivacy.AddRangeAsync(userPrivacy);
                     await context.SaveChangesAsync();
                 }
             }

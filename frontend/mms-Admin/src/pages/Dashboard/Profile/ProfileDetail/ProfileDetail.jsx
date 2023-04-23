@@ -1,13 +1,13 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./Profile.detail.module.scss";
 import { Col, Container, Row } from "react-bootstrap";
+import styles from "./Profile.detail.module.scss";
 import instagramIcon from "@/assets/icons/instagram-icon.svg";
 import linkedinIcon from "@/assets/icons/linkedin-icon.svg";
 import githubIcon from "@/assets/icons/github-icon.svg";
 import twitterIcon from "@/assets/icons/twitter-icon.svg";
 
-const ProfileDetail = () => {
+function ProfileDetail() {
   return (
     <Container className={cx(styles.profileDetailContainer, "p-4 border rounded-2")}>
       <Row className='mb-2'>
@@ -15,12 +15,11 @@ const ProfileDetail = () => {
       </Row>
       <Row>
         <p className={cx(styles.bio, "mb-3 p-3")}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum cumque, tempore
-          soluta debitis delectus tenetur tempora rem, adipisci facere dolore necessitatibus
-          incidunt fuga harum similique unde nobis voluptates voluptate. Soluta dolor officia
-          laboriosam omnis quisquam atque nostrum iusto natus quae nesciunt tempora sequi impedit
-          minus distinctio, expedita veritatis nemo voluptatibus exercitationem quo eos error.
-          Maxime et quae itaque sit quod?
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum cumque, tempore soluta debitis delectus
+          tenetur tempora rem, adipisci facere dolore necessitatibus incidunt fuga harum similique unde nobis voluptates
+          voluptate. Soluta dolor officia laboriosam omnis quisquam atque nostrum iusto natus quae nesciunt tempora
+          sequi impedit minus distinctio, expedita veritatis nemo voluptatibus exercitationem quo eos error. Maxime et
+          quae itaque sit quod?
         </p>
       </Row>
       <Row className={cx(styles.addressInfo, "align-items-center mb-3")}>
@@ -112,6 +111,6 @@ const ProfileDetail = () => {
       </Row>
     </Container>
   );
-};
+}
 
 export default ProfileDetail;

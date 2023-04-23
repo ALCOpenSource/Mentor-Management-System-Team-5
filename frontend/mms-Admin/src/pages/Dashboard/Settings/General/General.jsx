@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
+import { Country, City } from "country-state-city";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./General.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import SelectField from "@/components/Select/Select";
 import TextArea from "@/components/TextArea/TextArea";
-import { Country, State, City } from "country-state-city";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
+import successNotificationImage from "@/assets/images/default-success-notification-image.png";
 
 import githubIcon from "@/assets/icons/settings-github-icon.svg";
 import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
@@ -16,11 +19,9 @@ import linkedinIcon from "@/assets/icons/settings-linkedin-icon.svg";
 import twitterIcon from "@/assets/icons/settings-twitter-icon.svg";
 import profileImage from "@/assets/images/sample-profile-image.svg";
 
-import { useForm, Controller } from "react-hook-form";
 import { settingsGeneralSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 
-const General = () => {
+function General() {
   const dispatch = useDispatch();
 
   // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
@@ -51,7 +52,6 @@ const General = () => {
   ];
 
   const [countries, setCountries] = useState([]);
-  const [state, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
@@ -74,7 +74,6 @@ const General = () => {
   };
 
   const {
-    handleSubmit,
     formState: { errors },
     control,
     setValue
@@ -83,15 +82,11 @@ const General = () => {
   const handleSelectChange = (e, name) => {
     if (name === "country") {
       const country = Country.getCountryByCode(e.target.value);
-      const state = State.getStatesOfCountry(country.isoCode).map((state) => {
-        return { value: state.isoCode, label: state.name };
-      });
       const city = City.getCitiesOfCountry(country.isoCode).map((city) => {
         return { value: city.name, label: city.name };
       });
 
       setCities(city);
-      setStates(state.length > 0 ? state : [{ value: country.isoCode, label: country.name }]);
     }
     setValue(name, e.target.value, { shouldValidate: true });
   };
@@ -119,7 +114,7 @@ const General = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label={"First Name"}
+                label='First Name'
                 placeholder=''
                 type='text'
                 error={errors?.firstName && errors?.firstName?.message}
@@ -133,7 +128,7 @@ const General = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label={"Last Name"}
+                label='Last Name'
                 placeholder=''
                 type='text'
                 error={errors?.lastName && errors?.lastName?.message}
@@ -154,8 +149,8 @@ const General = () => {
             render={({ field }) => (
               <TextArea
                 {...field}
-                placeholder={"Your Bio"}
-                label={""}
+                placeholder='Your Bio'
+                label=''
                 minHeight='150px'
                 error={errors?.bio && errors?.bio?.message}
               />
@@ -175,7 +170,7 @@ const General = () => {
             render={({ field }) => (
               <InputField
                 {...field}
-                label={"www.example.com"}
+                label='www.example.com'
                 placeholder=''
                 type='text'
                 error={errors?.website && errors?.website?.message}
@@ -197,13 +192,13 @@ const General = () => {
               render={({ field }) => (
                 <SelectField
                   {...field}
-                  defaultSelect={"Select Country"}
-                  label={""}
+                  defaultSelect='Select Country'
+                  label=''
                   options={countries}
                   error={errors?.country && errors?.country?.message}
                   onChange={(e) => handleSelectChange(e, "country")}
-                  border={"#C8C8C8"}
-                  loading={countries.length > 0 ? false : true}
+                  border='#C8C8C8'
+                  loading={!(countries.length > 0)}
                 />
               )}
             />
@@ -219,13 +214,12 @@ const General = () => {
               render={({ field }) => (
                 <SelectField
                   {...field}
-                  defaultSelect={"Select City"}
-                  label={""}
+                  defaultSelect='Select City'
+                  label=''
                   options={cities}
                   error={errors?.cities && errors?.cities?.message}
                   onChange={(e) => handleSelectChange(e, "cities")}
-                  border={"#C8C8C8"}
-                  // loading={state.length > 0 ? false : true}
+                  border='#C8C8C8'
                 />
               )}
             />
@@ -259,7 +253,6 @@ const General = () => {
                         marginbottom='0'
                         border='none'
                         label={item?.placeholder}
-                        // error={errors?.website && errors?.website?.message}
                       />
                     )}
                   />
@@ -274,18 +267,21 @@ const General = () => {
         <Button
           onClick={() =>
             dispatch(
-              showModal({ name: "successNotification", modalData: "Profile Saved Successfully" })
-            )
-          }
+              showModal({
+                name: "successNotification",
+                modalData: {
+                  title: "Profile saved successfully",
+                  image: successNotificationImage
+                }
+              })
+            )}
           title='Save Changes'
         />
       </div>
 
-      {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default General;
