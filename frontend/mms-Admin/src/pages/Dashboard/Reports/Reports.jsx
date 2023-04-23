@@ -25,6 +25,11 @@ function Reports() {
   // const displayModal = useSelector((state) => state.modal.show);
   // const modalName = useSelector((state) => state.modal.modalName);
 
+  useEffect(() => {
+    setSelectedMenuId(params.id);
+  }, [navigate, params.id]);
+
+
   const reportsCategoryArray = useMemo(
     () => [
       {
@@ -125,8 +130,6 @@ function Reports() {
 
   const handleOpenSideBar = (e, open, category) => {
     e.preventDefault();
-    console.log(e, "event");
-    console.log(open, category);
     setOpenSideBar({
       ...openSideBar,
       open,
@@ -186,7 +189,9 @@ function Reports() {
 
   const handleSelectedItem = (item) => {
     console.log(item);
-    setSelectedMenuId(item);
+    setSelectedMenuId(() => {
+      return item;
+    });
     navigate(`report-details/${item}`);
   };
 
@@ -194,11 +199,11 @@ function Reports() {
     <div className={cx(styles.reportsContainer, "flexRow")}>
       {openSideBar.open && openSideBar.category === "taskReport" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(taskReportArray)} />
+          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(taskReportArray)} activeClassName="active-report-item" />
         </div>
       ) : openSideBar.open && openSideBar.category === "programReport" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(programReportArray)} />
+          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(programReportArray)} activeClassName="active-report-item" />
         </div>
       ) : null}
 
@@ -213,10 +218,13 @@ function Reports() {
             />
             <small className={cx(styles.togglerText)}>MENU</small>
           </div>
-          <Button title='Compose Report' />
+          <Button onClick={()=> navigate("create-report")} title='Compose Report' />
         </div>
 
-        <div className={cx(styles.contentBody, "flexCol")}>
+        <div 
+        style={{ height: selectedMenuId ? "auto" : "100%" }}
+        className={cx(styles.contentBody, "flexCol")}
+        >
           {selectedMenuId ? (
             <Outlet />
           ) : (

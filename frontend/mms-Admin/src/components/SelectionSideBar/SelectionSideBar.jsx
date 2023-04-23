@@ -3,10 +3,14 @@ import cx from "classnames";
 import PropTypes from "prop-types";
 import styles from "./SelectionSideBar.module.scss";
 import useIsMobile from "@/hooks/useIsMobile";
+import { useParams } from "react-router-dom";
 
-function SelectionSideBar({ data, selectedMenuItem }) {
+function SelectionSideBar({ data, selectedMenuItem, activeClassName }) {
   const isMobile = useIsMobile();
   const sidebarRef = useRef(null);
+  const params = useParams();
+  const currentId = params?.id;
+  console.log(currentId);
 
   // const handleClickOutside = (event) => {
   //     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -48,7 +52,9 @@ function SelectionSideBar({ data, selectedMenuItem }) {
 
       <ul>
         {data.listItems.map((item, index) => (
-          <li key={index} onClick={() => handleMenuClick(item.id)}>
+          <li key={index} onClick={() => handleMenuClick(item.id)}
+          className={currentId === item.id.toString() ? activeClassName : ""}
+          >
             {item?.component}
           </li>
         ))}
@@ -59,7 +65,8 @@ function SelectionSideBar({ data, selectedMenuItem }) {
 
 SelectionSideBar.propTypes = {
   data: PropTypes.object,
-  selectedMenuItem: PropTypes.func
+  selectedMenuItem: PropTypes.func,
+  activeClassName: PropTypes.string
 };
 
 export default SelectionSideBar;

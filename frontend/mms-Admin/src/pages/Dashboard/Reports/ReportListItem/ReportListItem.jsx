@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import styles from "./ReportListItem.module.scss";
+import "./ReportListActiveItem.scss";
 
 function ReportListItem({ data }) {
   return (

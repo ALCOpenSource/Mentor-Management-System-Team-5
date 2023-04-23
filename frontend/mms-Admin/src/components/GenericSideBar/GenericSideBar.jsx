@@ -29,7 +29,7 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
   };
 
   useEffect(() => {
-    const active = data.find((menuItem) => menuItem.id.toString() === currentId);
+    const active = data.listItems.find((menuItem) => menuItem.id.toString() === currentId);
     setActiveLink(active ? active.id : "");
   }, [currentId, data]);
 
@@ -80,6 +80,7 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
         whiteSpace: open ? "normal" : "nowrap"
       }}
     >
+       <div className={cx(styles.selectionSideBarHeader, "flexCol")}>{data?.headerComponent}</div>
       {/* {isMobile && <SettingsToggler onClick={handleSidebarToggle} />} */}
       {isMobile && (
         <img
@@ -98,7 +99,7 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
           overflowX: isMobile && !open ? "hidden" : "auto"
         }}
       >
-        {data.map((item, index) => (
+        {data.listItems.map((item, index) => (
           <li
             key={index}
             onClick={() => handleMenuClick(item.id)}

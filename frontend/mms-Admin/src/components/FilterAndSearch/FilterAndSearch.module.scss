@@ -66,6 +66,7 @@
     border: 1px solid var(--green3Color);
     padding-left: 0.5rem;
     outline: none;
+    width: 100%;
   }
 }
 
@@ -91,7 +92,7 @@
 @media all and (min-width: 1200px) {
   .filterAndSearchContainer {
     gap: 1.125rem;
-    padding: 0 0.5rem 0 0;
+    padding: 0.5rem 0.5rem 0.5rem 0;
 
     .icon {
       width: 1.25rem;

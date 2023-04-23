@@ -3,11 +3,12 @@ import cx from "classnames";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 import styles from "./Tasks.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
+import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 
 import Button from "@/components/Button/Button";
 
-import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
-import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
+// import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
+// import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
 import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
@@ -19,7 +20,12 @@ function Tasks() {
   const params = useParams();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
 
-  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [openSideBar, setOpenSideBar] = useState({
+    open: false,
+    category: ""
+  });
+
+  // const [showSearchInput, setShowSearchInput] = useState(false);
 
   const menuItemsArray = [
     {
@@ -179,12 +185,46 @@ function Tasks() {
   ];
 
   const getMenuItems = () => {
-    return menuItemsArray.map((item, index) => {
+    let listItems = menuItemsArray.map((item, index) => {
       return {
         component: <TaskListItem key={index} data={item} />,
         id: item.id
       };
     });
+
+    const headerComponent = (
+      <>
+        <FilterAndSearch
+          closeSideBar={handleCloseSidebar}
+          dropdownItems={[
+            { name: "All Reports", id: 1 },
+            { name: "Assigned", id: 2 },
+            { name: "Completed", id: 3 }
+          ]}
+          searchData={handleSearchInput}
+          selectedFilterItem={handleSelectedFilterItem}
+          showCloseIcon={false}
+          inputPlaceholder='Search for tasks...'
+          showDropdown={true}
+          showFilterToggler={false}
+          reversed={true}
+        />
+      </>
+    );
+
+    return { listItems, headerComponent };
+  };
+
+  const handleSearchInput = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleSelectedFilterItem = (item) => {
+    console.log(item);
+  };
+
+  const handleCloseSidebar = () => {
+    setOpenSideBar({ open: false, category: "" });
   };
 
   const handleSelectedMenuItem = (id) => {
@@ -196,22 +236,22 @@ function Tasks() {
     <div className={cx(styles.tasksContainer, "flexCol")}>
       <section className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Tasks</h3>
-        <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
+        {/* <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
           <SearchIcon className={cx(styles.searchIcon)} onClick={() => setShowSearchInput(!showSearchInput)} />
           {showSearchInput && <input className={cx(styles.searchInput)} type='text' placeholder='Search for tasks' />}
           <SortIcon className={cx(styles.sortIcon)} />
-        </div>
+        </div> */}
         <Button title='Create New Task' onClick={() => navigate("create-task")} />
       </section>
 
       <section className={cx(styles.mainBody, "flexRow")}>
-        <div className={cx(styles.sidebarWrapper)}>
+        { <div className={cx(styles.sidebarWrapper)}>
           <GenericSideBar
             data={getMenuItems()}
             selectedMenuItem={handleSelectedMenuItem}
             activeMenuItemClass='active-task-item'
           />
-        </div>
+        </div>}
 
         <div className={cx(styles.content)}>
           {selectedMenuId ? (
