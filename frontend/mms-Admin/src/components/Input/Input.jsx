@@ -48,9 +48,11 @@ const Input = forwardRef(
             autoComplete='new-password'
             ref={ref}
           />
-          {label && <label onClick={(e) => handleLabelClick(e)} className={isActive ? "Active" : ""}>
-            {label}
-          </label>}
+          {label && (
+            <label onClick={(e) => handleLabelClick(e)} className={isActive ? "Active" : ""}>
+              {label}
+            </label>
+          )}
           {type === "password" && <img src={eyeIcon} alt='eye-icon' className='eye-icon' onClick={handleVisibility} />}
         </div>
         {error ? <span className='error'>{error}</span> : ""}

@@ -1,31 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 import styles from "./Tasks.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
-
 import Button from "@/components/Button/Button";
-
-// import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
-// import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
+import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
+import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
 import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
+import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
-
 import TaskListItem from "./TaskListItem/TaskListItem";
-
+import useIsMobile from "@/hooks/useIsMobile";
 function Tasks() {
   const navigate = useNavigate();
   const params = useParams();
+  const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
+  const [openSideBar, setOpenSideBar] = useState(false);
 
-  const [openSideBar, setOpenSideBar] = useState({
-    open: false,
-    category: ""
-  });
+  useEffect(() => {
+    isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
+  }, [isMobile]);
 
-  // const [showSearchInput, setShowSearchInput] = useState(false);
+  const [showSearchInput, setShowSearchInput] = useState(false);
 
   const menuItemsArray = [
     {
@@ -192,24 +191,22 @@ function Tasks() {
       };
     });
 
-    const headerComponent = (
-      <>
-        <FilterAndSearch
-          closeSideBar={handleCloseSidebar}
-          dropdownItems={[
-            { name: "All Reports", id: 1 },
-            { name: "Assigned", id: 2 },
-            { name: "Completed", id: 3 }
-          ]}
-          searchData={handleSearchInput}
-          selectedFilterItem={handleSelectedFilterItem}
-          showCloseIcon={false}
-          inputPlaceholder='Search for tasks...'
-          showDropdown={true}
-          showFilterToggler={false}
-          reversed={true}
-        />
-      </>
+    const headerComponent = !isMobile && (
+      <FilterAndSearch
+        closeSideBar={handleCloseSidebar}
+        dropdownItems={[
+          { name: "All", id: 1 },
+          { name: "Completed", id: 2 },
+          { name: "In-progress", id: 3 }
+        ]}
+        searchData={handleSearchInput}
+        selectedFilterItem={handleSelectedFilterItem}
+        showCloseIcon={false}
+        inputPlaceholder='Search for tasks...'
+        showDropdown={true}
+        showFilterToggler={true}
+        reversed={true}
+      />
     );
 
     return { listItems, headerComponent };
@@ -235,23 +232,37 @@ function Tasks() {
   return (
     <div className={cx(styles.tasksContainer, "flexCol")}>
       <section className={cx(styles.heading, "flexRow-space-between")}>
-        <h3 className={cx(styles.title)}>Tasks</h3>
-        {/* <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
+        <div className={cx(styles.titleAndToggler, "flexRow")}>
+          <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
+            <img
+              className={cx(styles.toggler)}
+              src={subMenuIcon}
+              alt='toggler'
+              onClick={() => setOpenSideBar(!openSideBar)}
+            />
+            <small className={cx(styles.togglerText)}>MENU</small>
+          </div>
+          <h3 className={cx(styles.title)}>Tasks</h3>
+        </div>
+        <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
           <SearchIcon className={cx(styles.searchIcon)} onClick={() => setShowSearchInput(!showSearchInput)} />
           {showSearchInput && <input className={cx(styles.searchInput)} type='text' placeholder='Search for tasks' />}
           <SortIcon className={cx(styles.sortIcon)} />
-        </div> */}
+        </div>
         <Button title='Create New Task' onClick={() => navigate("create-task")} />
       </section>
 
       <section className={cx(styles.mainBody, "flexRow")}>
-        { <div className={cx(styles.sidebarWrapper)}>
-          <GenericSideBar
-            data={getMenuItems()}
-            selectedMenuItem={handleSelectedMenuItem}
-            activeMenuItemClass='active-task-item'
-          />
-        </div>}
+        {openSideBar && (
+          <div className={cx(styles.sidebarWrapper)}>
+            <GenericSideBar
+              data={getMenuItems()}
+              selectedMenuItem={handleSelectedMenuItem}
+              activeMenuItemClass='active-task-item'
+              closeGenericSideBar={() => setOpenSideBar(false)}
+            />
+          </div>
+        )}
 
         <div className={cx(styles.content)}>
           {selectedMenuId ? (

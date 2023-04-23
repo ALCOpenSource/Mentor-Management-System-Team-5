@@ -52,8 +52,10 @@ function SelectionSideBar({ data, selectedMenuItem, activeClassName }) {
 
       <ul>
         {data.listItems.map((item, index) => (
-          <li key={index} onClick={() => handleMenuClick(item.id)}
-          className={currentId === item.id.toString() ? activeClassName : ""}
+          <li
+            key={index}
+            onClick={() => handleMenuClick(item.id)}
+            className={currentId === item.id.toString() ? activeClassName : ""}
           >
             {item?.component}
           </li>

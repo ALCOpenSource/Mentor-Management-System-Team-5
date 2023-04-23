@@ -6,7 +6,7 @@ import { useNavigate, useParams, Outlet } from "react-router-dom";
 
 import Button from "@/components/Button/Button";
 import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
-import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
+import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
@@ -28,7 +28,6 @@ function Reports() {
   useEffect(() => {
     setSelectedMenuId(params.id);
   }, [navigate, params.id]);
-
 
   const reportsCategoryArray = useMemo(
     () => [
@@ -199,11 +198,19 @@ function Reports() {
     <div className={cx(styles.reportsContainer, "flexRow")}>
       {openSideBar.open && openSideBar.category === "taskReport" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(taskReportArray)} activeClassName="active-report-item" />
+          <SelectionSideBar
+            selectedMenuItem={handleSelectedItem}
+            data={getListComponents(taskReportArray)}
+            activeClassName='active-report-item'
+          />
         </div>
       ) : openSideBar.open && openSideBar.category === "programReport" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(programReportArray)} activeClassName="active-report-item" />
+          <SelectionSideBar
+            selectedMenuItem={handleSelectedItem}
+            data={getListComponents(programReportArray)}
+            activeClassName='active-report-item'
+          />
         </div>
       ) : null}
 
@@ -212,19 +219,16 @@ function Reports() {
           <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
             <img
               className={cx(styles.toggler)}
-              src={calendarIcon}
+              src={subMenuIcon}
               alt='toggler'
               onClick={(e) => handleOpenSideBar(e, true, reportsCategoryArray[0].key)}
             />
             <small className={cx(styles.togglerText)}>MENU</small>
           </div>
-          <Button onClick={()=> navigate("create-report")} title='Compose Report' />
+          <Button onClick={() => navigate("create-report")} title='Compose Report' />
         </div>
 
-        <div 
-        style={{ height: selectedMenuId ? "auto" : "100%" }}
-        className={cx(styles.contentBody, "flexCol")}
-        >
+        <div style={{ height: selectedMenuId ? "auto" : "100%" }} className={cx(styles.contentBody, "flexCol")}>
           {selectedMenuId ? (
             <Outlet />
           ) : (

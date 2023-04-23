@@ -93,7 +93,7 @@ function FilterAndSearch({
       )}
 
       {showFilterToggler && showFilterIcon && (
-        <div className={cx(styles.filterDiv, "flexCol")}>
+        <div className={cx(styles.filterDiv, "flexCol")} style={{ order: reversed && -1 }}>
           <img src={filterIcon} alt='filter-icon' className={cx(styles.icon)} onClick={() => handleShowDropdown()} />
 
           {showCustomDropdown && (

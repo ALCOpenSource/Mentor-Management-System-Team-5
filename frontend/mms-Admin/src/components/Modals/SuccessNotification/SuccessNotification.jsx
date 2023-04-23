@@ -1,14 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-
 import cx from "classnames";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import styles from "./SuccessNotification.module.scss";
-
 import successImage from "@/assets/images/default-success-notification-image.png";
 import Button from "@/components/Button/Button";
-
 import { hideModal } from "@/redux/Modal/ModalSlice";
 
 function SuccessNotification({ show, size, modalName }) {

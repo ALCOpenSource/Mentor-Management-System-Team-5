@@ -6,7 +6,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import headerIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
-// import { ReactComponent as ReportIcon } from "@/assets/icons/reports-icon.svg";
 import reportIcon from "@/assets/icons/task-report-icon-green.png";
 import mentorsIcon from "@/assets/icons/mentor-icon-green.png";
 import mentorManagersIcon from "@/assets/icons/mentor-manager-icon-green.png";

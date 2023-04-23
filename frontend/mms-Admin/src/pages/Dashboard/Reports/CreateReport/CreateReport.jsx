@@ -5,7 +5,6 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./CreateReport.module.scss";
 import Button from "@/components/Button/Button";
-import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
@@ -14,7 +13,6 @@ import SuccessNotificationModal from "@/components/Modals/SuccessNotification/Su
 import { showModal } from "@/redux/Modal/ModalSlice";
 import { createReportSchema } from "@/helpers/validation";
 import ProgramListItem from "./ProgramListItem/ProgramListItem";
-import mentorManagerImage from "@/assets/images/reports-program-thumbnail.svg";
 import mentorImage from "@/assets/images/reports-program-thumbnail.svg";
 
 function CreateReport() {
@@ -184,16 +182,16 @@ function CreateReport() {
           <h3 className={cx(styles.title)}>Compose Report</h3>
 
           <div className={cx(styles.selectionDiv, "flexRow-space-between")}>
-             <select className={cx(styles.reportTypeSelector)} name="reportType" id="reportType">
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-              </select>
+            <select className={cx(styles.reportTypeSelector)} name='reportType' id='reportType'>
+              <option value='daily'>Daily</option>
+              <option value='weekly'>Weekly</option>
+              <option value='monthly'>Monthly</option>
+            </select>
 
-              <div className={cx(styles.wrapper, "flexRow-align-center")}>
-                <Button title='Select Program' type='secondary' onClick={(e) => handleOpenSideBar(e, true, "program")} />
-              </div>
+            <div className={cx(styles.wrapper, "flexRow-align-center")}>
+              <Button title='Select Program' type='secondary' onClick={(e) => handleOpenSideBar(e, true, "program")} />
             </div>
+          </div>
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
@@ -227,7 +225,7 @@ function CreateReport() {
               )}
             />
 
-<label htmlFor='blockers'>Major Blockers</label>
+            <label htmlFor='blockers'>Major Blockers</label>
             <Controller
               name='blockers'
               control={control}
@@ -242,7 +240,7 @@ function CreateReport() {
               )}
             />
 
-<label htmlFor='recommendations'>Major Recommendations</label>
+            <label htmlFor='recommendations'>Major Recommendations</label>
             <Controller
               name='recommendations'
               control={control}
