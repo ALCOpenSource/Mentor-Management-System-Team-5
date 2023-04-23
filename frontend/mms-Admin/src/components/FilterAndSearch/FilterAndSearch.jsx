@@ -7,11 +7,11 @@ import searchIcon from "@/assets/icons/search-icon-green.png";
 import filterIcon from "@/assets/icons/filter-icon.png";
 import closeIcon from "@/assets/icons/close-icon.png";
 
-function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeSideBar, showCloseIcon, inputPlaceholder }) {
+function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeSideBar, showCloseIcon, inputPlaceholder, showDropdown }) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [showSearchIcon, setShowSearchIcon] = useState(true);
   const [showCustomDropdown, setShowCustomDropdown] = useState(false);
-  const [showSelectDropdown, setShowSelectDropdown] = useState(false);
+  const [showSelectDropdown, setShowSelectDropdown] = useState(showDropdown);
   const [showFilterIcon, setShowFilterIcon] = useState(true);
   const [selectedFilterValue, setSelectedFilterValue] = useState("");
 
@@ -116,13 +116,15 @@ FilterAndSearch.propTypes = {
   dropdownItems: PropTypes.array,
   closeSideBar: PropTypes.func,
   showCloseIcon: PropTypes.bool,
-  inputPlaceholder: PropTypes.string
+  inputPlaceholder: PropTypes.string,
+  showDropdown: PropTypes.bool
 };
 
 FilterAndSearch.defaultProps = {
   dropdownItems: [],
   showCloseIcon: false,
-  inputPlaceholder: "Search"
+  inputPlaceholder: "Search",
+  showDropdown: false
 };
 
 export default FilterAndSearch;
