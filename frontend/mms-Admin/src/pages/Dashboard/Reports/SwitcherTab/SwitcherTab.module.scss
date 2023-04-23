@@ -1,0 +1,28 @@
+.switcherTab {
+  background-color: var(--green2Color);
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.25rem;
+
+  .tab {
+    color: var(--green3Color);
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+    font-family: var(--regular);
+    font-size: 1.125rem;
+    cursor: pointer;
+
+    &:hover {
+      // background-color: var(--green3Color);
+      // color: var(--green2Color);
+      font-family: var(--semiBold);
+    }
+  }
+
+  .activeTab {
+    background-color: var(--green3Color);
+    color: var(--green2Color);
+    font-family: var(--semiBold);
+  }
+}

@@ -203,7 +203,7 @@ function CreateTask() {
         searchData={handleSearchInput}
         selectedFilterItem={handleSelectedFilterItem}
         showCloseIcon={true}
-        inputPlaceholder="Search for mentor..."
+        inputPlaceholder='Search for mentor...'
       />
     );
 

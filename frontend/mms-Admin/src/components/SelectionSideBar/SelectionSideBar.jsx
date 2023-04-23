@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import styles from "./SelectionSideBar.module.scss";
+import useIsMobile from "@/hooks/useIsMobile";
 
 function SelectionSideBar({ data, selectedMenuItem }) {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const sidebarRef = useRef(null);
 
   // const handleClickOutside = (event) => {
@@ -12,18 +13,6 @@ function SelectionSideBar({ data, selectedMenuItem }) {
   //         setOpen(false);
   //     }
   // };
-
-  useEffect(() => {
-    const handleWindowSizeChange = () => {
-      setIsMobile(window.innerWidth <= 991);
-    };
-    handleWindowSizeChange();
-    window.addEventListener("resize", handleWindowSizeChange);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
 
   // useEffect(() => {
   //     if (isMobile && open) {
@@ -55,7 +44,7 @@ function SelectionSideBar({ data, selectedMenuItem }) {
         transition: "width 0s"
       }}
     >
-      <div className={styles.selectionSideBarHeader}>{data?.headerComponent}</div>
+      <div className={cx(styles.selectionSideBarHeader, "flexCol")}>{data?.headerComponent}</div>
 
       <ul>
         {data.listItems.map((item, index) => (

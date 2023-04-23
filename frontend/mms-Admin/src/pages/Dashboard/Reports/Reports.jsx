@@ -1,291 +1,137 @@
-import React, { useState }  from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect, useMemo } from "react";
+// import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./Reports.module.scss";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 
-
-import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
-
 import Button from "@/components/Button/Button";
-import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
-import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
-import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
+import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
-import TaskListItem from "@/pages/Dashboard/Tasks/TaskListItem/TaskListItem";
-
 import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
-import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
-import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
-import mentorImage from "@/assets/images/sample-profile-image.svg";
-
+import useIsMobile from "@/hooks/useIsMobile";
+import SwitcherTab from "@/pages/Dashboard/Reports/SwitcherTab/SwitcherTab";
+import ReportListItem from "./ReportListItem/ReportListItem";
 
 function Reports() {
-
   const navigate = useNavigate();
   const params = useParams();
+  const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
-  const [showSearchInput, setShowSearchInput] = useState(false);
+  // const [showSearchInput, setShowSearchInput] = useState(false);
 
-  const dispatch = useDispatch();
-  const displayModal = useSelector((state) => state.modal.show);
-  const modalName = useSelector((state) => state.modal.modalName);
+  // const dispatch = useDispatch();
+  // const displayModal = useSelector((state) => state.modal.show);
+  // const modalName = useSelector((state) => state.modal.modalName);
+
+  const reportsCategoryArray = useMemo(
+    () => [
+      {
+        id: 1,
+        title: "Program Report",
+        key: "programReport"
+      },
+      {
+        id: 2,
+        title: "Task Report",
+        key: "taskReport"
+      }
+    ],
+    []
+  );
+
+  const [activeTab, setActiveTab] = useState(reportsCategoryArray[0].key);
 
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
   });
 
-  const mentorsArray = [
+  useEffect(() => {
+    isMobile
+      ? setOpenSideBar({ open: false, category: "" })
+      : setOpenSideBar({ open: true, category: reportsCategoryArray[0].key });
+  }, [isMobile, reportsCategoryArray]);
+
+  const programReportArray = [
     {
       id: 1,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     },
     {
       id: 2,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     },
     {
       id: 3,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 4,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 5,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 6,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 7,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 8,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 9,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 10,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     }
   ];
 
-  const menuItemsArray = [
+  const taskReportArray = [
     {
       id: 1,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     },
     {
       id: 2,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     },
     {
       id: 3,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     },
     {
       id: 4,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     },
     {
       id: 5,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     },
     {
       id: 6,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 7,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 8,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 9,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 10,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 11,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 12,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 13,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 14,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 15,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 16,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 17,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 18,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 19,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 20,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 21,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 22,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now last",
-      icon: cardIcon,
-      calendarIcon
+      title: "Google Africa Scholarship",
+      author: "Ibrahim Kabir",
+      date: "19th - 25th Oct 23",
+      icon: cardIcon
     }
   ];
-
-  const getMenuItems = () => {
-    return menuItemsArray.map((item, index) => {
-      return {
-        component: <TaskListItem key={index} data={item} />,
-        id: item.id
-      };
-    });
-  };
-
-  const handleSelectedMenuItem = (id) => {
-    setSelectedMenuId(id);
-    navigate(`task-details/${id}`);
-  };
-
 
   const handleOpenSideBar = (e, open, category) => {
     e.preventDefault();
-    setOpenSideBar({ open, category });
+    console.log(e, "event");
+    console.log(open, category);
+    setOpenSideBar({
+      ...openSideBar,
+      open,
+      category
+    });
   };
 
   const handleSearchInput = (e) => {
@@ -300,27 +146,39 @@ function Reports() {
     setOpenSideBar({ open: false, category: "" });
   };
 
+  const handleSelectedTab = (tab) => {
+    setOpenSideBar({ open: true, category: tab.key });
+    setActiveTab(tab.key);
+  };
+
   const getListComponents = (data) => {
     const listItems = data.map((item, index) => {
       return {
-        component: <PersonelComponent key={index} data={item} />,
+        component: <ReportListItem key={index} data={item} />,
         id: item.id
       };
     });
 
     const headerComponent = (
-      <FilterAndSearch
-        closeSideBar={handleCloseSidebar}
-        dropdownItems={[
-          { name: "All", id: 1 },
-          { name: "Mentors", id: 2 },
-          { name: "Mentor Managers", id: 3 }
-        ]}
-        searchData={handleSearchInput}
-        selectedFilterItem={handleSelectedFilterItem}
-        showCloseIcon={true}
-        inputPlaceholder="Search for mentor..."
-      />
+      <>
+        <SwitcherTab data={reportsCategoryArray} selectedTab={handleSelectedTab} activeTab={activeTab} />
+
+        <FilterAndSearch
+          closeSideBar={handleCloseSidebar}
+          dropdownItems={[
+            { name: "All Reports", id: 1 },
+            { name: "Assigned", id: 2 },
+            { name: "Completed", id: 3 }
+          ]}
+          searchData={handleSearchInput}
+          selectedFilterItem={handleSelectedFilterItem}
+          showCloseIcon={false}
+          inputPlaceholder='Search for report...'
+          showDropdown={true}
+          showFilterToggler={false}
+          reversed={true}
+        />
+      </>
     );
 
     return { listItems, headerComponent };
@@ -328,47 +186,49 @@ function Reports() {
 
   const handleSelectedItem = (item) => {
     console.log(item);
+    setSelectedMenuId(item);
+    navigate(`report-details/${item}`);
   };
 
-
   return (
-  <div className={cx(styles.reportsContainer, "flexRow")}>
-
-    {openSideBar.open && openSideBar.category === "mentor-manager" ? (
+    <div className={cx(styles.reportsContainer, "flexRow")}>
+      {openSideBar.open && openSideBar.category === "taskReport" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents([])} />
+          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(taskReportArray)} />
         </div>
-      ) : openSideBar.open && openSideBar.category === "mentor" ? (
+      ) : openSideBar.open && openSideBar.category === "programReport" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
+          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(programReportArray)} />
         </div>
       ) : null}
-      
 
-        <div className={cx(styles.content, "flexCol")}>
-          <div className={cx(styles.heading, "flexRow")}>
-            <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
-            <img className={cx(styles.toggler)} src={calendarIcon} alt="toggler" onClick={(e) => handleOpenSideBar(e, true, "mentor")} />
+      <div className={cx(styles.content, "flexCol")}>
+        <div className={cx(styles.heading, "flexRow")}>
+          <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
+            <img
+              className={cx(styles.toggler)}
+              src={calendarIcon}
+              alt='toggler'
+              onClick={(e) => handleOpenSideBar(e, true, reportsCategoryArray[0].key)}
+            />
             <small className={cx(styles.togglerText)}>MENU</small>
-            </div>
-          <Button title='Compose Report' />
           </div>
+          <Button title='Compose Report' />
+        </div>
 
-          <div className={cx(styles.contentBody, "flexCol")}>
-   {selectedMenuId ? (
+        <div className={cx(styles.contentBody, "flexCol")}>
+          {selectedMenuId ? (
             <Outlet />
           ) : (
             <div className={cx(styles.emptySelectionDiv, "flexCol-fully-centered")}>
               <img src={emptySelectionIcon} alt='empty-selection-icon' />
               <p>No item selected yet </p>
-              <p>Select an item from the list to view task details</p>
+              <p>Select an item from the list to view report details</p>
             </div>
           )}
-          </div>
-       
         </div>
-    
-  </div>  
+      </div>
+    </div>
   );
 }
 
