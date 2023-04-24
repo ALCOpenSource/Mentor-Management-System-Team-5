@@ -110,6 +110,21 @@
             border-radius: 50%;
             cursor: pointer;
           }
+
+          .profileImageText {
+            font-size: 1.25rem;
+            color: var(--primaryTextColor);
+            font-family: var(--regular);
+            display: inline-block;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            line-height: 3rem;
+            text-align: center;
+            margin: 0rem;
+            background-color: var(--green3Color);
+            cursor: pointer;
+          }
         }
       }
     }

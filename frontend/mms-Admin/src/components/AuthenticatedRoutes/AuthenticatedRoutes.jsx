@@ -1,22 +1,23 @@
 import React from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { isAuthenticated } from "@/utils/auth";
+import { isAuthenticated, isExpired, getToken } from "@/utils/auth";
+import { refreshAccessToken } from "@/redux/Auth/AuthSlice";
 
 function AuthenticatedRoutes({ children, roles }) {
   const location = useLocation();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const checkIsAuthenticated = isAuthenticated();
 
-  // const token = getToken();
+  const token = getToken();
   const userDetails = JSON.parse(localStorage.getItem("userData"));
 
-  // if (isExpired(token)) {
-  //   const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
-  //   dispatch(refreshLogin({ refreshToken: refreshToken }));
-  // }
+  if (isExpired(token)) {
+    const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
+    dispatch(refreshAccessToken({ refreshToken: refreshToken }));
+  }
 
   const userHasRequiredRole = !!(userDetails && roles.includes(userDetails?.roles.toString().toLowerCase()));
 

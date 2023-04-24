@@ -1,5 +1,7 @@
 import jwtDecode from "jwt-decode";
 import { setAuthToken } from "./setAuthToken";
+import store from "@/redux/store";
+import { refreshAccessToken } from "@/redux/Auth/AuthSlice";
 
 export const isAuthenticated = () => {
   const token = getToken();
@@ -8,6 +10,14 @@ export const isAuthenticated = () => {
 
 export const getToken = () => {
   const token = localStorage.getItem("accessToken");
+  if (token) {
+    return JSON.parse(token);
+  }
+  return null;
+};
+
+export const getRefreshToken = () => {
+  const token = localStorage.getItem("refreshToken");
   if (token) {
     return JSON.parse(token);
   }
@@ -53,7 +63,7 @@ export const login = (token) => {
 export const logout = () => {
   localStorage.clear();
   setAuthToken("");
-  window.location.href = "/login";
+  window.location.href = "/";
 };
 
 export const checkAuth = () => {
@@ -62,7 +72,7 @@ export const checkAuth = () => {
     const decoded = jwtDecode(localStorage.accessToken);
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
-      logout();
+      store.dispatch(refreshAccessToken());
     }
   }
 };
