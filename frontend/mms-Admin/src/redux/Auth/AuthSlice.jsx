@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { loginApi, forgotPasswordApi, resetPasswordApi } from "../api/auth";
+import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi } from "../api/auth";
 
-import { setToken, setRefreshToken } from "@/utils/auth";
-import { setAuthToken } from "@/utils/setAuthToken";
+import { setToken, setRefreshToken, getRefreshToken, logout } from "@/utils/auth";
 
 import { loginLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
 
@@ -11,7 +10,8 @@ const initialState = {
   error: false,
   loginData: {},
   forgotPasswordData: {},
-  resetPasswordData: {}
+  resetPasswordData: {},
+  refreshAccessTokenData: {}
 };
 
 export const authSlice = createSlice({
@@ -34,13 +34,18 @@ export const authSlice = createSlice({
 
     resetPasswordAction: (state, action) => {
       state.resetPasswordData = action.payload;
+    },
+
+    refreshAccessTokenAction: (state, action) => {
+      state.refreshAccessTokenData = action.payload;
     }
   }
 });
 export default authSlice.reducer;
 
 // Actions
-const { hasError, loginAction, forgotPasswordAction, resetPasswordAction } = authSlice.actions;
+const { hasError, loginAction, forgotPasswordAction, resetPasswordAction, refreshAccessTokenAction } =
+  authSlice.actions;
 
 export const login = (data) => async (dispatch) => {
   dispatch(loginLoading(true));
@@ -66,13 +71,11 @@ export const forgotPassword = (data) => async (dispatch) => {
 
   try {
     const response = await forgotPasswordApi(data);
-    console.log(response, "forgotPassword response");
     toast.success(response?.data?.data?.message);
     dispatch(forgotPasswordLoading(false));
     dispatch(forgotPasswordAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    console.log(e, "forgotPassword error");
     toast.error(e?.response?.data);
     dispatch(forgotPasswordLoading(false));
     dispatch(hasError(e?.response?.data));
@@ -96,7 +99,17 @@ export const resetPassword = (data) => async (dispatch) => {
   }
 };
 
-export const logout = () => () => {
-  localStorage.clear();
-  setAuthToken("");
+export const refreshAccessToken = () => async (dispatch) => {
+  const refreshToken = getRefreshToken();
+  try {
+    const response = await refreshAccessTokenApi(refreshToken);
+    setToken(response?.data?.data?.token);
+    setRefreshToken(response?.data?.data?.refreshToken);
+    localStorage.setItem("userData", JSON.stringify(response?.data?.data));
+    dispatch(refreshAccessTokenAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    dispatch(hasError(e?.response?.data));
+    logout();
+  }
 };

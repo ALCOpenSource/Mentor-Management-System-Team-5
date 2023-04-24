@@ -14,6 +14,9 @@ import { loginSchema } from "@/helpers/validation";
 import { login } from "@/redux/Auth/AuthSlice";
 import Button from "@/components/Button/Button";
 
+// import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+// import axios from "axios";
+
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,6 +44,37 @@ function Login() {
   const handleForgotPassword = () => {
     navigate("/forgot-password");
   };
+
+  // Google Login
+  // const [ user, setUser ] = useState([]);
+  // const [ profile, setProfile ] = useState([]);
+
+  // console.log(user, "google");
+
+  // const loginGoogle = useGoogleLogin({
+  //     onSuccess: (codeResponse) => setUser(codeResponse),
+  //     onError: (error) => console.log("Login Failed:", error)
+  // });
+
+  // useEffect(
+  //   () => {
+  //       if (user) {
+  //           axios
+  //               .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+  //                   headers: {
+  //                       Authorization: `Bearer ${user.access_token}`,
+  //                       Accept: "application/json"
+  //                   }
+  //               })
+  //               .then((res) => {
+  //                   setProfile(res.data);
+  //               })
+  //               .catch((err) => console.log(err));
+  //       }
+  //   },
+  //   [ user ]
+  // );
+  // console.log(profile, "user profile");
 
   return (
     <div className={cx(styles.loginContainer, "row")}>
@@ -99,6 +133,7 @@ function Login() {
               </div>
             </form>
           </div>
+          {/* <button onClick={() => loginGoogle()}>Sign in with Google 🚀 </button> */}
         </div>
       </div>
     </div>

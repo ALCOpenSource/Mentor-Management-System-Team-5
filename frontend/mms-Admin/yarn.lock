@@ -942,6 +942,11 @@
   dependencies:
     "@swc/helpers" "^0.4.14"
 
+"@react-oauth/google@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.10.0.tgz#a06b1ac8877b623538d11111ec2792ab8017b794"
+  integrity sha512-uyMFAv3i3PdYeAuuyL8wJuzbKi5sxRuz+68DKPKvonK1IinIeEW1UibkipxHiaSEZxubQUSwcVuMgj8dbWw4+g==
+
 "@reduxjs/toolkit@^1.9.3":
   version "1.9.5"
   resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.9.5.tgz#d3987849c24189ca483baa7aa59386c8e52077c4"
