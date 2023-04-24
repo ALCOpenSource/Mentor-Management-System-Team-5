@@ -12,13 +12,13 @@ checkAuth();
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_WEB_CLIENT_ID} >
-    <ProSidebarProvider>
-      <Provider store={store}>
-        <ToastContainer autoClose={3000} />
-        <Routes />
-      </Provider>
-    </ProSidebarProvider>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_WEB_CLIENT_ID}>
+      <ProSidebarProvider>
+        <Provider store={store}>
+          <ToastContainer autoClose={3000} />
+          <Routes />
+        </Provider>
+      </ProSidebarProvider>
     </GoogleOAuthProvider>
   );
 }
