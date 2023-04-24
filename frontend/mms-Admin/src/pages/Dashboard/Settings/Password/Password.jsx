@@ -12,6 +12,8 @@ import ForgotPasswordModal from "@/components/Modals/ForgotPassword/ForgotPasswo
 import { showModal } from "@/redux/Modal/ModalSlice";
 
 import { settingsPasswordSchema } from "@/helpers/validation";
+import { changePassword } from "@/redux/Settings/SettingsSlice";
+
 
 function Password() {
   const dispatch = useDispatch();
@@ -28,12 +30,30 @@ function Password() {
   };
 
   const {
+    handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm({ defaultValues, resolver, mode: "all" });
+
+  const handleChangePassword = async (data) => {
+    const response = await dispatch(changePassword(data));
+    if(response?.success) {
+    dispatch(
+      showModal({
+        name: "successNotification",
+        modalData: {
+          title: "Password changed successfully"
+        }
+      })
+    );
+    reset();
+    }
+  };
 
   return (
     <div className={cx(styles.passwordContainer, "flexCol")}>
+      <form onSubmit={handleSubmit((data) => handleChangePassword(data))}>
       <div className={cx(styles.wrapper, styles.currentPasswordDiv)}>
         <div className={cx(styles.leftSection, styles.titleDiv)}>
           <h6 className={cx(styles.title)}>Current password</h6>
@@ -99,19 +119,11 @@ function Password() {
 
       <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
         <Button
-          onClick={() =>
-            dispatch(
-              showModal({
-                name: "successNotification",
-                modalData: {
-                  title: "Password changed successfully"
-                }
-              })
-            )}
+          onClick={() => handleSubmit((data) => handleChangePassword(data))}
           title='Save new password'
         />
       </div>
-
+      </form>
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
         <p onClick={() => dispatch(showModal({ name: "forgotPassword", modalData: "" }))}>Forgot Password?</p>
       </div>
