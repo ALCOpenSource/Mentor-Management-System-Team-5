@@ -18,7 +18,6 @@ import Mentors from "@/pages/Dashboard/Mentors/Mentors";
 import Messages from "@/pages/Dashboard/Messages/Messages";
 import Profile from "@/pages/Dashboard/Profile/Profile";
 import Programs from "@/pages/Dashboard/Programs/Programs";
-import Reports from "@/pages/Dashboard/Reports/Reports";
 
 // Settings
 import Settings from "@/pages/Dashboard/Settings/Settings";
@@ -35,6 +34,11 @@ import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
 import CreateTask from "@/pages/Dashboard/Tasks/CreateTask/CreateTask";
 import EditTask from "@/pages/Dashboard/Tasks/EditTask/EditTask";
+
+// Reports
+import Reports from "@/pages/Dashboard/Reports/Reports";
+import CreateReport from "@/pages/Dashboard/Reports/CreateReport/CreateReport";
+import ReportDetails from "@/pages/Dashboard/Reports/ReportDetails/ReportDetails";
 
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
@@ -75,7 +79,12 @@ function RoutesComponent() {
           <Route path='messages' element={<Messages />} />
           <Route index path='profile' element={<Profile />} />
           <Route path='programs' element={<Programs />} />
-          <Route path='reports' element={<Reports />} />
+          <Route path='reports'>
+            <Route path='' element={<Reports />}>
+              <Route path='report-details/:id' element={<ReportDetails />} />
+            </Route>
+            <Route path='create-report' element={<CreateReport />} />
+          </Route>
           <Route path='tasks'>
             <Route path='' element={<Tasks />}>
               <Route path='task-details/:id' element={<TaskDetails />} />

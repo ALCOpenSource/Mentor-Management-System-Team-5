@@ -11,6 +11,9 @@
     overflow-y: auto;
 
     .heading {
+      position: sticky;
+      top: 0;
+
       .title {
         margin: 0;
         font-family: var(--semiBold);
@@ -20,6 +23,8 @@
     }
 
     .formWrapper {
+      overflow-y: auto;
+
       form {
         label {
           font-family: var(--bold);
@@ -80,9 +85,6 @@
   }
 
   .sideBarSection {
-    // position: relative;
-    // overflow: auto;
-    // height: 100%;
     width: auto;
   }
 }
@@ -107,6 +109,8 @@
 
 @media all and (min-width: 992px) {
   .createTaskContainer {
+    padding: 1rem 2rem;
+
     .mainSection {
       gap: 2.5rem;
 

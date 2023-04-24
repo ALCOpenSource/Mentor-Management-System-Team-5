@@ -13,14 +13,20 @@
       font-family: var(--semiBold);
       color: var(--blackTextColor);
     }
+  }
 
-    .headerImage {
+  .modalBody {
+    align-items: center;
+
+    .modalImage {
       width: 10rem;
     }
   }
 
-  .modalBody {
+  .modalFooter {
     .btnDiv {
+      gap: 1.5rem;
+
       button {
         width: 100%;
       }
@@ -37,14 +43,18 @@
       .headerTitle {
         font-size: 1.5rem;
       }
+    }
 
-      .headerImage {
+    .modalBody {
+      .modalImage {
         width: 15rem;
       }
     }
 
-    .modalBody {
+    .modalFooter {
       .btnDiv {
+        gap: 1rem;
+
         button {
           width: fit-content;
         }

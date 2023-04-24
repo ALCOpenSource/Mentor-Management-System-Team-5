@@ -1,19 +1,46 @@
-.TasksContainer {
+.tasksContainer {
   gap: 1rem;
   height: calc(100dvh - var(--topNavbarHeight));
   overflow: hidden;
 
   .heading {
-    padding: 1rem 1rem 0 3rem;
+    padding: 1rem 0.5rem 0 0.5rem;
     flex-wrap: wrap;
     gap: 1rem;
+    align-items: flex-end;
     align-items: center;
+    position: sticky;
+    top: 0;
 
-    .title {
-      margin: 0;
-      font-family: var(--semiBold);
-      color: var(--blackTextColor);
-      font-size: 1.5rem;
+    .titleAndToggler {
+      gap: 0.25rem;
+      align-items: center;
+
+      .togglerDiv {
+        gap: 0.125rem;
+        cursor: pointer;
+
+        .toggler {
+          width: 0.875rem;
+        }
+
+        .togglerText {
+          font-family: var(--regular);
+          font-size: 0.5rem;
+          color: var(--primaryColor);
+          line-height: 1;
+          margin: 0;
+        }
+      }
+
+      .title {
+        margin: 0;
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        font-size: 1.5rem;
+        line-height: 1;
+        padding: 0;
+      }
     }
 
     .searchSortDiv {
@@ -43,22 +70,20 @@
 
   .mainBody {
     position: relative;
-    overflow: auto;
+    overflow-y: auto;
     height: 100%;
-    padding-right: 0.125rem;
+    padding: 0.5rem;
 
     .sidebarWrapper {
       height: 100%;
-      // overflow-y: auto;
     }
 
     .content {
-      overflow: auto;
+      overflow-y: auto;
+      height: fit-content;
       border: 1px solid #e6e6e6;
       border-radius: 0.25rem;
-      padding: 1rem 0.5rem 2rem 1rem;
       width: 100%;
-      margin-bottom: 1rem;
 
       .emptySelectionDiv {
         height: 100%;
@@ -94,9 +119,11 @@
 }
 
 @media all and (min-width: 768px) {
-  .TasksContainer {
+  .tasksContainer {
+    padding: 2rem;
+
     .heading {
-      padding: 1rem 1rem 0 3rem;
+      padding: 0;
       flex-wrap: nowrap;
 
       .searchSortDiv {
@@ -110,27 +137,42 @@
 
     .mainBody {
       gap: 1rem;
-      padding-right: 1rem;
-
-      .content {
-        padding: 1.5rem;
-      }
+      padding: 0;
     }
   }
 }
 
 @media all and (min-width: 992px) {
-  .TasksContainer {
+  .tasksContainer {
+    padding: 1.5rem;
+
     .heading {
-      padding: 1rem 2rem 0 2rem;
+      .titleAndToggler {
+        .togglerDiv {
+          display: none;
+        }
+      }
+
+      .searchSortDiv {
+        display: none;
+      }
+
+      button {
+        margin-left: auto;
+      }
     }
 
     .mainBody {
-      gap: 1rem;
-      padding-right: 1rem;
+      gap: 0.25rem;
+      height: 100%;
+
+      .sidebarWrapper {
+        height: 100%;
+      }
 
       .content {
-        padding: 1rem;
+        overflow-y: auto;
+        height: 100%;
 
         .emptySelectionDiv {
           img {
@@ -144,39 +186,9 @@
 }
 
 @media all and (min-width: 1200px) {
-  .TasksContainer {
-    .heading {
-      padding: 1.5rem 2rem 0 2rem;
-
-      .title {
-        margin-right: 9rem;
-      }
-
-      .searchSortDiv {
-        justify-content: flex-start;
-        position: relative;
-        gap: 0.875rem;
-
-        .searchInput {
-          position: absolute;
-          transform: translateX(-105%);
-          width: 9rem;
-        }
-      }
-
-      button {
-        margin-left: auto;
-      }
-    }
-
+  .tasksContainer {
     .mainBody {
-      gap: 0.5rem;
-      padding-right: 2rem;
-      padding-left: 2rem;
-
-      .content {
-        padding: 1rem;
-      }
+      gap: 0.75rem;
     }
   }
 }

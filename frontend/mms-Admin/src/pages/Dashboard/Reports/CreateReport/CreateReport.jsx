@@ -3,24 +3,19 @@ import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import styles from "./CreateTask.module.scss";
+import styles from "./CreateReport.module.scss";
 import Button from "@/components/Button/Button";
-import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
-import successImage from "@/assets/images/create-task-success-image.svg";
+import { createReportSchema } from "@/helpers/validation";
+import ProgramListItem from "./ProgramListItem/ProgramListItem";
+import mentorImage from "@/assets/images/reports-program-thumbnail.svg";
 
-import { createTaskSchema } from "@/helpers/validation";
-
-import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
-import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
-import mentorImage from "@/assets/images/sample-profile-image.svg";
-
-function CreateTask() {
+function CreateReport() {
   const dispatch = useDispatch();
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -103,49 +98,13 @@ function CreateTask() {
     }
   ];
 
-  const mentorManagersArray = [
-    {
-      id: 1,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 2,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 3,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 4,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 5,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
-
-  const resolver = yupResolver(createTaskSchema);
+  const resolver = yupResolver(createReportSchema);
 
   const defaultValues = {
     title: "",
-    details: ""
+    blockers: "",
+    achievements: "",
+    recommendations: ""
   };
 
   const {
@@ -160,8 +119,7 @@ function CreateTask() {
       showModal({
         name: "successNotification",
         modalData: {
-          title: "Task created successfully",
-          image: successImage
+          title: "Report submitted successfully"
         }
       })
     );
@@ -187,7 +145,7 @@ function CreateTask() {
   const getListComponents = (data) => {
     const listItems = data.map((item, index) => {
       return {
-        component: <PersonelComponent key={index} data={item} />,
+        component: <ProgramListItem key={index} data={item} />,
         id: item.id
       };
     });
@@ -203,7 +161,10 @@ function CreateTask() {
         searchData={handleSearchInput}
         selectedFilterItem={handleSelectedFilterItem}
         showCloseIcon={true}
-        inputPlaceholder='Search for mentor...'
+        inputPlaceholder='Search for programs...'
+        showDropdown={false}
+        showFilterToggler={false}
+        show
       />
     );
 
@@ -215,10 +176,22 @@ function CreateTask() {
   };
 
   return (
-    <div className={cx(styles.createTaskContainer, "flexRow")}>
+    <div className={cx(styles.createReportContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
-        <div className={cx(styles.heading, "flexRow")}>
-          <h3 className={cx(styles.title)}>New Task</h3>
+        <div className={cx(styles.heading, "flexCol")}>
+          <h3 className={cx(styles.title)}>Compose Report</h3>
+
+          <div className={cx(styles.selectionDiv, "flexRow-space-between")}>
+            <select className={cx(styles.reportTypeSelector)} name='reportType' id='reportType'>
+              <option value='daily'>Daily</option>
+              <option value='weekly'>Weekly</option>
+              <option value='monthly'>Monthly</option>
+            </select>
+
+            <div className={cx(styles.wrapper, "flexRow-align-center")}>
+              <Button title='Select Program' type='secondary' onClick={(e) => handleOpenSideBar(e, true, "program")} />
+            </div>
+          </div>
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
@@ -230,7 +203,6 @@ function CreateTask() {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label=''
                   placeholder='Enter a title'
                   type='text'
                   error={errors?.title && errors?.title?.message}
@@ -238,51 +210,57 @@ function CreateTask() {
               )}
             />
 
-            <label htmlFor='details'>Details</label>
+            <label htmlFor='achievements'>Major Achievements</label>
             <Controller
-              name='details'
+              name='achievements'
               control={control}
               render={({ field }) => (
                 <TextArea
                   {...field}
-                  placeholder='Enter task details'
+                  placeholder='Enter details'
                   label=''
                   minHeight='150px'
-                  error={errors?.details && errors?.details?.message}
+                  error={errors?.achievements && errors?.achievements?.message}
                 />
               )}
             />
 
-            <div className={cx(styles.selectionDiv, "flexRow-space-between")}>
-              <div className={cx(styles.wrapper, "flexRow-align-center")}>
-                <div className={cx(styles.leftSide, "flexCol")}>
-                  <h6 className={cx(styles.title)}>Add Mentor Manager</h6>
-                  <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>10 selected</span>
-                    <ClearListIcon />
-                  </div>
-                </div>
-                <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor-manager")} />
-              </div>
+            <label htmlFor='blockers'>Major Blockers</label>
+            <Controller
+              name='blockers'
+              control={control}
+              render={({ field }) => (
+                <TextArea
+                  {...field}
+                  placeholder='Enter details'
+                  label=''
+                  minHeight='150px'
+                  error={errors?.blockers && errors?.blockers?.message}
+                />
+              )}
+            />
 
-              <div className={cx(styles.wrapper, "flexRow-align-center")}>
-                <div className={cx(styles.leftSide, "flexCol")}>
-                  <h6 className={cx(styles.title)}>Add Mentor</h6>
-                  <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>5 selected</span>
-                    <ClearListIcon />
-                  </div>
-                </div>
-                <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor")} />
-              </div>
-            </div>
+            <label htmlFor='recommendations'>Major Recommendations</label>
+            <Controller
+              name='recommendations'
+              control={control}
+              render={({ field }) => (
+                <TextArea
+                  {...field}
+                  placeholder='Enter task recommendations'
+                  label=''
+                  minHeight='150px'
+                  error={errors?.recommendations && errors?.recommendations?.message}
+                />
+              )}
+            />
 
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
                 onClick={handleSubmit((data) => sendMessage(data))}
                 // loading={loading}
                 // disabled={loading}
-                title='Create Task'
+                title='Submit Report'
                 type='primary'
               />
             </div>
@@ -290,11 +268,7 @@ function CreateTask() {
         </div>
       </div>
 
-      {openSideBar.open && openSideBar.category === "mentor-manager" ? (
-        <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorManagersArray)} />
-        </div>
-      ) : openSideBar.open && openSideBar.category === "mentor" ? (
+      {openSideBar.open && openSideBar.category === "program" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
         </div>
@@ -305,4 +279,4 @@ function CreateTask() {
   );
 }
 
-export default CreateTask;
+export default CreateReport;

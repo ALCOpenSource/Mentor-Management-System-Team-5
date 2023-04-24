@@ -3,22 +3,15 @@ import cx from "classnames";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import styles from "./GenericSideBar.module.scss";
-// import { ReactComponent as SettingsToggler } from "@/assets/icons/settings-toggler-icon.svg";
-import searchIcon from "@/assets/icons/settings-toggler-icon.svg";
+import useIsMobile from "@/hooks/useIsMobile";
 
-function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
+function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGenericSideBar }) {
   const params = useParams();
   const [activeLink, setActiveLink] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [currentSideBarPosition, setCurrentSideBarPosition] = useState(0);
+  const isMobile = useIsMobile();
+  const [open, setOpen] = useState(true);
   const currentId = params?.id;
-
   const sidebarRef = useRef(null);
-
-  const handleSidebarToggle = () => {
-    setOpen(!open);
-  };
 
   const handleClickOutside = (event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -27,26 +20,9 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
   };
 
   useEffect(() => {
-    const active = data.find((menuItem) => menuItem.id.toString() === currentId);
+    const active = data.listItems.find((menuItem) => menuItem.id.toString() === currentId);
     setActiveLink(active ? active.id : "");
   }, [currentId, data]);
-
-  useEffect(() => {
-    const handleWindowSizeChange = () => {
-      setIsMobile(window.innerWidth <= 991);
-    };
-
-    handleWindowSizeChange();
-
-    window.addEventListener("resize", handleWindowSizeChange);
-
-    const currentHeight = sidebarRef.current.getBoundingClientRect();
-    setCurrentSideBarPosition(currentHeight.top);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
 
   useEffect(() => {
     if (isMobile && open) {
@@ -62,15 +38,12 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
     };
   }, [isMobile, open]);
 
-  const sidebarWidth = isMobile ? (open ? "100%" : "50px") : "250px";
-  const sidebarHeight = open ? "100%" : "100%";
+  const sidebarWidth = isMobile ? "100%" : "300px";
 
   const handleMenuClick = (itemId) => {
     if (isMobile && open) {
       selectedMenuItem(itemId);
-      setOpen(false);
-    } else if (isMobile && !open) {
-      setOpen(true);
+      closeGenericSideBar();
     } else {
       selectedMenuItem(itemId);
     }
@@ -82,33 +55,15 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
       className={cx(styles.genericSideBarContainer, "flexCol")}
       style={{
         width: sidebarWidth,
-        height: sidebarHeight,
-        position: open ? "fixed" : "relative",
-        top: open ? currentSideBarPosition : "0",
-        transition: "width 0s",
-        overflowX: isMobile && !open ? "hidden" : "auto",
-        whiteSpace: open ? "normal" : "nowrap"
+        position: isMobile ? "absolute" : "relative",
+        transition: "width 0s"
       }}
     >
-      {/* {isMobile && <SettingsToggler onClick={handleSidebarToggle} />} */}
-      {isMobile && (
-        <img
-          style={{
-            padding: open ? "0 0 0 1rem" : "0 0 0 0.5rem"
-          }}
-          className={cx(styles.toggler)}
-          onClick={handleSidebarToggle}
-          src={searchIcon}
-          alt='toggler'
-        />
+      {data?.headerComponent && (
+        <div className={cx(styles.genericSideBarHeader, "flexCol")}>{data?.headerComponent}</div>
       )}
-      <ul
-        style={{
-          padding: open ? "0 1rem" : "0",
-          overflowX: isMobile && !open ? "hidden" : "auto"
-        }}
-      >
-        {data.map((item, index) => (
+      <ul>
+        {data.listItems.map((item, index) => (
           <li
             key={index}
             onClick={() => handleMenuClick(item.id)}
@@ -125,7 +80,8 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass }) {
 GenericSideBar.propTypes = {
   data: PropTypes.array,
   selectedMenuItem: PropTypes.func,
-  activeMenuItemClass: PropTypes.string
+  activeMenuItemClass: PropTypes.string,
+  closeGenericSideBar: PropTypes.func
 };
 
 export default GenericSideBar;

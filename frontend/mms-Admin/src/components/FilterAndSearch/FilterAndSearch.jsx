@@ -7,11 +7,21 @@ import searchIcon from "@/assets/icons/search-icon-green.png";
 import filterIcon from "@/assets/icons/filter-icon.png";
 import closeIcon from "@/assets/icons/close-icon.png";
 
-function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeSideBar }) {
+function FilterAndSearch({
+  searchData,
+  selectedFilterItem,
+  dropdownItems,
+  closeSideBar,
+  showCloseIcon,
+  inputPlaceholder,
+  showDropdown,
+  showFilterToggler,
+  reversed
+}) {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [showSearchIcon, setShowSearchIcon] = useState(true);
   const [showCustomDropdown, setShowCustomDropdown] = useState(false);
-  const [showSelectDropdown, setShowSelectDropdown] = useState(false);
+  const [showSelectDropdown, setShowSelectDropdown] = useState(showDropdown);
   const [showFilterIcon, setShowFilterIcon] = useState(true);
   const [selectedFilterValue, setSelectedFilterValue] = useState("");
 
@@ -41,18 +51,16 @@ function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeS
   };
 
   return (
-    <div className={cx(styles.filterAndSearchContainer, "flexRow-align-center")}>
+    <div
+      className={cx(styles.filterAndSearchContainer, "flexRow-align-center")}
+      style={reversed ? { flexDirection: "row-reverse", justifyContent: "space-between" } : { flexDirection: "row" }}
+    >
       <div
         className={cx(styles.inputDiv, "flexRow-align-center")}
-        style={{ visibility: showSearchInput ? "visible" : "hidden" }}
+        style={{ display: showSearchInput ? "flex" : "none", flexDirection: reversed && "row" }}
       >
         <img src={searchIcon} alt='search-icon' className={cx(styles.icon)} />
-        <input
-          onChange={searchData}
-          className={cx(styles.searchInput)}
-          type='text'
-          placeholder='Search for mentor...'
-        />
+        <input onChange={searchData} className={cx(styles.searchInput)} type='text' placeholder={inputPlaceholder} />
 
         <img
           src={closeIcon}
@@ -84,8 +92,8 @@ function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeS
         </select>
       )}
 
-      {showFilterIcon && (
-        <div className={cx(styles.filterDiv, "flexCol")}>
+      {showFilterToggler && showFilterIcon && (
+        <div className={cx(styles.filterDiv, "flexCol")} style={{ order: reversed && -1 }}>
           <img src={filterIcon} alt='filter-icon' className={cx(styles.icon)} onClick={() => handleShowDropdown()} />
 
           {showCustomDropdown && (
@@ -105,7 +113,7 @@ function FilterAndSearch({ searchData, selectedFilterItem, dropdownItems, closeS
         </div>
       )}
 
-      <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={closeSideBar} />
+      {showCloseIcon && <img src={closeIcon} alt='close-icon' className={cx(styles.icon)} onClick={closeSideBar} />}
     </div>
   );
 }
@@ -114,7 +122,21 @@ FilterAndSearch.propTypes = {
   searchData: PropTypes.func,
   selectedFilterItem: PropTypes.func,
   dropdownItems: PropTypes.array,
-  closeSideBar: PropTypes.func
+  closeSideBar: PropTypes.func,
+  showCloseIcon: PropTypes.bool,
+  inputPlaceholder: PropTypes.string,
+  showDropdown: PropTypes.bool,
+  showFilterToggler: PropTypes.bool,
+  reversed: PropTypes.bool
+};
+
+FilterAndSearch.defaultProps = {
+  dropdownItems: [],
+  showCloseIcon: false,
+  inputPlaceholder: "Search",
+  showDropdown: false,
+  showFilterToggler: true,
+  reversed: false
 };
 
 export default FilterAndSearch;
