@@ -1,17 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { changePasswordApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi } from "../api/settings";
+import { changePasswordApi, updateProfileApi, editUserNotificationsApi, getUserNotificationsApi } from "../api/settings";
 
-// import { setToken, setRefreshToken, getRefreshToken, logout } from "@/utils/settings";
-
-import { changePasswordLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
+import { changePasswordLoading, updateProfileLoading, editUserNotificationsLoading, getUserNotificationsLoading } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
   error: false,
   changePasswordData: {},
-  forgotPasswordData: {},
-  resetPasswordData: {},
-  refreshAccessTokenData: {}
+  updateProfileData: {},
+  editUserNotificationsData: {},
+  getUserNotificationsData: {}
 };
 
 export const settingsSlice = createSlice({
@@ -28,23 +26,23 @@ export const settingsSlice = createSlice({
       state.changePasswordData = action.payload;
     },
 
-    forgotPasswordAction: (state, action) => {
-      state.forgotPasswordData = action.payload;
+    updateProfileAction: (state, action) => {
+      state.updateProfileData = action.payload;
     },
 
-    resetPasswordAction: (state, action) => {
-      state.resetPasswordData = action.payload;
+    editUserNotificationsAction: (state, action) => {
+      state.editUserNotificationsData = action.payload;
     },
 
-    refreshAccessTokenAction: (state, action) => {
-      state.refreshAccessTokenData = action.payload;
+    getUserNotificationsAction: (state, action) => {
+      state.getUserNotificationsData = action.payload;
     }
   }
 });
 export default settingsSlice.reducer;
 
 // Actions
-const { hasError, changePasswordAction, forgotPasswordAction, resetPasswordAction, refreshAccessTokenAction } =
+const { hasError, changePasswordAction, updateProfileAction, editUserNotificationsAction, getUserNotificationsAction } =
   settingsSlice.actions;
 
 export const changePassword = (data) => async (dispatch) => {
@@ -52,7 +50,6 @@ export const changePassword = (data) => async (dispatch) => {
 
   try {
     const response = await changePasswordApi(data);
-    toast.success(response?.data?.message);
     dispatch(changePasswordLoading(false));
     dispatch(changePasswordAction(response?.data?.data));
     return { success: true };
@@ -63,53 +60,53 @@ export const changePassword = (data) => async (dispatch) => {
     return { success: false };
   }
 };
-export const forgotPassword = (data) => async (dispatch) => {
-  dispatch(forgotPasswordLoading(true));
+export const updateProfile = (data) => async (dispatch) => {
+  dispatch(updateProfileLoading(true));
 
   try {
-    const response = await forgotPasswordApi(data);
-    console.log(response, "forgotPassword response");
+    const response = await updateProfileApi(data);
+    console.log(response, "updateProfile response");
     toast.success(response?.data?.data?.message);
-    dispatch(forgotPasswordLoading(false));
-    dispatch(forgotPasswordAction(response?.data?.data));
+    dispatch(updateProfileLoading(false));
+    dispatch(updateProfileAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    console.log(e, "forgotPassword error");
+    console.log(e, "updateProfile error");
     toast.error(e?.response?.data);
-    dispatch(forgotPasswordLoading(false));
+    dispatch(updateProfileLoading(false));
     dispatch(hasError(e?.response?.data));
     return { success: false };
   }
 };
 
-export const resetPassword = (data) => async (dispatch) => {
-  dispatch(resetPasswordLoading(true));
+export const editUserNotifications = (data) => async (dispatch) => {
+  dispatch(editUserNotificationsLoading(true));
   try {
-    const response = await resetPasswordApi(data);
+    const response = await editUserNotificationsApi(data);
     toast.success(response?.data?.data?.message);
-    dispatch(resetPasswordLoading(false));
-    dispatch(resetPasswordAction(response?.data?.data));
+    dispatch(editUserNotificationsLoading(false));
+    dispatch(editUserNotificationsAction(response?.data?.data));
     return { success: true };
   } catch (e) {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
-    dispatch(resetPasswordLoading(false));
+    dispatch(editUserNotificationsLoading(false));
     return { success: false };
   }
 };
 
-// export const refreshAccessToken = () => async (dispatch) => {
-//   const refreshToken = getRefreshToken();
-//   try {
-//     const response = await refreshAccessTokenApi(refreshToken);
-//     setToken(response?.data?.data?.token);
-//     setRefreshToken(response?.data?.data?.refreshToken);
-//     localStorage.setItem("userData", JSON.stringify(response?.data?.data));
-//     dispatch(refreshAccessTokenAction(response?.data?.data));
-//     return { success: true };
-//   } catch (e) {
-//     console.error(e, "refresh error");
-//     dispatch(hasError(e?.response?.data));
-//     logout();
-//   }
-// };
+export const getUserNotifications = () => async (dispatch) => {
+  dispatch(getUserNotificationsLoading(true));
+  try {
+    const response = await getUserNotificationsApi();
+    toast.success(response?.data?.data?.message);
+    dispatch(getUserNotificationsLoading(false));
+    dispatch(getUserNotificationsAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(getUserNotificationsLoading(false));
+    return { success: false };
+  }
+};
