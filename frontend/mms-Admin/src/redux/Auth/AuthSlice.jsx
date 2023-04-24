@@ -71,13 +71,11 @@ export const forgotPassword = (data) => async (dispatch) => {
 
   try {
     const response = await forgotPasswordApi(data);
-    console.log(response, "forgotPassword response");
     toast.success(response?.data?.data?.message);
     dispatch(forgotPasswordLoading(false));
     dispatch(forgotPasswordAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    console.log(e, "forgotPassword error");
     toast.error(e?.response?.data);
     dispatch(forgotPasswordLoading(false));
     dispatch(hasError(e?.response?.data));
@@ -111,7 +109,6 @@ export const refreshAccessToken = () => async (dispatch) => {
     dispatch(refreshAccessTokenAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    console.error(e, "refresh error");
     dispatch(hasError(e?.response?.data));
     logout();
   }

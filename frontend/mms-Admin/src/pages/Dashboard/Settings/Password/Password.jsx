@@ -13,13 +13,15 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 
 import { settingsPasswordSchema } from "@/helpers/validation";
 import { changePassword } from "@/redux/Settings/SettingsSlice";
+import { forgotPassword } from "@/redux/Auth/AuthSlice";
+import userInfo from "@/hooks/useGetUserInfo";
 
 function Password() {
   const dispatch = useDispatch();
   // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
-
+  const { email: userEmail } = userInfo();
   const resolver = yupResolver(settingsPasswordSchema);
 
   const defaultValues = {
@@ -48,6 +50,11 @@ function Password() {
       );
       reset();
     }
+  };
+
+  const handleForgotPassword = async () => {
+    let response = await dispatch(forgotPassword({ email: userEmail }));
+    response?.success && dispatch(showModal({ name: "forgotPassword", modalData: "" }));
   };
 
   return (
@@ -121,7 +128,7 @@ function Password() {
         </div>
       </form>
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
-        <p onClick={() => dispatch(showModal({ name: "forgotPassword", modalData: "" }))}>Forgot Password?</p>
+        <p onClick={() => handleForgotPassword()}>Forgot Password?</p>
       </div>
 
       {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
