@@ -1,8 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { changePasswordApi, updateProfileApi, editUserNotificationsApi, getUserNotificationsApi } from "../api/settings";
+import {
+  changePasswordApi,
+  updateProfileApi,
+  editUserNotificationsApi,
+  getUserNotificationsApi
+} from "../api/settings";
 
-import { changePasswordLoading, updateProfileLoading, editUserNotificationsLoading, getUserNotificationsLoading } from "@/redux/Loading/LoadingSlice";
+import {
+  changePasswordLoading,
+  updateProfileLoading,
+  editUserNotificationsLoading,
+  getUserNotificationsLoading
+} from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
   error: false,

@@ -14,7 +14,6 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 import { settingsPasswordSchema } from "@/helpers/validation";
 import { changePassword } from "@/redux/Settings/SettingsSlice";
 
-
 function Password() {
   const dispatch = useDispatch();
   // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
@@ -38,91 +37,88 @@ function Password() {
 
   const handleChangePassword = async (data) => {
     const response = await dispatch(changePassword(data));
-    if(response?.success) {
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Password changed successfully"
-        }
-      })
-    );
-    reset();
+    if (response?.success) {
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Password changed successfully"
+          }
+        })
+      );
+      reset();
     }
   };
 
   return (
     <div className={cx(styles.passwordContainer, "flexCol")}>
       <form onSubmit={handleSubmit((data) => handleChangePassword(data))}>
-      <div className={cx(styles.wrapper, styles.currentPasswordDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Current password</h6>
+        <div className={cx(styles.wrapper, styles.currentPasswordDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Current password</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.currentPasswordDetails)}>
+            <Controller
+              name='currentPassword'
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label='Your current Password'
+                  placeholder=''
+                  type='password'
+                  error={errors?.currentPassword && errors?.currentPassword?.message}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className={cx(styles.rightSection, styles.currentPasswordDetails)}>
-          <Controller
-            name='currentPassword'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label='Your current Password'
-                placeholder=''
-                type='password'
-                error={errors?.currentPassword && errors?.currentPassword?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
 
-      <div className={cx(styles.wrapper, styles.newPasswordDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>New password</h6>
+        <div className={cx(styles.wrapper, styles.newPasswordDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>New password</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.newPasswordDetails)}>
+            <Controller
+              name='newPassword'
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label='Must be at least 8 characters'
+                  placeholder=''
+                  type='password'
+                  error={errors?.newPassword && errors?.newPassword?.message}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className={cx(styles.rightSection, styles.newPasswordDetails)}>
-          <Controller
-            name='newPassword'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label='Must be at least 8 characters'
-                placeholder=''
-                type='password'
-                error={errors?.newPassword && errors?.newPassword?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
 
-      <div className={cx(styles.wrapper, styles.confirmPasswordDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Confirm new password</h6>
+        <div className={cx(styles.wrapper, styles.confirmPasswordDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Confirm new password</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.confirmPasswordDetails)}>
+            <Controller
+              name='confirmPassword'
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label='Must match your new password'
+                  placeholder=''
+                  type='password'
+                  error={errors?.confirmPassword && errors?.confirmPassword?.message}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className={cx(styles.rightSection, styles.confirmPasswordDetails)}>
-          <Controller
-            name='confirmPassword'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label='Must match your new password'
-                placeholder=''
-                type='password'
-                error={errors?.confirmPassword && errors?.confirmPassword?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
 
-      <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
-        <Button
-          onClick={() => handleSubmit((data) => handleChangePassword(data))}
-          title='Save new password'
-        />
-      </div>
+        <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
+          <Button onClick={() => handleSubmit((data) => handleChangePassword(data))} title='Save new password' />
+        </div>
       </form>
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
         <p onClick={() => dispatch(showModal({ name: "forgotPassword", modalData: "" }))}>Forgot Password?</p>

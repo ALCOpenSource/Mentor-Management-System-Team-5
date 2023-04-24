@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-
   //Auth
   loginLoading: false,
   forgotPasswordLoading: false,
@@ -48,6 +47,14 @@ export const loadingSlice = createSlice({
 });
 
 // Actions
-export const { loginLoading, forgotPasswordLoading, resetPasswordLoading, changePasswordLoading, updateProfileLoading, editUserNotificationsLoading, getUserNotificationsLoading } = loadingSlice.actions;
+export const {
+  loginLoading,
+  forgotPasswordLoading,
+  resetPasswordLoading,
+  changePasswordLoading,
+  updateProfileLoading,
+  editUserNotificationsLoading,
+  getUserNotificationsLoading
+} = loadingSlice.actions;
 
 export default loadingSlice.reducer;
