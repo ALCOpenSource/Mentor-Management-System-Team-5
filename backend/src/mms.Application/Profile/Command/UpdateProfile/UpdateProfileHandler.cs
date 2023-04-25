@@ -3,21 +3,17 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using mms.Application.Account;
 using mms.Domain.Entities;
-using mms.Infrastructure.Context;
-using mms.Infrastructure.Interface;
 using System.Security.Claims;
 
 namespace mms.Application.Profile.Command.UpdateProfile
 {
-    public class UpdateProfileHandler : AccountBaseHandler, IRequestHandler<UpdateProfileCommand, Result<string>>
+    public class UpdateProfileHandler : ProfileBaseHandler, IRequestHandler<UpdateProfileCommand, Result<string>>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UpdateProfileHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            ApplicationContext context, ITokenGeneratorService tokenGenerator,
-            IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration, tokenGenerator)
+            IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration)
         {
             this._httpContextAccessor = _httpContextAccessor;
         }

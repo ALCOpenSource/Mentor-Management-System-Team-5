@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace mms.Domain.Entities
+﻿namespace mms.Application.Profile.Query.GetProfileById
 {
-    public class AppUser : IdentityUser
+    public class GetProfileByIResponse
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -21,8 +19,5 @@ namespace mms.Domain.Entities
         public string? About { get; set; }
         public string? Headline { get; set; }
         public string? ProfilePicture { get; set; }
-
-        public string? RefreshToken { get; set; }
-        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }

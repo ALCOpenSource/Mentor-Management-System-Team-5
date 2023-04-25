@@ -187,7 +187,7 @@ namespace mms.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("GitHub")
+                    b.Property<string>("Github")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Headline")
