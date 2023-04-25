@@ -20,6 +20,8 @@ namespace mms.Infrastructure.Context
         public DbSet<UserTask> UserTasks { get; set; }
         public DbSet<TechStack> TechStacks { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
+        public DbSet<UserPrivacy> UserPrivacy { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {
@@ -33,10 +35,10 @@ namespace mms.Infrastructure.Context
                 switch (item.State)
                 {
                     case EntityState.Modified:
-                        item.Entity.Id = Guid.NewGuid();
                         item.Entity.UpdatedAt = DateTime.UtcNow;
                         break;
                     case EntityState.Added:
+                        item.Entity.Id = Guid.NewGuid().ToString();
                         item.Entity.CreatedAt = DateTime.UtcNow;
                         break;
                     default:
@@ -60,11 +62,20 @@ namespace mms.Infrastructure.Context
             modelBuilder.Entity<ProgrammeApplication>()
                 .HasIndex(x => x.AppUserId);
 
+            modelBuilder.Entity<ProgramsMentor>()
+                .HasIndex(x => x.AppUserId);
+
             modelBuilder.Entity<UserDetail>()
                 .HasIndex(x => x.AppUserId);
 
             modelBuilder.Entity<UserTask>()
                 .HasMany(x => x.Managers);
+
+            modelBuilder.Entity<UserNotification>()
+                .HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<UserPrivacy>()
+                .HasIndex(x => x.AppUserId);
 
             base.OnModelCreating(modelBuilder);
         }

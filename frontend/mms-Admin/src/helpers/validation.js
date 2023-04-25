@@ -16,7 +16,11 @@ export const resetPasswordSchema = Yup.object().shape({
   password: Yup.string()
     .required("Password is required")
     .max(50, "Must be 50 characters or less")
-    .min(8, "Must be above 8 characters")
+    .min(8, "Must be above 8 characters"),
+  confirmPassword: Yup.string()
+    .required("Password is required")
+    .min(8, "Must Contain at least 8 Characters")
+    .oneOf([Yup.ref("password")], "Passwords must and should match")
 });
 
 export const settingsGeneralSchema = Yup.object().shape({
@@ -26,9 +30,7 @@ export const settingsGeneralSchema = Yup.object().shape({
 
 export const settingsPasswordSchema = Yup.object().shape({
   currentPassword: Yup.string().required("Current password is required"),
-  newPassword: Yup.string()
-    .required("Password is required")
-    .min(8, "Must Contain at least 8 Characters"),
+  newPassword: Yup.string().required("Password is required").min(8, "Must Contain at least 8 Characters"),
   confirmPassword: Yup.string()
     .required("Password is required")
     .min(8, "Must Contain at least 8 Characters")
@@ -40,4 +42,21 @@ export const settingsSupportSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Email is required"),
   title: Yup.string().required("Title is required"),
   body: Yup.string().required("Body is required")
+});
+
+export const createTaskSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
+  details: Yup.string().required("Task details is required")
+});
+
+export const editTaskSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
+  details: Yup.string().required("Task details is required")
+});
+
+export const createReportSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
+  achievements: Yup.string(),
+  blockers: Yup.string(),
+  recommendations: Yup.string()
 });

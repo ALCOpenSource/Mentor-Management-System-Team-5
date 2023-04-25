@@ -1,7 +1,7 @@
 import React from "react";
 
-const MentorManagers = () => {
+function MentorManagers() {
   return <div>MentorManagers</div>;
-};
+}
 
 export default MentorManagers;

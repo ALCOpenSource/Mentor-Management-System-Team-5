@@ -1,20 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginApi, forgotPasswordApi, resetPasswordApi } from "../api/auth";
 import { toast } from "react-toastify";
+import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi } from "../api/auth";
 
-import { setToken } from "@/utils/auth";
+import { setToken, setRefreshToken, getRefreshToken, logout } from "@/utils/auth";
 
-import {
-  loginLoading,
-  forgotPasswordLoading,
-  resetPasswordLoading
-} from "@/redux/Loading/LoadingSlice";
+import { loginLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
-  error: "",
+  error: false,
   loginData: {},
   forgotPasswordData: {},
-  resetPasswordData: {}
+  resetPasswordData: {},
+  refreshAccessTokenData: {}
 };
 
 export const authSlice = createSlice({
@@ -37,30 +34,36 @@ export const authSlice = createSlice({
 
     resetPasswordAction: (state, action) => {
       state.resetPasswordData = action.payload;
+    },
+
+    refreshAccessTokenAction: (state, action) => {
+      state.refreshAccessTokenData = action.payload;
     }
   }
 });
 export default authSlice.reducer;
 
 // Actions
-const { hasError, loginAction, forgotPasswordAction, resetPasswordAction } = authSlice.actions;
+const { hasError, loginAction, forgotPasswordAction, resetPasswordAction, refreshAccessTokenAction } =
+  authSlice.actions;
 
 export const login = (data) => async (dispatch) => {
   dispatch(loginLoading(true));
 
   try {
     const response = await loginApi(data);
-    setToken(response.data.token);
-    localStorage.setItem("loginData", JSON.stringify(response?.data));
+    setToken(response?.data?.data?.token);
+    setRefreshToken(response?.data?.data?.refreshToken);
+    localStorage.setItem("userData", JSON.stringify(response?.data?.data));
     toast.success(response?.data?.message);
     dispatch(loginLoading(false));
-    return dispatch(loginAction(response?.data));
+    dispatch(loginAction(response?.data?.data));
+    return { success: true };
   } catch (e) {
-    if (e instanceof Error) {
-      toast.error(e?.message);
-      dispatch(loginLoading(false));
-      return dispatch(hasError(e?.message));
-    }
+    toast.error(e?.response?.data?.message);
+    dispatch(loginLoading(false));
+    dispatch(hasError(e?.response?.data));
+    return { success: false };
   }
 };
 export const forgotPassword = (data) => async (dispatch) => {
@@ -68,15 +71,15 @@ export const forgotPassword = (data) => async (dispatch) => {
 
   try {
     const response = await forgotPasswordApi(data);
-    toast.success(response.data.message);
+    toast.success(response?.data?.data?.message);
     dispatch(forgotPasswordLoading(false));
-    return dispatch(forgotPasswordAction(response?.data));
+    dispatch(forgotPasswordAction(response?.data?.data));
+    return { success: true };
   } catch (e) {
-    if (e instanceof Error) {
-      toast.error(e?.message);
-      dispatch(forgotPasswordLoading(false));
-      return dispatch(hasError(e?.message));
-    }
+    toast.error(e?.response?.data);
+    dispatch(forgotPasswordLoading(false));
+    dispatch(hasError(e?.response?.data));
+    return { success: false };
   }
 };
 
@@ -84,24 +87,28 @@ export const resetPassword = (data) => async (dispatch) => {
   dispatch(resetPasswordLoading(true));
   try {
     const response = await resetPasswordApi(data);
-    toast.success(response.data.message);
     dispatch(resetPasswordLoading(false));
-    return dispatch(resetPasswordAction(response?.data));
+    dispatch(resetPasswordAction(response?.data?.data));
+    return { success: true };
   } catch (e) {
-    if (e instanceof Error) {
-      toast.error(e?.message);
-      dispatch(resetPasswordLoading(false));
-      return dispatch(hasError(e?.message));
-    }
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(resetPasswordLoading(false));
+    return { success: false };
   }
 };
 
-// export const logout = () => () => {
-//   try {
-//     localStorage.clear();
-//     setAuthToken("");
-//     window.location.href = "/login";
-//   } catch (e) {
-//     toast.error(e.response.data.message);
-//   }
-// };
+export const refreshAccessToken = () => async (dispatch) => {
+  const refreshToken = getRefreshToken();
+  try {
+    const response = await refreshAccessTokenApi(refreshToken);
+    setToken(response?.data?.data?.token);
+    setRefreshToken(response?.data?.data?.refreshToken);
+    localStorage.setItem("userData", JSON.stringify(response?.data?.data));
+    dispatch(refreshAccessTokenAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    dispatch(hasError(e?.response?.data));
+    logout();
+  }
+};

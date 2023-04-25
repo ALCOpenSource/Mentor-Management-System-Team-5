@@ -41,18 +41,16 @@ export const FormGroup = styled(Form.Group)`
     text-align: left;
     ${({ required }) =>
       required
-        ? `
-      ::after {
+        ? ` ::after {
         content: '*';
         color: red;
         padding-left: 5px;
-      }
-      `
+      }`
         : ""};
   }
 
   .error {
-    font-size: 12px;
+    font-size: 14px;
     color: #eb5757;
     position: absolute;
     left: 0;

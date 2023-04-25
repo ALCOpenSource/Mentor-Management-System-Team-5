@@ -3,7 +3,7 @@ import Switch from "react-switch";
 import { ReactComponent as ToggleOffIcon } from "@/assets/icons/toggle-off-icon.svg";
 import { ReactComponent as ToggleOnIcon } from "@/assets/icons/toggle-on-icon.svg";
 
-const ToggleSwitch = () => {
+function ToggleSwitch() {
   const [checked, setChecked] = useState(false);
   const handleChange = (nextChecked) => {
     setChecked(nextChecked);
@@ -47,6 +47,6 @@ const ToggleSwitch = () => {
       className='react-switch'
     />
   );
-};
+}
 
 export default ToggleSwitch;

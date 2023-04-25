@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./Password.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
@@ -9,16 +11,17 @@ import SuccessNotificationModal from "@/components/Modals/SuccessNotification/Su
 import ForgotPasswordModal from "@/components/Modals/ForgotPassword/ForgotPassword";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-import { useForm, Controller } from "react-hook-form";
 import { settingsPasswordSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { changePassword } from "@/redux/Settings/SettingsSlice";
+import { forgotPassword } from "@/redux/Auth/AuthSlice";
+import userInfo from "@/hooks/useGetUserInfo";
 
-const Password = () => {
+function Password() {
   const dispatch = useDispatch();
   // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
-
+  const { email: userEmail } = userInfo();
   const resolver = yupResolver(settingsPasswordSchema);
 
   const defaultValues = {
@@ -31,100 +34,108 @@ const Password = () => {
     handleSubmit,
     formState: { errors },
     control,
-    setValue
+    reset
   } = useForm({ defaultValues, resolver, mode: "all" });
+
+  const handleChangePassword = async (data) => {
+    const response = await dispatch(changePassword(data));
+    if (response?.success) {
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Password changed successfully"
+          }
+        })
+      );
+      reset();
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    let response = await dispatch(forgotPassword({ email: userEmail }));
+    response?.success && dispatch(showModal({ name: "forgotPassword", modalData: "" }));
+  };
 
   return (
     <div className={cx(styles.passwordContainer, "flexCol")}>
-      <div className={cx(styles.wrapper, styles.currentPasswordDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Current password</h6>
+      <form onSubmit={handleSubmit((data) => handleChangePassword(data))}>
+        <div className={cx(styles.wrapper, styles.currentPasswordDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Current password</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.currentPasswordDetails)}>
+            <Controller
+              name='currentPassword'
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label='Your current Password'
+                  placeholder=''
+                  type='password'
+                  error={errors?.currentPassword && errors?.currentPassword?.message}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className={cx(styles.rightSection, styles.currentPasswordDetails)}>
-          <Controller
-            name='currentPassword'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label={"Your current Password"}
-                placeholder=''
-                type='password'
-                error={errors?.currentPassword && errors?.currentPassword?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
 
-      <div className={cx(styles.wrapper, styles.newPasswordDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>New password</h6>
+        <div className={cx(styles.wrapper, styles.newPasswordDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>New password</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.newPasswordDetails)}>
+            <Controller
+              name='newPassword'
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label='Must be at least 8 characters'
+                  placeholder=''
+                  type='password'
+                  error={errors?.newPassword && errors?.newPassword?.message}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className={cx(styles.rightSection, styles.newPasswordDetails)}>
-          <Controller
-            name='newPassword'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label={"Must be at least 8 characters"}
-                placeholder=''
-                type='password'
-                error={errors?.newPassword && errors?.newPassword?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
 
-      <div className={cx(styles.wrapper, styles.confirmPasswordDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Confirm new password</h6>
+        <div className={cx(styles.wrapper, styles.confirmPasswordDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Confirm new password</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.confirmPasswordDetails)}>
+            <Controller
+              name='confirmPassword'
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label='Must match your new password'
+                  placeholder=''
+                  type='password'
+                  error={errors?.confirmPassword && errors?.confirmPassword?.message}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className={cx(styles.rightSection, styles.confirmPasswordDetails)}>
-          <Controller
-            name='confirmPassword'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label={"Must match your new password"}
-                placeholder=''
-                type='password'
-                error={errors?.confirmPassword && errors?.confirmPassword?.message}
-              />
-            )}
-          />
+
+        <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
+          <Button onClick={() => handleSubmit((data) => handleChangePassword(data))} title='Save new password' />
         </div>
-      </div>
-
-      <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
-        <Button
-          onClick={() =>
-            dispatch(
-              showModal({ name: "successNotification", modalData: "Password Changed Successfully" })
-            )
-          }
-          title='Save new password'
-        />
-      </div>
-
+      </form>
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>
-        <p onClick={() => dispatch(showModal({ name: "forgotPassword", modalData: "" }))}>
-          Forgot Password?
-        </p>
+        <p onClick={() => handleForgotPassword()}>Forgot Password?</p>
       </div>
 
-      {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
 
-      {displayModal && modalName === "forgotPassword" ? (
-        <ForgotPasswordModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "forgotPassword" ? <ForgotPasswordModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default Password;

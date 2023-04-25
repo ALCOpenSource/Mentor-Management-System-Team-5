@@ -9,7 +9,7 @@ import { ReactComponent as TogglerIcon } from "@/assets/icons/archive-toggler-ic
 import { ReactComponent as ReportIcon } from "@/assets/icons/reports-icon.svg";
 import Button from "@/components/Button/Button";
 
-const Archive = () => {
+function Archive() {
   const [toggle, setToggle] = useState({
     index: null,
     toggle: false
@@ -69,12 +69,12 @@ const Archive = () => {
   const handleToggle = (index) => {
     if (toggle.index === index) {
       setToggle({
-        index: index,
+        index,
         toggle: !toggle.toggle
       });
     } else {
       setToggle({
-        index: index,
+        index,
         toggle: true
       });
     }
@@ -111,16 +111,15 @@ const Archive = () => {
               <div className={cx(styles.cardBody, "flexCol")}>
                 <h6 className={cx(styles.title)}>About:</h6>
                 <p className={cx(styles.description)}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam
-                  in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula
-                  consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet
-                  augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur
-                  pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.
+                  Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae
+                  mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum
+                  eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque
                 </p>
 
                 <div className={cx(styles.summaryDiv, "flexRow-space-between")}>
                   <div className={cx(styles.summary, "flexRow-align-center")}>
-                    <ReportIcon stroke='red' />
+                    <ReportIcon />
                     <span className={cx(styles.summaryValue)}>40</span>
                     <span>Program Reports</span>
                   </div>
@@ -134,6 +133,6 @@ const Archive = () => {
       })}
     </div>
   );
-};
+}
 
 export default Archive;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import cx from "classnames";
 import styles from "./DashboardSideBar.module.scss";
 import "./DashboardActiveMenu.scss";
@@ -19,90 +19,98 @@ import { ReactComponent as MessagesIcon } from "@/assets/icons/messages-icon.svg
 import { ReactComponent as DiscussionForumIcon } from "@/assets/icons/discussion-forum-icon.svg";
 import { ReactComponent as SettingsIcon } from "@/assets/icons/settings-icon.svg";
 import { ReactComponent as LogoutIcon } from "@/assets/icons/logout-icon.svg";
+import userInfo from "@/hooks/useGetUserInfo";
+import arrayToString from "@/helpers/arrayToString";
+import { logout } from "@/utils/auth";
 
-const DashboardSideBar = () => {
+function DashboardSideBar() {
   const location = useLocation();
-  const { toggleSidebar, toggled } = useProSidebar();
-
+  const { toggleSidebar } = useProSidebar();
+  const userData = userInfo();
   const currentPage = location.pathname.split("/")[2] || "";
+
+  const menuItemsArray = useMemo(
+    () => [
+      {
+        name: "Profile",
+        link: "profile",
+        icon: <ProfileIcon />
+      },
+      {
+        name: "Dashboard",
+        link: "",
+        icon: <DashboardIcon />
+      },
+      {
+        name: "Programs",
+        link: "programs",
+        icon: <ProgramsIcon />
+      },
+      {
+        name: "Tasks",
+        link: "tasks",
+        icon: <TasksIcon />
+      },
+      {
+        name: "Reports",
+        link: "reports",
+        icon: <ReportsIcon />
+      },
+      {
+        name: "Mentors",
+        link: "mentors",
+        icon: <MentorsIcon />
+      },
+      {
+        name: "Mentor Managers",
+        link: "mentor-managers",
+        icon: <MentorManagersIcon />
+      },
+      {
+        name: "Approval Requests",
+        link: "approval-requests",
+        icon: <ApprovalRequestsIcon />
+      },
+      {
+        name: "Certificates",
+        link: "certificates",
+        icon: <CertificatesIcon />
+      },
+      {
+        name: "Messages",
+        link: "messages",
+        icon: <MessagesIcon />
+      },
+      {
+        name: "Discussion Forum",
+        link: "discussion-forum",
+        icon: <DiscussionForumIcon />
+      },
+      {
+        name: "Settings",
+        link: "settings",
+        icon: <SettingsIcon />
+      },
+      {
+        name: "Logout",
+        link: "/login",
+        icon: <LogoutIcon />
+      }
+    ],
+    []
+  );
 
   useEffect(() => {
     setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage));
-  }, [currentPage]);
+  }, [currentPage, menuItemsArray]);
 
-  const menuItemsArray = [
-    {
-      name: "Profile",
-      link: "profile",
-      icon: <ProfileIcon />
-    },
-    {
-      name: "Dashboard",
-      link: "",
-      icon: <DashboardIcon />
-    },
-    {
-      name: "Programs",
-      link: "programs",
-      icon: <ProgramsIcon />
-    },
-    {
-      name: "Tasks",
-      link: "tasks",
-      icon: <TasksIcon />
-    },
-    {
-      name: "Reports",
-      link: "reports",
-      icon: <ReportsIcon />
-    },
-    {
-      name: "Mentors",
-      link: "mentors",
-      icon: <MentorsIcon />
-    },
-    {
-      name: "Mentor Managers",
-      link: "mentor-managers",
-      icon: <MentorManagersIcon />
-    },
-    {
-      name: "Approval Requests",
-      link: "approval-requests",
-      icon: <ApprovalRequestsIcon />
-    },
-    {
-      name: "Certificates",
-      link: "certificates",
-      icon: <CertificatesIcon />
-    },
-    {
-      name: "Messages",
-      link: "messages",
-      icon: <MessagesIcon />
-    },
-    {
-      name: "Discussion Forum",
-      link: "discussion-forum",
-      icon: <DiscussionForumIcon />
-    },
-    {
-      name: "Settings",
-      link: "settings",
-      icon: <SettingsIcon />
-    },
-    {
-      name: "Logout",
-      link: "/login",
-      icon: <LogoutIcon />
+  const [activeIndex, setActiveIndex] = useState(menuItemsArray.findIndex((item) => item.link === currentPage));
+
+  const handleMenuClick = (index, menuItem) => {
+    if (menuItem.toLowerCase() === "logout") {
+      logout();
     }
-  ];
 
-  const [activeIndex, setActiveIndex] = useState(
-    menuItemsArray.findIndex((item) => item.link === currentPage)
-  );
-
-  const handleMenuClick = (index) => {
     setActiveIndex(index);
     toggleSidebar();
   };
@@ -111,19 +119,20 @@ const DashboardSideBar = () => {
     <div className={cx(styles.dashboardSideBarContainer, "flexCol")}>
       <Sidebar breakPoint='xl' className={cx(styles.sidebar)}>
         <div className={cx(styles.userInfoDiv, "flexCol")}>
-          <h5 className={cx(styles.name)}>Hi Kabiru</h5>
-          <p className={cx(styles.role)}>Admin</p>
+          <h5 className={cx(styles.name)}>Hi, {userData?.fullName}</h5>
+          <p className={cx(styles.role)}>{arrayToString(userData?.roles)}</p>
         </div>
 
         <Menu>
           {menuItemsArray.map((item, index) => {
             return (
               <MenuItem
+                key={index}
                 className={cx(activeIndex === index && "sidebar-active-menu")}
                 active={activeIndex === index}
-                onClick={() => handleMenuClick(index)}
+                onClick={() => handleMenuClick(index, item.name)}
                 icon={item.icon}
-                component={<Link to={item.link} />}
+                component={<Link to={item?.link} />}
               >
                 {" "}
                 {item.name}
@@ -134,6 +143,6 @@ const DashboardSideBar = () => {
       </Sidebar>
     </div>
   );
-};
+}
 
 export default DashboardSideBar;

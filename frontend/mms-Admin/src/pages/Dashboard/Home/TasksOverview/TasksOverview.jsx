@@ -8,28 +8,28 @@ import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
 
 import DashboardTasksOverviewCard from "@/components/Cards/DashboardTasksOverview/DashboardTasksOverview";
 
-const TasksOverview = () => {
+function TasksOverview() {
   const cardDataArray = [
     {
       title: "Google Africa Scholarship...",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       title: "Google Africa Scholarship...",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     },
     {
       title: "Google Africa Scholarship...",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
       icon: cardIcon,
-      calendarIcon: calendarIcon
+      calendarIcon
     }
   ];
 
@@ -76,6 +76,6 @@ const TasksOverview = () => {
       </div>
     </div>
   );
-};
+}
 
 export default TasksOverview;

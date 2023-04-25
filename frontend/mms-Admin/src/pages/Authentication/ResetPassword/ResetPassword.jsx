@@ -1,7 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./ResetPassword.module.scss";
 
 import Button from "@/components/Button/Button";
@@ -9,32 +11,50 @@ import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 
-import { useForm, Controller } from "react-hook-form";
 import { resetPasswordSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPassword } from "@/redux/Auth/AuthSlice";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-const ResetPassword = () => {
+function ResetPassword() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const loading = useSelector((state) => state?.loading?.resetPasswordLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
-  const handleResetPassword = async (data) => {
-    const response = await dispatch(resetPassword(data));
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+  const email = urlParams.get("email");
 
-    // Temporary code for success modal
-    response &&
-      dispatch(showModal({ name: "successNotification", modalData: "Password Reset Successful" }));
+  const handleResetPassword = async (data) => {
+    const response = await dispatch(
+      resetPassword({
+        Password: data.password,
+        ConfirmPassword: data.confirmPassword,
+        token,
+        email
+      })
+    );
+
+    response?.success &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Password reset successful",
+            redirectUrl: "/login"
+          }
+        })
+      );
     reset();
   };
 
   const resolver = yupResolver(resetPasswordSchema);
 
   const defaultValues = {
-    password: ""
+    password: "",
+    confirmPassword: ""
   };
 
   const {
@@ -63,7 +83,7 @@ const ResetPassword = () => {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label={"Password"}
+                    label='Password'
                     placeholder=''
                     type='password'
                     error={errors?.password && errors?.password?.message}
@@ -71,9 +91,21 @@ const ResetPassword = () => {
                 )}
               />
 
-              <p className={cx(styles.caption)}>
-                *Your new password must be different from previously used password.
-              </p>
+              <Controller
+                name='confirmPassword'
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    {...field}
+                    label='Must match your new password'
+                    placeholder=''
+                    type='password'
+                    error={errors?.confirmPassword && errors?.confirmPassword?.message}
+                  />
+                )}
+              />
+
+              <p className={cx(styles.caption)}>*Your new password must be different from previously used password.</p>
 
               <div className={cx(styles.submitBtnDiv, "flexRow")}>
                 <Button
@@ -84,16 +116,18 @@ const ResetPassword = () => {
                   type='primary'
                 />
               </div>
+
+              <div className={cx(styles.backToLoginWrapper, "flexRow")}>
+                <p onClick={() => navigate("/login")}>Back To Login</p>
+              </div>
             </form>
           </div>
         </div>
       </div>
 
-      {displayModal && modalName === "successNotification" ? (
-        <SuccessNotificationModal show size='md' />
-      ) : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
-};
+}
 
 export default ResetPassword;

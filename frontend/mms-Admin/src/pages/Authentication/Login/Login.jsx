@@ -2,36 +2,30 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./Login.module.scss";
 
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 
-import { useForm, Controller } from "react-hook-form";
 import { loginSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import { login } from "@/redux/Auth/AuthSlice";
 import Button from "@/components/Button/Button";
 
-const Login = () => {
+// import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+// import axios from "axios";
+
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loading = useSelector((state) => state?.loading?.loginLoading);
 
-  console.log(loading, "loading");
-
   const signIn = async (data) => {
     const response = await dispatch(login(data));
-    console.log(response, "login response");
-    // if (response?.payload?.success) {
-    //   dispatch(showModal({ action: "hide", type: "logIn" }));
-    //   navigate("/home");
-    // }
-
-    // Temporary login redirection
-    navigate("/dashboard");
+    response?.success && navigate("/dashboard");
   };
 
   const resolver = yupResolver(loginSchema);
@@ -50,6 +44,37 @@ const Login = () => {
   const handleForgotPassword = () => {
     navigate("/forgot-password");
   };
+
+  // Google Login
+  // const [ user, setUser ] = useState([]);
+  // const [ profile, setProfile ] = useState([]);
+
+  // console.log(user, "google");
+
+  // const loginGoogle = useGoogleLogin({
+  //     onSuccess: (codeResponse) => setUser(codeResponse),
+  //     onError: (error) => console.log("Login Failed:", error)
+  // });
+
+  // useEffect(
+  //   () => {
+  //       if (user) {
+  //           axios
+  //               .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+  //                   headers: {
+  //                       Authorization: `Bearer ${user.access_token}`,
+  //                       Accept: "application/json"
+  //                   }
+  //               })
+  //               .then((res) => {
+  //                   setProfile(res.data);
+  //               })
+  //               .catch((err) => console.log(err));
+  //       }
+  //   },
+  //   [ user ]
+  // );
+  // console.log(profile, "user profile");
 
   return (
     <div className={cx(styles.loginContainer, "row")}>
@@ -71,7 +96,7 @@ const Login = () => {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label={"Email"}
+                    label='Email'
                     placeholder=''
                     type='email'
                     error={errors?.email && errors?.email?.message}
@@ -85,7 +110,7 @@ const Login = () => {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label={"Password"}
+                    label='Password'
                     placeholder=''
                     type='password'
                     error={errors?.password && errors?.password?.message}
@@ -108,10 +133,11 @@ const Login = () => {
               </div>
             </form>
           </div>
+          {/* <button onClick={() => loginGoogle()}>Sign in with Google 🚀 </button> */}
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Login;

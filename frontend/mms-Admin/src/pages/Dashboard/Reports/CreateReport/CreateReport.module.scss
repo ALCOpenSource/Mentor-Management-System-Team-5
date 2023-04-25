@@ -1,0 +1,98 @@
+.createReportContainer {
+  gap: 1rem;
+  padding: 1rem;
+  position: relative;
+  height: calc(100vh - var(--topNavbarHeight));
+
+  .mainSection {
+    gap: 1.5rem;
+    flex-grow: 1;
+    height: 100%;
+    overflow-y: auto;
+
+    .heading {
+      position: sticky;
+      top: 0;
+      gap: 1rem;
+      padding-bottom: 1rem;
+
+      .title {
+        margin: 0;
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        font-size: 1.5rem;
+      }
+
+      .selectionDiv {
+        gap: 1rem;
+        flex-wrap: nowrap;
+
+        .reportTypeSelector {
+          flex-grow: 1;
+          background-color: var(--green3Color);
+          border-radius: 0.25rem;
+          border: 1px solid var(--green3Color);
+          padding: 0.5rem 0 0.5rem 0.5rem;
+          color: var(--grayTextColor);
+          outline: none;
+        }
+      }
+    }
+
+    .formWrapper {
+      overflow-y: auto;
+
+      form {
+        label {
+          font-family: var(--bold);
+          font-size: 1.125rem;
+          color: var(--black2TextColor);
+        }
+
+        .submitBtnDiv {
+          align-items: center;
+          justify-content: flex-end;
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+
+  .sideBarSection {
+    width: auto;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .createReportContainer {
+    padding: 2rem;
+
+    .mainSection {
+      .heading {
+        .selectionDiv {
+          gap: 2.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .createReportContainer {
+    padding: 1rem 2rem;
+
+    .mainSection {
+      gap: 1.5rem;
+
+      .heading {
+        .reportTypeSelector {
+          padding: 0.5rem 0 0.5rem 2rem;
+        }
+      }
+
+      .formWrapper {
+        padding-right: 0.5rem;
+      }
+    }
+  }
+}
