@@ -7,7 +7,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, process.cwd());
 
-  return {
+  return ({
     plugins: [react(), svgr()],
     resolve: {
       alias: {
@@ -18,5 +18,5 @@ export default defineConfig(({mode}) => {
       host: env.VITE_HOST,
       port: env.VITE_PORT // The host port the app will be accessed from
     }
-  };
+  });
 });

@@ -41,7 +41,8 @@ function ResetPassword() {
         showModal({
           name: "successNotification",
           modalData: {
-            title: "Password reset successful"
+            title: "Password reset successful",
+            redirectUrl: "/login"
           }
         })
       );

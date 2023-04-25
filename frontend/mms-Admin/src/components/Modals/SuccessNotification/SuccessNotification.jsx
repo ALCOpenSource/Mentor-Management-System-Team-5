@@ -7,14 +7,16 @@ import styles from "./SuccessNotification.module.scss";
 import successImage from "@/assets/images/default-success-notification-image.png";
 import Button from "@/components/Button/Button";
 import { hideModal } from "@/redux/Modal/ModalSlice";
+import { useNavigate } from "react-router-dom";
 
 function SuccessNotification({ show, size, modalName }) {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const modalData = useSelector((state) => state.modal.modalData);
 
   const handleClick = () => {
     dispatch(hideModal({ name: "successNotification" }));
+    modalData?.redirectUrl === "/login" && navigate(modalData?.redirectUrl);
   };
 
   return (
