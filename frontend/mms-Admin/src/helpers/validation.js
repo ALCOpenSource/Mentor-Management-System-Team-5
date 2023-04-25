@@ -23,9 +23,9 @@ export const resetPasswordSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must and should match")
 });
 
-export const settingsGeneralSchema = Yup.object().shape({
-  firstName: Yup.string().required("First Name is required"),
-  lastName: Yup.string().required("Last Name is required")
+export const updateProfileSchema = Yup.object().shape({
+  firstName: Yup.string(),
+  lastName: Yup.string()
 });
 
 export const settingsPasswordSchema = Yup.object().shape({

@@ -3,12 +3,17 @@
   width: fit-content;
 
   .sidebar {
-    margin-top: var(--topNavbarHeight);
+    // margin-top: var(--topNavbarHeight);
+    height: 100%;
 
     .userInfoDiv {
       padding: 2rem 1rem 2rem 1.5rem;
       text-align: left;
       gap: 0.25rem;
+      position: sticky;
+      top: 0;
+      background-color: var(--sideBarBgColor);
+      z-index: inherit;
 
       .name,
       .role {

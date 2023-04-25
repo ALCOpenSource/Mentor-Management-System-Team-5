@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { Country, City } from "country-state-city";
@@ -12,19 +12,23 @@ import TextArea from "@/components/TextArea/TextArea";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successNotificationImage from "@/assets/images/default-success-notification-image.png";
-
+import { useDropzone } from "react-dropzone";
 import githubIcon from "@/assets/icons/settings-github-icon.svg";
 import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
 import linkedinIcon from "@/assets/icons/settings-linkedin-icon.svg";
 import twitterIcon from "@/assets/icons/settings-twitter-icon.svg";
-import profileImage from "@/assets/images/sample-profile-image.svg";
+// import profileImage from "@/assets/images/sample-profile-image.svg";
 
-import { settingsGeneralSchema } from "@/helpers/validation";
+import { updateProfileSchema } from "@/helpers/validation";
+import { updateProfile } from "@/redux/Settings/SettingsSlice";
+import useGetUserInfo from "@/hooks/useGetUserInfo";
+import { initialsCase } from "@/helpers/textTransform";
 
 function General() {
   const dispatch = useDispatch();
+  const userData = useGetUserInfo();
 
-  // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
+  const loading = useSelector((state) => state?.loading?.updateProfileLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
@@ -52,7 +56,7 @@ function General() {
   ];
 
   const [countries, setCountries] = useState([]);
-  const [cities, setCities] = useState([]);
+  const [city, setCity] = useState([]);
 
   useEffect(() => {
     const countries = Country.getAllCountries().map((country) => {
@@ -61,19 +65,26 @@ function General() {
     setCountries(countries);
   }, []);
 
-  const resolver = yupResolver(settingsGeneralSchema);
+  const resolver = yupResolver(updateProfileSchema);
 
   const defaultValues = {
-    firstName: "",
-    lastName: "",
-    website: "",
-    github: "",
-    instagram: "",
-    linkedin: "",
-    twitter: ""
+    firstName: userData?.fullName || userData?.firstname || "",
+    lastName: userData?.lastname || "",
+    website: userData?.website || "",
+    about: userData?.about || "",
+    country: userData?.country || "",
+    city: userData?.city || "",
+    github: userData?.github || "",
+    instagram: userData?.instagram || "",
+    linkedin: userData?.linkedin || "",
+    twitter: userData?.twitter || "",
+    facebook: userData?.facebook || "",
+    profilePicture: userData?.profilePicture || "",
+    headline: userData?.headline || ""
   };
 
   const {
+    handleSubmit,
     formState: { errors },
     control,
     setValue
@@ -86,200 +97,235 @@ function General() {
         return { value: city.name, label: city.name };
       });
 
-      setCities(city);
+      setCity(city);
     }
     setValue(name, e.target.value, { shouldValidate: true });
   };
 
+  const handleUpdateProfile = async (data) => {
+    const payload = { ...data, profilePicture: uploadedFile?.file ? uploadedFile?.file : data.profilePicture };
+    let response = await dispatch(updateProfile(payload));
+
+    response?.success &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Profile saved successfully",
+            image: successNotificationImage
+          }
+        })
+      );
+  };
+
+  const [uploadedFile, setUploadedFile] = useState({
+    file: "",
+    imagePreviewUrl: ""
+  });
+
+  const onDrop = useCallback((acceptedFiles) => {
+    let file = acceptedFiles[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUploadedFile({ file: file, imagePreviewUrl: reader.result });
+    };
+    reader.readAsDataURL(file);
+  }, []);
+
+  const { getRootProps } = useDropzone({ onDrop, accept: "image/*" });
+
   return (
     <div className={cx(styles.generalContainer, "flexCol")}>
-      <div className={cx(styles.wrapper, styles.header)}>
-        <div className={cx(styles.leftSection, styles.imageDiv)}>
-          <img src={profileImage} alt='thumbnail-img' />
-        </div>
-        <div className={cx(styles.rightSection, styles.profilePicture)}>
-          <h5 className={cx(styles.title)}>Set Profile Picture</h5>
-          <Button title='Upload Picture' size='small' />
-        </div>
-      </div>
-
-      <div className={cx(styles.wrapper, styles.nameDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Name</h6>
-        </div>
-        <div className={cx(styles.rightSection, styles.nameDetails)}>
-          <Controller
-            name='firstName'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label='First Name'
-                placeholder=''
-                type='text'
-                error={errors?.firstName && errors?.firstName?.message}
+      <form className={cx(styles.formWrapper, "flexCol")} onSubmit={handleSubmit((data) => handleUpdateProfile(data))}>
+        <div className={cx(styles.wrapper, styles.header)}>
+          <div className={cx(styles.leftSection, styles.imageDiv)}>
+            {userData?.profileImage || uploadedFile?.imagePreviewUrl ? (
+              <img
+                {...getRootProps()}
+                src={uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : userData?.profileImage}
+                alt='profile-image'
               />
+            ) : (
+              <span {...getRootProps()} className={cx(styles.profileImageText)}>
+                {userData?.fullName && initialsCase(`${userData.fullName}`)}
+              </span>
             )}
-          />
+          </div>
+          <div className={cx(styles.rightSection, styles.profilePicture)}>
+            <h5 className={cx(styles.title)}>Set Profile Picture</h5>
+            <Button {...getRootProps()} title='Upload Picture' size='small' />
+          </div>
+        </div>
 
-          <Controller
-            name='lastName'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label='Last Name'
-                placeholder=''
-                type='text'
-                error={errors?.lastName && errors?.lastName?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
-
-      <div className={cx(styles.wrapper, styles.bioDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>About</h6>
-        </div>
-        <div className={cx(styles.rightSection, styles.bioDetails)}>
-          <Controller
-            name='bio'
-            control={control}
-            render={({ field }) => (
-              <TextArea
-                {...field}
-                placeholder='Your Bio'
-                label=''
-                minHeight='150px'
-                error={errors?.bio && errors?.bio?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
-
-      <div className={cx(styles.wrapper, styles.websiteDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Website</h6>
-        </div>
-        <div className={cx(styles.rightSection, styles.websiteDetails)}>
-          <Controller
-            name='website'
-            control={control}
-            render={({ field }) => (
-              <InputField
-                {...field}
-                label='www.example.com'
-                placeholder=''
-                type='text'
-                error={errors?.website && errors?.website?.message}
-              />
-            )}
-          />
-        </div>
-      </div>
-
-      <div className={cx(styles.wrapper, styles.countryDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Country</h6>
-        </div>
-        <div className={cx(styles.rightSection, styles.countryDetails)}>
-          <div className={cx(styles.countryDiv)}>
+        <div className={cx(styles.wrapper, styles.nameDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Name</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.nameDetails)}>
             <Controller
-              name='country'
+              name='firstName'
               control={control}
               render={({ field }) => (
-                <SelectField
+                <InputField
                   {...field}
-                  defaultSelect='Select Country'
-                  label=''
-                  options={countries}
-                  error={errors?.country && errors?.country?.message}
-                  onChange={(e) => handleSelectChange(e, "country")}
-                  border='#C8C8C8'
-                  loading={!(countries.length > 0)}
+                  label='First Name'
+                  placeholder=''
+                  type='text'
+                  error={errors?.firstName && errors?.firstName?.message}
                 />
               )}
             />
-          </div>
 
-          <div className={cx(styles.cityDiv)}>
-            <label htmlFor='city' className={cx(styles.label)}>
-              City
-            </label>
             <Controller
-              name='cities'
+              name='lastName'
               control={control}
               render={({ field }) => (
-                <SelectField
+                <InputField
                   {...field}
-                  defaultSelect='Select City'
-                  label=''
-                  options={cities}
-                  error={errors?.cities && errors?.cities?.message}
-                  onChange={(e) => handleSelectChange(e, "cities")}
-                  border='#C8C8C8'
+                  label='Last Name'
+                  placeholder=''
+                  type='text'
+                  error={errors?.lastName && errors?.lastName?.message}
                 />
               )}
             />
           </div>
         </div>
-      </div>
 
-      <div className={cx(styles.wrapper, styles.socialMediaDiv)}>
-        <div className={cx(styles.leftSection, styles.titleDiv)}>
-          <h6 className={cx(styles.title)}>Social</h6>
+        <div className={cx(styles.wrapper, styles.bioDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>About</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.bioDetails)}>
+            <Controller
+              name='bio'
+              control={control}
+              render={({ field }) => (
+                <TextArea
+                  {...field}
+                  placeholder='Your Bio'
+                  label=''
+                  minHeight='150px'
+                  error={errors?.bio && errors?.bio?.message}
+                />
+              )}
+            />
+          </div>
         </div>
-        <div className={cx(styles.rightSection, styles.socialMediaDetails)}>
-          {socialMediaInputArray.map((item, index) => {
-            return (
-              <div className={cx(styles.infoWrapper, "flexRow-align-center")} key={index}>
-                <div className={cx(styles.left, "flexRow-fully-centered")}>
-                  <span>
-                    <img src={item?.icon} alt='logo' />
-                  </span>
-                  <span>{item?.name}</span>
-                </div>
-                <div className={cx(styles.right)}>
-                  <Controller
-                    name={item?.name.toLowerCase()}
-                    control={control}
-                    render={({ field }) => (
-                      <InputField
-                        {...field}
-                        placeholder=''
-                        type='text'
-                        marginbottom='0'
-                        border='none'
-                        label={item?.placeholder}
-                      />
-                    )}
+
+        <div className={cx(styles.wrapper, styles.websiteDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Website</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.websiteDetails)}>
+            <Controller
+              name='website'
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  {...field}
+                  label='www.example.com'
+                  placeholder=''
+                  type='text'
+                  error={errors?.website && errors?.website?.message}
+                />
+              )}
+            />
+          </div>
+        </div>
+
+        <div className={cx(styles.wrapper, styles.countryDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Country</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.countryDetails)}>
+            <div className={cx(styles.countryDiv)}>
+              <Controller
+                name='country'
+                control={control}
+                render={({ field }) => (
+                  <SelectField
+                    {...field}
+                    defaultSelect='Select Country'
+                    label=''
+                    options={countries}
+                    error={errors?.country && errors?.country?.message}
+                    onChange={(e) => handleSelectChange(e, "country")}
+                    border='#C8C8C8'
+                    loading={!(countries.length > 0)}
                   />
-                </div>
-              </div>
-            );
-          })}
+                )}
+              />
+            </div>
+
+            <div className={cx(styles.cityDiv)}>
+              <label htmlFor='city' className={cx(styles.label)}>
+                City
+              </label>
+              <Controller
+                name='city'
+                control={control}
+                render={({ field }) => (
+                  <SelectField
+                    {...field}
+                    defaultSelect='Select City'
+                    label=''
+                    options={city}
+                    error={errors?.city && errors?.city?.message}
+                    onChange={(e) => handleSelectChange(e, "city")}
+                    border='#C8C8C8'
+                  />
+                )}
+              />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
-        <Button
-          onClick={() =>
-            dispatch(
-              showModal({
-                name: "successNotification",
-                modalData: {
-                  title: "Profile saved successfully",
-                  image: successNotificationImage
-                }
-              })
-            )
-          }
-          title='Save Changes'
-        />
-      </div>
+        <div className={cx(styles.wrapper, styles.socialMediaDiv)}>
+          <div className={cx(styles.leftSection, styles.titleDiv)}>
+            <h6 className={cx(styles.title)}>Social</h6>
+          </div>
+          <div className={cx(styles.rightSection, styles.socialMediaDetails)}>
+            {socialMediaInputArray.map((item, index) => {
+              return (
+                <div className={cx(styles.infoWrapper, "flexRow-align-center")} key={index}>
+                  <div className={cx(styles.left, "flexRow-fully-centered")}>
+                    <span>
+                      <img src={item?.icon} alt='logo' />
+                    </span>
+                    <span>{item?.name}</span>
+                  </div>
+                  <div className={cx(styles.right)}>
+                    <Controller
+                      name={item?.name.toLowerCase()}
+                      control={control}
+                      render={({ field }) => (
+                        <InputField
+                          {...field}
+                          placeholder=''
+                          type='text'
+                          marginbottom='0'
+                          border='none'
+                          label={item?.placeholder}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
+        <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
+          <Button
+            loading={loading}
+            disabled={loading}
+            onClick={handleSubmit((data) => handleUpdateProfile(data))}
+            title='Save Changes'
+          />
+        </div>
+      </form>
       {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
