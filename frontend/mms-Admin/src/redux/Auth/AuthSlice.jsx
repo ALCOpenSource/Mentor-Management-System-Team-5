@@ -87,7 +87,6 @@ export const resetPassword = (data) => async (dispatch) => {
   dispatch(resetPasswordLoading(true));
   try {
     const response = await resetPasswordApi(data);
-    toast.success(response?.data?.data?.message);
     dispatch(resetPasswordLoading(false));
     dispatch(resetPasswordAction(response?.data?.data));
     return { success: true };
