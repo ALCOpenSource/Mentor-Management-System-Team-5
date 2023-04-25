@@ -10,23 +10,27 @@ using mms.Infrastructure.Interface;
 namespace mms.Application.Profile.Query.GetProfileById
 {
     public class GetProfileByIdCommandHandler : ProfileBaseHandler,
-        IRequestHandler<GetProfileByIdCommand, Result<GetProfileByIResponse>>
+        IRequestHandler<GetProfileByIdCommand, Result<GetProfileByIdResponse>>
     {
-        protected GetProfileByIdCommandHandler(UserManager<AppUser> userManager, IConfiguration configuration,
+        public GetProfileByIdCommandHandler(UserManager<AppUser> userManager, IConfiguration configuration,
             ICurrentUserService currentUserService, IMapper mapper) : base(userManager, configuration,
-            currentUserService)
+            currentUserService, mapper)
         {
         }
 
-        public async Task<Result<GetProfileByIResponse>> Handle(GetProfileByIdCommand request,
+        public async Task<Result<GetProfileByIdResponse>> Handle(GetProfileByIdCommand request,
             CancellationToken cancellationToken)
         {
-            var user = _userManager.Users.FirstOrDefaultAsync(x => x.Id == _currentUserService.AppUserId,
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == _currentUserService.AppUserId,
                 cancellationToken);
             if (user == null)
             {
-                return await Result<GetProfileByIResponse>.FailAsync("User does not exist");
+                return await Result<GetProfileByIdResponse>.FailAsync("User does not exist");
             }
+
+            var userResult = _mapper.Map<GetProfileByIdResponse>(user);
+
+            return await Result<GetProfileByIdResponse>.SuccessAsync(userResult);
         }
     }
 }

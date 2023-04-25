@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using mms.Application.Account.ChangePassword;
 using mms.Application.Account.Login;
 using mms.Application.Account.PasswordReset;
+using mms.Application.Account.RefreshToken;
 using mms.Infrastructure.Interface;
 using System.Net;
-using mms.Application.Account.RefreshToken;
-using mms.Application.Profile.Command.UpdateProfile;
 
 namespace mms.api.Controllers
 {

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using mms.Domain.Entities;
 using System.Security.Claims;
+using AutoMapper;
+using mms.Infrastructure.Interface;
 
 namespace mms.Application.Profile.Command.UpdateProfile
 {
@@ -13,7 +15,8 @@ namespace mms.Application.Profile.Command.UpdateProfile
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UpdateProfileHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration)
+            ICurrentUserService currentUserService, IMapper mapper,
+            IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration, currentUserService, mapper)
         {
             this._httpContextAccessor = _httpContextAccessor;
         }

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace mms.Application.Profile.Query.GetProfileById
 {
-    public class GetProfileByIdCommand : IRequest<Result<GetProfileByIResponse>>
+    public class GetProfileByIdCommand : IRequest<Result<GetProfileByIdResponse>>
     {
     }
 }

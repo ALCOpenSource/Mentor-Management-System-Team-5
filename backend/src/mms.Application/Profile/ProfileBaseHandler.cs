@@ -33,6 +33,7 @@ namespace mms.Application.Profile
             user.Country = command.Country;
             user.FirstName = command.FirstName;
             user.Github = command.Github;
+            user.Instagram = command.Instagram;
             user.Headline = command.Headline;
             user.LastName = command.LastName;
             user.LinkedIn = command.LinkedIn;
