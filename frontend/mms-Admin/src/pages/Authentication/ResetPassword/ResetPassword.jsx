@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,6 +17,7 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 
 function ResetPassword() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const loading = useSelector((state) => state?.loading?.resetPasswordLoading);
   const displayModal = useSelector((state) => state.modal.show);
@@ -114,6 +115,10 @@ function ResetPassword() {
                   title='Reset Password'
                   type='primary'
                 />
+              </div>
+
+              <div className={cx(styles.backToLoginWrapper, "flexRow")}>
+                <p onClick={() => navigate("/login")}>Back To Login</p>
               </div>
             </form>
           </div>
