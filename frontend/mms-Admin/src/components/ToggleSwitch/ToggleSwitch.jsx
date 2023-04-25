@@ -4,8 +4,8 @@ import { ReactComponent as ToggleOffIcon } from "@/assets/icons/toggle-off-icon.
 import { ReactComponent as ToggleOnIcon } from "@/assets/icons/toggle-on-icon.svg";
 import PropTypes from "prop-types";
 
-function ToggleSwitch({ onChange, initialState }) {
-  const [checked, setChecked] = useState(initialState);
+function ToggleSwitch({ onChange, checkedStatus }) {
+  const [checked, setChecked] = useState(checkedStatus);
   const handleChange = (nextChecked) => {
     setChecked(nextChecked);
     onChange(nextChecked);
@@ -49,12 +49,12 @@ function ToggleSwitch({ onChange, initialState }) {
 
 ToggleSwitch.propTypes = {
   onChange: PropTypes.func.isRequired,
-  initialState: PropTypes.bool.isRequired
+  checkedStatus: PropTypes.bool.isRequired
 };
 
 ToggleSwitch.defaultProps = {
   onChange: () => {},
-  initialState: false
+  checkedStatus: false
 };
 
 export default ToggleSwitch;

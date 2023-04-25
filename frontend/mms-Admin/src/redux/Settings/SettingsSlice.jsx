@@ -111,7 +111,8 @@ export const editUserNotifications = (data) => async (dispatch) => {
   dispatch(editUserNotificationsLoading(true));
   try {
     const response = await editUserNotificationsApi(data);
-    toast.success(response?.data?.data?.message);
+    // toast.success(response?.data?.data?.message);
+    toast.success("Notification settings updated successfully");
     dispatch(editUserNotificationsLoading(false));
     dispatch(editUserNotificationsAction(response?.data?.data));
     return { success: true };
@@ -143,7 +144,7 @@ export const editUserPrivacy = (data) => async (dispatch) => {
   dispatch(editUserPrivacyLoading(true));
   try {
     const response = await editUserPrivacyApi(data);
-    toast.success(response?.data?.data?.message);
+    // toast.success(response?.data?.data?.message);
     toast.success("Privacy settings updated successfully");
     dispatch(editUserPrivacyLoading(false));
     dispatch(editUserPrivacyAction(response?.data?.data));
@@ -160,7 +161,6 @@ export const getUserPrivacy = () => async (dispatch) => {
   dispatch(getUserPrivacyLoading(true));
   try {
     const response = await getUserPrivacyApi();
-    toast.success(response?.data?.data?.message);
     dispatch(getUserPrivacyLoading(false));
     dispatch(getUserPrivacyAction(response?.data?.data));
     return { success: true };
