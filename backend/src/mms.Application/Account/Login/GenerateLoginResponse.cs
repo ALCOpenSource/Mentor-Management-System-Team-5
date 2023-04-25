@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using mms.Application.Common;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
-using System.Data;
-using mms.Application.Common;
-using mms.Domain.Common;
 
 namespace mms.Application.Account.Login
 {
@@ -30,6 +27,9 @@ namespace mms.Application.Account.Login
                 Id = user.Id,
                 Email = user.Email,
                 FullName = Utilities.GetUserFullName(user),
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ProfilePicture = user.ProfilePicture,
                 Token = await _tokenGeneratorService.GenerateTokenAsync(user),
                 RefreshToken = await _tokenGeneratorService.GenerateRefreshTokenAsync(user),
                 Roles = roles,

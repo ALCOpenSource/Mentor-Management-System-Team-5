@@ -3,12 +3,13 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using mms.Application.Account;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
 using System.Security.Claims;
 
-namespace mms.Application.Account.Profile
+namespace mms.Application.Profile.Command.UpdateProfile
 {
     public class UpdateProfileHandler : AccountBaseHandler, IRequestHandler<UpdateProfileCommand, Result<string>>
     {

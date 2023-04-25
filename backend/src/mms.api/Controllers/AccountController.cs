@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using mms.Application.Account.ChangePassword;
 using mms.Application.Account.Login;
 using mms.Application.Account.PasswordReset;
-using mms.Application.Account.Profile;
 using mms.Infrastructure.Interface;
 using System.Net;
 using mms.Application.Account.RefreshToken;
+using mms.Application.Profile.Command.UpdateProfile;
 
 namespace mms.api.Controllers
 {
@@ -99,22 +99,6 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
-        [Authorize]
-        [HttpPut("update-profile")]
-        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> UpdateProfileAsync(UpdateProfileCommand command)
-        {
-            var result = await Mediator.Send(command);
-            if (!result.Succeeded)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(result);
-        }
-
-        [Authorize]
         [HttpPut("change-password")]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]

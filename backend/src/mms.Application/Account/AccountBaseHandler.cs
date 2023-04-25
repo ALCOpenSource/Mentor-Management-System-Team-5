@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using mms.Application.Account.Profile;
+using mms.Application.Profile.Command.UpdateProfile;
 using mms.Domain.Entities;
 using mms.Infrastructure.Interface;
 
@@ -41,10 +41,10 @@ namespace mms.Application.Account
             user.Bio = command.Bio;
             user.City = command.City;
             user.Country = command.Country;
-            user.FirstName = command.Firtname;
-            user.GitHub = command.GitHub;
+            user.FirstName = command.FirstName;
+            user.GitHub = command.Github;
             user.Headline = command.Headline;
-            user.LastName = command.Lastname;
+            user.LastName = command.LastName;
             user.LinkedIn = command.LinkedIn;
             user.ProfilePicture = command.ProfilePicture;
             user.Twitter = command.Twitter;
