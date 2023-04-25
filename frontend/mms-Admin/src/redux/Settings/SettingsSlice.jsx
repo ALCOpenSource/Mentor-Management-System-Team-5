@@ -4,14 +4,18 @@ import {
   changePasswordApi,
   updateProfileApi,
   editUserNotificationsApi,
-  getUserNotificationsApi
+  getUserNotificationsApi,
+  editUserPrivacyApi,
+  getUserPrivacyApi
 } from "../api/settings";
 
 import {
   changePasswordLoading,
   updateProfileLoading,
   editUserNotificationsLoading,
-  getUserNotificationsLoading
+  getUserNotificationsLoading,
+  editUserPrivacyLoading,
+  getUserPrivacyLoading
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
@@ -19,7 +23,9 @@ const initialState = {
   changePasswordData: {},
   updateProfileData: {},
   editUserNotificationsData: {},
-  getUserNotificationsData: {}
+  getUserNotificationsData: {},
+  editUserPrivacyData: {},
+  getUserPrivacyData: {}
 };
 
 export const settingsSlice = createSlice({
@@ -46,14 +52,29 @@ export const settingsSlice = createSlice({
 
     getUserNotificationsAction: (state, action) => {
       state.getUserNotificationsData = action.payload;
+    },
+
+    editUserPrivacyAction: (state, action) => {
+      state.editUserPrivacyData = action.payload;
+    },
+
+    getUserPrivacyAction: (state, action) => {
+      state.getUserPrivacyData = action.payload;
     }
   }
 });
 export default settingsSlice.reducer;
 
 // Actions
-const { hasError, changePasswordAction, updateProfileAction, editUserNotificationsAction, getUserNotificationsAction } =
-  settingsSlice.actions;
+const {
+  hasError,
+  changePasswordAction,
+  updateProfileAction,
+  editUserNotificationsAction,
+  getUserNotificationsAction,
+  editUserPrivacyAction,
+  getUserPrivacyAction
+} = settingsSlice.actions;
 
 export const changePassword = (data) => async (dispatch) => {
   dispatch(changePasswordLoading(true));
@@ -75,13 +96,10 @@ export const updateProfile = (data) => async (dispatch) => {
 
   try {
     const response = await updateProfileApi(data);
-    console.log(response, "updateProfile response");
-    toast.success(response?.data?.data?.message);
     dispatch(updateProfileLoading(false));
     dispatch(updateProfileAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    console.log(e, "updateProfile error");
     toast.error(e?.response?.data);
     dispatch(updateProfileLoading(false));
     dispatch(hasError(e?.response?.data));
@@ -117,6 +135,39 @@ export const getUserNotifications = () => async (dispatch) => {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(getUserNotificationsLoading(false));
+    return { success: false };
+  }
+};
+
+export const editUserPrivacy = (data) => async (dispatch) => {
+  dispatch(editUserPrivacyLoading(true));
+  try {
+    const response = await editUserPrivacyApi(data);
+    toast.success(response?.data?.data?.message);
+    toast.success("Privacy settings updated successfully");
+    dispatch(editUserPrivacyLoading(false));
+    dispatch(editUserPrivacyAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(editUserPrivacyLoading(false));
+    return { success: false };
+  }
+};
+
+export const getUserPrivacy = () => async (dispatch) => {
+  dispatch(getUserPrivacyLoading(true));
+  try {
+    const response = await getUserPrivacyApi();
+    toast.success(response?.data?.data?.message);
+    dispatch(getUserPrivacyLoading(false));
+    dispatch(getUserPrivacyAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(getUserPrivacyLoading(false));
     return { success: false };
   }
 };

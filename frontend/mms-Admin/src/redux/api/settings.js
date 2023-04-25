@@ -5,3 +5,5 @@ export const updateProfileApi = async (data) => await axios.put("/Account/update
 export const editUserNotificationsApi = async (data) =>
   await axios.patch("/UserNotification/editusernotification", data);
 export const getUserNotificationsApi = async (data) => await axios.get("/UserNotification/usernotification", data);
+export const editUserPrivacyApi = async (data) => await axios.patch("/UserPrivacy/edituserprivacy", data);
+export const getUserPrivacyApi = async (data) => await axios.get("/UserPrivacy/userprivacy", data);
