@@ -37,12 +37,16 @@ namespace mms.Application.Account.RefreshToken
             var user = await _userManager.FindByEmailAsync(userEmail);
 
             if (user == null)
+            {
                 throw new Exception("User not fouud");
+            }
 
             if (user.RefreshToken != request.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+            {
                 return Result<RefreshTokenResponse>.Fail("Invalid or expired refresh token");
+            }
 
-            var result = new RefreshTokenResponse()
+            var result = new RefreshTokenResponse
             {
                 RefreshToken = await _tokenGeneratorService.GenerateRefreshTokenAsync(user),
                 AccessToken = await _tokenGeneratorService.GenerateTokenAsync(user)
