@@ -1,28 +1,23 @@
-﻿using System;
-using System.Security.Claims;
-using AspNetCoreHero.Results;
+﻿using AspNetCoreHero.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using mms.Application.Account.PasswordReset;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
+using System.Security.Claims;
 
 namespace mms.Application.Account.Profile
 {
-	public class UpdateProfileHandler : AccountBaseHandler, IRequestHandler<UpdateProfileCommand, Result<string>>
+    public class UpdateProfileHandler : AccountBaseHandler, IRequestHandler<UpdateProfileCommand, Result<string>>
     {
-
-        protected readonly ITokenGeneratorService _tokenGenerator;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UpdateProfileHandler(UserManager<AppUser> userManager, IConfiguration configuration,
             ApplicationContext context, ITokenGeneratorService tokenGenerator,
-            IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration)
+            IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration, tokenGenerator)
         {
-            _tokenGenerator = tokenGenerator;
             this._httpContextAccessor = _httpContextAccessor;
         }
 
@@ -30,7 +25,8 @@ namespace mms.Application.Account.Profile
         {
             string? userEmail = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
 
-            if (userEmail != null) {
+            if (userEmail != null)
+            {
                 var user = await _userManager.FindByEmailAsync(userEmail);
 
                 if (user == null)
@@ -47,6 +43,7 @@ namespace mms.Application.Account.Profile
                 {
                     return await Result<string>.FailAsync("Account not active");
                 }
+
                 AppUser? updateUser = await FromUpdateProfileCommandToAppUser(request, userEmail);
                 await _userManager.UpdateAsync(updateUser!);
 
@@ -57,4 +54,3 @@ namespace mms.Application.Account.Profile
         }
     }
 }
-

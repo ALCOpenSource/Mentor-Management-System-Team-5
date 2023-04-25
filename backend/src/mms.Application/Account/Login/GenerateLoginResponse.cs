@@ -12,15 +12,13 @@ namespace mms.Application.Account.Login
 {
     public class GenerateLoginResponse : AccountBaseHandler
     {
-        protected readonly ITokenGeneratorService _tokenGenerator;
         private readonly ApplicationContext _context;
 
         public GenerateLoginResponse(UserManager<AppUser> userManager, IConfiguration configuration,
             ApplicationContext context, ITokenGeneratorService tokenGenerator) : base(userManager,
-            configuration)
+            configuration, tokenGenerator)
         {
             _context = context;
-            _tokenGenerator = tokenGenerator;
         }
 
         protected async Task<LoginResponseDto> GetLoginSuccessResponse(AppUser user)
@@ -32,8 +30,8 @@ namespace mms.Application.Account.Login
                 Id = user.Id,
                 Email = user.Email,
                 FullName = Utilities.GetUserFullName(user),
-                Token = await _tokenGenerator.GenerateTokenAsync(user),
-                RefreshToken = await _tokenGenerator.GenerateRefreshTokenAsync(user),
+                Token = await _tokenGeneratorService.GenerateTokenAsync(user),
+                RefreshToken = await _tokenGeneratorService.GenerateRefreshTokenAsync(user),
                 Roles = roles,
             };
             return result;

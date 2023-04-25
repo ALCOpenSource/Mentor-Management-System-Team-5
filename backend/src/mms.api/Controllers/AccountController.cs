@@ -1,22 +1,23 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using mms.Application.Account.Login;
-using System.Net;
-using AspNetCoreHero.Results;
-using System.ComponentModel.DataAnnotations;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using mms.Application.Account.PasswordReset;
-using mms.Infrastructure.Interface;
-using mms.Application.Account.Profile;
 using mms.Application.Account.ChangePassword;
+using mms.Application.Account.Login;
+using mms.Application.Account.PasswordReset;
+using mms.Application.Account.Profile;
+using mms.Infrastructure.Interface;
+using System.Net;
+using mms.Application.Account.RefreshToken;
 
 namespace mms.api.Controllers
 {
     public class AccountController : BaseController
     {
-        public AccountController(IMailService mailService) {
+        public AccountController(IMailService mailService)
+        {
             _mailService = mailService;
         }
+
         private readonly IMailService _mailService;
 
         [AllowAnonymous]
@@ -24,6 +25,21 @@ namespace mms.api.Controllers
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> LoginAsync(LoginCommand command)
+        {
+            var result = await Mediator.Send(command);
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("refresh-token")]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> LoginAsync(RefreshTokenCommand command)
         {
             var result = await Mediator.Send(command);
             if (result.Succeeded == false)
@@ -46,8 +62,10 @@ namespace mms.api.Controllers
                 return BadRequest(result.Message);
             }
 
-            var forgetPasswordLink = Url.Action(nameof(ResetPassword), "Account", new { token = result.Data.Token, email = result.Data.Email }, Request.Scheme);
-            var mail = new Domain.Mail.MailRequest {
+            var forgetPasswordLink = Url.Action(nameof(ResetPassword), "Account",
+                new { token = result.Data.Token, email = result.Data.Email }, Request.Scheme);
+            var mail = new Domain.Mail.MailRequest
+            {
                 Subject = "Forgot Password Link",
                 ToEmail = result.Data.Email!,
                 Body = forgetPasswordLink!
@@ -62,9 +80,9 @@ namespace mms.api.Controllers
         [ProducesResponseType(typeof(Result<ResetPassword>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ResetPassword(string token, string email)
         {
-            var result = new ResetPassword { Token = token, Email = email};
+            var result = new ResetPassword { Token = token, Email = email };
 
-            return Ok(new {result});
+            return Ok(new { result });
         }
 
         [AllowAnonymous]
