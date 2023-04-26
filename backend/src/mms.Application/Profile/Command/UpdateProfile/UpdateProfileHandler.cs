@@ -8,6 +8,7 @@ using mms.Domain.Entities;
 using System.Security.Claims;
 using AutoMapper;
 using mms.Infrastructure.Interface;
+using mms.Infrastructure.Context;
 
 namespace mms.Application.Profile.Command.UpdateProfile
 {
@@ -15,13 +16,15 @@ namespace mms.Application.Profile.Command.UpdateProfile
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ApplicationContext _context;
+        private readonly IMapper _mapper;
 
         public UpdateProfileHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            ICurrentUserService currentUserService, IMapper mapper,
+            ICurrentUserService currentUserService, IMapper mapper, ApplicationContext context,
             IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration, currentUserService, mapper)
         {
             this._httpContextAccessor = _httpContextAccessor;
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<Result<string>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
@@ -47,13 +50,13 @@ namespace mms.Application.Profile.Command.UpdateProfile
                     return await Result<string>.FailAsync("Account not active");
                 }
 
-                AppUser? updateUser = await FromUpdateProfileCommandToAppUser(request, userEmail);
+                AppUser? updateUser = await FromUpdateProfileCommandToAppUser(request, user);
                 await _userManager.UpdateAsync(updateUser!);
                 await _context.SaveChangesAsync(cancellationToken);
                 return await Result<string>.SuccessAsync("Successfully Update Profile");
             }
 
-            return await Result<string>.FailAsync("Email does not exist");
+            return await Result<string>.FailAsync("Invalid User");
         }
     }
 }
