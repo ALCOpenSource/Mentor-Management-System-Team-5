@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import ModalContainer from "../ModalContainer/ModalContainer";
-import styles from "./CreateForumTopic.module.scss";
+import styles from "./CreateAndEditForumTopic.module.scss";
 import Button from "@/components/Button/Button";
 import { hideModal, showModal } from "@/redux/Modal/ModalSlice";
 import closeIcon from "@/assets/icons/close-icon.svg";
-import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import attachmentIcon from "@/assets/icons/attachment-icon-green.svg";
@@ -15,19 +14,17 @@ import smileyIcon from "@/assets/icons/smiley-icon.svg";
 
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createForumTopicSchema } from "@/helpers/validation";
+import { createAndEditForumTopicSchema } from "@/helpers/validation";
 
-function CreateForumTopic({ show, size, modalName }) {
+function CreateAndEditForumTopic({ show, size, modalName }) {
   const dispatch = useDispatch();
   const modalData = useSelector((state) => state.modal.modalData);
-  const displayModal = useSelector((state) => state.modal.show);
-  const modalNameAlt = useSelector((state) => state.modal.modalName);
 
   const handleCloseModal = () => {
     dispatch(hideModal({ name: "successNotification" }));
   };
 
-  const resolver = yupResolver(createForumTopicSchema);
+  const resolver = yupResolver(createAndEditForumTopicSchema);
 
   const defaultValues = {
     title: "",
@@ -113,16 +110,14 @@ function CreateForumTopic({ show, size, modalName }) {
           </div>
         </div>
       </div>
-
-      {displayModal && modalNameAlt === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </ModalContainer>
   );
 }
 
-CreateForumTopic.propTypes = {
+CreateAndEditForumTopic.propTypes = {
   show: PropTypes.bool,
   size: PropTypes.string,
   modalName: PropTypes.string
 };
 
-export default CreateForumTopic;
+export default CreateAndEditForumTopic;
