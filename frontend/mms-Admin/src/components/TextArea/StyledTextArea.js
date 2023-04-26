@@ -6,10 +6,9 @@ export const FormGroup = styled(Form.Group)`
   position: relative;
   width: inherit;
   border-radius: 4px;
-  border: 1px solid #c1c7d0;
-  border: 1px solid #c8c8c8;
   padding: 4px 10px 7.5px 10px;
   margin-bottom: ${({ marginbottom }) => marginbottom};
+  border: ${({ borderColor }) => `1px solid ${borderColor ? borderColor : "#c8c8c8"}`};
 
   textarea {
     display: block;
@@ -65,6 +64,5 @@ export const StyledTextArea = styled.textarea`
   min-height: ${({ minHeight = "100px" }) => minHeight};
   font-size: ${({ fontSize = "10px" }) => fontSize};
   font-weight: ${({ fontWeight = "400" }) => fontWeight};
-  border: ${({ border }) => border};
   color: ${({ color }) => color ?? "#000"};
 `;

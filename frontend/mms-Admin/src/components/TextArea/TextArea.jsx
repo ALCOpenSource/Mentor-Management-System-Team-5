@@ -2,21 +2,23 @@ import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { FormGroup, StyledTextArea } from "./StyledTextArea";
 
-const TextArea = forwardRef(({ label, placeholder, required, onChange, error, marginbottom, minHeight, ...props }) => {
-  return (
-    <FormGroup marginbottom={marginbottom || "2rem"} required={required}>
-      <label>{label}</label>
-      <StyledTextArea
-        placeholder={placeholder}
-        required={required}
-        onChange={onChange}
-        minHeight={minHeight}
-        {...props}
-      />
-      {error ? <p className='error'>{error}</p> : ""}
-    </FormGroup>
-  );
-});
+const TextArea = forwardRef(
+  ({ label, placeholder, required, onChange, error, marginbottom, minHeight, borderColor, ...props }) => {
+    return (
+      <FormGroup marginbottom={marginbottom || "2rem"} borderColor={borderColor} required={required}>
+        <label>{label}</label>
+        <StyledTextArea
+          placeholder={placeholder}
+          required={required}
+          onChange={onChange}
+          minHeight={minHeight}
+          {...props}
+        />
+        {error ? <p className='error'>{error}</p> : ""}
+      </FormGroup>
+    );
+  }
+);
 
 TextArea.displayName = "TextArea";
 
@@ -27,7 +29,8 @@ TextArea.propTypes = {
   onChange: PropTypes.func,
   marginbottom: PropTypes.string,
   minHeight: PropTypes.string,
-  error: PropTypes.string
+  error: PropTypes.string,
+  borderColor: PropTypes.string
 };
 
 export default TextArea;

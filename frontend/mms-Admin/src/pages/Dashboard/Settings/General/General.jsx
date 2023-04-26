@@ -103,7 +103,11 @@ function General() {
   };
 
   const handleUpdateProfile = async (data) => {
-    const payload = { ...data, profilePicture: uploadedFile?.file ? uploadedFile?.file : data.profilePicture };
+    const payload = {
+      ...data,
+      profilePicture: uploadedFile?.file ? uploadedFile?.file : data.profilePicture,
+      country: countries.find((country) => country.value === data.country)?.label
+    };
     let response = await dispatch(updateProfile(payload));
 
     response?.success &&

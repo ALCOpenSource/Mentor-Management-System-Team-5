@@ -4,6 +4,7 @@ import cx from "classnames";
 import styles from "./Privacy.module.scss";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 import { getUserPrivacy, editUserPrivacy } from "@/redux/Settings/SettingsSlice";
+import Loader from "@/components/Loader/Loader";
 
 function Privacy() {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ function Privacy() {
   return (
     <div className={cx(styles.privacyContainer, "flexCol")}>
       {Object.keys(userPrivacyData).length === 0 ? (
-        <p>loading</p>
+        <Loader small={false} />
       ) : (
         Array.isArray(userPrivacyArray) &&
         userPrivacyArray.map((category) => {
@@ -78,8 +79,7 @@ function Privacy() {
               <h6 className={cx(styles.infoTitle)}>{category.title}</h6>
               <div className={cx(styles.switchWrapper, "flexRow")}>
                 <ToggleSwitch
-                  initialState={category?.value}
-                  checkedState={category.value}
+                  checkedStatus={category.value}
                   onChange={(status) => handleEditUserPrivacy(status, category.key)}
                 />
               </div>

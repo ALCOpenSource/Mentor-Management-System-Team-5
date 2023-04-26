@@ -60,3 +60,8 @@ export const createReportSchema = Yup.object().shape({
   blockers: Yup.string(),
   recommendations: Yup.string()
 });
+
+export const createForumTopicSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required"),
+  body: Yup.string().required("Message body is required")
+});

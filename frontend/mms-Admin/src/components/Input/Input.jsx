@@ -35,7 +35,7 @@ const Input = forwardRef(
     }, [props.value]);
 
     return (
-      <FormGroup marginbottom={marginbottom || "2rem"} border={border || "#CCCCCC"} required={required}>
+      <FormGroup marginbottom={marginbottom || "2rem"} border={border || "#e6e6e6"} required={required}>
         <div className='input-container'>
           {icon && <img src={searchIcon} alt='search icon' />}
           <input
