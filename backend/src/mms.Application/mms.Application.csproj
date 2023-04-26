@@ -26,10 +26,18 @@
     <None Remove="Account\PasswordReset\" />
     <None Remove="Account\Profile\" />
     <None Remove="Account\ChangePassword\" />
+    <None Remove="Support\" />
+    <None Remove="Support\Command\" />
+    <None Remove="Program\" />
+    <None Remove="Program\Query\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\PasswordReset\" />
     <Folder Include="Account\Profile\" />
     <Folder Include="Account\ChangePassword\" />
+    <Folder Include="Support\" />
+    <Folder Include="Support\Command\" />
+    <Folder Include="Program\" />
+    <Folder Include="Program\Query\" />
   </ItemGroup>
 </Project>

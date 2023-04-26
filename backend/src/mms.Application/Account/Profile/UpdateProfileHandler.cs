@@ -4,6 +4,7 @@ using AspNetCoreHero.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using mms.Application.Account.PasswordReset;
 using mms.Domain.Entities;
@@ -17,6 +18,7 @@ namespace mms.Application.Account.Profile
 
         protected readonly ITokenGeneratorService _tokenGenerator;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ApplicationContext _context;
 
         public UpdateProfileHandler(UserManager<AppUser> userManager, IConfiguration configuration,
             ApplicationContext context, ITokenGeneratorService tokenGenerator,
@@ -24,6 +26,7 @@ namespace mms.Application.Account.Profile
         {
             _tokenGenerator = tokenGenerator;
             this._httpContextAccessor = _httpContextAccessor;
+            _context = context;
         }
 
         public async Task<Result<string>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
@@ -49,7 +52,7 @@ namespace mms.Application.Account.Profile
                 }
                 AppUser? updateUser = await FromUpdateProfileCommandToAppUser(request, userEmail);
                 await _userManager.UpdateAsync(updateUser!);
-
+                await _context.SaveChangesAsync(cancellationToken);
                 return await Result<string>.SuccessAsync("Successfully Update Profile");
             }
 
