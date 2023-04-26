@@ -1,0 +1,182 @@
+.discussionForumCardContainer {
+  gap: 1.5rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--grayBorderColor);
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+  }
+
+  .heading {
+    align-items: flex-start;
+
+    .bioDataDiv {
+      gap: 0.75rem;
+
+      .profileImage {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+      }
+
+      .bioDetails {
+        text-align: left;
+        gap: 0.125rem;
+
+        .name {
+          font-size: 1.125rem;
+          font-family: var(--semiBold);
+          color: var(--black2TextColor);
+          line-height: 1;
+          margin: 0;
+        }
+
+        .designation {
+          font-size: 0.875rem;
+          font-family: var(--regular);
+          color: var(--grayTextColor);
+          line-height: 1;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .content {
+    gap: 0.5rem;
+
+    .title {
+      font-size: 1.125rem;
+      font-family: var(--semiBold);
+      color: var(--black2TextColor);
+      line-height: 1;
+      margin: 0;
+    }
+
+    .description {
+      font-size: 1rem;
+      font-family: var(--regular);
+      color: var(--grayTextColor);
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+
+  .footer {
+    align-items: center;
+
+    .iconsDiv {
+      gap: 0.75rem;
+    }
+
+    .timeDiv {
+      gap: 0.5rem;
+
+      span {
+        font-size: 0.875rem;
+        font-family: var(--regular);
+        color: var(--grayTextColor);
+        line-height: 1;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .discussionForumCardContainer {
+    gap: 1.75rem;
+    padding: 1rem;
+
+    .icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .heading {
+      .bioDataDiv {
+        gap: 1rem;
+
+        .profileImage {
+          width: 4rem;
+          height: 4rem;
+        }
+
+        .bioDetails {
+          gap: 0.25rem;
+
+          .name {
+            font-size: 1.25rem;
+          }
+
+          .designation {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+
+    .content {
+      gap: 0.75rem;
+
+      .title {
+        font-size: 1.125rem;
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+    }
+
+    .footer {
+      .iconsDiv {
+        gap: 0.875rem;
+      }
+
+      .timeDiv {
+        gap: 0.75rem;
+
+        span {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .discussionForumCardContainer {
+    gap: 1.75rem;
+
+    .heading {
+      .bioDataDiv {
+        .profileImage {
+          width: 3.5rem;
+          height: 3.5rem;
+        }
+
+        .bioDetails {
+          .name {
+            font-size: 1.25rem;
+          }
+
+          .designation {
+            font-size: 0.875rem;
+          }
+        }
+      }
+    }
+
+    .content {
+      gap: 0.75rem;
+
+      .description {
+        font-size: 1rem;
+        line-height: 2rem;
+      }
+    }
+  }
+}

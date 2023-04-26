@@ -1,6 +1,5 @@
 .privacyContainer {
   gap: 2rem;
-  max-width: 50%;
 
   .infoWrapper {
     gap: 1.5rem;
@@ -19,5 +18,11 @@
       padding-right: 0.5rem;
       align-items: center;
     }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .privacyContainer {
+    max-width: 50%;
   }
 }

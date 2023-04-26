@@ -1,6 +1,6 @@
-const userInfo = () => {
+const useGetUserInfo = () => {
   let userData = JSON.parse(localStorage.getItem("userData"));
   return userData;
 };
 
-export default userInfo;
+export default useGetUserInfo;

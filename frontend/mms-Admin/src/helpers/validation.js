@@ -23,9 +23,9 @@ export const resetPasswordSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must and should match")
 });
 
-export const settingsGeneralSchema = Yup.object().shape({
-  firstName: Yup.string().required("First Name is required"),
-  lastName: Yup.string().required("Last Name is required")
+export const updateProfileSchema = Yup.object().shape({
+  firstName: Yup.string(),
+  lastName: Yup.string()
 });
 
 export const settingsPasswordSchema = Yup.object().shape({
@@ -59,4 +59,9 @@ export const createReportSchema = Yup.object().shape({
   achievements: Yup.string(),
   blockers: Yup.string(),
   recommendations: Yup.string()
+});
+
+export const createForumTopicSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required"),
+  body: Yup.string().required("Message body is required")
 });

@@ -9,14 +9,12 @@ using mms.Infrastructure.Interface;
 
 namespace mms.Application.Account.PasswordReset
 {
-	public class ResetPasswordHandler : AccountBaseHandler, IRequestHandler<ResetPassword, Result<string>>
+    public class ResetPasswordHandler : AccountBaseHandler, IRequestHandler<ResetPassword, Result<string>>
     {
-
-        protected readonly ITokenGeneratorService _tokenGenerator;
         public ResetPasswordHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            ApplicationContext context, ITokenGeneratorService tokenGenerator) : base(userManager, configuration)
+            ApplicationContext context, ITokenGeneratorService tokenGenerator) : base(userManager, configuration,
+            tokenGenerator)
         {
-            _tokenGenerator = tokenGenerator;
         }
 
         public async Task<Result<string>> Handle(ResetPassword request, CancellationToken cancellationToken)
@@ -37,13 +35,15 @@ namespace mms.Application.Account.PasswordReset
             {
                 return await Result<string>.FailAsync("Account not active");
             }
+
             var result = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
-            if (!result.Succeeded) {
-                return await Result<string>.FailAsync("Failed while processing user password reset, kindly try again later.");
+            if (!result.Succeeded)
+            {
+                return await Result<string>.FailAsync(
+                    "Failed while processing user password reset, kindly try again later.");
             }
 
             return await Result<string>.SuccessAsync("Password has been changed");
         }
     }
 }
-

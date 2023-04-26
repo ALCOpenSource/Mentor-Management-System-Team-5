@@ -1,0 +1,89 @@
+.modalWrapper {
+  gap: 2.5rem;
+  background-color: var(--modalBgColor);
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+
+  .modalHeader {
+    align-items: center;
+    gap: 1rem;
+
+    .headerTitle {
+      font-size: 1.25rem;
+      font-family: var(--semiBold);
+      color: var(--blackTextColor);
+    }
+  }
+
+  .modalBody {
+    align-items: center;
+    width: 100%;
+
+    .formWrapper {
+      width: 100%;
+
+      form {
+        width: 100%;
+
+        .textAreaWrapper {
+          border: 1px solid var(--grayBorderColor);
+          border-radius: 0.5rem;
+          padding: 1rem;
+
+          .attachmentsDiv {
+            gap: 1rem;
+
+            img {
+              width: 1.5rem;
+              object-fit: cover;
+              cursor: pointer;
+            }
+          }
+
+          p {
+            bottom: -40%;
+          }
+        }
+
+        .submitBtnDiv {
+          margin-top: 2.5rem;
+        }
+      }
+    }
+  }
+
+  .modalFooter {
+    .btnDiv {
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .modalWrapper {
+    gap: 2.5rem;
+    padding: 1.5rem 2rem;
+
+    .modalHeader {
+      .headerTitle {
+        font-size: 1.5rem;
+      }
+    }
+
+    .modalBody {
+      .successImage {
+        width: 15rem;
+      }
+    }
+
+    .modalFooter {
+      .btnDiv {
+        button {
+          width: fit-content;
+        }
+      }
+    }
+  }
+}

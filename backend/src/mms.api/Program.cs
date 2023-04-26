@@ -9,6 +9,11 @@ using mms.Infrastructure.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Set up configuration sources
+var configuration = builder.Configuration;
+configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
 //Add logging
 builder.Logging.AddConsole();
 
