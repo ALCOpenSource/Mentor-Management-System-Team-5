@@ -17,9 +17,9 @@ export const getUserNotificationsApi = async (data) => {
 };
 
 export const editUserPrivacyApi = async (data) => {
-  return await axios.patch("/UserPrivacy/edituserprivacy", data);
+  return await axios.patch("/UserPrivacy/edit-user-privacy", data);
 };
 
 export const getUserPrivacyApi = async (data) => {
-  return await axios.get("/UserPrivacy/userprivacy", data);
+  return await axios.get("/UserPrivacy/user-privacy", data);
 };
