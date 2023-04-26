@@ -1,6 +1,10 @@
 .generalContainer {
   gap: 1rem;
 
+  .formWrapper {
+    gap: 1rem;
+  }
+
   .wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -29,14 +33,36 @@
 
   .header {
     flex-wrap: nowrap;
-    gap: 1rem;
+    gap: 0;
 
     .imageDiv {
       width: fit-content;
+      display: flex;
       justify-content: flex-start;
+      padding-right: 1rem;
 
       img {
         width: 5rem;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+        cursor: pointer;
+        border: 0.25px solid var(--imageBorderColor);
+      }
+
+      .profileImageText {
+        font-size: 2.25rem;
+        color: var(--whiteTextColor);
+        font-family: var(--semiBold);
+        display: inline-block;
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+        line-height: 5rem;
+        text-align: center;
+        margin: 0;
+        background-color: var(--primaryColor);
+        cursor: pointer;
       }
     }
 
@@ -112,6 +138,10 @@
         .right {
           border-left: 1px solid var(--grayTextColor);
           width: 50%;
+
+          > div {
+            width: 100%;
+          }
         }
       }
     }
@@ -130,8 +160,11 @@
       margin-bottom: 1.5rem;
 
       .imageDiv {
-        img {
+        .profileImageText {
+          font-size: 2.25rem;
           width: 5rem;
+          height: 5rem;
+          line-height: 5rem;
         }
       }
 
@@ -182,8 +215,8 @@
       margin-bottom: 2rem;
 
       .imageDiv {
-        img {
-          width: 6rem;
+        .profileImageText {
+          font-size: 3rem;
         }
       }
 
@@ -238,14 +271,6 @@
 
         .title {
           margin-top: 1rem;
-        }
-      }
-    }
-
-    .header {
-      .imageDiv {
-        img {
-          width: 7rem;
         }
       }
     }

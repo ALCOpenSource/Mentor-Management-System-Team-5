@@ -1,6 +1,6 @@
 .notificationsContainer {
   gap: 2rem;
-  max-width: 65%;
+  height: 100%;
 
   .wrapper {
     gap: 0.5rem;
@@ -42,5 +42,11 @@
         align-items: center;
       }
     }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .notificationsContainer {
+    max-width: 65%;
   }
 }

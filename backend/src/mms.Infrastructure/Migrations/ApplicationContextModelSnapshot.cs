@@ -181,16 +181,16 @@ namespace mms.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Facebook")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("GitHub")
+                    b.Property<string>("Github")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Headline")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Instagram")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsActive")

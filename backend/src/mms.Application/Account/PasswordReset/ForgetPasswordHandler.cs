@@ -10,17 +10,17 @@ using mms.Infrastructure.Interface;
 
 namespace mms.Application.Account.PasswordReset
 {
-	public class ForgetPasswordHandler : AccountBaseHandler, IRequestHandler<ForgetPasswordCommand, Result<ForgetPasswordResponseDto>>
+    public class ForgetPasswordHandler : AccountBaseHandler,
+        IRequestHandler<ForgetPasswordCommand, Result<ForgetPasswordResponseDto>>
     {
-
-        protected readonly ITokenGeneratorService _tokenGenerator;
         public ForgetPasswordHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            ApplicationContext context, ITokenGeneratorService tokenGenerator) : base(userManager, configuration)
+            ApplicationContext context, ITokenGeneratorService tokenGeneratorService) : base(userManager, configuration,
+            tokenGeneratorService)
         {
-            _tokenGenerator = tokenGenerator;
         }
 
-        public async Task<Result<ForgetPasswordResponseDto>> Handle(ForgetPasswordCommand request, CancellationToken cancellationToken)
+        public async Task<Result<ForgetPasswordResponseDto>> Handle(ForgetPasswordCommand request,
+            CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
 
@@ -38,11 +38,11 @@ namespace mms.Application.Account.PasswordReset
             {
                 return await Result<ForgetPasswordResponseDto>.FailAsync("Account not active");
             }
+
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var result = new ForgetPasswordResponseDto { Email = user.Email, Token = token};
+            var result = new ForgetPasswordResponseDto { Email = user.Email, Token = token };
 
             return await Result<ForgetPasswordResponseDto>.SuccessAsync(result);
         }
     }
 }
-

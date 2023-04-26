@@ -7,7 +7,7 @@ namespace mms.api.Controllers
 {
     public class UserNotificationController : BaseController
     {
-        [HttpPatch("edituserprivacy")]
+        [HttpPatch("edit-user-notification")]
         public async Task<IActionResult> EditUserNotification(EditUserNotificationCommand command)
         {
             var result = await Mediator.Send(command);
@@ -19,7 +19,7 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("usernotification")]
+        [HttpGet("user-notification")]
         public async Task<IActionResult> GetUserNotification()
         {
             var result = await Mediator.Send(new GetUserNotificationCommand());

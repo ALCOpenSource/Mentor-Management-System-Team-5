@@ -33,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\PasswordReset\" />
-    <Folder Include="Account\Profile\" />
     <Folder Include="Account\ChangePassword\" />
     <Folder Include="Support\" />
     <Folder Include="Support\Command\" />

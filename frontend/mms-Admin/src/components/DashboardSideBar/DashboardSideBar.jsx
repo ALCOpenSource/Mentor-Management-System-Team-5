@@ -122,7 +122,6 @@ function DashboardSideBar() {
           <h5 className={cx(styles.name)}>Hi, {userData?.fullName}</h5>
           <p className={cx(styles.role)}>{arrayToString(userData?.roles)}</p>
         </div>
-
         <Menu>
           {menuItemsArray.map((item, index) => {
             return (
