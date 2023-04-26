@@ -42,7 +42,7 @@ const DiscussionForumTopic = ({ data }) => {
           <img
             onClick={() => handleBookmark()}
             className={cx(styles.icon)}
-            src={isBookmarked ? bookmarkIcon : bookmarkIconChecked}
+            src={isBookmarked ? bookmarkIconChecked : bookmarkIcon}
             alt='bookmark-icon'
           />
           <img className={cx(styles.icon)} src={shareIcon} alt='share-icon' />
