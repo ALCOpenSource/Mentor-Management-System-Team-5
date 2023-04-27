@@ -107,12 +107,12 @@ function Privacy() {
                 </div>
               );
             })}
-            <Button
-              loading={loading}
-              disabled={loading}
-              onClick={handleSubmit((data) => handleEditUserPrivacy(data))}
-              title='Save Changes'
-            />
+          <Button
+            loading={loading}
+            disabled={loading}
+            onClick={handleSubmit((data) => handleEditUserPrivacy(data))}
+            title='Save Changes'
+          />
         </form>
       )}
     </div>
