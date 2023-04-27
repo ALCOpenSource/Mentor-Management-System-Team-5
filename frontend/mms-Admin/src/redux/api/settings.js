@@ -9,11 +9,11 @@ export const updateProfileApi = async (data) => {
 };
 
 export const editUserNotificationsApi = async (data) => {
-  return await axios.patch("/UserNotification/edituserprivacy", data);
+  return await axios.patch("/UserNotification/edit-user-notification", data);
 };
 
 export const getUserNotificationsApi = async (data) => {
-  return await axios.get("/UserNotification/usernotification", data);
+  return await axios.get("/UserNotification/user-notification", data);
 };
 
 export const editUserPrivacyApi = async (data) => {
