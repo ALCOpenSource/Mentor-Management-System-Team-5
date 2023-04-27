@@ -16,7 +16,7 @@ const BroadcastMessageListItem = ({ date, message, receipant, time }) => {
           <h6 className={cx(styles.receipentText)}>{receipant}</h6>
           <div className={cx(styles.timeAndIconDiv, "flexRow")}>
             <h6 className={cx(styles.timeText)}>{time}</h6>
-            <img src={doubleCheckIcon} alt="double check icon" />
+            <img src={doubleCheckIcon} alt='double check icon' />
           </div>
         </div>
       </div>

@@ -66,7 +66,7 @@ const BroadcastMessage = () => {
         <DropDownList
           selectedReceipent={selectedReceipent}
           setSelectedReceipent={setSelectedReceipent}
-          menu={["All","Mentor Managers", "Mentors", "Mentor Manager Applicants", "Mentor Applicants"]}
+          menu={["All", "Mentor Managers", "Mentors", "Mentor Manager Applicants", "Mentor Applicants"]}
         />
         <div className={cx(styles.messagesList, "flexCol-align-center")}>
           {messagesArray.map((item, index) => (
@@ -80,9 +80,9 @@ const BroadcastMessage = () => {
           ))}
         </div>
         <div className={cx(styles.messageBoxDiv, "flexRow")}>
-          <img src={emojiIcon} alt="emoji icon" />
-          <img src={attachmentIcon} alt="attachment icon" />
-          <input className={cx(styles.messageInput)} type="text" placeholder="Type a message..."/>
+          <img src={emojiIcon} alt='emoji icon' />
+          <img src={attachmentIcon} alt='attachment icon' />
+          <input className={cx(styles.messageInput)} type='text' placeholder='Type a message...' />
         </div>
       </section>
     </div>
