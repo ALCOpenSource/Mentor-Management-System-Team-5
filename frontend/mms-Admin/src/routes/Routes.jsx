@@ -12,7 +12,6 @@ import DashboardContainer from "@/components/DashboardContainer/DashboardContain
 import Home from "@/pages/Dashboard/Home/Home";
 import ApprovalRequests from "@/pages/Dashboard/ApprovalRequests/ApprovalRequests";
 import Certificates from "@/pages/Dashboard/Certificates/Certificates";
-import DiscussionForum from "@/pages/Dashboard/DiscussionForum/DiscussionForum";
 import MentorManagers from "@/pages/Dashboard/MentorManagers/MentorManagers";
 import Mentors from "@/pages/Dashboard/Mentors/Mentors";
 import Messages from "@/pages/Dashboard/Messages/Messages";
@@ -34,6 +33,10 @@ import Tasks from "@/pages/Dashboard/Tasks/Tasks";
 import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
 import CreateTask from "@/pages/Dashboard/Tasks/CreateTask/CreateTask";
 import EditTask from "@/pages/Dashboard/Tasks/EditTask/EditTask";
+
+// Discussion Forum
+import DiscussionForum from "@/pages/Dashboard/DiscussionForum/DiscussionForum";
+import PostDetails from "@/pages/Dashboard/DiscussionForum/PostDetails/PostDetails";
 
 // Reports
 import Reports from "@/pages/Dashboard/Reports/Reports";
@@ -74,7 +77,10 @@ function RoutesComponent() {
           </Route>
           <Route path='approval-requests' element={<ApprovalRequests />} />
           <Route index path='certificates' element={<Certificates />} />
-          <Route path='discussion-forum' element={<DiscussionForum />} />
+          <Route path='discussion-forum'>
+            <Route index path='' element={<DiscussionForum />} />
+            <Route path='post-details/:id' element={<PostDetails />} />
+          </Route>
           <Route path='mentor-managers' element={<MentorManagers />} />
           <Route path='mentors' element={<Mentors />} />
           <Route path='messages'>

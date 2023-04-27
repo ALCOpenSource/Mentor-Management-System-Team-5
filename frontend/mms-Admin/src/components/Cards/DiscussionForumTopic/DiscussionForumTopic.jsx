@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./DiscussionForumTopic.module.scss";
 import PropTypes from "prop-types";
@@ -12,8 +13,9 @@ import clockIcon from "@/assets/icons/clock-icon.svg";
 import moreIcon from "@/assets/icons/more-horizontal-icon.svg";
 import caretUp from "@/assets/icons/caret-up-icon.svg";
 
-const DiscussionForumTopic = ({ data }) => {
+const DiscussionForumTopic = ({ data, disableNavLink }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -31,7 +33,8 @@ const DiscussionForumTopic = ({ data }) => {
           name: "createAndEditForumTopic",
           modalData: {
             title: "Edit Post",
-            data: data
+            data: data,
+            type: "edit"
           }
         })
       );
@@ -40,15 +43,14 @@ const DiscussionForumTopic = ({ data }) => {
     if (type === "delete") {
       dispatch(
         showModal({
-          name: "deleteConfirmation",
+          name: "deleteNotification",
           modalData: {
-            title: "Delete Forum Topic",
-            description: "Are you sure you want to delete this forum topic?"
+            title: "Post Deleted Successfully",
+            type: "post"
           }
         })
       );
     }
-
   };
 
   const dropdownListArray = [
@@ -63,9 +65,13 @@ const DiscussionForumTopic = ({ data }) => {
   ];
 
   const handleDropdownToggle = (id) => {
+    console.log(id);
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleShowDetails = () => {
+    !disableNavLink && navigate(`post-details/${data?.id}`, { state: { data: data } });
+  };
 
   return (
     <div className={cx(styles.discussionForumCardContainer, "flexCol")}>
@@ -79,37 +85,37 @@ const DiscussionForumTopic = ({ data }) => {
           </div>
         </div>
         <div className={cx(styles.moreOptionsDiv)}>
-        <img className={cx(styles.icon)} src={moreIcon} alt='more-icon'
-        onClick={() => handleDropdownToggle(data?.id)}
-        />
-        {
-          isDropdownOpen && (
+          <img
+            className={cx(styles.icon)}
+            src={moreIcon}
+            alt='more-icon'
+            onClick={() => handleDropdownToggle(data?.id)}
+          />
+          {isDropdownOpen && (
             <div className={cx(styles.dropdown)}>
               <ul className={cx(styles.dropdownList)}>
-                {
-                  dropdownListArray.map((item) => {
-                    return (
-                      <li
-                        onClick={() => handleDropdownListClick(item?.key, data)}
-                        key={item.key}
-                        className={cx(styles.dropdownListItem)}
-                      >
-                        {item.name}
-                      </li>
-                    );
-                  })
-                }
+                {dropdownListArray.map((item) => {
+                  return (
+                    <li
+                      onClick={() => handleDropdownListClick(item?.key, data)}
+                      key={item.key}
+                      className={cx(styles.dropdownListItem)}
+                    >
+                      {item.name}
+                    </li>
+                  );
+                })}
               </ul>
-              <img onClick={() => handleDropdownToggle(data?.id)} src={caretUp} alt="caret-up" />
+              <img onClick={() => handleDropdownToggle(data?.id)} src={caretUp} alt='caret-up' />
             </div>
-          )
-        }
-
+          )}
         </div>
       </div>
 
       <div className={cx(styles.content, "flexCol")}>
-        <h3 className={cx(styles.title)}>{data?.title}</h3>
+        <h3 className={cx(styles.title)} onClick={() => handleShowDetails()}>
+          {data?.title}
+        </h3>
         <p className={cx(styles.description)}>{data?.description}</p>
       </div>
 
@@ -135,7 +141,12 @@ const DiscussionForumTopic = ({ data }) => {
 };
 
 DiscussionForumTopic.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  disableNavLink: PropTypes.object
+};
+
+DiscussionForumTopic.defaultProps = {
+  disableNavLink: false
 };
 
 export default DiscussionForumTopic;

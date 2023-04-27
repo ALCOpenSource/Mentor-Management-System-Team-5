@@ -27,8 +27,8 @@ function CreateAndEditForumTopic({ show, size, modalName }) {
   const resolver = yupResolver(createAndEditForumTopicSchema);
 
   const defaultValues = {
-    title: "",
-    body: ""
+    title: modalData?.data?.title || "",
+    body: modalData?.data?.description || ""
   };
 
   const {
@@ -39,11 +39,12 @@ function CreateAndEditForumTopic({ show, size, modalName }) {
 
   const createPost = (data) => {
     console.log(data);
+
     dispatch(
       showModal({
         name: "successNotification",
         modalData: {
-          title: "Post Created Successfully"
+          title: modalData?.type === "create" ? "Post Created Successfully" : "Post Updated Successfully"
         }
       })
     );
@@ -98,13 +99,23 @@ function CreateAndEditForumTopic({ show, size, modalName }) {
               </div>
 
               <div className={cx(styles.submitBtnDiv, "flexRow-right-centered")}>
-                <Button
-                  onClick={handleSubmit((data) => createPost(data))}
-                  // loading={loading}
-                  // disabled={loading}
-                  title='Post to forum'
-                  type='primary'
-                />
+                {modalData?.type === "create" ? (
+                  <Button
+                    onClick={handleSubmit((data) => createPost(data))}
+                    // loading={loading}
+                    // disabled={loading}
+                    title='Post to forum'
+                    type='primary'
+                  />
+                ) : (
+                  <Button
+                    onClick={handleSubmit((data) => createPost(data))}
+                    // loading={loading}
+                    // disabled={loading}
+                    title='Save changes'
+                    type='primary'
+                  />
+                )}
               </div>
             </form>
           </div>

@@ -1,7 +1,7 @@
 .modalWrapper {
   gap: 2.5rem;
   background-color: var(--modalBgColor);
-  padding: 3rem 2rem;
+  padding: 2rem 1rem;
   border-radius: 1rem;
 
   .modalHeader {
@@ -32,7 +32,7 @@
         .textAreaWrapper {
           border: 1px solid var(--grayBorderColor);
           border-radius: 0.5rem;
-          padding: 1rem;
+          padding: 0.5rem;
 
           .attachmentsDiv {
             gap: 1rem;

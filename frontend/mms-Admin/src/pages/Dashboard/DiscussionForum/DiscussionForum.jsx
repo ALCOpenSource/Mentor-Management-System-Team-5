@@ -6,6 +6,7 @@ import addIcon from "@/assets/icons/add-icon.svg";
 import thumbnailImg from "@/assets/images/mentor-manager-thumbnail.svg";
 import TopicCard from "@/components/Cards/DiscussionForumTopic/DiscussionForumTopic";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
+import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import CreateForumTopicModal from "@/components/Modals/CreateAndEditForumTopic/CreateAndEditForumTopic";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
@@ -67,7 +68,8 @@ const DiscussionForum = () => {
               showModal({
                 name: "createAndEditForumTopic",
                 modalData: {
-                  title: "New Topic"
+                  title: "New Topic",
+                  type: "create"
                 }
               })
             )}
@@ -85,6 +87,7 @@ const DiscussionForum = () => {
 
       {displayModal && modalName === "createAndEditForumTopic" ? <CreateForumTopicModal show size='lg' /> : null}
       {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
+      {displayModal && modalName === "deleteNotification" ? <DeleteNotificationModal show size='md' /> : null}
     </div>
   );
 };

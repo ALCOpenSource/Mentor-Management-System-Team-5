@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import cx from "classnames";
 import ModalContainer from "../ModalContainer/ModalContainer";
-import styles from "./TaskDeleteNotification.module.scss";
+import styles from "./DeleteNotification.module.scss";
 
 import successImage from "@/assets/images/task-delete-success.png";
 
@@ -12,7 +12,7 @@ import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 
-function TaskDeleteNotification({ show, size, modalName }) {
+function DeleteNotification({ show, size, modalName }) {
   const dispatch = useDispatch();
 
   const modalData = useSelector((state) => state.modal.modalData);
@@ -25,7 +25,7 @@ function TaskDeleteNotification({ show, size, modalName }) {
     <ModalContainer show={show} size={size} modalName={modalName}>
       <div className={cx(styles.modalWrapper, "flexCol")}>
         <div className={cx(styles.modalHeader, "flexCol")}>
-          <h6 className={cx(styles.headerTitle)}>{modalData}</h6>
+          <h6 className={cx(styles.headerTitle)}>{modalData?.title}</h6>
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
@@ -43,10 +43,10 @@ function TaskDeleteNotification({ show, size, modalName }) {
   );
 }
 
-TaskDeleteNotification.propTypes = {
+DeleteNotification.propTypes = {
   show: PropTypes.bool,
   size: PropTypes.string,
   modalName: PropTypes.string
 };
 
-export default TaskDeleteNotification;
+export default DeleteNotification;

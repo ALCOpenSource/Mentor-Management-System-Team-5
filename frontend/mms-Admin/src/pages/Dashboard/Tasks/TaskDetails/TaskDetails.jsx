@@ -10,7 +10,7 @@ import reportIcon from "@/assets/icons/task-report-icon-green.png";
 import mentorsIcon from "@/assets/icons/mentor-icon-green.png";
 import mentorManagersIcon from "@/assets/icons/mentor-manager-icon-green.png";
 import deleteIcon from "@/assets/icons/delete-icon-red.svg";
-import TaskDeleteNotificationModal from "@/components/Modals/TaskDeleteNotification/TaskDeleteNotification";
+import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
 function TaskDetails() {
@@ -46,7 +46,15 @@ function TaskDetails() {
   ];
 
   const handleDeleteTask = () => {
-    dispatch(showModal({ name: "taskDeleteNotification", modalData: "Task Deleted Successfully" }));
+    dispatch(
+      showModal({
+        name: "taskDeleteNotification",
+        modalData: {
+          title: "Task Deleted Successfully",
+          type: "task"
+        }
+      })
+    );
   };
 
   return (
@@ -103,7 +111,7 @@ function TaskDetails() {
         </>
       )}
 
-      {displayModal && modalName === "taskDeleteNotification" ? <TaskDeleteNotificationModal show size='md' /> : null}
+      {displayModal && modalName === "taskDeleteNotification" ? <DeleteNotificationModal show size='md' /> : null}
     </div>
   );
 }
