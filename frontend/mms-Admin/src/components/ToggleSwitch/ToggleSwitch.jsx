@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Switch from "react-switch";
 import { ReactComponent as ToggleOffIcon } from "@/assets/icons/toggle-off-icon.svg";
 import { ReactComponent as ToggleOnIcon } from "@/assets/icons/toggle-on-icon.svg";
@@ -6,6 +6,11 @@ import PropTypes from "prop-types";
 
 function ToggleSwitch({ onChange, checkedStatus }) {
   const [checked, setChecked] = useState(checkedStatus);
+
+  useEffect(() => {
+    setChecked(checkedStatus);
+  }, [checkedStatus]);
+
   const handleChange = (nextChecked) => {
     setChecked(nextChecked);
     onChange(nextChecked);

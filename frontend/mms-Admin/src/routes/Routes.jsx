@@ -78,8 +78,8 @@ function RoutesComponent() {
           <Route path='mentor-managers' element={<MentorManagers />} />
           <Route path='mentors' element={<Mentors />} />
           <Route path='messages'>
-            <Route path='' element={<Messages />}/>
-            <Route path='broadcast-message' element={<BroadcastMessage />}/>
+            <Route path='' element={<Messages />} />
+            <Route path='broadcast-message' element={<BroadcastMessage />} />
           </Route>
           <Route index path='profile' element={<Profile />} />
           <Route path='programs' element={<Programs />} />
