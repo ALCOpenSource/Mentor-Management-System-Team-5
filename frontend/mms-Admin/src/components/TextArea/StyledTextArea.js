@@ -18,6 +18,7 @@ export const FormGroup = styled(Form.Group)`
     color: #5e6c84;
     transition: 0.3s;
     font-size: 16px;
+    background-color: ${({ bgColor }) => bgColor};
 
     &:focus {
       outline: none;

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { FormGroup, StyledTextArea } from "./StyledTextArea";
 
 const TextArea = forwardRef(
-  ({ label, placeholder, required, onChange, error, marginbottom, minHeight, borderColor, ...props }) => {
+  ({ label, placeholder, required, onChange, error, marginbottom, minHeight, borderColor, bgColor, ...props }) => {
     return (
-      <FormGroup marginbottom={marginbottom || "2rem"} borderColor={borderColor} required={required}>
+      <FormGroup marginbottom={marginbottom || "2rem"} borderColor={borderColor} bgColor={bgColor} required={required}>
         <label>{label}</label>
         <StyledTextArea
           placeholder={placeholder}
@@ -30,7 +30,8 @@ TextArea.propTypes = {
   marginbottom: PropTypes.string,
   minHeight: PropTypes.string,
   error: PropTypes.string,
-  borderColor: PropTypes.string
+  borderColor: PropTypes.string,
+  bgColor: PropTypes.string
 };
 
 export default TextArea;
