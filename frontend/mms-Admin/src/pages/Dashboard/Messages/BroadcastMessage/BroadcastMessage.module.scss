@@ -11,7 +11,7 @@
     align-items: center;
     position: sticky;
     top: 0;
-    
+
     .title {
       margin: 0;
       font-family: var(--semiBold);
@@ -57,7 +57,9 @@
         padding-left: 2rem;
         padding-right: 1rem;
 
-        &:hover, &:focus, &:active {
+        &:hover,
+        &:focus,
+        &:active {
           outline-color: var(--green5Color);
           border-color: var(--green5Color);
         }
