@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mms.Infrastructure.Context;
 
@@ -10,9 +11,11 @@ using mms.Infrastructure.Context;
 namespace mms.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230426182542_AddedSupportEntities")]
+    partial class AddedSupportEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,16 +184,16 @@ namespace mms.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("Facebook")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Github")
+                    b.Property<string>("GitHub")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Headline")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Instagram")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsActive")

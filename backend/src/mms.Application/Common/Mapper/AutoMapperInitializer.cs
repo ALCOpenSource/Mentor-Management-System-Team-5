@@ -6,6 +6,10 @@ using mms.Application.UserPrivacy.Command.EditUserPrivacy;
 using mms.Application.UserPrivacy.Query;
 using UserNotificationEntity = mms.Domain.Entities.UserNotification;
 using UserPrivacyEntity = mms.Domain.Entities.UserPrivacy;
+using SupportEntity = mms.Domain.Entities.Support;
+using ProgrammeEntity = mms.Domain.Entities.Programme;
+using mms.Application.Support.Command;
+using mms.Application.Program.Query;
 using AppUserEntity = mms.Domain.Entities.AppUser;
 
 namespace mms.Application.Common.Mapper
@@ -18,6 +22,8 @@ namespace mms.Application.Common.Mapper
             CreateMap<UserNotificationEntity, GetUserNotificationResponse>().ReverseMap();
             CreateMap<UserPrivacyEntity, EditUserPrivacyCommand>().ReverseMap();
             CreateMap<UserPrivacyEntity, GetUserPrivacyResponse>().ReverseMap();
+            CreateMap<SupportEntity, AddSupportCommand>().ReverseMap();
+            CreateMap<ProgrammeEntity, GetArchiveProgramsResponse>().ReverseMap();
             CreateMap<AppUserEntity, GetProfileByIdResponse>().ReverseMap();
         }
     }

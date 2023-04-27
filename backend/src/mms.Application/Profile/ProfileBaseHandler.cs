@@ -23,10 +23,8 @@ namespace mms.Application.Profile
             _mapper = mapper;
         }
 
-        protected async Task<AppUser?> FromUpdateProfileCommandToAppUser(UpdateProfileCommand command, string email)
+        protected async Task<AppUser?> FromUpdateProfileCommandToAppUser(UpdateProfileCommand command, AppUser user)
         {
-            var user = await _userManager.FindByEmailAsync(email);
-
             user.About = command.About;
             user.Bio = command.Bio;
             user.City = command.City;
