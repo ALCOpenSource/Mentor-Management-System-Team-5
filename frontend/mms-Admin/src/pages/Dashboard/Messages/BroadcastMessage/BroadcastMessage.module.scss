@@ -1,0 +1,75 @@
+.broadcastMessageContainer {
+  gap: 1rem;
+  height: calc(100dvh - var(--topNavbarHeight));
+  overflow: hidden;
+
+  .heading {
+    padding: 1rem 0.5rem 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    align-items: center;
+    position: sticky;
+    top: 0;
+
+    .title {
+      margin: 0;
+      font-family: var(--semiBold);
+      color: var(--blackTextColor);
+      font-size: 1.5rem;
+      line-height: 1;
+      padding: 0;
+    }
+  }
+
+  .body {
+    padding: 0.5rem;
+    gap: 1.5rem;
+    height: 100%;
+
+    .messagesList {
+      gap: 1rem;
+      border-radius: 1.25rem;
+      background-color: var(--green3Color);
+      border: 1px solid var(--green4Color);
+      padding: 2rem 3rem 1rem 3rem;
+      max-height: 65%;
+      overflow-y: auto;
+    }
+
+    .messageBoxDiv {
+      gap: 1rem;
+      height: 3rem;
+
+      img {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .messageInput {
+        width: 100%;
+        background-color: var(--green3Color);
+        border: 1px solid var(--green4Color);
+        border-radius: 0.4375rem;
+        font-family: var(--regular);
+        font-size: 1rem;
+        padding-left: 2rem;
+        padding-right: 1rem;
+
+        &:hover,
+        &:focus,
+        &:active {
+          outline-color: var(--green5Color);
+          border-color: var(--green5Color);
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .broadcastMessageContainer {
+    padding: 1.5rem;
+  }
+}

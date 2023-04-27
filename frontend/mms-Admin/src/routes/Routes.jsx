@@ -43,6 +43,7 @@ import ReportDetails from "@/pages/Dashboard/Reports/ReportDetails/ReportDetails
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
 import userRoles from "@/constants/userRoles";
+import BroadcastMessage from "@/pages/Dashboard/Messages/BroadcastMessage/BroadcastMessage";
 
 function RoutesComponent() {
   return (
@@ -76,7 +77,10 @@ function RoutesComponent() {
           <Route path='discussion-forum' element={<DiscussionForum />} />
           <Route path='mentor-managers' element={<MentorManagers />} />
           <Route path='mentors' element={<Mentors />} />
-          <Route path='messages' element={<Messages />} />
+          <Route path='messages'>
+            <Route path='' element={<Messages />} />
+            <Route path='broadcast-message' element={<BroadcastMessage />} />
+          </Route>
           <Route index path='profile' element={<Profile />} />
           <Route path='programs' element={<Programs />} />
           <Route path='reports'>
