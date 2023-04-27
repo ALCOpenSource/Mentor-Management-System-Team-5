@@ -7,7 +7,7 @@ namespace mms.api.Controllers
 {
 	public class ProgramsController : BaseController
 	{
-        [HttpGet()]
+        [HttpGet("allPrograms")]
         public async Task<IActionResult> GetPrograms()
         {
             var result = await Mediator.Send(new GetArchiveProgramsCommand());
