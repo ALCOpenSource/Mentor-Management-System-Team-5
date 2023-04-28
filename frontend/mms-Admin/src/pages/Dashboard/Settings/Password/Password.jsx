@@ -18,7 +18,7 @@ import userInfo from "@/hooks/useGetUserInfo";
 
 function Password() {
   const dispatch = useDispatch();
-  // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
+  const loading = useSelector((state) => state?.loading?.changePasswordLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
   const { email: userEmail } = userInfo();
@@ -124,7 +124,12 @@ function Password() {
         </div>
 
         <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
-          <Button onClick={() => handleSubmit((data) => handleChangePassword(data))} title='Save new password' />
+          <Button
+            loading={loading}
+            disabled={loading}
+            onClick={() => handleSubmit((data) => handleChangePassword(data))}
+            title='Save new password'
+          />
         </div>
       </form>
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>

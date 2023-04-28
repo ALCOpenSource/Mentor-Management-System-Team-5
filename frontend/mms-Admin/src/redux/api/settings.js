@@ -5,7 +5,11 @@ export const changePasswordApi = async (data) => {
 };
 
 export const updateProfileApi = async (data) => {
-  return await axios.put("/Account/update-profile", data);
+  return await axios.put("/Profile/update-profile", data);
+};
+
+export const getProfileApi = async (data) => {
+  return await axios.get("/Profile/get-profile", data);
 };
 
 export const editUserNotificationsApi = async (data) => {

@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import {
   changePasswordApi,
   updateProfileApi,
+  getProfileApi,
   editUserNotificationsApi,
   getUserNotificationsApi,
   editUserPrivacyApi,
@@ -12,6 +13,7 @@ import {
 import {
   changePasswordLoading,
   updateProfileLoading,
+  getProfileLoading,
   editUserNotificationsLoading,
   getUserNotificationsLoading,
   editUserPrivacyLoading,
@@ -22,6 +24,7 @@ const initialState = {
   error: false,
   changePasswordData: {},
   updateProfileData: {},
+  getProfileData: {},
   editUserNotificationsData: {},
   getUserNotificationsData: {},
   editUserPrivacyData: {},
@@ -44,6 +47,10 @@ export const settingsSlice = createSlice({
 
     updateProfileAction: (state, action) => {
       state.updateProfileData = action.payload;
+    },
+
+    getProfileAction: (state, action) => {
+      state.getProfileData = action.payload;
     },
 
     editUserNotificationsAction: (state, action) => {
@@ -70,6 +77,7 @@ const {
   hasError,
   changePasswordAction,
   updateProfileAction,
+  getProfileAction,
   editUserNotificationsAction,
   getUserNotificationsAction,
   editUserPrivacyAction,
@@ -102,6 +110,22 @@ export const updateProfile = (data) => async (dispatch) => {
   } catch (e) {
     toast.error(e?.response?.data);
     dispatch(updateProfileLoading(false));
+    dispatch(hasError(e?.response?.data));
+    return { success: false };
+  }
+};
+
+export const getProfile = (data) => async (dispatch) => {
+  dispatch(getProfileLoading(true));
+
+  try {
+    const response = await getProfileApi(data);
+    dispatch(getProfileLoading(false));
+    dispatch(getProfileAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data);
+    dispatch(getProfileLoading(false));
     dispatch(hasError(e?.response?.data));
     return { success: false };
   }
