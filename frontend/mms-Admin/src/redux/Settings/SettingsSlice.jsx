@@ -204,10 +204,10 @@ export const getUserPrivacy = () => async (dispatch) => {
   }
 };
 
-export const sendSupportMessage = () => async (dispatch) => {
+export const sendSupportMessage = (data) => async (dispatch) => {
   dispatch(sendSupportMessageLoading(true));
   try {
-    const response = await sendSupportMessageApi();
+    const response = await sendSupportMessageApi(data);
     dispatch(sendSupportMessageLoading(false));
     dispatch(sendSupportMessageAction(response?.data?.data));
     return { success: true };
