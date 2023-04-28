@@ -11,6 +11,9 @@ using ProgrammeEntity = mms.Domain.Entities.Programme;
 using mms.Application.Support.Command;
 using mms.Application.Program.Query;
 using AppUserEntity = mms.Domain.Entities.AppUser;
+using FAQEntity = mms.Domain.Entities.FAQ;
+using mms.Application.FAQ.Command;
+using mms.Application.FAQ.Query;
 
 namespace mms.Application.Common.Mapper
 {
@@ -25,6 +28,9 @@ namespace mms.Application.Common.Mapper
             CreateMap<SupportEntity, AddSupportCommand>().ReverseMap();
             CreateMap<ProgrammeEntity, GetArchiveProgramsResponse>().ReverseMap();
             CreateMap<AppUserEntity, GetProfileByIdResponse>().ReverseMap();
+            CreateMap<FAQEntity, PostFAQCommand>().ReverseMap();
+            CreateMap<FAQEntity, PutFAQCommand>().ReverseMap();
+            CreateMap<FAQEntity, GetFAQsResponse>().ReverseMap();
         }
     }
 }
