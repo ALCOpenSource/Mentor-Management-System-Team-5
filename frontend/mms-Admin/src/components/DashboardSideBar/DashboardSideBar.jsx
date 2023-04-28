@@ -22,6 +22,7 @@ import { ReactComponent as LogoutIcon } from "@/assets/icons/logout-icon.svg";
 import userInfo from "@/hooks/useGetUserInfo";
 import arrayToString from "@/helpers/arrayToString";
 import { logout } from "@/utils/auth";
+import { titleCase } from "@/helpers/textTransform";
 
 function DashboardSideBar() {
   const location = useLocation();
@@ -119,7 +120,9 @@ function DashboardSideBar() {
     <div className={cx(styles.dashboardSideBarContainer, "flexCol")}>
       <Sidebar breakPoint='xl' className={cx(styles.sidebar)}>
         <div className={cx(styles.userInfoDiv, "flexCol")}>
-          <h5 className={cx(styles.name)}>Hi, {userData?.fullName}</h5>
+          <h5 className={cx(styles.name)}>
+            Hi, {titleCase(userData?.firstName) || titleCase(userData?.lastName || titleCase(userData?.fullName))}
+          </h5>
           <p className={cx(styles.role)}>{arrayToString(userData?.roles)}</p>
         </div>
         <Menu>

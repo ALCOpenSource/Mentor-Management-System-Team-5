@@ -107,7 +107,7 @@ export const FormGroup = styled(Form.Group)`
     bottom: -30%;
     text-align: left;
     padding: 0.25rem 0px 0px 0px;
-    margin: 0px;
+    margin: 0;
     line-height: 1;
   }
   .eye-icon {

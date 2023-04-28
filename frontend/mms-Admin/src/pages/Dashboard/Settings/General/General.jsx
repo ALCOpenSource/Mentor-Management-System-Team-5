@@ -17,39 +17,43 @@ import githubIcon from "@/assets/icons/settings-github-icon.svg";
 import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
 import linkedinIcon from "@/assets/icons/settings-linkedin-icon.svg";
 import twitterIcon from "@/assets/icons/settings-twitter-icon.svg";
-// import profileImage from "@/assets/images/sample-profile-image.svg";
-
 import { updateProfileSchema } from "@/helpers/validation";
-import { updateProfile } from "@/redux/Settings/SettingsSlice";
-import useGetUserInfo from "@/hooks/useGetUserInfo";
+import { updateProfile, getProfile } from "@/redux/Settings/SettingsSlice";
 import { initialsCase } from "@/helpers/textTransform";
 
 function General() {
   const dispatch = useDispatch();
-  const userData = useGetUserInfo();
-
   const loading = useSelector((state) => state?.loading?.updateProfileLoading);
+  const userProfile = useSelector((state) => state.settings.getProfileData);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
   const socialMediaInputArray = [
     {
-      name: "Github",
+      key: "github",
+      label: "Github",
       placeholder: "@githubuser",
       icon: githubIcon
     },
     {
-      name: "Instagram",
+      key: "instagram",
+      label: "Instagram",
       placeholder: "@instagramuser",
       icon: instagramIcon
     },
     {
-      name: "LinkedIn",
+      key: "linkedIn",
+      label: "LinkedIn",
       placeholder: "@linkedinuser",
       icon: linkedinIcon
     },
     {
-      name: "Twitter",
+      key: "twitter",
+      label: "Twitter",
       placeholder: "@twitteruser",
       icon: twitterIcon
     }
@@ -60,39 +64,33 @@ function General() {
 
   useEffect(() => {
     const countries = Country.getAllCountries().map((country) => {
-      return { value: country.isoCode, label: country.name };
+      return { value: country.name, label: country.name };
     });
     setCountries(countries);
   }, []);
 
   const resolver = yupResolver(updateProfileSchema);
 
-  const defaultValues = {
-    firstName: userData?.fullName || userData?.firstname || "",
-    lastName: userData?.lastname || "",
-    website: userData?.website || "",
-    about: userData?.about || "",
-    country: userData?.country || "",
-    city: userData?.city || "",
-    github: userData?.github || "",
-    instagram: userData?.instagram || "",
-    linkedin: userData?.linkedin || "",
-    twitter: userData?.twitter || "",
-    facebook: userData?.facebook || "",
-    profilePicture: userData?.profilePicture || "",
-    headline: userData?.headline || ""
-  };
-
   const {
     handleSubmit,
     formState: { errors },
     control,
-    setValue
-  } = useForm({ defaultValues, resolver, mode: "all" });
+    setValue,
+    reset
+  } = useForm({ resolver, mode: "all" });
+
+  useEffect(() => {
+    const country = Country.getAllCountries().find((item) => item.name === userProfile?.country);
+    const city = City.getCitiesOfCountry(country?.isoCode).map((city) => {
+      return { value: city.name, label: city.name };
+    });
+    setCity(city);
+    reset(userProfile);
+  }, [reset, userProfile]);
 
   const handleSelectChange = (e, name) => {
     if (name === "country") {
-      const country = Country.getCountryByCode(e.target.value);
+      const country = Country.getAllCountries().find((item) => item.name === e.target.value);
       const city = City.getCitiesOfCountry(country.isoCode).map((city) => {
         return { value: city.name, label: city.name };
       });
@@ -105,12 +103,11 @@ function General() {
   const handleUpdateProfile = async (data) => {
     const payload = {
       ...data,
-      profilePicture: uploadedFile?.file ? uploadedFile?.file : data.profilePicture,
-      country: countries.find((country) => country.value === data.country)?.label
+      profilePicture: uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : data.profilePicture
     };
     let response = await dispatch(updateProfile(payload));
 
-    response?.success &&
+    if (response?.success) {
       dispatch(
         showModal({
           name: "successNotification",
@@ -120,6 +117,8 @@ function General() {
           }
         })
       );
+      dispatch(getProfile());
+    }
   };
 
   const [uploadedFile, setUploadedFile] = useState({
@@ -143,15 +142,19 @@ function General() {
       <form className={cx(styles.formWrapper, "flexCol")} onSubmit={handleSubmit((data) => handleUpdateProfile(data))}>
         <div className={cx(styles.wrapper, styles.header)}>
           <div className={cx(styles.leftSection, styles.imageDiv)}>
-            {userData?.profileImage || uploadedFile?.imagePreviewUrl ? (
+            {userProfile?.profilePicture || uploadedFile?.imagePreviewUrl ? (
               <img
                 {...getRootProps()}
-                src={uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : userData?.profileImage}
+                src={uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : userProfile?.profilePicture}
                 alt='profile-image'
               />
             ) : (
               <span {...getRootProps()} className={cx(styles.profileImageText)}>
-                {userData?.fullName && initialsCase(`${userData.fullName}`)}
+                {initialsCase(
+                  `${userProfile?.firstName ? userProfile?.firstName : ""} ${
+                    userProfile?.lastName ? userProfile?.lastName : ""
+                  }`
+                )}
               </span>
             )}
           </div>
@@ -297,11 +300,11 @@ function General() {
                     <span>
                       <img src={item?.icon} alt='logo' />
                     </span>
-                    <span>{item?.name}</span>
+                    <span>{item?.label}</span>
                   </div>
                   <div className={cx(styles.right)}>
                     <Controller
-                      name={item?.name.toLowerCase()}
+                      name={item?.key}
                       control={control}
                       render={({ field }) => (
                         <InputField
