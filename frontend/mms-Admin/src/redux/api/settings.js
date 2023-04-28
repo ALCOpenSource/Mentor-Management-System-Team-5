@@ -27,3 +27,11 @@ export const editUserPrivacyApi = async (data) => {
 export const getUserPrivacyApi = async (data) => {
   return await axios.get("/UserPrivacy/user-privacy", data);
 };
+
+export const getGeneralFaqApi = async () => {
+  return await axios.get(`/FAQ/generalFAQ`);
+};
+
+export const getTechnicalFaqApi = async () => {
+  return await axios.get(`/FAQ/technicalFAQ`);
+};

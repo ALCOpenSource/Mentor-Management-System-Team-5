@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./FAQ.module.scss";
+import { getGeneralFaq, getTechnicalFaq } from "@/redux/Settings/SettingsSlice";
 
 import { ReactComponent as ExpandIcon } from "@/assets/icons/faq-expand-icon.svg";
 import { ReactComponent as CollapseIcon } from "@/assets/icons/faq-collapse-icon.svg";
 
 function FAQ() {
+
+  const dispatch = useDispatch();
+
+  const general = useSelector((state)=> state?.settings?.getGeneralFaqData);
+  const technical = useSelector((state)=> state?.settings?.getTechnicalFaqData);
+
+  console.log(general, "general");
+  console.log(technical, "technical");
+
+  useEffect(()=>{
+    dispatch(getGeneralFaq());
+    dispatch(getTechnicalFaq());
+  });
+
   const [toggle, setToggle] = useState({
     index: null,
     toggle: false
