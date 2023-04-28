@@ -13,10 +13,12 @@ import SuccessNotificationModal from "@/components/Modals/SuccessNotification/Su
 import { showModal } from "@/redux/Modal/ModalSlice";
 
 import { settingsSupportSchema } from "@/helpers/validation";
+import { sendSupportMessage } from "@/redux/Settings/SettingsSlice";
+
 
 function Support() {
   const dispatch = useDispatch();
-  // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
+  const loading = useSelector((state) => state?.loading?.sendSupportMessageLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
@@ -26,18 +28,24 @@ function Support() {
     name: "",
     email: "",
     title: "",
-    body: ""
+    body: "",
+    attachment: "bbbbbbb"
   };
 
   const {
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm({ defaultValues, resolver, mode: "all" });
 
-  const sendMessage = (data) => {
+  const sendMessage = async (data) => {
     console.log(data);
-    dispatch(
+
+    let response = await dispatch(sendSupportMessage(data));
+
+    if (response?.success) {
+        dispatch(
       showModal({
         name: "successNotification",
         modalData: {
@@ -45,6 +53,8 @@ function Support() {
         }
       })
     );
+    reset();
+    }
   };
 
   return (
@@ -117,8 +127,8 @@ function Support() {
 
               <Button
                 onClick={handleSubmit((data) => sendMessage(data))}
-                // loading={loading}
-                // disabled={loading}
+                loading={loading}
+                disabled={loading}
                 title='Send'
                 type='primary'
               />
