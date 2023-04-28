@@ -23,6 +23,7 @@ namespace mms.Infrastructure.Context
         public DbSet<UserNotification> UserNotifications { get; set; }
         public DbSet<UserPrivacy> UserPrivacy { get; set; }
         public DbSet<Support> Supports { get; set; }
+        public DbSet<FAQ> FAQs { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {

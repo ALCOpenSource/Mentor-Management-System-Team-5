@@ -30,6 +30,9 @@
     <None Remove="Support\Command\" />
     <None Remove="Program\" />
     <None Remove="Program\Query\" />
+    <None Remove="FAQ\" />
+    <None Remove="FAQ\Command\" />
+    <None Remove="FAQ\Query\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\PasswordReset\" />
@@ -38,5 +41,8 @@
     <Folder Include="Support\Command\" />
     <Folder Include="Program\" />
     <Folder Include="Program\Query\" />
+    <Folder Include="FAQ\" />
+    <Folder Include="FAQ\Command\" />
+    <Folder Include="FAQ\Query\" />
   </ItemGroup>
 </Project>
