@@ -7,7 +7,8 @@ import {
   editUserNotificationsApi,
   getUserNotificationsApi,
   editUserPrivacyApi,
-  getUserPrivacyApi
+  getUserPrivacyApi,
+  sendSupportMessageApi
 } from "../api/settings";
 
 import {
@@ -17,7 +18,8 @@ import {
   editUserNotificationsLoading,
   getUserNotificationsLoading,
   editUserPrivacyLoading,
-  getUserPrivacyLoading
+  getUserPrivacyLoading,
+  sendSupportMessageLoading
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
@@ -28,7 +30,8 @@ const initialState = {
   editUserNotificationsData: {},
   getUserNotificationsData: {},
   editUserPrivacyData: {},
-  getUserPrivacyData: {}
+  getUserPrivacyData: {},
+  sendSupportMessageData: {}
 };
 
 export const settingsSlice = createSlice({
@@ -67,6 +70,10 @@ export const settingsSlice = createSlice({
 
     getUserPrivacyAction: (state, action) => {
       state.getUserPrivacyData = action.payload;
+    },
+
+    sendSupportMessageAction: (state, action) => {
+      state.sendSupportMessageData = action.payload;
     }
   }
 });
@@ -81,7 +88,8 @@ const {
   editUserNotificationsAction,
   getUserNotificationsAction,
   editUserPrivacyAction,
-  getUserPrivacyAction
+  getUserPrivacyAction,
+  sendSupportMessageAction
 } = settingsSlice.actions;
 
 export const changePassword = (data) => async (dispatch) => {
@@ -192,6 +200,21 @@ export const getUserPrivacy = () => async (dispatch) => {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(getUserPrivacyLoading(false));
+    return { success: false };
+  }
+};
+
+export const sendSupportMessage = (data) => async (dispatch) => {
+  dispatch(sendSupportMessageLoading(true));
+  try {
+    const response = await sendSupportMessageApi(data);
+    dispatch(sendSupportMessageLoading(false));
+    dispatch(sendSupportMessageAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(sendSupportMessageLoading(false));
     return { success: false };
   }
 };

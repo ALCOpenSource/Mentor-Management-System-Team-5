@@ -13,7 +13,8 @@ const initialState = {
   editUserNotificationsLoading: false,
   getUserNotificationsLoading: false,
   editUserPrivacyLoading: false,
-  getUserPrivacyLoading: false
+  getUserPrivacyLoading: false,
+  sendSupportMessageLoading: false
 };
 
 export const loadingSlice = createSlice({
@@ -54,6 +55,9 @@ export const loadingSlice = createSlice({
     },
     getUserPrivacyLoading: (state, action) => {
       state.getUserPrivacyLoading = action.payload;
+    },
+    sendSupportMessageLoading: (state, action) => {
+      state.sendSupportMessageLoading = action.payload;
     }
   }
 });
@@ -69,7 +73,8 @@ export const {
   editUserNotificationsLoading,
   getUserNotificationsLoading,
   editUserPrivacyLoading,
-  getUserPrivacyLoading
+  getUserPrivacyLoading,
+  sendSupportMessageLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;

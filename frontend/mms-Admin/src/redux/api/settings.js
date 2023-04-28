@@ -27,3 +27,7 @@ export const editUserPrivacyApi = async (data) => {
 export const getUserPrivacyApi = async (data) => {
   return await axios.get("/UserPrivacy/user-privacy", data);
 };
+
+export const sendSupportMessageApi = async (data) => {
+  return await axios.post("/Support/support", data);
+};
