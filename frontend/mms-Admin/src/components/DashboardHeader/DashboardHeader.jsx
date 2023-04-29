@@ -52,7 +52,10 @@ function Header() {
               <img src={messageIcon} alt='message-icon' />
               <img src={notificationIcon} alt='notification-icon' />
             </div>
-            <div onClick={()=> navigate("/dashboard/settings")} className={cx(styles.profileImageDiv, "flexRow-fully-centered")}>
+            <div
+              onClick={() => navigate("/dashboard/settings")}
+              className={cx(styles.profileImageDiv, "flexRow-fully-centered")}
+            >
               {userData?.profilePicture ? (
                 <img className={cx(styles.profileImage)} src={userData?.profilePicture} alt='profile-image' />
               ) : (
