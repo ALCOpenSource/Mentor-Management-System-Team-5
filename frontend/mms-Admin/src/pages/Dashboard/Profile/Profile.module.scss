@@ -1,5 +1,5 @@
 .profileContainer {
-  padding: 2rem !important;
+  padding: 1rem !important;
   gap: 1rem;
 }
 
@@ -18,6 +18,6 @@
 
 @media all and (min-width: 1200px) {
   .profileContainer {
-    padding: 2rem 1rem;
+    padding: 2rem !important;
   }
 }

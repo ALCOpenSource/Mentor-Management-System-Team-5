@@ -1,15 +1,68 @@
 .profileHeaderContainer {
-  padding: 0;
+  padding: 0 !important;
 
-  .userName {
-    font-size: 1.2rem;
-    font-family: var(--semiBold);
-    color: var(--black2TextColor);
+  .bioDataDiv {
+    gap: 0.5rem;
+
+    .profileImage {
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profileImageText {
+      font-size: 1.25rem;
+      color: var(--whiteTextColor);
+      font-family: var(--regular);
+      display: inline-block;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      line-height: 3rem;
+      text-align: center;
+      margin: 0;
+      background-color: var(--primaryColor);
+      cursor: pointer;
+    }
+
+    .flagImageDiv {
+      img {
+        width: 1.75rem;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .flagImage {
+      width: 1.75rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .userName {
+      font-size: 1.2rem;
+      font-family: var(--semiBold);
+      color: var(--black2TextColor);
+      display: inline-block;
+      padding: 0;
+      width: fit-content;
+    }
+
+    .userRole {
+      font-size: 1rem;
+      font-family: var(--regular);
+      color: var(--grayTextColor);
+    }
   }
+}
 
-  .userRole {
-    font-size: 1rem;
-    font-family: var(--regular);
-    color: var(--grayTextColor);
+@media all and (min-width: 768px) {
+  .profileHeaderContainer {
+    padding: 0 !important;
+
+    .bioDataDiv {
+      gap: 1rem;
+    }
   }
 }
