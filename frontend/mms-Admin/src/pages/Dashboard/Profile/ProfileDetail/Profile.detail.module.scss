@@ -1,5 +1,7 @@
 .profileDetailContainer {
-  .title {
+  padding: 1rem !important;
+
+  .sectionTitle {
     font-size: 1.5rem;
     font-family: var(--bold);
     color: var(--black2TextColor);
@@ -12,29 +14,133 @@
     font-size: 1rem;
     font-family: var(--regular);
     color: var(--black3TextColor);
+    padding: 1rem;
   }
 
-  .addressInfo {
-    .title {
-      font-size: 1.2rem;
-      font-family: var(--semiBold);
-      color: var(--black2TextColor);
+  .addressInfoDiv {
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .addressInfo {
+      gap: 0.25rem;
+
+      .title {
+        font-size: 1.2rem;
+        font-family: var(--semiBold);
+        color: var(--black2TextColor);
+        line-height: 1rem;
+      }
+
+      .info {
+        font-size: 1rem;
+        font-family: var(--regular);
+        color: var(--grayTextColor);
+      }
+    }
+  }
+
+  .socialInfoDiv {
+    gap: 1rem;
+    margin: 2rem 0 0 0;
+
+    .wrapper {
+      gap: 1.25rem;
+
+      .socialInfo {
+        background-color: var(--profileSocialBackgroundColor);
+        gap: 0.25rem;
+        padding: 0.5rem 0.875rem;
+
+        .socialUserName {
+          font-size: 1.2rem;
+          font-family: var(--semiBold);
+          color: var(--black3TextColor);
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .profileDetailContainer {
+    .sectionTitle {
+      font-size: 1.5rem;
     }
 
-    .info {
+    .bio {
       font-size: 1rem;
-      font-family: var(--regular);
-      color: var(--grayTextColor);
+    }
+
+    .addressInfoDiv {
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+
+      .addressInfo {
+        gap: 1rem;
+        flex-wrap: nowrap;
+
+        .title {
+          font-size: 1.2rem;
+        }
+
+        .info {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .socialInfoDiv {
+      gap: 1rem;
+      margin: 2rem 0 0 0;
+
+      .wrapper {
+        gap: 1rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        .socialInfo {
+          background-color: var(--profileSocialBackgroundColor);
+          gap: 0.25rem;
+
+          .socialUserName {
+            font-size: 1.2rem;
+            font-family: var(--semiBold);
+            color: var(--black3TextColor);
+          }
+        }
+      }
     }
   }
+}
 
-  .socialInfo {
-    background-color: var(--profileSocialBackgroundColor);
+@media all and (min-width: 1200px) {
+  .profileDetailContainer {
+    padding: 2rem !important;
 
-    .socialUserName {
-      font-size: 1.2rem;
-      font-family: var(--semiBold);
-      color: var(--black3TextColor);
+    .addressInfoDiv {
+      margin-top: 1rem;
+
+      .addressInfo {
+        gap: 1.5rem;
+      }
+    }
+
+    .socialInfoDiv {
+      gap: 1.5rem;
+      margin: 2.5rem 0 0 0;
+
+      .wrapper {
+        gap: 1.5rem;
+
+        .socialInfo {
+          gap: 1rem;
+          padding: 1.125rem;
+
+          .socialUserName {
+            font-size: 1.2rem;
+          }
+        }
+      }
     }
   }
 }
