@@ -102,7 +102,7 @@ export const refreshAccessToken = () => async (dispatch) => {
   const refreshToken = getRefreshToken();
   const token = getToken();
   try {
-    const response = await refreshAccessTokenApi({refreshToken: refreshToken, accessToken: token});
+    const response = await refreshAccessTokenApi({ refreshToken: refreshToken, accessToken: token });
     setToken(response?.data?.data?.token);
     setRefreshToken(response?.data?.data?.refreshToken);
     localStorage.setItem("userData", JSON.stringify(response?.data?.data));

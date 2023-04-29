@@ -12,9 +12,8 @@ import { ReactComponent as CollapseIcon } from "@/assets/icons/faq-collapse-icon
 function FAQ() {
   const dispatch = useDispatch();
 
-  //It will be used after data is populated
-  // const generalFAQData = useSelector((state)=> state?.settings?.getGeneralFaqData);
-  // const technicalFAQData = useSelector((state)=> state?.settings?.getTechnicalFaqData);
+  const generalFAQData = useSelector((state) => state?.settings?.getGeneralFaqData);
+  const technicalFAQData = useSelector((state) => state?.settings?.getTechnicalFaqData);
   const getGeneralFaqLoading = useSelector((state) => state?.loading?.getGeneralFaqLoading);
   const getTechnicalFaqLoading = useSelector((state) => state?.loading?.getTechnicalFaqLoading);
 
@@ -41,52 +40,6 @@ function FAQ() {
       });
     }
   };
-
-  const generalFAQData = [
-    {
-      question: "General Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    },
-    {
-      question: "General Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    },
-    {
-      question: "General Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    },
-    {
-      question: "General Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    }
-  ];
-
-  const technicalFAQData = [
-    {
-      question: "Technical Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    },
-    {
-      question: "Technical Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    },
-    {
-      question: "Technical Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    },
-    {
-      question: "Technical Frequently Asked Question?",
-      answer:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, exercitationem nesciunt! Corrupti voluptatem a maxime cum dicta, tempora eaque. Quis laboriosam qui non quae illo ad aspernatur nostrum sequi eum."
-    }
-  ];
 
   const accordionComponent = (faq, index, type) => {
     return (
