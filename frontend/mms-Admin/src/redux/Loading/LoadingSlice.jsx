@@ -14,6 +14,8 @@ const initialState = {
   getUserNotificationsLoading: false,
   editUserPrivacyLoading: false,
   getUserPrivacyLoading: false,
+  getGeneralFaqLoading: false,
+  getTechnicalFaqLoading: false,
   sendSupportMessageLoading: false
 };
 
@@ -56,6 +58,12 @@ export const loadingSlice = createSlice({
     getUserPrivacyLoading: (state, action) => {
       state.getUserPrivacyLoading = action.payload;
     },
+    getGeneralFaqLoading: (state, action) => {
+      state.getGeneralFaqLoading = action.payload;
+    },
+    getTechnicalFaqLoading: (state, action) => {
+      state.getTechnicalFaqLoading = action.payload;
+    },
     sendSupportMessageLoading: (state, action) => {
       state.sendSupportMessageLoading = action.payload;
     }
@@ -74,6 +82,8 @@ export const {
   getUserNotificationsLoading,
   editUserPrivacyLoading,
   getUserPrivacyLoading,
+  getGeneralFaqLoading,
+  getTechnicalFaqLoading,
   sendSupportMessageLoading
 } = loadingSlice.actions;
 

@@ -3,18 +3,20 @@ import cx from "classnames";
 import styles from "./Loader.module.scss";
 import PropTypes from "prop-types";
 
-const Loader = ({ small }) => (
-  <div className={cx(styles.loaderContainer, "flexRow-fully-centered")}>
-    <div className={small ? cx(styles.smallSpinner, styles.spinner) : cx(styles.bigSpinner, styles.spinner)} />
+const Loader = ({ small, fullPage }) => (
+  <div className={cx(styles.loaderContainer, fullPage && styles.fullPage, "flexRow-fully-centered")}>
+    <div className={cx(small ? styles.smallSpinner : styles.bigSpinner, styles.spinner)} />
   </div>
 );
 
 Loader.propTypes = {
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  fullPage: PropTypes.bool
 };
 
 Loader.defaultProps = {
-  small: true
+  small: false,
+  fullPage: true
 };
 
 export default Loader;
