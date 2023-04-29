@@ -15,10 +15,20 @@
       form {
         .submitBtnDiv {
           align-items: center;
+          gap: 1rem;
 
           .attachmentDiv {
+            gap: 0.5rem;
+
             img {
               cursor: pointer;
+            }
+
+            .fileName {
+              font-size: 0.875rem;
+              font-family: var(--medium);
+              color: var(--primaryColor);
+              line-height: 1.125rem;
             }
           }
         }
