@@ -19,10 +19,12 @@ import { FlagIcon } from "react-flag-kit";
 import useGetUserInfo from "@/hooks/useGetUserInfo";
 import formatDate from "@/helpers/formatDate";
 import arrayToString from "@/helpers/arrayToString";
+import Loader from "@/components/Loader/Loader";
 
 function Profile() {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.settings.getProfileData);
+  const getProfileLoading = useSelector((state) => state.loading.getProfileLoading);
 
   // To be removed after email is included in getProfile API
   const { email, roles } = useGetUserInfo();
@@ -102,12 +104,18 @@ function Profile() {
 
   return (
     <Container className={cx(styles.profileContainer)}>
-      <Row className='mb-5'>
-        <ProfileHeader data={profileHeaderData} />
-      </Row>
-      <Row>
-        <ProfileDetail data={profileDetailData} />
-      </Row>
+      {getProfileLoading ? (
+        <Loader fullPage={false} />
+      ) : (
+        <>
+          <Row className='mb-5'>
+            <ProfileHeader data={profileHeaderData} />
+          </Row>
+          <Row>
+            <ProfileDetail data={profileDetailData} />
+          </Row>
+        </>
+      )}
     </Container>
   );
 }
