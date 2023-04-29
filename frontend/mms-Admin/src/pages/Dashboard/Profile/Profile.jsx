@@ -18,13 +18,14 @@ import { FlagIcon } from "react-flag-kit";
 // To be removed after email is included in getProfile API
 import useGetUserInfo from "@/hooks/useGetUserInfo";
 import formatDate from "@/helpers/formatDate";
+import arrayToString from "@/helpers/arrayToString";
 
 function Profile() {
   const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.settings.getProfileData);
 
   // To be removed after email is included in getProfile API
-  const { email } = useGetUserInfo();
+  const { email, roles } = useGetUserInfo();
 
   const [profileHeaderData, setProfileHeaderData] = useState({});
   const [profileDetailData, setProfileDetailData] = useState({});
@@ -33,7 +34,7 @@ function Profile() {
     if (userProfile) {
       setProfileHeaderData({
         fullName: `${userProfile.firstName} ${userProfile.lastName}`,
-        role: userProfile.role,
+        role: userProfile.role ? userProfile.role : arrayToString(roles),
         profilePicture1: userProfile.profilePicture,
         flagImage: Country.getAllCountries().find((country) => country.name === userProfile.country).flag,
         flagIcon: (
@@ -95,7 +96,7 @@ function Profile() {
         bio: userProfile.bio
       });
     }
-  }, [email, userProfile]);
+  }, [email, roles, userProfile]);
 
   useEffect(() => {
     dispatch(getProfile());
