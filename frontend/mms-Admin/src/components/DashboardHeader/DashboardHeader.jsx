@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import cx from "classnames";
 import { Navbar, Nav } from "react-bootstrap";
 import { useProSidebar } from "react-pro-sidebar";
@@ -18,6 +18,7 @@ function Header() {
   const [expanded, setExpanded] = useState(false);
   const { toggleSidebar } = useProSidebar();
   const userData = userInfo();
+  const navigate = useNavigate();
 
   return (
     <section className={cx(styles.dashboardHeaderContainer)}>
@@ -51,7 +52,7 @@ function Header() {
               <img src={messageIcon} alt='message-icon' />
               <img src={notificationIcon} alt='notification-icon' />
             </div>
-            <div className={cx(styles.profileImageDiv, "flexRow-fully-centered")}>
+            <div onClick={()=> navigate("/dashboard/settings")} className={cx(styles.profileImageDiv, "flexRow-fully-centered")}>
               {userData?.profilePicture ? (
                 <img className={cx(styles.profileImage)} src={userData?.profilePicture} alt='profile-image' />
               ) : (

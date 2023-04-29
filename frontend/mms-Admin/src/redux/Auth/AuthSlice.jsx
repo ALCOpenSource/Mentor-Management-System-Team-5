@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi } from "../api/auth";
 
-import { setToken, setRefreshToken, getRefreshToken, logout } from "@/utils/auth";
+import { setToken, setRefreshToken, getToken, getRefreshToken, logout } from "@/utils/auth";
 
 import { loginLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
 
@@ -100,8 +100,9 @@ export const resetPassword = (data) => async (dispatch) => {
 
 export const refreshAccessToken = () => async (dispatch) => {
   const refreshToken = getRefreshToken();
+  const token = getToken();
   try {
-    const response = await refreshAccessTokenApi(refreshToken);
+    const response = await refreshAccessTokenApi({refreshToken: refreshToken, accessToken: token});
     setToken(response?.data?.data?.token);
     setRefreshToken(response?.data?.data?.refreshToken);
     localStorage.setItem("userData", JSON.stringify(response?.data?.data));

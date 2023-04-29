@@ -20,11 +20,13 @@ import twitterIcon from "@/assets/icons/settings-twitter-icon.svg";
 import { updateProfileSchema } from "@/helpers/validation";
 import { updateProfile, getProfile } from "@/redux/Settings/SettingsSlice";
 import { initialsCase } from "@/helpers/textTransform";
+import Loader from "@/components/Loader/Loader";
 
 function General() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state?.loading?.updateProfileLoading);
   const userProfile = useSelector((state) => state.settings.getProfileData);
+  const getProfileLoading = useSelector((state) => state?.loading?.getProfileLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
@@ -139,6 +141,8 @@ function General() {
 
   return (
     <div className={cx(styles.generalContainer, "flexCol")}>
+      {
+        getProfileLoading ? <Loader /> : 
       <form className={cx(styles.formWrapper, "flexCol")} onSubmit={handleSubmit((data) => handleUpdateProfile(data))}>
         <div className={cx(styles.wrapper, styles.header)}>
           <div className={cx(styles.leftSection, styles.imageDiv)}>
@@ -332,7 +336,8 @@ function General() {
             title='Save Changes'
           />
         </div>
-      </form>
+      </form> 
+      }
       {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
