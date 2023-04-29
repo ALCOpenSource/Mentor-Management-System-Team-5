@@ -8,12 +8,9 @@ import {
   getUserNotificationsApi,
   editUserPrivacyApi,
   getUserPrivacyApi,
-<<<<<<< HEAD
   getGeneralFaqApi,
-  getTechnicalFaqApi
-=======
+  getTechnicalFaqApi,
   sendSupportMessageApi
->>>>>>> develop
 } from "../api/settings";
 
 import {
@@ -24,12 +21,9 @@ import {
   getUserNotificationsLoading,
   editUserPrivacyLoading,
   getUserPrivacyLoading,
-<<<<<<< HEAD
   getGeneralFaqLoading,
-  getTechnicalFaqLoading
-=======
+  getTechnicalFaqLoading,
   sendSupportMessageLoading
->>>>>>> develop
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
@@ -41,12 +35,9 @@ const initialState = {
   getUserNotificationsData: {},
   editUserPrivacyData: {},
   getUserPrivacyData: {},
-<<<<<<< HEAD
   getGeneralFaqData: {},
-  getTechnicalFaqData: {}
-=======
+  getTechnicalFaqData: {},
   sendSupportMessageData: {}
->>>>>>> develop
 };
 
 export const settingsSlice = createSlice({
@@ -87,17 +78,16 @@ export const settingsSlice = createSlice({
       state.getUserPrivacyData = action.payload;
     },
 
-<<<<<<< HEAD
     getGeneralFaqAction: (state, action) => {
       state.getGeneralFaqData = action.payload;
     },
 
     getTechnicalFaqAction: (state, action) => {
       state.getTechnicalFaqData = action.payload;
-=======
+    },
+
     sendSupportMessageAction: (state, action) => {
       state.sendSupportMessageData = action.payload;
->>>>>>> develop
     }
   }
 });
@@ -113,12 +103,9 @@ const {
   getUserNotificationsAction,
   editUserPrivacyAction,
   getUserPrivacyAction,
-<<<<<<< HEAD
   getGeneralFaqAction,
-  getTechnicalFaqAction
-=======
+  getTechnicalFaqAction,
   sendSupportMessageAction
->>>>>>> develop
 } = settingsSlice.actions;
 
 export const changePassword = (data) => async (dispatch) => {
@@ -233,26 +220,16 @@ export const getUserPrivacy = () => async (dispatch) => {
   }
 };
 
-<<<<<<< HEAD
 export const getGeneralFaq = () => async (dispatch) => {
   dispatch(getGeneralFaqLoading(true));
   try {
     const response = await getGeneralFaqApi();
     dispatch(getGeneralFaqLoading(false));
     dispatch(getGeneralFaqAction(response?.data?.data));
-=======
-export const sendSupportMessage = (data) => async (dispatch) => {
-  dispatch(sendSupportMessageLoading(true));
-  try {
-    const response = await sendSupportMessageApi(data);
-    dispatch(sendSupportMessageLoading(false));
-    dispatch(sendSupportMessageAction(response?.data?.data));
->>>>>>> develop
     return { success: true };
   } catch (e) {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
-<<<<<<< HEAD
     dispatch(getGeneralFaqLoading(false));
     return { success: false };
   }
@@ -272,9 +249,18 @@ export const getTechnicalFaq = () => async (dispatch) => {
     return { success: false };
   }
 };
-=======
+
+export const sendSupportMessage = (data) => async (dispatch) => {
+  dispatch(sendSupportMessageLoading(true));
+  try {
+    const response = await sendSupportMessageApi(data);
+    dispatch(sendSupportMessageLoading(false));
+    dispatch(sendSupportMessageAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
     dispatch(sendSupportMessageLoading(false));
     return { success: false };
   }
 };
->>>>>>> develop

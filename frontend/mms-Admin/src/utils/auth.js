@@ -63,7 +63,7 @@ export const login = (token) => {
 export const logout = () => {
   localStorage.clear();
   setAuthToken("");
-  window.location.href = "/login";
+  // window.location.href = "/login";
 };
 
 export const checkAuth = () => {
