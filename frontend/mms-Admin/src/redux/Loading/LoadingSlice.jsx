@@ -9,6 +9,7 @@ const initialState = {
   //Settings
   changePasswordLoading: false,
   updateProfileLoading: false,
+  getProfileLoading: false,
   editUserNotificationsLoading: false,
   getUserNotificationsLoading: false,
   editUserPrivacyLoading: false,
@@ -39,6 +40,9 @@ export const loadingSlice = createSlice({
     updateProfileLoading: (state, action) => {
       state.updateProfileLoading = action.payload;
     },
+    getProfileLoading: (state, action) => {
+      state.getProfileLoading = action.payload;
+    },
     editUserNotificationsLoading: (state, action) => {
       state.editUserNotificationsLoading = action.payload;
     },
@@ -61,6 +65,7 @@ export const {
   resetPasswordLoading,
   changePasswordLoading,
   updateProfileLoading,
+  getProfileLoading,
   editUserNotificationsLoading,
   getUserNotificationsLoading,
   editUserPrivacyLoading,

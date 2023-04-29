@@ -28,7 +28,7 @@ export const FormGroup = styled(Form.Group)`
 
   label {
     transform: scale(0.7);
-    margin-bottom: 0px;
+    margin-bottom: 0;
     transform-origin: top left;
     transition: all 0.2s ease-out;
 
@@ -56,7 +56,7 @@ export const FormGroup = styled(Form.Group)`
     left: 0;
     bottom: -10%;
     text-align: left;
-    margin: 0px;
+    margin: 0;
     line-height: 1;
   }
 `;

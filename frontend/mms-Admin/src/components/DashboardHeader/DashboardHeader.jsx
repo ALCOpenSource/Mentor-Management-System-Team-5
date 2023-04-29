@@ -9,7 +9,6 @@ import styles from "./DashboardHeader.module.scss";
 import logo from "@/assets/images/logo.svg";
 import messageIcon from "@/assets/icons/message-icon.svg";
 import notificationIcon from "@/assets/icons/notification-icon.svg";
-// import profileImage from "@/assets/images/sample-profile-image.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
 
 import userInfo from "@/hooks/useGetUserInfo";
@@ -44,8 +43,6 @@ function Header() {
 
         <Navbar.Collapse className={cx(styles.navbarCollapse, "flexRow")} id='responsive-navbar-nav'>
           <Nav className={cx(styles.primaryNavigation, "flexRow-space-between")}>
-            {/* <NavLink onClick={() => setExpanded(false)} className={(navData) => navData.isActive && cx(styles.active)} end to="/">Home</NavLink> */}
-
             <div className={cx(styles.inputDiv, "flexRow-align-center")}>
               <img className={cx(styles.searchIcon)} src={searchIcon} alt='search-icon' />
               <input type='text' placeholder='Search for anything' />
@@ -55,12 +52,11 @@ function Header() {
               <img src={notificationIcon} alt='notification-icon' />
             </div>
             <div className={cx(styles.profileImageDiv, "flexRow-fully-centered")}>
-              {userData?.image ? (
-                <img className={cx(styles.profileImage)} src={userData?.image} alt='profile-image' />
+              {userData?.profilePicture ? (
+                <img className={cx(styles.profileImage)} src={userData?.profilePicture} alt='profile-image' />
               ) : (
                 <span className={cx(styles.profileImageText)}>{initialsCase(userData?.fullName)}</span>
               )}
-              {/* <img className={cx(styles.profileImage)} src={profileImage} alt='profile-image' /> */}
             </div>
           </Nav>
         </Navbar.Collapse>
