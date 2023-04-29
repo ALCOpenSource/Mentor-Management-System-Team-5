@@ -15,7 +15,8 @@ const initialState = {
   editUserPrivacyLoading: false,
   getUserPrivacyLoading: false,
   getGeneralFaqLoading: false,
-  getTechnicalFaqLoading: false
+  getTechnicalFaqLoading: false,
+  sendSupportMessageLoading: false
 };
 
 export const loadingSlice = createSlice({
@@ -62,6 +63,9 @@ export const loadingSlice = createSlice({
     },
     getTechnicalFaqLoading: (state, action) => {
       state.getTechnicalFaqLoading = action.payload;
+    },
+    sendSupportMessageLoading: (state, action) => {
+      state.sendSupportMessageLoading = action.payload;
     }
   }
 });
@@ -79,7 +83,8 @@ export const {
   editUserPrivacyLoading,
   getUserPrivacyLoading,
   getGeneralFaqLoading,
-  getTechnicalFaqLoading
+  getTechnicalFaqLoading,
+  sendSupportMessageLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;
