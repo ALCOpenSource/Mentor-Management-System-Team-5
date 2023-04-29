@@ -10,7 +10,7 @@ using mms.Infrastructure.Policy;
 
 namespace mms.Application.FAQ.Command
 {
-	public class PostFAQCommandHandler : IRequestHandler<PostFAQCommand, IResult>
+	public class PostFAQCommandHandler : IRequestHandler<PostFAQCommand, IResult<string>>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ApplicationContext _context;
@@ -24,16 +24,16 @@ namespace mms.Application.FAQ.Command
             _mapper = mapper;
         }
 
-        public async Task<IResult> Handle(PostFAQCommand request, CancellationToken cancellationToken)
+        public async Task<IResult<string>> Handle(PostFAQCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(_currentUserService.AppUserId))
             {
-                return await Result.FailAsync("Invalid user");
+                return await Result<string>.FailAsync("Invalid user");
             }
 
-            if (string.IsNullOrEmpty(_currentUserService.UserRole) || _currentUserService.UserRole == Policies.Admin)
+            if (string.IsNullOrEmpty(_currentUserService.UserRole) || !_currentUserService.UserRole.Equals(Policies.Admin))
             {
-                return await Result.FailAsync("Invalid user Account Role");
+                return await Result<string>.FailAsync("Invalid user Account Role");
             }
 
             var faq =
@@ -41,7 +41,7 @@ namespace mms.Application.FAQ.Command
                     cancellationToken);
             if (faq != null)
             {
-                return await Result.FailAsync("Duplicate FAQ");
+                return await Result<string>.FailAsync("Duplicate FAQ");
             }
 
             var entity = _mapper.Map<Domain.Entities.FAQ>(request);
@@ -50,7 +50,7 @@ namespace mms.Application.FAQ.Command
 
             await _context.FAQs.AddAsync(entity);
             await _context.SaveChangesAsync(cancellationToken);
-            return await Result.SuccessAsync();
+            return await Result<string>.SuccessAsync("Successful");
         }
     }
 }

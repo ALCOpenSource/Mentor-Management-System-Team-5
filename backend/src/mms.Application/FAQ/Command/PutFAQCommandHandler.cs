@@ -9,7 +9,7 @@ using mms.Infrastructure.Policy;
 
 namespace mms.Application.FAQ.Command
 {
-	public class PutFAQCommandHandler : IRequestHandler<PutFAQCommand, IResult>
+	public class PutFAQCommandHandler : IRequestHandler<PutFAQCommand, IResult<string>>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ApplicationContext _context;
@@ -23,16 +23,16 @@ namespace mms.Application.FAQ.Command
             _mapper = mapper;
         }
 
-        public async Task<IResult> Handle(PutFAQCommand request, CancellationToken cancellationToken)
+        public async Task<IResult<string>> Handle(PutFAQCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(_currentUserService.AppUserId))
             {
-                return await Result.FailAsync("Invalid user");
+                return await Result<string>.FailAsync("Invalid user");
             }
 
             if (string.IsNullOrEmpty(_currentUserService.UserRole) || _currentUserService.UserRole == Policies.Admin)
             {
-                return await Result.FailAsync("Invalid user Account Role");
+                return await Result<string>.FailAsync("Invalid user Account Role");
             }
 
             var faq =
@@ -40,14 +40,14 @@ namespace mms.Application.FAQ.Command
                     cancellationToken);
             if (faq == null)
             {
-                return await Result.FailAsync($"FAQ with Id {request.Id} does not exist");
+                return await Result<string>.FailAsync($"FAQ with Id {request.Id} does not exist");
             }
 
             var entity = _mapper.Map(request, faq);
 
             _context.FAQs.Update(entity);
             await _context.SaveChangesAsync(cancellationToken);
-            return await Result.SuccessAsync();
+            return await Result<string>.SuccessAsync("Successful");
         }
     }
 }
