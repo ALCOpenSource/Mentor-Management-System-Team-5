@@ -31,18 +31,16 @@ function Profile() {
   const [profileDetailData, setProfileDetailData] = useState({});
 
   useEffect(() => {
-    if (userProfile) {
+    if (Object.keys(userProfile).length > 0) {
       setProfileHeaderData({
         fullName: `${userProfile.firstName} ${userProfile.lastName}`,
         role: userProfile.role ? userProfile.role : arrayToString(roles),
-        profilePicture1: userProfile.profilePicture,
-        flagImage: Country.getAllCountries().find((country) => country.name === userProfile.country).flag,
+        profilePicture: userProfile.profilePicture,
         flagIcon: (
           <FlagIcon
             code={Country.getAllCountries().find((country) => country.name === userProfile?.country)?.isoCode}
           />
-        ),
-        flagAltText: Country.getAllCountries().find((country) => country.name === userProfile.country)?.flag
+        )
       });
       setProfileDetailData({
         addressInfoData: [
@@ -96,7 +94,7 @@ function Profile() {
         bio: userProfile.bio
       });
     }
-  }, [email, roles, userProfile]);
+  }, [userProfile]);
 
   useEffect(() => {
     dispatch(getProfile());
