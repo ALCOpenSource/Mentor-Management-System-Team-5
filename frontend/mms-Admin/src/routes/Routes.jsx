@@ -20,7 +20,8 @@ import Programs from "@/pages/Dashboard/Programs/Programs";
 // Messages
 import Messages from "@/pages/Dashboard/Messages/Messages";
 import BroadcastMessage from "@/pages/Dashboard/Messages/BroadcastMessage/BroadcastMessage";
-
+import Chats from "@/pages/Dashboard/Messages/Chats/Chats";
+import ChatDetails from "@/pages/Dashboard/Messages/ChatDetails/ChatDetails";
 
 // Settings
 import Settings from "@/pages/Dashboard/Settings/Settings";
@@ -87,8 +88,9 @@ function RoutesComponent() {
           <Route path='mentor-managers' element={<MentorManagers />} />
           <Route path='mentors' element={<Mentors />} />
           <Route path='messages'>
-            <Route path='' element={<Messages />}>
-              {/* <Route path='chat/:id' element={<Chat />} /> */}
+            <Route path='' element={<Messages />} />
+            <Route path='chats' element={<Chats />}>
+              <Route path=':id' element={<ChatDetails />} />
             </Route>
             <Route path='broadcast-message' element={<BroadcastMessage />} />
           </Route>

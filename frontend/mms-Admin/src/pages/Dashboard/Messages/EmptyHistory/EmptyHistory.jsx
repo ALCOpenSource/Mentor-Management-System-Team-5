@@ -14,7 +14,7 @@ const EmptyHistory = () => {
     <img src={emptyHistoryIcon} alt='empty-message-history-icon' />
     <p>No Messages, Yet</p>
     <p>No messages in your chatbox, yet. Start chatting with other users</p>
-    <Button title='Browse People' onClick={() => navigate("broadcast-message")} />
+    <Button title='Browse People' onClick={() => navigate("chats")} />
   </div>
   );
 };

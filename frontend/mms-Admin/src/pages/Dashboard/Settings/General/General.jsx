@@ -139,6 +139,14 @@ function General() {
 
   const { getRootProps } = useDropzone({ onDrop, accept: "image/*" });
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDropzoneClick = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className={cx(styles.generalContainer, "flexCol")}>
       {getProfileLoading ? (
@@ -152,12 +160,12 @@ function General() {
             <div className={cx(styles.leftSection, styles.imageDiv)}>
               {userProfile?.profilePicture || uploadedFile?.imagePreviewUrl ? (
                 <img
-                  {...getRootProps()}
+                  {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}
                   src={uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : userProfile?.profilePicture}
                   alt='profile-image'
                 />
               ) : (
-                <span {...getRootProps()} className={cx(styles.profileImageText)}>
+                <span {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })} className={cx(styles.profileImageText)}>
                   {initialsCase(
                     `${userProfile?.firstName ? userProfile?.firstName : ""} ${
                       userProfile?.lastName ? userProfile?.lastName : ""
@@ -168,7 +176,7 @@ function General() {
             </div>
             <div className={cx(styles.rightSection, styles.profilePicture)}>
               <h5 className={cx(styles.title)}>Set Profile Picture</h5>
-              <Button {...getRootProps()} title='Upload Picture' size='small' />
+              <Button {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })} title='Upload Picture' size='small' />
             </div>
           </div>
 
