@@ -23,11 +23,16 @@ namespace mms.Application.Common.Mapper
         {
             CreateMap<UserNotificationEntity, EditUserNotificationCommand>().ReverseMap();
             CreateMap<UserNotificationEntity, GetUserNotificationResponse>().ReverseMap();
+
             CreateMap<UserPrivacyEntity, EditUserPrivacyCommand>().ReverseMap();
             CreateMap<UserPrivacyEntity, GetUserPrivacyResponse>().ReverseMap();
+
             CreateMap<SupportEntity, AddSupportCommand>().ReverseMap();
+
             CreateMap<ProgrammeEntity, GetArchiveProgramsResponse>().ReverseMap();
+
             CreateMap<AppUserEntity, GetProfileByIdResponse>().ReverseMap();
+
             CreateMap<FAQEntity, PostFAQCommand>().ReverseMap();
             CreateMap<FAQEntity, PutFAQCommand>().ReverseMap();
             CreateMap<FAQEntity, GetFAQsResponse>().ReverseMap();
