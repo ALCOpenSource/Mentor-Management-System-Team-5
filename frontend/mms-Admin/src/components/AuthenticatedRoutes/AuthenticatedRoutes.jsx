@@ -18,7 +18,9 @@ function AuthenticatedRoutes({ children, roles }) {
     dispatch(refreshAccessToken());
   }
 
-  const userHasRequiredRole = !!(userDetails && roles.includes(userDetails?.roles.toString().toLowerCase()));
+  const userHasRequiredRole = !!(
+    userDetails && roles.includes(userDetails?.roles && userDetails?.roles.toString().toLowerCase())
+  );
 
   if (!checkIsAuthenticated) {
     toast.error("You must be logged in to access this page");

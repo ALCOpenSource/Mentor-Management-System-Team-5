@@ -1,11 +1,11 @@
 .filterAndSearchContainer {
   justify-content: flex-end;
   gap: 1.25rem;
-  padding: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   background-color: white;
 
   .icon {
-    width: 1.25rem;
+    width: 1rem;
     object-fit: contain;
     cursor: pointer;
   }
@@ -26,6 +26,10 @@
       color: var(--black2TextColor);
       font-size: 0.875rem;
       width: 100%;
+    }
+
+    .icon {
+      width: 1rem;
     }
   }
 

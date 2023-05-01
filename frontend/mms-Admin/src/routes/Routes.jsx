@@ -14,9 +14,15 @@ import ApprovalRequests from "@/pages/Dashboard/ApprovalRequests/ApprovalRequest
 import Certificates from "@/pages/Dashboard/Certificates/Certificates";
 import MentorManagers from "@/pages/Dashboard/MentorManagers/MentorManagers";
 import Mentors from "@/pages/Dashboard/Mentors/Mentors";
-import Messages from "@/pages/Dashboard/Messages/Messages";
 import Profile from "@/pages/Dashboard/Profile/Profile";
 import Programs from "@/pages/Dashboard/Programs/Programs";
+
+// Messages
+import Messages from "@/pages/Dashboard/Messages/Messages";
+import BroadcastMessage from "@/pages/Dashboard/Messages/BroadcastMessage/BroadcastMessage";
+import Chats from "@/pages/Dashboard/Messages/Chats/Chats";
+import ChatDetails from "@/pages/Dashboard/Messages/ChatDetails/ChatDetails";
+import AllPersonels from "@/pages/Dashboard/Messages/AllPersonels/AllPersonels";
 
 // Settings
 import Settings from "@/pages/Dashboard/Settings/Settings";
@@ -46,7 +52,6 @@ import ReportDetails from "@/pages/Dashboard/Reports/ReportDetails/ReportDetails
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
 import userRoles from "@/constants/userRoles";
-import BroadcastMessage from "@/pages/Dashboard/Messages/BroadcastMessage/BroadcastMessage";
 
 function RoutesComponent() {
   return (
@@ -85,6 +90,10 @@ function RoutesComponent() {
           <Route path='mentors' element={<Mentors />} />
           <Route path='messages'>
             <Route path='' element={<Messages />} />
+            <Route path='all-personels' element={<AllPersonels />} />
+            <Route path='chats' element={<Chats />}>
+              <Route path=':id' element={<ChatDetails />} />
+            </Route>
             <Route path='broadcast-message' element={<BroadcastMessage />} />
           </Route>
           <Route index path='profile' element={<Profile />} />
