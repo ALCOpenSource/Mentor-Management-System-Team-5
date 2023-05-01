@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Chats.module.scss";
 import cx from "classnames";
 import Button from "@/components/Button/Button";
@@ -7,237 +7,206 @@ import { useNavigate, useParams, Outlet } from "react-router-dom";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import useIsMobile from "@/hooks/useIsMobile";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
-import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
-import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
+import cardIcon from "@/assets/images/mentor-manager-thumbnail.svg";
 import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
-import TaskListItem from "@/pages/Dashboard/Tasks/TaskListItem/TaskListItem";
-import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
-import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
-import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
+import ChatListItem from "../ChatListItem/ChatListItem";
 
 
 const Chats = () => {
-
   const navigate = useNavigate();
   const params = useParams();
   const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
-  const [openSideBar, setOpenSideBar] = useState(false);
+  const [openSideBar, setOpenSideBar] = useState(true);
+
+  // Temp fix for handling empty message history
+  // const [messageHistory, setMessageHistory] = useState([]);
+  const messageHistory = [ ];
 
   useEffect(() => {
-    isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
+    !isMobile && setOpenSideBar(true);
   }, [isMobile]);
 
-  const [showSearchInput, setShowSearchInput] = useState(false);
+  useEffect(() => {
+    setSelectedMenuId(params.id);
+  }, [params.id]);
+
+  // const [showSearchInput, setShowSearchInput] = useState(false);
 
   const menuItemsArray = [
     {
       id: 1,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview:
+        "Lorem is such a text here and more lorem text to test the overflow of the text and more lorem text to test the overflow of the text",
+      count: 50
     },
     {
       id: 2,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 3,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 4,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 5,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 6,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 7,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 8,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 9,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 10,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 11,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 12,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 13,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 14,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 15,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     },
     {
       id: 16,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 17,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 18,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 19,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 20,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 21,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 22,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now last",
-      icon: cardIcon,
-      calendarIcon
+      name: "Peculiar C Umeh",
+      time: "30m",
+      profileImage: cardIcon,
+      messagePreview: "Lorem is such a text here",
+      count: 5
     }
   ];
 
   const getMenuItems = () => {
     let listItems = menuItemsArray.map((item, index) => {
       return {
-        component: <TaskListItem key={index} data={item} />,
+        component: <ChatListItem key={index} data={item} />,
         id: item.id
       };
     });
 
-    const headerComponent = !isMobile && (
-      <FilterAndSearch
-        closeSideBar={handleCloseSidebar}
-        dropdownItems={[
-          { name: "All", id: 1 },
-          { name: "Completed", id: 2 },
-          { name: "In-progress", id: 3 }
-        ]}
-        searchData={handleSearchInput}
-        selectedFilterItem={handleSelectedFilterItem}
-        showCloseIcon={false}
-        inputPlaceholder='Search for tasks...'
-        showDropdown={true}
-        showFilterToggler={true}
-        reversed={true}
-      />
+    const headerComponent = (
+      <FilterAndSearch searchData={handleSearchInput} inputPlaceholder='Search for contact...' mode='search' />
     );
 
     return { listItems, headerComponent };
   };
 
-  const handleSearchInput = (e) => {
-    console.log(e.target.value);
+  const handleSearchInput = (data) => {
+    console.log(data);
   };
 
-  const handleSelectedFilterItem = (item) => {
-    console.log(item);
-  };
+  // const handleSelectedFilterItem = (item) => {
+  //   console.log(item);
+  // };
 
-  const handleCloseSidebar = () => {
-    setOpenSideBar({ open: false, category: "" });
-  };
+  // const handleCloseSidebar = () => {
+  //   setOpenSideBar({ open: false, category: "" });
+  // };
 
   const handleSelectedMenuItem = (id) => {
     setSelectedMenuId(id);
     navigate(`${id}`);
+    if (isMobile) {
+      setOpenSideBar(false);
+    } else {
+      setOpenSideBar(true);
+    }
   };
 
   return (
-    <div className={cx(styles.chatsContainer, "flexCol")} >
-           <section className={cx(styles.heading, "flexRow-space-between")}>
+    <div className={cx(styles.chatsContainer, "flexCol")}>
+      <section className={cx(styles.heading, "flexRow-space-between")}>
         <div className={cx(styles.titleAndToggler, "flexRow")}>
-          <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
+          {/* <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
             <img
               className={cx(styles.toggler)}
               src={subMenuIcon}
@@ -245,19 +214,23 @@ const Chats = () => {
               onClick={() => setOpenSideBar(!openSideBar)}
             />
             <small className={cx(styles.togglerText)}>MENU</small>
-          </div>
-          <h3 className={cx(styles.title)}>Tasks</h3>
+          </div> */}
+          <h3 className={cx(styles.title)}>Chats</h3>
         </div>
-        <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
+        {/* <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
           <SearchIcon className={cx(styles.searchIcon)} onClick={() => setShowSearchInput(!showSearchInput)} />
           {showSearchInput && <input className={cx(styles.searchInput)} type='text' placeholder='Search for tasks' />}
           <SortIcon className={cx(styles.sortIcon)} />
-        </div>
-        <Button title='Create New Task' onClick={() => navigate("create-task")} />
+        </div> */}
+        <Button
+          size={isMobile && "small"}
+          onClick={() => navigate("/dashboard/messages/broadcast-message")}
+          title='Send Broadcast Message'
+        />
       </section>
 
-        <section className={cx(styles.mainBody, "flexRow")}>
-        {openSideBar && (
+      <section className={cx(styles.mainBody, "flexRow")}>
+        {(openSideBar || !selectedMenuId) && (
           <div className={cx(styles.sidebarWrapper)}>
             <GenericSideBar
               data={getMenuItems()}
@@ -271,13 +244,13 @@ const Chats = () => {
         <div className={cx(styles.content)}>
           {selectedMenuId ? (
             <Outlet />
-          ) : (
+          ) : Array.isArray(messageHistory) && messageHistory.length === 0 && !isMobile ? (
             <div className={cx(styles.emptySelectionDiv, "flexCol-fully-centered")}>
               <img src={emptySelectionIcon} alt='empty-selection-icon' />
               <p>No item selected yet </p>
-              <p>Select an item from the list to view task details</p>
+              <p>Select an item from the list to view a chat</p>
             </div>
-          )}
+          ) : null}
         </div>
       </section>
     </div>

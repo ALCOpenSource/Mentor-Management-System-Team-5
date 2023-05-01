@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./Pagination.module.scss";
+import PropTypes from "prop-types";
 
 import searchIcon from "@/assets/icons/pagination-search-icon.svg";
 import navigateFirst from "@/assets/icons/pagination-left-arrow.svg";
@@ -8,13 +9,15 @@ import navigateLast from "@/assets/icons/pagination-right-arrow.svg";
 import nextPage from "@/assets/icons/pagination-next-arrow.svg";
 import previousPage from "@/assets/icons/pagination-previous-arrow.svg";
 
-function Pagination() {
+function Pagination({ showSearchInput }) {
   return (
     <div className={cx(styles.paginationContainer, "flexRow-align-center")}>
-      <div className={cx(styles.inputDiv, "flexRow")}>
-        <img src={searchIcon} alt='search-icon' />
-        <input type='text' placeholder='Search archive' />
-      </div>
+      {showSearchInput && (
+        <div className={cx(styles.inputDiv, "flexRow")}>
+          <img src={searchIcon} alt='search-icon' />
+          <input type='text' placeholder='Search archive' />
+        </div>
+      )}
 
       <div className={cx(styles.ctaSection, "flexRow-align-center")}>
         <div className={cx(styles.btnGroup, "flexRow-align-center")}>
@@ -32,5 +35,13 @@ function Pagination() {
     </div>
   );
 }
+
+Pagination.propTypes = {
+  showSearchInput: PropTypes.bool
+};
+
+Pagination.defaultProps = {
+  showSearchInput: true
+};
 
 export default Pagination;

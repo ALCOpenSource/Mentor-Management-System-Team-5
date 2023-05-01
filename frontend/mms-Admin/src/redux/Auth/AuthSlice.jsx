@@ -103,7 +103,7 @@ export const refreshAccessToken = () => async (dispatch) => {
   const token = getToken();
   try {
     const response = await refreshAccessTokenApi({ refreshToken: refreshToken, accessToken: token });
-    setToken(response?.data?.data?.token);
+    setToken(response?.data?.data?.accessToken);
     setRefreshToken(response?.data?.data?.refreshToken);
     dispatch(refreshAccessTokenAction(response?.data?.data));
     return { success: true };

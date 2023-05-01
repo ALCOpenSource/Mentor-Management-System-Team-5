@@ -165,7 +165,10 @@ function General() {
                   alt='profile-image'
                 />
               ) : (
-                <span {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })} className={cx(styles.profileImageText)}>
+                <span
+                  {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}
+                  className={cx(styles.profileImageText)}
+                >
                   {initialsCase(
                     `${userProfile?.firstName ? userProfile?.firstName : ""} ${
                       userProfile?.lastName ? userProfile?.lastName : ""
@@ -176,7 +179,11 @@ function General() {
             </div>
             <div className={cx(styles.rightSection, styles.profilePicture)}>
               <h5 className={cx(styles.title)}>Set Profile Picture</h5>
-              <Button {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })} title='Upload Picture' size='small' />
+              <Button
+                {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}
+                title='Upload Picture'
+                size='small'
+              />
             </div>
           </div>
 

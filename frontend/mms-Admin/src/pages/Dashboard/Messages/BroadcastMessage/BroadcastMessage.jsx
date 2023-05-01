@@ -1,6 +1,6 @@
 import Button from "@/components/Button/Button";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./BroadcastMessage.module.scss";
 import DropDownList from "@/components/DropDownList/DropDownList";
@@ -9,6 +9,8 @@ import emojiIcon from "@/assets/icons/emoji-icon.svg";
 import attachmentIcon from "@/assets/icons/attachment-icon.svg";
 
 const BroadcastMessage = () => {
+  const navigate = useNavigate();
+
   const [selectedReceipent, setSelectedReceipent] = useState("Select receipent");
 
   const messagesArray = [
@@ -58,9 +60,7 @@ const BroadcastMessage = () => {
     <div className={cx(styles.broadcastMessageContainer, "flexCol")}>
       <section className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Broadcast Message</h3>
-        <Link to='/dashboard/messages'>
-          <Button title='Close' />
-        </Link>
+        <Button onClick={() => navigate(-1)} title='Close' />
       </section>
       <section className={cx(styles.body, "flexCol")}>
         <DropDownList

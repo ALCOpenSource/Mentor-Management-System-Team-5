@@ -1,0 +1,120 @@
+.chatListItemContainer {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--taskListBgColor);
+  border-radius: 5px;
+  justify-content: center;
+  border: 1px solid var(--grayBorderColor);
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--taskListHoverBgColor);
+    border: 1px solid var(--taskListHoverBgColor);
+  }
+
+  .body {
+    gap: 0.75rem;
+
+    .profileImage {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .mainContent {
+      justify-content: center;
+      gap: 0.5rem;
+
+      .name {
+        font-size: 1.125rem;
+        color: var(--blackTextColor);
+        font-family: var(--semiBold);
+        margin: 0;
+        line-height: 1;
+      }
+
+      .messagePreview {
+        font-size: 0.875rem;
+        color: var(--black3TextColor);
+        font-family: var(--regular);
+        line-height: 1;
+      }
+
+      .name,
+      .messagePreview {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-box;
+        display: -o-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -moz-line-clamp: 1;
+        -ms-line-clamp: 1;
+        -o-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -ms-box-orient: vertical;
+        -o-box-orient: vertical;
+        white-space: normal;
+      }
+    }
+
+    .statsDiv {
+      margin-left: auto;
+      gap: 0.5rem;
+
+      .time {
+        font-size: 0.875rem;
+        color: var(--black3TextColor);
+        font-family: var(--regular);
+        line-height: 1;
+      }
+
+      .count {
+        font-size: 0.75rem;
+        width: auto;
+        padding: 0.125rem 0.125rem;
+        text-align: center;
+        border-radius: 0.25rem;
+        color: var(--whiteTextColor);
+        font-family: var(--regular);
+        background-color: var(--primaryRedColor);
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .chatListItemContainer {
+    padding: 0.875rem 0.75rem;
+
+    .body {
+      .profileImage {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .mainContent {
+        gap: 0.5rem;
+
+        .name {
+          font-size: 1rem;
+        }
+
+        .messagePreview {
+          font-size: 0.875rem;
+        }
+      }
+
+      .statsDiv {
+        .count {
+          font-size: 0.875rem;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

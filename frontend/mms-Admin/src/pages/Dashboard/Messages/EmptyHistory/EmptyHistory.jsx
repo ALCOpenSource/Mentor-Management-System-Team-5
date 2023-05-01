@@ -6,16 +6,15 @@ import Button from "@/components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 const EmptyHistory = () => {
-
   const navigate = useNavigate();
 
   return (
     <div className={cx(styles.emptyHistoryDiv, "flexCol-fully-centered")}>
-    <img src={emptyHistoryIcon} alt='empty-message-history-icon' />
-    <p>No Messages, Yet</p>
-    <p>No messages in your chatbox, yet. Start chatting with other users</p>
-    <Button title='Browse People' onClick={() => navigate("chats")} />
-  </div>
+      <img src={emptyHistoryIcon} alt='empty-message-history-icon' />
+      <p>No Messages, Yet</p>
+      <p>No messages in your chatbox, yet. Start chatting with other users</p>
+      <Button title='Browse People' onClick={() => navigate("all-personels")} />
+    </div>
   );
 };
 
