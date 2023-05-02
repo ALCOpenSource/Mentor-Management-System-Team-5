@@ -1,31 +1,34 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./ReportsOverview.module.scss";
+import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 
-import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
+import {ReactComponent as CardIcon} from "@/assets/icons/reports-overview-card-icon.svg";
 
 import DashboardReportsOverviewCard from "@/components/Cards/DashboardReportsOverview/DashboardReportsOverview";
-
 function ReportsOverview() {
+  
+  const navigate = useNavigate();
+
   const cardDataArray = [
     {
       title: "Google Africa Scholarship",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
-      icon: cardIcon
+      icon: CardIcon
     },
     {
       title: "Google Africa Scholarship",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
-      icon: cardIcon
+      icon: CardIcon
     },
     {
       title: "Google Africa Scholarship",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
-      icon: cardIcon
+      icon: CardIcon
     }
   ];
 
@@ -46,7 +49,7 @@ function ReportsOverview() {
       </div>
 
       <div className={cx(styles.btnDiv, "flexRow")}>
-        <Button title='View All' type='primary' size='small' />
+        <Button onClick={()=> navigate("reports")} title='View All' type='primary' size='small' />
       </div>
     </div>
   );

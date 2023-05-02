@@ -2,6 +2,29 @@
   padding: 0.875rem 0.75rem;
   background-color: var(--dashboardSummaryCardBgColor);
   border-radius: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--green5Color);
+
+    .body {
+      .icon {
+        path {
+          stroke: var(--primaryColor);
+        }
+      }
+
+      .mainContent {
+        .title {
+          color: var(--black2TextColor);
+        }
+
+        .metaData {
+          color: var(--grayTextColor);
+        }
+      }
+    }
+  }
 
   .body {
     gap: 0.5rem;
@@ -15,7 +38,7 @@
 
       .title {
         font-size: 1.25rem;
-        font-family: var(--semiBold);
+        font-family: var(--regular);
         color: var(--blackTextColor);
         margin: 0;
         line-height: 1;

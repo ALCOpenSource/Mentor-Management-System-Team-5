@@ -26,15 +26,13 @@ function TaskDetails() {
       // icon: <ReportIcon />,
       icon: mentorManagersIcon,
       value: 10,
-      caption: "Mentor Managers assigned to this program",
-      count: 5
+      caption: "Mentor Managers assigned to this task"
     },
     {
       // icon: <ReportIcon />,
       icon: mentorsIcon,
       value: 80,
-      caption: "Mentors assigned to this program",
-      count: 3
+      caption: "Mentors assigned to this task"
     },
     {
       // icon: <ReportIcon />,
@@ -91,9 +89,9 @@ function TaskDetails() {
                   <div className={cx(styles.summary, "flexRow")}>
                     <span className={cx(styles.summaryValue)}>{item.value}</span>
                     <span className={cx(styles.caption)}>{item.caption}</span>
-                    <div>
+                    {item?.caption.toLowerCase() === "task reports" && <div>
                       <span className={cx(styles.count)}>{item.count}</span>
-                    </div>
+                    </div>}
                   </div>
 
                   <Button title='View' size='small' />

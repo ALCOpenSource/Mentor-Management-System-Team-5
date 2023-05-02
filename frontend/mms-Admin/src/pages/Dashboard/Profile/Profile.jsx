@@ -105,7 +105,7 @@ function Profile() {
   return (
     <Container className={cx(styles.profileContainer)}>
       {getProfileLoading ? (
-        <Loader fullPage={false} />
+        <Loader />
       ) : (
         <>
           <Row className='mb-5'>

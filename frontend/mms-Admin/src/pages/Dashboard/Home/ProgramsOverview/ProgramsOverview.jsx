@@ -1,6 +1,7 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./ProgramsOverview.module.scss";
+import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 
 import cardIcon from "@/assets/icons/programs-overview-card-icon.svg";
@@ -8,6 +9,9 @@ import cardIcon from "@/assets/icons/programs-overview-card-icon.svg";
 import DashboardProgramsOverviewCard from "@/components/Cards/DashboardProgramsOverview/DashboardProgramsOverview";
 
 function ProgramsOverview() {
+
+  const navigate = useNavigate();
+
   const cardDataArray = [
     {
       title: "GADS Program 2023",
@@ -46,7 +50,7 @@ function ProgramsOverview() {
       </div>
 
       <div className={cx(styles.btnDiv, "flexRow")}>
-        <Button title='View All' type='primary' size='small' />
+        <Button onClick={()=> navigate("programs")} title='View All' type='primary' size='small' />
       </div>
     </div>
   );
