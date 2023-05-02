@@ -13,7 +13,7 @@ import userRoles from "@/constants/userRoles";
 
 
 // Dashboard
-const DashboardContainer = lazy(() => import("@/components/DashboardContainer/DashboardContainer"));
+import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
 const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
 const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
