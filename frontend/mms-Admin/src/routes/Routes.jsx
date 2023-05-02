@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, {lazy} from "react";
+import React, { lazy } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 // Authentication
@@ -10,7 +10,6 @@ import ResetPassword from "@/pages/Authentication/ResetPassword/ResetPassword";
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
 import userRoles from "@/constants/userRoles";
-
 
 // Dashboard
 import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
@@ -28,7 +27,6 @@ const BroadcastMessage = lazy(() => import("@/pages/Dashboard/Messages/Broadcast
 const Chats = lazy(() => import("@/pages/Dashboard/Messages/Chats/Chats"));
 const ChatDetails = lazy(() => import("@/pages/Dashboard/Messages/ChatDetails/ChatDetails"));
 const AllPersonels = lazy(() => import("@/pages/Dashboard/Messages/AllPersonels/AllPersonels"));
-
 
 // Settings
 const Settings = lazy(() => import("@/pages/Dashboard/Settings/Settings"));

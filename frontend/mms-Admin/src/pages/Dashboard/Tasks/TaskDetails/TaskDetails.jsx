@@ -38,7 +38,7 @@ function TaskDetails() {
       // icon: <ReportIcon />,
       icon: reportIcon,
       value: 40,
-      caption: "Task reports",
+      caption: "Task / Reports",
       count: 50
     }
   ];
@@ -89,9 +89,11 @@ function TaskDetails() {
                   <div className={cx(styles.summary, "flexRow")}>
                     <span className={cx(styles.summaryValue)}>{item.value}</span>
                     <span className={cx(styles.caption)}>{item.caption}</span>
-                    {item?.caption.toLowerCase() === "task reports" && <div>
-                      <span className={cx(styles.count)}>{item.count}</span>
-                    </div>}
+                    {item?.caption.toLowerCase().includes("report") && (
+                      <div>
+                        <span className={cx(styles.count)}>{item.count}</span>
+                      </div>
+                    )}
                   </div>
 
                   <Button title='View' size='small' />

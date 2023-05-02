@@ -4,13 +4,12 @@ import { useNavigate } from "react-router-dom";
 import styles from "./TasksOverview.module.scss";
 import Button from "@/components/Button/Button";
 
-import {ReactComponent as CardIcon} from "@/assets/icons/tasks-overview-card-icon.svg";
+import { ReactComponent as CardIcon } from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
 
 import DashboardTasksOverviewCard from "@/components/Cards/DashboardTasksOverview/DashboardTasksOverview";
 
 function TasksOverview() {
-  
   const navigate = useNavigate();
 
   const cardDataArray = [
@@ -57,7 +56,7 @@ function TasksOverview() {
           </div>
         </div>
         <div className={cx(styles.btnDiv, "flexRow")}>
-          <Button onClick={()=> navigate("tasks")} title='View All' type='primary' size='small' />
+          <Button onClick={() => navigate("tasks")} title='View All' type='primary' size='small' />
         </div>
       </div>
 
@@ -75,7 +74,7 @@ function TasksOverview() {
           </div>
         </div>
         <div className={cx(styles.btnDiv, "flexRow")}>
-          <Button onClick={()=> navigate("tasks")} title='View All' type='primary' size='small' />
+          <Button onClick={() => navigate("tasks")} title='View All' type='primary' size='small' />
         </div>
       </div>
     </div>

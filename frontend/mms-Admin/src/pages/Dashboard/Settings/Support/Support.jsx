@@ -140,12 +140,12 @@ function Support() {
               )}
             />
 
-            <div className={cx(styles.submitBtnDiv, "flexRow-space-between")}>
-              <div className={cx(styles.attachmentDiv, "flexRow")}>
-                <img {...getRootProps()} src={attachmentIcon} alt='attachment-icon' />
-                <span className={cx(styles.fileName)}>{uploadedFile?.file?.name}</span>
-              </div>
+            <div className={cx(styles.attachmentDiv, "flexRow-left-centered")}>
+              <img {...getRootProps()} src={attachmentIcon} alt='attachment-icon' />
+              <span className={cx(styles.fileName)}>{uploadedFile?.file?.name}</span>
+            </div>
 
+            <div className={cx(styles.submitBtnDiv, "flexRow-right-centered")}>
               <Button
                 onClick={handleSubmit((data) => sendMessage(data))}
                 loading={loading}

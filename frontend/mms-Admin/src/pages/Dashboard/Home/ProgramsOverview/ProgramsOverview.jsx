@@ -9,7 +9,6 @@ import cardIcon from "@/assets/icons/programs-overview-card-icon.svg";
 import DashboardProgramsOverviewCard from "@/components/Cards/DashboardProgramsOverview/DashboardProgramsOverview";
 
 function ProgramsOverview() {
-
   const navigate = useNavigate();
 
   const cardDataArray = [
@@ -50,7 +49,7 @@ function ProgramsOverview() {
       </div>
 
       <div className={cx(styles.btnDiv, "flexRow")}>
-        <Button onClick={()=> navigate("programs")} title='View All' type='primary' size='small' />
+        <Button onClick={() => navigate("programs")} title='View All' type='primary' size='small' />
       </div>
     </div>
   );

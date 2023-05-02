@@ -14,7 +14,6 @@ import searchIcon from "@/assets/icons/search-icon.svg";
 import { initialsCase } from "@/helpers/textTransform";
 import { useSelector } from "react-redux";
 
-
 function Header() {
   const [expanded, setExpanded] = useState(false);
   const { toggleSidebar } = useProSidebar();

@@ -26,8 +26,6 @@ import { titleCase } from "@/helpers/textTransform";
 import { useSelector } from "react-redux";
 // import useIsMobile from "@/hooks/useIsMobile";
 
-
-
 function DashboardSideBar() {
   const location = useLocation();
   // const isMobile = useIsMobile();
@@ -127,7 +125,8 @@ function DashboardSideBar() {
       <Sidebar breakPoint='xl' className={cx(styles.sidebar)}>
         <div className={cx(styles.userInfoDiv, "flexCol")}>
           <h5 className={cx(styles.name)}>
-            Hi, {titleCase(userProfile?.firstName) || titleCase(userProfile?.lastName || titleCase(userProfile?.fullName))}
+            Hi,{" "}
+            {titleCase(userProfile?.firstName) || titleCase(userProfile?.lastName || titleCase(userProfile?.fullName))}
           </h5>
           <p className={cx(styles.role)}>{arrayToString(userData?.roles)}</p>
         </div>

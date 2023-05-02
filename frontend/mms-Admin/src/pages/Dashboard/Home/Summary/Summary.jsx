@@ -11,7 +11,6 @@ import { ReactComponent as MentorsIcon } from "@/assets/icons/summary-card-mento
 import { ReactComponent as MentorManagersIcon } from "@/assets/icons/summary-card-mentor-managers-icon.svg";
 
 function Summary() {
-
   const navigate = useNavigate();
 
   const summaryCardsData = [
@@ -48,7 +47,7 @@ function Summary() {
   return (
     <div className={cx(styles.summaryContainer, "flexRow")}>
       <div className={cx(styles.activeProgramsDiv, "flexCol")}>
-        <Button onClick={()=> navigate("programs")} title='View All' type='secondary' size='small' />
+        <Button onClick={() => navigate("programs")} title='View All' type='secondary' size='small' />
         <div className={cx(styles.body, "flexRow")}>
           <span className={cx(styles.value)}>60</span>
           <h6 className={cx(styles.heading)}>Active Programs</h6>
@@ -56,7 +55,7 @@ function Summary() {
       </div>
       <div className={cx(styles.cardsGroup, "flexRow")}>
         {summaryCardsData.map((item, index) => (
-          <SummaryCard onClick={()=> navigate(`${item?.path}`)} key={index} data={item} />
+          <SummaryCard onClick={() => navigate(`${item?.path}`)} key={index} data={item} />
         ))}
       </div>
     </div>
