@@ -3,9 +3,9 @@ import cx from "classnames";
 import PropTypes from "prop-types";
 import styles from "./DashboardProgramsOverview.module.scss";
 
-function DashboardProgramsOverview({ data }) {
+function DashboardProgramsOverview({ data, onClick }) {
   return (
-    <div className={cx(styles.dashboardProgramsOverviewContainer, "flexCol")}>
+    <div onClick={onClick} className={cx(styles.dashboardProgramsOverviewContainer, "flexCol")}>
       <div className={cx(styles.body, "flexRow-align-center")}>
         <img className={cx(styles.icon)} src={data?.icon} alt='icon' />
         <div className={cx(styles.mainContent, "flexCol")}>
@@ -22,7 +22,8 @@ function DashboardProgramsOverview({ data }) {
 }
 
 DashboardProgramsOverview.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  onClick: PropTypes.func
 };
 
 export default DashboardProgramsOverview;

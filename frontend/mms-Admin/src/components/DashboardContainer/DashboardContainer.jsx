@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import styles from "./DashboardContainer.module.scss";
@@ -6,6 +6,7 @@ import styles from "./DashboardContainer.module.scss";
 import DashboardHeader from "../DashboardHeader/DashboardHeader";
 import DashboardSideBar from "../DashboardSideBar/DashboardSideBar";
 import DashboardChildren from "@/components/DashboardChildren/DashboardChildren";
+import Loader from "@/components/Loader/Loader";
 
 function DashboardContainer(props) {
   const { children } = props;
@@ -20,7 +21,9 @@ function DashboardContainer(props) {
           <DashboardSideBar />
         </div>
         <div className={cx(styles.children, "flexCol")}>
-          <DashboardChildren> {children} </DashboardChildren>
+          <Suspense fallback={<Loader />}>
+            <DashboardChildren> {children} </DashboardChildren>
+          </Suspense>
         </div>
       </section>
     </div>

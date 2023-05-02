@@ -11,14 +11,15 @@ import messageIcon from "@/assets/icons/message-icon.svg";
 import notificationIcon from "@/assets/icons/notification-icon.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
 
-import userInfo from "@/hooks/useGetUserInfo";
 import { initialsCase } from "@/helpers/textTransform";
+import { useSelector } from "react-redux";
 
 function Header() {
   const [expanded, setExpanded] = useState(false);
   const { toggleSidebar } = useProSidebar();
-  const userData = userInfo();
   const navigate = useNavigate();
+
+  const userProfile = useSelector((state) => state.settings.getProfileData);
 
   return (
     <section className={cx(styles.dashboardHeaderContainer)}>
@@ -56,10 +57,10 @@ function Header() {
               onClick={() => navigate("/dashboard/settings")}
               className={cx(styles.profileImageDiv, "flexRow-fully-centered")}
             >
-              {userData?.profilePicture ? (
-                <img className={cx(styles.profileImage)} src={userData?.profilePicture} alt='profile-image' />
+              {userProfile?.profilePicture ? (
+                <img className={cx(styles.profileImage)} src={userProfile?.profilePicture} alt='profile-image' />
               ) : (
-                <span className={cx(styles.profileImageText)}>{initialsCase(userData?.fullName)}</span>
+                <span className={cx(styles.profileImageText)}>{initialsCase(userProfile?.firstName)}</span>
               )}
             </div>
           </Nav>

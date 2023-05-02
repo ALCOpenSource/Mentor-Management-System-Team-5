@@ -11,7 +11,6 @@ import cardIcon from "@/assets/images/mentor-manager-thumbnail.svg";
 import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import ChatListItem from "../ChatListItem/ChatListItem";
 
-
 const Chats = () => {
   const navigate = useNavigate();
   const params = useParams();
@@ -21,7 +20,7 @@ const Chats = () => {
 
   // Temp fix for handling empty message history
   // const [messageHistory, setMessageHistory] = useState([]);
-  const messageHistory = [ ];
+  const messageHistory = [];
 
   useEffect(() => {
     !isMobile && setOpenSideBar(true);

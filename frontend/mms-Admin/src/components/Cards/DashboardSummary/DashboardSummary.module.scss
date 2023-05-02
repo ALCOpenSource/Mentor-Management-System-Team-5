@@ -4,6 +4,34 @@
   align-items: center;
   padding: 1rem;
   width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: -3px 4px 11px -6px rgba(0, 0, 0, 0.25);
+    color: var(--primaryColor);
+
+    .leftSection {
+      .heading {
+        color: var(--primaryColor);
+      }
+
+      .body {
+        .value {
+          color: var(--primaryColor);
+        }
+
+        .percentChange {
+          color: var(--primaryColor);
+        }
+      }
+    }
+
+    .icon {
+      path {
+        stroke: var(--primaryColor);
+      }
+    }
+  }
 
   .leftSection {
     gap: 0.25rem;

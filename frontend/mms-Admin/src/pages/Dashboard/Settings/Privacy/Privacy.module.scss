@@ -20,6 +20,11 @@
         align-items: center;
       }
     }
+
+    button {
+      align-self: flex-end;
+      margin-top: 1.5rem;
+    }
   }
 }
 
