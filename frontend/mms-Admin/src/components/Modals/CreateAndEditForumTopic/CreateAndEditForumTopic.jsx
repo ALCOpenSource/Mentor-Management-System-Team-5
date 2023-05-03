@@ -11,7 +11,7 @@ import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import attachmentIcon from "@/assets/icons/attachment-icon-green.svg";
 import smileyIcon from "@/assets/icons/smiley-icon.svg";
-
+import successImage from "@/assets/images/default-success-notification-image.png";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createAndEditForumTopicSchema } from "@/helpers/validation";
@@ -44,7 +44,8 @@ function CreateAndEditForumTopic({ show, size, modalName }) {
       showModal({
         name: "successNotification",
         modalData: {
-          title: modalData?.type === "create" ? "Post Created Successfully" : "Post Updated Successfully"
+          title: modalData?.type === "create" ? "Post Created Successfully" : "Post Updated Successfully",
+          image: successImage
         }
       })
     );

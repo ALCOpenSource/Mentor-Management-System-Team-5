@@ -15,6 +15,7 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 
 import { settingsSupportSchema } from "@/helpers/validation";
 import { sendSupportMessage } from "@/redux/Settings/SettingsSlice";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 function Support() {
   const dispatch = useDispatch();
@@ -49,7 +50,8 @@ function Support() {
         showModal({
           name: "successNotification",
           modalData: {
-            title: "Message sent successfully"
+            title: "Message sent successfully",
+            image: successImage
           }
         })
       );

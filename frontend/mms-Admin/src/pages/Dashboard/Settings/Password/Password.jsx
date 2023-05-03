@@ -15,6 +15,7 @@ import { settingsPasswordSchema } from "@/helpers/validation";
 import { changePassword } from "@/redux/Settings/SettingsSlice";
 import { forgotPassword } from "@/redux/Auth/AuthSlice";
 import userInfo from "@/hooks/useGetUserInfo";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 function Password() {
   const dispatch = useDispatch();
@@ -44,7 +45,8 @@ function Password() {
         showModal({
           name: "successNotification",
           modalData: {
-            title: "Password changed successfully"
+            title: "Password changed successfully",
+            image: successImage
           }
         })
       );

@@ -12,6 +12,7 @@ import moreIcon from "@/assets/icons/more-horizontal-icon.svg";
 import caretUp from "@/assets/icons/caret-up-icon.svg";
 import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import CreateForumTopicModal from "@/components/Modals/CreateAndEditForumTopic/CreateAndEditForumTopic";
+import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 
 const PostDetails = () => {
   const location = useLocation();
@@ -169,6 +170,7 @@ const PostDetails = () => {
 
       {displayModal && modalName === "createAndEditForumTopic" ? <CreateForumTopicModal show size='lg' /> : null}
       {displayModal && modalName === "deleteNotification" ? <DeleteNotificationModal show size='md' /> : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
 };

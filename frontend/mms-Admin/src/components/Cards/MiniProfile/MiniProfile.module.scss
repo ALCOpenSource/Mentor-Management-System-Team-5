@@ -1,0 +1,192 @@
+.miniProfileContainer {
+  padding: 0.5rem 0.5rem;
+  background-color: var(--taskListBgColor);
+  border-radius: 5px;
+  justify-content: center;
+  border: 1px solid var(--grayBorderColor);
+  width: 100%;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--taskListHoverBgColor);
+    border: 1px solid var(--taskListHoverBgColor);
+  }
+
+  .imageDiv {
+    .avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+    }
+  }
+
+  .userInfo {
+    gap: 0.25rem;
+    flex-grow: 1;
+
+    .groupOne {
+      .name {
+        font-size: 1rem;
+        color: var(--blackTextColor);
+        font-family: var(--bold);
+        margin: 0;
+        line-height: 1;
+      }
+
+      .designation {
+        font-size: 0.75rem;
+        color: var(--grayTextColor);
+        font-family: var(--regular);
+        line-height: 1.25;
+        margin: 0;
+      }
+    }
+
+    .positionTags {
+      gap: 0.5rem;
+
+      span {
+        font-size: 0.75rem;
+        color: var(--black3TextColor);
+        font-family: var(--regular);
+        line-height: 1;
+        padding: 0.25rem 0.5rem;
+        border-radius: 5px;
+        background-color: var(--green4Color);
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .icon {
+    width: 1rem;
+    cursor: pointer;
+  }
+}
+
+.gridView {
+  display: flex;
+  flex-direction: column;
+
+  .imageDiv {
+    justify-content: space-between;
+
+    .btnGroup {
+      align-self: flex-start;
+      gap: 0.875rem;
+    }
+  }
+
+  .userInfo {
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .leftSection {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .btnGroup {
+      display: none;
+    }
+  }
+}
+
+.listView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .imageDiv {
+    .btnGroup {
+      display: none;
+    }
+  }
+
+  .userInfo {
+    flex-direction: row;
+    gap: 0.5rem;
+
+    .leftSection {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .btnGroup {
+      gap: 0.5rem;
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .gridView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .imageDiv {
+      justify-content: space-between;
+
+      .btnGroup {
+        display: none;
+      }
+    }
+
+    .userInfo {
+      flex-direction: row;
+      gap: 0.5rem;
+
+      .leftSection {
+        gap: 0.5rem;
+        flex-grow: 1;
+
+        .groupOne {
+          gap: 0.25rem;
+        }
+      }
+
+      .btnGroup {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding-right: 0.5rem;
+      }
+    }
+  }
+
+  .listView {
+    padding: 0.5rem 2rem;
+
+    .userInfo {
+      align-items: center;
+
+      .leftSection {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+
+        .positionTags {
+          align-items: center;
+        }
+      }
+
+      .btnGroup {
+        gap: 0.5rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .gridView {
+    padding: 0.5rem 2rem;
+  }
+}
