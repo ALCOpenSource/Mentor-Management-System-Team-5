@@ -12,6 +12,7 @@ using mms.Application.UserTasks.Query;
 using mms.Domain.Entities;
 using mms.Application.Programme.Query;
 using mms.Application.Report.Query;
+using mms.Application.Mentors.Query;
 
 namespace mms.Application.Common.Mapper
 {
@@ -27,6 +28,7 @@ namespace mms.Application.Common.Mapper
             CreateMap<UserTask, GetUserTasksResponse>().ReverseMap();
             CreateMap<Programmes, GetProgrammeResponse>().ReverseMap();
             CreateMap<Reports, GetReportsCommand>().ReverseMap();
+            CreateMap<ProgramsMentor, GetMentorsCommand>().ReverseMap();
         }
     }
 }
