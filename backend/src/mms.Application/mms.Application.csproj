@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,5 +30,6 @@
   <ItemGroup>
     <Folder Include="Account\PasswordReset\" />
     <Folder Include="Account\ChangePassword\" />
+    <Folder Include="Programme\Command\" />
   </ItemGroup>
 </Project>
