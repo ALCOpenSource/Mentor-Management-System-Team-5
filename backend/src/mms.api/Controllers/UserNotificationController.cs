@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using mms.Application.UserNotification.Command.EditUserNotification;
 using mms.Application.UserNotification.Query;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace mms.api.Controllers
 {

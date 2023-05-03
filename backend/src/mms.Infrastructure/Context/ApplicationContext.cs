@@ -16,6 +16,7 @@ namespace mms.Infrastructure.Context
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<ProgrammeApplication> ProgrammeApplications { get; set; }
         public DbSet<ProgramsMentor> ProgramsMentors { get; set; }
+        public DbSet<MentorManager> MentorManagers { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<UserTask> UserTasks { get; set; }
         public DbSet<TechStack> TechStacks { get; set; }

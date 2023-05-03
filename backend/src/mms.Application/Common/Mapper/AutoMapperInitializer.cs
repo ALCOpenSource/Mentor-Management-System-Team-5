@@ -13,6 +13,7 @@ using mms.Domain.Entities;
 using mms.Application.Programme.Query;
 using mms.Application.Report.Query;
 using mms.Application.Mentors.Query;
+using mms.Application.MentorManagers.Query;
 
 namespace mms.Application.Common.Mapper
 {
@@ -29,6 +30,7 @@ namespace mms.Application.Common.Mapper
             CreateMap<Programmes, GetProgrammeResponse>().ReverseMap();
             CreateMap<Reports, GetReportsCommand>().ReverseMap();
             CreateMap<ProgramsMentor, GetMentorsCommand>().ReverseMap();
+            CreateMap<MentorManager, GetMentorManagersCommand>().ReverseMap();
         }
     }
 }
