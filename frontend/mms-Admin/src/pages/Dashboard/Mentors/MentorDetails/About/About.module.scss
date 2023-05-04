@@ -113,6 +113,10 @@
 
 @media all and (min-width: 1200px) {
   .aboutContainer {
+    .miscInfoDiv {
+      gap: 1rem !important;
+    }
+
     .socialInfoDiv {
       .wrapper {
         gap: 1.5rem;

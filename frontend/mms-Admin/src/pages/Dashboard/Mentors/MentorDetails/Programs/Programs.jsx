@@ -141,6 +141,7 @@ const Programs = () => {
                           <ReportIcon />
                           <span className={cx(styles.summaryValue)}>40</span>
                           <span>Program Reports</span>
+                          <span className={cx(styles.count)}>5</span>
                         </div>
 
                         <Button title='View' size='small' />

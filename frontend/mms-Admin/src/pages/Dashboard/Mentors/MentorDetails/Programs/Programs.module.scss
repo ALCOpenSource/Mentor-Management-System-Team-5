@@ -176,6 +176,19 @@
                 font-size: 1.25rem;
                 font-family: var(--bold);
               }
+
+              .count {
+                font-size: 0.875rem;
+                text-align: center;
+                width: 1.5rem;
+                line-height: 1.5rem;
+                border-radius: 50%;
+                font-family: var(--semiBold);
+                color: var(--whiteTextColor);
+                background-color: var(--primaryRedColor);
+                margin-left: 0.5rem;
+                display: block;
+              }
             }
           }
         }
@@ -311,6 +324,13 @@
 
                 .summaryValue {
                   font-size: 1.75rem;
+                }
+
+                .count {
+                  font-size: 1rem;
+                  width: 1.5rem;
+                  line-height: 1.5rem;
+                  margin-left: 1.5rem;
                 }
               }
             }
