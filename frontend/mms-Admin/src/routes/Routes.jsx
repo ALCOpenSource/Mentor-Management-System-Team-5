@@ -17,9 +17,12 @@ const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
 const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
 const MentorManagers = lazy(() => import("@/pages/Dashboard/MentorManagers/MentorManagers"));
-const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
+
+// Mentors
+const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
+const MentorDetails = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/MentorDetails"));
 
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
@@ -89,7 +92,10 @@ function RoutesComponent() {
             <Route path='post-details/:id' element={<PostDetails />} />
           </Route>
           <Route path='mentor-managers' element={<MentorManagers />} />
-          <Route path='mentors' element={<Mentors />} />
+          <Route path='mentors'>
+            <Route index path='' element={<Mentors />} />
+            <Route path='mentor-details/:id' element={<MentorDetails />} />
+          </Route>
           <Route path='messages'>
             <Route path='' element={<Messages />} />
             <Route path='all-personels' element={<AllPersonels />} />

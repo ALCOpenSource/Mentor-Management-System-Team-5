@@ -144,7 +144,7 @@ function Mentors() {
 
       <div className={cx(styles.body, view === "grid" ? styles.gridView : styles.listView)}>
         {mentorsArray.map((mentor, index) => (
-          <MiniProfile key={index} data={mentor} type={view} />
+          <MiniProfile onClick={() => navigate(`mentor-details/${mentor?.id}`)} key={index} data={mentor} type={view} />
         ))}
       </div>
 
