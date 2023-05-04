@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import cx from "classnames";
 import styles from "./Tabs.module.scss";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 const Tabs = ({ data, onClick }) => {
-  const [active, setActive] = useState(0);
+  const location = useLocation();
+  const path = location.pathname.split("/").pop();
+  let subMenuPath = data.find((item) => item?.path === path)?.path || data[0]?.path;
 
-  const handleTabClick = (item, index) => {
+  const handleTabClick = (item) => {
     onClick(item);
-    setActive(index);
   };
 
   return (
@@ -19,7 +21,7 @@ const Tabs = ({ data, onClick }) => {
             <span
               key={index}
               onClick={() => handleTabClick(item, index)}
-              className={cx(styles.tab, active === index ? styles.active : null)}
+              className={cx(styles.tab, subMenuPath === item?.path ? styles.active : null)}
             >
               {item?.name}
             </span>

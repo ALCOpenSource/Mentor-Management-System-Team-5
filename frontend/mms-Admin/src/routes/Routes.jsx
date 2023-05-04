@@ -23,6 +23,12 @@ const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
 // Mentors
 const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
 const MentorDetails = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/MentorDetails"));
+const MentorDetailsAbout = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/About/About"));
+const MentorDetailsPrograms = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/Programs/Programs"));
+const MentorDetailsCertificates = lazy(() =>
+  import("@/pages/Dashboard/Mentors/MentorDetails/Certificates/Certificates")
+);
+const MentorDetailsTasks = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/Tasks/Tasks"));
 
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
@@ -94,7 +100,13 @@ function RoutesComponent() {
           <Route path='mentor-managers' element={<MentorManagers />} />
           <Route path='mentors'>
             <Route index path='' element={<Mentors />} />
-            <Route path='mentor-details/:id' element={<MentorDetails />} />
+            <Route path='mentor-details/:id' element={<MentorDetails />}>
+              <Route path='' element={<MentorDetailsAbout />} />
+              <Route path='about' element={<MentorDetailsAbout />} />
+              <Route path='programs' element={<MentorDetailsPrograms />} />
+              <Route path='certificates' element={<MentorDetailsCertificates />} />
+              <Route path='tasks' element={<MentorDetailsTasks />} />
+            </Route>
           </Route>
           <Route path='messages'>
             <Route path='' element={<Messages />} />

@@ -4,8 +4,9 @@
   overflow-y: hidden;
   flex-wrap: nowrap;
   white-space: nowrap;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0 0;
   gap: 1.5rem;
+  border-bottom: 1px solid #ccc;
 
   .tab {
     font-size: 1rem;
@@ -17,7 +18,7 @@
   .active {
     color: var(--primaryColor);
     font-family: var(--bold);
-    border-bottom: 1px solid var(--primaryColor);
+    border-bottom: 2px solid var(--primaryColor);
   }
 
   &::-webkit-scrollbar {
