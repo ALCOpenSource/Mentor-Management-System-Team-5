@@ -4,6 +4,7 @@
   overflow-y: hidden;
   flex-wrap: nowrap;
   white-space: nowrap;
+  justify-content: space-around;
   padding: 0.5rem 0.5rem 0 0;
   gap: 1.5rem;
   border-bottom: 1px solid #ccc;
@@ -12,6 +13,7 @@
     font-size: 1rem;
     cursor: pointer;
     font-family: var(--regular);
+    color: var(--grayTextColor);
     padding-bottom: 0.125rem;
   }
 
