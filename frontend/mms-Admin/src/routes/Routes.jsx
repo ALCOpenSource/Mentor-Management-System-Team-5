@@ -64,11 +64,13 @@ function RoutesComponent() {
 
         <Route
           path='/dashboard'
-          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={
+            <AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>}
+            </AuthenticatedRoutes>
+          }
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>

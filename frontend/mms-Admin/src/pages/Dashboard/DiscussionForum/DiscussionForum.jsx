@@ -72,7 +72,8 @@ const DiscussionForum = () => {
                   type: "create"
                 }
               })
-            )}
+            )
+          }
           className={cx(styles.addNewTopicDiv, "flexRow-space-between")}
         >
           <span>Add new topic</span>
