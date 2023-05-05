@@ -17,22 +17,14 @@
 
   .modalBody {
     align-items: center;
-
-    .successImage {
-      width: 10rem;
-    }
-
-    .message {
-      font-size: 1.125rem;
-      font-family: var(--regular);
-      color: var(--black2TextColor);
-      text-align: center;
-      margin-top: 1rem;
-    }
+    width: 100%;
+    padding: 2rem 0;
   }
 
   .modalFooter {
     .btnDiv {
+      gap: 1.5rem;
+
       button {
         width: 100%;
       }
@@ -52,8 +44,8 @@
     }
 
     .modalBody {
-      .successImage {
-        width: 15rem;
+      .content {
+        font-size: 1.125rem;
       }
     }
 

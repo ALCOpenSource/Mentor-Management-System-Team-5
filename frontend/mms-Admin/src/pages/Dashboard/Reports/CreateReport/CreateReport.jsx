@@ -14,6 +14,7 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 import { createReportSchema } from "@/helpers/validation";
 import ProgramListItem from "./ProgramListItem/ProgramListItem";
 import mentorImage from "@/assets/images/reports-program-thumbnail.svg";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 function CreateReport() {
   const dispatch = useDispatch();
@@ -119,7 +120,8 @@ function CreateReport() {
       showModal({
         name: "successNotification",
         modalData: {
-          title: "Report submitted successfully"
+          title: "Report submitted successfully",
+          image: successImage
         }
       })
     );
