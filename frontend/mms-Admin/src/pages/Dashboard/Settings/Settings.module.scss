@@ -18,6 +18,8 @@
     .paginationWrapper {
       width: 100%;
       justify-content: center;
+      gap: 0.75rem;
+      flex-direction: row-reverse;
     }
   }
 
@@ -52,6 +54,9 @@
 
       .paginationWrapper {
         justify-content: flex-end;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        flex-direction: row;
       }
     }
 

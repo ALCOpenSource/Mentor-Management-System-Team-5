@@ -48,10 +48,6 @@
     right: 1.5rem;
     transform: translate(0, -50%);
     width: max-content;
-    // background-color: white;
-    // border: 1px solid var(--grayBorderColor);
-    // border-radius: 0.25rem;
-    // z-index: 100;
   }
 
   .hideInput {
@@ -62,6 +58,9 @@
     position: relative;
     width: max-content;
     display: flex;
+    background-color: white;
+    border: 1px solid var(--grayBorderColor);
+    border-radius: 0.5rem;
   }
 
   .togglerGroup {

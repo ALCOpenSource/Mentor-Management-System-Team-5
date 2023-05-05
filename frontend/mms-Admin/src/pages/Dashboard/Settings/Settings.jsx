@@ -4,6 +4,7 @@ import { useLocation, Outlet } from "react-router-dom";
 import styles from "./Settings.module.scss";
 import SettingsSideBar from "@/components/SettingsSideBar/SettingsSideBar";
 import Pagination from "@/components/Pagination/Pagination";
+import Search from "@/components/Search/Search";
 
 import { ReactComponent as GeneralIcon } from "@/assets/icons/settings-general-icon.svg";
 import { ReactComponent as PasswordIcon } from "@/assets/icons/settings-password-icon.svg";
@@ -12,10 +13,12 @@ import { ReactComponent as PrivacyIcon } from "@/assets/icons/settings-privacy-i
 import { ReactComponent as ArchiveIcon } from "@/assets/icons/settings-archive-icon.svg";
 import { ReactComponent as SupportIcon } from "@/assets/icons/settings-support-icon.svg";
 import { ReactComponent as FAQIcon } from "@/assets/icons/settings-faq-icon.svg";
+import { useIsMobileTablet } from "@/hooks/useIsMobile";
 
 function Settings() {
   const location = useLocation();
   const currentPage = location.pathname.split("/")[3] || "";
+  const isMobileTablet = useIsMobileTablet();
 
   const menuItemsArray = [
     {
@@ -59,9 +62,12 @@ function Settings() {
     <div className={cx(styles.settingsContainer, "flexCol")}>
       <section className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Settings</h3>
-        <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
-          {currentPage === "archive" && <Pagination currentPage={currentPage} />}
-        </div>
+        {currentPage === "archive" && (
+          <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
+            <Search expanded={!isMobileTablet} inputPlaceholder='Search archive' />
+            <Pagination />
+          </div>
+        )}
       </section>
 
       <section className={cx(styles.body, "flexRow")}>

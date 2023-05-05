@@ -145,7 +145,7 @@ function Mentors() {
           <Button onClick={() => handleAddMentor()} title='Add New Mentor' size='small' />
         </div>
         <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
-          <Pagination showSearchInput={false} />
+          <Pagination />
           {/* <FilterAndSearch /> */}
           <Search
             onSearchClick={handleSearchClick}

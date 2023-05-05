@@ -88,7 +88,7 @@ const AllPersonels = () => {
         <h3 className={cx(styles.title)}>Select someone to start a conversation</h3>
 
         <div className={cx(styles.rightSection, "flexRow")}>
-          <Pagination showSearchInput={false} />
+          <Pagination />
           <FilterAndSearch showCloseIcon={true} />
         </div>
       </div>
