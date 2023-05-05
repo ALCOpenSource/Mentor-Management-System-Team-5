@@ -12,7 +12,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import flagIcon from "@/assets/icons/flag-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
-import Search from "@/components/Search/Search";
 
 const MentorDetails = () => {
   const isMobile = useIsMobile();

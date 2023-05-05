@@ -4,7 +4,6 @@ import cx from "classnames";
 import styles from "./Mentors.module.scss";
 import Button from "@/components/Button/Button";
 import Pagination from "@/components/Pagination/Pagination";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 import MiniProfile from "@/components/Cards/MiniProfile/MiniProfile";
 import { ReactComponent as GridViewIcon } from "@/assets/icons/grid-view-icon.svg";
