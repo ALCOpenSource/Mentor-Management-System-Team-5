@@ -5,6 +5,7 @@ import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi } 
 import { setToken, setRefreshToken, getToken, getRefreshToken, logout } from "@/utils/auth";
 
 import { loginLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
+import { getProfile } from "@/redux/Settings/SettingsSlice";
 
 const initialState = {
   error: false,
@@ -58,6 +59,7 @@ export const login = (data) => async (dispatch) => {
     toast.success(response?.data?.message);
     dispatch(loginLoading(false));
     dispatch(loginAction(response?.data?.data));
+    dispatch(getProfile());
     return { success: true };
   } catch (e) {
     toast.error(e?.response?.data?.message);
@@ -105,6 +107,7 @@ export const refreshAccessToken = () => async (dispatch) => {
     const response = await refreshAccessTokenApi({ refreshToken: refreshToken, accessToken: token });
     setToken(response?.data?.data?.accessToken);
     setRefreshToken(response?.data?.data?.refreshToken);
+    dispatch(getProfile());
     dispatch(refreshAccessTokenAction(response?.data?.data));
     return { success: true };
   } catch (e) {

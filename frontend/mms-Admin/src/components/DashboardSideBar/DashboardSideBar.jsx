@@ -23,11 +23,13 @@ import userInfo from "@/hooks/useGetUserInfo";
 import arrayToString from "@/helpers/arrayToString";
 import { logout } from "@/utils/auth";
 import { titleCase } from "@/helpers/textTransform";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfile } from "@/redux/Settings/SettingsSlice";
 // import useIsMobile from "@/hooks/useIsMobile";
 
 function DashboardSideBar() {
   const location = useLocation();
+  const dispatch = useDispatch();
   // const isMobile = useIsMobile();
   const { toggleSidebar } = useProSidebar();
   const userData = userInfo();
@@ -104,6 +106,10 @@ function DashboardSideBar() {
     ],
     []
   );
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
   useEffect(() => {
     setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage));

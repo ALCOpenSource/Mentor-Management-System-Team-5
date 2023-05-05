@@ -1,0 +1,84 @@
+.searchContainer {
+  justify-content: flex-end;
+  gap: 1.25rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  background-color: white;
+  position: relative;
+  height: inherit;
+
+  .icon {
+    width: 1rem;
+    object-fit: contain;
+    cursor: pointer;
+  }
+
+  .inputDiv {
+    gap: 0.25rem;
+    background-color: var(--green3Color);
+    padding: 0 0.5rem;
+    border-radius: 0.25rem;
+    width: 100%;
+    height: inherit;
+
+    .searchInput {
+      border: none;
+      outline: none;
+      padding: 0.5rem;
+      background-color: transparent;
+      font-family: var(--regular);
+      color: var(--black2TextColor);
+      font-size: 0.875rem;
+      width: 100%;
+    }
+
+    .icon {
+      width: 1rem;
+    }
+
+    .clearListIcon {
+      width: 0.75rem;
+      object-fit: contain;
+      cursor: pointer;
+    }
+  }
+
+  .showInput {
+    position: absolute;
+    top: 50%;
+    right: 1.5rem;
+    transform: translate(0, -50%);
+    width: max-content;
+    // background-color: white;
+    // border: 1px solid var(--grayBorderColor);
+    // border-radius: 0.25rem;
+    // z-index: 100;
+  }
+
+  .hideInput {
+    display: none;
+  }
+
+  .expanded {
+    position: relative;
+    width: max-content;
+    display: flex;
+  }
+
+  .togglerGroup {
+    .closeIcon {
+      width: 0.625rem;
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .searchContainer {
+    gap: 1.25rem;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .searchContainer {
+    gap: 1.125rem;
+  }
+}

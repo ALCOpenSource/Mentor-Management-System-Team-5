@@ -1,0 +1,146 @@
+.mentorsContainer {
+  height: calc(100dvh - var(--topNavbarHeight));
+  width: 100%;
+  overflow: hidden;
+  padding: 0.5rem;
+  gap: 1rem;
+
+  .heading {
+    position: sticky;
+    top: 0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .leftSection {
+      align-items: center;
+      gap: 1.5rem;
+      justify-content: space-between;
+      width: 100%;
+
+      .title {
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        font-size: 1.5rem;
+        line-height: 1;
+        padding: 0;
+        margin: 0;
+      }
+
+      .viewToggler {
+        gap: 1rem;
+        align-items: center;
+
+        .isActive {
+          path {
+            fill: var(--green7Color);
+          }
+        }
+
+        svg {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btnGroup {
+      justify-content: center;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .paginationAndSearchDiv {
+      width: 100%;
+      justify-content: space-evenly;
+    }
+  }
+
+  .body {
+    gap: 1rem;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+  }
+
+  .gridView {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .listView {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .mentorsContainer {
+    padding: 1rem 2rem;
+
+    .heading {
+      gap: 1rem;
+
+      .leftSection {
+        gap: 1.25rem;
+        width: auto;
+
+        .title {
+          font-size: 1.5rem;
+        }
+
+        .viewToggler {
+          gap: 1rem;
+        }
+      }
+
+      .btnGroup {
+        justify-content: flex-end;
+        gap: 1rem;
+        width: auto;
+        flex-grow: 1;
+      }
+
+      .paginationAndSearchDiv {
+        gap: 2rem;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    }
+
+    .listView {
+      gap: 0.75rem;
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .mentorsContainer {
+    padding: 1rem 1.5rem;
+
+    .heading {
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+
+      .leftSection {
+        gap: 1.25rem;
+        width: 100%;
+        flex-grow: 1;
+        justify-content: flex-start;
+      }
+
+      .paginationAndSearchDiv {
+        gap: 2rem;
+        width: auto;
+        margin-left: 2rem;
+      }
+    }
+
+    .listView {
+      gap: 0.75rem;
+    }
+  }
+}
