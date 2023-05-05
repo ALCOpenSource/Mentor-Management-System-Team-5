@@ -7,6 +7,18 @@
 
   .sideBarSection {
     height: 100%;
+
+    .headerWrapper {
+      align-items: center;
+
+      .title {
+        font-size: 1.25rem;
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        margin: 0;
+        line-height: 1;
+      }
+    }
   }
 
   .outletDiv {

@@ -14,6 +14,7 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import AddUserModal from "@/components/Modals/AddUser/AddUser";
+import Search from "@/components/Search/Search";
 
 function Mentors() {
   const navigate = useNavigate();
@@ -111,6 +112,14 @@ function Mentors() {
     }
   ];
 
+  const handleSearchInput = (data) => {
+    console.log(data);
+  };
+
+  const handleSearchClick = () => {
+    console.log("search icon clicked");
+  };
+
   return (
     <div className={cx(styles.mentorsContainer, "flexCol")}>
       <div className={cx(styles.heading, "flexRow")}>
@@ -138,7 +147,13 @@ function Mentors() {
         </div>
         <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
           <Pagination showSearchInput={false} />
-          <FilterAndSearch />
+          {/* <FilterAndSearch /> */}
+          <Search
+            onSearchClick={handleSearchClick}
+            onChange={handleSearchInput}
+            expanded={false}
+            inputPlaceholder={"Search for mentor..."}
+          />
         </div>
       </div>
 

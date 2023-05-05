@@ -121,7 +121,9 @@
 
     .heading {
       flex-wrap: nowrap;
-      gap: 3rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
       padding: 1rem 0;
 
       .leftSection {
@@ -132,8 +134,9 @@
       }
 
       .paginationAndSearchDiv {
-        gap: 1.5rem;
+        gap: 2rem;
         width: auto;
+        margin-left: 2rem;
       }
     }
 

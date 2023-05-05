@@ -12,6 +12,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import flagIcon from "@/assets/icons/flag-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
+import Search from "@/components/Search/Search";
 
 const MentorDetails = () => {
   const isMobile = useIsMobile();
@@ -23,73 +24,63 @@ const MentorDetails = () => {
     () => [
       {
         id: 1,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 2,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 3,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 4,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 5,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 6,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 7,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 8,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 9,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       },
       {
         id: 10,
-        name: "Kabiru Omo Isaka",
-        designation: "Program Assistant, Andela, He/Him",
+        name: "Alison Davis",
         image: mentorImage,
-        positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
+        dateAdded: "May 05, 2023"
       }
     ],
     []
@@ -125,29 +116,43 @@ const MentorDetails = () => {
     setOpenSideBar(false);
   };
 
+  const handleViewUser = (user) => {
+    setSelectedUser(user);
+    navigate(`/dashboard/mentors/mentor-details/${user?.id}`);
+
+    if (isMobile) {
+      setOpenSideBar(false);
+    }
+  };
+
   const getListComponents = (data) => {
     const listItems =
       Array.isArray(data) &&
       data.map((item, index) => {
         return {
-          component: <UserComponent key={index} data={item} />,
+          component: <UserComponent onClick={handleViewUser} key={index} data={item} />,
           id: item.id
         };
       });
 
     const headerComponent = (
-      <FilterAndSearch
-        closeSideBar={handleCloseSidebar}
-        dropdownItems={[
-          { name: "All", id: 1 },
-          { name: "Mentors", id: 2 },
-          { name: "Mentor Managers", id: 3 }
-        ]}
-        searchData={handleSearchInput}
-        selectedFilterItem={handleSelectedFilterItem}
-        showCloseIcon={true}
-        inputPlaceholder='Search for mentor...'
-      />
+      <>
+        <div className={cx(styles.headerWrapper, "flexRow-space-between")}>
+          <h3 className={cx(styles.title)}>Title</h3>
+          <FilterAndSearch
+            closeSideBar={handleCloseSidebar}
+            dropdownItems={[
+              { name: "All", id: 1 },
+              { name: "Mentors", id: 2 },
+              { name: "Mentor Managers", id: 3 }
+            ]}
+            searchData={handleSearchInput}
+            selectedFilterItem={handleSelectedFilterItem}
+            showCloseIcon={false}
+            inputPlaceholder='Search for mentor...'
+          />
+        </div>
+      </>
     );
 
     return { listItems, headerComponent };
@@ -199,8 +204,19 @@ const MentorDetails = () => {
               </div>
             </div>
             <div className={cx(styles.btnGroup, "flexRow-align-center")}>
-              <Button title='Send Message' size={"small"} className={cx(styles.editBtn)} />
-              <Button type='secondary' title='Close' size={"small"} className={cx(styles.viewBtn)} />
+              <Button
+                onClick={() => navigate("/dashboard/messages/chats/1")}
+                title='Send Message'
+                size={"small"}
+                className={cx(styles.editBtn)}
+              />
+              <Button
+                onClick={() => navigate("/dashboard/mentors")}
+                type='secondary'
+                title='Close'
+                size={"small"}
+                className={cx(styles.viewBtn)}
+              />
             </div>
           </div>
           {isMobile && (
