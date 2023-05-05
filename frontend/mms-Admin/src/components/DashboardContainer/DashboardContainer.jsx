@@ -21,7 +21,7 @@ function DashboardContainer(props) {
           <DashboardSideBar />
         </div>
         <div className={cx(styles.children, "flexCol")}>
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Loader fullPage={true} />}>
             <DashboardChildren> {children} </DashboardChildren>
           </Suspense>
         </div>

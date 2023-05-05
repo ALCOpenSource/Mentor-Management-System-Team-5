@@ -45,6 +45,11 @@
   }
 }
 
+.active {
+  background-color: var(--taskListHoverBgColor);
+  border: 1px solid var(--taskListHoverBgColor);
+}
+
 @media all and (min-width: 992px) {
   .userComponent {
     padding: 0.5rem 0.5rem;

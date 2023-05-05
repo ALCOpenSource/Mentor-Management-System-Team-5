@@ -104,7 +104,7 @@ const MentorDetails = () => {
   };
 
   const handleSearchInput = (e) => {
-    console.log(e.target.value);
+    console.log(e);
   };
 
   const handleSelectedFilterItem = (item) => {
@@ -137,7 +137,7 @@ const MentorDetails = () => {
     const headerComponent = (
       <>
         <div className={cx(styles.headerWrapper, "flexRow-space-between")}>
-          <h3 className={cx(styles.title)}>Title</h3>
+          <h3 className={cx(styles.title)}>Mentors</h3>
           <FilterAndSearch
             closeSideBar={handleCloseSidebar}
             dropdownItems={[
