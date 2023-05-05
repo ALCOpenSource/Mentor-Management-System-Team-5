@@ -10,6 +10,7 @@ import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import cardIcon from "@/assets/images/mentor-manager-thumbnail.svg";
 import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import ChatListItem from "../ChatListItem/ChatListItem";
+// import Search from "@/components/Search/Search";
 
 const Chats = () => {
   const navigate = useNavigate();
@@ -174,6 +175,7 @@ const Chats = () => {
 
     const headerComponent = (
       <FilterAndSearch searchData={handleSearchInput} inputPlaceholder='Search for contact...' mode='search' />
+      // <Search expanded searchData={handleSearchInput} inputPlaceholder='Search for contact...' mode='search' />
     );
 
     return { listItems, headerComponent };

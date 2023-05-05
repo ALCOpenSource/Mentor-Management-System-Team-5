@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import cx from "classnames";
 import { useLocation, Outlet } from "react-router-dom";
 import styles from "./Settings.module.scss";
@@ -19,6 +19,13 @@ function Settings() {
   const location = useLocation();
   const currentPage = location.pathname.split("/")[3] || "";
   const isMobileTablet = useIsMobileTablet();
+
+  const [currentPageNumber, setCurrentPageNumber] = useState(0);
+  const [perPage, setPerPage] = useState(5);
+  const totalNumberOfPages = 10; // for testing purposes
+
+  console.log(currentPageNumber, "current page");
+  console.log(perPage, "per page");
 
   const menuItemsArray = [
     {
@@ -58,6 +65,14 @@ function Settings() {
     }
   ];
 
+  const handlePageClick = (data) => {
+    setCurrentPageNumber(data);
+  };
+
+  const handlePageSizeChange = (data) => {
+    setPerPage(data);
+  };
+
   return (
     <div className={cx(styles.settingsContainer, "flexCol")}>
       <section className={cx(styles.heading, "flexRow-space-between")}>
@@ -65,7 +80,13 @@ function Settings() {
         {currentPage === "archive" && (
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
             <Search expanded={!isMobileTablet} inputPlaceholder='Search archive' />
-            <Pagination />
+            <Pagination
+              totalNumberOfPages={totalNumberOfPages}
+              currentPage={currentPage}
+              onPageClick={handlePageClick}
+              onSizeChange={handlePageSizeChange}
+              showSizePicker={true}
+            />
           </div>
         )}
       </section>
