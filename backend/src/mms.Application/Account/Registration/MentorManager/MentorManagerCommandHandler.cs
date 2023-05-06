@@ -28,7 +28,7 @@ namespace mms.Application.Account.Registration.MentorManager
                 return await Result<string>.FailAsync("User already Exist");
             }
 
-            user = new AppUser()
+            user = new AppUser
             {
                 Email = request.Email,
                 FirstName = GetFirstAndLastName(request.Name).firstName,
@@ -36,11 +36,11 @@ namespace mms.Application.Account.Registration.MentorManager
                 UserName = request.Email
             };
 
-            var response = new Result<string>();
+            Result<string> response = new();
 
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                response = await CreateUser(user, Policies.Manager, password: request.Password);
+                response = await CreateUser(user, Policies.Manager, request.Password, true);
                 if (response.Succeeded)
                 {
                     transaction.Complete();
