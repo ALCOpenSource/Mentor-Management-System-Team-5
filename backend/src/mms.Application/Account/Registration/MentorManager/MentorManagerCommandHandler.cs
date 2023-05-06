@@ -35,16 +35,11 @@ namespace mms.Application.Account.Registration.MentorManager
                 LastName = GetFirstAndLastName(request.Name).lastName,
                 UserName = request.Email
             };
-
-            Result<string> response = new();
-
-            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            var response = await CreateUser(user, Policies.Manager, request.Password, true);
+            if (response.Succeeded)
             {
-                response = await CreateUser(user, Policies.Manager, request.Password, true);
-                if (response.Succeeded)
-                {
-                    transaction.Complete();
-                }
+                transaction.Complete();
             }
 
             return response;

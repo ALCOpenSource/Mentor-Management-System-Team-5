@@ -38,7 +38,7 @@ namespace mms.Application.Account
         }
 
         protected async Task<Result<string>> CreateUser(AppUser user, string role, string subject,
-            string password, bool confirmEmail = true)
+            string password, bool confirmEmail)
         {
             user.DateCreated = DateTime.UtcNow;
             var userCreationResult = password == null
