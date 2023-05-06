@@ -4,7 +4,7 @@
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   background-color: white;
   position: relative;
-  height: inherit;
+  z-index: 10;
 
   .icon {
     width: 1rem;
@@ -18,12 +18,11 @@
     padding: 0 0.5rem;
     border-radius: 0.25rem;
     width: 100%;
-    height: inherit;
 
     .searchInput {
       border: none;
       outline: none;
-      padding: 0.5rem;
+      padding: 0.25rem 0.5rem;
       background-color: transparent;
       font-family: var(--regular);
       color: var(--black2TextColor);
@@ -48,6 +47,7 @@
     right: 1.5rem;
     transform: translate(0, -50%);
     width: max-content;
+    min-width: 15rem;
   }
 
   .hideInput {

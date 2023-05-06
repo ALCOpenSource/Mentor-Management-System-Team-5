@@ -3,16 +3,16 @@ import cx from "classnames";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 import styles from "./Tasks.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import Button from "@/components/Button/Button";
-import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
-import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
 import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
+import closeIcon from "@/assets/icons/close-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import TaskListItem from "./TaskListItem/TaskListItem";
 import useIsMobile from "@/hooks/useIsMobile";
+import Search from "@/components/Search/Search";
+import Filter from "@/components/Filter/Filter";
 function Tasks() {
   const navigate = useNavigate();
   const params = useParams();
@@ -24,7 +24,8 @@ function Tasks() {
     isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
   }, [isMobile]);
 
-  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [collapseInput, setCollapseInput] = useState(false);
+  const [closeSelectElement, setCloseSelectElement] = useState(false);
 
   const menuItemsArray = [
     {
@@ -183,7 +184,17 @@ function Tasks() {
     }
   ];
 
-  const getMenuItems = () => {
+  const handleCloseSearchInput = (e) => {
+    console.log(e, "handle close input");
+    setCollapseInput(true);
+  };
+
+  const handleCloseSelectElement = (e) => {
+    console.log(e, "handle close select");
+    setCloseSelectElement(true);
+  };
+
+  const getSideBarData = () => {
     let listItems = menuItemsArray.map((item, index) => {
       return {
         component: <TaskListItem key={index} data={item} />,
@@ -191,37 +202,47 @@ function Tasks() {
       };
     });
 
-    const headerComponent = !isMobile && (
-      <FilterAndSearch
-        closeSideBar={handleCloseSidebar}
-        dropdownItems={[
-          { name: "All", id: 1 },
-          { name: "Completed", id: 2 },
-          { name: "In-progress", id: 3 }
-        ]}
-        searchData={handleSearchInput}
-        selectedFilterItem={handleSelectedFilterItem}
-        showCloseIcon={false}
-        inputPlaceholder='Search for tasks...'
-        showDropdown={true}
-        showFilterToggler={true}
-        reversed={true}
-      />
+    const headerComponent = (
+      <div className={cx(styles.sideBarHeader, "flexRow-align-center")}>
+        <h3 className={cx(styles.title)}>Tasks</h3>
+        <Search
+          inputPlaceholder='Search for tasks...'
+          onChange={handleSearchInput}
+          collapseInput={collapseInput}
+          setCollapseInput={setCollapseInput}
+          closeSelectElement={handleCloseSelectElement}
+        />
+        <Filter
+          dropdownItems={[
+            { name: "All", id: 1 },
+            { name: "Completed", id: 2 },
+            { name: "In-progress", id: 3 }
+          ]}
+          selectedFilterItem={handleSelectedFilterItem}
+          closeSearchInput={handleCloseSearchInput}
+          closeSelectElement={closeSelectElement}
+          setCloseSelectElement={setCloseSelectElement}
+        />
+        {isMobile && (
+          <img
+            onClick={() => setOpenSideBar(!openSideBar)}
+            src={closeIcon}
+            className={cx(styles.closeIcon)}
+            alt='close-icon'
+          />
+        )}
+      </div>
     );
 
     return { listItems, headerComponent };
   };
 
-  const handleSearchInput = (e) => {
-    console.log(e.target.value);
+  const handleSearchInput = (data) => {
+    console.log(data);
   };
 
   const handleSelectedFilterItem = (item) => {
     console.log(item);
-  };
-
-  const handleCloseSidebar = () => {
-    setOpenSideBar({ open: false, category: "" });
   };
 
   const handleSelectedMenuItem = (id) => {
@@ -230,39 +251,34 @@ function Tasks() {
   };
 
   return (
-    <div className={cx(styles.tasksContainer, "flexCol")}>
-      <section className={cx(styles.heading, "flexRow-space-between")}>
-        <div className={cx(styles.titleAndToggler, "flexRow")}>
-          <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
-            <img
-              className={cx(styles.toggler)}
-              src={subMenuIcon}
-              alt='toggler'
-              onClick={() => setOpenSideBar(!openSideBar)}
-            />
-            <small className={cx(styles.togglerText)}>MENU</small>
-          </div>
-          <h3 className={cx(styles.title)}>Tasks</h3>
+    <div className={cx(styles.tasksContainer, "flexRow")}>
+      {openSideBar && (
+        <div className={cx(styles.sidebarWrapper)}>
+          <GenericSideBar
+            data={getSideBarData()}
+            selectedMenuItem={handleSelectedMenuItem}
+            activeMenuItemClass='active-task-item'
+            closeGenericSideBar={() => setOpenSideBar(false)}
+          />
         </div>
-        <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
-          <SearchIcon className={cx(styles.searchIcon)} onClick={() => setShowSearchInput(!showSearchInput)} />
-          {showSearchInput && <input className={cx(styles.searchInput)} type='text' placeholder='Search for tasks' />}
-          <SortIcon className={cx(styles.sortIcon)} />
-        </div>
-        <Button title='Create New Task' onClick={() => navigate("create-task")} />
-      </section>
+      )}
 
-      <section className={cx(styles.mainBody, "flexRow")}>
-        {openSideBar && (
-          <div className={cx(styles.sidebarWrapper)}>
-            <GenericSideBar
-              data={getMenuItems()}
-              selectedMenuItem={handleSelectedMenuItem}
-              activeMenuItemClass='active-task-item'
-              closeGenericSideBar={() => setOpenSideBar(false)}
-            />
+      <section className={cx(styles.mainBody, "flexCol")}>
+        <section className={cx(styles.heading, "flexRow-space-between")}>
+          <div className={cx(styles.titleAndToggler, "flexRow")}>
+            <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
+              <img
+                className={cx(styles.toggler)}
+                src={subMenuIcon}
+                alt='toggler'
+                onClick={() => setOpenSideBar(!openSideBar)}
+              />
+              <small className={cx(styles.togglerText)}>MENU</small>
+            </div>
+            <h3 className={cx(styles.title)}>Tasks</h3>
           </div>
-        )}
+          <Button title='Create New Task' onClick={() => navigate("create-task")} />
+        </section>
 
         <div className={cx(styles.content)}>
           {selectedMenuId ? (

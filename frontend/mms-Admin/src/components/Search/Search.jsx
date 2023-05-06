@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import styles from "./Search.module.scss";
 import PropTypes from "prop-types";
@@ -6,19 +6,33 @@ import searchIcon from "@/assets/icons/search-icon-green.png";
 import closeIcon from "@/assets/icons/close-icon.png";
 import deleteIcon from "@/assets/icons/clear-list-reversed.svg";
 
-const Search = ({ onSearchClick, onChange, reversed, inputPlaceholder, expanded }) => {
+const Search = ({
+  onSearchClick,
+  onChange,
+  inputPlaceholder,
+  expanded,
+  collapseInput,
+  setCollapseInput,
+  closeSelectElement
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [toggle, setToggle] = useState(false);
-
-  console.log(reversed, "reversed");
 
   const handleInputChange = (value) => {
     setInputValue(value);
     onChange(value);
   };
 
+  useEffect(() => {
+    if (collapseInput) {
+      setInputValue("");
+    }
+  }, [collapseInput]);
+
   const handleToggle = (value) => {
     setToggle(value);
+    value ? setCollapseInput(false) : setCollapseInput(true);
+    closeSelectElement(true);
   };
 
   return (
@@ -27,7 +41,7 @@ const Search = ({ onSearchClick, onChange, reversed, inputPlaceholder, expanded 
         className={cx(
           styles.inputDiv,
           "flexRow-align-center",
-          toggle ? styles.showInput : styles.hideInput,
+          toggle && !collapseInput ? styles.showInput : styles.hideInput,
           expanded && styles.expanded
         )}
       >
@@ -51,7 +65,7 @@ const Search = ({ onSearchClick, onChange, reversed, inputPlaceholder, expanded 
 
       {!expanded ? (
         <div className={cx(styles.togglerGroup, "flexRow-align-center")}>
-          {toggle ? (
+          {toggle && !collapseInput ? (
             <img
               src={closeIcon}
               alt='close-icon'
@@ -82,11 +96,18 @@ Search.propTypes = {
   inputPlaceholder: PropTypes.string,
   expanded: PropTypes.bool,
   onSearchClick: PropTypes.func,
-  reversed: PropTypes.bool
+  reversed: PropTypes.bool,
+  collapseInput: PropTypes.bool,
+  setCollapseInput: PropTypes.func,
+  closeSelectElement: PropTypes.func
 };
 
 Search.defaultProps = {
-  reversed: false
+  reversed: false,
+  expanded: false,
+  setCollapseInput: () => {},
+  collapseInput: false,
+  closeSelectElement: () => {}
 };
 
 export default Search;

@@ -1,6 +1,6 @@
 .createTaskContainer {
   gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   position: relative;
   height: calc(100vh - var(--topNavbarHeight));
 
@@ -24,6 +24,7 @@
 
     .formWrapper {
       overflow-y: auto;
+      padding-right: 0.5rem;
 
       form {
         label {
