@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import { Country, City } from "country-state-city";
+// import { Country, City } from "country-state-city";
+import { Country } from "country-state-city";
+import { City } from "country-state-city";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./General.module.scss";
