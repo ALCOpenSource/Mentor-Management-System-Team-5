@@ -7,6 +7,8 @@ using mms.Application.Account.PasswordReset;
 using mms.Application.Account.RefreshToken;
 using mms.Infrastructure.Interface;
 using System.Net;
+using mms.Application.Account.ConfirmEmail;
+using mms.Application.Account.Registration.MentorManager;
 
 namespace mms.api.Controllers
 {
@@ -35,10 +37,40 @@ namespace mms.api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost("mentor-manager-registration")]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> MentorManagerRegistration(MentorManagerCommand command)
+        {
+            var result = await Mediator.Send(command);
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("confirm-email")]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailCommand command)
+        {
+            var result = await Mediator.Send(command);
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
         [HttpPost("refresh-token")]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> LoginAsync(RefreshTokenCommand command)
+        public async Task<IActionResult> RefreshToken(RefreshTokenCommand command)
         {
             var result = await Mediator.Send(command);
             if (result.Succeeded == false)

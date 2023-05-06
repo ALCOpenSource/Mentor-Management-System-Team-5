@@ -18,7 +18,8 @@ namespace mms.Application.Account.ChangePassword
 
         public ChangePasswordHandler(UserManager<AppUser> userManager, IConfiguration configuration,
             ApplicationContext context, ITokenGeneratorService tokenGenerator,
-            IHttpContextAccessor _httpContextAccessor) : base(userManager, configuration, tokenGenerator)
+            IHttpContextAccessor _httpContextAccessor, IMailService mailService) : base(userManager, configuration,
+            tokenGenerator, mailService)
         {
             this._httpContextAccessor = _httpContextAccessor;
         }

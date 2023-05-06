@@ -12,8 +12,9 @@ namespace mms.Application.Account.Login
     public class LoginCommandHandler : GenerateLoginResponse, IRequestHandler<LoginCommand, Result<LoginResponseDto>>
     {
         public LoginCommandHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            ApplicationContext context, ITokenGeneratorService tokenGenerator) : base(userManager, configuration,
-            context, tokenGenerator)
+            ApplicationContext context, ITokenGeneratorService tokenGenerator, IMailService mailService) : base(
+            userManager, configuration,
+            context, tokenGenerator, mailService)
         {
         }
 

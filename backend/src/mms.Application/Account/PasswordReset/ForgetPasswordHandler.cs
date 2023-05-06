@@ -14,8 +14,9 @@ namespace mms.Application.Account.PasswordReset
         IRequestHandler<ForgetPasswordCommand, Result<ForgetPasswordResponseDto>>
     {
         public ForgetPasswordHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            ApplicationContext context, ITokenGeneratorService tokenGeneratorService) : base(userManager, configuration,
-            tokenGeneratorService)
+            ApplicationContext context, ITokenGeneratorService tokenGeneratorService, IMailService mailService) : base(
+            userManager, configuration,
+            tokenGeneratorService, mailService)
         {
         }
 
