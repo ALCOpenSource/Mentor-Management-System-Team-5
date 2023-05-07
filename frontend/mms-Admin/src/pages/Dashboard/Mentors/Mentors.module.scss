@@ -51,7 +51,10 @@
     .paginationAndSearchDiv {
       width: 100%;
       justify-content: center;
+      align-items: center;
       gap: 1rem;
+      min-height: 3rem;
+      // flex-grow: 1;
     }
   }
 
@@ -122,21 +125,21 @@
     .heading {
       flex-wrap: nowrap;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      gap: 2rem;
       padding: 1rem 0;
 
       .leftSection {
         gap: 1.25rem;
-        width: 100%;
-        flex-grow: 1;
         justify-content: flex-start;
       }
 
+      .btnGroup {
+        width: max-content;
+      }
+
       .paginationAndSearchDiv {
-        gap: 2rem;
-        width: auto;
-        margin-left: 2rem;
+        gap: 1rem;
+        justify-content: flex-end;
       }
     }
 

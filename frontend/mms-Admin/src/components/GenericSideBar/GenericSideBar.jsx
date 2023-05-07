@@ -59,9 +59,7 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
         transition: "width 0s"
       }}
     >
-      {data?.headerComponent && (
-        <div className={cx(styles.genericSideBarHeader, "flexCol")}>{data?.headerComponent}</div>
-      )}
+      {data?.headerComponent && <div className={cx(styles.genericSideBarHeader)}>{data?.headerComponent}</div>}
       <ul>
         {data?.listItems.map((item, index) => (
           <li
