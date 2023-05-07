@@ -5,7 +5,9 @@ import styles from "./Archive.module.scss";
 import { ReactComponent as ArchiveCardIcon } from "@/assets/icons/archive-card-icon.svg";
 import { ReactComponent as CalendarIcon } from "@/assets/icons/archive-calendar-icon.svg";
 import { ReactComponent as ClockIcon } from "@/assets/icons/archive-clock-icon.svg";
-import { ReactComponent as TogglerIcon } from "@/assets/icons/archive-toggler-icon.svg";
+import { ReactComponent as TogglerIconUp } from "@/assets/icons/arrow-circle-up.svg";
+import { ReactComponent as TogglerIconDown } from "@/assets/icons/arrow-circle-down.svg";
+
 import { ReactComponent as ReportIcon } from "@/assets/icons/reports-icon.svg";
 import Button from "@/components/Button/Button";
 
@@ -103,7 +105,11 @@ function Archive() {
                 </div>
               </div>
               <div className={cx(styles.cardToggler)}>
-                <TogglerIcon onClick={() => handleToggle(index)} />
+                {toggle?.toggle && toggle.index === index ? (
+                  <TogglerIconUp onClick={() => handleToggle(index)} />
+                ) : (
+                  <TogglerIconDown onClick={() => handleToggle(index)} />
+                )}
               </div>
             </div>
 

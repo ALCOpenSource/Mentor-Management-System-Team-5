@@ -8,7 +8,7 @@ import Button from "@/components/Button/Button";
 import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
-import closeIcon from "@/assets/icons/close-icon.svg";
+import closeIcon from "@/assets/icons/undo-icon.svg";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
@@ -180,13 +180,15 @@ function Reports() {
         <SwitcherTab data={reportsCategoryArray} selectedTab={handleSelectedTab} activeTab={activeTab} />
 
         <div className={cx(styles.searchAndFilterDiv, "flexRow")}>
-          <Search
-            inputPlaceholder='Search for tasks...'
-            onChange={handleSearchInput}
-            collapseInput={collapseInput}
-            setCollapseInput={setCollapseInput}
-            closeSelectElement={handleCloseSelectElement}
-          />
+          <div className={cx(styles.searchWrapper)}>
+            <Search
+              inputPlaceholder='Search for tasks...'
+              onChange={handleSearchInput}
+              collapseInput={collapseInput}
+              setCollapseInput={setCollapseInput}
+              closeSelectElement={handleCloseSelectElement}
+            />
+          </div>
 
           <Filter
             dropdownItems={[

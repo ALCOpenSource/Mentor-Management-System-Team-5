@@ -19,6 +19,7 @@ function Mentors() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [view, setView] = useState("grid");
+  const [collapseInput, setCollapseInput] = useState(true);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -144,14 +145,25 @@ function Mentors() {
           />
           <Button onClick={() => handleAddMentor()} title='Add New Mentor' size='small' />
         </div>
-        <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
-          <Pagination totalNumberOfPages={10} />
-          <Search
-            onSearchClick={handleSearchClick}
-            onChange={handleSearchInput}
-            expanded={false}
-            inputPlaceholder={"Search for mentor..."}
-          />
+        <div
+          style={{ width: !collapseInput ? "25%" : "auto" }}
+          className={cx(styles.paginationAndSearchDiv, "flexRow")}
+        >
+          {collapseInput && (
+            <div className={cx(styles.paginationWrapper)}>
+              <Pagination />
+            </div>
+          )}
+          <div style={{ width: !collapseInput ? "100%" : "auto" }} className={cx(styles.searchWrapper)}>
+            <Search
+              onSearchClick={handleSearchClick}
+              onChange={handleSearchInput}
+              expanded={false}
+              inputPlaceholder={"Search for mentor..."}
+              collapseInput={collapseInput}
+              setCollapseInput={setCollapseInput}
+            />
+          </div>
         </div>
       </div>
 

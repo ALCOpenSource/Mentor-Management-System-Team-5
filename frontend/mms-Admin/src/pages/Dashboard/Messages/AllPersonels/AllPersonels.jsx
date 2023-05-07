@@ -11,7 +11,7 @@ import backIcon from "@/assets/icons/back-icon.svg";
 const AllPersonels = () => {
   const navigate = useNavigate();
 
-  const [collapseInput, setCollapseInput] = useState(false);
+  const [collapseInput, setCollapseInput] = useState(true);
   const [closeSelectElement, setCloseSelectElement] = useState(false);
 
   const personelsArray = [
@@ -114,7 +114,7 @@ const AllPersonels = () => {
         </h3>
 
         <div className={cx(styles.rightSection, "flexRow")}>
-          <Pagination totalNumberOfPages={10} />
+          {collapseInput && <Pagination />}
           <Search
             inputPlaceholder='Search for tasks...'
             onChange={handleSearchInput}

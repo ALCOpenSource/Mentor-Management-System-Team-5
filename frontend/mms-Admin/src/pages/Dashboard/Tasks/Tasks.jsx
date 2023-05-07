@@ -6,7 +6,7 @@ import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import Button from "@/components/Button/Button";
 import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
-import closeIcon from "@/assets/icons/close-icon.svg";
+import backIcon from "@/assets/icons/back-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import TaskListItem from "./TaskListItem/TaskListItem";
@@ -24,7 +24,7 @@ function Tasks() {
     isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
   }, [isMobile]);
 
-  const [collapseInput, setCollapseInput] = useState(false);
+  const [collapseInput, setCollapseInput] = useState(true);
   const [closeSelectElement, setCloseSelectElement] = useState(false);
 
   const menuItemsArray = [
@@ -204,14 +204,29 @@ function Tasks() {
 
     const headerComponent = (
       <div className={cx(styles.sideBarHeader, "flexRow-align-center")}>
-        <h3 className={cx(styles.title)}>Tasks</h3>
-        <Search
-          inputPlaceholder='Search for tasks...'
-          onChange={handleSearchInput}
-          collapseInput={collapseInput}
-          setCollapseInput={setCollapseInput}
-          closeSelectElement={handleCloseSelectElement}
-        />
+        <div
+          style={{ display: !isMobile && !collapseInput ? "none" : "flex" }}
+          className={cx(styles.titleDiv, "flexRow-align-center")}
+        >
+          {isMobile && (
+            <img
+              onClick={() => setOpenSideBar(!openSideBar)}
+              src={backIcon}
+              className={cx(styles.backIcon)}
+              alt='close-icon'
+            />
+          )}
+          {collapseInput && <h3 className={cx(styles.title)}>Tasks</h3>}
+        </div>
+        <div className={cx(styles.searchWrapper)}>
+          <Search
+            inputPlaceholder='Search for tasks...'
+            onChange={handleSearchInput}
+            collapseInput={collapseInput}
+            setCollapseInput={setCollapseInput}
+            closeSelectElement={handleCloseSelectElement}
+          />
+        </div>
         <Filter
           dropdownItems={[
             { name: "All", id: 1 },
@@ -223,14 +238,6 @@ function Tasks() {
           closeSelectElement={closeSelectElement}
           setCloseSelectElement={setCloseSelectElement}
         />
-        {isMobile && (
-          <img
-            onClick={() => setOpenSideBar(!openSideBar)}
-            src={closeIcon}
-            className={cx(styles.closeIcon)}
-            alt='close-icon'
-          />
-        )}
       </div>
     );
 

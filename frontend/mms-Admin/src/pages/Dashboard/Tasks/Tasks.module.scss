@@ -10,25 +10,33 @@
       width: 100%;
       position: relative;
       margin: 0.5rem 0;
-      min-height: 2.25rem;
+      min-height: 3.5rem;
       justify-content: flex-end;
       padding: 0 1rem;
+      gap: 0.75rem;
 
-      .title {
-        margin: 0;
-        font-family: var(--semiBold);
-        color: var(--blackTextColor);
-        font-size: 1.25rem;
-        line-height: 1;
-        padding: 0;
-        flex-grow: 1;
+      .titleDiv {
+        margin-right: auto;
+
+        .backIcon {
+          cursor: pointer;
+          width: 0.75rem;
+          height: 0.75rem;
+          margin: 0 0.25rem;
+        }
+
+        .title {
+          margin: 0;
+          font-family: var(--semiBold);
+          color: var(--blackTextColor);
+          font-size: 1.25rem;
+          line-height: 1;
+          padding: 0;
+        }
       }
 
-      .closeIcon {
-        cursor: pointer;
-        width: 0.75rem;
-        height: 0.75rem;
-        margin: 0 0.25rem;
+      .searchWrapper {
+        flex-grow: 1;
       }
     }
   }
@@ -152,13 +160,14 @@
 
 @media all and (min-width: 992px) {
   .tasksContainer {
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem;
 
     .sidebarWrapper {
       padding: 0;
 
       .sideBarHeader {
         padding: 0;
+        margin: 0.875rem 0 0 0;
       }
     }
 
@@ -166,6 +175,8 @@
       height: 100%;
 
       .heading {
+        padding-top: 1rem;
+
         .titleAndToggler {
           display: none;
         }

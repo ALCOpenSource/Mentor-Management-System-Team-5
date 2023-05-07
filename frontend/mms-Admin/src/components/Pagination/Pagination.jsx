@@ -67,7 +67,7 @@ function Pagination({
           onPageChange={handlePageClick}
           containerClassName={styles.pagination}
           disabledClassName={styles.disabled}
-          renderOnZeroPageCount={null}
+          // renderOnZeroPageCount={null}
           pageLabelBuilder={() => (
             <span>
               {1} - {10} of {totalNumberOfItems}
@@ -107,9 +107,10 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
+  onPageClick: () => {},
   showSizePicker: false,
   resultPerPage: 10,
-  totalNumberOfPages: 0,
+  totalNumberOfPages: 1,
   totalNumberOfItems: 20
 };
 

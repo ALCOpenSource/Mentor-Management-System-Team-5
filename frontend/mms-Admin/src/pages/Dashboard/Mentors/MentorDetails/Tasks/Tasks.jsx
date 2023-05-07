@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 
 import searchIcon from "@/assets/icons/search-icon.svg";
 import { ReactComponent as ArchiveCardIcon } from "@/assets/icons/archive-card-icon.svg";
-import { ReactComponent as TogglerIcon } from "@/assets/icons/archive-toggler-icon.svg";
+import { ReactComponent as TogglerIconUp } from "@/assets/icons/arrow-circle-up.svg";
+import { ReactComponent as TogglerIconDown } from "@/assets/icons/arrow-circle-down.svg";
 import Button from "@/components/Button/Button";
 
 import headerIcon from "@/assets/icons/tasks-overview-card-icon.svg";
@@ -128,7 +129,11 @@ const Tasks = () => {
                     </div>
                   </div>
                   <div className={cx(styles.cardToggler)}>
-                    <TogglerIcon onClick={() => handleToggle(index)} />
+                    {toggle?.toggle && toggle.index === index ? (
+                      <TogglerIconUp onClick={() => handleToggle(index)} />
+                    ) : (
+                      <TogglerIconDown onClick={() => handleToggle(index)} />
+                    )}
                   </div>
                 </div>
 

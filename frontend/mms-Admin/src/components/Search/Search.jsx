@@ -26,6 +26,7 @@ const Search = ({
   useEffect(() => {
     if (collapseInput) {
       setInputValue("");
+      setToggle(false);
     }
   }, [collapseInput]);
 
@@ -45,36 +46,40 @@ const Search = ({
           expanded && styles.expanded
         )}
       >
-        <img onClick={onSearchClick} src={searchIcon} alt='search-icon' className={cx(styles.icon)} />
+        <div className={cx(styles.mainGroup, "flexRow")}>
+          <img onClick={onSearchClick} src={searchIcon} alt='search-icon' className={cx(styles.icon)} />
 
-        <input
-          value={inputValue}
-          onChange={(e) => handleInputChange(e.target.value)}
-          className={cx(styles.searchInput)}
-          type='text'
-          placeholder={inputPlaceholder}
-        />
+          <input
+            value={inputValue}
+            onChange={(e) => handleInputChange(e.target.value)}
+            className={cx(styles.searchInput)}
+            type='text'
+            placeholder={inputPlaceholder}
+          />
 
-        <img
-          onClick={() => handleInputChange("")}
-          className={cx(styles.clearListIcon)}
-          src={deleteIcon}
-          alt='delete-icon'
-        />
+          <img
+            onClick={() => handleInputChange("")}
+            className={cx(styles.clearListIcon)}
+            src={deleteIcon}
+            alt='delete-icon'
+          />
+        </div>
+
+        {!expanded && (
+          <img
+            src={closeIcon}
+            alt='close-icon'
+            className={cx(styles.closeIcon)}
+            onClick={() => {
+              handleToggle(false);
+            }}
+          />
+        )}
       </div>
 
-      {!expanded ? (
+      {!expanded && !toggle && (
         <div className={cx(styles.togglerGroup, "flexRow-align-center")}>
-          {toggle && !collapseInput ? (
-            <img
-              src={closeIcon}
-              alt='close-icon'
-              className={cx(styles.icon, styles.closeIcon)}
-              onClick={() => {
-                handleToggle(false);
-              }}
-            />
-          ) : (
+          {
             <img
               src={searchIcon}
               alt='search-icon'
@@ -83,9 +88,9 @@ const Search = ({
                 handleToggle(true);
               }}
             />
-          )}
+          }
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

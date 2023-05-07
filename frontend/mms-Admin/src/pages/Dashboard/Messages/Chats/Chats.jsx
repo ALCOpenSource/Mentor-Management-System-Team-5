@@ -8,7 +8,6 @@ import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import useIsMobile from "@/hooks/useIsMobile";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import cardIcon from "@/assets/images/mentor-manager-thumbnail.svg";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import ChatListItem from "../ChatListItem/ChatListItem";
 import Search from "@/components/Search/Search";
 
@@ -18,6 +17,7 @@ const Chats = () => {
   const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
   const [openSideBar, setOpenSideBar] = useState(true);
+  const [collapseInput, setCollapseInput] = useState(true);
 
   // Temp fix for handling empty message history
   // const [messageHistory, setMessageHistory] = useState([]);
@@ -175,10 +175,16 @@ const Chats = () => {
 
     const headerComponent = (
       <div className={cx(styles.sideBarHeader, "flexRow")}>
-        <h3 className={cx(styles.title)}>Chats</h3>
-        <Search searchData={handleSearchInput} inputPlaceholder='Search for contact...' mode='search' />
+        {collapseInput && <h3 className={cx(styles.title)}>Chats</h3>}
+        <div className={cx(styles.searchWrapper)}>
+          <Search
+            searchData={handleSearchInput}
+            inputPlaceholder='Search for contact...'
+            collapseInput={collapseInput}
+            setCollapseInput={setCollapseInput}
+          />
+        </div>
       </div>
-      // <FilterAndSearch searchData={handleSearchInput} inputPlaceholder='Search for contact...' mode='search' />
     );
 
     return { listItems, headerComponent };

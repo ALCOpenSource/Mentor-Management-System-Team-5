@@ -5,6 +5,8 @@
   background-color: white;
   position: relative;
   z-index: 10;
+  // flex-grow: 1;
+  // width: max-content;
 
   .icon {
     width: 1.125rem;
@@ -13,41 +15,54 @@
   }
 
   .inputDiv {
-    gap: 0.25rem;
-    background-color: var(--green3Color);
-    padding: 0 0.5rem;
-    border-radius: 0.25rem;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
     width: 100%;
+    background-color: var(--white1Color);
 
-    .searchInput {
-      border: none;
-      outline: none;
-      padding: 0.25rem 0.5rem;
-      background-color: transparent;
-      font-family: var(--regular);
-      color: var(--black2TextColor);
-      font-size: 0.875rem;
+    .mainGroup {
+      background-color: var(--green3Color);
+      gap: 0.25rem;
+      align-items: center;
+      padding: 0 0.5rem 0 0.25rem;
       width: 100%;
+
+      .searchInput {
+        border: none;
+        outline: none;
+        padding: 0.25rem 0.125rem;
+        background-color: transparent;
+        font-family: var(--regular);
+        color: var(--black2TextColor);
+        font-size: 0.875rem;
+        width: 100%;
+      }
+
+      .icon {
+        width: 1rem;
+      }
+
+      .clearListIcon {
+        width: 0.75rem;
+        object-fit: contain;
+        cursor: pointer;
+      }
     }
 
-    .icon {
-      width: 1rem;
-    }
-
-    .clearListIcon {
-      width: 0.75rem;
-      object-fit: contain;
+    .closeIcon {
+      width: 0.875rem;
       cursor: pointer;
     }
   }
 
   .showInput {
-    position: absolute;
-    top: 50%;
-    right: 1.5rem;
-    transform: translate(0, -50%);
-    width: max-content;
-    min-width: 15rem;
+    // position: absolute;
+    // top: 50%;
+    // right: 0;
+    // transform: translate(0, -50%);
+    // width: max-content;
+    position: relative;
+    width: 100%;
   }
 
   .hideInput {
@@ -58,9 +73,13 @@
     position: relative;
     width: max-content;
     display: flex;
-    background-color: white;
-    border: 1px solid var(--grayBorderColor);
     border-radius: 0.5rem;
+
+    .mainGroup {
+      background-color: white;
+      border: 1px solid var(--grayBorderColor);
+      border-radius: 0.5rem;
+    }
   }
 
   .togglerGroup {
