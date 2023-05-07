@@ -20,12 +20,10 @@ function Settings() {
   const currentPage = location.pathname.split("/")[3] || "";
   const isMobileTablet = useIsMobileTablet();
 
-  const [currentPageNumber, setCurrentPageNumber] = useState(0);
-  const [perPage, setPerPage] = useState(5);
-  const totalNumberOfPages = 10; // for testing purposes
-
-  console.log(currentPageNumber, "current page");
-  console.log(perPage, "per page");
+  // const [currentPageNumber, setCurrentPageNumber] = useState(0);
+  // const [perPage, setPerPage] = useState(5);
+  // const totalNumberOfPages = 10; // for testing purposes
+  const [collapseInput, setCollapseInput] = useState(true);
 
   const menuItemsArray = [
     {
@@ -65,13 +63,13 @@ function Settings() {
     }
   ];
 
-  const handlePageClick = (data) => {
-    setCurrentPageNumber(data);
-  };
+  // const handlePageClick = (data) => {
+  //   setCurrentPageNumber(data);
+  // };
 
-  const handlePageSizeChange = (data) => {
-    setPerPage(data);
-  };
+  // const handlePageSizeChange = (data) => {
+  //   setPerPage(data);
+  // };
 
   return (
     <div className={cx(styles.settingsContainer, "flexCol")}>
@@ -79,12 +77,12 @@ function Settings() {
         <h3 className={cx(styles.title)}>Settings</h3>
         {currentPage === "archive" && (
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
-            <Search expanded={!isMobileTablet} inputPlaceholder='Search archive' />
-            <Pagination
-              totalNumberOfPages={totalNumberOfPages}
-              currentPage={currentPage}
-              onPageClick={handlePageClick}
-              onSizeChange={handlePageSizeChange}
+            {collapseInput && <Pagination />}
+            <Search
+              expanded={!isMobileTablet}
+              inputPlaceholder='Search archive'
+              collapseInput={collapseInput}
+              setCollapseInput={setCollapseInput}
             />
           </div>
         )}

@@ -4,7 +4,7 @@ import styles from "./Search.module.scss";
 import PropTypes from "prop-types";
 import searchIcon from "@/assets/icons/search-icon-green.png";
 import closeIcon from "@/assets/icons/close-icon.png";
-import deleteIcon from "@/assets/icons/clear-list-reversed.svg";
+// import clearIcon from "@/assets/icons/clear-list-reversed.svg";
 
 const Search = ({
   onSearchClick,
@@ -57,12 +57,12 @@ const Search = ({
             placeholder={inputPlaceholder}
           />
 
-          <img
+          {/* <img
             onClick={() => handleInputChange("")}
             className={cx(styles.clearListIcon)}
-            src={deleteIcon}
-            alt='delete-icon'
-          />
+            src={clearIcon}
+            alt='clear-icon'
+          /> */}
         </div>
 
         {!expanded && (
