@@ -3,10 +3,13 @@ import cx from "classnames";
 import styles from "./ChatListItem.module.scss";
 import "./ChatListActiveItem.scss";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 
 function ChatListItem({ data }) {
+  const { id } = useParams();
+
   return (
-    <div className={cx(styles.chatListItemContainer, "flexCol")}>
+    <div className={cx(styles.chatListItemContainer, "flexCol", id === data?.id.toString() && styles.active)}>
       <div className={cx(styles.body, "flexRow-align-center")}>
         <img className={cx(styles.profileImage)} src={data?.profileImage} alt='profileImage' />
         <div className={cx(styles.mainContent, "flexCol")}>

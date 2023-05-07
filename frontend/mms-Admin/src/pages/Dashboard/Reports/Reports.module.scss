@@ -4,6 +4,25 @@
   overflow: hidden;
   position: relative;
 
+  .sideBarSection {
+    .sideBarHeader {
+      gap: 0.5rem;
+
+      .searchAndFilterDiv {
+        width: 100%;
+        justify-content: flex-end;
+        align-items: center;
+        min-height: 2.5rem;
+
+        .closeIcon {
+          cursor: pointer;
+          width: 0.875rem;
+          margin: 0 0 0 0.5rem;
+        }
+      }
+    }
+  }
+
   .content {
     overflow: auto;
     width: 100%;

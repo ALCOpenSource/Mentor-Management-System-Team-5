@@ -10,9 +10,16 @@ import navigateLast from "@/assets/icons/pagination-right-arrow.svg";
 import nextPage from "@/assets/icons/pagination-next-arrow.svg";
 import previousPage from "@/assets/icons/pagination-previous-arrow.svg";
 
-function Pagination({ totalNumberOfPages, onPageClick, onSizeChange, showSizePicker, initialPerPage }) {
+function Pagination({
+  totalNumberOfPages,
+  onPageClick,
+  onSizeChange,
+  showSizePicker,
+  resultPerPage,
+  totalNumberOfItems
+}) {
   const [pageCount, setPageCount] = useState(totalNumberOfPages);
-  const [perPage, setPerPage] = useState(initialPerPage);
+  const [perPage, setPerPage] = useState(resultPerPage);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
@@ -61,9 +68,9 @@ function Pagination({ totalNumberOfPages, onPageClick, onSizeChange, showSizePic
           containerClassName={styles.pagination}
           disabledClassName={styles.disabled}
           renderOnZeroPageCount={null}
-          pageLabelBuilder={(page) => (
+          pageLabelBuilder={() => (
             <span>
-              {page} of {pageCount}
+              {1} - {10} of {totalNumberOfItems}
             </span>
           )}
         />
@@ -95,13 +102,15 @@ Pagination.propTypes = {
   onPageClick: PropTypes.func.isRequired,
   onSizeChange: PropTypes.func,
   showSizePicker: PropTypes.bool,
-  initialPerPage: PropTypes.number
+  resultPerPage: PropTypes.number,
+  totalNumberOfItems: PropTypes.number
 };
 
 Pagination.defaultProps = {
-  showSizePicker: true,
-  initialPerPage: 5,
-  totalNumberOfPages: 0
+  showSizePicker: false,
+  resultPerPage: 10,
+  totalNumberOfPages: 0,
+  totalNumberOfItems: 20
 };
 
 export default Pagination;

@@ -8,7 +8,9 @@ import Button from "@/components/Button/Button";
 import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
+import closeIcon from "@/assets/icons/close-icon.svg";
+import Search from "@/components/Search/Search";
+import Filter from "@/components/Filter/Filter";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import useIsMobile from "@/hooks/useIsMobile";
 import SwitcherTab from "@/pages/Dashboard/Reports/SwitcherTab/SwitcherTab";
@@ -144,7 +146,7 @@ function Reports() {
     console.log(item);
   };
 
-  const handleCloseSidebar = () => {
+  const handleCloseSideBar = () => {
     setOpenSideBar({ open: false, category: "" });
   };
 
@@ -153,6 +155,18 @@ function Reports() {
     setActiveTab(tab.key);
   };
 
+  const [collapseInput, setCollapseInput] = useState(false);
+  const [closeSelectElement, setCloseSelectElement] = useState(false);
+
+  const handleCloseSearchInput = (e) => {
+    console.log(e, "handle close input");
+    setCollapseInput(true);
+  };
+
+  const handleCloseSelectElement = (e) => {
+    console.log(e, "handle close select");
+    setCloseSelectElement(true);
+  };
   const getListComponents = (data) => {
     const listItems = data.map((item, index) => {
       return {
@@ -162,25 +176,40 @@ function Reports() {
     });
 
     const headerComponent = (
-      <>
+      <div className={cx(styles.sideBarHeader, "flexCol")}>
         <SwitcherTab data={reportsCategoryArray} selectedTab={handleSelectedTab} activeTab={activeTab} />
 
-        <FilterAndSearch
-          closeSideBar={handleCloseSidebar}
-          dropdownItems={[
-            { name: "All Reports", id: 1 },
-            { name: "Assigned", id: 2 },
-            { name: "Completed", id: 3 }
-          ]}
-          searchData={handleSearchInput}
-          selectedFilterItem={handleSelectedFilterItem}
-          showCloseIcon={false}
-          inputPlaceholder='Search for report...'
-          showDropdown={true}
-          showFilterToggler={false}
-          reversed={true}
-        />
-      </>
+        <div className={cx(styles.searchAndFilterDiv, "flexRow")}>
+          <Search
+            inputPlaceholder='Search for tasks...'
+            onChange={handleSearchInput}
+            collapseInput={collapseInput}
+            setCollapseInput={setCollapseInput}
+            closeSelectElement={handleCloseSelectElement}
+          />
+
+          <Filter
+            dropdownItems={[
+              { name: "All Reports", id: 1 },
+              { name: "Assigned", id: 2 },
+              { name: "Completed", id: 3 }
+            ]}
+            selectedFilterItem={handleSelectedFilterItem}
+            closeSearchInput={handleCloseSearchInput}
+            closeSelectElement={closeSelectElement}
+            setCloseSelectElement={setCloseSelectElement}
+          />
+
+          {isMobile && (
+            <img
+              onClick={() => setOpenSideBar(!openSideBar)}
+              src={closeIcon}
+              className={cx(styles.closeIcon)}
+              alt='close-icon'
+            />
+          )}
+        </div>
+      </div>
     );
 
     return { listItems, headerComponent };
@@ -191,8 +220,11 @@ function Reports() {
     setSelectedMenuId(() => {
       return item;
     });
+    isMobile && handleCloseSideBar();
     navigate(`report-details/${item}`);
   };
+
+  console.log(selectedMenuId, "selectedMenuId");
 
   return (
     <div className={cx(styles.reportsContainer, "flexRow")}>

@@ -1,13 +1,13 @@
 .searchContainer {
   justify-content: flex-end;
   gap: 1.25rem;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem 0;
   background-color: white;
   position: relative;
   z-index: 10;
 
   .icon {
-    width: 1rem;
+    width: 1.125rem;
     object-fit: contain;
     cursor: pointer;
   }

@@ -85,7 +85,6 @@ function Settings() {
               currentPage={currentPage}
               onPageClick={handlePageClick}
               onSizeChange={handlePageSizeChange}
-              showSizePicker={true}
             />
           </div>
         )}

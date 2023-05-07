@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import cx from "classnames";
 import styles from "./AllPersonels.module.scss";
 import mentorImage from "@/assets/images/reports-program-thumbnail.svg";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import Pagination from "@/components/Pagination/Pagination";
+import Search from "@/components/Search/Search";
+import Filter from "@/components/Filter/Filter";
+import backIcon from "@/assets/icons/back-icon.svg";
 
 const AllPersonels = () => {
   const navigate = useNavigate();
+
+  const [collapseInput, setCollapseInput] = useState(false);
+  const [closeSelectElement, setCloseSelectElement] = useState(false);
 
   const personelsArray = [
     {
@@ -82,14 +87,52 @@ const AllPersonels = () => {
     }
   ];
 
+  const handleCloseSearchInput = (e) => {
+    console.log(e, "handle close input");
+    setCollapseInput(true);
+  };
+
+  const handleCloseSelectElement = (e) => {
+    console.log(e, "handle close select");
+    setCloseSelectElement(true);
+  };
+
+  const handleSearchInput = (data) => {
+    console.log(data);
+  };
+
+  const handleSelectedFilterItem = (item) => {
+    console.log(item);
+  };
+
   return (
     <div className={cx(styles.allPersonelsContainer, "flexCol")}>
       <div className={cx(styles.heading, "flexRow-align-center")}>
-        <h3 className={cx(styles.title)}>Select someone to start a conversation</h3>
+        <h3 className={cx(styles.title)}>
+          <img onClick={() => navigate(-1)} src={backIcon} alt='back-icon' />
+          Select someone to start a conversation
+        </h3>
 
         <div className={cx(styles.rightSection, "flexRow")}>
-          <Pagination />
-          <FilterAndSearch showCloseIcon={true} />
+          <Pagination totalNumberOfPages={10} />
+          <Search
+            inputPlaceholder='Search for tasks...'
+            onChange={handleSearchInput}
+            collapseInput={collapseInput}
+            setCollapseInput={setCollapseInput}
+            closeSelectElement={handleCloseSelectElement}
+          />
+          <Filter
+            dropdownItems={[
+              { name: "All", id: 1 },
+              { name: "Mentors", id: 2 },
+              { name: "Mentor Managers", id: 3 }
+            ]}
+            selectedFilterItem={handleSelectedFilterItem}
+            closeSearchInput={handleCloseSearchInput}
+            closeSelectElement={closeSelectElement}
+            setCloseSelectElement={setCloseSelectElement}
+          />
         </div>
       </div>
 
