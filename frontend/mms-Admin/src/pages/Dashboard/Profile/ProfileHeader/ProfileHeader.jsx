@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import { initialsCase } from "@/helpers/textTransform";
 
 function ProfileHeader({ data }) {
-  const { profilePicture, flagIcon, fullName, role } = data;
+  const { profilePicture, flagUrl, fullName, role } = data;
 
   return (
     <Container className={cx(styles.profileHeaderContainer)}>
@@ -26,7 +26,9 @@ function ProfileHeader({ data }) {
               <Col className='ps-0'>
                 <Row className='align-items-center justify-content-start' style={{ flexWrap: "nowrap", gap: "0.5rem" }}>
                   <h1 className={cx(styles.userName, "m-0")}>{fullName}</h1>
-                  <div className={cx(styles.flagImageDiv)}>{flagIcon}</div>
+                  <div className={cx(styles.flagImageDiv)}>
+                    <img className={cx(styles.flagImage)} src={flagUrl} alt='flag-icon' />
+                  </div>
                 </Row>
                 <Row>
                   <h1 className={cx(styles.userRole, "m-0 p-0")}>{role}</h1>
