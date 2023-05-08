@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-// import { Country, City } from "country-state-city";
-import { Country } from "country-state-city";
-import { City } from "country-state-city";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./General.module.scss";
@@ -23,9 +20,16 @@ import { updateProfileSchema } from "@/helpers/validation";
 import { updateProfile, getProfile } from "@/redux/Settings/SettingsSlice";
 import { initialsCase } from "@/helpers/textTransform";
 import Loader from "@/components/Loader/Loader";
+import allCountries from "@/utils/countriesAndFlags";
+import useGetCountriesAndCities from "@/hooks/useGetCountriesAndCities";
 
 function General() {
   const dispatch = useDispatch();
+  const allCountriesAndCities = useGetCountriesAndCities()?.data;
+  const citiesLoading = useGetCountriesAndCities()?.loading;
+  const [countries, setCountries] = useState([]);
+  const [city, setCity] = useState([]);
+
   const loading = useSelector((state) => state?.loading?.updateProfileLoading);
   const userProfile = useSelector((state) => state.settings.getProfileData);
   const getProfileLoading = useSelector((state) => state?.loading?.getProfileLoading);
@@ -63,11 +67,8 @@ function General() {
     }
   ];
 
-  const [countries, setCountries] = useState([]);
-  const [city, setCity] = useState([]);
-
   useEffect(() => {
-    const countries = Country.getAllCountries().map((country) => {
+    const countries = allCountries.map((country) => {
       return { value: country.name, label: country.name };
     });
     setCountries(countries);
@@ -84,21 +85,24 @@ function General() {
   } = useForm({ resolver, mode: "all" });
 
   useEffect(() => {
-    const country = Country.getAllCountries().find((item) => item.name === userProfile?.country);
-    const city = City.getCitiesOfCountry(country?.isoCode).map((city) => {
-      return { value: city.name, label: city.name };
-    });
+    const city = allCountriesAndCities
+      ?.find((item) => item.country.toLowerCase() === userProfile?.country.toLowerCase())
+      ?.cities.map((city) => {
+        return { value: city, label: city };
+      });
     setCity(city);
     reset(userProfile);
-  }, [reset, userProfile]);
+  }, [allCountriesAndCities, reset, userProfile]);
 
   const handleSelectChange = (e, name) => {
     if (name === "country") {
-      const country = Country.getAllCountries().find((item) => item.name === e.target.value);
-      const city = City.getCitiesOfCountry(country.isoCode).map((city) => {
-        return { value: city.name, label: city.name };
-      });
-
+      const city =
+        Array.isArray(allCountriesAndCities) &&
+        allCountriesAndCities
+          .find((item) => item.country.toLowerCase() === e.target.value.toLowerCase())
+          ?.cities.map((city) => {
+            return { value: city, label: city };
+          });
       setCity(city);
     }
     setValue(name, e.target.value, { shouldValidate: true });
@@ -306,6 +310,7 @@ function General() {
                       error={errors?.city && errors?.city?.message}
                       onChange={(e) => handleSelectChange(e, "city")}
                       border='#C8C8C8'
+                      loading={citiesLoading}
                     />
                   )}
                 />
