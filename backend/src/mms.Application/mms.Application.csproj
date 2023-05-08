@@ -44,6 +44,5 @@
     <Folder Include="FAQ\" />
     <Folder Include="FAQ\Command\" />
     <Folder Include="FAQ\Query\" />
-    <Folder Include="Programme\Command\" />
   </ItemGroup>
 </Project>
