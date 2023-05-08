@@ -14,8 +14,8 @@ namespace mms.Application.Account.RefreshToken
         public RefreshTokenCommandHandler
         (UserManager<AppUser> userManager,
             ITokenGeneratorService tokenGenerator,
-            IConfiguration configuration)
-            : base(userManager, configuration, tokenGenerator)
+            IConfiguration configuration, IMailService mailService)
+            : base(userManager, configuration, tokenGenerator, mailService)
         {
         }
 
