@@ -13,7 +13,6 @@ using AppUserEntity = mms.Domain.Entities.AppUser;
 using FAQEntity = mms.Domain.Entities.FAQ;
 using mms.Application.FAQ.Command;
 using mms.Application.FAQ.Query;
-using Programmes = mms.Domain.Entities.Programme;
 using Reports = mms.Domain.Entities.Report;
 using mms.Application.UserTasks.Query;
 using mms.Domain.Entities;
@@ -23,6 +22,7 @@ using mms.Application.Mentors.Query;
 using mms.Application.MentorManagers.Query;
 using mms.Application.UserTasks.Command.CreateTask;
 using mms.Application.Report.Command;
+using mms.Application.Programme.Command;
 
 namespace mms.Application.Common.Mapper
 {
@@ -46,7 +46,8 @@ namespace mms.Application.Common.Mapper
             CreateMap<UserTask, CreateTaskCommand>().ReverseMap();
             CreateMap<UserTask, PutUserTaskCommand>().ReverseMap();
 
-            CreateMap<Programmes, GetProgrammeResponse>().ReverseMap();
+            CreateMap<ProgrammeEntity, GetProgrammeResponse>().ReverseMap();
+            CreateMap<ProgrammeEntity, CreateProgrammeCommand>().ReverseMap();
 
             CreateMap<Reports, GetReportsResponse>().ReverseMap();
             CreateMap<Reports, CreateReportCommand>().ReverseMap();
