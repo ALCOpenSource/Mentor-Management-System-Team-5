@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 const useGetCitiesOfACountry = (country) => {
   const [cities, setCities] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getCities = async () => {
@@ -16,7 +15,6 @@ const useGetCitiesOfACountry = (country) => {
         });
         const { data } = await result.json();
         setCities(data);
-        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -24,7 +22,7 @@ const useGetCitiesOfACountry = (country) => {
     getCities();
   }, [country]);
 
-  return { cities, loading };
+  return cities;
 };
 
 export default useGetCitiesOfACountry;

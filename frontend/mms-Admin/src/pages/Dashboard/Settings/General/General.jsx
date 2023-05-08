@@ -25,8 +25,7 @@ import useGetCountriesAndCities from "@/hooks/useGetCountriesAndCities";
 
 function General() {
   const dispatch = useDispatch();
-  const allCountriesAndCities = useGetCountriesAndCities()?.data;
-  const citiesLoading = useGetCountriesAndCities()?.loading;
+  const allCountriesAndCities = useGetCountriesAndCities();
   const [countries, setCountries] = useState([]);
   const [city, setCity] = useState([]);
 
@@ -95,6 +94,7 @@ function General() {
   }, [allCountriesAndCities, reset, userProfile]);
 
   const handleSelectChange = (e, name) => {
+    setValue(name, e.target.value, { shouldValidate: true });
     if (name === "country") {
       const city =
         Array.isArray(allCountriesAndCities) &&
@@ -105,7 +105,6 @@ function General() {
           });
       setCity(city);
     }
-    setValue(name, e.target.value, { shouldValidate: true });
   };
 
   const handleUpdateProfile = async (data) => {
@@ -310,7 +309,7 @@ function General() {
                       error={errors?.city && errors?.city?.message}
                       onChange={(e) => handleSelectChange(e, "city")}
                       border='#C8C8C8'
-                      loading={citiesLoading}
+                      loading={Array.isArray(city) && !(city.length > 0)}
                     />
                   )}
                 />
