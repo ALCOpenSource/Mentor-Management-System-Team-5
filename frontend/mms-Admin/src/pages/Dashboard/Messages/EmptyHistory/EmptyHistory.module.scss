@@ -1,0 +1,40 @@
+.emptyHistoryDiv {
+  height: 100%;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--grayBorderColor);
+  border-radius: 0.5rem;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-family: var(--regular);
+    text-align: center;
+  }
+
+  p:nth-of-type(1) {
+    font-size: 1.25rem;
+    color: var(--black2TextColor);
+  }
+
+  p:nth-of-type(2) {
+    font-size: 1rem;
+    color: var(--grayTextColor);
+  }
+}
+
+@media all and (min-width: 992px) {
+  .emptyHistoryDiv {
+    img {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+}

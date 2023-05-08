@@ -5,9 +5,12 @@ import styles from "./Privacy.module.scss";
 import ToggleSwitch from "@/components/ToggleSwitch/ToggleSwitch";
 import { getUserPrivacy, editUserPrivacy } from "@/redux/Settings/SettingsSlice";
 import Loader from "@/components/Loader/Loader";
+import Button from "@/components/Button/Button";
+import { useForm, Controller } from "react-hook-form";
 
 function Privacy() {
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state?.loading?.editUserPrivacyLoading);
   const getUserPrivacyLoading = useSelector((state) => state?.loading?.getUserPrivacyLoading);
   const userPrivacyData = useSelector((state) => state?.settings?.getUserPrivacyData);
   const [userPrivacyArray, setUserPrivacyArray] = useState([]);
@@ -58,34 +61,59 @@ function Privacy() {
     }
   }, [userPrivacyData, getUserPrivacyLoading]);
 
-  const handleEditUserPrivacy = async (status, category) => {
-    const payload = {
-      ...userPrivacyData,
-      [category]: status
-    };
-    let response = await dispatch(editUserPrivacy(payload));
+  const handleEditUserPrivacy = async (data) => {
+    let response = await dispatch(editUserPrivacy(data));
     response?.success && dispatch(getUserPrivacy());
   };
+
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+    reset
+  } = useForm({ mode: "all" });
+
+  useEffect(() => {
+    reset(userPrivacyData);
+  }, [reset, userPrivacyData]);
 
   return (
     <div className={cx(styles.privacyContainer, "flexCol")}>
       {Object.keys(userPrivacyData).length === 0 ? (
         <Loader small={false} />
       ) : (
-        Array.isArray(userPrivacyArray) &&
-        userPrivacyArray.map((category) => {
-          return (
-            <div className={cx(styles.infoWrapper, "flexRow-space-between")} key={category?.key}>
-              <h6 className={cx(styles.infoTitle)}>{category.title}</h6>
-              <div className={cx(styles.switchWrapper, "flexRow")}>
-                <ToggleSwitch
-                  checkedStatus={category.value}
-                  onChange={(status) => handleEditUserPrivacy(status, category.key)}
-                />
-              </div>
-            </div>
-          );
-        })
+        <form
+          className={cx(styles.formWrapper, "flexCol")}
+          onSubmit={handleSubmit((data) => handleEditUserPrivacy(data))}
+        >
+          {Array.isArray(userPrivacyArray) &&
+            userPrivacyArray.map((category) => {
+              return (
+                <div className={cx(styles.infoWrapper, "flexRow-space-between")} key={category?.key}>
+                  <h6 className={cx(styles.infoTitle)}>{category.title}</h6>
+                  <div className={cx(styles.switchWrapper, "flexRow")}>
+                    <Controller
+                      name={`${category?.key}`}
+                      control={control}
+                      render={({ field }) => (
+                        <ToggleSwitch
+                          {...field}
+                          error={errors[`${category?.key}`] && errors[`${category?.key}`]?.message}
+                          checkedStatus={category.value}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          <Button
+            loading={loading}
+            disabled={loading}
+            onClick={handleSubmit((data) => handleEditUserPrivacy(data))}
+            title='Save Changes'
+          />
+        </form>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { lazy } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 // Authentication
@@ -7,42 +7,60 @@ import Login from "@/pages/Authentication/Login/Login";
 import ForgotPassword from "@/pages/Authentication/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/pages/Authentication/ResetPassword/ResetPassword";
 
-// Dashboard
-import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
-import Home from "@/pages/Dashboard/Home/Home";
-import ApprovalRequests from "@/pages/Dashboard/ApprovalRequests/ApprovalRequests";
-import Certificates from "@/pages/Dashboard/Certificates/Certificates";
-import DiscussionForum from "@/pages/Dashboard/DiscussionForum/DiscussionForum";
-import MentorManagers from "@/pages/Dashboard/MentorManagers/MentorManagers";
-import Mentors from "@/pages/Dashboard/Mentors/Mentors";
-import Messages from "@/pages/Dashboard/Messages/Messages";
-import Profile from "@/pages/Dashboard/Profile/Profile";
-import Programs from "@/pages/Dashboard/Programs/Programs";
-
-// Settings
-import Settings from "@/pages/Dashboard/Settings/Settings";
-import SettingsGeneral from "@/pages/Dashboard/Settings/General/General";
-import SettingsPassword from "@/pages/Dashboard/Settings/Password/Password";
-import SettingsFAQ from "@/pages/Dashboard/Settings/FAQ/FAQ";
-import SettingsSupport from "@/pages/Dashboard/Settings/Support/Support";
-import SettingsArchive from "@/pages/Dashboard/Settings/Archive/Archive";
-import SettingsPrivacy from "@/pages/Dashboard/Settings/Privacy/Privacy";
-import SettingsNotifications from "@/pages/Dashboard/Settings/Notifications/Notifications";
-
-// Tasks
-import Tasks from "@/pages/Dashboard/Tasks/Tasks";
-import TaskDetails from "@/pages/Dashboard/Tasks/TaskDetails/TaskDetails";
-import CreateTask from "@/pages/Dashboard/Tasks/CreateTask/CreateTask";
-import EditTask from "@/pages/Dashboard/Tasks/EditTask/EditTask";
-
-// Reports
-import Reports from "@/pages/Dashboard/Reports/Reports";
-import CreateReport from "@/pages/Dashboard/Reports/CreateReport/CreateReport";
-import ReportDetails from "@/pages/Dashboard/Reports/ReportDetails/ReportDetails";
-
 // Authenticated Routes
 import AuthenticatedRoutes from "@/components/AuthenticatedRoutes/AuthenticatedRoutes";
 import userRoles from "@/constants/userRoles";
+
+// Dashboard
+import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
+const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
+const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
+const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
+const MentorManagers = lazy(() => import("@/pages/Dashboard/MentorManagers/MentorManagers"));
+const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
+const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
+
+// Mentors
+const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
+const MentorDetails = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/MentorDetails"));
+const MentorDetailsAbout = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/About/About"));
+const MentorDetailsPrograms = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/Programs/Programs"));
+const MentorDetailsCertificates = lazy(() =>
+  import("@/pages/Dashboard/Mentors/MentorDetails/Certificates/Certificates")
+);
+const MentorDetailsTasks = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/Tasks/Tasks"));
+
+// Messages
+const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
+const BroadcastMessage = lazy(() => import("@/pages/Dashboard/Messages/BroadcastMessage/BroadcastMessage"));
+const Chats = lazy(() => import("@/pages/Dashboard/Messages/Chats/Chats"));
+const ChatDetails = lazy(() => import("@/pages/Dashboard/Messages/ChatDetails/ChatDetails"));
+const AllPersonels = lazy(() => import("@/pages/Dashboard/Messages/AllPersonels/AllPersonels"));
+
+// Settings
+const Settings = lazy(() => import("@/pages/Dashboard/Settings/Settings"));
+const SettingsGeneral = lazy(() => import("@/pages/Dashboard/Settings/General/General"));
+const SettingsPassword = lazy(() => import("@/pages/Dashboard/Settings/Password/Password"));
+const SettingsFAQ = lazy(() => import("@/pages/Dashboard/Settings/FAQ/FAQ"));
+const SettingsSupport = lazy(() => import("@/pages/Dashboard/Settings/Support/Support"));
+const SettingsArchive = lazy(() => import("@/pages/Dashboard/Settings/Archive/Archive"));
+const SettingsPrivacy = lazy(() => import("@/pages/Dashboard/Settings/Privacy/Privacy"));
+const SettingsNotifications = lazy(() => import("@/pages/Dashboard/Settings/Notifications/Notifications"));
+
+// Tasks
+const Tasks = lazy(() => import("@/pages/Dashboard/Tasks/Tasks"));
+const TaskDetails = lazy(() => import("@/pages/Dashboard/Tasks/TaskDetails/TaskDetails"));
+const CreateTask = lazy(() => import("@/pages/Dashboard/Tasks/CreateTask/CreateTask"));
+const EditTask = lazy(() => import("@/pages/Dashboard/Tasks/EditTask/EditTask"));
+
+// Discussion Forum
+const DiscussionForum = lazy(() => import("@/pages/Dashboard/DiscussionForum/DiscussionForum"));
+const PostDetails = lazy(() => import("@/pages/Dashboard/DiscussionForum/PostDetails/PostDetails"));
+
+// Reports
+const Reports = lazy(() => import("@/pages/Dashboard/Reports/Reports"));
+const CreateReport = lazy(() => import("@/pages/Dashboard/Reports/CreateReport/CreateReport"));
+const ReportDetails = lazy(() => import("@/pages/Dashboard/Reports/ReportDetails/ReportDetails"));
 
 function RoutesComponent() {
   return (
@@ -73,10 +91,29 @@ function RoutesComponent() {
           </Route>
           <Route path='approval-requests' element={<ApprovalRequests />} />
           <Route index path='certificates' element={<Certificates />} />
-          <Route path='discussion-forum' element={<DiscussionForum />} />
+          <Route path='discussion-forum'>
+            <Route index path='' element={<DiscussionForum />} />
+            <Route path='post-details/:id' element={<PostDetails />} />
+          </Route>
           <Route path='mentor-managers' element={<MentorManagers />} />
-          <Route path='mentors' element={<Mentors />} />
-          <Route path='messages' element={<Messages />} />
+          <Route path='mentors'>
+            <Route index path='' element={<Mentors />} />
+            <Route path='mentor-details/:id' element={<MentorDetails />}>
+              <Route path='' element={<MentorDetailsAbout />} />
+              <Route path='about' element={<MentorDetailsAbout />} />
+              <Route path='programs' element={<MentorDetailsPrograms />} />
+              <Route path='certificates' element={<MentorDetailsCertificates />} />
+              <Route path='tasks' element={<MentorDetailsTasks />} />
+            </Route>
+          </Route>
+          <Route path='messages'>
+            <Route path='' element={<Messages />} />
+            <Route path='all-personels' element={<AllPersonels />} />
+            <Route path='chats' element={<Chats />}>
+              <Route path=':id' element={<ChatDetails />} />
+            </Route>
+            <Route path='broadcast-message' element={<BroadcastMessage />} />
+          </Route>
           <Route index path='profile' element={<Profile />} />
           <Route path='programs' element={<Programs />} />
           <Route path='reports'>

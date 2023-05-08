@@ -316,6 +316,33 @@ namespace mms.Infrastructure.Migrations
                     b.ToTable("Certificates");
                 });
 
+            modelBuilder.Entity("mms.Domain.Entities.FAQ", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsGeneral")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FAQs");
+                });
+
             modelBuilder.Entity("mms.Domain.Entities.JobRole", b =>
                 {
                     b.Property<string>("Id")
@@ -517,6 +544,42 @@ namespace mms.Infrastructure.Migrations
                     b.ToTable("Reports");
                 });
 
+            modelBuilder.Entity("mms.Domain.Entities.Support", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Attachment")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Supports");
+                });
+
             modelBuilder.Entity("mms.Domain.Entities.TechStack", b =>
                 {
                     b.Property<string>("Id")
@@ -606,6 +669,12 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("ApprovalRequestInApp")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("CommentsEmail")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("CommentsInApp")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("CreatedAt")

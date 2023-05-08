@@ -61,7 +61,11 @@ export const createReportSchema = Yup.object().shape({
   recommendations: Yup.string()
 });
 
-export const createForumTopicSchema = Yup.object().shape({
+export const createAndEditForumTopicSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   body: Yup.string().required("Message body is required")
+});
+
+export const addUserSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email address").required("Email is required")
 });

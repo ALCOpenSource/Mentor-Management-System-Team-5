@@ -3,31 +3,33 @@ import { Link } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import cx from "classnames";
 import Button from "@/components/Button/Button";
-import profileImage from "@/assets/images/sample-profile-image.svg";
-import flagImage from "@/assets/icons/flag-01.svg";
 import styles from "./Profile.header.module.scss";
+import PropTypes from "prop-types";
+import { initialsCase } from "@/helpers/textTransform";
 
-function ProfileHeader() {
+function ProfileHeader({ data }) {
+  const { profilePicture, flagIcon, fullName, role } = data;
+
   return (
     <Container className={cx(styles.profileHeaderContainer)}>
       <Row>
         <Col className='d-flex justify-content-start ps-0'>
           <Container className='ps-0'>
-            <Row className='align-items-center'>
+            <Row className={cx(styles.bioDataDiv, "align-items-center")}>
               <Col md='auto'>
-                <img src={profileImage} alt='profile image' style={{ height: "90px" }} />
+                {profilePicture ? (
+                  <img className={cx(styles.profileImage)} src={profilePicture} alt='profile-image' />
+                ) : (
+                  <span className={cx(styles.profileImageText)}>{initialsCase(fullName)}</span>
+                )}
               </Col>
-              <Col>
-                <Row className='align-items-center'>
-                  <Col md='auto'>
-                    <h1 className={cx(styles.userName, "m-0")}>Peculiar Umeh</h1>
-                  </Col>
-                  <Col>
-                    <img src={flagImage} alt='flag image' />
-                  </Col>
+              <Col className='ps-0'>
+                <Row className='align-items-center justify-content-start' style={{ flexWrap: "nowrap", gap: "0.5rem" }}>
+                  <h1 className={cx(styles.userName, "m-0")}>{fullName}</h1>
+                  <div className={cx(styles.flagImageDiv)}>{flagIcon}</div>
                 </Row>
                 <Row>
-                  <h1 className={cx(styles.userRole, "m-0 p-0")}>Admin</h1>
+                  <h1 className={cx(styles.userRole, "m-0 p-0")}>{role}</h1>
                 </Row>
               </Col>
             </Row>
@@ -42,5 +44,12 @@ function ProfileHeader() {
     </Container>
   );
 }
+
+ProfileHeader.propTypes = {
+  data: PropTypes.object,
+  profilePicture: PropTypes.string,
+  fullName: PropTypes.string,
+  role: PropTypes.string
+};
 
 export default ProfileHeader;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { useForm, Controller } from "react-hook-form";
@@ -8,15 +8,18 @@ import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import attachmentIcon from "@/assets/icons/attachment-icon.svg";
+import { useDropzone } from "react-dropzone";
 
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
 import { settingsSupportSchema } from "@/helpers/validation";
+import { sendSupportMessage } from "@/redux/Settings/SettingsSlice";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 function Support() {
   const dispatch = useDispatch();
-  // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
+  const loading = useSelector((state) => state?.loading?.sendSupportMessageLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
 
@@ -26,26 +29,55 @@ function Support() {
     name: "",
     email: "",
     title: "",
-    body: ""
+    body: "",
+    attachment: ""
   };
 
   const {
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm({ defaultValues, resolver, mode: "all" });
 
-  const sendMessage = (data) => {
-    console.log(data);
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Message sent successfully"
-        }
-      })
-    );
+  const sendMessage = async (data) => {
+    const payload = { ...data, attachment: uploadedFile.dataUrl };
+
+    const response = await dispatch(sendSupportMessage(payload));
+
+    if (response?.success) {
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Message sent successfully",
+            image: successImage
+          }
+        })
+      );
+      reset();
+      setUploadedFile({
+        file: "",
+        dataUrl: ""
+      });
+    }
   };
+
+  const [uploadedFile, setUploadedFile] = useState({
+    file: "",
+    dataUrl: ""
+  });
+
+  const onDrop = useCallback((acceptedFiles) => {
+    let file = acceptedFiles[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUploadedFile({ file: file, dataUrl: reader.result });
+    };
+    reader.readAsDataURL(file);
+  }, []);
+
+  const { getRootProps } = useDropzone({ onDrop, accept: "*" });
 
   return (
     <div className={cx(styles.supportContainer, "flexCol")}>
@@ -110,15 +142,16 @@ function Support() {
               )}
             />
 
-            <div className={cx(styles.submitBtnDiv, "flexRow-space-between")}>
-              <div className={cx(styles.attachmentDiv)}>
-                <img src={attachmentIcon} alt='attachment-icon' />
-              </div>
+            <div className={cx(styles.attachmentDiv, "flexRow-left-centered")}>
+              <img {...getRootProps()} src={attachmentIcon} alt='attachment-icon' />
+              <span className={cx(styles.fileName)}>{uploadedFile?.file?.name}</span>
+            </div>
 
+            <div className={cx(styles.submitBtnDiv, "flexRow-right-centered")}>
               <Button
                 onClick={handleSubmit((data) => sendMessage(data))}
-                // loading={loading}
-                // disabled={loading}
+                loading={loading}
+                disabled={loading}
                 title='Send'
                 type='primary'
               />

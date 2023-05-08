@@ -5,21 +5,37 @@ export const changePasswordApi = async (data) => {
 };
 
 export const updateProfileApi = async (data) => {
-  return await axios.put("/Account/update-profile", data);
+  return await axios.put("/Profile/update-profile", data);
+};
+
+export const getProfileApi = async (data) => {
+  return await axios.get("/Profile/get-profile", data);
 };
 
 export const editUserNotificationsApi = async (data) => {
-  return await axios.patch("/UserNotification/edituserprivacy", data);
+  return await axios.patch("/UserNotification/edit-user-notification", data);
 };
 
 export const getUserNotificationsApi = async (data) => {
-  return await axios.get("/UserNotification/usernotification", data);
+  return await axios.get("/UserNotification/user-notification", data);
 };
 
 export const editUserPrivacyApi = async (data) => {
-  return await axios.patch("/UserPrivacy/edituserprivacy", data);
+  return await axios.patch("/UserPrivacy/edit-user-privacy", data);
 };
 
 export const getUserPrivacyApi = async (data) => {
-  return await axios.get("/UserPrivacy/userprivacy", data);
+  return await axios.get("/UserPrivacy/user-privacy", data);
+};
+
+export const getGeneralFaqApi = async () => {
+  return await axios.get("/FAQ/generalFAQ");
+};
+
+export const getTechnicalFaqApi = async () => {
+  return await axios.get("/FAQ/technicalFAQ");
+};
+
+export const sendSupportMessageApi = async (data) => {
+  return await axios.post("/Support/support", data);
 };

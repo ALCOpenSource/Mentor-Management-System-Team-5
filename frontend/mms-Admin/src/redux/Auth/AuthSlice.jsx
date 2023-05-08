@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi } from "../api/auth";
 
-import { setToken, setRefreshToken, getRefreshToken, logout } from "@/utils/auth";
+import { setToken, setRefreshToken, getToken, getRefreshToken, logout } from "@/utils/auth";
 
 import { loginLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
+import { getProfile } from "@/redux/Settings/SettingsSlice";
 
 const initialState = {
   error: false,
@@ -58,6 +59,7 @@ export const login = (data) => async (dispatch) => {
     toast.success(response?.data?.message);
     dispatch(loginLoading(false));
     dispatch(loginAction(response?.data?.data));
+    dispatch(getProfile());
     return { success: true };
   } catch (e) {
     toast.error(e?.response?.data?.message);
@@ -100,11 +102,12 @@ export const resetPassword = (data) => async (dispatch) => {
 
 export const refreshAccessToken = () => async (dispatch) => {
   const refreshToken = getRefreshToken();
+  const token = getToken();
   try {
-    const response = await refreshAccessTokenApi(refreshToken);
-    setToken(response?.data?.data?.token);
+    const response = await refreshAccessTokenApi({ refreshToken: refreshToken, accessToken: token });
+    setToken(response?.data?.data?.accessToken);
     setRefreshToken(response?.data?.data?.refreshToken);
-    localStorage.setItem("userData", JSON.stringify(response?.data?.data));
+    dispatch(getProfile());
     dispatch(refreshAccessTokenAction(response?.data?.data));
     return { success: true };
   } catch (e) {

@@ -15,10 +15,11 @@ import { settingsPasswordSchema } from "@/helpers/validation";
 import { changePassword } from "@/redux/Settings/SettingsSlice";
 import { forgotPassword } from "@/redux/Auth/AuthSlice";
 import userInfo from "@/hooks/useGetUserInfo";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 function Password() {
   const dispatch = useDispatch();
-  // const loading = useSelector((state) => state?.loading?.saveSettingsLoading);
+  const loading = useSelector((state) => state?.loading?.changePasswordLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
   const { email: userEmail } = userInfo();
@@ -44,7 +45,8 @@ function Password() {
         showModal({
           name: "successNotification",
           modalData: {
-            title: "Password changed successfully"
+            title: "Password changed successfully",
+            image: successImage
           }
         })
       );
@@ -124,7 +126,12 @@ function Password() {
         </div>
 
         <div className={cx(styles.btnDiv, "flexRow-right-centered")}>
-          <Button onClick={() => handleSubmit((data) => handleChangePassword(data))} title='Save new password' />
+          <Button
+            loading={loading}
+            disabled={loading}
+            onClick={() => handleSubmit((data) => handleChangePassword(data))}
+            title='Save new password'
+          />
         </div>
       </form>
       <div className={cx(styles.forgotPasswordWrapper, "flexRow")}>

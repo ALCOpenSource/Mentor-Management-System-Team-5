@@ -10,7 +10,7 @@ import reportIcon from "@/assets/icons/task-report-icon-green.png";
 import mentorsIcon from "@/assets/icons/mentor-icon-green.png";
 import mentorManagersIcon from "@/assets/icons/mentor-manager-icon-green.png";
 import deleteIcon from "@/assets/icons/delete-icon-red.svg";
-import TaskDeleteNotificationModal from "@/components/Modals/TaskDeleteNotification/TaskDeleteNotification";
+import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
 function TaskDetails() {
@@ -26,27 +26,33 @@ function TaskDetails() {
       // icon: <ReportIcon />,
       icon: mentorManagersIcon,
       value: 10,
-      caption: "Mentor Managers assigned to this program",
-      count: 5
+      caption: "Mentor Managers assigned to this task"
     },
     {
       // icon: <ReportIcon />,
       icon: mentorsIcon,
       value: 80,
-      caption: "Mentors assigned to this program",
-      count: 3
+      caption: "Mentors assigned to this task"
     },
     {
       // icon: <ReportIcon />,
       icon: reportIcon,
       value: 40,
-      caption: "Task reports",
+      caption: "Task / Reports",
       count: 50
     }
   ];
 
   const handleDeleteTask = () => {
-    dispatch(showModal({ name: "taskDeleteNotification", modalData: "Task Deleted Successfully" }));
+    dispatch(
+      showModal({
+        name: "taskDeleteNotification",
+        modalData: {
+          title: "Task Deleted Successfully",
+          type: "task"
+        }
+      })
+    );
   };
 
   return (
@@ -83,9 +89,11 @@ function TaskDetails() {
                   <div className={cx(styles.summary, "flexRow")}>
                     <span className={cx(styles.summaryValue)}>{item.value}</span>
                     <span className={cx(styles.caption)}>{item.caption}</span>
-                    <div>
-                      <span className={cx(styles.count)}>{item.count}</span>
-                    </div>
+                    {item?.caption.toLowerCase().includes("report") && (
+                      <div>
+                        <span className={cx(styles.count)}>{item.count}</span>
+                      </div>
+                    )}
                   </div>
 
                   <Button title='View' size='small' />
@@ -103,7 +111,7 @@ function TaskDetails() {
         </>
       )}
 
-      {displayModal && modalName === "taskDeleteNotification" ? <TaskDeleteNotificationModal show size='md' /> : null}
+      {displayModal && modalName === "taskDeleteNotification" ? <DeleteNotificationModal show size='md' /> : null}
     </div>
   );
 }

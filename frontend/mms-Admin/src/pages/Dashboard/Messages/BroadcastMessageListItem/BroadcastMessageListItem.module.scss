@@ -1,0 +1,52 @@
+.broadcastMessageListContainer {
+  width: 100%;
+  gap: 0.5rem;
+
+  .dateDiv {
+    background-color: #fff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3125rem;
+
+    .dateText {
+      font-family: var(--semiBold);
+      font-size: 0.75rem;
+      color: var(--grayTextColor);
+      margin: 0;
+    }
+  }
+
+  .messageDiv {
+    background-color: var(--green4Color);
+    border-radius: 0.625rem;
+    padding: 2rem 1.5rem 1rem 1.5rem;
+
+    p {
+      font-size: 1.25rem;
+      font-family: var(--regular);
+      color: var(--black3TextColor);
+    }
+
+    .messageInfoDiv {
+      align-items: center;
+
+      .receipentText {
+        font-family: var(--bold);
+        font-size: 0.75rem;
+        text-decoration: underline;
+        margin: 0;
+      }
+
+      .timeAndIconDiv {
+        gap: 1rem;
+        align-items: center;
+
+        .timeText {
+          margin: 0;
+          font-family: var(--regular);
+          font-size: 0.75rem;
+          color: var(--black3TextColor);
+        }
+      }
+    }
+  }
+}

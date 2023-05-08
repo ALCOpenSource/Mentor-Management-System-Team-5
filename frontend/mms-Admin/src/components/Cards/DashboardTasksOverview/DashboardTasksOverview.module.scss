@@ -3,6 +3,19 @@
   background-color: var(--dashboardSummaryCardBgColor);
   border-radius: 0.5rem;
   justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--green5Color);
+
+    .body {
+      .icon {
+        path {
+          stroke: var(--primaryColor);
+        }
+      }
+    }
+  }
 
   .body {
     gap: 0.5rem;

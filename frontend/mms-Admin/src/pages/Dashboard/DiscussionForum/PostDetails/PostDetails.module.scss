@@ -1,0 +1,195 @@
+.postDetailsContainer {
+  padding: 1rem;
+  gap: 1.5rem;
+  height: calc(100vh - var(--topNavbarHeight));
+
+  .heading {
+    gap: 0.5rem;
+    position: sticky;
+    top: 0;
+    align-items: flex-end;
+
+    .title {
+      font-size: 1.375rem;
+      font-family: var(--semiBold);
+      color: var(--black2TextColor);
+      line-height: 1;
+      margin: 0;
+    }
+  }
+
+  .postDetailsBody {
+    gap: 1rem;
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+    padding-right: 0.5rem;
+
+    .textAreaWrapper {
+      border: 1px solid var(--grayBorderColor);
+      background-color: var(--green3Color);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      gap: 1rem;
+
+      .attachmentsDiv {
+        gap: 1rem;
+        align-items: center;
+
+        .attachments {
+          gap: 1rem;
+          padding-left: 0.5rem;
+
+          img {
+            width: 1.25rem;
+            object-fit: cover;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .commentsList {
+      gap: 1rem;
+      padding: 0.75rem;
+      border: 1px solid var(--grayBorderColor);
+      border-radius: 0.25rem;
+
+      .comment {
+        gap: 0.5rem;
+        border-radius: 0.25rem;
+        padding: 0.75rem;
+        background-color: var(--green3Color);
+
+        .top {
+          align-items: center;
+
+          .name {
+            font-family: var(--semiBold);
+            color: var(--black2TextColor);
+            font-size: 1rem;
+            line-height: 1;
+            margin: 0;
+          }
+
+          .moreOptionsDiv {
+            position: relative;
+            width: auto;
+
+            .icon {
+              cursor: pointer;
+            }
+
+            .dropdown {
+              position: absolute;
+              right: 0;
+              top: 0;
+              transform: translate(0%, 0);
+              width: max-content;
+              display: flex;
+              gap: 0.5rem;
+              align-items: flex-start;
+              border: 1px solid var(--grayBorderColor);
+              background-color: var(--sideBarBgColor);
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              padding: 0 0.5rem 0 0;
+
+              .dropdownList {
+                z-index: 1;
+                text-align: right;
+                list-style-type: none;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+
+                .dropdownListItem {
+                  padding: 0.25rem 0.5rem;
+                  cursor: pointer;
+                  width: 100%;
+                  font-size: 0.875rem;
+
+                  &:hover {
+                    background-color: var(--grayBorderColor);
+                  }
+                }
+              }
+
+              img {
+                padding-top: 0.5rem;
+                width: 1.125rem;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        p {
+          font-family: var(--regular);
+          color: var(--grayTextColor);
+          margin: 0;
+        }
+
+        span {
+          font-family: var(--regular);
+          color: var(--grayTextColor);
+          text-align: right;
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .postDetailsContainer {
+    padding: 2rem;
+
+    .heading {
+      gap: 0.5rem;
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .postDetailsBody {
+      gap: 1rem;
+
+      .textAreaWrapper {
+        padding: 1rem;
+
+        .attachmentsDiv {
+          .attachments {
+            img {
+              width: 1.375rem;
+            }
+          }
+        }
+      }
+
+      .commentsList {
+        padding: 1rem;
+
+        .comment {
+          gap: 0.75rem;
+          padding: 1rem;
+
+          .top {
+            .name {
+              font-size: 1.125rem;
+            }
+          }
+
+          p {
+            font-size: 1rem;
+            line-height: 1.875rem;
+          }
+
+          span {
+            font-size: 0.875rem;
+          }
+        }
+      }
+    }
+  }
+}

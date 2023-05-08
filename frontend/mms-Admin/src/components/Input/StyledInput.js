@@ -9,8 +9,8 @@ export const FormGroup = styled(Form.Group)`
 
   label {
     position: absolute;
-    transform: translate(0px, 0px) scale(1);
-    margin-bottom: 0px;
+    transform: translate(0, 0) scale(1);
+    margin-bottom: 0;
     transform-origin: top left;
     transition: all 0.2s ease-out;
 
@@ -106,8 +106,8 @@ export const FormGroup = styled(Form.Group)`
     left: 0;
     bottom: -30%;
     text-align: left;
-    padding: 0.25rem 0px 0px 0px;
-    margin: 0px;
+    padding: 0.25rem 0 0 0;
+    margin: 0;
     line-height: 1;
   }
   .eye-icon {

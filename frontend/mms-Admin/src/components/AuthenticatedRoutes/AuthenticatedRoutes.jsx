@@ -15,11 +15,12 @@ function AuthenticatedRoutes({ children, roles }) {
   const userDetails = JSON.parse(localStorage.getItem("userData"));
 
   if (isExpired(token)) {
-    const refreshToken = JSON.parse(localStorage.getItem("refreshToken"));
-    dispatch(refreshAccessToken({ refreshToken: refreshToken }));
+    dispatch(refreshAccessToken());
   }
 
-  const userHasRequiredRole = !!(userDetails && roles.includes(userDetails?.roles.toString().toLowerCase()));
+  const userHasRequiredRole = !!(
+    userDetails && roles.includes(userDetails?.roles && userDetails?.roles.toString().toLowerCase())
+  );
 
   if (!checkIsAuthenticated) {
     toast.error("You must be logged in to access this page");

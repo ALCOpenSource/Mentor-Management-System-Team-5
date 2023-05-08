@@ -22,12 +22,19 @@ import { ReactComponent as LogoutIcon } from "@/assets/icons/logout-icon.svg";
 import userInfo from "@/hooks/useGetUserInfo";
 import arrayToString from "@/helpers/arrayToString";
 import { logout } from "@/utils/auth";
+import { titleCase } from "@/helpers/textTransform";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfile } from "@/redux/Settings/SettingsSlice";
+// import useIsMobile from "@/hooks/useIsMobile";
 
 function DashboardSideBar() {
   const location = useLocation();
+  const dispatch = useDispatch();
+  // const isMobile = useIsMobile();
   const { toggleSidebar } = useProSidebar();
   const userData = userInfo();
   const currentPage = location.pathname.split("/")[2] || "";
+  const userProfile = useSelector((state) => state.settings.getProfileData);
 
   const menuItemsArray = useMemo(
     () => [
@@ -101,6 +108,10 @@ function DashboardSideBar() {
   );
 
   useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
     setActiveIndex(menuItemsArray.findIndex((item) => item.link === currentPage));
   }, [currentPage, menuItemsArray]);
 
@@ -119,7 +130,10 @@ function DashboardSideBar() {
     <div className={cx(styles.dashboardSideBarContainer, "flexCol")}>
       <Sidebar breakPoint='xl' className={cx(styles.sidebar)}>
         <div className={cx(styles.userInfoDiv, "flexCol")}>
-          <h5 className={cx(styles.name)}>Hi, {userData?.fullName}</h5>
+          <h5 className={cx(styles.name)}>
+            Hi,{" "}
+            {titleCase(userProfile?.firstName) || titleCase(userProfile?.lastName || titleCase(userProfile?.fullName))}
+          </h5>
           <p className={cx(styles.role)}>{arrayToString(userData?.roles)}</p>
         </div>
         <Menu>

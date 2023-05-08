@@ -1,0 +1,88 @@
+.receivedChatContainer {
+  gap: 0.75rem;
+  width: 85%;
+
+  .profileImageDiv {
+    .profileImage {
+      width: 2.5rem;
+      height: 2.5rem;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .emptyImage {
+      font-size: 1.25rem;
+      color: var(--whiteTextColor);
+      font-family: var(--regular);
+      display: inline-block;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      line-height: 3rem;
+      text-align: center;
+      margin: 0;
+      background-color: var(--primaryColor);
+    }
+  }
+
+  .chatBody {
+    gap: 0.5rem;
+    align-items: flex-start;
+    background-color: var(--green4Color);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    width: 100%;
+
+    .chatMessage {
+      color: var(--black2TextColor);
+      font-size: 1rem;
+      font-family: var(--regular);
+      line-height: 1.125;
+    }
+
+    .chatTime {
+      font-size: 0.875rem;
+      color: var(--black3TextColor);
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .receivedChatContainer {
+    gap: 1rem;
+    width: 70%;
+
+    .profileImageDiv {
+      .profileImage {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+
+    .chatBody {
+      gap: 0.875rem;
+      border-radius: 0.5rem;
+
+      .chatMessage {
+        line-height: 1.25;
+      }
+
+      .chatTime {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .receivedChatContainer {
+    width: 50%;
+
+    .profileImageDiv {
+      .profileImage {
+        width: 3.5rem;
+        height: 3.5rem;
+      }
+    }
+  }
+}

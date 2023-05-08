@@ -3,29 +3,41 @@ import { toast } from "react-toastify";
 import {
   changePasswordApi,
   updateProfileApi,
+  getProfileApi,
   editUserNotificationsApi,
   getUserNotificationsApi,
   editUserPrivacyApi,
-  getUserPrivacyApi
+  getUserPrivacyApi,
+  getGeneralFaqApi,
+  getTechnicalFaqApi,
+  sendSupportMessageApi
 } from "../api/settings";
 
 import {
   changePasswordLoading,
   updateProfileLoading,
+  getProfileLoading,
   editUserNotificationsLoading,
   getUserNotificationsLoading,
   editUserPrivacyLoading,
-  getUserPrivacyLoading
+  getUserPrivacyLoading,
+  getGeneralFaqLoading,
+  getTechnicalFaqLoading,
+  sendSupportMessageLoading
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
   error: false,
   changePasswordData: {},
   updateProfileData: {},
+  getProfileData: {},
   editUserNotificationsData: {},
   getUserNotificationsData: {},
   editUserPrivacyData: {},
-  getUserPrivacyData: {}
+  getUserPrivacyData: {},
+  getGeneralFaqData: {},
+  getTechnicalFaqData: {},
+  sendSupportMessageData: {}
 };
 
 export const settingsSlice = createSlice({
@@ -46,6 +58,10 @@ export const settingsSlice = createSlice({
       state.updateProfileData = action.payload;
     },
 
+    getProfileAction: (state, action) => {
+      state.getProfileData = action.payload;
+    },
+
     editUserNotificationsAction: (state, action) => {
       state.editUserNotificationsData = action.payload;
     },
@@ -60,6 +76,18 @@ export const settingsSlice = createSlice({
 
     getUserPrivacyAction: (state, action) => {
       state.getUserPrivacyData = action.payload;
+    },
+
+    getGeneralFaqAction: (state, action) => {
+      state.getGeneralFaqData = action.payload;
+    },
+
+    getTechnicalFaqAction: (state, action) => {
+      state.getTechnicalFaqData = action.payload;
+    },
+
+    sendSupportMessageAction: (state, action) => {
+      state.sendSupportMessageData = action.payload;
     }
   }
 });
@@ -70,10 +98,14 @@ const {
   hasError,
   changePasswordAction,
   updateProfileAction,
+  getProfileAction,
   editUserNotificationsAction,
   getUserNotificationsAction,
   editUserPrivacyAction,
-  getUserPrivacyAction
+  getUserPrivacyAction,
+  getGeneralFaqAction,
+  getTechnicalFaqAction,
+  sendSupportMessageAction
 } = settingsSlice.actions;
 
 export const changePassword = (data) => async (dispatch) => {
@@ -102,6 +134,22 @@ export const updateProfile = (data) => async (dispatch) => {
   } catch (e) {
     toast.error(e?.response?.data);
     dispatch(updateProfileLoading(false));
+    dispatch(hasError(e?.response?.data));
+    return { success: false };
+  }
+};
+
+export const getProfile = (data) => async (dispatch) => {
+  dispatch(getProfileLoading(true));
+
+  try {
+    const response = await getProfileApi(data);
+    dispatch(getProfileLoading(false));
+    dispatch(getProfileAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data);
+    dispatch(getProfileLoading(false));
     dispatch(hasError(e?.response?.data));
     return { success: false };
   }
@@ -168,6 +216,51 @@ export const getUserPrivacy = () => async (dispatch) => {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(getUserPrivacyLoading(false));
+    return { success: false };
+  }
+};
+
+export const getGeneralFaq = () => async (dispatch) => {
+  dispatch(getGeneralFaqLoading(true));
+  try {
+    const response = await getGeneralFaqApi();
+    dispatch(getGeneralFaqLoading(false));
+    dispatch(getGeneralFaqAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(getGeneralFaqLoading(false));
+    return { success: false };
+  }
+};
+
+export const getTechnicalFaq = () => async (dispatch) => {
+  dispatch(getTechnicalFaqLoading(true));
+  try {
+    const response = await getTechnicalFaqApi();
+    dispatch(getTechnicalFaqLoading(false));
+    dispatch(getTechnicalFaqAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(getTechnicalFaqLoading(false));
+    return { success: false };
+  }
+};
+
+export const sendSupportMessage = (data) => async (dispatch) => {
+  dispatch(sendSupportMessageLoading(true));
+  try {
+    const response = await sendSupportMessageApi(data);
+    dispatch(sendSupportMessageLoading(false));
+    dispatch(sendSupportMessageAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(sendSupportMessageLoading(false));
     return { success: false };
   }
 };
