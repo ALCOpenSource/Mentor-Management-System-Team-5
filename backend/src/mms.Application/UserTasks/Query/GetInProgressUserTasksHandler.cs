@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace mms.Application.UserTasks.Query
 {
     public class GetInProgressUserTasksHandler : IRequestHandler<GetInProgressUserTasksCommand,
-            IResult<GetUserTasksResponse>>
+            IResult<List<GetUserTasksResponse>>>
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace mms.Application.UserTasks.Query
             _mapper = mapper;
         }
 
-        public async Task<IResult<GetUserTasksResponse>> Handle(GetInProgressUserTasksCommand request,
+        public async Task<IResult<List<GetUserTasksResponse>>> Handle(GetInProgressUserTasksCommand request,
             CancellationToken cancellationToken)
         {
             //TODO:
@@ -32,12 +32,12 @@ namespace mms.Application.UserTasks.Query
             var usertasks = await _context.UserTasks.Where(s => s.Status == "inprogress").OrderByDescending(x => x.DateCreated).ToListAsync();
             if (usertasks == null)
             {
-                return await Result<GetUserTasksResponse>.FailAsync("No User Tasks Available");
+                return await Result<List<GetUserTasksResponse>>.FailAsync("No User Tasks Available");
             }
 
-            var result = _mapper.Map<GetUserTasksResponse>(usertasks);
+            var result = _mapper.Map<List<GetUserTasksResponse>>(usertasks);
 
-            return await Result<GetUserTasksResponse>.SuccessAsync(result);
+            return await Result<List<GetUserTasksResponse>>.SuccessAsync(result);
         }
     }
 }

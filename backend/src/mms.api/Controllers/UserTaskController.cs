@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.Results;
 using Microsoft.AspNetCore.Mvc;
+using mms.Application.UserTasks.Command.CreateTask;
 using mms.Application.UserTasks.Query;
 using System.Net;
 
@@ -7,7 +8,7 @@ namespace mms.api.Controllers
 {
     public class UserTaskController: BaseController
     {
-        [HttpGet("get-user-tasks")]
+        [HttpGet("get-tasks")]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetUserTasks()
@@ -21,7 +22,7 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("get-completed-user-tasks")]
+        [HttpGet("get-completed-tasks")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCompletedUserTasks()
@@ -35,7 +36,7 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("get-inprogress-user-tasks")]
+        [HttpGet("get-inprogress-tasks")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetInProgressUserTasks()
@@ -49,6 +50,17 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateTask([FromBody] CreateTaskRequest request)
+        {
+            var task = await Mediator.Send(new CreateTaskCommand(
+                request.Title,
+                request.Description,
+                request.Genre,
+                request.Rating));
+
+            return Ok(task);
+        }
 
 
     }

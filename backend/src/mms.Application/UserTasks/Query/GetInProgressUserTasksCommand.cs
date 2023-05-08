@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace mms.Application.UserTasks.Query
 {
-    public class GetInProgressUserTasksCommand:IRequest<Result<GetUserTasksResponse>>
+    public class GetInProgressUserTasksCommand:IRequest<IResult<List<GetUserTasksResponse>>>
     {
     }
 }

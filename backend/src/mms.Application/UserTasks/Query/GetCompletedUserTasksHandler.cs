@@ -3,16 +3,11 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using mms.Infrastructure.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mms.Application.UserTasks.Query
 {
     public class GetCompletedUserTasksHandler : IRequestHandler<GetCompletedUserTasksCommand,
-            IResult<GetUserTasksResponse>>
+            IResult<List<GetUserTasksResponse>>>
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
@@ -24,7 +19,7 @@ namespace mms.Application.UserTasks.Query
             _mapper = mapper;
         }
 
-        public async Task<IResult<GetUserTasksResponse>> Handle(GetCompletedUserTasksCommand request,
+        public async Task<IResult<List<GetUserTasksResponse>>> Handle(GetCompletedUserTasksCommand request,
             CancellationToken cancellationToken)
         {
             //TODO:
@@ -32,12 +27,12 @@ namespace mms.Application.UserTasks.Query
             var usertasks = await _context.UserTasks.Where(s => s.Status == "complete").OrderByDescending(x => x.DateCreated).ToListAsync();
             if (usertasks == null)
             {
-                return await Result<GetUserTasksResponse>.FailAsync("No User Tasks Available");
+                return await Result<List<GetUserTasksResponse>>.FailAsync("No User Tasks Available");
             }
 
-            var result = _mapper.Map<GetUserTasksResponse>(usertasks);
+            var result = _mapper.Map<List<GetUserTasksResponse>>(usertasks);
 
-            return await Result<GetUserTasksResponse>.SuccessAsync(result);
+            return await Result<List<GetUserTasksResponse>>.SuccessAsync(result);
         }
     }
 }

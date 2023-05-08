@@ -28,9 +28,9 @@ namespace mms.Application.Common.Mapper
             CreateMap<AppUserEntity, GetProfileByIdResponse>().ReverseMap();
             CreateMap<UserTask, GetUserTasksResponse>().ReverseMap();
             CreateMap<Programmes, GetProgrammeResponse>().ReverseMap();
-            CreateMap<Reports, GetReportsCommand>().ReverseMap();
-            CreateMap<ProgramsMentor, GetMentorsCommand>().ReverseMap();
-            CreateMap<MentorManager, GetMentorManagersCommand>().ReverseMap();
+            CreateMap<Reports, GetReportsResponse>().ReverseMap();
+            CreateMap<ProgramsMentor, GetMentorsResponse>().ReverseMap();
+            CreateMap<MentorManager, GetMentorManagersResponse>().ReverseMap();
         }
     }
 }

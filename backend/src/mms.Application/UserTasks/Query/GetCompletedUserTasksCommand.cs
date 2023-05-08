@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace mms.Application.UserTasks.Query
 {
-    public class GetCompletedUserTasksCommand : IRequest<Result<GetUserTasksResponse>>
+    public class GetCompletedUserTasksCommand : IRequest<IResult<List<GetUserTasksResponse>>>
     {
     }
 }
