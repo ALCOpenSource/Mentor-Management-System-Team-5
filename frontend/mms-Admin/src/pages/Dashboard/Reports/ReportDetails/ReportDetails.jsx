@@ -79,7 +79,7 @@ const ReportDetails = () => {
           </div>
         </div>
 
-        <img onClick={() => handleCloseReport()} src={closeIcon} alt='close-icon' />
+        <img className={cx(styles.closeIcon)} onClick={() => handleCloseReport()} src={closeIcon} alt='close-icon' />
       </div>
 
       <div className={cx(styles.mainBody, "flexCol")}>

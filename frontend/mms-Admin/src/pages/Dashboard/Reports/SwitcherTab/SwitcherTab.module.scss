@@ -12,10 +12,6 @@
     font-family: var(--regular);
     font-size: 1.125rem;
     cursor: pointer;
-
-    &:hover {
-      font-family: var(--semiBold);
-    }
   }
 
   .activeTab {
