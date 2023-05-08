@@ -11,5 +11,6 @@ namespace mms.Domain.Entities
         public string Status { get; set; }
         public string ProgramId { get; set; }
         public IList<AppUser> Managers { get; set; }
+        public Programme Programme { get; set; }
     }
 }

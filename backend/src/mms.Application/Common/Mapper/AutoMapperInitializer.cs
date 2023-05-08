@@ -21,6 +21,8 @@ using mms.Application.Programme.Query;
 using mms.Application.Report.Query;
 using mms.Application.Mentors.Query;
 using mms.Application.MentorManagers.Query;
+using mms.Application.UserTasks.Command.CreateTask;
+using mms.Application.Report.Command;
 
 namespace mms.Application.Common.Mapper
 {
@@ -39,9 +41,17 @@ namespace mms.Application.Common.Mapper
             CreateMap<ProgrammeEntity, GetArchiveProgramsResponse>().ReverseMap();
 
             CreateMap<AppUserEntity, GetProfileByIdResponse>().ReverseMap();
+
             CreateMap<UserTask, GetUserTasksResponse>().ReverseMap();
+            CreateMap<UserTask, CreateTaskCommand>().ReverseMap();
+            CreateMap<UserTask, PutUserTaskCommand>().ReverseMap();
+
             CreateMap<Programmes, GetProgrammeResponse>().ReverseMap();
+
             CreateMap<Reports, GetReportsResponse>().ReverseMap();
+            CreateMap<Reports, CreateReportCommand>().ReverseMap();
+            CreateMap<Reports, PutReportCommand>().ReverseMap();
+
             CreateMap<ProgramsMentor, GetMentorsResponse>().ReverseMap();
             CreateMap<MentorManager, GetMentorManagersResponse>().ReverseMap();
 

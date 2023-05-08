@@ -50,18 +50,43 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateTask([FromBody] CreateTaskRequest request)
+        [HttpPost("task")]
+        public async Task<IActionResult> CreateTask(CreateTaskCommand command)
         {
-            var task = await Mediator.Send(new CreateTaskCommand(
-                request.Title,
-                request.Description,
-                request.Genre,
-                request.Rating));
+            var result = await Mediator.Send(command);
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
 
-            return Ok(task);
+            return Ok(result);
         }
 
+
+
+        [HttpPut("task/{id}")]
+        public async Task<IActionResult> PutTask(string id, [FromBody] UpdateUserTaskRequest request)
+        {
+            PutUserTaskCommand command = new()
+            {
+                Id = id,
+                UpdatedAt = DateTime.Now,
+                Description = request.Description,
+                CreatedBy = request.CreatedBy,
+                Status = request.Status,
+                ProgramId = request.ProgramId,
+                Title = request.Title,
+                Managers = request.Managers,
+            };
+
+            var result = await Mediator.Send(command);
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
 
     }
 
