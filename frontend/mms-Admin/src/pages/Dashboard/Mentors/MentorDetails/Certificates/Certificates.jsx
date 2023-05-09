@@ -4,7 +4,8 @@ import styles from "./Certificates.module.scss";
 
 import certificate from "@/assets/images/certificate-full.png";
 import { ReactComponent as CertificateIcon } from "@/assets/icons/certificate-thumbnail.svg";
-import { ReactComponent as TogglerIcon } from "@/assets/icons/archive-toggler-icon.svg";
+import { ReactComponent as TogglerIconUp } from "@/assets/icons/arrow-circle-up.svg";
+import { ReactComponent as TogglerIconDown } from "@/assets/icons/arrow-circle-down.svg";
 import Button from "@/components/Button/Button";
 
 const Certificates = () => {
@@ -77,7 +78,11 @@ const Certificates = () => {
                     <h6 className={cx(styles.metaDataTitle)}>{item.title}</h6>
                   </div>
                   <div className={cx(styles.cardToggler)}>
-                    <TogglerIcon onClick={() => handleToggle(index)} />
+                    {toggle?.toggle && toggle.index === index ? (
+                      <TogglerIconUp onClick={() => handleToggle(index)} />
+                    ) : (
+                      <TogglerIconDown onClick={() => handleToggle(index)} />
+                    )}
                   </div>
                 </div>
 

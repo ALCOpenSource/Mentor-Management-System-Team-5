@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { getProfile } from "@/redux/Settings/SettingsSlice";
-import { Country } from "country-state-city";
 
 import { Container, Row } from "react-bootstrap";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
@@ -13,7 +12,7 @@ import instagramIcon from "@/assets/icons/instagram-icon.svg";
 import linkedinIcon from "@/assets/icons/linkedin-icon.svg";
 import githubIcon from "@/assets/icons/github-icon.svg";
 import twitterIcon from "@/assets/icons/twitter-icon.svg";
-import { FlagIcon } from "react-flag-kit";
+import countriesAndFlags from "@/utils/countriesAndFlags";
 
 // To be removed after email is included in getProfile API
 import useGetUserInfo from "@/hooks/useGetUserInfo";
@@ -38,11 +37,7 @@ function Profile() {
         fullName: `${userProfile.firstName} ${userProfile.lastName}`,
         role: userProfile.role ? userProfile.role : arrayToString(roles),
         profilePicture: userProfile.profilePicture,
-        flagIcon: (
-          <FlagIcon
-            code={Country.getAllCountries().find((country) => country.name === userProfile?.country)?.isoCode}
-          />
-        )
+        flagUrl: countriesAndFlags.find((item) => item.name === userProfile?.country)?.flag
       });
       setProfileDetailData({
         addressInfoData: [

@@ -72,6 +72,9 @@
   --secondaryBtnSmallFontSize: 0.75rem;
   --secondaryBtnSmallPadding: 0.375rem 0.5rem;
 
+  // Toast
+  --toastify-color-success: var(--green2Color);
+
   @media all and (min-width: 992px) {
     // Primary Button Big
     --primaryBtnFontSize: 1rem;

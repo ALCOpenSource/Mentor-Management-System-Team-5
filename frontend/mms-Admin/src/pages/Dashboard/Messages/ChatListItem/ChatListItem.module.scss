@@ -87,6 +87,11 @@
   }
 }
 
+.active {
+  background-color: var(--taskListHoverBgColor);
+  border: 1px solid var(--taskListHoverBgColor);
+}
+
 @media all and (min-width: 992px) {
   .chatListItemContainer {
     padding: 0.875rem 0.75rem;

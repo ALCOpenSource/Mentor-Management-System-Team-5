@@ -3,35 +3,18 @@
   height: calc(100dvh - var(--topNavbarHeight));
   overflow: hidden;
 
-  .heading {
-    padding: 1rem 0.5rem 0 0.5rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: flex-end;
-    align-items: center;
-    position: sticky;
-    top: 0;
+  .sidebarWrapper {
+    height: 100%;
+    z-index: 15;
 
-    .titleAndToggler {
-      gap: 0.25rem;
+    .sideBarHeader {
+      width: 100%;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      min-height: 3.875rem;
       align-items: center;
-
-      .togglerDiv {
-        gap: 0.125rem;
-        cursor: pointer;
-
-        .toggler {
-          width: 0.875rem;
-        }
-
-        .togglerText {
-          font-family: var(--regular);
-          font-size: 0.5rem;
-          color: var(--primaryColor);
-          line-height: 1;
-          margin: 0;
-        }
-      }
+      margin: 0.5rem 0;
+      padding: 0 1rem;
 
       .title {
         margin: 0;
@@ -41,30 +24,10 @@
         line-height: 1;
         padding: 0;
       }
-    }
 
-    .searchSortDiv {
-      order: 2;
-      width: 100%;
-      justify-content: flex-end;
-      gap: 1rem;
-
-      svg {
-        cursor: pointer;
+      .searchWrapper {
+        flex-grow: 1;
       }
-
-      .searchInput {
-        width: 100%;
-        max-width: 20rem;
-        padding: 0.25rem 0.5rem;
-        border: 1px solid var(--grayBorderColor);
-        border-radius: 0.25rem;
-        outline: none;
-      }
-    }
-
-    button {
-      order: 1;
     }
   }
 
@@ -72,10 +35,25 @@
     position: relative;
     overflow-y: auto;
     height: 100%;
-    padding: 0;
+    width: 100%;
+    padding: 0 0.75rem 1rem 0.75rem;
 
-    .sidebarWrapper {
-      height: 100%;
+    .heading {
+      padding: 1rem 0;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      align-items: center;
+      position: sticky;
+      top: 0;
+
+      .title {
+        margin: 0;
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        font-size: 1.5rem;
+        line-height: 1;
+        padding: 0;
+      }
     }
 
     .content {
@@ -120,54 +98,41 @@
 
 @media all and (min-width: 768px) {
   .chatsContainer {
-    padding: 2rem;
-
-    .heading {
-      padding: 0;
-      flex-wrap: nowrap;
-
-      .searchSortDiv {
-        order: 1;
-      }
-
-      button {
-        order: 2;
-      }
-    }
+    padding: 1rem 2rem;
 
     .mainBody {
-      gap: 1rem;
       padding: 0;
+
+      .heading {
+        padding: 0 0 1rem 0;
+      }
     }
   }
 }
 
 @media all and (min-width: 992px) {
   .chatsContainer {
-    padding: 1.5rem;
+    padding: 0 1.5rem 1rem 1.5rem;
 
-    .heading {
-      .titleAndToggler {
-        .togglerDiv {
-          display: none;
-        }
-      }
+    .sidebarWrapper {
+      height: 100%;
 
-      .searchSortDiv {
-        display: none;
-      }
-
-      button {
-        margin-left: auto;
+      .sideBarHeader {
+        padding: 0;
       }
     }
 
     .mainBody {
-      gap: 0.25rem;
+      padding-top: 1rem;
+      gap: 0.75rem;
       height: 100%;
 
-      .sidebarWrapper {
-        height: 100%;
+      .heading {
+        padding: 0;
+
+        button {
+          margin-left: auto;
+        }
       }
 
       .content {
@@ -187,6 +152,12 @@
 
 @media all and (min-width: 1200px) {
   .chatsContainer {
+    .sidebarWrapper {
+      .sideBarHeader {
+        padding: 1rem 0 0 0;
+      }
+    }
+
     .mainBody {
       gap: 0.75rem;
     }

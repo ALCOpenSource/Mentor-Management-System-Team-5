@@ -12,8 +12,9 @@ namespace mms.Application.Account.Login
         private readonly ApplicationContext _context;
 
         public GenerateLoginResponse(UserManager<AppUser> userManager, IConfiguration configuration,
-            ApplicationContext context, ITokenGeneratorService tokenGenerator) : base(userManager,
-            configuration, tokenGenerator)
+            ApplicationContext context, ITokenGeneratorService tokenGenerator, IMailService mailService) : base(
+            userManager,
+            configuration, tokenGenerator, mailService)
         {
             _context = context;
         }

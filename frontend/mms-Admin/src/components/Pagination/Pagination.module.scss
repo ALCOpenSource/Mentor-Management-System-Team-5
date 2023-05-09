@@ -1,9 +1,10 @@
 .paginationContainer {
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 
   .mainWrapper {
     gap: 0.75rem;
+    width: max-content;
 
     .pagination {
       display: flex;

@@ -31,13 +31,13 @@ const ChatDetails = () => {
     },
     {
       id: 3,
-      message: "Please are you in the meeting now, cos i’m on my way home",
+      message: "Please are you in the meeting now, cos i'm on my way home",
       time: "12:00pm",
       type: "received"
     },
     {
       id: 4,
-      message: "I’m not. Been waiting for you",
+      message: "I'm not. Been waiting for you",
       time: "12:00pm",
       type: "sent",
       status: "delivered"
@@ -49,33 +49,33 @@ const ChatDetails = () => {
       type: "received"
     },
     {
-      id: 1,
+      id: 6,
       message: "Hello Kabiru, trust you are well?",
       time: "6:00pm",
       type: "received"
     },
     {
-      id: 2,
+      id: 7,
       message: "Hi Alison, i am well. Thanks",
       time: "12:00pm",
       type: "sent",
       status: "read"
     },
     {
-      id: 3,
-      message: "Please are you in the meeting now, cos i’m on my way home",
+      id: 8,
+      message: "Please are you in the meeting now, cos i'm on my way home",
       time: "12:00pm",
       type: "received"
     },
     {
-      id: 4,
-      message: "I’m not. Been waiting for you",
+      id: 9,
+      message: "I'm not. Been waiting for you",
       time: "12:00pm",
       type: "sent",
       status: "delivered"
     },
     {
-      id: 5,
+      id: 10,
       message: "Can we go ahead to join the UI/UX Team Meeting now",
       time: "12:00pm",
       type: "received"
@@ -93,10 +93,12 @@ const ChatDetails = () => {
           <span>Conversation started, 15 Oct</span>
           <hr />
         </div>
-        {chatData.map((chat) => {
-          return chat.type === "sent" ? <Sent key={chat?.id} data={chat} /> : <Received key={chat?.id} data={chat} />;
-        })}
 
+        <div className={cx(styles.chats, "flexCol")}>
+          {chatData.map((chat) => {
+            return chat.type === "sent" ? <Sent key={chat?.id} data={chat} /> : <Received key={chat?.id} data={chat} />;
+          })}
+        </div>
         <div className={cx(styles.footer, "flexRow-align-center")}>
           <div className={cx(styles.attachmentsDiv, "flexRow-align-center")}>
             <img src={attachmentIcon} alt='attachment' />
