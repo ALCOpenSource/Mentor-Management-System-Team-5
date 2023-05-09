@@ -1,38 +1,23 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import { FormGroup } from "./StyledInput";
-import eyeIcon from "@/assets/icons/eye.svg";
+import eyeIconShow from "@/assets/icons/eye-password-show.svg";
+import eyeIconHide from "@/assets/icons/eye-password-hide.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
 
 const Input = forwardRef(
   ({ label, placeholder, required, type = "text", onChange, error, icon, marginbottom, border, ...props }, ref) => {
     const [inputType, setInputType] = useState(type);
-    const [isActive, setIsActive] = useState(false);
-
-    const handleTextChange = (e) => {
-      e.target.value !== "" ? setIsActive(true) : setIsActive(false);
-    };
-
-    const handleLabelClick = (e) => {
-      e.preventDefault();
-
-      const element = e.target;
-      const inputElement = element.previousSibling;
-      const inputValue = inputElement?.nodeValue;
-
-      inputValue !== "" ? inputElement.focus() : setIsActive(false);
-    };
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleVisibility = () => {
       if (inputType === "password") {
+        setShowPassword(true);
         return setInputType("text");
       }
+      setShowPassword(false);
       return setInputType("password");
     };
-
-    useEffect(() => {
-      props.value !== "" && setIsActive(true);
-    }, [props.value]);
 
     return (
       <FormGroup marginbottom={marginbottom || "2rem"} border={border || "#e6e6e6"} required={required}>
@@ -40,20 +25,21 @@ const Input = forwardRef(
           {icon && <img src={searchIcon} alt='search icon' />}
           <input
             type={inputType}
-            placeholder={placeholder}
+            placeholder={label}
             required={required}
             onChange={onChange}
-            onBlur={handleTextChange}
             {...props}
             autoComplete='new-password'
             ref={ref}
           />
-          {label && (
-            <label onClick={(e) => handleLabelClick(e)} className={isActive ? "Active" : ""}>
-              {label}
-            </label>
+          {type === "password" && (
+            <img
+              src={showPassword ? eyeIconShow : eyeIconHide}
+              alt='eye-icon'
+              className='eye-icon'
+              onClick={handleVisibility}
+            />
           )}
-          {type === "password" && <img src={eyeIcon} alt='eye-icon' className='eye-icon' onClick={handleVisibility} />}
         </div>
         {error ? <span className='error'>{error}</span> : ""}
       </FormGroup>
@@ -64,7 +50,6 @@ const Input = forwardRef(
 Input.displayName = "Input";
 
 Input.propTypes = {
-  label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   type: PropTypes.string,
