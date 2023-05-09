@@ -19,6 +19,18 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("active-programme")]
+        public async Task<IActionResult> GetActiveProgrammes()
+        {
+            var result = await Mediator.Send(new GetActiveProgrammesCommand());
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost("programme")]
         public async Task<IActionResult> CreateTask(CreateProgrammeCommand command)
         {

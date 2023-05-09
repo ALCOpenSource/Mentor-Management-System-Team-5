@@ -25,7 +25,7 @@ namespace mms.Application.Report.Query
             var reports = await _context.Reports.Where(y => y.DateCreated.Year == DateTime.UtcNow.Year).OrderByDescending(x => x.DateCreated).ToListAsync();
             if (reports == null)
             {
-                return await Result<List<GetReportsResponse>>.FailAsync("No Reports Available");
+                return await Result<List<GetReportsResponse>>.FailAsync("No Yearly Reports Available");
             }
 
             var result = _mapper.Map<List<GetReportsResponse>>(reports);

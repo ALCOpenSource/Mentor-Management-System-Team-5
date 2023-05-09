@@ -28,7 +28,7 @@ namespace mms.Application.Report.Query
             var reports = await _context.Reports.OrderByDescending(t => t.DateCreated >= startOfWeek && t.DateCreated <= today).ToListAsync();
             if (reports == null)
             {
-                return await Result<List<GetReportsResponse>>.FailAsync("No Reports Available");
+                return await Result<List<GetReportsResponse>>.FailAsync("No weekly Reports Available");
             }
 
             var result = _mapper.Map<List<GetReportsResponse>>(reports);
