@@ -50,6 +50,48 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("get-weekly-tasks")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetWeeklyTasks()
+        {
+            var result = await Mediator.Send(new GetWeeklyTasksCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("get-Monthly-tasks")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetMonthlyTasks()
+        {
+            var result = await Mediator.Send(new GetMonthlyTasksCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("get-yearly-tasks")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetYearlyTasks()
+        {
+            var result = await Mediator.Send(new GetYearlyTasksCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost("task")]
         public async Task<IActionResult> CreateTask(CreateTaskCommand command)
         {
