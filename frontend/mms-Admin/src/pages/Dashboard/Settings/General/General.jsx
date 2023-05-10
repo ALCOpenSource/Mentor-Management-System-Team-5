@@ -43,25 +43,25 @@ function General() {
     {
       key: "github",
       label: "Github",
-      placeholder: "@githubuser",
+      placeholder: "update data",
       icon: githubIcon
     },
     {
       key: "instagram",
       label: "Instagram",
-      placeholder: "@instagramuser",
+      placeholder: "update data",
       icon: instagramIcon
     },
     {
       key: "linkedIn",
       label: "LinkedIn",
-      placeholder: "@linkedinuser",
+      placeholder: "update data",
       icon: linkedinIcon
     },
     {
       key: "twitter",
       label: "Twitter",
-      placeholder: "@twitteruser",
+      placeholder: "update data",
       icon: twitterIcon
     }
   ];
@@ -203,8 +203,7 @@ function General() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='First Name'
-                    placeholder=''
+                    placeholder='First Name'
                     type='text'
                     error={errors?.firstName && errors?.firstName?.message}
                   />
@@ -217,8 +216,7 @@ function General() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Last Name'
-                    placeholder=''
+                    placeholder='Last Name'
                     type='text'
                     error={errors?.lastName && errors?.lastName?.message}
                   />
@@ -239,7 +237,6 @@ function General() {
                   <TextArea
                     {...field}
                     placeholder='Your Bio'
-                    label=''
                     minHeight='150px'
                     error={errors?.bio && errors?.bio?.message}
                   />
@@ -259,8 +256,7 @@ function General() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='www.example.com'
-                    placeholder=''
+                    placeholder='www.example.com'
                     type='text'
                     error={errors?.website && errors?.website?.message}
                   />
@@ -282,7 +278,6 @@ function General() {
                     <SelectField
                       {...field}
                       defaultSelect='Select Country'
-                      label=''
                       options={countries}
                       error={errors?.country && errors?.country?.message}
                       onChange={(e) => handleSelectChange(e, "country")}
@@ -304,7 +299,6 @@ function General() {
                     <SelectField
                       {...field}
                       defaultSelect='Select City'
-                      label=''
                       options={city}
                       error={errors?.city && errors?.city?.message}
                       onChange={(e) => handleSelectChange(e, "city")}
@@ -338,11 +332,10 @@ function General() {
                         render={({ field }) => (
                           <InputField
                             {...field}
-                            placeholder=''
                             type='text'
                             marginbottom='0'
                             border='none'
-                            label={item?.placeholder}
+                            placeholder={item?.placeholder}
                           />
                         )}
                       />

@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { showModal } from "@/redux/Modal/ModalSlice";
+import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import cx from "classnames";
 import styles from "./About.module.scss";
 import arrayToString from "@/helpers/arrayToString";
@@ -8,8 +11,44 @@ import linkedinIcon from "@/assets/icons/linkedin-icon.svg";
 import githubIcon from "@/assets/icons/github-icon.svg";
 import twitterIcon from "@/assets/icons/twitter-icon.svg";
 import paperIcon from "@/assets/icons/paper-icon.svg";
+import Button from "@/components/Button/Button";
+import activateUserImage from "@/assets/images/activate-user.svg";
+import deActivateUserImage from "@/assets/images/deactivate-user.svg";
 
 const About = () => {
+  const dispatch = useDispatch();
+
+  const [userStatus, setUserStatus] = useState("active");
+
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
+
+  const handleSetUserStatus = (status) => {
+    setUserStatus(status);
+
+    status === "deactivate" &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Mentor Deactivated Successfully",
+            image: deActivateUserImage
+          }
+        })
+      );
+
+    status === "activate" &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Mentor Activated Successfully",
+            image: activateUserImage
+          }
+        })
+      );
+  };
+
   const userData = {
     bio: {
       title: "Bio",
@@ -161,6 +200,16 @@ const About = () => {
             ))}
         </div>
       </div>
+
+      <div className={cx(styles.btnDiv, "flexRow-align-center")}>
+        {userStatus === "activate" ? (
+          <Button onClick={() => handleSetUserStatus("deactivate")} title='Deactivate Mentor' />
+        ) : (
+          <Button onClick={() => handleSetUserStatus("activate")} title='Activate Mentor' />
+        )}
+      </div>
+
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
 };

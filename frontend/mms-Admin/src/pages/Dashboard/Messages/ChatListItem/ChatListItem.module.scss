@@ -8,8 +8,8 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--taskListHoverBgColor);
-    border: 1px solid var(--taskListHoverBgColor);
+    background-color: var(--green3Color);
+    border: 1px solid var(--green3Color);
   }
 
   .body {
@@ -88,8 +88,8 @@
 }
 
 .active {
-  background-color: var(--taskListHoverBgColor);
-  border: 1px solid var(--taskListHoverBgColor);
+  background-color: var(--green3Color);
+  border: 1px solid var(--green4Color);
 }
 
 @media all and (min-width: 992px) {

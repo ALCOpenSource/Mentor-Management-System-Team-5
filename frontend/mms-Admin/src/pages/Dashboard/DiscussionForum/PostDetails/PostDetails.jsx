@@ -111,7 +111,6 @@ const PostDetails = () => {
         <div className={cx(styles.textAreaWrapper, "flexCol")}>
           <TextArea
             placeholder='Write a comment...'
-            label=''
             borderColor='none'
             marginbottom='0'
             minHeight='150px'

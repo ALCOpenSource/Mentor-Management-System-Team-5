@@ -11,17 +11,25 @@ import Filter from "@/components/Filter/Filter";
 import useIsMobile from "@/hooks/useIsMobile";
 import Tabs from "@/components/Tabs/Tabs";
 import { Outlet, useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { showModal } from "@/redux/Modal/ModalSlice";
 import flagIcon from "@/assets/icons/flag-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
+import editIcon from "@/assets/icons/edit-icon.svg";
+import EditUserRoleModal from "@/components/Modals/EditUserRole/EditUserRole";
 
 const MentorDetails = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [openSideBar, setOpenSideBar] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
   const [collapseInput, setCollapseInput] = useState(true);
   const [closeSelectElement, setCloseSelectElement] = useState(false);
+
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
 
   const mentorsArray = useMemo(
     () => [
@@ -134,6 +142,18 @@ const MentorDetails = () => {
     }
   };
 
+  const editUserRole = () => {
+    console.log("edit user role");
+    dispatch(
+      showModal({
+        name: "editUserRole",
+        modalData: {
+          title: "Edit User Role"
+        }
+      })
+    );
+  };
+
   const getListComponents = (data) => {
     const listItems =
       Array.isArray(data) &&
@@ -227,7 +247,10 @@ const MentorDetails = () => {
               <div className={cx(styles.info, "flexRow")}>
                 <div className={cx(styles.nameAndRole, "flexCol")}>
                   <p className={cx(styles.name)}>{selectedUser?.name}</p>
-                  <p className={cx(styles.role)}>{selectedUser?.role || "Mentor"}</p>
+                  <p className={cx(styles.role)}>
+                    {selectedUser?.role || "Mentor"}{" "}
+                    <img onClick={() => editUserRole()} src={editIcon} alt='edit-icon' />{" "}
+                  </p>
                 </div>
 
                 <img className={cx(styles.flagIcon)} src={flagIcon} alt='flag' />
@@ -272,6 +295,7 @@ const MentorDetails = () => {
           </div>
         </div>
       </div>
+      {displayModal && modalName === "editUserRole" ? <EditUserRoleModal show size='md' /> : null}
     </div>
   );
 };

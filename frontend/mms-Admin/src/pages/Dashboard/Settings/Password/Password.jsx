@@ -73,8 +73,7 @@ function Password() {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label='Your current Password'
-                  placeholder=''
+                  placeholder='Your current Password'
                   type='password'
                   error={errors?.currentPassword && errors?.currentPassword?.message}
                 />
@@ -94,8 +93,7 @@ function Password() {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label='Must be at least 8 characters'
-                  placeholder=''
+                  placeholder='Must be at least 8 characters'
                   type='password'
                   error={errors?.newPassword && errors?.newPassword?.message}
                 />
@@ -115,8 +113,7 @@ function Password() {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label='Must match your new password'
-                  placeholder=''
+                  placeholder='Must match your new password'
                   type='password'
                   error={errors?.confirmPassword && errors?.confirmPassword?.message}
                 />

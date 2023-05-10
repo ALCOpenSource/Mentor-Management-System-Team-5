@@ -70,8 +70,7 @@ function ForgotPassword() {
                   render={({ field }) => (
                     <InputField
                       {...field}
-                      label='Email'
-                      placeholder=''
+                      placeholder='Email'
                       type='email'
                       error={errors?.email && errors?.email?.message}
                     />

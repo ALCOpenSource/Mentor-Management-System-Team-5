@@ -1,0 +1,86 @@
+.modalWrapper {
+  gap: 1.5rem;
+  background-color: var(--modalBgColor);
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+
+  .modalHeader {
+    align-items: center;
+    gap: 1rem;
+
+    .headerTitle {
+      font-size: 1.25rem;
+      font-family: var(--semiBold);
+      color: var(--blackTextColor);
+    }
+  }
+
+  .modalBody {
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    .formElement {
+      gap: 1.25rem;
+      position: relative;
+      width: 100%;
+
+      .radioDiv {
+        gap: 1rem;
+
+        input {
+          cursor: pointer;
+        }
+
+        .radioLabel {
+          font-size: 1rem;
+          font-family: var(--regular);
+          color: var(--black2TextColor);
+          cursor: pointer;
+        }
+      }
+
+      .errorDiv {
+        font-size: 0.875rem;
+        font-family: var(--regular);
+        color: var(--red2Color);
+        position: absolute;
+        left: 0;
+        bottom: 5.5rem;
+      }
+
+      .btnGroup {
+        gap: 1rem;
+        margin: 2rem 0 1rem 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .modalWrapper {
+    padding: 1.5rem 2rem;
+
+    .modalHeader {
+      .headerTitle {
+        font-size: 1.5rem;
+      }
+    }
+
+    .modalBody {
+      .modalImage {
+        width: 15rem;
+      }
+    }
+
+    .modalFooter {
+      .btnDiv {
+        gap: 1rem;
+
+        button {
+          width: fit-content;
+        }
+      }
+    }
+  }
+}

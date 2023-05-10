@@ -66,8 +66,7 @@ function AddUser({ show, size, modalName }) {
               render={({ field }) => (
                 <Input
                   {...field}
-                  label='Enter Email'
-                  placeholder=''
+                  placeholder='Enter Email'
                   type='text'
                   error={errors?.email && errors?.email?.message}
                 />

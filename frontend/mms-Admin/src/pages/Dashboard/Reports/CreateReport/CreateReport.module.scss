@@ -1,6 +1,6 @@
 .createReportContainer {
   gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   position: relative;
   height: calc(100vh - var(--topNavbarHeight));
 
@@ -41,6 +41,7 @@
 
     .formWrapper {
       overflow-y: auto;
+      padding-right: 0.5rem;
 
       form {
         label {
@@ -60,6 +61,22 @@
 
   .sideBarSection {
     width: auto;
+    padding: 1rem;
+
+    .filterAndSearchDiv {
+      width: 100%;
+      justify-content: flex-end;
+      gap: 1rem;
+      min-height: 3rem;
+
+      .searchWrapper {
+        flex-grow: 1;
+      }
+
+      .closeIcon {
+        width: 1rem;
+      }
+    }
   }
 }
 
