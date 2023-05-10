@@ -39,10 +39,7 @@ export const FormGroup = styled(Form.Group)`
     }
 
     & img {
-      position: absolute;
-      margin-right: 0.75rem;
-      right: 0%;
-      transform: translateY(-50%, 0%);
+      width: 1.5rem;
     }
   }
   .error {

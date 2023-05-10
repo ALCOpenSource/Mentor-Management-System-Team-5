@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 // Authentication
 import Login from "@/pages/Authentication/Login/Login";
+import SignUp from "@/pages/Authentication/SignUp/SignUp";
 import ForgotPassword from "@/pages/Authentication/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/pages/Authentication/ResetPassword/ResetPassword";
 
@@ -68,16 +69,19 @@ function RoutesComponent() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/sign-up' element={<SignUp />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
 
         <Route
           path='/dashboard'
-          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={
+            <AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>}
+            </AuthenticatedRoutes>
+          }
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>

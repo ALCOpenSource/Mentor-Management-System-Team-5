@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi } from "../api/auth";
+import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi, signUpApi } from "../api/auth";
 
 import { setToken, setRefreshToken, getToken, getRefreshToken, logout } from "@/utils/auth";
 
-import { loginLoading, forgotPasswordLoading, resetPasswordLoading } from "@/redux/Loading/LoadingSlice";
+import { loginLoading, forgotPasswordLoading, resetPasswordLoading, signUpLoading } from "@/redux/Loading/LoadingSlice";
 import { getProfile } from "@/redux/Settings/SettingsSlice";
 
 const initialState = {
@@ -12,7 +12,8 @@ const initialState = {
   loginData: {},
   forgotPasswordData: {},
   resetPasswordData: {},
-  refreshAccessTokenData: {}
+  refreshAccessTokenData: {},
+  signUpData: {}
 };
 
 export const authSlice = createSlice({
@@ -39,13 +40,17 @@ export const authSlice = createSlice({
 
     refreshAccessTokenAction: (state, action) => {
       state.refreshAccessTokenData = action.payload;
+    },
+
+    signUpAction: (state, action) => {
+      state.signUpData = action.payload;
     }
   }
 });
 export default authSlice.reducer;
 
 // Actions
-const { hasError, loginAction, forgotPasswordAction, resetPasswordAction, refreshAccessTokenAction } =
+const { hasError, loginAction, forgotPasswordAction, resetPasswordAction, refreshAccessTokenAction, signUpAction } =
   authSlice.actions;
 
 export const login = (data) => async (dispatch) => {
@@ -113,5 +118,21 @@ export const refreshAccessToken = () => async (dispatch) => {
   } catch (e) {
     dispatch(hasError(e?.response?.data));
     logout();
+  }
+};
+
+export const signUp = (data) => async (dispatch) => {
+  dispatch(signUpLoading(true));
+  try {
+    const response = await signUpApi(data);
+    toast.success(response?.data?.message);
+    dispatch(signUpLoading(false));
+    dispatch(signUpAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(signUpLoading(false));
+    return { success: false };
   }
 };

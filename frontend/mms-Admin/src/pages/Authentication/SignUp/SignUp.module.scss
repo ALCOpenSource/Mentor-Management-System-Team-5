@@ -1,4 +1,4 @@
-.loginContainer {
+.signUpContainer {
   .leftSection {
     display: none;
   }
@@ -59,7 +59,7 @@
         }
       }
 
-      .googleLoginDiv {
+      .googleSignUpDiv {
         gap: 1rem;
         border: 1px solid var(--secondaryBtnTextColor);
         border-radius: 0.5rem;
@@ -80,7 +80,7 @@
         }
       }
 
-      .signUpDiv {
+      .signInDiv {
         .caption,
         span {
           font-size: 1rem;
@@ -99,7 +99,7 @@
 }
 
 @media all and (min-width: 768px) {
-  .loginContainer {
+  .signUpContainer {
     .leftSection {
       display: block;
     }
@@ -134,7 +134,7 @@
 }
 
 @media all and (min-width: 992px) {
-  .loginContainer {
+  .signUpContainer {
     .rightSection {
       .formContainer {
         padding: 2rem;
@@ -155,7 +155,7 @@
 }
 
 @media all and (min-width: 1200px) {
-  .loginContainer {
+  .signUpContainer {
     .rightSection {
       .formContainer {
         width: 70%;
