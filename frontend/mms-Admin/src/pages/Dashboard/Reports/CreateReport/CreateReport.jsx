@@ -8,7 +8,9 @@ import Button from "@/components/Button/Button";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
+import Search from "@/components/Search/Search";
+import Filter from "@/components/Filter/Filter";
+import closeIcon from "@/assets/icons/undo-icon.svg";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import { createReportSchema } from "@/helpers/validation";
@@ -17,14 +19,16 @@ import mentorImage from "@/assets/images/reports-program-thumbnail.svg";
 import successImage from "@/assets/images/default-success-notification-image.png";
 
 function CreateReport() {
-  const dispatch = useDispatch();
-  const displayModal = useSelector((state) => state.modal.show);
-  const modalName = useSelector((state) => state.modal.modalName);
-
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
   });
+  const [collapseInput, setCollapseInput] = useState(true);
+  const [closeSelectElement, setCloseSelectElement] = useState(false);
+
+  const dispatch = useDispatch();
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
 
   const mentorsArray = [
     {
@@ -140,8 +144,14 @@ function CreateReport() {
     console.log(item);
   };
 
-  const handleCloseSidebar = () => {
-    setOpenSideBar({ open: false, category: "" });
+  const handleCloseSearchInput = (e) => {
+    console.log(e, "handle close input");
+    setCollapseInput(true);
+  };
+
+  const handleCloseSelectElement = (e) => {
+    console.log(e, "handle close select");
+    setCloseSelectElement(true);
   };
 
   const getListComponents = (data) => {
@@ -153,21 +163,34 @@ function CreateReport() {
     });
 
     const headerComponent = (
-      <FilterAndSearch
-        closeSideBar={handleCloseSidebar}
-        dropdownItems={[
-          { name: "All", id: 1 },
-          { name: "Mentors", id: 2 },
-          { name: "Mentor Managers", id: 3 }
-        ]}
-        searchData={handleSearchInput}
-        selectedFilterItem={handleSelectedFilterItem}
-        showCloseIcon={true}
-        inputPlaceholder='Search for programs...'
-        showDropdown={false}
-        showFilterToggler={false}
-        show
-      />
+      <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
+        <div className={cx(styles.searchWrapper)}>
+          <Search
+            inputPlaceholder='Search for mentor...'
+            onChange={handleSearchInput}
+            collapseInput={collapseInput}
+            setCollapseInput={setCollapseInput}
+            closeSelectElement={handleCloseSelectElement}
+          />
+        </div>
+        <Filter
+          dropdownItems={[
+            { name: "All", id: 1 },
+            { name: "Mentors", id: 2 },
+            { name: "Mentor Managers", id: 3 }
+          ]}
+          selectedFilterItem={handleSelectedFilterItem}
+          closeSearchInput={handleCloseSearchInput}
+          closeSelectElement={closeSelectElement}
+          setCloseSelectElement={setCloseSelectElement}
+        />
+        <img
+          src={closeIcon}
+          className={cx(styles.closeIcon)}
+          alt='close-icon'
+          onClick={() => setOpenSideBar({ open: false })}
+        />
+      </div>
     );
 
     return { listItems, headerComponent };
@@ -220,7 +243,6 @@ function CreateReport() {
                 <TextArea
                   {...field}
                   placeholder='Enter details'
-                  label=''
                   minHeight='150px'
                   error={errors?.achievements && errors?.achievements?.message}
                 />
@@ -235,7 +257,6 @@ function CreateReport() {
                 <TextArea
                   {...field}
                   placeholder='Enter details'
-                  label=''
                   minHeight='150px'
                   error={errors?.blockers && errors?.blockers?.message}
                 />
@@ -250,7 +271,6 @@ function CreateReport() {
                 <TextArea
                   {...field}
                   placeholder='Enter task recommendations'
-                  label=''
                   minHeight='150px'
                   error={errors?.recommendations && errors?.recommendations?.message}
                 />

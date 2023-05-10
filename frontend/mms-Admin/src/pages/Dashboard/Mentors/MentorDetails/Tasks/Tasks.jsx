@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import cx from "classnames";
 import styles from "./Tasks.module.scss";
 import { useParams } from "react-router-dom";
-
+import { useSelector, useDispatch } from "react-redux";
+import { showModal } from "@/redux/Modal/ModalSlice";
+import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import searchIcon from "@/assets/icons/search-icon.svg";
 import { ReactComponent as ArchiveCardIcon } from "@/assets/icons/archive-card-icon.svg";
 import { ReactComponent as TogglerIconUp } from "@/assets/icons/arrow-circle-up.svg";
@@ -12,10 +14,47 @@ import Button from "@/components/Button/Button";
 import headerIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
 import reportIcon from "@/assets/icons/task-report-icon-green.png";
+import assignSuccessImage from "@/assets/images/create-task-success-image.svg";
+import unAssignSuccessImage from "@/assets/images/deactivate-user.svg";
 
 const Tasks = () => {
   const params = useParams();
   const taskId = params.id;
+  const dispatch = useDispatch();
+
+  const [taskStatus, setTaskStatus] = useState({
+    status: "unassigned",
+    index: null
+  });
+
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
+
+  const handleSetTaskStatus = (status, index) => {
+    setTaskStatus({ status, index });
+
+    status === "unassigned" &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Unassigned from Task",
+            image: unAssignSuccessImage
+          }
+        })
+      );
+
+    status === "assigned" &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Assigned to Task",
+            image: assignSuccessImage
+          }
+        })
+      );
+  };
 
   const [toggle, setToggle] = useState({
     index: null,
@@ -170,7 +209,15 @@ const Tasks = () => {
                       })}
                     </div>
                     <div className={cx(styles.unAssignBtnDiv)}>
-                      <Button title='Unassign from Task' type='secondary' />
+                      {taskStatus.status === "assigned" && taskStatus.index === index ? (
+                        <Button
+                          onClick={() => handleSetTaskStatus("unassigned", index)}
+                          title='Unassign from Task'
+                          type='secondary'
+                        />
+                      ) : (
+                        <Button onClick={() => handleSetTaskStatus("assigned", index)} title='Assign To Task' />
+                      )}
                     </div>
                   </>
                 )}
@@ -179,6 +226,7 @@ const Tasks = () => {
           })}
         </div>
       </div>
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
 };

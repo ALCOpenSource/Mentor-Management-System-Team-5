@@ -28,12 +28,14 @@
   }
 
   .bio {
-    background-color: #f7feff;
+    background-color: var(--green3Color);
     font-size: 1rem;
     font-family: var(--regular);
     color: var(--black3TextColor);
     padding: 0.5rem;
     line-height: 1.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--green4Color);
   }
 
   .miscInfoDiv {
@@ -61,6 +63,7 @@
         background-color: var(--gray4Color);
         gap: 0.875rem;
         padding: 0.5rem 0.875rem;
+        border-radius: 0.25rem;
 
         .socialUserName {
           font-size: 1.25rem;
@@ -71,6 +74,11 @@
         }
       }
     }
+  }
+
+  .btnDiv {
+    justify-content: flex-end;
+    margin-top: 1.5rem;
   }
 }
 

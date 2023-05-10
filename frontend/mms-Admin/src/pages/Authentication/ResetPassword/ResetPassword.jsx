@@ -85,8 +85,7 @@ function ResetPassword() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Password'
-                    placeholder=''
+                    placeholder='Password'
                     type='password'
                     error={errors?.password && errors?.password?.message}
                   />
@@ -99,8 +98,7 @@ function ResetPassword() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Must match your new password'
-                    placeholder=''
+                    placeholder='Must match your new password'
                     type='password'
                     error={errors?.confirmPassword && errors?.confirmPassword?.message}
                   />

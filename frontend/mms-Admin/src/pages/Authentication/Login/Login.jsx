@@ -65,8 +65,7 @@ function Login() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Email'
-                    placeholder=''
+                    placeholder='Email'
                     type='email'
                     error={errors?.email && errors?.email?.message}
                   />
@@ -79,8 +78,7 @@ function Login() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Password'
-                    placeholder=''
+                    placeholder='Password'
                     type='password'
                     error={errors?.password && errors?.password?.message}
                   />

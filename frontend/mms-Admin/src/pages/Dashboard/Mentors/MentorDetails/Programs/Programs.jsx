@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import styles from "./Programs.module.scss";
-
+import { useSelector, useDispatch } from "react-redux";
+import { showModal } from "@/redux/Modal/ModalSlice";
+import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import searchIcon from "@/assets/icons/search-icon.svg";
 import { ReactComponent as ArchiveCardIcon } from "@/assets/icons/archive-card-icon.svg";
 import { ReactComponent as CalendarIcon } from "@/assets/icons/archive-calendar-icon.svg";
@@ -10,8 +12,46 @@ import { ReactComponent as TogglerIconUp } from "@/assets/icons/arrow-circle-up.
 import { ReactComponent as TogglerIconDown } from "@/assets/icons/arrow-circle-down.svg";
 import { ReactComponent as ReportIcon } from "@/assets/icons/reports-icon.svg";
 import Button from "@/components/Button/Button";
+import assignSuccessImage from "@/assets/images/activate-user.svg";
+import unAssignSuccessImage from "@/assets/images/deactivate-user.svg";
 
 const Programs = () => {
+  const dispatch = useDispatch();
+
+  const [programStatus, setProgramStatus] = useState({
+    status: "unassigned",
+    index: null
+  });
+
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
+
+  const handleSetProgramStatus = (status, index) => {
+    setProgramStatus({ status, index });
+
+    status === "unassigned" &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Unassigned from program!",
+            image: unAssignSuccessImage
+          }
+        })
+      );
+
+    status === "assigned" &&
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Assigned to program!",
+            image: assignSuccessImage
+          }
+        })
+      );
+  };
+
   const [toggle, setToggle] = useState({
     index: null,
     toggle: false
@@ -153,7 +193,15 @@ const Programs = () => {
                       </div>
                     </div>
                     <div className={cx(styles.unAssignBtnDiv)}>
-                      <Button title='Unassign from Program' type='secondary' />
+                      {programStatus.status === "assigned" && programStatus.index === index ? (
+                        <Button
+                          onClick={() => handleSetProgramStatus("unassigned", index)}
+                          title='Unassign from Program'
+                          type='secondary'
+                        />
+                      ) : (
+                        <Button onClick={() => handleSetProgramStatus("assigned", index)} title='Assign To Program' />
+                      )}
                     </div>
                   </>
                 )}
@@ -162,6 +210,7 @@ const Programs = () => {
           })}
         </div>
       </div>
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
 };

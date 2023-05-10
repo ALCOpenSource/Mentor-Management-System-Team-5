@@ -6,7 +6,7 @@ import eyeIconHide from "@/assets/icons/eye-password-hide.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
 
 const Input = forwardRef(
-  ({ label, placeholder, required, type = "text", onChange, error, icon, marginbottom, border, ...props }, ref) => {
+  ({ placeholder, required, type = "text", onChange, error, icon, marginbottom, border, ...props }, ref) => {
     const [inputType, setInputType] = useState(type);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -25,7 +25,7 @@ const Input = forwardRef(
           {icon && <img src={searchIcon} alt='search icon' />}
           <input
             type={inputType}
-            placeholder={label}
+            placeholder={placeholder}
             required={required}
             onChange={onChange}
             {...props}

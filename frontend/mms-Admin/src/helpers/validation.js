@@ -69,3 +69,7 @@ export const createAndEditForumTopicSchema = Yup.object().shape({
 export const addUserSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Email is required")
 });
+
+export const editUserRoleSchema = Yup.object().shape({
+  role: Yup.string().required("Kindly select a role")
+});

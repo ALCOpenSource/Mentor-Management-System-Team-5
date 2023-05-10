@@ -4,12 +4,11 @@ import "./Select.scss";
 import loadingIcon from "@/assets/icons/loading.gif";
 
 const Select = forwardRef(
-  ({ options, defaultSelect, name, onChange, value, label, error, border, marginbottom, loading, required }) => {
+  ({ options, defaultSelect, name, onChange, value, error, border, marginbottom, loading, required }) => {
     return (
       <div className='select-container' style={{ marginBottom: marginbottom }}>
         <div className='select-wrapper' style={{ border: `1px solid ${border || "#022B69"}` }}>
           <div className='flexRow-space-between'>
-            <label className='select-label'>{label}</label>
             {loading && <img className='select-loading-icon' src={loadingIcon} alt='icon' />}
           </div>
           <select required={required} name={name} onChange={onChange} value={value}>
@@ -35,7 +34,6 @@ Select.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  label: PropTypes.string.isRequired,
   error: PropTypes.string,
   required: PropTypes.bool,
   border: PropTypes.string,
@@ -51,7 +49,6 @@ Select.defaultProps = {
   value: "",
   error: "",
   required: false,
-  label: "Select",
   border: "#022B69",
   marginbottom: "2rem",
   loading: false
