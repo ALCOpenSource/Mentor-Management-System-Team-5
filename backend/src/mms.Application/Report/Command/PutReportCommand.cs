@@ -1,9 +1,16 @@
-﻿using mms.Domain.Common;
+﻿using AspNetCoreHero.Results;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace mms.Domain.Entities
+namespace mms.Application.Report.Command
 {
-    public class Report : BaseEntity
+    public class PutReportCommand : IRequest<IResult<string>>
     {
+        public string Id { get; set; }
         public string Type { get; set; }
         public string ReportTitle { get; set; }
         public string Achievements { get; set; }
@@ -13,6 +20,6 @@ namespace mms.Domain.Entities
         public string CreatedBy { get; set; }
         public string TaskId { get; set; }
         public string ProgramId { get; set; }
-        public Programme Programme { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

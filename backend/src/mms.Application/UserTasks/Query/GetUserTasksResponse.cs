@@ -1,8 +1,13 @@
-﻿using mms.Domain.Common;
+﻿using mms.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace mms.Domain.Entities
+namespace mms.Application.UserTasks.Query
 {
-    public class UserTask : BaseEntity
+    public class GetUserTasksResponse
     {
         public string Title { get; set; }
         public string Description { get; set; }
@@ -10,7 +15,6 @@ namespace mms.Domain.Entities
         public string CreatedBy { get; set; }
         public string Status { get; set; }
         public string ProgramId { get; set; }
-        public IList<AppUser> Managers { get; set; }
-        public Programme Programme { get; set; }
+
     }
 }

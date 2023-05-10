@@ -1,8 +1,9 @@
-﻿using mms.Domain.Common;
+﻿using AspNetCoreHero.Results;
+using MediatR;
 
-namespace mms.Domain.Entities
+namespace mms.Application.Report.Command
 {
-    public class Report : BaseEntity
+    public class CreateReportCommand : IRequest<IResult>
     {
         public string Type { get; set; }
         public string ReportTitle { get; set; }
@@ -13,6 +14,6 @@ namespace mms.Domain.Entities
         public string CreatedBy { get; set; }
         public string TaskId { get; set; }
         public string ProgramId { get; set; }
-        public Programme Programme { get; set; }
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using mms.Application.Profile.Query.GetProfileById;
+﻿using mms.Application.Profile.Query.GetProfileById;
 using mms.Application.UserNotification.Command.EditUserNotification;
 using mms.Application.UserNotification.Query;
 using mms.Application.UserPrivacy.Command.EditUserPrivacy;
@@ -14,6 +13,16 @@ using AppUserEntity = mms.Domain.Entities.AppUser;
 using FAQEntity = mms.Domain.Entities.FAQ;
 using mms.Application.FAQ.Command;
 using mms.Application.FAQ.Query;
+using Reports = mms.Domain.Entities.Report;
+using mms.Application.UserTasks.Query;
+using mms.Domain.Entities;
+using mms.Application.Programme.Query;
+using mms.Application.Report.Query;
+using mms.Application.Mentors.Query;
+using mms.Application.MentorManagers.Query;
+using mms.Application.UserTasks.Command.CreateTask;
+using mms.Application.Report.Command;
+using mms.Application.Programme.Command;
 
 namespace mms.Application.Common.Mapper
 {
@@ -32,6 +41,20 @@ namespace mms.Application.Common.Mapper
             CreateMap<ProgrammeEntity, GetArchiveProgramsResponse>().ReverseMap();
 
             CreateMap<AppUserEntity, GetProfileByIdResponse>().ReverseMap();
+
+            CreateMap<UserTask, GetUserTasksResponse>().ReverseMap();
+            CreateMap<UserTask, CreateTaskCommand>().ReverseMap();
+            CreateMap<UserTask, PutUserTaskCommand>().ReverseMap();
+
+            CreateMap<ProgrammeEntity, GetProgrammeResponse>().ReverseMap();
+            CreateMap<ProgrammeEntity, CreateProgrammeCommand>().ReverseMap();
+
+            CreateMap<Reports, GetReportsResponse>().ReverseMap();
+            CreateMap<Reports, CreateReportCommand>().ReverseMap();
+            CreateMap<Reports, PutReportCommand>().ReverseMap();
+
+            CreateMap<ProgramsMentor, GetMentorsResponse>().ReverseMap();
+            CreateMap<MentorManager, GetMentorManagersResponse>().ReverseMap();
 
             CreateMap<FAQEntity, PostFAQCommand>().ReverseMap();
             CreateMap<FAQEntity, PutFAQCommand>().ReverseMap();
