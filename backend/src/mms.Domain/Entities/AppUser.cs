@@ -24,5 +24,9 @@ namespace mms.Domain.Entities
 
         public string? RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
+        public string ProgramId { get; set; }
+        public IList<Programme> Programmes { get; set; }
+        public string UserTaskId { get; set; }
+        public IList<UserTask> UserTasks { get; set; }
     }
 }

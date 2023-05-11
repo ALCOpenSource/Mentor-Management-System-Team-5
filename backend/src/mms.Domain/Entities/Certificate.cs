@@ -1,4 +1,5 @@
 ﻿using mms.Domain.Common;
+using mms.Domain.Enums;
 
 namespace mms.Domain.Entities
 {
@@ -10,6 +11,6 @@ namespace mms.Domain.Entities
         public string CreatedBy { get; set; }
         public string ApprovedBy { get; set; }
         public string CertificateCode { get; set; }
-        public string Status { get; set; }
+        public CertificateStatus Status { get; set; }
     }
 }
