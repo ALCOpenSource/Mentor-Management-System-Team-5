@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using mms.Domain.Enums;
 
 namespace mms.Application.Programme.Query
 {
@@ -27,7 +28,8 @@ namespace mms.Application.Programme.Query
         public async Task<IResult<List<GetProgrammeResponse>>> Handle(GetActiveProgrammesCommand request,
             CancellationToken cancellationToken)
         {
-            var programmes = await _context.Programmes.Where(x => x.Status == "Active").OrderByDescending(x => x.DateCreated).ToListAsync();
+            var programmes = await _context.Programmes.Where(x => x.Status == ProgramStatus.Active)
+                .OrderByDescending(x => x.DateCreated).ToListAsync(cancellationToken);
             if (programmes == null)
             {
                 return await Result<List<GetProgrammeResponse>>.FailAsync("No Active Programmes Available");
@@ -39,4 +41,3 @@ namespace mms.Application.Programme.Query
         }
     }
 }
-
