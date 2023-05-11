@@ -23,6 +23,15 @@ export const resetPasswordSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must and should match")
 });
 
+export const signUpSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email address").required("Email is required"),
+  password: Yup.string()
+    .required("Password is required")
+    .max(50, "Must be 50 characters or less")
+    .min(8, "Must be above 8 characters"),
+  name: Yup.string().required("Name is required")
+});
+
 export const updateProfileSchema = Yup.object().shape({
   firstName: Yup.string(),
   lastName: Yup.string()
