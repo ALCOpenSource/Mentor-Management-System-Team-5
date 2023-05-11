@@ -107,7 +107,7 @@ function Login() {
 
           <div className={cx(styles.signUpDiv, "flexRow-fully-centered")}>
             <p className={cx(styles.caption)}>
-              New User? <span onClick={() => navigate("/sign-up")}>Signup</span>
+              New User? <span onClick={() => navigate("/sign-up-category-selector")}>Signup</span>
             </p>
           </div>
         </div>

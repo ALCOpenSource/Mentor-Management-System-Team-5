@@ -6,6 +6,7 @@ const initialState = {
   forgotPasswordLoading: false,
   resetPasswordLoading: false,
   signUpLoading: false,
+  confirmEmailLoading: false,
 
   //Settings
   changePasswordLoading: false,
@@ -38,6 +39,9 @@ export const loadingSlice = createSlice({
     },
     signUpLoading: (state, action) => {
       state.signUpLoading = action.payload;
+    },
+    confirmEmailLoading: (state, action) => {
+      state.confirmEmailLoading = action.payload;
     },
 
     //Settings
@@ -80,6 +84,7 @@ export const {
   forgotPasswordLoading,
   resetPasswordLoading,
   signUpLoading,
+  confirmEmailLoading,
   changePasswordLoading,
   updateProfileLoading,
   getProfileLoading,

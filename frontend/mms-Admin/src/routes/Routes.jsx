@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 // Authentication
 import Login from "@/pages/Authentication/Login/Login";
 import SignUp from "@/pages/Authentication/SignUp/SignUp";
+import CategorySelector from "@/pages/Authentication/SignUp/CategorySelector/CategorySelector";
+import SignUpConfirmation from "@/pages/Authentication/SignUp/Confirmation/Confirmation";
 import ForgotPassword from "@/pages/Authentication/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/pages/Authentication/ResetPassword/ResetPassword";
 
@@ -69,19 +71,19 @@ function RoutesComponent() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/sign-up/:category' element={<SignUp />} />
+        <Route path='/sign-up-category-selector' element={<CategorySelector />} />
+        <Route path='/sign-up-confirmation' element={<SignUpConfirmation />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
 
         <Route
           path='/dashboard'
-          element={
-            <AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>
-          }
+            </AuthenticatedRoutes>}
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>

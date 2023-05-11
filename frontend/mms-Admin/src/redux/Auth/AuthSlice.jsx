@@ -1,10 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { loginApi, forgotPasswordApi, resetPasswordApi, refreshAccessTokenApi, signUpApi } from "../api/auth";
+import {
+  loginApi,
+  forgotPasswordApi,
+  resetPasswordApi,
+  refreshAccessTokenApi,
+  signUpApi,
+  confirmEmailApi
+} from "../api/auth";
 
 import { setToken, setRefreshToken, getToken, getRefreshToken, logout } from "@/utils/auth";
 
-import { loginLoading, forgotPasswordLoading, resetPasswordLoading, signUpLoading } from "@/redux/Loading/LoadingSlice";
+import {
+  loginLoading,
+  forgotPasswordLoading,
+  resetPasswordLoading,
+  signUpLoading,
+  confirmEmailLoading
+} from "@/redux/Loading/LoadingSlice";
 import { getProfile } from "@/redux/Settings/SettingsSlice";
 
 const initialState = {
@@ -13,7 +26,8 @@ const initialState = {
   forgotPasswordData: {},
   resetPasswordData: {},
   refreshAccessTokenData: {},
-  signUpData: {}
+  signUpData: {},
+  confirmEmailData: {}
 };
 
 export const authSlice = createSlice({
@@ -44,14 +58,25 @@ export const authSlice = createSlice({
 
     signUpAction: (state, action) => {
       state.signUpData = action.payload;
+    },
+
+    confirmEmailAction: (state, action) => {
+      state.confirmEmailData = action.payload;
     }
   }
 });
 export default authSlice.reducer;
 
 // Actions
-const { hasError, loginAction, forgotPasswordAction, resetPasswordAction, refreshAccessTokenAction, signUpAction } =
-  authSlice.actions;
+const {
+  hasError,
+  loginAction,
+  forgotPasswordAction,
+  resetPasswordAction,
+  refreshAccessTokenAction,
+  signUpAction,
+  confirmEmailAction
+} = authSlice.actions;
 
 export const login = (data) => async (dispatch) => {
   dispatch(loginLoading(true));
@@ -83,7 +108,7 @@ export const forgotPassword = (data) => async (dispatch) => {
     dispatch(forgotPasswordAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    toast.error(e?.response?.data);
+    toast.error(e?.response?.data?.message || e?.response?.data);
     dispatch(forgotPasswordLoading(false));
     dispatch(hasError(e?.response?.data));
     return { success: false };
@@ -125,14 +150,29 @@ export const signUp = (data) => async (dispatch) => {
   dispatch(signUpLoading(true));
   try {
     const response = await signUpApi(data);
-    toast.success(response?.data?.message);
     dispatch(signUpLoading(false));
     dispatch(signUpAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    toast.error(e?.response?.data?.message);
+    toast.error(e?.response?.data?.message || e?.response?.data);
     dispatch(hasError(e?.response?.data));
     dispatch(signUpLoading(false));
+    return { success: false };
+  }
+};
+
+export const confirmEmail = (data) => async (dispatch) => {
+  dispatch(confirmEmailLoading(true));
+  try {
+    const response = await confirmEmailApi(data);
+    toast.success(response?.data?.message);
+    dispatch(confirmEmailLoading(false));
+    dispatch(confirmEmailAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(confirmEmailLoading(false));
     return { success: false };
   }
 };

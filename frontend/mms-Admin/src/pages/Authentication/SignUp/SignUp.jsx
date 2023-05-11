@@ -16,7 +16,6 @@ import Button from "@/components/Button/Button";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 // import { useGoogleSignUp } from "@react-oauth/google";
-// import axios from "axios";
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -27,23 +26,23 @@ function SignUp() {
   const modalName = useSelector((state) => state.modal.modalName);
 
   const handleSignUp = async (data) => {
-    console.log(data, "signup data");
-    // const response = await dispatch(signUp(data));
-    // console.log(response);
+    const response = await dispatch(signUp(data));
 
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Registration successful",
-          redirectUrl: "/login",
-          message: `A verification mail has been sent to your
+    if (response?.success) {
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Registration successful",
+            redirectUrl: "/login",
+            message: `A verification mail has been sent to your
           registered email, please click the link to
           confirm your account.`
-        }
-      })
-    );
-    reset();
+          }
+        })
+      );
+      reset();
+    }
   };
 
   const resolver = yupResolver(signUpSchema);
