@@ -391,6 +391,28 @@ namespace mms.Infrastructure.Migrations
                     b.ToTable("JobRoles");
                 });
 
+            modelBuilder.Entity("mms.Domain.Entities.MentorManager", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("MentorManagers");
+                });
+
             modelBuilder.Entity("mms.Domain.Entities.Programme", b =>
                 {
                     b.Property<string>("Id")
@@ -424,6 +446,9 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("MentorManagerId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -439,6 +464,8 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MentorManagerId");
 
                     b.ToTable("Programmes");
                 });
@@ -494,6 +521,9 @@ namespace mms.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("MentorManagerId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("ProgramId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -538,6 +568,7 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProgrammeId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Recommendations")
@@ -697,6 +728,12 @@ namespace mms.Infrastructure.Migrations
                     b.Property<bool>("ApprovalRequestInApp")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("CommentsEmail")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("CommentsInApp")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -817,6 +854,7 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ProgrammeId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
@@ -934,9 +972,20 @@ namespace mms.Infrastructure.Migrations
 
             modelBuilder.Entity("mms.Domain.Entities.UserTask", b =>
                 {
-                    b.HasOne("mms.Domain.Entities.Programme", null)
+                    b.HasOne("mms.Domain.Entities.Programme", "Programme")
                         .WithMany("UserTasks")
-                        .HasForeignKey("ProgrammeId");
+                        .HasForeignKey("ProgrammeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Programme");
+                });
+
+            modelBuilder.Entity("mms.Domain.Entities.MentorManager", b =>
+                {
+                    b.Navigation("Programmes");
+
+                    b.Navigation("ProgramsMentors");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.Programme", b =>

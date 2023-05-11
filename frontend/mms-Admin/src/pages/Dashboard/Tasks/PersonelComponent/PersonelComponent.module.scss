@@ -9,12 +9,13 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--taskListHoverBgColor);
-    border: 1px solid var(--taskListHoverBgColor);
+    background-color: var(--green3Color);
+    border: 1px solid var(--green3Color);
   }
 
   .avatar {
     width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
   }
 

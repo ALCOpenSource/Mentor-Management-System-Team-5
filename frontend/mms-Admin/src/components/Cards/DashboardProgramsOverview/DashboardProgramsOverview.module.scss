@@ -3,6 +3,11 @@
   gap: 0.5rem;
   background-color: var(--dashboardSummaryCardBgColor);
   border-radius: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--green5Color);
+  }
 
   .body {
     gap: 1rem;

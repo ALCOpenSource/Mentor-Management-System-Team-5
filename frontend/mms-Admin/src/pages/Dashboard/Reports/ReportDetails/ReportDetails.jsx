@@ -9,6 +9,7 @@ import Button from "@/components/Button/Button";
 import ShareReportModal from "@/components/Modals/ShareReport/ShareReport";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 const ReportDetails = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,8 @@ const ReportDetails = () => {
       showModal({
         name: "successNotification",
         modalData: {
-          title: "Report downloaded successfully"
+          title: "Report downloaded successfully",
+          image: successImage
         }
       })
     );
@@ -77,7 +79,7 @@ const ReportDetails = () => {
           </div>
         </div>
 
-        <img onClick={() => handleCloseReport()} src={closeIcon} alt='close-icon' />
+        <img className={cx(styles.closeIcon)} onClick={() => handleCloseReport()} src={closeIcon} alt='close-icon' />
       </div>
 
       <div className={cx(styles.mainBody, "flexCol")}>

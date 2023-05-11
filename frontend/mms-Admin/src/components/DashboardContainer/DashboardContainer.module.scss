@@ -27,7 +27,7 @@
 
     .sideBar {
       // flex: 1;
-      background-color: var(--sideBarBgColor);
+      background-color: var(--green3Color);
       width: auto;
     }
 
@@ -35,6 +35,8 @@
       flex: 1;
       background-color: var(--dashboardChildrenBgColor);
       height: 100%;
+      height: calc(100vh - var(--topNavbarHeight));
+      position: relative;
     }
   }
 }

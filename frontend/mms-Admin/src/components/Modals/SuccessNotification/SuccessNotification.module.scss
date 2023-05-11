@@ -21,6 +21,14 @@
     .successImage {
       width: 10rem;
     }
+
+    .message {
+      font-size: 1.125rem;
+      font-family: var(--regular);
+      color: var(--black2TextColor);
+      text-align: center;
+      margin-top: 1rem;
+    }
   }
 
   .modalFooter {

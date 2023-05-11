@@ -20,7 +20,7 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
   };
 
   useEffect(() => {
-    const active = data.listItems.find((menuItem) => menuItem.id.toString() === currentId);
+    const active = data?.listItems.find((menuItem) => menuItem.id.toString() === currentId);
     setActiveLink(active ? active.id : "");
   }, [currentId, data]);
 
@@ -59,11 +59,9 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
         transition: "width 0s"
       }}
     >
-      {data?.headerComponent && (
-        <div className={cx(styles.genericSideBarHeader, "flexCol")}>{data?.headerComponent}</div>
-      )}
+      {data?.headerComponent && <div className={cx(styles.genericSideBarHeader)}>{data?.headerComponent}</div>}
       <ul>
-        {data.listItems.map((item, index) => (
+        {data?.listItems.map((item, index) => (
           <li
             key={index}
             onClick={() => handleMenuClick(item.id)}

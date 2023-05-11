@@ -1,0 +1,262 @@
+.allPersonelsContainer {
+  width: 100%;
+  height: calc(100dvh - var(--topNavbarHeight));
+  gap: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+
+  .heading {
+    gap: 0.5rem;
+    position: sticky;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 10;
+
+    .title {
+      font-size: 1.125rem;
+      font-family: var(--semiBold);
+      color: var(--black2TextColor);
+      line-height: 1;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      img {
+        width: 1rem;
+        cursor: pointer;
+      }
+    }
+
+    .rightSection {
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      min-height: 3rem;
+      gap: 1rem;
+
+      .closeIcon {
+        cursor: pointer;
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+    }
+  }
+
+  .body {
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+    padding-right: 0.5rem;
+    gap: 0.75rem;
+
+    .card {
+      padding: 0.5rem 0.5rem;
+      background-color: var(--taskListBgColor);
+      border-radius: 5px;
+      justify-content: center;
+      border: 1px solid var(--grayBorderColor);
+      width: 100%;
+      gap: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--green3Color);
+        border: 1px solid var(--green3Color);
+      }
+
+      .avatar {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+      }
+
+      .userInfo {
+        gap: 0.25rem;
+        flex-grow: 1;
+
+        .leftGroup {
+          gap: 0.25rem;
+
+          .name {
+            font-size: 1rem;
+            color: var(--blackTextColor);
+            font-family: var(--bold);
+            margin: 0;
+            line-height: 1;
+          }
+
+          .designation {
+            font-size: 0.75rem;
+            color: var(--grayTextColor);
+            font-family: var(--regular);
+            line-height: 1.25;
+            margin: 0;
+          }
+        }
+
+        .positionTags {
+          gap: 0.5rem;
+          flex-wrap: wrap;
+
+          span {
+            font-size: 0.75rem;
+            color: var(--black3TextColor);
+            font-family: var(--regular);
+            line-height: 1;
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            background-color: var(--green4Color);
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .allPersonelsContainer {
+    padding: 2rem;
+
+    .heading {
+      gap: 0.75rem;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      .title {
+        font-size: 1.125rem;
+      }
+
+      .rightSection {
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        gap: 1.5rem;
+      }
+    }
+
+    .body {
+      .card {
+        padding: 0.75rem 1rem;
+        justify-content: center;
+        gap: 1rem;
+
+        .userInfo {
+          gap: 1.5rem;
+          flex-direction: row;
+          align-items: center;
+
+          .leftGroup {
+            gap: 0.25rem;
+
+            .name {
+              font-size: 1rem;
+            }
+
+            .designation {
+              font-size: 0.75rem;
+              line-height: 1;
+            }
+          }
+
+          .positionTags {
+            gap: 0.5rem;
+            flex-wrap: wrap;
+
+            span {
+              font-size: 0.75rem;
+              padding: 0.25rem 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .allPersonelsContainer {
+    padding: 0.5rem 2rem 1rem 2rem;
+
+    .heading {
+      gap: 0.75rem;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      .title {
+        font-size: 1.25rem;
+        flex-grow: 2;
+      }
+
+      .rightSection {
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        gap: 1.5rem;
+        width: fit-content;
+        align-items: center;
+
+        & > div {
+          padding: 0;
+        }
+      }
+    }
+
+    .body {
+      gap: 0.625rem;
+
+      .card {
+        padding: 0.75rem 1.5rem;
+        gap: 1.25rem;
+
+        .userInfo {
+          gap: 1.75rem;
+
+          .leftGroup {
+            gap: 0.5rem;
+
+            .name {
+              font-size: 1.25rem;
+            }
+
+            .designation {
+              font-size: 0.75rem;
+            }
+          }
+
+          .positionTags {
+            gap: 0.75rem;
+
+            span {
+              font-size: 0.75rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .allPersonelsContainer {
+    padding: 1rem 2rem;
+    gap: 1rem;
+
+    .heading {
+      gap: 0.75rem;
+
+      .title {
+        font-size: 1.25rem;
+      }
+
+      .rightSection {
+        gap: 1.5rem;
+      }
+    }
+
+    .body {
+      gap: 0.75rem;
+    }
+  }
+}

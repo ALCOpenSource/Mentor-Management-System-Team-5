@@ -1,0 +1,57 @@
+.userComponent {
+  padding: 0.5rem 0.5rem;
+  background-color: var(--taskListBgColor);
+  border-radius: 5px;
+  justify-content: center;
+  border: 1px solid var(--grayBorderColor);
+  width: 100%;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--green3Color);
+    border: 1px solid var(--green3Color);
+  }
+
+  .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+
+  .userInfo {
+    gap: 0.25rem;
+    flex-grow: 1;
+
+    .name {
+      font-size: 1rem;
+      color: var(--blackTextColor);
+      font-family: var(--semiBold);
+      margin: 0;
+      line-height: 1;
+    }
+
+    .date {
+      font-size: 0.75rem;
+      color: var(--black3TextColor);
+      font-family: var(--regular);
+      line-height: 1.25;
+      margin: 0;
+    }
+  }
+
+  .icon {
+    width: 1.25rem;
+  }
+}
+
+.active {
+  background-color: var(--green3Color);
+  border: 1px solid var(--green4Color);
+}
+
+@media all and (min-width: 992px) {
+  .userComponent {
+    padding: 0.5rem 0.5rem;
+  }
+}

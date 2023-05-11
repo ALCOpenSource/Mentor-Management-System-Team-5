@@ -10,6 +10,7 @@ import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 import { resetPasswordSchema } from "@/helpers/validation";
 import { resetPassword } from "@/redux/Auth/AuthSlice";
@@ -43,7 +44,8 @@ function ResetPassword() {
           name: "successNotification",
           modalData: {
             title: "Password reset successful",
-            redirectUrl: "/login"
+            redirectUrl: "/login",
+            image: successImage
           }
         })
       );
@@ -83,8 +85,7 @@ function ResetPassword() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Password'
-                    placeholder=''
+                    placeholder='Password'
                     type='password'
                     error={errors?.password && errors?.password?.message}
                   />
@@ -97,8 +98,7 @@ function ResetPassword() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Must match your new password'
-                    placeholder=''
+                    placeholder='Must match your new password'
                     type='password'
                     error={errors?.confirmPassword && errors?.confirmPassword?.message}
                   />

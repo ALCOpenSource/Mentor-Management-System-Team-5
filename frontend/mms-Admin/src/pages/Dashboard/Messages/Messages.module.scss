@@ -1,0 +1,42 @@
+.messagesContainer {
+  width: 100%;
+  height: calc(100dvh - var(--topNavbarHeight));
+  gap: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+
+  .heading {
+    gap: 0.5rem;
+    position: sticky;
+    top: 0;
+    align-items: center;
+
+    .title {
+      font-size: 1.25rem;
+      font-family: var(--semiBold);
+      color: var(--black2TextColor);
+      line-height: 1;
+      margin: 0;
+    }
+  }
+
+  .messagesOutlet {
+    overflow-y: auto;
+    height: 100%;
+    position: relative;
+  }
+}
+
+@media all and (min-width: 992px) {
+  .messagesContainer {
+    padding: 1.5rem;
+
+    .heading {
+      gap: 1.5rem;
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

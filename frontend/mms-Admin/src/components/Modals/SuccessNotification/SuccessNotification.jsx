@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import styles from "./SuccessNotification.module.scss";
-import successImage from "@/assets/images/default-success-notification-image.png";
 import Button from "@/components/Button/Button";
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +26,10 @@ function SuccessNotification({ show, size, modalName }) {
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
-          <img className={cx(styles.successImage)} src={modalData?.image || successImage} alt='notification-image' />
+          {modalData?.image && (
+            <img className={cx(styles.successImage)} src={modalData?.image} alt='notification-image' />
+          )}
+          {modalData?.message && <p className={cx(styles.message)}>{modalData?.message}</p>}
         </div>
 
         <div className={cx(styles.modalFooter)}>

@@ -1,0 +1,135 @@
+.chatDetailsContainer {
+  gap: 1rem;
+  background-color: var(--green3Color);
+  border: 1px solid var(--green4Color);
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  position: relative;
+  height: 100%;
+  overflow-y: hidden;
+
+  .heading {
+    position: fixed;
+    top: 9rem;
+    right: 5%;
+    z-index: 1;
+
+    img {
+      width: 1rem;
+      height: 1rem;
+      object-fit: contain;
+      cursor: pointer;
+    }
+  }
+
+  .chatsDiv {
+    height: 100%;
+    position: relative;
+
+    .startTime {
+      position: relative;
+      justify-content: center;
+
+      span {
+        font-family: var(--regular);
+        font-size: 0.875rem;
+        color: var(--green6Color);
+        background-color: var(--green3Color);
+        z-index: 10;
+        padding: 0.5rem;
+        text-align: center;
+      }
+
+      hr {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(0, 0);
+        width: 100%;
+        border-top: 1px solid var(--green6Color);
+      }
+    }
+
+    .chats {
+      gap: 1rem;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .footer {
+      gap: 1rem;
+      padding: 0.75rem 0;
+      background-color: var(--green3Color);
+      width: 100%;
+
+      .attachmentsDiv {
+        gap: 1rem;
+
+        img {
+          width: 1rem;
+          height: 1rem;
+          object-fit: contain;
+          cursor: pointer;
+        }
+      }
+
+      .inputDiv {
+        width: 100%;
+
+        textarea {
+          background-color: white;
+          border: none;
+          outline: none;
+          padding: 0.5rem;
+          resize: none;
+          font-family: var(--regular);
+          color: var(--black2TextColor);
+          font-size: 1rem;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .chatDetailsContainer {
+    padding: 1rem;
+
+    .heading {
+      top: 10rem;
+      right: 6%;
+    }
+
+    .chatsDiv {
+      .footer {
+        padding: 1rem 0;
+
+        .attachmentsDiv {
+          img {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .chatDetailsContainer {
+    padding: 0 1rem;
+
+    .chatsDiv {
+      margin-bottom: 0;
+
+      .footer {
+        .attachmentsDiv {
+          img {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

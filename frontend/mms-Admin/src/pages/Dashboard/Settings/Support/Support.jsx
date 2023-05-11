@@ -15,6 +15,7 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 
 import { settingsSupportSchema } from "@/helpers/validation";
 import { sendSupportMessage } from "@/redux/Settings/SettingsSlice";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 function Support() {
   const dispatch = useDispatch();
@@ -49,7 +50,8 @@ function Support() {
         showModal({
           name: "successNotification",
           modalData: {
-            title: "Message sent successfully"
+            title: "Message sent successfully",
+            image: successImage
           }
         })
       );
@@ -90,13 +92,7 @@ function Support() {
               name='name'
               control={control}
               render={({ field }) => (
-                <InputField
-                  {...field}
-                  label='Name'
-                  placeholder=''
-                  type='text'
-                  error={errors?.name && errors?.name?.message}
-                />
+                <InputField {...field} placeholder='Name' type='text' error={errors?.name && errors?.name?.message} />
               )}
             />
             <Controller
@@ -105,8 +101,7 @@ function Support() {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label='Email'
-                  placeholder=''
+                  placeholder='Email'
                   type='email'
                   error={errors?.email && errors?.email?.message}
                 />
@@ -118,8 +113,7 @@ function Support() {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label='Title'
-                  placeholder=''
+                  placeholder='Title'
                   type='text'
                   error={errors?.title && errors?.title?.message}
                 />
@@ -133,19 +127,18 @@ function Support() {
                 <TextArea
                   {...field}
                   placeholder='Body'
-                  label=''
                   minHeight='150px'
                   error={errors?.body && errors?.body?.message}
                 />
               )}
             />
 
-            <div className={cx(styles.submitBtnDiv, "flexRow-space-between")}>
-              <div className={cx(styles.attachmentDiv, "flexRow")}>
-                <img {...getRootProps()} src={attachmentIcon} alt='attachment-icon' />
-                <span className={cx(styles.fileName)}>{uploadedFile?.file?.name}</span>
-              </div>
+            <div className={cx(styles.attachmentDiv, "flexRow-left-centered")}>
+              <img {...getRootProps()} src={attachmentIcon} alt='attachment-icon' />
+              <span className={cx(styles.fileName)}>{uploadedFile?.file?.name}</span>
+            </div>
 
+            <div className={cx(styles.submitBtnDiv, "flexRow-right-centered")}>
               <Button
                 onClick={handleSubmit((data) => sendMessage(data))}
                 loading={loading}

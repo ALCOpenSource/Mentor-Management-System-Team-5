@@ -14,5 +14,6 @@ namespace mms.Domain.Entities
         public string UserTaskId { get; set; }
         public UserTask UserTask { get; set; }
         public string ProgramId { get; set; }
+        public Programme Programme { get; set; }
     }
 }

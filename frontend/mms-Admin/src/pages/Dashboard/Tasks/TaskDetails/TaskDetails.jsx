@@ -26,21 +26,19 @@ function TaskDetails() {
       // icon: <ReportIcon />,
       icon: mentorManagersIcon,
       value: 10,
-      caption: "Mentor Managers assigned to this program",
-      count: 5
+      caption: "Mentor Managers assigned to this task"
     },
     {
       // icon: <ReportIcon />,
       icon: mentorsIcon,
       value: 80,
-      caption: "Mentors assigned to this program",
-      count: 3
+      caption: "Mentors assigned to this task"
     },
     {
       // icon: <ReportIcon />,
       icon: reportIcon,
       value: 40,
-      caption: "Task reports",
+      caption: "Task / Reports",
       count: 50
     }
   ];
@@ -79,7 +77,10 @@ function TaskDetails() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.
               Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis
               tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu.
-              Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque
+              Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque Pellentesque sit amet
+              sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis
+              imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh
+              nibh, at maximus ante fermentum sit amet. Pellentesque
             </p>
 
             {summaryDivData.map((item, index) => {
@@ -91,9 +92,11 @@ function TaskDetails() {
                   <div className={cx(styles.summary, "flexRow")}>
                     <span className={cx(styles.summaryValue)}>{item.value}</span>
                     <span className={cx(styles.caption)}>{item.caption}</span>
-                    <div>
-                      <span className={cx(styles.count)}>{item.count}</span>
-                    </div>
+                    {item?.caption.toLowerCase().includes("report") && (
+                      <div>
+                        <span className={cx(styles.count)}>{item.count}</span>
+                      </div>
+                    )}
                   </div>
 
                   <Button title='View' size='small' />
