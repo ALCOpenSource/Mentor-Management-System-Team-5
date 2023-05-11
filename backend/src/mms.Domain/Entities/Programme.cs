@@ -18,9 +18,6 @@ namespace mms.Domain.Entities
         public DateTime? DateArchived { get; set; }
         [Column(TypeName = "json")] public string Criteria { get; set; }
         public IList<Report> Reports { get; set; }
-        public string AppUserId { get; set; }
-
         public IList<AppUser> AppUsers { get; set; } //Note that this should only be managers
-        //public IList<ProgrammeApplication> ProgrammeApplications { get; set; }
     }
 }
