@@ -25,7 +25,7 @@ namespace mms.Application.Report.Query
             var startOfWeek = DateTime.Today.AddDays(-7);
             var today = DateTime.Today;
 
-            var reports = await _context.Reports.OrderByDescending(t => t.DateCreated >= startOfWeek && t.DateCreated <= today).ToListAsync();
+            var reports = await _context.Reports.OrderByDescending(t => t.CreatedAt >= startOfWeek && t.CreatedAt <= today).ToListAsync();
             if (reports == null)
             {
                 return await Result<List<GetReportsResponse>>.FailAsync("No weekly Reports Available");

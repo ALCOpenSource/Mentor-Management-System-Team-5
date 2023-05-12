@@ -13,9 +13,9 @@ namespace mms.Application.Report.Command
         public string Achievements { get; set; }
         public string Blocker { get; set; }
         public string Recommendations { get; set; }
-        public DateTime DateCreated { get; set; }
-        public string CreatedBy { get; set; }
         public string TaskId { get; set; }
         public string ProgramId { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
