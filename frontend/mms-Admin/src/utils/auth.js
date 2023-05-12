@@ -24,6 +24,13 @@ export const getRefreshToken = () => {
   return null;
 };
 
+const setRefreshTokenInterval = (token) => {
+  const decoded = decodeToken(token);
+  const currentTime = Date.now() / 1000;
+  const intervalTime = decoded.exp - currentTime - 60;
+  return intervalTime * 1000;
+};
+
 export const setToken = (token) => {
   if (token) {
     localStorage.setItem("accessToken", JSON.stringify(token));
@@ -33,10 +40,16 @@ export const setToken = (token) => {
 };
 
 export const setRefreshToken = (token) => {
+  let refreshTokenTimeout = null;
   if (token) {
     localStorage.setItem("refreshToken", JSON.stringify(token));
+    const intervalTime = setRefreshTokenInterval(token);
+    refreshTokenTimeout = setTimeout(() => {
+      store.dispatch(refreshAccessToken());
+    }, intervalTime);
   } else {
     localStorage.removeItem("refreshToken");
+    clearTimeout(refreshTokenTimeout);
   }
 };
 
@@ -63,6 +76,7 @@ export const login = (token) => {
 export const logout = () => {
   localStorage.clear();
   setAuthToken("");
+  setRefreshToken("");
 };
 
 export const checkAuth = () => {
