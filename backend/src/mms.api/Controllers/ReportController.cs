@@ -83,8 +83,6 @@ namespace mms.api.Controllers
             PutReportCommand command = new()
             {
                 Id = id,
-                UpdatedAt = DateTime.Now,
-                CreatedBy = request.CreatedBy,
                 Achievements = request.Achievements,
                 Blocker = request.Blocker,
                 Recommendations = request.Recommendations,
