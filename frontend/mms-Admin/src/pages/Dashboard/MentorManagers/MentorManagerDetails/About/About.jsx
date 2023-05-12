@@ -151,7 +151,7 @@ const About = () => {
   };
 
   return (
-    <div className={cx(styles.aboutContainer, "flexCol")}>
+    <div className={cx(styles.aboutMentorManagerContainer, "flexCol")}>
       <div className={cx(styles.subSectionWrapper, "flexCol")}>
         <h3 className={cx(styles.title)}>{userData?.bio?.title}</h3>
         <p className={cx(styles.bio)}>{userData?.bio?.response}</p>
