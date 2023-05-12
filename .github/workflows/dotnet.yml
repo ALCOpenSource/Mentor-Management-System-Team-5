@@ -21,4 +21,4 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./backend/src/src.sln
     - name: Build
-      run: dotnet build backend/src/src.sln/mms.api/mms.api.csproj
+      run: dotnet build backend/src/mms.api/mms.api.csproj
