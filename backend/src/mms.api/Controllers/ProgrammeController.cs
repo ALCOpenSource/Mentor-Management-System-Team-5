@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using mms.Application.Programme.Command;
 using mms.Application.Programme.Query;
-using mms.Application.Report.Command;
 
 namespace mms.api.Controllers
 {
-    public class ProgrammeController:BaseController
+    public class ProgrammeController : BaseController
     {
         [HttpGet("programme")]
         public async Task<IActionResult> GetProgrammes()

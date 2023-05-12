@@ -2,12 +2,13 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using mms.Domain.Enums;
 using mms.Infrastructure.Context;
 
 namespace mms.Application.UserTasks.Query
 {
     public class GetCompletedUserTasksHandler : IRequestHandler<GetCompletedUserTasksCommand,
-            IResult<List<GetUserTasksResponse>>>
+        IResult<List<GetUserTasksResponse>>>
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
@@ -24,8 +25,9 @@ namespace mms.Application.UserTasks.Query
         {
             //TODO:
             //Check how status are Inserted in the database for Tasks
-            var usertasks = await _context.UserTasks.Where(s => s.Status == "complete").OrderByDescending(x => x.DateCreated).ToListAsync();
-            if (usertasks == null)
+            var usertasks = await _context.UserTasks.Where(s => s.Status == UserTaskStatus.Completed)
+                .OrderByDescending(x => x.DateCreated).ToListAsync(cancellationToken);
+            if (!usertasks.Any())
             {
                 return await Result<List<GetUserTasksResponse>>.FailAsync("No User Tasks Available");
             }

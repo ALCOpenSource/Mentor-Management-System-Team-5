@@ -28,7 +28,10 @@ namespace mms.Application.Profile.Query.GetProfileById
                 return await Result<GetProfileByIdResponse>.FailAsync("User does not exist");
             }
 
+            var roles = await _userManager.GetRolesAsync(user);
+
             var userResult = _mapper.Map<GetProfileByIdResponse>(user);
+            userResult.Roles = roles;
 
             return await Result<GetProfileByIdResponse>.SuccessAsync(userResult);
         }

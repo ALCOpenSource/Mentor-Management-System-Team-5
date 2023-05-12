@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using mms.Domain.Enums;
 
 namespace mms.Application.UserTasks.Query
 {
     public class GetInProgressUserTasksHandler : IRequestHandler<GetInProgressUserTasksCommand,
-            IResult<List<GetUserTasksResponse>>>
+        IResult<List<GetUserTasksResponse>>>
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
@@ -29,8 +30,9 @@ namespace mms.Application.UserTasks.Query
         {
             //TODO:
             //Check how status are Inserted in the database for Tasks
-            var usertasks = await _context.UserTasks.Where(s => s.Status == "inprogress").OrderByDescending(x => x.DateCreated).ToListAsync();
-            if (usertasks == null)
+            var usertasks = await _context.UserTasks.Where(s => s.Status == UserTaskStatus.InProgress)
+                .OrderByDescending(x => x.DateCreated).ToListAsync(cancellationToken);
+            if (!usertasks.Any())
             {
                 return await Result<List<GetUserTasksResponse>>.FailAsync("No User Tasks Available");
             }
