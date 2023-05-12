@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode";
-import { setAuthToken } from "./setAuthToken";
 import store from "@/redux/store";
 import { refreshAccessToken } from "@/redux/Auth/AuthSlice";
+import { setAuthToken } from "@/utils/setAuthToken";
 
 export const isAuthenticated = () => {
   const token = getToken();
@@ -27,7 +27,7 @@ export const getRefreshToken = () => {
 const setRefreshTokenInterval = (token) => {
   const decoded = decodeToken(token);
   const currentTime = Date.now() / 1000;
-  const intervalTime = decoded.exp - currentTime - 60;
+  const intervalTime = decoded?.exp - currentTime - 60;
   return intervalTime * 1000;
 };
 
@@ -41,12 +41,16 @@ export const setToken = (token) => {
 
 export const setRefreshToken = (token) => {
   let refreshTokenTimeout = null;
+  let accessToken = getToken();
+
   if (token) {
     localStorage.setItem("refreshToken", JSON.stringify(token));
-    const intervalTime = setRefreshTokenInterval(token);
-    refreshTokenTimeout = setTimeout(() => {
-      store.dispatch(refreshAccessToken());
-    }, intervalTime);
+    const intervalTime = setRefreshTokenInterval(accessToken);
+    refreshTokenTimeout =
+      intervalTime &&
+      setTimeout(() => {
+        store.dispatch(refreshAccessToken());
+      }, intervalTime);
   } else {
     localStorage.removeItem("refreshToken");
     clearTimeout(refreshTokenTimeout);
@@ -62,11 +66,11 @@ export const isExpired = (token) => {
 };
 
 export const decodeToken = (token) => {
-  let decoded = {};
-  if (token) {
-    decoded = jwtDecode(token);
+  try {
+    return jwtDecode(token);
+  } catch (err) {
+    return null;
   }
-  return decoded;
 };
 
 export const login = (token) => {
