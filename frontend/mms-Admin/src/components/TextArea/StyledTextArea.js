@@ -8,7 +8,7 @@ export const FormGroup = styled(Form.Group)`
   border-radius: 4px;
   padding: 4px 10px 7.5px 10px;
   margin-bottom: ${({ marginbottom }) => marginbottom};
-  border: ${({ borderColor }) => `1px solid ${borderColor ? borderColor : "#c8c8c8"}`};
+  border: ${({ bordercolor }) => `1px solid ${bordercolor ? bordercolor : "#c8c8c8"}`};
 
   textarea {
     display: block;
@@ -18,7 +18,7 @@ export const FormGroup = styled(Form.Group)`
     color: #5e6c84;
     transition: 0.3s;
     font-size: 16px;
-    background-color: ${({ bgColor }) => bgColor};
+    background-color: ${({ bgColor }) => bgColor ? bgColor : "#fff"};
 
     &:focus {
       outline: none;

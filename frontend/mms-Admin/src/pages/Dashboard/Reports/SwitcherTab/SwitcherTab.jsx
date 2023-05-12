@@ -20,7 +20,7 @@ const SwitcherTab = ({ data, selectedTab, activeTab }) => {
 };
 
 SwitcherTab.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   selectedTab: PropTypes.func.isRequired,
   activeTab: PropTypes.string
 };
