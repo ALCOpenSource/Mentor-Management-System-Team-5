@@ -25,9 +25,8 @@ namespace mms.Application.Report.Command
             var report = _mapper.Map<Domain.Entities.Report>(request);
 
             report.Id = Guid.NewGuid().ToString();
-            report.CreatedAt = DateTime.Now();
-            report.CreatedBy = _currentUserService.UserId;
-            
+            report.CreatedAt = DateTime.Now;
+            report.CreatedBy = _currentUserService.AppUserId;
             await _context.Reports.AddAsync(report);
             await _context.SaveChangesAsync(cancellationToken);
             return await Result.SuccessAsync();
