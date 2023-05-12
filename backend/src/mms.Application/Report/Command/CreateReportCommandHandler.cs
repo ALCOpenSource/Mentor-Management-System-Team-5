@@ -26,7 +26,7 @@ namespace mms.Application.Report.Command
 
             report.Id = Guid.NewGuid().ToString();
             report.CreatedAt = DateTime.Now();
-            report.CreatedBy = _currentUserService.UserId
+            report.CreatedBy = _currentUserService.UserId;
             await _context.Reports.AddAsync(report);
             await _context.SaveChangesAsync(cancellationToken);
             return await Result.SuccessAsync();
