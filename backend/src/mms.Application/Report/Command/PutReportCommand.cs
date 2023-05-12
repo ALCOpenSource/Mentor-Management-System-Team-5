@@ -18,6 +18,5 @@ namespace mms.Application.Report.Command
         public string Recommendations { get; set; }
         public string TaskId { get; set; }
         public string ProgramId { get; set; }
-        public DateTime UpdatedAt { get; set; }
     }
 }
