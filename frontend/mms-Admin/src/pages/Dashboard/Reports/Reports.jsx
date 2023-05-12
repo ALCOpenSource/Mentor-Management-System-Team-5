@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./Reports.module.scss";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
@@ -15,21 +15,24 @@ import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import useIsMobile from "@/hooks/useIsMobile";
 import SwitcherTab from "@/pages/Dashboard/Reports/SwitcherTab/SwitcherTab";
 import ReportListItem from "./ReportListItem/ReportListItem";
+import { getAllReports } from "@/redux/Reports/ReportsSlice";
 
 function Reports() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const params = useParams();
   const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
-  // const [showSearchInput, setShowSearchInput] = useState(false);
 
-  // const dispatch = useDispatch();
   // const displayModal = useSelector((state) => state.modal.show);
   // const modalName = useSelector((state) => state.modal.modalName);
+  const allReportsData = useSelector((state) => state.reports.getAllReportsData);
+  console.log(allReportsData, "all reports data");
 
   useEffect(() => {
+    dispatch(getAllReports());
     setSelectedMenuId(params.id);
-  }, [navigate, params.id]);
+  }, [navigate, dispatch, params.id]);
 
   const reportsCategoryArray = useMemo(
     () => [
