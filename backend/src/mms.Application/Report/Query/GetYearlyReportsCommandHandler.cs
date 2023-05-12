@@ -22,7 +22,7 @@ namespace mms.Application.Report.Query
         public async Task<IResult<List<GetReportsResponse>>> Handle(GetYearlyReportsCommand request,
             CancellationToken cancellationToken)
         {
-            var reports = await _context.Reports.Where(y => y.DateCreated.Year == DateTime.UtcNow.Year).OrderByDescending(x => x.DateCreated).ToListAsync();
+            var reports = await _context.Reports.Where(y => y.CreatedAt.Year == DateTime.UtcNow.Year).OrderByDescending(x => x.CreatedAt).ToListAsync();
             if (reports == null)
             {
                 return await Result<List<GetReportsResponse>>.FailAsync("No Yearly Reports Available");
