@@ -66,11 +66,7 @@ export const isExpired = (token) => {
 };
 
 export const decodeToken = (token) => {
-  try {
-    return jwtDecode(token);
-  } catch (err) {
-    return null;
-  }
+  return token ? jwtDecode(token) : null;
 };
 
 export const login = (token) => {
