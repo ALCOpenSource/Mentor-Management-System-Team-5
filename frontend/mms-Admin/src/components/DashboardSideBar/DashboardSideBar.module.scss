@@ -40,13 +40,19 @@
       padding: 0.25rem 1rem;
       height: auto;
       color: var(--grayTextColor);
+      font-family: var(--regular);
+      font-size: 1rem !important;
 
       &:hover {
         background-color: #fff;
 
         &:nth-child(1) {
-          font-weight: 700;
-          color: #333;
+          font-family: var(--semiBold);
+          color: var(--black2TextColor);
+
+          svg path {
+            stroke: var(--black2TextColor);
+          }
         }
       }
     }

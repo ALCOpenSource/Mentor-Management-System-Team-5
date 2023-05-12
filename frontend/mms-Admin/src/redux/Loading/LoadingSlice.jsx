@@ -5,6 +5,8 @@ const initialState = {
   loginLoading: false,
   forgotPasswordLoading: false,
   resetPasswordLoading: false,
+  signUpLoading: false,
+  confirmEmailLoading: false,
 
   //Settings
   changePasswordLoading: false,
@@ -34,6 +36,12 @@ export const loadingSlice = createSlice({
     },
     resetPasswordLoading: (state, action) => {
       state.resetPasswordLoading = action.payload;
+    },
+    signUpLoading: (state, action) => {
+      state.signUpLoading = action.payload;
+    },
+    confirmEmailLoading: (state, action) => {
+      state.confirmEmailLoading = action.payload;
     },
 
     //Settings
@@ -75,6 +83,8 @@ export const {
   loginLoading,
   forgotPasswordLoading,
   resetPasswordLoading,
+  signUpLoading,
+  confirmEmailLoading,
   changePasswordLoading,
   updateProfileLoading,
   getProfileLoading,
