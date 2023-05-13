@@ -21,10 +21,11 @@ function EditUserRole({ show, size, modalName }) {
   };
 
   const rolesArray = [
-    { id: 1, name: "Mentor" },
-    { id: 2, name: "Mentor Applicant" },
-    { id: 3, name: "Mentor Manager" },
-    { id: 4, name: "Mentor Manager Applicant" }
+    { id: 1, name: "Admin" },
+    { id: 2, name: "Mentor" },
+    { id: 3, name: "Mentor Applicant" },
+    { id: 4, name: "Mentor Manager" },
+    { id: 5, name: "Mentor Manager Applicant" }
   ];
 
   const handleSelect = (e) => {

@@ -19,7 +19,6 @@ import DashboardContainer from "@/components/DashboardContainer/DashboardContain
 const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
 const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
-const MentorManagers = lazy(() => import("@/pages/Dashboard/MentorManagers/MentorManagers"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
 
@@ -32,6 +31,27 @@ const MentorDetailsCertificates = lazy(() =>
   import("@/pages/Dashboard/Mentors/MentorDetails/Certificates/Certificates")
 );
 const MentorDetailsTasks = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/Tasks/Tasks"));
+
+// MentorManagers
+const MentorManagers = lazy(() => import("@/pages/Dashboard/MentorManagers/MentorManagers"));
+const MentorManagerDetails = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/MentorManagerDetails")
+);
+const MentorManagerDetailsAbout = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/About/About")
+);
+const MentorManagerDetailsPrograms = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Programs/Programs")
+);
+const MentorManagerDetailsMentors = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Mentors/Mentors")
+);
+const MentorManagerDetailsCertificates = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Certificates/Certificates")
+);
+const MentorManagerDetailsTasks = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Tasks/Tasks")
+);
 
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
@@ -79,11 +99,13 @@ function RoutesComponent() {
 
         <Route
           path='/dashboard'
-          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={
+            <AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>}
+            </AuthenticatedRoutes>
+          }
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>
@@ -101,7 +123,17 @@ function RoutesComponent() {
             <Route index path='' element={<DiscussionForum />} />
             <Route path='post-details/:id' element={<PostDetails />} />
           </Route>
-          <Route path='mentor-managers' element={<MentorManagers />} />
+          <Route path='mentor-managers'>
+            <Route index path='' element={<MentorManagers />} />
+            <Route path='mentor-manager-details/:id' element={<MentorManagerDetails />}>
+              <Route path='' element={<MentorManagerDetailsAbout />} />
+              <Route path='about' element={<MentorManagerDetailsAbout />} />
+              <Route path='programs' element={<MentorManagerDetailsPrograms />} />
+              <Route path='mentors' element={<MentorManagerDetailsMentors />} />
+              <Route path='certificates' element={<MentorManagerDetailsCertificates />} />
+              <Route path='tasks' element={<MentorManagerDetailsTasks />} />
+            </Route>
+          </Route>
           <Route path='mentors'>
             <Route index path='' element={<Mentors />} />
             <Route path='mentor-details/:id' element={<MentorDetails />}>
