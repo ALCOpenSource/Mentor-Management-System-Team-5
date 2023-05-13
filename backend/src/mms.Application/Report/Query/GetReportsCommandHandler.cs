@@ -29,7 +29,7 @@ namespace mms.Application.Report.Query
             CancellationToken cancellationToken)
         {
 
-            var reports = await _context.Reports.OrderByDescending(x => x.DateCreated).ToListAsync();
+            var reports = await _context.Reports.OrderByDescending(x => x.CreatedAt).ToListAsync();
             if (reports == null)
             {
                 return await Result<List<GetReportsResponse>>.FailAsync("No Reports Available");

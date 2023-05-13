@@ -29,6 +29,7 @@ namespace mms.Application.Report.Command
             }
 
             var entity = _mapper.Map(request, report);
+            entity.UpdatedAt = DateTime.Now;
 
             _context.Reports.Update(entity);
             await _context.SaveChangesAsync(cancellationToken);
