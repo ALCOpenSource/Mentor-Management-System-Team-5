@@ -70,35 +70,22 @@
 
           .cardIcon {
             svg {
-              width: 2rem;
+              width: 3.5rem;
+              height: 3.5rem;
+              border-radius: 50%;
             }
           }
 
-          .metaData {
-            gap: 0.25rem;
+          .mainGroup {
+            gap: 0.5rem;
+          }
 
+          .metaData {
             .metaDataTitle {
               font-size: 1.125rem;
               font-family: var(--semiBold);
               color: var(--black2TextColor);
               margin: 0;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: -webkit-box;
-              display: -moz-box;
-              display: -ms-box;
-              display: -o-box;
-              display: box;
-              -webkit-line-clamp: 1; /* number of lines to show */
-              -moz-line-clamp: 1;
-              -ms-line-clamp: 1;
-              -o-line-clamp: 1;
-              line-clamp: 1;
-              -webkit-box-orient: vertical;
-              -moz-box-orient: vertical;
-              -ms-box-orient: vertical;
-              -o-box-orient: vertical;
-              white-space: normal;
             }
 
             .dateTime {
@@ -121,6 +108,7 @@
 
           .tagsDiv {
             gap: 1rem;
+            align-items: center;
 
             h6 {
               margin: 0;
@@ -218,10 +206,9 @@
             gap: 1rem;
             padding: 1rem;
 
-            .cardIcon {
-              svg {
-                width: 2.5rem;
-              }
+            .mainGroup {
+              flex-direction: row;
+              gap: 0.875rem;
             }
 
             .metaData {

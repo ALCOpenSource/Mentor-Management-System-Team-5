@@ -145,16 +145,13 @@ function MentorManagers() {
           />
           <Button onClick={() => handleAddMentorManager()} title='Add New MentorManager' size='small' />
         </div>
-        <div
-          style={{ width: !collapseInput ? "25%" : "auto" }}
-          className={cx(styles.paginationAndSearchDiv, "flexRow")}
-        >
+        <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
           {collapseInput && (
             <div className={cx(styles.paginationWrapper)}>
               <Pagination />
             </div>
           )}
-          <div style={{ width: !collapseInput ? "100%" : "auto" }} className={cx(styles.searchWrapper)}>
+          <div className={cx(styles.searchWrapper)}>
             <Search
               onSearchClick={handleSearchClick}
               onChange={handleSearchInput}

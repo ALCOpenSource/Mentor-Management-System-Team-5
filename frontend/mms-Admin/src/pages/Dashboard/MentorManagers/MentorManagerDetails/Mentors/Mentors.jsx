@@ -162,18 +162,21 @@ function Mentors() {
                   <div className={cx(styles.cardIcon)}>
                     <item.image />
                   </div>
-                  <div className={cx(styles.metaData, "flexCol")}>
-                    <h6 className={cx(styles.metaDataTitle)}>{item.name}</h6>
-                    <div className={cx(styles.dateTime, "flexRow")}>
-                      <div className={cx(styles.infoWrapper, "flexRow")}>
-                        <span className={cx(styles.value)}>{item?.designation}</span>
+                  <div className={cx(styles.mainGroup, "flexCol")}>
+                    <div className={cx(styles.metaData, "flexCol")}>
+                      <h6 className={cx(styles.metaDataTitle)}>{item.name}</h6>
+                      <div className={cx(styles.dateTime, "flexRow")}>
+                        <div className={cx(styles.infoWrapper, "flexRow")}>
+                          <span className={cx(styles.value)}>{item?.designation}</span>
+                        </div>
                       </div>
                     </div>
+                    <div className={cx(styles.tagsDiv, "flexRow")}>
+                      <h6>PROGRAM ASST.</h6>
+                      <h6>MENTOR-GADS</h6>
+                    </div>
                   </div>
-                  <div className={cx(styles.tagsDiv, "flexRow")}>
-                    <h6>PROGRAM ASST.</h6>
-                    <h6>MENTOR-GADS</h6>
-                  </div>
+
                   <div className={cx(styles.cardToggler)}>
                     {toggle?.toggle && toggle.index === index ? (
                       <TogglerIconUp onClick={() => handleToggle(index)} />

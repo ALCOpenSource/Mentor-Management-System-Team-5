@@ -36,6 +36,7 @@
         color: var(--black2TextColor);
         font-size: 0.875rem;
         width: 100%;
+        min-width: calc(100% - 0.25rem);
       }
 
       .icon {
