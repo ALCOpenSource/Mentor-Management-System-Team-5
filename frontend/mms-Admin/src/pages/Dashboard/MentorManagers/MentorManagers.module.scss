@@ -10,6 +10,8 @@
     top: 0;
     flex-wrap: wrap;
     gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
 
     .leftSection {
       align-items: center;
@@ -49,12 +51,10 @@
     }
 
     .paginationAndSearchDiv {
-      width: 100%;
       justify-content: center;
       align-items: center;
       gap: 1rem;
       min-height: 3rem;
-      // flex-grow: 1;
     }
   }
 
@@ -84,10 +84,12 @@
 
     .heading {
       gap: 1rem;
+      flex-wrap: nowrap;
 
       .leftSection {
         gap: 1.25rem;
         width: auto;
+        justify-content: flex-start;
 
         .title {
           font-size: 1.5rem;
@@ -106,9 +108,8 @@
       }
 
       .paginationAndSearchDiv {
-        gap: 2rem;
+        gap: 1rem;
         justify-content: flex-end;
-        align-items: center;
       }
     }
 
@@ -118,33 +119,21 @@
   }
 }
 
-@media all and (min-width: 1200px) {
+@media all and (min-width: 992px) {
   .mentorManagersContainer {
     padding: 1rem 1.5rem;
 
     .heading {
-      flex-wrap: nowrap;
-      align-items: center;
       gap: 2rem;
-      padding: 1rem 0;
-
-      .leftSection {
-        gap: 1.25rem;
-        justify-content: flex-start;
-      }
-
-      .btnGroup {
-        width: max-content;
-      }
-
-      .paginationAndSearchDiv {
-        gap: 1rem;
-        justify-content: flex-end;
-      }
     }
+  }
+}
 
-    .listView {
-      gap: 0.75rem;
+@media all and (min-width: 1200px) {
+  .mentorManagersContainer {
+    .heading {
+      padding: 1rem 0;
+      gap: 1.5rem;
     }
   }
 }

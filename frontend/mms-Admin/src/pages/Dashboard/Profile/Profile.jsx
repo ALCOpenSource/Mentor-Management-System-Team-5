@@ -13,29 +13,24 @@ import linkedinIcon from "@/assets/icons/linkedin-icon.svg";
 import githubIcon from "@/assets/icons/github-icon.svg";
 import twitterIcon from "@/assets/icons/twitter-icon.svg";
 import countriesAndFlags from "@/utils/countriesAndFlags";
-
-// To be removed after email is included in getProfile API
-import useGetUserInfo from "@/hooks/useGetUserInfo";
 import formatDate from "@/helpers/formatDate";
 import arrayToString from "@/helpers/arrayToString";
 import Loader from "@/components/Loader/Loader";
 
 function Profile() {
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.settings.getProfileData);
-  const getProfileLoading = useSelector((state) => state.loading.getProfileLoading);
-
-  // To be removed after email is included in getProfile API
-  const { email, roles } = useGetUserInfo();
 
   const [profileHeaderData, setProfileHeaderData] = useState({});
   const [profileDetailData, setProfileDetailData] = useState({});
+
+  const userProfile = useSelector((state) => state.settings.getProfileData);
+  const getProfileLoading = useSelector((state) => state.loading.getProfileLoading);
 
   useEffect(() => {
     if (Object.keys(userProfile).length > 0) {
       setProfileHeaderData({
         fullName: `${userProfile.firstName} ${userProfile.lastName}`,
-        role: userProfile.role ? userProfile.role : arrayToString(roles),
+        role: Array.isArray(userProfile?.roles) ? arrayToString(userProfile?.roles) : userProfile?.roles,
         profilePicture: userProfile.profilePicture,
         flagUrl: countriesAndFlags.find((item) => item.name === userProfile?.country)?.flag
       });
@@ -49,7 +44,7 @@ function Profile() {
           {
             id: 2,
             title: "Email:",
-            info: userProfile.email ? userProfile.email : email
+            info: userProfile?.email
           },
           {
             id: 3,
