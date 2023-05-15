@@ -6,7 +6,6 @@ export const FormGroup = styled(Form.Group)`
   position: relative;
   width: inherit;
   border-radius: 4px;
-  padding: 4px 10px 7.5px 10px;
   margin-bottom: ${({ marginbottom }) => marginbottom};
   border: ${({ bordercolor }) => `1px solid ${bordercolor ? bordercolor : "#c8c8c8"}`};
 
@@ -15,10 +14,8 @@ export const FormGroup = styled(Form.Group)`
     width: 100%;
     box-sizing: border-box;
     border: none;
-    color: #5e6c84;
     transition: 0.3s;
-    font-size: 16px;
-    background-color: ${({ bgColor }) => (bgColor ? bgColor : "#fff")};
+    padding: 4px 10px 7.5px 10px;
 
     &:focus {
       outline: none;
@@ -63,7 +60,7 @@ export const FormGroup = styled(Form.Group)`
 
 export const StyledTextArea = styled.textarea`
   min-height: ${({ minHeight = "100px" }) => minHeight};
-  font-size: ${({ fontSize = "10px" }) => fontSize};
-  font-weight: ${({ fontWeight = "400" }) => fontWeight};
-  color: ${({ color }) => color ?? "#000"};
+  font-size: ${({ fontSize = "1rem" }) => fontSize};
+  color: ${({ color }) => color ?? "#5e6c84"};
+  background-color: ${({ bgColor }) => bgColor ?? "#fff"};
 `;

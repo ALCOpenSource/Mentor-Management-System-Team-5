@@ -109,13 +109,7 @@ const PostDetails = () => {
         <TopicCard data={topicCardData} disableNavLink={true} />
 
         <div className={cx(styles.textAreaWrapper, "flexCol")}>
-          <TextArea
-            placeholder='Write a comment...'
-            borderColor='none'
-            marginbottom='0'
-            minHeight='150px'
-            bgColor='transparent'
-          />
+          <TextArea placeholder='Write a comment...' borderColor='none' marginbottom='0' minHeight='150px' />
 
           <div className={cx(styles.attachmentsDiv, "flexRow-space-between")}>
             <div className={cx(styles.attachments, "flexRow")}>
