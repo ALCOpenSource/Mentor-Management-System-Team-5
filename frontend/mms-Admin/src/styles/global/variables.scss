@@ -26,6 +26,7 @@
   --green5Color: #cefafd;
   --green6Color: #06b9c6;
   --green7Color: #9cf6fc;
+  --green8Color: #023c40;
   --grayBorderColor: #e6e6e6;
   --gray4Color: #f2f2f2;
   --toogleSwitchOnBgColor: #058b94;
@@ -45,9 +46,9 @@
   --primaryBtnBg: #058b94;
   --primaryBtnTextColor: #fff;
   --primaryBtnBorderColor: #058b94;
-  --primaryBtnHoverBg: #035d63;
+  --primaryBtnHoverBg: var(--primaryColor);
   --primaryBtnHoverTextColor: #fff;
-  --primaryBtnHoverBorderColor: #035d63;
+  --primaryBtnHoverBorderColor: var(--primaryColor);
   --primaryBtnBorderRadius: 10px;
   --primaryBtnFontSize: 14px;
   --primaryBtnPadding: 0.625rem 1.5rem;
@@ -59,11 +60,11 @@
 
   // Secondary Button Big
   --secondaryBtnBg: #fff;
-  --secondaryBtnTextColor: #023c40;
-  --secondaryBtnBorderColor: #058b94;
-  --secondaryBtnHoverBg: #035d63;
-  --secondaryBtnHoverTextColor: #f7feff;
-  --secondaryBtnHoverBorderColor: #058b94;
+  --secondaryBtnTextColor: var(--green8Color);
+  --secondaryBtnBorderColor: var(--green2Color);
+  --secondaryBtnHoverBg: var(--green4Color);
+  --secondaryBtnHoverTextColor: var(--green8Color);
+  --secondaryBtnHoverBorderColor: var(--green2Color);
   --secondaryBtnBorderRadius: 10px;
 
   // Secondary Button Small

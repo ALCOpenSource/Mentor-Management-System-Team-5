@@ -20,7 +20,11 @@ const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
 const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
+
+// Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
+const CreateProgram = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateProgram"));
+const CreateCriteria = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateCriteria/CreateCriteria"));
 
 // Mentors
 const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
@@ -151,7 +155,14 @@ function RoutesComponent() {
             <Route path='broadcast-message' element={<BroadcastMessage />} />
           </Route>
           <Route index path='profile' element={<Profile />} />
-          <Route path='programs' element={<Programs />} />
+          <Route path='programs'>
+            <Route path='' element={<Programs />} />
+            <Route path='create-program'>
+              <Route path='' element={<CreateProgram />} />
+              <Route path='create-criteria' element={<CreateCriteria />} />
+            </Route>
+          </Route>
+
           <Route path='reports'>
             <Route path='' element={<Reports />}>
               <Route path='report-details/:id' element={<ReportDetails />} />
