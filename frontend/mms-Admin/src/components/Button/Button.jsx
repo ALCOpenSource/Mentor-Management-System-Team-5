@@ -20,6 +20,7 @@ border: 1px solid ${(props) =>
   justify-content: center;
   outline: none;
   height: fit-content;
+  line-height: 1rem;
 
 input{
       margin: 0 0.375rem 0 0;
