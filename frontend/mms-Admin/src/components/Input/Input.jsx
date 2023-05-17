@@ -4,11 +4,17 @@ import { FormGroup } from "./StyledInput";
 import eyeIconShow from "@/assets/icons/eye-password-show.svg";
 import eyeIconHide from "@/assets/icons/eye-password-hide.svg";
 import searchIcon from "@/assets/icons/search-icon.svg";
+import DOMPurify from "dompurify";
 
 const Input = forwardRef(
   ({ placeholder, required, type = "text", onChange, error, icon, marginbottom, border, ...props }, ref) => {
     const [inputType, setInputType] = useState(type);
     const [showPassword, setShowPassword] = useState(false);
+
+    const handleChange = (e) => {
+      const sanitizedValue = DOMPurify.sanitize(e.target.value);
+      onChange(sanitizedValue);
+    };
 
     const handleVisibility = () => {
       if (inputType === "password") {
@@ -27,7 +33,7 @@ const Input = forwardRef(
             type={inputType}
             placeholder={placeholder}
             required={required}
-            onChange={onChange}
+            onChange={handleChange}
             {...props}
             autoComplete='new-password'
             ref={ref}
