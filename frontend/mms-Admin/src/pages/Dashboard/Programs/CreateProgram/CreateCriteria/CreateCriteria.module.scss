@@ -1,0 +1,72 @@
+.createCriteriaContainer {
+  gap: 0.75rem;
+  padding: 1rem 0.5rem;
+  position: relative;
+  height: calc(100vh - var(--topNavbarHeight));
+  overflow-y: auto;
+
+  .heading {
+    position: sticky;
+    top: 0;
+    gap: 0.5rem;
+
+    .backIcon {
+      width: 0.875rem;
+      cursor: pointer;
+    }
+
+    .title {
+      margin: 0;
+      font-family: var(--semiBold);
+      color: var(--blackTextColor);
+      font-size: 1.25rem;
+    }
+  }
+
+  .body {
+    height: 100%;
+    overflow-y: auto;
+
+    .formContainer {
+      height: 100%;
+      position: relative;
+      gap: 0.75rem;
+
+      .instructions {
+        margin-bottom: 1rem;
+        gap: 1rem;
+        background-color: var(--green3Color);
+        padding: 1rem;
+        border-radius: 10px;
+
+        p {
+          margin: 0;
+          font-family: var(--regular);
+          color: var(--grayText2Color);
+          font-size: 1rem;
+          text-align: justify;
+        }
+
+        button {
+          align-self: flex-end;
+        }
+      }
+
+      .formHeader {
+        position: sticky;
+        top: 0;
+      }
+
+      .formBody {
+        gap: 1rem;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+
+        .submitBtnDiv {
+          justify-content: flex-end;
+          margin-top: auto;
+        }
+      }
+    }
+  }
+}

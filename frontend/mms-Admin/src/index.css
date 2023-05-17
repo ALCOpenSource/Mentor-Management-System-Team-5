@@ -89,7 +89,7 @@ select:-webkit-autofill:focus {
 
 button:disabled,
 button[disabled] {
-  background-color: gray;
+  background-color: var(--green9Color);
   color: white;
   cursor: not-allowed;
   border: none;
