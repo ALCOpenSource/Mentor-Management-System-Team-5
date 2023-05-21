@@ -5,15 +5,14 @@ import styled from "styled-components";
 import imageLoader from "@/assets/icons/loading.svg";
 
 const ButtonComponent = styled.button`
-font-size: ${(props) => (props.size === "small" ? "var(--primaryBtnSmallFontSize)" : "var(--primaryBtnFontSize)")};
-font-family: ${(props) => (props.size === "small" ? "var(--regular)" : "var(--semiBold)")};
-padding: ${(props) => (props.size === "small" ? "var(--primaryBtnSmallPadding)" : "var(--primaryBtnPadding)")};
-border-radius: ${(props) =>
-  props.size === "small" ? "var(--primaryBtnSmallBorderRadius)" : "var(--primaryBtnBorderRadius)"};
-background-color: ${(props) => (props.type === "primary" ? "var(--primaryBtnBg)" : "var(--secondaryBtnBg)")};
-color: ${(props) => (props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)")};
-border: 1px solid ${(props) =>
-  props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)"};
+  font-size: ${(props) => (props.size === "small" ? "0.75rem" : "0.875rem")};
+  font-family: ${(props) => (props.size === "small" ? "var(--regular)" : "var(--semiBold)")};
+  padding: ${(props) => (props.size === "small" ? "0.5rem 0.5rem" : "0.75rem 1rem")};
+  border-radius: ${(props) => (props.size === "small" ? "5px" : "10px")};
+  background-color: ${(props) => (props.type === "primary" ? "var(--primaryBtnBg)" : "var(--secondaryBtnBg)")};
+  color: ${(props) => (props.type === "primary" ? "var(--primaryBtnTextColor)" : "var(--secondaryBtnTextColor)")};
+  border: 1px solid
+    ${(props) => (props.type === "primary" ? "var(--primaryBtnBorderColor)" : "var(--secondaryBtnBorderColor)")};
   width: fit-content;
   white-space: nowrap;
   align-items: center;
@@ -22,25 +21,30 @@ border: 1px solid ${(props) =>
   height: fit-content;
   line-height: 1rem;
 
-input{
-      margin: 0 0.375rem 0 0;
+  input {
+    margin: 0 0.375rem 0 0;
   }
-  a{
-      width: 100%;
+  a {
+    width: 100%;
   }
-span{
-      margin-right: 0;
-      font-size: 1.25rem;
+  span {
+    margin-right: 0;
+    font-size: 1.25rem;
   }
-&:hover{ 
-  background-color: ${(props) =>
-    props.type === "primary" ? "var(--primaryBtnHoverBg)" : "var(--secondaryBtnHoverBg)"}; 
-  color: ${(props) =>
-    props.type === "primary" ? "var(--primaryBtnHoverTextColor)" : "var(--secondaryBtnHoverTextColor)"}; 
-  border: 1px solid ${(props) =>
-    props.type === "primary" ? "var(--primaryBtnHoverBorderColor)" : "var(--secondaryBtnHoverBorderColor)"};
-}
-}
+  &:hover {
+    background-color: ${(props) =>
+      props.type === "primary" ? "var(--primaryBtnHoverBg)" : "var(--secondaryBtnHoverBg)"};
+    color: ${(props) =>
+      props.type === "primary" ? "var(--primaryBtnHoverTextColor)" : "var(--secondaryBtnHoverTextColor)"};
+    border: 1px solid
+      ${(props) =>
+        props.type === "primary" ? "var(--primaryBtnHoverBorderColor)" : "var(--secondaryBtnHoverBorderColor)"};
+  }
+
+  @media all and (min-width: 992px) {
+    font-size: ${(props) => (props.size === "small" ? "0.875rem" : "1rem")};
+    padding: ${(props) => (props.size === "small" ? "0.5rem 0.5rem" : "1rem 1.5rem")};
+  }
 `;
 
 function Button(props) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import cx from "classnames";
@@ -6,54 +6,49 @@ import ModalContainer from "../ModalContainer/ModalContainer";
 import styles from "./CriteriaTypes.module.scss";
 import Button from "@/components/Button/Button";
 import { hideModal, showModal } from "@/redux/Modal/ModalSlice";
-import successImage from "@/assets/images/activate-user.svg";
-
-import { useForm } from "react-hook-form";
-// import { criteriaTypesSchema } from "@/helpers/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { saveCriteriaToStorage, getCriteriaFromStorage } from "@/redux/Criteria/CriteriaSlice";
 
 function CriteriaTypes({ show, size, modalName }) {
   const dispatch = useDispatch();
+
   const modalData = useSelector((state) => state?.modal?.modalData);
+  const criteria = useSelector((state) => state?.criteria?.getCriteriaFromStorageData);
+
+  useEffect(() => {
+    dispatch(getCriteriaFromStorage());
+  }, [dispatch]);
 
   const handleClose = () => {
     dispatch(hideModal({ name: "criteriaTypes" }));
   };
 
-  const rolesArray = [
-    { id: 1, name: "Admin" },
-    { id: 2, name: "Mentor" },
-    { id: 3, name: "Mentor Applicant" },
-    { id: 4, name: "Mentor Manager" },
-    { id: 5, name: "Mentor Manager Applicant" }
+  const inputTypesArray = [
+    { key: "singleInput", value: "Single Input" },
+    { key: "multipleInput", value: "Multiple Input" },
+    { key: "yesOrNo", value: "Yes/No" },
+    { key: "fileInput", value: "File Input" },
+    { key: "multiChoice", value: "Multi Choice" }
   ];
 
-  const handleSelect = (e) => {
-    console.log(e.target.value, "selected");
-    setValue("role", e.target.value, { shouldValidate: true, shouldDirty: true });
-  };
+  const handleSelect = async (data) => {
+    criteria
+      ? await dispatch(
+          saveCriteriaToStorage({
+            ...criteria,
+            [data?.key]: Array.isArray(criteria[data?.key]) ? [...criteria[data?.key]] : []
+          })
+        )
+      : await dispatch(
+          saveCriteriaToStorage({
+            [data?.key]: []
+          })
+        );
 
-  const resolver = yupResolver();
-
-  const defaultValues = {
-    role: ""
-  };
-
-  const {
-    handleSubmit,
-    formState: { errors },
-    register,
-    setValue
-  } = useForm({ defaultValues, resolver, mode: "all" });
-
-  const handleCriteriaTypes = (data) => {
-    console.log(data);
     dispatch(
       showModal({
-        name: "successNotification",
+        name: data?.key,
         modalData: {
-          title: "User Role Edited Successfully",
-          image: successImage
+          type: data?.key
         }
       })
     );
@@ -67,32 +62,17 @@ function CriteriaTypes({ show, size, modalName }) {
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
-          <form
-            className={cx(styles.formElement, "flexCol")}
-            onSubmit={handleSubmit((data) => handleCriteriaTypes(data))}
-          >
-            {rolesArray.map((role) => (
-              <div key={role?.id} className={cx(styles.radioDiv, "flexRow-align-center")}>
-                <input
-                  {...register("role")}
-                  type='radio'
-                  name='role'
-                  id={role.id}
-                  value={role?.name}
-                  onChange={(e) => handleSelect(e)}
-                />
-                <label className={cx(styles.radioLabel)} htmlFor={role.id}>
-                  {role.name}
-                </label>
-              </div>
+          <div className={cx(styles.wrapper, "flexCol")}>
+            {inputTypesArray.map((type) => (
+              <p onClick={() => handleSelect(type)} key={type?.key} className={cx(styles.inputType)}>
+                {type?.value}
+              </p>
             ))}
-            <div className={cx(styles.errorDiv)}>{errors?.role?.message}</div>
+          </div>
 
-            <div className={cx(styles.btnGroup, "flexRow-fully-centered")}>
-              <Button onClick={handleClose} title='Cancel' type='secondary' />
-              <Button onClick={handleSubmit((data) => handleCriteriaTypes(data))} title='Save' />
-            </div>
-          </form>
+          <div className={cx(styles.btnGroup, "flexRow-align-left")}>
+            <Button onClick={handleClose} title='Cancel' type='secondary' />
+          </div>
         </div>
       </div>
     </ModalContainer>

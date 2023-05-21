@@ -1,11 +1,11 @@
 .modalWrapper {
   gap: 1.5rem;
   background-color: var(--modalBgColor);
-  padding: 3rem 2rem;
+  padding: 2rem 1rem;
   border-radius: 1rem;
 
   .modalHeader {
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
 
     .headerTitle {
@@ -19,47 +19,35 @@
     align-items: flex-start;
     gap: 1.5rem;
 
-    .formElement {
-      gap: 1.25rem;
-      position: relative;
+    .wrapper {
       width: 100%;
+      box-shadow: 1px 3px 9px rgba(3, 93, 99, 0.2);
+      border-radius: 5px;
 
-      .radioDiv {
-        gap: 1rem;
-
-        input {
-          cursor: pointer;
-        }
-
-        .radioLabel {
-          font-size: 1rem;
-          font-family: var(--regular);
-          color: var(--black2TextColor);
-          cursor: pointer;
-        }
-      }
-
-      .errorDiv {
-        font-size: 0.875rem;
+      .inputType {
+        cursor: pointer;
+        line-height: 1rem;
+        font-size: 1rem;
         font-family: var(--regular);
-        color: var(--red2Color);
-        position: absolute;
-        left: 0;
-        bottom: 5.5rem;
-      }
+        color: var(--grayTextColor);
+        margin: 0;
+        padding: 1.125rem 1rem;
 
-      .btnGroup {
-        gap: 1rem;
-        margin: 2rem 0 1rem 0;
-        width: 100%;
+        &:hover {
+          background-color: var(--green3Color);
+        }
       }
+    }
+
+    .btnGroup {
+      width: 100%;
     }
   }
 }
 
 @media all and (min-width: 768px) {
   .modalWrapper {
-    padding: 1.5rem 2rem;
+    padding: 2rem;
 
     .modalHeader {
       .headerTitle {
@@ -68,19 +56,20 @@
     }
 
     .modalBody {
-      .modalImage {
-        width: 15rem;
-      }
-    }
+      gap: 3.5rem;
 
-    .modalFooter {
-      .btnDiv {
-        gap: 1rem;
-
-        button {
-          width: fit-content;
+      .wrapper {
+        .inputType {
+          font-size: 1.25rem;
+          padding: 1.5rem 1rem;
         }
       }
     }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .modalWrapper {
+    padding: 3.5rem 4rem;
   }
 }

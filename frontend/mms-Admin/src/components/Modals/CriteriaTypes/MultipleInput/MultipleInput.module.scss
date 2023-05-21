@@ -1,0 +1,95 @@
+.modalWrapper {
+  gap: 1.5rem;
+  background-color: var(--modalBgColor);
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+
+  .modalHeader {
+    align-items: flex-start;
+    gap: 1rem;
+
+    .headerTitle {
+      font-size: 1.25rem;
+      font-family: var(--bold);
+      color: var(--blackTextColor);
+    }
+  }
+
+  .modalBody {
+    align-items: flex-start;
+
+    .formContainer {
+      width: 100%;
+      gap: 0.5rem;
+
+      .formGroup {
+        position: relative;
+
+        .deleteFormGroupDiv {
+          position: absolute;
+          bottom: -1px;
+          right: 0;
+
+          img {
+            cursor: pointer;
+            width: 1.5rem;
+          }
+        }
+      }
+
+      .appendDiv {
+        gap: 0.5rem;
+        cursor: pointer;
+        width: fit-content;
+
+        img {
+          cursor: pointer;
+          width: 1.5rem;
+        }
+
+        span {
+          font-size: 1rem;
+          font-family: var(--regular);
+          color: var(--grayTextColor);
+        }
+      }
+
+      .rootError {
+        font-size: 0.875rem;
+        font-family: var(--regular);
+        color: var(--red2Color);
+      }
+
+      .btnGroup {
+        margin: 2.5rem 0 0.5rem 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .modalWrapper {
+    padding: 1.5rem 2rem;
+
+    .modalHeader {
+      .headerTitle {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .modalWrapper {
+    padding: 3.5rem 4rem;
+
+    .modalBody {
+      .formContainer {
+        .btnGroup {
+          margin: 3.5rem 0 0.5rem 0;
+        }
+      }
+    }
+  }
+}

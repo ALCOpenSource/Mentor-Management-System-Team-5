@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./CreateCriteria.module.scss";
@@ -12,12 +12,21 @@ import { createProgramCriteriaSchema } from "@/helpers/validation";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import CriteriaTypesModal from "@/components/Modals/CriteriaTypes/CriteriaTypes";
+import SingleInputModal from "@/components/Modals/CriteriaTypes/SingleInput/SingleInput";
+import MultipleInputModal from "@/components/Modals/CriteriaTypes/MultipleInput/MultipleInput";
+import YesOrNoModal from "@/components/Modals/CriteriaTypes/YesOrNo/YesOrNo";
+import MultiChoiceModal from "@/components/Modals/CriteriaTypes/MultiChoice/MultiChoice";
+import { getCriteriaFromStorage } from "@/redux/Criteria/CriteriaSlice";
 
-import successImage from "@/assets/images/default-success-notification-image.png";
+// import successImage from "@/assets/images/default-success-notification-image.png";
 
 const CreateCriteria = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const criteriaData = useSelector((state) => state?.criteria?.getCriteriaFromStorageData);
+
+  console.log(criteriaData, "criteriaData");
 
   const [displayInstructions, setDisplayInstructions] = useState(true);
   const [disableBtn, setDisableBtn] = useState({
@@ -27,6 +36,10 @@ const CreateCriteria = () => {
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+
+  useEffect(() => {
+    dispatch(getCriteriaFromStorage());
+  }, [dispatch]);
 
   const handleDisplayInstructions = () => {
     setDisplayInstructions(false);
@@ -47,7 +60,7 @@ const CreateCriteria = () => {
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   const handleCreateCriteria = (data) => {
-    console.log(data);
+    console.log(data, "form data");
     // dispatch(
     //   showModal({
     //     name: "successNotification",
@@ -59,7 +72,9 @@ const CreateCriteria = () => {
     // );
   };
 
-  const displayCriteriaTypes = () => {
+  const displayCriteriaTypes = (e) => {
+    e.preventDefault();
+
     dispatch(
       showModal({
         name: "criteriaTypes",
@@ -92,9 +107,22 @@ const CreateCriteria = () => {
             onSubmit={handleSubmit((data) => handleCreateCriteria(data))}
           >
             <div className={cx(styles.formBody, "flexCol")}>
+              <div className={cx(styles.contentWrapper, "flexCol")}>
+                {criteriaData &&
+                  Object.keys(criteriaData) &&
+                  Object.keys(criteriaData).map((category) => {
+                    return criteriaData[category].map((item, index) => {
+                      return (
+                        <div key={index} className={cx(styles.criteriaCard, "flexCol")}>
+                          <p>{item.question}</p>
+                        </div>
+                      );
+                    });
+                  })}
+              </div>
               <div className={cx(styles.addCriteriaBtnDiv, "flexRow")}>
                 <Button
-                  onClick={() => displayCriteriaTypes()}
+                  onClick={(e) => displayCriteriaTypes(e)}
                   title='Add Criteria'
                   type='primary'
                   size='small'
@@ -115,8 +143,12 @@ const CreateCriteria = () => {
         )}
       </div>
 
-      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
-      {displayModal && modalName === "criteriaTypes" ? <CriteriaTypesModal show size='md' /> : null}
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='lg' /> : null}
+      {displayModal && modalName === "criteriaTypes" ? <CriteriaTypesModal show size='lg' /> : null}
+      {displayModal && modalName === "singleInput" ? <SingleInputModal show size='lg' /> : null}
+      {displayModal && modalName === "multipleInput" ? <MultipleInputModal show size='lg' /> : null}
+      {displayModal && modalName === "yesOrNo" ? <YesOrNoModal show size='lg' /> : null}
+      {displayModal && modalName === "multiChoice" ? <MultiChoiceModal show size='lg' /> : null}
     </div>
   );
 };

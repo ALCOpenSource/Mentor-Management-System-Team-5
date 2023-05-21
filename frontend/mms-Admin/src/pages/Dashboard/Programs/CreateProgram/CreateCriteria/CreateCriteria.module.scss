@@ -17,7 +17,7 @@
 
     .title {
       margin: 0;
-      font-family: var(--semiBold);
+      font-family: var(--bold);
       color: var(--blackTextColor);
       font-size: 1.25rem;
     }
@@ -56,7 +56,6 @@
       .formBody {
         gap: 1rem;
         overflow-y: auto;
-        padding-right: 0.5rem;
 
         .addCriteriaBtnDiv {
           justify-content: flex-start;
@@ -65,6 +64,52 @@
         .submitBtnDiv {
           justify-content: flex-end;
           margin-top: auto;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .createCriteriaContainer {
+    gap: 0.875rem;
+    padding: 1rem;
+
+    .heading {
+      gap: 0.75rem;
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .body {
+      .instructions {
+        padding: 1.5rem;
+
+        p {
+          line-height: 2rem;
+        }
+      }
+
+      .formContainer {
+        .formBody {
+          gap: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .createCriteriaContainer {
+    gap: 1rem;
+    padding: 1.5rem;
+
+    .body {
+      .formContainer {
+        .formBody {
+          gap: 1rem;
         }
       }
     }
