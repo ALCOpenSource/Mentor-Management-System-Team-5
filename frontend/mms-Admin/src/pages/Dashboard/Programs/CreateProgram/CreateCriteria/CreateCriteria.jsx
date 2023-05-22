@@ -16,6 +16,7 @@ import SingleInputModal from "@/components/Modals/CriteriaTypes/SingleInput/Sing
 import MultipleInputModal from "@/components/Modals/CriteriaTypes/MultipleInput/MultipleInput";
 import YesOrNoModal from "@/components/Modals/CriteriaTypes/YesOrNo/YesOrNo";
 import MultiChoiceModal from "@/components/Modals/CriteriaTypes/MultiChoice/MultiChoice";
+import FileInputModal from "@/components/Modals/CriteriaTypes/FileInput/FileInput";
 import { getCriteriaFromStorage } from "@/redux/Criteria/CriteriaSlice";
 
 // import successImage from "@/assets/images/default-success-notification-image.png";
@@ -149,6 +150,7 @@ const CreateCriteria = () => {
       {displayModal && modalName === "multipleInput" ? <MultipleInputModal show size='lg' /> : null}
       {displayModal && modalName === "yesOrNo" ? <YesOrNoModal show size='lg' /> : null}
       {displayModal && modalName === "multiChoice" ? <MultiChoiceModal show size='lg' /> : null}
+      {displayModal && modalName === "fileInput" ? <FileInputModal show size='lg' /> : null}
     </div>
   );
 };

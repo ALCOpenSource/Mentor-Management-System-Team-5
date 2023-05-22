@@ -1,0 +1,94 @@
+.nestedFieldsContainer {
+  .optionWrapper {
+    width: 100%;
+    gap: 0.5rem;
+    align-items: flex-start;
+
+    .numbering {
+      margin-top: 0.75rem;
+    }
+
+    .option {
+      width: 100%;
+      flex-wrap: wrap;
+
+      & > div {
+        width: 100%;
+      }
+
+      .fileNameDiv {
+        width: 100%;
+
+        & > div {
+          border: transparent;
+          border-bottom: 1px solid var(--grayBorderColor);
+          & > div {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+
+    img {
+      margin-top: 0.75rem;
+      width: 1.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .rootError {
+    font-size: 0.875rem;
+    font-family: var(--regular);
+    color: var(--red2Color);
+  }
+
+  .addMore {
+    width: fit-content;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    img {
+      width: 1.5rem;
+    }
+
+    span {
+      font-size: 1rem;
+      font-family: var(--regular);
+      color: var(--grayTextColor);
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .nestedFieldsContainer {
+    .optionWrapper {
+      gap: 0.5rem;
+
+      .option {
+        flex-wrap: nowrap;
+        gap: 1rem;
+
+        .fileNameDiv {
+          width: 60%;
+
+          & > div {
+            width: 100%;
+          }
+        }
+
+        .quantityDiv,
+        .fileTypesDiv {
+          width: 20%;
+
+          & > div {
+            width: 100%;
+          }
+        }
+      }
+
+      img {
+        margin-top: 0.875rem;
+      }
+    }
+  }
+}

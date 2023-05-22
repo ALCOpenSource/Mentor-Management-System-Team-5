@@ -53,7 +53,7 @@ function Button(props) {
   return (
     <ButtonComponent size={size} type={type} onClick={onClick} disabled={disabled} className={cx("flexRow")}>
       {loading ? (
-        <img src={imageLoader} height='24' width='60' />
+        <img src={imageLoader} height='16' width='60' />
       ) : (
         <>
           <span style={{ marginRight: "0.5rem" }} className={cx("flexRow")}>

@@ -281,7 +281,7 @@ function General() {
                       options={countries}
                       error={errors?.country && errors?.country?.message}
                       onChange={(e) => handleSelectChange(e, "country")}
-                      border='#C8C8C8'
+                      border='#e6e6e6'
                       loading={!(countries.length > 0)}
                     />
                   )}
@@ -302,7 +302,7 @@ function General() {
                       options={city}
                       error={errors?.city && errors?.city?.message}
                       onChange={(e) => handleSelectChange(e, "city")}
-                      border='#C8C8C8'
+                      border='#e6e6e6'
                       loading={Array.isArray(city) && !(city.length > 0)}
                     />
                   )}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import ModalContainer from "../../ModalContainer/ModalContainer";
-import styles from "./MultiChoice.module.scss";
+import styles from "./FileInput.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import NestedArray from "./NestedFieldArray/NestedFieldArray";
@@ -14,7 +14,7 @@ import { useFieldArray, useForm, Controller } from "react-hook-form";
 import { saveCriteriaToStorage, getCriteriaFromStorage } from "@/redux/Criteria/CriteriaSlice";
 import addIcon from "@/assets/icons/add-icon.svg";
 import removeIcon from "@/assets/icons/minus-icon.svg";
-function MultiChoice({ show, size, modalName }) {
+function FileInput({ show, size, modalName }) {
   const dispatch = useDispatch();
 
   const modalData = useSelector((state) => state?.modal?.modalData);
@@ -25,7 +25,7 @@ function MultiChoice({ show, size, modalName }) {
   }, [dispatch]);
 
   const handleClose = () => {
-    dispatch(hideModal({ name: "multiChoice" }));
+    dispatch(hideModal({ name: "fileInput" }));
     dispatch(getCriteriaFromStorage());
   };
 
@@ -33,12 +33,14 @@ function MultiChoice({ show, size, modalName }) {
     criteria: [
       {
         question: "",
-        options: [{ option: "" }]
+        options: [{ fileName: "", fileType: "", quantity: "" }]
       }
     ]
   };
 
   const {
+    setValue,
+    getValues,
     handleSubmit,
     control,
     register,
@@ -58,19 +60,29 @@ function MultiChoice({ show, size, modalName }) {
 
   const handleCreateCriteria = (data) => {
     console.log(data, "data");
-    const newCriteria = {
-      ...criteria,
-      [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
-    };
-    dispatch(saveCriteriaToStorage(newCriteria));
-    handleClose();
+    // const newCriteria = {
+    //   ...criteria,
+    //   [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
+    // };
+    // dispatch(saveCriteriaToStorage(newCriteria));
+    // handleClose();
   };
+
+  const handleRemoveGroup = (index) => {
+    remove(index);
+    console.log(fields, "new field");
+    console.log(criteria, "current criteria");
+    // reset({ fields });
+  };
+
+  console.log(errors, "eror");
+  console.log(fields, "fields");
 
   return (
     <ModalContainer show={show} size={size} modalName={modalName}>
       <div className={cx(styles.modalWrapper, "flexCol")}>
         <div className={cx(styles.modalHeader, "flexCol")}>
-          <h6 className={cx(styles.headerTitle)}>Input Multiple Questions</h6>
+          <h6 className={cx(styles.headerTitle)}>Input File Request</h6>
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
@@ -86,11 +98,11 @@ function MultiChoice({ show, size, modalName }) {
                       <Controller
                         name={`criteria.${index}.question`}
                         control={control}
-                        rules={{ required: "Question is required" }}
+                        rules={{ required: "This field is required" }}
                         render={({ field }) => (
                           <InputField
                             {...field}
-                            placeholder='Enter question here'
+                            placeholder='Enter request here'
                             type='text'
                             marginbottom='1.5rem'
                             error={
@@ -102,15 +114,15 @@ function MultiChoice({ show, size, modalName }) {
                     </div>
 
                     <div className={cx(styles.optionsWrapper, "flexCol")}>
-                      <NestedArray nestIndex={index} {...{ control, register, errors }} />
+                      <NestedArray nestIndex={index} {...{ control, errors }} />
                     </div>
 
                     <div
-                      onClick={() => remove(index)}
+                      onClick={() => handleRemoveGroup(index)}
                       className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
                     >
-                      <img onClick={() => remove(index)} src={removeIcon} alt='minus-icon' />
-                      <span>Delete Question</span>
+                      <img src={removeIcon} alt='minus-icon' />
+                      <span>Delete Request</span>
                     </div>
                   </div>
                 );
@@ -123,7 +135,7 @@ function MultiChoice({ show, size, modalName }) {
 
             <div
               onClick={() => {
-                append({ question: "", options: [{ option: "" }] }),
+                append({ question: "", options: [{ fileName: "", fileType: "", quantity: "" }] }),
                   {
                     shouldFocus: true,
                     shouldUnregister: false
@@ -132,7 +144,7 @@ function MultiChoice({ show, size, modalName }) {
               className={cx(styles.appendDiv, "flexRow-align-center")}
             >
               <img src={addIcon} alt='add-icon' />
-              <span>{errors?.criteria?.root?.message ? "Add question" : "Add another question"}</span>
+              <span>{errors?.criteria?.root?.message ? "Add request" : "Add another request"}</span>
             </div>
 
             <div className={cx(styles.btnGroup, "flexRow-space-between")}>
@@ -147,10 +159,10 @@ function MultiChoice({ show, size, modalName }) {
   );
 }
 
-MultiChoice.propTypes = {
+FileInput.propTypes = {
   show: PropTypes.bool,
   size: PropTypes.string,
   modalName: PropTypes.string
 };
 
-export default MultiChoice;
+export default FileInput;

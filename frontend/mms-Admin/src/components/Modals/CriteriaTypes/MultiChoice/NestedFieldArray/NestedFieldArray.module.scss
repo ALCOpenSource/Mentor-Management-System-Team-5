@@ -1,0 +1,39 @@
+.nestedFieldsContainer {
+  .optionWrapper {
+    width: 100%;
+    gap: 0.5rem;
+    align-items: flex-start;
+
+    .option {
+      width: 100%;
+    }
+
+    img {
+      margin-top: 1rem;
+      width: 1.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .rootError {
+    font-size: 0.875rem;
+    font-family: var(--regular);
+    color: var(--red2Color);
+  }
+
+  .addMore {
+    width: fit-content;
+    gap: 0.5rem;
+    cursor: pointer;
+
+    img {
+      width: 1.5rem;
+    }
+
+    span {
+      font-size: 1rem;
+      font-family: var(--regular);
+      color: var(--grayTextColor);
+    }
+  }
+}
