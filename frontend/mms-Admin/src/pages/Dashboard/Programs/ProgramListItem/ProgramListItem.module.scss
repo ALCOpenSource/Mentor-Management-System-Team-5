@@ -39,7 +39,7 @@
         -moz-line-clamp: 1;
         -ms-line-clamp: 1;
         -o-line-clamp: 1;
-          line-clamp: 1;
+        line-clamp: 1;
         -webkit-box-orient: vertical;
         -moz-box-orient: vertical;
         -ms-box-orient: vertical;
@@ -61,7 +61,7 @@
           svg {
             width: 1rem;
           }
-          
+
           .value {
             margin: 0;
             line-height: 1;
@@ -123,7 +123,7 @@
             gap: 0.25rem;
 
             svg {
-                width: 1rem;
+              width: 1rem;
             }
 
             .value {
