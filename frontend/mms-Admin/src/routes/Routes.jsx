@@ -21,10 +21,13 @@ const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/A
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
 
-// Programs
+
+//Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
+const ProgramDetails = lazy(() => import("@/pages/Dashboard/Programs/ProgramDetails/ProgramDetails"));
 const CreateProgram = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateProgram"));
 const CreateCriteria = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateCriteria/CreateCriteria"));
+
 
 // Mentors
 const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
@@ -156,11 +159,13 @@ function RoutesComponent() {
           </Route>
           <Route index path='profile' element={<Profile />} />
           <Route path='programs'>
-            <Route path='' element={<Programs />} />
-            <Route path='create-program'>
-              <Route path='' element={<CreateProgram />} />
-              <Route path='create-criteria' element={<CreateCriteria />} />
-            </Route>
+              <Route path='' element={<Programs />}>
+                <Route path='program-details/:id' element={<ProgramDetails />} />
+                <Route path='create-program'>
+                  <Route path='' element={<CreateProgram />} />
+                  <Route path='create-criteria' element={<CreateCriteria />} />
+                </Route>
+              </Route>
           </Route>
 
           <Route path='reports'>
