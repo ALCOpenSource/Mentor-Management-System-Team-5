@@ -114,11 +114,11 @@ namespace mms.api.Controllers
                 Id = id,
                 UpdatedAt = DateTime.Now,
                 Description = request.Description,
-                CreatedBy = request.CreatedBy,
                 Status = request.Status,
                 ProgramId = request.ProgramId,
                 Title = request.Title,
                 Managers = request.Managers,
+                Mentors = request.Mentors
             };
 
             var result = await Mediator.Send(command);

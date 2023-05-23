@@ -10,6 +10,5 @@ namespace mms.Application.Common.DTOs
     {
         public string Id { get; set; }
         public string ProgramId { get; set; }
-        public string AppUserId { get; set; }
     }
 }

@@ -9,6 +9,5 @@ namespace mms.Application.Common.DTOs
     public class MentorManagerDTO
     {
         public string Id { get; set; }
-        public string AppUserId { get; set; }
     }
 }
