@@ -15,7 +15,7 @@
         width: 3rem;
         align-self: flex-start;
       }
-  
+
       .mainContent {
         gap: 0.5rem;
   
@@ -26,13 +26,13 @@
           margin: 0;
           line-height: 1;
         }
-  
+
         .metaData {
           gap: 1.5rem;
           font-size: 0.875rem;
           color: var(--grayTextColor);
           font-family: var(--regular);
-  
+
           .info {
             align-items: center;
             gap: 0.25rem;
@@ -51,12 +51,12 @@
       }
     }
   }
-  
+
   .body {
     background-color: var(--sectionContainerBgColor);
     padding: 0.5rem;
     gap: 1rem;
-  
+
     .subHeading {
       color: var(--blackTextColor);
       font-family: var(--semiBold);
@@ -72,19 +72,19 @@
       margin: 0;
       padding: 0;
     }
-  
+
     .summaryDiv {
       background-color: var(--dashboardSummaryCardBgColor);
       align-items: center;
       padding: 0.5rem;
       width: 100%;
       gap: 0.5rem;
-  
+
       .iconDiv {
         width: 7.5%;
         display: none;
       }
-  
+
       .summary {
         width: 75%;
         gap: 0.5rem;
@@ -92,25 +92,25 @@
         font-family: var(--semiBold);
         font-size: 1rem;
         align-items: center;
-  
+
         span {
           line-height: 1;
           margin: 0;
         }
-  
+
         .summaryValue {
           font-size: 1.25rem;
           font-family: var(--bold);
           color: var(--black2TextColor);
         }
-  
+ 
         .caption {
           font-size: 0.875rem;
           font-family: var(--semiBold);
           color: var(--black2TextColor);
           white-space: wrap;
         }
-  
+
         .count {
           font-size: 0.875rem;
           text-align: center;
@@ -124,13 +124,13 @@
           display: block;
         }
       }
-  
+
       button {
         margin-left: auto;
       }
     }
   }
-  
+
   .btnGroup {
     gap: 1.5rem;
     justify-content: flex-end;
@@ -147,7 +147,7 @@
     }
   }
 }
-  
+
 @media all and (min-width: 768px) {
   .programDetailsContainer {
     padding: 1rem 0;
