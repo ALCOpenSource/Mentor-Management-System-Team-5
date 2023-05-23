@@ -5,8 +5,9 @@ import styles from "./CreateCriteria.module.scss";
 import { useNavigate } from "react-router-dom";
 import backIcon from "@/assets/icons/back-icon.svg";
 import Button from "@/components/Button/Button";
-
-import { useForm, Controller } from "react-hook-form";
+import InputField from "@/components/Input/Input";
+import SelectField from "@/components/Select/Select";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createProgramCriteriaSchema } from "@/helpers/validation";
 import { showModal } from "@/redux/Modal/ModalSlice";
@@ -18,6 +19,8 @@ import YesOrNoModal from "@/components/Modals/CriteriaTypes/YesOrNo/YesOrNo";
 import MultiChoiceModal from "@/components/Modals/CriteriaTypes/MultiChoice/MultiChoice";
 import FileInputModal from "@/components/Modals/CriteriaTypes/FileInput/FileInput";
 import { getCriteriaFromStorage } from "@/redux/Criteria/CriteriaSlice";
+import editIcon from "@/assets/icons/edit-icon-thin.svg";
+import deleteIcon from "@/assets/icons/minus-icon-thin.svg";
 
 // import successImage from "@/assets/images/default-success-notification-image.png";
 
@@ -86,6 +89,87 @@ const CreateCriteria = () => {
     );
   };
 
+  const getSingleInputContents = (item) => {
+    return (
+      Array.isArray(item) &&
+      item.map((input) => {
+        return (
+          <div className={cx(styles.singleInputWrapper, "flexCol")} key={input?.id}>
+            <InputField type='text' value={input.question} readOnly marginbottom={"0.5rem"} />
+            <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
+              <img src={editIcon} alt='edit-icon' />
+              <img src={deleteIcon} alt='delete-icon' />
+            </div>
+          </div>
+        );
+      })
+    );
+  };
+
+  const getMultipleInputContents = (item) => {
+    return (
+      Array.isArray(item) &&
+      item.map((input) => {
+        return (
+          <div className={cx(styles.multipleInputWrapper, "flexCol")} key={input?.id}>
+            <p className={cx(styles.title)}>{input.question}</p>
+            <InputField type='text' value={`${input.numberOfInputs} Inputs`} readOnly marginbottom={"0.5rem"} />
+            <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
+              <img src={editIcon} alt='edit-icon' />
+              <img src={deleteIcon} alt='delete-icon' />
+            </div>
+          </div>
+        );
+      })
+    );
+  };
+
+  const getYesOrNoContents = (item) => {
+    return (
+      Array.isArray(item) &&
+      item.map((input) => {
+        return (
+          <div className={cx(styles.yesOrNoWrapper, "flexCol")} key={input?.id}>
+            <p className={cx(styles.title)}>{input.question}</p>
+            <div className={cx(styles.radioBtnGroup, "flexRow")}>
+              <div className={cx(styles.group, "flexRow")}>
+                <input type='radio' name='yes' id='yes' />
+                <label htmlFor='yes'>Yes</label>
+              </div>
+              <div className={cx(styles.group, "flexRow")}>
+                <input type='radio' name='no' id='no' />
+                <label htmlFor='no'>No</label>
+              </div>
+            </div>
+            <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
+              <img src={editIcon} alt='edit-icon' />
+              <img src={deleteIcon} alt='delete-icon' />
+            </div>
+          </div>
+        );
+      })
+    );
+  };
+
+  const handleDisplayContents = (item, category) => {
+    console.log(item, "item");
+    console.log(category, "category");
+    switch (category) {
+      case "singleInput":
+        return getSingleInputContents(item);
+      case "multipleInput":
+        return getMultipleInputContents(item);
+      case "yesOrNo":
+        return getYesOrNoContents(item);
+      case "multiChoice":
+        return getMultiChoiceContents(item);
+      case "fileInput":
+        return getFileInputContents(item);
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={cx(styles.createCriteriaContainer, "flexCol")}>
       <div className={cx(styles.heading, "flexRow-align-center")}>
@@ -112,13 +196,7 @@ const CreateCriteria = () => {
                 {criteriaData &&
                   Object.keys(criteriaData) &&
                   Object.keys(criteriaData).map((category) => {
-                    return criteriaData[category].map((item, index) => {
-                      return (
-                        <div key={index} className={cx(styles.criteriaCard, "flexCol")}>
-                          <p>{item.question}</p>
-                        </div>
-                      );
-                    });
+                    return handleDisplayContents(criteriaData[category], category);
                   })}
               </div>
               <div className={cx(styles.addCriteriaBtnDiv, "flexRow")}>

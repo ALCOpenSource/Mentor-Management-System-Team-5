@@ -57,6 +57,50 @@
         gap: 1rem;
         overflow-y: auto;
 
+        .contentWrapper {
+          gap: 1rem;
+          color: var(--grayTextColor);
+          font-size: 1rem;
+
+          .title {
+            font-family: var(--regular);
+            color: var(--grayTextColor);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+          }
+
+          .btnGroup {
+            gap: 1rem;
+
+            img {
+              width: 1.5rem;
+              cursor: pointer;
+            }
+          }
+
+          .singleInputWrapper {
+            width: 100%;
+          }
+
+          .multipleInputWrapper {
+            width: 100%;
+          }
+
+          .yesOrNoWrapper {
+            width: 100%;
+
+            .radioBtnGroup {
+              gap: 4rem;
+
+              .group {
+                align-items: center;
+                gap: 0.5rem;
+              }
+            }
+          }
+        }
+
         .addCriteriaBtnDiv {
           justify-content: flex-start;
         }
