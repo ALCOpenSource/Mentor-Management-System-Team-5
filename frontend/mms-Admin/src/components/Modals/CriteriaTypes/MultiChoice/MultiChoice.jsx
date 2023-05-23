@@ -42,6 +42,7 @@ function MultiChoice({ show, size, modalName }) {
     handleSubmit,
     control,
     register,
+    getValues,
     formState: { errors },
     reset
   } = useForm({
@@ -57,13 +58,18 @@ function MultiChoice({ show, size, modalName }) {
   });
 
   const handleCreateCriteria = (data) => {
-    console.log(data, "data");
     const newCriteria = {
       ...criteria,
       [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
     };
     dispatch(saveCriteriaToStorage(newCriteria));
     handleClose();
+  };
+
+  const handleRemoveGroup = (index) => {
+    remove(index);
+    let updatedValue = getValues("criteria");
+    reset({ criteria: updatedValue });
   };
 
   return (
@@ -106,10 +112,10 @@ function MultiChoice({ show, size, modalName }) {
                     </div>
 
                     <div
-                      onClick={() => remove(index)}
+                      onClick={() => handleRemoveGroup(index)}
                       className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
                     >
-                      <img onClick={() => remove(index)} src={removeIcon} alt='minus-icon' />
+                      <img src={removeIcon} alt='minus-icon' />
                       <span>Delete Question</span>
                     </div>
                   </div>

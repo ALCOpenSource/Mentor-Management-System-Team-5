@@ -39,11 +39,9 @@ function FileInput({ show, size, modalName }) {
   };
 
   const {
-    setValue,
     getValues,
     handleSubmit,
     control,
-    register,
     formState: { errors },
     reset
   } = useForm({
@@ -59,24 +57,19 @@ function FileInput({ show, size, modalName }) {
   });
 
   const handleCreateCriteria = (data) => {
-    console.log(data, "data");
-    // const newCriteria = {
-    //   ...criteria,
-    //   [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
-    // };
-    // dispatch(saveCriteriaToStorage(newCriteria));
-    // handleClose();
+    const newCriteria = {
+      ...criteria,
+      [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
+    };
+    dispatch(saveCriteriaToStorage(newCriteria));
+    handleClose();
   };
 
   const handleRemoveGroup = (index) => {
     remove(index);
-    console.log(fields, "new field");
-    console.log(criteria, "current criteria");
-    // reset({ fields });
+    let updatedValue = getValues("criteria");
+    reset({ criteria: updatedValue });
   };
-
-  console.log(errors, "eror");
-  console.log(fields, "fields");
 
   return (
     <ModalContainer show={show} size={size} modalName={modalName}>
@@ -137,8 +130,7 @@ function FileInput({ show, size, modalName }) {
               onClick={() => {
                 append({ question: "", options: [{ fileName: "", fileType: "", quantity: "" }] }),
                   {
-                    shouldFocus: true,
-                    shouldUnregister: false
+                    shouldFocus: true
                   };
               }}
               className={cx(styles.appendDiv, "flexRow-align-center")}
