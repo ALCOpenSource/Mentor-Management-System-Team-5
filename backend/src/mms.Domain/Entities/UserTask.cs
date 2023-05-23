@@ -1,4 +1,5 @@
 ﻿using mms.Domain.Common;
+using mms.Domain.Enums;
 
 namespace mms.Domain.Entities
 {
@@ -8,8 +9,10 @@ namespace mms.Domain.Entities
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
         public string CreatedBy { get; set; }
-        public string Status { get; set; }
+        public UserTaskStatus Status { get; set; }
         public string ProgramId { get; set; }
-        public IList<AppUser> Managers { get; set; }
+        public string AppUserId { get; set; }
+        public IList<AppUser> AppUsers { get; set; } //Managers and Mentors only
+        public IList<Report> Reports { get; set; }
     }
 }

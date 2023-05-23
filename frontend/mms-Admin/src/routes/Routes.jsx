@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 // Authentication
 import Login from "@/pages/Authentication/Login/Login";
+import SignUp from "@/pages/Authentication/SignUp/SignUp";
+import CategorySelector from "@/pages/Authentication/SignUp/CategorySelector/CategorySelector";
+import SignUpConfirmation from "@/pages/Authentication/SignUp/Confirmation/Confirmation";
 import ForgotPassword from "@/pages/Authentication/ForgotPassword/ForgotPassword";
 import ResetPassword from "@/pages/Authentication/ResetPassword/ResetPassword";
 
@@ -16,12 +19,14 @@ import DashboardContainer from "@/components/DashboardContainer/DashboardContain
 const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
 const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
-const MentorManagers = lazy(() => import("@/pages/Dashboard/MentorManagers/MentorManagers"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
+
 
 //Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
 const ProgramDetails = lazy(() => import("@/pages/Dashboard/Programs/ProgramDetails/ProgramDetails"));
+const CreateProgram = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateProgram"));
+const CreateCriteria = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateCriteria/CreateCriteria"));
 
 
 // Mentors
@@ -33,6 +38,27 @@ const MentorDetailsCertificates = lazy(() =>
   import("@/pages/Dashboard/Mentors/MentorDetails/Certificates/Certificates")
 );
 const MentorDetailsTasks = lazy(() => import("@/pages/Dashboard/Mentors/MentorDetails/Tasks/Tasks"));
+
+// MentorManagers
+const MentorManagers = lazy(() => import("@/pages/Dashboard/MentorManagers/MentorManagers"));
+const MentorManagerDetails = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/MentorManagerDetails")
+);
+const MentorManagerDetailsAbout = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/About/About")
+);
+const MentorManagerDetailsPrograms = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Programs/Programs")
+);
+const MentorManagerDetailsMentors = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Mentors/Mentors")
+);
+const MentorManagerDetailsCertificates = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Certificates/Certificates")
+);
+const MentorManagerDetailsTasks = lazy(() =>
+  import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Tasks/Tasks")
+);
 
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
@@ -72,6 +98,9 @@ function RoutesComponent() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/sign-up/:category' element={<SignUp />} />
+        <Route path='/sign-up-category-selector' element={<CategorySelector />} />
+        <Route path='/sign-up-confirmation' element={<SignUpConfirmation />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
 
@@ -99,7 +128,17 @@ function RoutesComponent() {
             <Route index path='' element={<DiscussionForum />} />
             <Route path='post-details/:id' element={<PostDetails />} />
           </Route>
-          <Route path='mentor-managers' element={<MentorManagers />} />
+          <Route path='mentor-managers'>
+            <Route index path='' element={<MentorManagers />} />
+            <Route path='mentor-manager-details/:id' element={<MentorManagerDetails />}>
+              <Route path='' element={<MentorManagerDetailsAbout />} />
+              <Route path='about' element={<MentorManagerDetailsAbout />} />
+              <Route path='programs' element={<MentorManagerDetailsPrograms />} />
+              <Route path='mentors' element={<MentorManagerDetailsMentors />} />
+              <Route path='certificates' element={<MentorManagerDetailsCertificates />} />
+              <Route path='tasks' element={<MentorManagerDetailsTasks />} />
+            </Route>
+          </Route>
           <Route path='mentors'>
             <Route index path='' element={<Mentors />} />
             <Route path='mentor-details/:id' element={<MentorDetails />}>
@@ -122,8 +161,13 @@ function RoutesComponent() {
           <Route path='programs'>
               <Route path='' element={<Programs />}>
                 <Route path='program-details/:id' element={<ProgramDetails />} />
+                <Route path='create-program'>
+                  <Route path='' element={<CreateProgram />} />
+                  <Route path='create-criteria' element={<CreateCriteria />} />
+                </Route>
               </Route>
           </Route>
+
           <Route path='reports'>
             <Route path='' element={<Reports />}>
               <Route path='report-details/:id' element={<ReportDetails />} />

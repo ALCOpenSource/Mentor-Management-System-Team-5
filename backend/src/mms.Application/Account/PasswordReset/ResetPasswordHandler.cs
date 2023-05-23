@@ -12,8 +12,9 @@ namespace mms.Application.Account.PasswordReset
     public class ResetPasswordHandler : AccountBaseHandler, IRequestHandler<ResetPassword, Result<string>>
     {
         public ResetPasswordHandler(UserManager<AppUser> userManager, IConfiguration configuration,
-            ApplicationContext context, ITokenGeneratorService tokenGenerator) : base(userManager, configuration,
-            tokenGenerator)
+            ApplicationContext context, ITokenGeneratorService tokenGenerator, IMailService mailService) : base(
+            userManager, configuration,
+            tokenGenerator, mailService)
         {
         }
 

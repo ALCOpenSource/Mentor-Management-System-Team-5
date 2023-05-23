@@ -5,6 +5,16 @@ const initialState = {
   loginLoading: false,
   forgotPasswordLoading: false,
   resetPasswordLoading: false,
+  signUpLoading: false,
+  confirmEmailLoading: false,
+
+  // Reports
+  getAllReportsLoading: false,
+  getWeeklyReportsLoading: false,
+  getMonthlyReportsLoading: false,
+  getYearlyReportsLoading: false,
+  createNewReportLoading: false,
+  editReportLoading: false,
 
   //Settings
   changePasswordLoading: false,
@@ -34,6 +44,32 @@ export const loadingSlice = createSlice({
     },
     resetPasswordLoading: (state, action) => {
       state.resetPasswordLoading = action.payload;
+    },
+    signUpLoading: (state, action) => {
+      state.signUpLoading = action.payload;
+    },
+    confirmEmailLoading: (state, action) => {
+      state.confirmEmailLoading = action.payload;
+    },
+
+    // Reports
+    getAllReportsLoading: (state, action) => {
+      state.getAllReportsLoading = action.payload;
+    },
+    getWeeklyReportsLoading: (state, action) => {
+      state.getWeeklyReportsLoading = action.payload;
+    },
+    getMonthlyReportsLoading: (state, action) => {
+      state.getMonthlyReportsLoading = action.payload;
+    },
+    getYearlyReportsLoading: (state, action) => {
+      state.getYearlyReportsLoading = action.payload;
+    },
+    createNewReportLoading: (state, action) => {
+      state.createNewReportLoading = action.payload;
+    },
+    editReportLoading: (state, action) => {
+      state.editReportLoading = action.payload;
     },
 
     //Settings
@@ -75,6 +111,14 @@ export const {
   loginLoading,
   forgotPasswordLoading,
   resetPasswordLoading,
+  signUpLoading,
+  confirmEmailLoading,
+  getAllReportsLoading,
+  getWeeklyReportsLoading,
+  getMonthlyReportsLoading,
+  getYearlyReportsLoading,
+  createNewReportLoading,
+  editReportLoading,
   changePasswordLoading,
   updateProfileLoading,
   getProfileLoading,

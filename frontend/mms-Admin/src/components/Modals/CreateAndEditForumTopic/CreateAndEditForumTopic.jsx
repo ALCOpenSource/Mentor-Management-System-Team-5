@@ -68,8 +68,7 @@ function CreateAndEditForumTopic({ show, size, modalName }) {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Enter a title'
-                    placeholder=''
+                    placeholder='Enter a title'
                     type='text'
                     error={errors?.title && errors?.title?.message}
                   />
@@ -84,7 +83,6 @@ function CreateAndEditForumTopic({ show, size, modalName }) {
                     <TextArea
                       {...field}
                       placeholder='Start typing...'
-                      label=''
                       borderColor='none'
                       marginbottom='0'
                       minHeight='150px'

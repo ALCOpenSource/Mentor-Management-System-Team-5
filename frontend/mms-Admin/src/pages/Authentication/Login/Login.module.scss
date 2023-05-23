@@ -58,6 +58,42 @@
           }
         }
       }
+
+      .googleLoginDiv {
+        gap: 1rem;
+        border: 1px solid var(--secondaryBtnTextColor);
+        border-radius: 0.5rem;
+        width: 100%;
+        cursor: pointer;
+        padding: 0.125rem 0;
+        margin-top: 1.5rem;
+
+        img {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+
+        span {
+          font-size: 1rem;
+          font-family: var(--semiBold);
+          color: var(--secondaryBtnTextColor);
+        }
+      }
+
+      .signUpDiv {
+        .caption,
+        span {
+          font-size: 1rem;
+          font-family: var(--semiBold);
+          color: var(--primaryTextColor);
+        }
+
+        span {
+          cursor: pointer;
+          padding-left: 0.25rem;
+          text-decoration: dotted underline;
+        }
+      }
     }
   }
 }

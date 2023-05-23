@@ -1,0 +1,177 @@
+.signUpContainer {
+  .leftSection {
+    display: none;
+  }
+
+  .rightSection {
+    .formContainer {
+      min-height: 100dvh;
+      width: 100%;
+      padding: 1.5rem;
+      gap: 1.5rem;
+
+      .formHeader {
+        text-align: left;
+        width: 100%;
+
+        .formTitle {
+          font-size: 2rem;
+          font-family: var(--bold);
+          color: var(--blackTextColor);
+        }
+
+        .caption {
+          font-size: 1rem;
+          font-weight: 400;
+          color: var(--grayTextColor);
+        }
+      }
+
+      .formWrapper {
+        width: 100%;
+
+        form {
+          .submitBtnDiv {
+            margin-top: 3.5rem;
+
+            button {
+              width: 100%;
+            }
+          }
+
+          .forgotPasswordWrapper {
+            margin-top: 1.5rem;
+            justify-content: flex-end;
+
+            p {
+              text-align: right;
+              font-size: 1rem;
+              font-family: var(--semiBold);
+              color: var(--black2TextColor);
+              width: fit-content;
+              cursor: pointer;
+              border-bottom: 1px solid #ccc;
+              margin: 0;
+              padding: 0;
+              line-height: 1;
+            }
+          }
+        }
+      }
+
+      .googleSignUpDiv {
+        gap: 1rem;
+        border: 1px solid var(--secondaryBtnTextColor);
+        border-radius: 0.5rem;
+        width: 100%;
+        cursor: pointer;
+        padding: 0.125rem 0;
+        margin-top: 1.5rem;
+
+        img {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+
+        span {
+          font-size: 1rem;
+          font-family: var(--semiBold);
+          color: var(--secondaryBtnTextColor);
+        }
+      }
+
+      .signInDiv {
+        .caption,
+        span {
+          font-size: 1rem;
+          font-family: var(--semiBold);
+          color: var(--primaryTextColor);
+        }
+
+        span {
+          cursor: pointer;
+          padding-left: 0.25rem;
+          text-decoration: dotted underline;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .signUpContainer {
+    .leftSection {
+      display: block;
+    }
+
+    .rightSection {
+      .formContainer {
+        padding: 1rem;
+        gap: 1.5rem;
+
+        .formHeader {
+          .formTitle {
+            font-size: 2rem;
+          }
+
+          .caption {
+            font-size: 1.25rem;
+          }
+        }
+
+        .formWrapper {
+          form {
+            .forgotPasswordWrapper {
+              p {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .signUpContainer {
+    .rightSection {
+      .formContainer {
+        padding: 2rem;
+        gap: 1.75rem;
+
+        .formWrapper {
+          form {
+            .forgotPasswordWrapper {
+              p {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .signUpContainer {
+    .rightSection {
+      .formContainer {
+        width: 70%;
+        align-self: center;
+        gap: 2rem;
+
+        .formWrapper {
+          form {
+            .forgotPasswordWrapper {
+              p {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

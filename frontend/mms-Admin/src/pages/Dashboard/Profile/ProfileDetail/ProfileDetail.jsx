@@ -13,7 +13,7 @@ function ProfileDetail({ data }) {
         <h2 className={cx(styles.sectionTitle, "p-0")}>About</h2>
       </Row>
       <Row>
-        <p className={cx(styles.bio, "mb-3")}>{bio}</p>
+        <p className={cx(styles.bio, "mb-3")}>{bio || "Kindly update your bio"}</p>
       </Row>
 
       <div className={cx(styles.addressInfoDiv, "flexCol")}>
@@ -43,7 +43,7 @@ function ProfileDetail({ data }) {
                   <img src={data.icon} alt={`${data.title} icon`} />
                 </Col>
                 <Col className='p-0'>
-                  <h6 className={cx(styles.socialUserName, "m-0")}>{data.username}</h6>
+                  <h6 className={cx(styles.socialUserName, "m-0")}>{data.username || "Kindly update your details"}</h6>
                 </Col>
               </Row>
             ))}

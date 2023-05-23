@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./Reports.module.scss";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
@@ -8,26 +8,31 @@ import Button from "@/components/Button/Button";
 import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
+import closeIcon from "@/assets/icons/undo-icon.svg";
+import Search from "@/components/Search/Search";
+import Filter from "@/components/Filter/Filter";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import useIsMobile from "@/hooks/useIsMobile";
 import SwitcherTab from "@/pages/Dashboard/Reports/SwitcherTab/SwitcherTab";
 import ReportListItem from "./ReportListItem/ReportListItem";
+import { getAllReports } from "@/redux/Reports/ReportsSlice";
 
 function Reports() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const params = useParams();
   const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
-  // const [showSearchInput, setShowSearchInput] = useState(false);
 
-  // const dispatch = useDispatch();
   // const displayModal = useSelector((state) => state.modal.show);
   // const modalName = useSelector((state) => state.modal.modalName);
+  const allReportsData = useSelector((state) => state.reports.getAllReportsData);
+  console.log(allReportsData, "all reports data");
 
   useEffect(() => {
+    dispatch(getAllReports());
     setSelectedMenuId(params.id);
-  }, [navigate, params.id]);
+  }, [navigate, dispatch, params.id]);
 
   const reportsCategoryArray = useMemo(
     () => [
@@ -144,7 +149,7 @@ function Reports() {
     console.log(item);
   };
 
-  const handleCloseSidebar = () => {
+  const handleCloseSideBar = () => {
     setOpenSideBar({ open: false, category: "" });
   };
 
@@ -153,6 +158,18 @@ function Reports() {
     setActiveTab(tab.key);
   };
 
+  const [collapseInput, setCollapseInput] = useState(false);
+  const [closeSelectElement, setCloseSelectElement] = useState(false);
+
+  const handleCloseSearchInput = (e) => {
+    console.log(e, "handle close input");
+    setCollapseInput(true);
+  };
+
+  const handleCloseSelectElement = (e) => {
+    console.log(e, "handle close select");
+    setCloseSelectElement(true);
+  };
   const getListComponents = (data) => {
     const listItems = data.map((item, index) => {
       return {
@@ -162,25 +179,42 @@ function Reports() {
     });
 
     const headerComponent = (
-      <>
+      <div className={cx(styles.sideBarHeader, "flexCol")}>
         <SwitcherTab data={reportsCategoryArray} selectedTab={handleSelectedTab} activeTab={activeTab} />
 
-        <FilterAndSearch
-          closeSideBar={handleCloseSidebar}
-          dropdownItems={[
-            { name: "All Reports", id: 1 },
-            { name: "Assigned", id: 2 },
-            { name: "Completed", id: 3 }
-          ]}
-          searchData={handleSearchInput}
-          selectedFilterItem={handleSelectedFilterItem}
-          showCloseIcon={false}
-          inputPlaceholder='Search for report...'
-          showDropdown={true}
-          showFilterToggler={false}
-          reversed={true}
-        />
-      </>
+        <div className={cx(styles.searchAndFilterDiv, "flexRow")}>
+          <div className={cx(styles.searchWrapper)}>
+            <Search
+              inputPlaceholder='Search for tasks...'
+              onChange={handleSearchInput}
+              collapseInput={collapseInput}
+              setCollapseInput={setCollapseInput}
+              closeSelectElement={handleCloseSelectElement}
+            />
+          </div>
+
+          <Filter
+            dropdownItems={[
+              { name: "All Reports", id: 1 },
+              { name: "Assigned", id: 2 },
+              { name: "Completed", id: 3 }
+            ]}
+            selectedFilterItem={handleSelectedFilterItem}
+            closeSearchInput={handleCloseSearchInput}
+            closeSelectElement={closeSelectElement}
+            setCloseSelectElement={setCloseSelectElement}
+          />
+
+          {isMobile && (
+            <img
+              onClick={() => setOpenSideBar(!openSideBar)}
+              src={closeIcon}
+              className={cx(styles.closeIcon)}
+              alt='close-icon'
+            />
+          )}
+        </div>
+      </div>
     );
 
     return { listItems, headerComponent };
@@ -191,8 +225,11 @@ function Reports() {
     setSelectedMenuId(() => {
       return item;
     });
+    isMobile && handleCloseSideBar();
     navigate(`report-details/${item}`);
   };
+
+  console.log(selectedMenuId, "selectedMenuId");
 
   return (
     <div className={cx(styles.reportsContainer, "flexRow")}>

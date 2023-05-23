@@ -1,0 +1,153 @@
+.signUpContainer {
+  .leftSection {
+    display: none;
+  }
+
+  .rightSection {
+    min-height: 100dvh;
+    width: 100%;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    justify-content: center;
+
+    .header {
+      text-align: left;
+      width: 100%;
+
+      .headerTitle {
+        font-size: 2rem;
+        font-family: var(--bold);
+        color: var(--blackTextColor);
+      }
+
+      .caption {
+        font-size: 1rem;
+        font-weight: 400;
+        color: var(--grayTextColor);
+      }
+    }
+
+    .selectorDiv {
+      gap: 2rem;
+
+      .cardWrapper {
+        gap: 0.5rem;
+        border: 1px solid var(--green5Color);
+        border-radius: 10px;
+        padding: 1rem;
+        cursor: pointer;
+
+        &:hover {
+          border: 1px solid var(--green5Color);
+          background-color: var(--green3Color);
+          box-shadow: 0 4px 14px 1px rgba(0, 0, 0, 0.04);
+        }
+
+        .iconDiv {
+          width: 5rem;
+
+          .categoryIcon {
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .content {
+          gap: 0.5rem;
+
+          .title {
+            font-size: 1.25rem;
+            font-family: var(--regular);
+            color: var(--black1Color);
+            line-height: 1;
+            margin: 0;
+          }
+
+          .description {
+            font-size: 1rem;
+            font-family: var(--regular);
+            color: var(--black6Color);
+            margin: 0;
+            line-height: 1.5;
+          }
+        }
+
+        .icon {
+          width: 1.5rem;
+          object-fit: cover;
+          margin-left: auto;
+        }
+      }
+    }
+
+    .signInDiv {
+      margin-top: 1rem;
+
+      .caption,
+      span {
+        font-size: 1rem;
+        font-family: var(--semiBold);
+        color: var(--primaryTextColor);
+      }
+
+      span {
+        cursor: pointer;
+        padding-left: 0.25rem;
+        text-decoration: dotted underline;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .signUpContainer {
+    flex-wrap: nowrap;
+
+    .leftSection {
+      display: block;
+    }
+
+    .rightSection {
+      padding: 1rem;
+      gap: 1.5rem;
+      width: 50%;
+
+      .header {
+        .headerTitle {
+          font-size: 2rem;
+        }
+
+        .caption {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .signUpContainer {
+    .rightSection {
+      padding: 2rem;
+      gap: 1.75rem;
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .signUpContainer {
+    .rightSection {
+      width: 40%;
+      align-self: center;
+      gap: 2rem;
+      padding: 4rem 6rem;
+
+      .selectorDiv {
+        .cardWrapper {
+          gap: 1.5rem;
+          padding: 1rem 1.5rem;
+        }
+      }
+    }
+  }
+}

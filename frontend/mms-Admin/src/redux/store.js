@@ -3,13 +3,15 @@ import AuthReducer from "./Auth/AuthSlice";
 import ModalReducer from "./Modal/ModalSlice";
 import LoadingReducer from "./Loading/LoadingSlice";
 import SettingsReducer from "./Settings/SettingsSlice";
+import ReportsReducer from "./Reports/ReportsSlice";
 
 const store = configureStore({
   reducer: {
     auth: AuthReducer,
     modal: ModalReducer,
     loading: LoadingReducer,
-    settings: SettingsReducer
+    settings: SettingsReducer,
+    reports: ReportsReducer
   },
   devTools: process.env.NODE_ENV === "development"
 });

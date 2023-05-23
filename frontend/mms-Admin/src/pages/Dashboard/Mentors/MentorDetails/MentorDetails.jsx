@@ -4,20 +4,32 @@ import styles from "./MentorDetails.module.scss";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import UserComponent from "../UserComponent/UserComponent";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import Button from "@/components/Button/Button";
+import backIcon from "@/assets/icons/back-icon.svg";
+import Search from "@/components/Search/Search";
+import Filter from "@/components/Filter/Filter";
 import useIsMobile from "@/hooks/useIsMobile";
 import Tabs from "@/components/Tabs/Tabs";
 import { Outlet, useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { showModal } from "@/redux/Modal/ModalSlice";
 import flagIcon from "@/assets/icons/flag-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
+import editIcon from "@/assets/icons/edit-icon.svg";
+import EditUserRoleModal from "@/components/Modals/EditUserRole/EditUserRole";
 
 const MentorDetails = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [openSideBar, setOpenSideBar] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [collapseInput, setCollapseInput] = useState(true);
+  const [closeSelectElement, setCloseSelectElement] = useState(false);
+
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
 
   const mentorsArray = useMemo(
     () => [
@@ -111,8 +123,14 @@ const MentorDetails = () => {
     console.log(item);
   };
 
-  const handleCloseSidebar = () => {
-    setOpenSideBar(false);
+  const handleCloseSearchInput = (e) => {
+    console.log(e, "handle close input");
+    setCollapseInput(true);
+  };
+
+  const handleCloseSelectElement = (e) => {
+    console.log(e, "handle close select");
+    setCloseSelectElement(true);
   };
 
   const handleViewUser = (user) => {
@@ -122,6 +140,18 @@ const MentorDetails = () => {
     if (isMobile) {
       setOpenSideBar(false);
     }
+  };
+
+  const editUserRole = () => {
+    console.log("edit user role");
+    dispatch(
+      showModal({
+        name: "editUserRole",
+        modalData: {
+          title: "Edit User Role"
+        }
+      })
+    );
   };
 
   const getListComponents = (data) => {
@@ -136,19 +166,40 @@ const MentorDetails = () => {
 
     const headerComponent = (
       <>
-        <div className={cx(styles.headerWrapper, "flexRow-space-between")}>
-          <h3 className={cx(styles.title)}>Mentors</h3>
-          <FilterAndSearch
-            closeSideBar={handleCloseSidebar}
+        <div className={cx(styles.sideBarHeader, "flexRow-space-between")}>
+          <div
+            style={{ display: !isMobile && !collapseInput ? "none" : "flex" }}
+            className={cx(styles.titleDiv, "flexRow-align-center")}
+          >
+            {isMobile && (
+              <img
+                onClick={() => setOpenSideBar(!openSideBar)}
+                src={backIcon}
+                className={cx(styles.backIcon)}
+                alt='close-icon'
+              />
+            )}
+            {collapseInput && <h3 className={cx(styles.title)}>Mentors</h3>}
+          </div>
+          <div className={cx(styles.searchWrapper)}>
+            <Search
+              inputPlaceholder='Search for tasks...'
+              onChange={handleSearchInput}
+              collapseInput={collapseInput}
+              setCollapseInput={setCollapseInput}
+              closeSelectElement={handleCloseSelectElement}
+            />
+          </div>
+          <Filter
             dropdownItems={[
               { name: "All", id: 1 },
               { name: "Mentors", id: 2 },
               { name: "Mentor Managers", id: 3 }
             ]}
-            searchData={handleSearchInput}
             selectedFilterItem={handleSelectedFilterItem}
-            showCloseIcon={false}
-            inputPlaceholder='Search for mentor...'
+            closeSearchInput={handleCloseSearchInput}
+            closeSelectElement={closeSelectElement}
+            setCloseSelectElement={setCloseSelectElement}
           />
         </div>
       </>
@@ -196,7 +247,10 @@ const MentorDetails = () => {
               <div className={cx(styles.info, "flexRow")}>
                 <div className={cx(styles.nameAndRole, "flexCol")}>
                   <p className={cx(styles.name)}>{selectedUser?.name}</p>
-                  <p className={cx(styles.role)}>{selectedUser?.role || "Mentor"}</p>
+                  <p className={cx(styles.role)}>
+                    {selectedUser?.role || "Mentor"}{" "}
+                    <img onClick={() => editUserRole()} src={editIcon} alt='edit-icon' />{" "}
+                  </p>
                 </div>
 
                 <img className={cx(styles.flagIcon)} src={flagIcon} alt='flag' />
@@ -241,6 +295,7 @@ const MentorDetails = () => {
           </div>
         </div>
       </div>
+      {displayModal && modalName === "editUserRole" ? <EditUserRoleModal show size='md' /> : null}
     </div>
   );
 };

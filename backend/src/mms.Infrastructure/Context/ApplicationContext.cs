@@ -16,6 +16,7 @@ namespace mms.Infrastructure.Context
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<ProgrammeApplication> ProgrammeApplications { get; set; }
         public DbSet<ProgramsMentor> ProgramsMentors { get; set; }
+        public DbSet<MentorManager> MentorManagers { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<UserTask> UserTasks { get; set; }
         public DbSet<TechStack> TechStacks { get; set; }
@@ -56,22 +57,50 @@ namespace mms.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Certificate>()
+                .HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<Certificate>()
+                .HasIndex(x => x.ProgramId);
+
+            modelBuilder.Entity<Programme>()
+                .HasMany(x => x.UserTasks);
+
+            modelBuilder.Entity<Programme>()
+                .HasMany(x => x.Reports);
+
+            modelBuilder.Entity<Programme>()
+                .HasMany(x => x.AppUsers);
+
             modelBuilder.Entity<ProgrammeApplication>()
-                .HasOne(p => p.Programme)
-                .WithMany(p => p.ProgrammeApplications)
-                .HasForeignKey(p => p.ProgrammeId);
+                .HasIndex(p => p.ProgrammeId);
 
             modelBuilder.Entity<ProgrammeApplication>()
                 .HasIndex(x => x.AppUserId);
 
             modelBuilder.Entity<ProgramsMentor>()
+                .HasIndex(x => x.ProgramId);
+
+            modelBuilder.Entity<ProgramsMentor>()
                 .HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<Report>()
+                .HasIndex(x => x.UserTaskId);
+
+            modelBuilder.Entity<Report>()
+                .HasIndex(x => x.ProgramId);
 
             modelBuilder.Entity<UserDetail>()
                 .HasIndex(x => x.AppUserId);
 
             modelBuilder.Entity<UserTask>()
-                .HasMany(x => x.Managers);
+                .HasMany(x => x.AppUsers)
+                .WithMany(x => x.UserTasks);
+
+            modelBuilder.Entity<UserTask>()
+                .HasMany(x => x.Reports)
+                .WithOne(x => x.UserTask)
+                .HasForeignKey(x => x.UserTaskId);
 
             modelBuilder.Entity<UserNotification>()
                 .HasIndex(x => x.AppUserId);

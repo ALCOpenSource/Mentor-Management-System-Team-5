@@ -23,6 +23,15 @@ export const resetPasswordSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must and should match")
 });
 
+export const signUpSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email address").required("Email is required"),
+  password: Yup.string()
+    .required("Password is required")
+    .max(50, "Must be 50 characters or less")
+    .min(8, "Must be above 8 characters"),
+  name: Yup.string().required("Name is required")
+});
+
 export const updateProfileSchema = Yup.object().shape({
   firstName: Yup.string(),
   lastName: Yup.string()
@@ -49,6 +58,11 @@ export const createTaskSchema = Yup.object().shape({
   details: Yup.string().required("Task details is required")
 });
 
+export const createProgramSchema = Yup.object().shape({
+  programName: Yup.string().required("Program name is required"),
+  programDescription: Yup.string().required("Program description is required")
+});
+
 export const editTaskSchema = Yup.object().shape({
   title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
   details: Yup.string().required("Task details is required")
@@ -68,4 +82,8 @@ export const createAndEditForumTopicSchema = Yup.object().shape({
 
 export const addUserSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Email is required")
+});
+
+export const editUserRoleSchema = Yup.object().shape({
+  role: Yup.string().required("Kindly select a role")
 });

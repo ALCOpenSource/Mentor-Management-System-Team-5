@@ -118,7 +118,7 @@
         }
 
         .cardBody {
-          background-color: var(--sectionContainerBgColor);
+          background-color: var(--green3Color);
           padding: 0.5rem;
           gap: 1rem;
 
@@ -256,11 +256,12 @@
     .body {
       .cardContainer {
         padding-right: 0;
+        gap: 0.625rem;
 
         .cardWrapper {
           .cardHeader {
             gap: 1rem;
-            padding: 1rem;
+            padding: 0.5rem 1rem;
 
             .wrapper {
               gap: 0.75rem;
@@ -274,7 +275,7 @@
                 gap: 0.5rem;
 
                 .title {
-                  font-size: 1.125rem;
+                  font-size: 1rem;
                 }
 
                 .metaData {
@@ -311,7 +312,7 @@
         .cardWrapper {
           .cardHeader {
             gap: 1.5rem;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1.5rem;
 
             .wrapper {
               .icon {

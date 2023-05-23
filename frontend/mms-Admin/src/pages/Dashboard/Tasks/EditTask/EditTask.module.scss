@@ -1,6 +1,6 @@
 .editTaskContainer {
   gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   position: relative;
   height: calc(100vh - var(--topNavbarHeight));
 
@@ -9,6 +9,7 @@
     flex-grow: 1;
     height: 100%;
     overflow-y: auto;
+    padding-right: 0.5rem;
 
     .heading {
       .title {
@@ -33,7 +34,7 @@
 
           .wrapper {
             width: 100%;
-            background-color: var(--sectionContainerBgColor);
+            background-color: var(--green3Color);
             padding: 1rem;
 
             .leftSide {
@@ -80,10 +81,23 @@
   }
 
   .sideBarSection {
-    // position: relative;
-    // overflow: auto;
-    // height: 100%;
     width: auto;
+
+    .filterAndSearchDiv {
+      width: 100%;
+      justify-content: flex-end;
+      gap: 1rem;
+      min-height: 3rem;
+
+      .searchWrapper {
+        flex-grow: 1;
+      }
+
+      .closeIcon {
+        width: 1rem;
+        cursor: pointer;
+      }
+    }
   }
 }
 

@@ -4,31 +4,33 @@ import cx from "classnames";
 import styles from "./EditTask.module.scss";
 import Button from "@/components/Button/Button";
 import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
+import closeIcon from "@/assets/icons/undo-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
-import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
+import Search from "@/components/Search/Search";
+import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
-
 import { useForm, Controller } from "react-hook-form";
 import { editTaskSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 
 const EditTask = () => {
-  const dispatch = useDispatch();
-  const displayModal = useSelector((state) => state.modal.show);
-  const modalName = useSelector((state) => state.modal.modalName);
-
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
   });
+  const [collapseInput, setCollapseInput] = useState(true);
+  const [closeSelectElement, setCloseSelectElement] = useState(false);
+
+  const dispatch = useDispatch();
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
 
   const mentorsArray = [
     {
@@ -180,8 +182,14 @@ const EditTask = () => {
     console.log(item);
   };
 
-  const handleCloseSidebar = () => {
-    setOpenSideBar({ open: false, category: "" });
+  const handleCloseSearchInput = (e) => {
+    console.log(e, "handle close input");
+    setCollapseInput(true);
+  };
+
+  const handleCloseSelectElement = (e) => {
+    console.log(e, "handle close select");
+    setCloseSelectElement(true);
   };
 
   const getListComponents = (data) => {
@@ -193,18 +201,34 @@ const EditTask = () => {
     });
 
     let headerComponent = (
-      <FilterAndSearch
-        closeSideBar={handleCloseSidebar}
-        dropdownItems={[
-          { name: "All", id: 1 },
-          { name: "Mentors", id: 2 },
-          { name: "Mentor Managers", id: 3 }
-        ]}
-        searchData={handleSearchInput}
-        selectedFilterItem={handleSelectedFilterItem}
-        showCloseIcon={true}
-        inputPlaceholder='Search for mentor...'
-      />
+      <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
+        <div className={cx(styles.searchWrapper)}>
+          <Search
+            inputPlaceholder='Search for mentor...'
+            onChange={handleSearchInput}
+            collapseInput={collapseInput}
+            setCollapseInput={setCollapseInput}
+            closeSelectElement={handleCloseSelectElement}
+          />
+        </div>
+        <Filter
+          dropdownItems={[
+            { name: "All", id: 1 },
+            { name: "Mentors", id: 2 },
+            { name: "Mentor Managers", id: 3 }
+          ]}
+          selectedFilterItem={handleSelectedFilterItem}
+          closeSearchInput={handleCloseSearchInput}
+          closeSelectElement={closeSelectElement}
+          setCloseSelectElement={setCloseSelectElement}
+        />
+        <img
+          src={closeIcon}
+          className={cx(styles.closeIcon)}
+          alt='close-icon'
+          onClick={() => setOpenSideBar({ open: false })}
+        />
+      </div>
     );
 
     return { listItems, headerComponent };
@@ -230,7 +254,6 @@ const EditTask = () => {
               render={({ field }) => (
                 <InputField
                   {...field}
-                  label={""}
                   placeholder='Enter a title'
                   type='text'
                   error={errors?.title && errors?.title?.message}
@@ -246,7 +269,6 @@ const EditTask = () => {
                 <TextArea
                   {...field}
                   placeholder={"Enter task details"}
-                  label={""}
                   minHeight='150px'
                   error={errors?.details && errors?.details?.message}
                 />

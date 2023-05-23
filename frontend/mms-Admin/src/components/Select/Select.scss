@@ -10,7 +10,7 @@
     border-radius: 4px;
     align-items: center;
     padding: 12px;
-    padding: 15px 10px 7.5px 10px;
+    padding: 8px 10px 8px 10px;
     margin: 0;
 
     select {
@@ -37,19 +37,6 @@
     position: absolute;
     bottom: -40%;
     left: 0;
-  }
-
-  .select-label {
-    display: block;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 1;
-    margin-bottom: 0;
-    color: var(--grayTextColor);
-    text-align: left;
-    position: absolute;
-    top: 2px;
   }
 
   .select-loading-icon {

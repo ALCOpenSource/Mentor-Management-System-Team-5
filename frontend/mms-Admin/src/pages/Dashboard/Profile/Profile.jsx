@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { getProfile } from "@/redux/Settings/SettingsSlice";
-import { Country } from "country-state-city";
 
 import { Container, Row } from "react-bootstrap";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
@@ -13,36 +12,27 @@ import instagramIcon from "@/assets/icons/instagram-icon.svg";
 import linkedinIcon from "@/assets/icons/linkedin-icon.svg";
 import githubIcon from "@/assets/icons/github-icon.svg";
 import twitterIcon from "@/assets/icons/twitter-icon.svg";
-import { FlagIcon } from "react-flag-kit";
-
-// To be removed after email is included in getProfile API
-import useGetUserInfo from "@/hooks/useGetUserInfo";
+import countriesAndFlags from "@/utils/countriesAndFlags";
 import formatDate from "@/helpers/formatDate";
 import arrayToString from "@/helpers/arrayToString";
 import Loader from "@/components/Loader/Loader";
 
 function Profile() {
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.settings.getProfileData);
-  const getProfileLoading = useSelector((state) => state.loading.getProfileLoading);
-
-  // To be removed after email is included in getProfile API
-  const { email, roles } = useGetUserInfo();
 
   const [profileHeaderData, setProfileHeaderData] = useState({});
   const [profileDetailData, setProfileDetailData] = useState({});
+
+  const userProfile = useSelector((state) => state.settings.getProfileData);
+  const getProfileLoading = useSelector((state) => state.loading.getProfileLoading);
 
   useEffect(() => {
     if (Object.keys(userProfile).length > 0) {
       setProfileHeaderData({
         fullName: `${userProfile.firstName} ${userProfile.lastName}`,
-        role: userProfile.role ? userProfile.role : arrayToString(roles),
+        role: Array.isArray(userProfile?.roles) ? arrayToString(userProfile?.roles) : userProfile?.roles,
         profilePicture: userProfile.profilePicture,
-        flagIcon: (
-          <FlagIcon
-            code={Country.getAllCountries().find((country) => country.name === userProfile?.country)?.isoCode}
-          />
-        )
+        flagUrl: countriesAndFlags.find((item) => item.name === userProfile?.country)?.flag
       });
       setProfileDetailData({
         addressInfoData: [
@@ -54,7 +44,7 @@ function Profile() {
           {
             id: 2,
             title: "Email:",
-            info: userProfile.email ? userProfile.email : email
+            info: userProfile?.email
           },
           {
             id: 3,

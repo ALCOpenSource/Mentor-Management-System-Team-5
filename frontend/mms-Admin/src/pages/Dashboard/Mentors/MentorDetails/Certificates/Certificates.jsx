@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import cx from "classnames";
 import styles from "./Certificates.module.scss";
-
+import { useSelector, useDispatch } from "react-redux";
+import { showModal } from "@/redux/Modal/ModalSlice";
+import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import certificate from "@/assets/images/certificate-full.png";
 import { ReactComponent as CertificateIcon } from "@/assets/icons/certificate-thumbnail.svg";
-import { ReactComponent as TogglerIcon } from "@/assets/icons/archive-toggler-icon.svg";
+import { ReactComponent as TogglerIconUp } from "@/assets/icons/arrow-circle-up.svg";
+import { ReactComponent as TogglerIconDown } from "@/assets/icons/arrow-circle-down.svg";
 import Button from "@/components/Button/Button";
-
+import downloadSuccessImage from "@/assets/images/certificate-download-success.svg";
 const Certificates = () => {
+  const dispatch = useDispatch();
+
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
+
+  const handleDownload = () => {
+    dispatch(
+      showModal({
+        name: "successNotification",
+        modalData: {
+          title: "Certificate Downloaded Successfully!",
+          image: downloadSuccessImage
+        }
+      })
+    );
+  };
+
   const [toggle, setToggle] = useState({
     index: null,
     toggle: false
@@ -77,7 +97,11 @@ const Certificates = () => {
                     <h6 className={cx(styles.metaDataTitle)}>{item.title}</h6>
                   </div>
                   <div className={cx(styles.cardToggler)}>
-                    <TogglerIcon onClick={() => handleToggle(index)} />
+                    {toggle?.toggle && toggle.index === index ? (
+                      <TogglerIconUp onClick={() => handleToggle(index)} />
+                    ) : (
+                      <TogglerIconDown onClick={() => handleToggle(index)} />
+                    )}
                   </div>
                 </div>
 
@@ -96,7 +120,7 @@ const Certificates = () => {
                           <option value='jpg'>JPG</option>
                         </select>
 
-                        <Button title='Download' size='small' />
+                        <Button onClick={() => handleDownload()} title='Download' />
                       </div>
                     </div>
                   </>
@@ -106,6 +130,7 @@ const Certificates = () => {
           })}
         </div>
       </div>
+      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
     </div>
   );
 };

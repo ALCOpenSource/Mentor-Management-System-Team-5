@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-// import { Country, City } from "country-state-city";
-import { Country } from "country-state-city";
-import { City } from "country-state-city";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styles from "./General.module.scss";
@@ -23,9 +20,15 @@ import { updateProfileSchema } from "@/helpers/validation";
 import { updateProfile, getProfile } from "@/redux/Settings/SettingsSlice";
 import { initialsCase } from "@/helpers/textTransform";
 import Loader from "@/components/Loader/Loader";
+import allCountries from "@/utils/countriesAndFlags";
+import useGetCountriesAndCities from "@/hooks/useGetCountriesAndCities";
 
 function General() {
   const dispatch = useDispatch();
+  const allCountriesAndCities = useGetCountriesAndCities();
+  const [countries, setCountries] = useState([]);
+  const [city, setCity] = useState([]);
+
   const loading = useSelector((state) => state?.loading?.updateProfileLoading);
   const userProfile = useSelector((state) => state.settings.getProfileData);
   const getProfileLoading = useSelector((state) => state?.loading?.getProfileLoading);
@@ -40,34 +43,31 @@ function General() {
     {
       key: "github",
       label: "Github",
-      placeholder: "@githubuser",
+      placeholder: "update data",
       icon: githubIcon
     },
     {
       key: "instagram",
       label: "Instagram",
-      placeholder: "@instagramuser",
+      placeholder: "update data",
       icon: instagramIcon
     },
     {
       key: "linkedIn",
       label: "LinkedIn",
-      placeholder: "@linkedinuser",
+      placeholder: "update data",
       icon: linkedinIcon
     },
     {
       key: "twitter",
       label: "Twitter",
-      placeholder: "@twitteruser",
+      placeholder: "update data",
       icon: twitterIcon
     }
   ];
 
-  const [countries, setCountries] = useState([]);
-  const [city, setCity] = useState([]);
-
   useEffect(() => {
-    const countries = Country.getAllCountries().map((country) => {
+    const countries = allCountries.map((country) => {
       return { value: country.name, label: country.name };
     });
     setCountries(countries);
@@ -84,24 +84,27 @@ function General() {
   } = useForm({ resolver, mode: "all" });
 
   useEffect(() => {
-    const country = Country.getAllCountries().find((item) => item.name === userProfile?.country);
-    const city = City.getCitiesOfCountry(country?.isoCode).map((city) => {
-      return { value: city.name, label: city.name };
-    });
+    const city = allCountriesAndCities
+      ?.find((item) => item.country.toLowerCase() === userProfile?.country.toLowerCase())
+      ?.cities.map((city) => {
+        return { value: city, label: city };
+      });
     setCity(city);
     reset(userProfile);
-  }, [reset, userProfile]);
+  }, [allCountriesAndCities, reset, userProfile]);
 
   const handleSelectChange = (e, name) => {
+    setValue(name, e.target.value, { shouldValidate: true });
     if (name === "country") {
-      const country = Country.getAllCountries().find((item) => item.name === e.target.value);
-      const city = City.getCitiesOfCountry(country.isoCode).map((city) => {
-        return { value: city.name, label: city.name };
-      });
-
+      const city =
+        Array.isArray(allCountriesAndCities) &&
+        allCountriesAndCities
+          .find((item) => item.country.toLowerCase() === e.target.value.toLowerCase())
+          ?.cities.map((city) => {
+            return { value: city, label: city };
+          });
       setCity(city);
     }
-    setValue(name, e.target.value, { shouldValidate: true });
   };
 
   const handleUpdateProfile = async (data) => {
@@ -200,8 +203,7 @@ function General() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='First Name'
-                    placeholder=''
+                    placeholder='First Name'
                     type='text'
                     error={errors?.firstName && errors?.firstName?.message}
                   />
@@ -214,8 +216,7 @@ function General() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='Last Name'
-                    placeholder=''
+                    placeholder='Last Name'
                     type='text'
                     error={errors?.lastName && errors?.lastName?.message}
                   />
@@ -236,7 +237,6 @@ function General() {
                   <TextArea
                     {...field}
                     placeholder='Your Bio'
-                    label=''
                     minHeight='150px'
                     error={errors?.bio && errors?.bio?.message}
                   />
@@ -256,8 +256,7 @@ function General() {
                 render={({ field }) => (
                   <InputField
                     {...field}
-                    label='www.example.com'
-                    placeholder=''
+                    placeholder='www.example.com'
                     type='text'
                     error={errors?.website && errors?.website?.message}
                   />
@@ -279,7 +278,6 @@ function General() {
                     <SelectField
                       {...field}
                       defaultSelect='Select Country'
-                      label=''
                       options={countries}
                       error={errors?.country && errors?.country?.message}
                       onChange={(e) => handleSelectChange(e, "country")}
@@ -301,11 +299,11 @@ function General() {
                     <SelectField
                       {...field}
                       defaultSelect='Select City'
-                      label=''
                       options={city}
                       error={errors?.city && errors?.city?.message}
                       onChange={(e) => handleSelectChange(e, "city")}
                       border='#C8C8C8'
+                      loading={Array.isArray(city) && !(city.length > 0)}
                     />
                   )}
                 />
@@ -334,11 +332,10 @@ function General() {
                         render={({ field }) => (
                           <InputField
                             {...field}
-                            placeholder=''
                             type='text'
                             marginbottom='0'
                             border='none'
-                            label={item?.placeholder}
+                            placeholder={item?.placeholder}
                           />
                         )}
                       />

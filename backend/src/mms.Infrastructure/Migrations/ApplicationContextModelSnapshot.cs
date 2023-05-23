@@ -19,6 +19,36 @@ namespace mms.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("AppUserProgramme", b =>
+                {
+                    b.Property<string>("AppUsersId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ProgrammesId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("AppUsersId", "ProgrammesId");
+
+                    b.HasIndex("ProgrammesId");
+
+                    b.ToTable("AppUserProgramme");
+                });
+
+            modelBuilder.Entity("AppUserUserTask", b =>
+                {
+                    b.Property<string>("AppUsersId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("UserTasksId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("AppUsersId", "UserTasksId");
+
+                    b.HasIndex("UserTasksId");
+
+                    b.ToTable("AppUserUserTask");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -253,9 +283,6 @@ namespace mms.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("UserTaskId")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("Website")
                         .HasColumnType("longtext");
 
@@ -268,14 +295,16 @@ namespace mms.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.HasIndex("UserTaskId");
-
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.Certificate", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("ApprovedBy")
@@ -298,20 +327,19 @@ namespace mms.Infrastructure.Migrations
 
                     b.Property<string>("ProgramId")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProgramId");
 
                     b.ToTable("Certificates");
                 });
@@ -363,6 +391,28 @@ namespace mms.Infrastructure.Migrations
                     b.ToTable("JobRoles");
                 });
 
+            modelBuilder.Entity("mms.Domain.Entities.MentorManager", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("MentorManagers");
+                });
+
             modelBuilder.Entity("mms.Domain.Entities.Programme", b =>
                 {
                     b.Property<string>("Id")
@@ -381,7 +431,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.Property<string>("Criteria")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("json");
 
                     b.Property<DateTime?>("DateArchived")
                         .HasColumnType("datetime(6)");
@@ -396,6 +446,9 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("MentorManagerId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -404,14 +457,15 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MentorManagerId");
 
                     b.ToTable("Programmes");
                 });
@@ -423,7 +477,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.Property<string>("Answers")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("json");
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -440,9 +494,8 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -468,11 +521,10 @@ namespace mms.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("ProgramId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<string>("MentorManagerId")
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ProgrammeId")
+                    b.Property<string>("ProgramId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
@@ -483,7 +535,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ProgrammeId");
+                    b.HasIndex("ProgramId");
 
                     b.ToTable("ProgramsMentors");
                 });
@@ -513,9 +565,10 @@ namespace mms.Infrastructure.Migrations
 
                     b.Property<string>("ProgramId")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProgrammeId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Recommendations")
@@ -526,10 +579,6 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("TaskId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -537,9 +586,17 @@ namespace mms.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("UserTaskId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("ProgramId");
+
                     b.HasIndex("ProgrammeId");
+
+                    b.HasIndex("UserTaskId");
 
                     b.ToTable("Reports");
                 });
@@ -774,6 +831,10 @@ namespace mms.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -793,11 +854,11 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ProgrammeId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -811,6 +872,36 @@ namespace mms.Infrastructure.Migrations
                     b.HasIndex("ProgrammeId");
 
                     b.ToTable("UserTasks");
+                });
+
+            modelBuilder.Entity("AppUserProgramme", b =>
+                {
+                    b.HasOne("mms.Domain.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("AppUsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("mms.Domain.Entities.Programme", null)
+                        .WithMany()
+                        .HasForeignKey("ProgrammesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AppUserUserTask", b =>
+                {
+                    b.HasOne("mms.Domain.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("AppUsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("mms.Domain.Entities.UserTask", null)
+                        .WithMany()
+                        .HasForeignKey("UserTasksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -864,63 +955,41 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("mms.Domain.Entities.AppUser", b =>
-                {
-                    b.HasOne("mms.Domain.Entities.UserTask", null)
-                        .WithMany("Managers")
-                        .HasForeignKey("UserTaskId");
-                });
-
-            modelBuilder.Entity("mms.Domain.Entities.ProgrammeApplication", b =>
-                {
-                    b.HasOne("mms.Domain.Entities.Programme", "Programme")
-                        .WithMany("ProgrammeApplications")
-                        .HasForeignKey("ProgrammeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Programme");
-                });
-
-            modelBuilder.Entity("mms.Domain.Entities.ProgramsMentor", b =>
-                {
-                    b.HasOne("mms.Domain.Entities.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("mms.Domain.Entities.Programme", "Programme")
-                        .WithMany("ProgramsMentors")
-                        .HasForeignKey("ProgrammeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Programme");
-                });
-
             modelBuilder.Entity("mms.Domain.Entities.Report", b =>
                 {
                     b.HasOne("mms.Domain.Entities.Programme", null)
                         .WithMany("Reports")
                         .HasForeignKey("ProgrammeId");
+
+                    b.HasOne("mms.Domain.Entities.UserTask", "UserTask")
+                        .WithMany("Reports")
+                        .HasForeignKey("UserTaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserTask");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.UserTask", b =>
                 {
-                    b.HasOne("mms.Domain.Entities.Programme", null)
+                    b.HasOne("mms.Domain.Entities.Programme", "Programme")
                         .WithMany("UserTasks")
-                        .HasForeignKey("ProgrammeId");
+                        .HasForeignKey("ProgrammeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Programme");
+                });
+
+            modelBuilder.Entity("mms.Domain.Entities.MentorManager", b =>
+                {
+                    b.Navigation("Programmes");
+
+                    b.Navigation("ProgramsMentors");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.Programme", b =>
                 {
-                    b.Navigation("ProgrammeApplications");
-
-                    b.Navigation("ProgramsMentors");
-
                     b.Navigation("Reports");
 
                     b.Navigation("UserTasks");
@@ -928,7 +997,7 @@ namespace mms.Infrastructure.Migrations
 
             modelBuilder.Entity("mms.Domain.Entities.UserTask", b =>
                 {
-                    b.Navigation("Managers");
+                    b.Navigation("Reports");
                 });
 #pragma warning restore 612, 618
         }
