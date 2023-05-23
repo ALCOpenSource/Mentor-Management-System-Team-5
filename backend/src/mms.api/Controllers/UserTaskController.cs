@@ -1,13 +1,33 @@
 ﻿using AspNetCoreHero.Results;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using mms.Application.UserTasks.Command.CreateTask;
+using mms.Application.UserTasks.Command.DeleteTask;
+using mms.Application.UserTasks.Command.UpdateTask;
 using mms.Application.UserTasks.Query;
 using System.Net;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace mms.api.Controllers
 {
     public class UserTaskController: BaseController
     {
+
+        [HttpDelete("task/{id}")]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var result = await Mediator.Send(new DeleteTaskCommand { Id = id });
+
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpGet("get-tasks")]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]

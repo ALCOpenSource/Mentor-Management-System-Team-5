@@ -23,6 +23,7 @@ using mms.Application.MentorManagers.Query;
 using mms.Application.UserTasks.Command.CreateTask;
 using mms.Application.Report.Command;
 using mms.Application.Programme.Command;
+using mms.Application.UserTasks.Command.UpdateTask;
 
 namespace mms.Application.Common.Mapper
 {

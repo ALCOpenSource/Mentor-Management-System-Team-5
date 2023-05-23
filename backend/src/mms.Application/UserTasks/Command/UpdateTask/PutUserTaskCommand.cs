@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mms.Application.UserTasks.Command.CreateTask
+namespace mms.Application.UserTasks.Command.UpdateTask
 {
     public class PutUserTaskCommand : IRequest<IResult<string>>
     {

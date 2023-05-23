@@ -1,7 +1,7 @@
 ﻿using mms.Application.Common.DTOs;
 using mms.Domain.Enums;
 
-namespace mms.Application.UserTasks.Command.CreateTask
+namespace mms.Application.UserTasks.Command.UpdateTask
 {
     public class UpdateUserTaskRequest
     {
