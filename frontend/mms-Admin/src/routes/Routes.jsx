@@ -18,7 +18,11 @@ const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/A
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
 const MentorManagers = lazy(() => import("@/pages/Dashboard/MentorManagers/MentorManagers"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
+
+//Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
+const ProgramDetails = lazy(() => import("@/pages/Dashboard/Programs/ProgramDetails/ProgramDetails"));
+
 
 // Mentors
 const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
@@ -115,7 +119,11 @@ function RoutesComponent() {
             <Route path='broadcast-message' element={<BroadcastMessage />} />
           </Route>
           <Route index path='profile' element={<Profile />} />
-          <Route path='programs' element={<Programs />} />
+          <Route path='programs'>
+              <Route path='' element={<Programs />}>
+                <Route path='program-details/:id' element={<ProgramDetails />} />
+              </Route>
+          </Route>
           <Route path='reports'>
             <Route path='' element={<Reports />}>
               <Route path='report-details/:id' element={<ReportDetails />} />
