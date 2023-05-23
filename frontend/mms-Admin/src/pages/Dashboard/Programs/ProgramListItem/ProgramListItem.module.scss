@@ -54,11 +54,11 @@
         font-family: var(--regular);
         line-height: 1;
 
-        .info{
+        .info {
           gap: 0.25rem;
           align-items: center;
 
-          svg{
+          svg {
             width: 1rem;
           }
           
@@ -68,7 +68,6 @@
             font-size: 0.75rem;
           }
         }
-        
       }
     }
   }
@@ -119,11 +118,11 @@
           color: var(--grayTextColor);
           font-family: var(--regular);
 
-          .info{
+          .info {
             align-items: center;
             gap: 0.25rem;
 
-            svg{
+            svg {
                 width: 1rem;
             }
 

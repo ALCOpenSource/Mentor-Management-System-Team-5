@@ -3,7 +3,7 @@
   gap: 0.75rem;
   padding: 1rem 0;
   overflow-y: auto;
-  
+
   .header {
     justify-content: center;
     padding: 0 0.5rem;
@@ -33,11 +33,11 @@
           color: var(--grayTextColor);
           font-family: var(--regular);
   
-          .info{
+          .info {
             align-items: center;
             gap: 0.25rem;
 
-            .icon{
+            .icon {
               width: 1rem;
             }
 
@@ -57,7 +57,7 @@
     padding: 0.5rem;
     gap: 1rem;
   
-    .subHeading{
+    .subHeading {
       color: var(--blackTextColor);
       font-family: var(--semiBold);
       margin: 0;
@@ -148,95 +148,94 @@
   }
 }
   
-  @media all and (min-width: 768px) {
-    .programDetailsContainer {
-      padding: 1rem 0;
-  
-      .header {
-        padding: 0 1rem;
-      }
-  
-      .body {
-        padding: 1rem;
-  
-        .summaryDiv {
-          .iconDiv {
-            display: block;
-          }
+@media all and (min-width: 768px) {
+  .programDetailsContainer {
+    padding: 1rem 0;
+
+    .header {
+      padding: 0 1rem;
+    }
+
+    .body {
+      padding: 1rem;
+
+      .summaryDiv {
+        .iconDiv {
+          display: block;
         }
-      }
-  
-      .btnGroup {
-        padding-right: 1.5rem;
       }
     }
+
+    .btnGroup {
+      padding-right: 1.5rem;
+    }
   }
-  
-  @media all and (min-width: 992px) {
-    .programDetailsContainer {
-      .header {
-        .wrapper {
-          .icon {
-            width: 2.25rem;
-          }
-  
-          .mainContent {
-            gap: 0.5rem;
-  
-            .title {
-              font-size: 1.25rem;
-            }
-  
-            .metaData {
-              font-size: 1rem;
-              gap: 4.5rem;
-            }
-          }
+}
+
+@media all and (min-width: 992px) {
+  .programDetailsContainer {
+    .header {
+      .wrapper {
+        .icon {
+          width: 2.25rem;
         }
-      }
-  
-      .body {
-        gap: 1.5rem;
-  
-        .description {
-          font-size: 1rem;
-          line-height: 2;
-        }
-  
-        .summaryDiv {
-          padding: 1rem;
-          gap: 1rem;
-  
-          .iconDiv {
-            width: 2.5%;
-          }
-  
-          .summary {
-            gap: 1rem;
+
+        .mainContent {
+          gap: 0.5rem;
+
+          .title {
             font-size: 1.25rem;
-  
-            .summaryValue {
-              font-size: 2rem;
-            }
-  
-            .caption {
-              font-size: 1.25rem;
-            }
-  
-            .count {
-              font-size: 1rem;
-              width: 1.5rem;
-              line-height: 1.5rem;
-              margin-left: 1.5rem;
-            }
+          }
+
+          .metaData {
+            font-size: 1rem;
+            gap: 4.5rem;
           }
         }
       }
-  
-      .btnGroup {
-        gap: 2rem;
-        padding-right: 1rem;
+    }
+
+    .body {
+      gap: 1.5rem;
+
+      .description {
+        font-size: 1rem;
+        line-height: 2;
+      }
+
+      .summaryDiv {
+        padding: 1rem;
+        gap: 1rem;
+
+        .iconDiv {
+          width: 2.5%;
+        }
+
+        .summary {
+          gap: 1rem;
+          font-size: 1.25rem;
+
+          .summaryValue {
+            font-size: 2rem;
+          }
+
+          .caption {
+            font-size: 1.25rem;
+          }
+
+          .count {
+            font-size: 1rem;
+            width: 1.5rem;
+            line-height: 1.5rem;
+            margin-left: 1.5rem;
+          }
+        }
       }
     }
+
+    .btnGroup {
+      gap: 2rem;
+      padding-right: 1rem;
+    }
   }
-  
+}
