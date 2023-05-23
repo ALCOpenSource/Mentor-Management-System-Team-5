@@ -1,12 +1,11 @@
 .active-program-item {
-    > div {
-      background-color: var(--sectionContainerBgColor);
-      border: 1px solid #e6fdfe;
-    }
-  
-    a {
-      color: var(--blackTextColor) !important;
-      font-family: var(--bold);
-    }
+  > div {
+    background-color: var(--sectionContainerBgColor);
+    border: 1px solid #e6fdfe;
   }
-  
+
+  a {
+    color: var(--blackTextColor) !important;
+    font-family: var(--bold);
+  }
+}
