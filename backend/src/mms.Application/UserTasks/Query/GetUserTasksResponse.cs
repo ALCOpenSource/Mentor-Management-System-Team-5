@@ -1,4 +1,5 @@
 ﻿using mms.Domain.Entities;
+using mms.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace mms.Application.UserTasks.Query
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
         public string CreatedBy { get; set; }
-        public string Status { get; set; }
+        public UserTaskStatus Status { get; set; }
         public string ProgramId { get; set; }
 
     }

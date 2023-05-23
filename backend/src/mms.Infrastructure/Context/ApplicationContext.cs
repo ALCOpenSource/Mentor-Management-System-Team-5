@@ -94,8 +94,12 @@ namespace mms.Infrastructure.Context
                 .HasIndex(x => x.AppUserId);
 
             modelBuilder.Entity<UserTask>()
-                .HasMany(x => x.AppUsers)
+                .HasMany(x => x.MentorManagers)
                 .WithMany(x => x.UserTasks);
+
+            modelBuilder.Entity<UserTask>()
+             .HasMany(x => x.Mentors)
+             .WithMany(x => x.UserTasks);
 
             modelBuilder.Entity<UserTask>()
                 .HasMany(x => x.Reports)

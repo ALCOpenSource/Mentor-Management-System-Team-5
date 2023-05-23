@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.Results;
 using MediatR;
+using mms.Application.Common.DTOs;
 using mms.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ namespace mms.Application.UserTasks.Command.CreateTask
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime DateCreated { get; set; }
         public string CreatedBy { get; set; }
         public string Status { get; set; }
         public string ProgramId { get; set; }
-        public IList<AppUser> Managers { get; set; }
+        public IList<MentorManagerDTO> Managers { get; set; }
+        public IList<MentorDTO> Mentors { get; set; }
     }
 }
