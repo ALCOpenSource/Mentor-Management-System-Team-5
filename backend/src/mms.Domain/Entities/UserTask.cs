@@ -11,7 +11,6 @@ namespace mms.Domain.Entities
         public string CreatedBy { get; set; }
         public UserTaskStatus Status { get; set; }
         public string ProgramId { get; set; }
-        public string AppUserId { get; set; }
         public IList<ProgramsMentor> Mentors { get; set; }
         public IList<MentorManager> MentorManagers { get; set; }
         public IList<Report> Reports { get; set; }
