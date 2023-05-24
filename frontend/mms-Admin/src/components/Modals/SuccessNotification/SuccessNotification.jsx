@@ -15,7 +15,7 @@ function SuccessNotification({ show, size, modalName }) {
 
   const handleClick = () => {
     dispatch(hideModal({ name: "successNotification" }));
-    modalData?.redirectUrl === "/login" && navigate(modalData?.redirectUrl);
+    modalData?.redirectUrl && navigate(modalData?.redirectUrl);
   };
 
   return (

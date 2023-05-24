@@ -13,6 +13,7 @@ import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
+
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
 import { createProgramSchema } from "@/helpers/validation";
@@ -168,10 +169,12 @@ function CreateProgram() {
         name: "successNotification",
         modalData: {
           title: "Program Created Successfully!",
-          image: successImage
+          image: successImage,
+          redirectUrl: "/dashboard/programs"
         }
       })
     );
+    localStorage.removeItem("criteria");
   };
 
   const handleOpenSideBar = (e, open, category) => {

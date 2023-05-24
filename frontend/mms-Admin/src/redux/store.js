@@ -4,6 +4,7 @@ import ModalReducer from "./Modal/ModalSlice";
 import LoadingReducer from "./Loading/LoadingSlice";
 import SettingsReducer from "./Settings/SettingsSlice";
 import ReportsReducer from "./Reports/ReportsSlice";
+import CriteriaSlice from "./Criteria/CriteriaSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     modal: ModalReducer,
     loading: LoadingReducer,
     settings: SettingsReducer,
-    reports: ReportsReducer
+    reports: ReportsReducer,
+    criteria: CriteriaSlice
   },
   devTools: process.env.NODE_ENV === "development"
 });
