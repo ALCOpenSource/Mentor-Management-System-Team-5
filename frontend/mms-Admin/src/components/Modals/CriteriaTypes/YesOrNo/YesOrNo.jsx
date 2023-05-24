@@ -99,7 +99,7 @@ function YesOrNo({ show, size, modalName }) {
                     )}
                   />
 
-                  <div className={cx(styles.deleteFormGroupDiv, "flexRow-align-right")}>
+                  <div className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}>
                     <img onClick={() => remove(index)} src={removeIcon} alt='minus-icon' />
                   </div>
                 </section>

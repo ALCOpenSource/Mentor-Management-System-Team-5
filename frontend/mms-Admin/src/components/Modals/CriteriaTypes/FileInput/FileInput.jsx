@@ -31,13 +31,15 @@ function FileInput({ show, size, modalName }) {
   };
 
   const defaultValues = {
-    criteria: [
-      {
-        question: "",
-        options: [{ fileName: "", fileType: "" }],
-        id: nanoid()
-      }
-    ]
+    criteria: modalData?.edit
+      ? [criteria[modalData?.type].find((item) => item.id === modalData?.groupIndex)]
+      : [
+          {
+            question: "",
+            options: [{ fileName: "", fileType: "" }],
+            id: nanoid()
+          }
+        ]
   };
 
   const {
@@ -61,7 +63,15 @@ function FileInput({ show, size, modalName }) {
   const handleCreateCriteria = (data) => {
     const newCriteria = {
       ...criteria,
-      [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
+      [modalData?.type]: modalData?.edit
+        ? criteria[modalData?.type].map((item) => {
+            if (item.id === modalData?.groupIndex) {
+              return data.criteria[0];
+            } else {
+              return item;
+            }
+          })
+        : [...criteria[modalData?.type], ...data.criteria]
     };
     dispatch(saveCriteriaToStorage(newCriteria));
     handleClose();
@@ -112,13 +122,15 @@ function FileInput({ show, size, modalName }) {
                       <NestedArray nestIndex={index} {...{ control, errors }} />
                     </div>
 
-                    <div
-                      onClick={() => handleRemoveGroup(index)}
-                      className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
-                    >
-                      <img src={removeIcon} alt='minus-icon' />
-                      <span>Delete request</span>
-                    </div>
+                    {!modalData?.edit && (
+                      <div
+                        onClick={() => handleRemoveGroup(index)}
+                        className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
+                      >
+                        <img src={removeIcon} alt='minus-icon' />
+                        <span>Delete request</span>
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -128,22 +140,24 @@ function FileInput({ show, size, modalName }) {
               <p className={cx(styles.rootError, "flexRow")}>{errors?.criteria?.root?.message}</p>
             )}
 
-            <div
-              onClick={() => {
-                append({ question: "", options: [{ fileName: "", fileType: "" }], id: nanoid() }),
-                  {
-                    shouldFocus: true
-                  };
-              }}
-              className={cx(styles.appendDiv, "flexRow-align-center")}
-            >
-              <img src={addIcon} alt='add-icon' />
-              <span>{errors?.criteria?.root?.message ? "Add request" : "Add another request"}</span>
-            </div>
+            {!modalData?.edit && (
+              <div
+                onClick={() => {
+                  append({ question: "", options: [{ fileName: "", fileType: "" }], id: nanoid() }),
+                    {
+                      shouldFocus: true
+                    };
+                }}
+                className={cx(styles.appendDiv, "flexRow-align-center")}
+              >
+                <img src={addIcon} alt='add-icon' />
+                <span>{errors?.criteria?.root?.message ? "Add request" : "Add another request"}</span>
+              </div>
+            )}
 
             <div className={cx(styles.btnGroup, "flexRow-space-between")}>
               <Button onClick={handleClose} title='Cancel' type='secondary' />
-              <Button type='secondary' onClick={() => reset(defaultValues)} title='Reset' />
+              {!modalData?.edit && <Button type='secondary' onClick={() => reset(defaultValues)} title='Reset' />}
               <Button onClick={handleSubmit((data) => handleCreateCriteria(data))} title='Done' />
             </div>
           </form>

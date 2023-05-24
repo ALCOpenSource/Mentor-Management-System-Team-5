@@ -169,10 +169,12 @@ function CreateProgram() {
         name: "successNotification",
         modalData: {
           title: "Program Created Successfully!",
-          image: successImage
+          image: successImage,
+          redirectUrl: "/dashboard/programs"
         }
       })
     );
+    localStorage.removeItem("criteria");
   };
 
   const handleOpenSideBar = (e, open, category) => {

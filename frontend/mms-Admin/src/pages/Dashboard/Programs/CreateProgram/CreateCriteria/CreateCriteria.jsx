@@ -22,7 +22,7 @@ import { getCriteriaFromStorage, saveCriteriaToStorage } from "@/redux/Criteria/
 import editIcon from "@/assets/icons/edit-icon-thin.svg";
 import deleteIcon from "@/assets/icons/minus-icon-thin.svg";
 
-// import successImage from "@/assets/images/default-success-notification-image.png";
+import successImage from "@/assets/images/default-success-notification-image.png";
 
 const CreateCriteria = () => {
   const navigate = useNavigate();
@@ -45,6 +45,12 @@ const CreateCriteria = () => {
     dispatch(getCriteriaFromStorage());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (criteriaData) {
+      setDisableBtn({ ...disableBtn, createCriteria: false });
+    }
+  }, []);
+
   const handleDisplayInstructions = () => {
     setDisplayInstructions(false);
     setDisableBtn({ ...disableBtn, addCriteria: false });
@@ -61,15 +67,18 @@ const CreateCriteria = () => {
 
   const handleCreateCriteria = (data) => {
     console.log(data, "form data");
-    // dispatch(
-    //   showModal({
-    //     name: "successNotification",
-    //     modalData: {
-    //       title: "Criteria Created Successfully!",
-    //       image: successImage
-    //     }
-    //   })
-    // );
+    console.log(criteriaData, "criteriaData");
+
+    dispatch(
+      showModal({
+        name: "successNotification",
+        modalData: {
+          title: "Criteria Created Successfully!",
+          image: successImage,
+          redirectUrl: "/dashboard/programs/create-program"
+        }
+      })
+    );
   };
 
   const displayCriteriaTypes = (e) => {

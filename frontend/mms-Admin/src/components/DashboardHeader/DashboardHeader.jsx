@@ -50,7 +50,7 @@ function Header() {
               <input type='text' placeholder='Search for anything' />
             </div>
             <div className={cx(styles.iconsDiv, "flexRow-fully-centered")}>
-              <img src={messageIcon} alt='message-icon' />
+              <img onClick={() => navigate("/dashboard/messages")} src={messageIcon} alt='message-icon' />
               <img src={notificationIcon} alt='notification-icon' />
             </div>
             <div

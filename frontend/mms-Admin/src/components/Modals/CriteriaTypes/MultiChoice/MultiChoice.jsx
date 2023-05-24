@@ -31,13 +31,15 @@ function MultiChoice({ show, size, modalName }) {
   };
 
   const defaultValues = {
-    criteria: [
-      {
-        question: "",
-        options: [{ option: "" }],
-        id: nanoid()
-      }
-    ]
+    criteria: modalData?.edit
+      ? [criteria[modalData?.type].find((item) => item.id === modalData?.groupIndex)]
+      : [
+          {
+            question: "",
+            options: [{ option: "" }],
+            id: nanoid()
+          }
+        ]
   };
 
   const {
@@ -62,8 +64,17 @@ function MultiChoice({ show, size, modalName }) {
   const handleCreateCriteria = (data) => {
     const newCriteria = {
       ...criteria,
-      [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
+      [modalData?.type]: modalData?.edit
+        ? criteria[modalData?.type].map((item) => {
+            if (item.id === modalData?.groupIndex) {
+              return data.criteria[0];
+            } else {
+              return item;
+            }
+          })
+        : [...criteria[modalData?.type], ...data.criteria]
     };
+
     dispatch(saveCriteriaToStorage(newCriteria));
     handleClose();
   };
@@ -78,7 +89,7 @@ function MultiChoice({ show, size, modalName }) {
     <ModalContainer show={show} size={size} modalName={modalName}>
       <div className={cx(styles.modalWrapper, "flexCol")}>
         <div className={cx(styles.modalHeader, "flexCol")}>
-          <h6 className={cx(styles.headerTitle)}>Input Multiple Questions</h6>
+          <h6 className={cx(styles.headerTitle)}>Input Multi Choice Questions</h6>
         </div>
 
         <div className={cx(styles.modalBody, "flexCol")}>
@@ -113,13 +124,15 @@ function MultiChoice({ show, size, modalName }) {
                       <NestedArray nestIndex={index} {...{ control, register, errors }} />
                     </div>
 
-                    <div
-                      onClick={() => handleRemoveGroup(index)}
-                      className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
-                    >
-                      <img src={removeIcon} alt='minus-icon' />
-                      <span>Delete question</span>
-                    </div>
+                    {!modalData?.edit && (
+                      <div
+                        onClick={() => handleRemoveGroup(index)}
+                        className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
+                      >
+                        <img src={removeIcon} alt='minus-icon' />
+                        <span>Delete question</span>
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -129,23 +142,25 @@ function MultiChoice({ show, size, modalName }) {
               <p className={cx(styles.rootError, "flexRow")}>{errors?.criteria?.root?.message}</p>
             )}
 
-            <div
-              onClick={() => {
-                append({ question: "", options: [{ option: "" }], id: nanoid() }),
-                  {
-                    shouldFocus: true,
-                    shouldUnregister: false
-                  };
-              }}
-              className={cx(styles.appendDiv, "flexRow-align-center")}
-            >
-              <img src={addIcon} alt='add-icon' />
-              <span>{errors?.criteria?.root?.message ? "Add question" : "Add another question"}</span>
-            </div>
+            {!modalData?.edit && (
+              <div
+                onClick={() => {
+                  append({ question: "", options: [{ option: "" }], id: nanoid() }),
+                    {
+                      shouldFocus: true,
+                      shouldUnregister: false
+                    };
+                }}
+                className={cx(styles.appendDiv, "flexRow-align-center")}
+              >
+                <img src={addIcon} alt='add-icon' />
+                <span>{errors?.criteria?.root?.message ? "Add question" : "Add another question"}</span>
+              </div>
+            )}
 
             <div className={cx(styles.btnGroup, "flexRow-space-between")}>
               <Button onClick={handleClose} title='Cancel' type='secondary' />
-              <Button type='secondary' onClick={() => reset(defaultValues)} title='Reset' />
+              {!modalData?.edit && <Button type='secondary' onClick={() => reset(defaultValues)} title='Reset' />}
               <Button onClick={handleSubmit((data) => handleCreateCriteria(data))} title='Done' />
             </div>
           </form>

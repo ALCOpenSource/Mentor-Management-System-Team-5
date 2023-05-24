@@ -35,7 +35,9 @@ function MultipleInput({ show, size, modalName }) {
     control
   } = useForm({
     defaultValues: {
-      criteria: [{ question: "", numberOfInputs: "", id: nanoid() }]
+      criteria: modalData?.edit
+        ? [criteria[modalData?.type].find((item) => item.id === modalData?.groupIndex)]
+        : [{ question: "", numberOfInputs: "", id: nanoid() }]
     }
   });
   const { fields, append, remove } = useFieldArray({
@@ -49,7 +51,15 @@ function MultipleInput({ show, size, modalName }) {
   const handleCreateCriteria = (data) => {
     const newCriteria = {
       ...criteria,
-      [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
+      [modalData?.type]: modalData?.edit
+        ? criteria[modalData?.type].map((item) => {
+            if (item.id === modalData?.groupIndex) {
+              return data.criteria[0];
+            } else {
+              return item;
+            }
+          })
+        : [...criteria[modalData?.type], ...data.criteria]
     };
     dispatch(saveCriteriaToStorage(newCriteria));
     handleClose();
@@ -90,7 +100,13 @@ function MultipleInput({ show, size, modalName }) {
                   <Controller
                     name={`criteria.${index}.numberOfInputs`}
                     control={control}
-                    rules={{ required: "Number of inputs is required" }}
+                    rules={{
+                      required: "Number of inputs is required",
+                      min: {
+                        value: 1,
+                        message: "Number of inputs must be at least 1"
+                      }
+                    }}
                     render={({ field }) => (
                       <InputField
                         {...field}
@@ -106,9 +122,12 @@ function MultipleInput({ show, size, modalName }) {
                     )}
                   />
 
-                  <div className={cx(styles.deleteFormGroupDiv, "flexRow-align-right")}>
-                    <img onClick={() => remove(index)} src={removeIcon} alt='minus-icon' />
-                  </div>
+                  {!modalData?.edit && (
+                    <div className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}>
+                      <img onClick={() => remove(index)} src={removeIcon} alt='minus-icon' />
+                      <span>Delete question</span>
+                    </div>
+                  )}
                 </section>
               );
             })}
@@ -117,19 +136,21 @@ function MultipleInput({ show, size, modalName }) {
               <p className={cx(styles.rootError, "flexRow")}>{errors?.criteria?.root?.message}</p>
             )}
 
-            <div
-              onClick={() => {
-                append({
-                  question: "",
-                  numberOfInputs: "",
-                  id: nanoid()
-                });
-              }}
-              className={cx(styles.appendDiv, "flexRow-align-center")}
-            >
-              <img src={addIcon} alt='add-icon' />
-              <span>{errors?.criteria?.root?.message ? "Add question" : "Add another question"}</span>
-            </div>
+            {!modalData?.edit && (
+              <div
+                onClick={() => {
+                  append({
+                    question: "",
+                    numberOfInputs: "",
+                    id: nanoid()
+                  });
+                }}
+                className={cx(styles.appendDiv, "flexRow-align-center")}
+              >
+                <img src={addIcon} alt='add-icon' />
+                <span>{errors?.criteria?.root?.message ? "Add question" : "Add another question"}</span>
+              </div>
+            )}
 
             <div className={cx(styles.btnGroup, "flexRow-space-between")}>
               <Button onClick={handleClose} title='Cancel' type='secondary' />
