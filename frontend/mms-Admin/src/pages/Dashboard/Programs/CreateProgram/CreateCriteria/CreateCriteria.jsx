@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./CreateCriteria.module.scss";
 import { useNavigate } from "react-router-dom";
-import backIcon from "@/assets/icons/back-icon.svg";
+import backIcon from "@/assets/icons/close-icon.svg";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import SelectField from "@/components/Select/Select";
@@ -18,7 +18,7 @@ import MultipleInputModal from "@/components/Modals/CriteriaTypes/MultipleInput/
 import YesOrNoModal from "@/components/Modals/CriteriaTypes/YesOrNo/YesOrNo";
 import MultiChoiceModal from "@/components/Modals/CriteriaTypes/MultiChoice/MultiChoice";
 import FileInputModal from "@/components/Modals/CriteriaTypes/FileInput/FileInput";
-import { getCriteriaFromStorage } from "@/redux/Criteria/CriteriaSlice";
+import { getCriteriaFromStorage, saveCriteriaToStorage } from "@/redux/Criteria/CriteriaSlice";
 import editIcon from "@/assets/icons/edit-icon-thin.svg";
 import deleteIcon from "@/assets/icons/minus-icon-thin.svg";
 
@@ -57,11 +57,7 @@ const CreateCriteria = () => {
     details: ""
   };
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    control
-  } = useForm({ defaultValues, resolver, mode: "all" });
+  const { handleSubmit } = useForm({ defaultValues, resolver, mode: "all" });
 
   const handleCreateCriteria = (data) => {
     console.log(data, "form data");
@@ -89,16 +85,42 @@ const CreateCriteria = () => {
     );
   };
 
-  const getSingleInputContents = (item) => {
+  const handleDeleteGroup = (category, index) => {
+    let tempData = JSON.parse(JSON.stringify(criteriaData));
+
+    let selectedGroup = tempData[category].find((item) => item.id === index);
+    let groupIndex = tempData[category].indexOf(selectedGroup);
+    tempData[category].splice(groupIndex, 1);
+
+    dispatch(saveCriteriaToStorage(tempData));
+    dispatch(getCriteriaFromStorage());
+  };
+
+  const handleDeleteSubGroup = (category, index, subIndex) => {
+    let tempData = JSON.parse(JSON.stringify(criteriaData));
+
+    let selectedSubGroup = tempData[category]
+      .find((item) => item.id === index)
+      .options.find((_, index) => index === subIndex);
+    let subGroupIndex = tempData[category].find((item) => item.id === index).options.indexOf(selectedSubGroup);
+
+    tempData[category].find((item) => item.id === index).options.splice(subGroupIndex, 1);
+
+    dispatch(saveCriteriaToStorage(tempData));
+    dispatch(getCriteriaFromStorage());
+  };
+
+  const getSingleInputContents = (category, item) => {
     return (
       Array.isArray(item) &&
-      item.map((input) => {
+      item.map((element) => {
         return (
-          <div className={cx(styles.singleInputWrapper, "flexCol")} key={input?.id}>
-            <InputField type='text' value={input.question} readOnly marginbottom={"0.5rem"} />
+          <div className={cx(styles.singleInputWrapper, "flexCol")} key={element?.id}>
+            <p className={cx(styles.title)}>{element?.question}</p>
+            <InputField type='text' placeholder='Single input response here' readOnly marginbottom={"0.5rem"} />
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
               <img src={editIcon} alt='edit-icon' />
-              <img src={deleteIcon} alt='delete-icon' />
+              <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>
         );
@@ -106,17 +128,29 @@ const CreateCriteria = () => {
     );
   };
 
-  const getMultipleInputContents = (item) => {
+  const getMultipleInputContents = (category, item) => {
     return (
       Array.isArray(item) &&
-      item.map((input) => {
+      item.map((element) => {
         return (
-          <div className={cx(styles.multipleInputWrapper, "flexCol")} key={input?.id}>
-            <p className={cx(styles.title)}>{input.question}</p>
-            <InputField type='text' value={`${input.numberOfInputs} Inputs`} readOnly marginbottom={"0.5rem"} />
+          <div className={cx(styles.multipleInputWrapper, "flexCol")} key={element?.id}>
+            <p className={cx(styles.title)}>{element?.question}</p>
+            {Array(element?.numberOfInputs * 1)
+              .fill(0)
+              .map((_, index) => {
+                return (
+                  <InputField
+                    key={index}
+                    type='text'
+                    placeholder={`Multiple input ${index + 1} response here`}
+                    readOnly
+                    marginbottom={"0.5rem"}
+                  />
+                );
+              })}
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
               <img src={editIcon} alt='edit-icon' />
-              <img src={deleteIcon} alt='delete-icon' />
+              <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>
         );
@@ -124,13 +158,13 @@ const CreateCriteria = () => {
     );
   };
 
-  const getYesOrNoContents = (item) => {
+  const getYesOrNoContents = (category, item) => {
     return (
       Array.isArray(item) &&
-      item.map((input) => {
+      item.map((element) => {
         return (
-          <div className={cx(styles.yesOrNoWrapper, "flexCol")} key={input?.id}>
-            <p className={cx(styles.title)}>{input.question}</p>
+          <div className={cx(styles.yesOrNoWrapper, "flexCol")} key={element?.id}>
+            <p className={cx(styles.title)}>{element?.question}</p>
             <div className={cx(styles.radioBtnGroup, "flexRow")}>
               <div className={cx(styles.group, "flexRow")}>
                 <input type='radio' name='yes' id='yes' />
@@ -143,7 +177,72 @@ const CreateCriteria = () => {
             </div>
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
               <img src={editIcon} alt='edit-icon' />
-              <img src={deleteIcon} alt='delete-icon' />
+              <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
+            </div>
+          </div>
+        );
+      })
+    );
+  };
+
+  const getMultiChoiceContents = (category, item) => {
+    return (
+      Array.isArray(item) &&
+      item.map((element) => {
+        return (
+          <div className={cx(styles.multiChoiceWrapper, "flexCol")} key={element?.id}>
+            <p className={cx(styles.title)}>{element?.question}</p>
+            {Array.isArray(element?.options) &&
+              element?.options.map((input, index) => {
+                return (
+                  <div key={index} className={cx(styles.wrapper, "flexRow-align-center")}>
+                    <p className={cx(styles.fileName)}>{`${input?.option}`}</p>
+                    <div className={cx(styles.rightGroup, "flexRow-align-center")}>
+                      <img
+                        onClick={() => handleDeleteSubGroup(category, element?.id, index)}
+                        src={deleteIcon}
+                        alt='delete-icon'
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
+              <img src={editIcon} alt='edit-icon' />
+              <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
+            </div>
+          </div>
+        );
+      })
+    );
+  };
+
+  const getFileInputContents = (category, item) => {
+    return (
+      Array.isArray(item) &&
+      item.map((element) => {
+        return (
+          <div className={cx(styles.fileInputWrapper, "flexCol")} key={element?.id}>
+            <p className={cx(styles.title)}>{element?.question}</p>
+            {Array.isArray(element?.options) &&
+              element?.options.map((input, index) => {
+                return (
+                  <div key={index} className={cx(styles.wrapper, "flexRow-align-center")}>
+                    <p className={cx(styles.fileName)}>{`${input?.fileName}.${input?.fileType}`}</p>
+                    <div className={cx(styles.rightGroup, "flexRow-align-center")}>
+                      <span>Choose</span>
+                      <img
+                        onClick={() => handleDeleteSubGroup(category, element?.id, index)}
+                        src={deleteIcon}
+                        alt='delete-icon'
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
+              <img src={editIcon} alt='edit-icon' />
+              <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>
         );
@@ -152,19 +251,17 @@ const CreateCriteria = () => {
   };
 
   const handleDisplayContents = (item, category) => {
-    console.log(item, "item");
-    console.log(category, "category");
     switch (category) {
       case "singleInput":
-        return getSingleInputContents(item);
+        return getSingleInputContents(category, item);
       case "multipleInput":
-        return getMultipleInputContents(item);
+        return getMultipleInputContents(category, item);
       case "yesOrNo":
-        return getYesOrNoContents(item);
+        return getYesOrNoContents(category, item);
       case "multiChoice":
-        return getMultiChoiceContents(item);
+        return getMultiChoiceContents(category, item);
       case "fileInput":
-        return getFileInputContents(item);
+        return getFileInputContents(category, item);
       default:
         return null;
     }
@@ -172,9 +269,14 @@ const CreateCriteria = () => {
 
   return (
     <div className={cx(styles.createCriteriaContainer, "flexCol")}>
-      <div className={cx(styles.heading, "flexRow-align-center")}>
-        <img onClick={() => navigate(-1)} src={backIcon} className={cx(styles.backIcon)} alt='close-icon' />
+      <div className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Criteria Setup</h3>
+        <img
+          onClick={() => navigate("/dashboard/programs/create-program")}
+          src={backIcon}
+          className={cx(styles.backIcon)}
+          alt='close-icon'
+        />
       </div>
       <div className={cx(styles.body, "flexCol")}>
         {displayInstructions ? (

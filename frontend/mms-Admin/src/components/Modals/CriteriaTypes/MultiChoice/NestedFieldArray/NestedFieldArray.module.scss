@@ -3,13 +3,17 @@
     width: 100%;
     gap: 0.5rem;
     align-items: flex-start;
+    border: 1px solid var(--grayBorderColor);
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+    padding-right: 0.5rem;
 
     .option {
       width: 100%;
     }
 
     img {
-      margin-top: 1rem;
+      margin-top: 0.75rem;
       width: 1.5rem;
       cursor: pointer;
     }

@@ -6,6 +6,7 @@ import ModalContainer from "../../ModalContainer/ModalContainer";
 import styles from "./MultipleInput.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
+import { nanoid } from "nanoid";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useFieldArray, useForm, Controller } from "react-hook-form";
@@ -34,7 +35,7 @@ function MultipleInput({ show, size, modalName }) {
     control
   } = useForm({
     defaultValues: {
-      criteria: [{ question: "", numberOfInputs: "" }]
+      criteria: [{ question: "", numberOfInputs: "", id: nanoid() }]
     }
   });
   const { fields, append, remove } = useFieldArray({
@@ -120,7 +121,8 @@ function MultipleInput({ show, size, modalName }) {
               onClick={() => {
                 append({
                   question: "",
-                  numberOfInputs: ""
+                  numberOfInputs: "",
+                  id: nanoid()
                 });
               }}
               className={cx(styles.appendDiv, "flexRow-align-center")}

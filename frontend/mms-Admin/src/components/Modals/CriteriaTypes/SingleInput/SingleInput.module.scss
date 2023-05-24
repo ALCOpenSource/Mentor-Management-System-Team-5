@@ -25,9 +25,13 @@
       .formGroup {
         gap: 0.5rem;
         width: 100%;
+        border: 1px solid var(--grayBorderColor);
+        margin-bottom: 1.5rem;
+        border-radius: 0.5rem;
+        padding: 0 0.5rem 0 0.125rem;
 
         .deleteFormGroupDiv {
-          margin-top: 0.875rem;
+          margin-top: 0.625rem;
           img {
             cursor: pointer;
             width: 1.5rem;
@@ -39,6 +43,7 @@
         gap: 0.5rem;
         cursor: pointer;
         width: fit-content;
+        margin-top: 1.5rem;
 
         img {
           cursor: pointer;

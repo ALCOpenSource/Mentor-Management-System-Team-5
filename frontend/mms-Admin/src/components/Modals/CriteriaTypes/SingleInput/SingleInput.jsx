@@ -6,13 +6,14 @@ import ModalContainer from "../../ModalContainer/ModalContainer";
 import styles from "./SingleInput.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
+import { nanoid } from "nanoid";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useFieldArray, useForm, Controller } from "react-hook-form";
 
 import { saveCriteriaToStorage, getCriteriaFromStorage } from "@/redux/Criteria/CriteriaSlice";
 import addIcon from "@/assets/icons/add-icon.svg";
-import removeIcon from "@/assets/icons/minus-icon.svg";
+import removeIcon from "@/assets/icons/minus-icon-thin.svg";
 function SingleInput({ show, size, modalName }) {
   const dispatch = useDispatch();
 
@@ -34,7 +35,7 @@ function SingleInput({ show, size, modalName }) {
     control
   } = useForm({
     defaultValues: {
-      criteria: [{ question: "" }]
+      criteria: [{ question: "", id: nanoid() }]
     }
   });
   const { fields, append, remove } = useFieldArray({
@@ -78,7 +79,8 @@ function SingleInput({ show, size, modalName }) {
                         {...field}
                         placeholder='Enter question here'
                         type='text'
-                        marginbottom='1.5rem'
+                        marginbottom='0rem'
+                        border='none'
                         error={
                           errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message
                         }
@@ -100,7 +102,8 @@ function SingleInput({ show, size, modalName }) {
             <div
               onClick={() => {
                 append({
-                  question: ""
+                  question: "",
+                  id: nanoid()
                 });
               }}
               className={cx(styles.appendDiv, "flexRow-align-center")}

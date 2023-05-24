@@ -1,8 +1,8 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./NestedFieldArray.module.scss";
-import addIcon from "@/assets/icons/add-icon.svg";
-import removeIcon from "@/assets/icons/minus-icon.svg";
+import addIcon from "@/assets/icons/add-icon-thin.svg";
+import removeIcon from "@/assets/icons/minus-icon-thin.svg";
 
 import PropTypes from "prop-types";
 import { useFieldArray, Controller } from "react-hook-form";
@@ -81,28 +81,6 @@ const NestedFieldArray = ({ nestIndex, control, errors }) => {
                   )}
                 />
               </div>
-
-              <div className={cx(styles.quantityDiv)}>
-                <Controller
-                  name={`criteria.${nestIndex}.options.${optionIndex}.quantity`}
-                  control={control}
-                  rules={{ required: "Field is required" }}
-                  render={({ field }) => (
-                    <InputField
-                      {...field}
-                      placeholder='Quantity'
-                      type='number'
-                      marginbottom='1.5rem'
-                      error={
-                        errors?.criteria &&
-                        errors?.criteria[nestIndex] &&
-                        errors?.criteria[nestIndex]?.options &&
-                        errors?.criteria[nestIndex]?.options[optionIndex]?.quantity?.message
-                      }
-                    />
-                  )}
-                />
-              </div>
             </div>
 
             <img onClick={() => remove(optionIndex)} src={removeIcon} alt='remove-icon' />
@@ -116,12 +94,7 @@ const NestedFieldArray = ({ nestIndex, control, errors }) => {
 
       <div
         onClick={() => {
-          append(
-            { option: "" },
-            {
-              shouldFocus: true
-            }
-          );
+          append();
         }}
         className={cx(styles.addMore, "flexRow-align-center")}
       >

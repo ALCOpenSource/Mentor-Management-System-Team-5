@@ -1,8 +1,8 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./NestedFieldArray.module.scss";
-import addIcon from "@/assets/icons/add-icon.svg";
-import removeIcon from "@/assets/icons/minus-icon.svg";
+import addIcon from "@/assets/icons/add-icon-thin.svg";
+import removeIcon from "@/assets/icons/minus-icon-thin.svg";
 
 import PropTypes from "prop-types";
 import { useFieldArray, Controller } from "react-hook-form";
@@ -32,7 +32,8 @@ const NestedFieldArray = ({ nestIndex, control, errors }) => {
                     {...field}
                     placeholder='Enter option here'
                     type='text'
-                    marginbottom='1.5rem'
+                    marginbottom='0rem'
+                    border='none'
                     error={
                       errors?.criteria &&
                       errors?.criteria[nestIndex] &&
@@ -55,13 +56,7 @@ const NestedFieldArray = ({ nestIndex, control, errors }) => {
 
       <div
         onClick={() => {
-          append(
-            { option: "" },
-            {
-              shouldFocus: true,
-              shouldUnregister: false
-            }
-          );
+          append();
         }}
         className={cx(styles.addMore, "flexRow-align-center")}
       >

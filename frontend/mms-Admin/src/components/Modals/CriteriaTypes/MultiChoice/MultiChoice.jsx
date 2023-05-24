@@ -7,6 +7,7 @@ import styles from "./MultiChoice.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import NestedArray from "./NestedFieldArray/NestedFieldArray";
+import { nanoid } from "nanoid";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useFieldArray, useForm, Controller } from "react-hook-form";
@@ -33,7 +34,8 @@ function MultiChoice({ show, size, modalName }) {
     criteria: [
       {
         question: "",
-        options: [{ option: "" }]
+        options: [{ option: "" }],
+        id: nanoid()
       }
     ]
   };
@@ -116,7 +118,7 @@ function MultiChoice({ show, size, modalName }) {
                       className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
                     >
                       <img src={removeIcon} alt='minus-icon' />
-                      <span>Delete Question</span>
+                      <span>Delete question</span>
                     </div>
                   </div>
                 );
@@ -129,7 +131,7 @@ function MultiChoice({ show, size, modalName }) {
 
             <div
               onClick={() => {
-                append({ question: "", options: [{ option: "" }] }),
+                append({ question: "", options: [{ option: "" }], id: nanoid() }),
                   {
                     shouldFocus: true,
                     shouldUnregister: false

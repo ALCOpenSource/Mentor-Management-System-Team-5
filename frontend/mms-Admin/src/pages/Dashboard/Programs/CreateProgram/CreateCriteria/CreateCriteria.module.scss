@@ -56,6 +56,7 @@
       .formBody {
         gap: 1rem;
         overflow-y: auto;
+        padding-right: 0.5rem;
 
         .contentWrapper {
           gap: 1rem;
@@ -65,7 +66,7 @@
           .title {
             font-family: var(--regular);
             color: var(--grayTextColor);
-            font-size: 1rem;
+            font-size: 1.125rem;
             margin-bottom: 0.5rem;
             line-height: 1;
           }
@@ -99,6 +100,61 @@
               }
             }
           }
+
+          .fileInputWrapper {
+            width: 100%;
+
+            .wrapper {
+              gap: 1rem;
+              margin-bottom: 0.5rem;
+              border: 1px solid var(--grayBorderColor);
+              border-radius: 0.25rem;
+              justify-content: space-between;
+              padding: 0.5rem 1rem 0.5rem 1rem;
+
+              .fileName {
+                margin: 0;
+                color: var(--grayTextColor);
+              }
+
+              .rightGroup {
+                gap: 1.5rem;
+                color: var(--primaryColor);
+
+                span,
+                img {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+
+          .multiChoiceWrapper {
+            width: 100%;
+
+            .wrapper {
+              gap: 1rem;
+              margin-bottom: 0.5rem;
+              border: 1px solid var(--grayBorderColor);
+              border-radius: 0.25rem;
+              justify-content: space-between;
+              padding: 0.5rem 1rem 0.5rem 1rem;
+
+              .fileName {
+                margin: 0;
+                color: var(--grayTextColor);
+              }
+
+              .rightGroup {
+                gap: 1.5rem;
+                color: var(--primaryColor);
+
+                img {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
         }
 
         .addCriteriaBtnDiv {
@@ -129,10 +185,11 @@
 
     .body {
       .instructions {
-        padding: 1.5rem;
+        padding: 2rem;
 
         p {
           line-height: 2rem;
+          font-size: 1.25rem;
         }
       }
 
@@ -151,6 +208,14 @@
     padding: 1.5rem;
 
     .body {
+      .instructions {
+        padding: 3rem 5rem;
+
+        p {
+          line-height: 3rem;
+          font-size: 1.5rem;
+        }
+      }
       .formContainer {
         .formBody {
           gap: 1rem;

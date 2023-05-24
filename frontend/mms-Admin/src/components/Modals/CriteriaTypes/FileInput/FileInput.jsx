@@ -7,6 +7,7 @@ import styles from "./FileInput.module.scss";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import NestedArray from "./NestedFieldArray/NestedFieldArray";
+import { nanoid } from "nanoid";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
 import { useFieldArray, useForm, Controller } from "react-hook-form";
@@ -33,7 +34,8 @@ function FileInput({ show, size, modalName }) {
     criteria: [
       {
         question: "",
-        options: [{ fileName: "", fileType: "", quantity: "" }]
+        options: [{ fileName: "", fileType: "" }],
+        id: nanoid()
       }
     ]
   };
@@ -115,7 +117,7 @@ function FileInput({ show, size, modalName }) {
                       className={cx(styles.deleteFormGroupDiv, "flexRow-right-centered")}
                     >
                       <img src={removeIcon} alt='minus-icon' />
-                      <span>Delete Request</span>
+                      <span>Delete request</span>
                     </div>
                   </div>
                 );
@@ -128,7 +130,7 @@ function FileInput({ show, size, modalName }) {
 
             <div
               onClick={() => {
-                append({ question: "", options: [{ fileName: "", fileType: "", quantity: "" }] }),
+                append({ question: "", options: [{ fileName: "", fileType: "" }], id: nanoid() }),
                   {
                     shouldFocus: true
                   };
