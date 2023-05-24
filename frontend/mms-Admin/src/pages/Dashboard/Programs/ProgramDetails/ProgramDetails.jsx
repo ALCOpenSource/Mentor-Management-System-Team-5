@@ -6,7 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import headerIcon from "@/assets/icons/google-filled-icon.svg";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
-import clockIcon from '@/assets/icons/clock-icon.svg';
+import clockIcon from "@/assets/icons/clock-icon.svg";
 import reportIcon from "@/assets/icons/task-report-icon-green.png";
 import mentorsIcon from "@/assets/icons/mentor-icon-green.png";
 import mentorManagersIcon from "@/assets/icons/mentor-manager-icon-green.png";
@@ -66,18 +66,17 @@ function ProgramDetails() {
             <div className={cx(styles.wrapper, "flexRow-align-center")}>
               <img className={cx(styles.icon)} src={headerIcon} alt='program-icon' />
               <div className={cx(styles.mainContent, "flexCol")}>
-                <h5 className={cx(styles.title)}>{`Google Africa Scholarship Program`}</h5>
+                <h5 className={cx(styles.title)}>{"Google Africa Scholarship Program"}</h5>
                 <div className={cx(styles.metaData, "flexRow")}>
-                    <div className={cx(styles.info, "flexRow")}>
-                        <img className={cx(styles.icon)} src={calendarIcon} alt='calendar-icon' />
-                        <span className={cx(styles.value)}>Dec 12, 2022</span>
-                    </div>
-                    <div className={cx(styles.info, "flexRow")}>
-                        <img className={cx(styles.icon)} src={clockIcon} alt='clock-icon' />
-                        <span className={cx(styles.value)}>6:00pm</span>
-                    </div>
+                  <div className={cx(styles.info, "flexRow")}>
+                    <img className={cx(styles.icon)} src={calendarIcon} alt='calendar-icon' />
+                    <span className={cx(styles.value)}>Dec 12, 2022</span>
+                  </div>
+                  <div className={cx(styles.info, "flexRow")}>
+                    <img className={cx(styles.icon)} src={clockIcon} alt='clock-icon' />
+                    <span className={cx(styles.value)}>6:00pm</span>
+                  </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -101,9 +100,8 @@ function ProgramDetails() {
                     <span className={cx(styles.summaryValue)}>{item.value}</span>
                     <span className={cx(styles.caption)}>{item.caption}</span>
                     <div>
-                        <span className={cx(styles.count)}>{item.count}</span>
+                      <span className={cx(styles.count)}>{item.count}</span>
                     </div>
-                   
                   </div>
 
                   <Button title='View' size='small' />

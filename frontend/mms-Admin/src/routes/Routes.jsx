@@ -26,6 +26,8 @@ const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
 const ProgramDetails = lazy(() => import("@/pages/Dashboard/Programs/ProgramDetails/ProgramDetails"));
 const CreateProgram = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateProgram"));
 const CreateCriteria = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateCriteria/CreateCriteria"));
+const EditProgram = lazy(() => import("@/pages/Dashboard/Programs/EditProgram/EditProgram"));
+const EditCriteria = lazy(() => import("@/pages/Dashboard/Programs/EditProgram/EditCriteria/EditCriteria"));
 
 // Mentors
 const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
@@ -165,6 +167,10 @@ function RoutesComponent() {
             <Route path='create-program'>
               <Route path='' element={<CreateProgram />} />
               <Route path='create-criteria' element={<CreateCriteria />} />
+            </Route>
+            <Route path='edit-program/:id'>
+              <Route path='' element={<EditProgram />} />
+              <Route path='edit-criteria' element={<EditCriteria />} />
             </Route>
           </Route>
 

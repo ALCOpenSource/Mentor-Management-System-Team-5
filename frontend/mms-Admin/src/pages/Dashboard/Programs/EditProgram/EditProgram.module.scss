@@ -1,0 +1,183 @@
+.editProgramContainer {
+  gap: 1rem;
+  padding: 1rem 0.5rem;
+  position: relative;
+  height: calc(100vh - var(--topNavbarHeight));
+
+  .mainSection {
+    gap: 1.5rem;
+    flex-grow: 1;
+    height: 100%;
+    overflow-y: auto;
+
+    .heading {
+      position: sticky;
+      top: 0;
+
+      .title {
+        margin: 0;
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        font-size: 1.5rem;
+      }
+    }
+
+    .formWrapper {
+      overflow-y: auto;
+      padding-right: 0.5rem;
+
+      form {
+        .headerWrapper {
+          flex-wrap: nowrap;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+          align-items: flex-end;
+
+          .imageDiv {
+            width: fit-content;
+            display: flex;
+            justify-content: flex-start;
+
+            img {
+              width: 5.5rem;
+              height: 5.5rem;
+              border-radius: 50%;
+              object-fit: cover;
+              object-position: center;
+              cursor: pointer;
+              border: 0.25px solid var(--imageBorderColor);
+            }
+          }
+
+          .rightSection {
+            gap: 1rem;
+            justify-content: center;
+            align-items: flex-start;
+
+            .title {
+              font-size: 1.25rem;
+              font-family: var(--semiBold);
+              margin: 0;
+              line-height: 1;
+            }
+          }
+        }
+
+        label {
+          font-family: var(--bold);
+          font-size: 1.125rem;
+          color: var(--black2TextColor);
+        }
+
+        .selectionDiv {
+          gap: 1rem;
+          flex-wrap: wrap;
+
+          .wrapper {
+            width: 100%;
+            background-color: var(--green3Color);
+            padding: 1rem;
+
+            .leftSide {
+              gap: 0;
+              align-items: center;
+              flex-grow: 1;
+
+              .title {
+                font-family: var(--semiBold);
+                font-size: 1.125rem;
+                color: var(--black2TextColor);
+                line-height: 1rem;
+              }
+
+              .statsDiv {
+                gap: 1.5rem;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                padding: 0.25rem 1.5rem;
+                border-radius: 0.25rem;
+
+                .stats {
+                  font-family: var(--regular);
+                  font-size: 1rem;
+                  color: var(--black2TextColor);
+                }
+
+                svg {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+
+        .submitBtnDiv {
+          align-items: center;
+          justify-content: flex-end;
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+
+  .sideBarSection {
+    width: auto;
+
+    .filterAndSearchDiv {
+      width: 100%;
+      justify-content: flex-end;
+      gap: 1rem;
+      min-height: 3rem;
+
+      .searchWrapper {
+        flex-grow: 1;
+      }
+
+      .closeIcon {
+        width: 1rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .editProgramContainer {
+    padding: 2rem;
+
+    .mainSection {
+      .formWrapper {
+        form {
+          .selectionDiv {
+            gap: 1.5rem;
+            flex-wrap: nowrap;
+            margin-top: 3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .editProgramContainer {
+    padding: 1rem 2rem;
+
+    .mainSection {
+      gap: 2.5rem;
+
+      .formWrapper {
+        form {
+          .selectionDiv {
+            gap: 1.5rem;
+          }
+
+          .submitBtnDiv {
+            margin-top: 3rem;
+          }
+        }
+      }
+    }
+  }
+}
