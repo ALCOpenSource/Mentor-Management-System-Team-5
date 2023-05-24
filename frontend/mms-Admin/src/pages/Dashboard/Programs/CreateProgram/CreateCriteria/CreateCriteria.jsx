@@ -110,6 +110,19 @@ const CreateCriteria = () => {
     dispatch(getCriteriaFromStorage());
   };
 
+  const handleEditGroup = (category, index) => {
+    dispatch(
+      showModal({
+        name: category,
+        modalData: {
+          type: category,
+          edit: true,
+          groupIndex: index
+        }
+      })
+    );
+  };
+
   const getSingleInputContents = (category, item) => {
     return (
       Array.isArray(item) &&
@@ -119,7 +132,7 @@ const CreateCriteria = () => {
             <p className={cx(styles.title)}>{element?.question}</p>
             <InputField type='text' placeholder='Single input response here' readOnly marginbottom={"0.5rem"} />
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
-              <img src={editIcon} alt='edit-icon' />
+              <img onClick={() => handleEditGroup(category, element?.id)} src={editIcon} alt='edit-icon' />
               <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>
@@ -149,7 +162,7 @@ const CreateCriteria = () => {
                 );
               })}
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
-              <img src={editIcon} alt='edit-icon' />
+              <img onClick={() => handleEditGroup(category, element?.id)} src={editIcon} alt='edit-icon' />
               <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>
@@ -176,7 +189,7 @@ const CreateCriteria = () => {
               </div>
             </div>
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
-              <img src={editIcon} alt='edit-icon' />
+              <img onClick={() => handleEditGroup(category, element?.id)} src={editIcon} alt='edit-icon' />
               <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>
@@ -208,7 +221,7 @@ const CreateCriteria = () => {
                 );
               })}
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
-              <img src={editIcon} alt='edit-icon' />
+              <img onClick={() => handleEditGroup(category, element?.id)} src={editIcon} alt='edit-icon' />
               <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>
@@ -241,7 +254,7 @@ const CreateCriteria = () => {
                 );
               })}
             <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
-              <img src={editIcon} alt='edit-icon' />
+              <img onClick={() => handleEditGroup(category, element?.id)} src={editIcon} alt='edit-icon' />
               <img onClick={() => handleDeleteGroup(category, element?.id)} src={deleteIcon} alt='delete-icon' />
             </div>
           </div>

@@ -35,7 +35,9 @@ function YesOrNo({ show, size, modalName }) {
     control
   } = useForm({
     defaultValues: {
-      criteria: [{ question: "", id: nanoid() }]
+      criteria: modalData?.edit
+        ? [criteria[modalData?.type].find((item) => item.id === modalData?.groupIndex)]
+        : [{ question: "", id: nanoid() }]
     }
   });
   const { fields, append, remove } = useFieldArray({
@@ -49,8 +51,17 @@ function YesOrNo({ show, size, modalName }) {
   const handleCreateCriteria = (data) => {
     const newCriteria = {
       ...criteria,
-      [modalData?.type]: [...criteria[modalData?.type], ...data.criteria]
+      [modalData?.type]: modalData?.edit
+        ? criteria[modalData?.type].map((item) => {
+            if (item.id === modalData?.groupIndex) {
+              return data.criteria[0];
+            } else {
+              return item;
+            }
+          })
+        : [...criteria[modalData?.type], ...data.criteria]
     };
+
     dispatch(saveCriteriaToStorage(newCriteria));
     handleClose();
   };
@@ -99,18 +110,20 @@ function YesOrNo({ show, size, modalName }) {
               <p className={cx(styles.rootError, "flexRow")}>{errors?.criteria?.root?.message}</p>
             )}
 
-            <div
-              onClick={() => {
-                append({
-                  question: "",
-                  id: nanoid()
-                });
-              }}
-              className={cx(styles.appendDiv, "flexRow-align-center")}
-            >
-              <img src={addIcon} alt='add-icon' />
-              <span>{errors?.criteria?.root?.message ? "Add question" : "Add another question"}</span>
-            </div>
+            {!modalData?.edit && (
+              <div
+                onClick={() => {
+                  append({
+                    question: "",
+                    id: nanoid()
+                  });
+                }}
+                className={cx(styles.appendDiv, "flexRow-align-center")}
+              >
+                <img src={addIcon} alt='add-icon' />
+                <span>{errors?.criteria?.root?.message ? "Add question" : "Add another question"}</span>
+              </div>
+            )}
 
             <div className={cx(styles.btnGroup, "flexRow-space-between")}>
               <Button onClick={handleClose} title='Cancel' type='secondary' />
