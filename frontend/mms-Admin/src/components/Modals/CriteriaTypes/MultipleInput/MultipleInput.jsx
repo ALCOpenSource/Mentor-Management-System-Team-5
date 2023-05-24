@@ -90,9 +90,7 @@ function MultipleInput({ show, size, modalName }) {
                         placeholder='Enter question here'
                         type='text'
                         marginbottom='1.5rem'
-                        error={
-                          errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message
-                        }
+                        error={errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message}
                       />
                     )}
                   />
@@ -113,11 +111,9 @@ function MultipleInput({ show, size, modalName }) {
                         placeholder='Number of Inputs'
                         type='number'
                         marginbottom='1.5rem'
-                        error={
-                          errors?.criteria &&
+                        error={errors?.criteria &&
                           errors?.criteria[index] &&
-                          errors?.criteria[index]?.numberOfInputs?.message
-                        }
+                          errors?.criteria[index]?.numberOfInputs?.message}
                       />
                     )}
                   />

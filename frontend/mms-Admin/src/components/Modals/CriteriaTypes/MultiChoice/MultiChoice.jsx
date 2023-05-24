@@ -112,9 +112,7 @@ function MultiChoice({ show, size, modalName }) {
                             placeholder='Enter question here'
                             type='text'
                             marginbottom='1.5rem'
-                            error={
-                              errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message
-                            }
+                            error={errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message}
                           />
                         )}
                       />

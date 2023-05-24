@@ -42,7 +42,7 @@ const ButtonComponent = styled.button`
   }
 
   @media all and (min-width: 992px) {
-    font-size: ${(props) => (props.size === "small" ? "0.875rem" : "1rem")};
+    font-size: ${(props) => (props.size === "small" ? "0.875rem" : "1.125rem")};
     padding: ${(props) => (props.size === "small" ? "0.5rem 0.5rem" : "1rem 1.5rem")};
   }
 `;

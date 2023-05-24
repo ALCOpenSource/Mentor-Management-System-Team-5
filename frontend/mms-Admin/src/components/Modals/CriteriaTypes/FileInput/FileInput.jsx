@@ -110,9 +110,7 @@ function FileInput({ show, size, modalName }) {
                             placeholder='Enter request here'
                             type='text'
                             marginbottom='1.5rem'
-                            error={
-                              errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message
-                            }
+                            error={errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message}
                           />
                         )}
                       />

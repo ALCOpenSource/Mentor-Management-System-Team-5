@@ -34,12 +34,10 @@ const NestedFieldArray = ({ nestIndex, control, errors }) => {
                     type='text'
                     marginbottom='0rem'
                     border='none'
-                    error={
-                      errors?.criteria &&
+                    error={errors?.criteria &&
                       errors?.criteria[nestIndex] &&
                       errors?.criteria[nestIndex]?.options &&
-                      errors?.criteria[nestIndex]?.options[optionIndex]?.option?.message
-                    }
+                      errors?.criteria[nestIndex]?.options[optionIndex]?.option?.message}
                   />
                 )}
               />

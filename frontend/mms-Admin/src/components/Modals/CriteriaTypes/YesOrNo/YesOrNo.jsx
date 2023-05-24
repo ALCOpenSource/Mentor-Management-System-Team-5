@@ -92,9 +92,7 @@ function YesOrNo({ show, size, modalName }) {
                         type='text'
                         marginbottom='0rem'
                         border='none'
-                        error={
-                          errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message
-                        }
+                        error={errors?.criteria && errors?.criteria[index] && errors?.criteria[index]?.question?.message}
                       />
                     )}
                   />

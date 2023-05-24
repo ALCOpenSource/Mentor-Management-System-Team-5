@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "@/assets/icons/close-icon.svg";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
-import SelectField from "@/components/Select/Select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createProgramCriteriaSchema } from "@/helpers/validation";
@@ -29,8 +28,6 @@ const CreateCriteria = () => {
   const dispatch = useDispatch();
 
   const criteriaData = useSelector((state) => state?.criteria?.getCriteriaFromStorageData);
-
-  console.log(criteriaData, "criteriaData");
 
   const [displayInstructions, setDisplayInstructions] = useState(true);
   const [disableBtn, setDisableBtn] = useState({
