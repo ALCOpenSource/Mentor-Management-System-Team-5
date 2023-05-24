@@ -22,6 +22,24 @@
       width: 100%;
       gap: 0.5rem;
 
+      .appendDiv {
+        gap: 0.5rem;
+        cursor: pointer;
+        width: fit-content;
+        margin-top: 0.75rem;
+
+        img {
+          cursor: pointer;
+          width: 1.5rem;
+        }
+
+        span {
+          font-size: 1rem;
+          font-family: var(--regular);
+          color: var(--grayTextColor);
+        }
+      }
+
       .questionContainer {
         width: 100%;
         gap: 1.5rem;
@@ -67,24 +85,6 @@
         font-size: 0.875rem;
         font-family: var(--regular);
         color: var(--red2Color);
-      }
-
-      .appendDiv {
-        gap: 0.5rem;
-        cursor: pointer;
-        width: fit-content;
-        margin-top: 0.75rem;
-
-        img {
-          cursor: pointer;
-          width: 1.5rem;
-        }
-
-        span {
-          font-size: 1rem;
-          font-family: var(--regular);
-          color: var(--grayTextColor);
-        }
       }
 
       .btnGroup {
