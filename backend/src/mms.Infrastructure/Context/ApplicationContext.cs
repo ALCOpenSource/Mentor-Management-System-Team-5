@@ -25,6 +25,9 @@ namespace mms.Infrastructure.Context
         public DbSet<UserPrivacy> UserPrivacy { get; set; }
         public DbSet<Support> Supports { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<MessageThread> MessageThreads { get; set; }
+        public DbSet<MessageThreadParticipant> MessageThreadParticipants { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {
@@ -107,6 +110,22 @@ namespace mms.Infrastructure.Context
 
             modelBuilder.Entity<UserPrivacy>()
                 .HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<Message>().HasIndex(x => x.SenderId);
+
+            modelBuilder.Entity<Message>().HasIndex(x => x.MessageThreadId);
+
+            modelBuilder.Entity<MessageThread>().HasIndex(x => x.LastMessageId);
+
+            modelBuilder.Entity<MessageThread>().HasIndex(x => x.PinnedMessageId);
+
+            modelBuilder.Entity<MessageThread>().HasIndex(x => x.MessageThreadParticipantHash).IsUnique();
+
+            modelBuilder.Entity<MessageThreadParticipant>().HasIndex(x => x.MessageThreadId);
+
+            modelBuilder.Entity<MessageThreadParticipant>().HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<MessageThreadParticipant>().HasOne(x => x.MessageThread);
 
             base.OnModelCreating(modelBuilder);
         }
