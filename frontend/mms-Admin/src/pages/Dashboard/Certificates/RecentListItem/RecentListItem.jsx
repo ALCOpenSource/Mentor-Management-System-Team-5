@@ -1,12 +1,12 @@
 import React from "react";
 import cx from "classnames";
-import styles from "./TaskListItem.module.scss";
-import "./TaskListActiveItem.scss";
+import styles from "./RecentListItem.module.scss";
+import "./RecentListActiveItem.scss";
 import PropTypes from "prop-types";
 
-function TaskListItem({ data }) {
+function RecentListItem({ data }) {
   return (
-    <div className={cx(styles.taskListItemContainer, "flexCol")}>
+    <div className={cx(styles.recentListItemContainer, "flexCol")}>
       <div className={cx(styles.body, "flexRow-align-center")}>
         <img className={cx(styles.icon)} src={data?.icon} alt='icon' />
         <div className={cx(styles.mainContent, "flexCol")}>
@@ -21,8 +21,8 @@ function TaskListItem({ data }) {
   );
 }
 
-TaskListItem.propTypes = {
+RecentListItem.propTypes = {
   data: PropTypes.object
 };
 
-export default TaskListItem;
+export default RecentListItem;

@@ -9,7 +9,10 @@ import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
 import backIcon from "@/assets/icons/close-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
-import TaskListItem from "./TaskListItem/TaskListItem";
+import approvedCertificateIcon from "@/assets/icons/new-entries-icon.svg";
+import generatedCertificateIcon from "@/assets/icons/blog-post-icon.svg";
+import RecentListItem from "./RecentListItem/RecentListItem";
+import CategoryListItem from "./CategoryListItem/CategoryListItem";
 import useIsMobile from "@/hooks/useIsMobile";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
@@ -29,7 +32,7 @@ function Certificates() {
   const [collapseInput, setCollapseInput] = useState(true);
   const [closeSelectElement, setCloseSelectElement] = useState(false);
 
-  const menuItemsArray = [
+  const recentDataArray = [
     {
       id: 1,
       title: "Room Library Article Written in Java",
@@ -196,6 +199,11 @@ function Certificates() {
     setCloseSelectElement(true);
   };
 
+  const handleCategoryClick = (item) => {
+    console.log(item, "handle category click");
+    navigate(item.path);
+  };
+
   const getSideBarData = () => {
     // let listItems = menuItemsArray.map((item, index) => {
     //   return {
@@ -204,13 +212,55 @@ function Certificates() {
     //   };
     // });
 
+    let categoryData = [
+      {
+        id: 1,
+        title: "Approved Certificates",
+        icon: approvedCertificateIcon,
+        count: 290,
+        selected: true,
+        path: "/dashboard/certificates/approved-certificates"
+      },
+      {
+        id: 2,
+        title: "My Generated Certificates",
+        icon: generatedCertificateIcon,
+        count: 300,
+        selected: false,
+        path: "/dashboard/certificates/generated-certificates"
+      }
+    ];
+
     let listItems = [
       {
-        component: <div>Top section</div>,
+        component: (
+          <div className={cx(styles.topSection, "flexCol")}>
+            <h3 className={cx(styles.title)}>Category</h3>
+            {categoryData.map((item, index) => {
+              return <CategoryListItem onClick={handleCategoryClick} key={index} data={item} />;
+            })}
+            <div
+              onClick={() => navigate("/dashboard/certificates/pending-certificates")}
+              className={cx(styles.pendingDiv, "flexRow-space-between")}
+            >
+              <p>Certificates pending approval</p>
+              <span>50</span>
+            </div>
+          </div>
+        ),
         id: 1
       },
       {
-        component: <div>Bottom section</div>,
+        component: (
+          <div className={cx(styles.bottomSection, "flexCol")}>
+            <h3 className={cx(styles.title)}>Recent</h3>
+            <div className={cx(styles.listWrapper, "flexCol")}>
+              {recentDataArray.map((item, index) => {
+                return <RecentListItem key={index} data={item} />;
+              })}
+            </div>
+          </div>
+        ),
         id: 2
       }
     ];

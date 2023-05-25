@@ -1,16 +1,13 @@
-.taskListItemContainer {
+.categoryListItemContainer {
   padding: 0.25rem 0.5rem;
-  background-color: var(--taskListBgColor);
   border-radius: 5px;
-  justify-content: center;
-  border: 1px solid var(--grayBorderColor);
   width: 100%;
   cursor: pointer;
 
-  &:hover {
-    background-color: var(--green3Color);
-    border: 1px solid var(--green3Color);
-  }
+  // &:hover {
+  //   background-color: var(--green3Color);
+  //   border: 1px solid var(--green3Color);
+  // }
 
   .body {
     gap: 0.5rem;
@@ -19,57 +16,25 @@
       width: 2.5rem;
     }
 
-    .mainContent {
-      gap: 0.5rem;
+    .title {
+      font-size: 1rem;
+      color: var(--black2TextColor);
+      font-family: var(--bold);
+      margin: 0;
+    }
 
-      .title {
-        font-size: 1rem;
-        color: var(--blackTextColor);
-        font-family: var(--semiBold);
-        margin: 0;
-        line-height: 1;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-box;
-        display: -o-box;
-        display: box;
-        -webkit-line-clamp: 1; /* number of lines to show */
-        -moz-line-clamp: 1;
-        -ms-line-clamp: 1;
-        -o-line-clamp: 1;
-        line-clamp: 1;
-        -webkit-box-orient: vertical;
-        -moz-box-orient: vertical;
-        -ms-box-orient: vertical;
-        -o-box-orient: vertical;
-        white-space: normal;
-      }
-
-      .metaData {
-        font-size: 0.875rem;
-        gap: 0.25rem;
-        color: var(--grayTextColor);
-        font-family: var(--regular);
-        line-height: 1;
-        align-items: flex-end;
-
-        .dateIcon {
-          width: 1rem;
-        }
-
-        .date {
-          margin: 0;
-          line-height: 1;
-        }
-      }
+    .count {
+      font-size: 1.5rem;
+      color: var(--blackTextColor);
+      font-family: var(--bold);
+      line-height: 1;
+      margin-left: auto;
     }
   }
 }
 
 @media all and (min-width: 992px) {
-  .taskListItemContainer {
+  .categoryListItemContainer {
     padding: 0.875rem 0.75rem;
 
     .body {
