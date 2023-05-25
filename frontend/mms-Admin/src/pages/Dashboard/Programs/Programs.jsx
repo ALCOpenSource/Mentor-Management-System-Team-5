@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 import styles from "./Programs.module.scss";
@@ -7,7 +7,7 @@ import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import Button from "@/components/Button/Button";
 import { ReactComponent as CalendarIcon } from "@/assets/icons/tasks-overview-calendar-icon.svg";
 import programsIcon from "@/assets/icons/google-filled-icon.svg";
-import { ReactComponent as ClockIcon } from '@/assets/icons/clock-icon.svg';
+import { ReactComponent as ClockIcon } from "@/assets/icons/clock-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import { ReactComponent as SearchIcon } from "@/assets/icons/search-icon.svg";
 import { ReactComponent as SortIcon } from "@/assets/icons/sort-icon.svg";
@@ -33,7 +33,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -42,7 +42,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -51,7 +51,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -60,7 +60,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -69,7 +69,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -78,7 +78,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -87,7 +87,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -96,7 +96,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -105,7 +105,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     },
@@ -114,7 +114,7 @@ function Programs() {
       title: "Google Africa Scholarship Program",
       date: "Dec 12, 2022",
       time: "6:00pm",
-      icon: programsIcon, 
+      icon: programsIcon,
       ClockIcon,
       CalendarIcon
     }
@@ -166,8 +166,9 @@ function Programs() {
     navigate(`program-details/${id}`);
   };
 
-  return <div className={cx(styles.programsContainer, "flexCol")}>
-    <section className={cx(styles.heading, "flexRow-space-between")}>
+  return (
+    <div className={cx(styles.programsContainer, "flexCol")}>
+      <section className={cx(styles.heading, "flexRow-space-between")}>
         <div className={cx(styles.titleAndToggler, "flexRow")}>
           <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
             <img
@@ -182,12 +183,14 @@ function Programs() {
         </div>
         <div className={cx(styles.searchSortDiv, "flexRow-align-center")}>
           <SearchIcon className={cx(styles.searchIcon)} onClick={() => setShowSearchInput(!showSearchInput)} />
-          {showSearchInput && <input className={cx(styles.searchInput)} type='text' placeholder='Search for programs' />}
+          {showSearchInput && (
+            <input className={cx(styles.searchInput)} type='text' placeholder='Search for programs' />
+          )}
           <SortIcon className={cx(styles.sortIcon)} />
         </div>
         <Button title='Create New Program' onClick={() => navigate("create-program")} />
-    </section>
-    <section className={cx(styles.mainBody, "flexRow")}>
+      </section>
+      <section className={cx(styles.mainBody, "flexRow")}>
         {openSideBar && (
           <div className={cx(styles.sidebarWrapper)}>
             <GenericSideBar
@@ -210,8 +213,9 @@ function Programs() {
             </div>
           )}
         </div>
-    </section>
-  </div>;
+      </section>
+    </div>
+  );
 }
 
 export default Programs;

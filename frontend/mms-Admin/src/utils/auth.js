@@ -76,4 +76,8 @@ export const checkAuth = () => {
       logout();
     }
   }
+
+  if (!localStorage.accessToken || !localStorage.refreshToken) {
+    logout();
+  }
 };
