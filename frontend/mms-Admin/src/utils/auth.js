@@ -75,9 +75,7 @@ export const checkAuth = () => {
     if (decoded.exp < currentTime) {
       logout();
     }
-  }
-
-  if (!localStorage.accessToken || !localStorage.refreshToken) {
+  } else {
     logout();
   }
 };
