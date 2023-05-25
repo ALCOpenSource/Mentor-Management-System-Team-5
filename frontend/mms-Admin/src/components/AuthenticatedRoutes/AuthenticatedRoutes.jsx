@@ -11,12 +11,12 @@ function AuthenticatedRoutes({ children, roles }) {
   const dispatch = useDispatch();
   const checkIsAuthenticated = isAuthenticated();
 
-  const token = getToken();
+  // const token = getToken();
   const userDetails = JSON.parse(localStorage.getItem("userData"));
 
-  if (isExpired(token)) {
-    dispatch(refreshAccessToken());
-  }
+  // if (isExpired(token)) {
+  //   dispatch(refreshAccessToken());
+  // }
 
   const userHasRequiredRole = !!(
     userDetails && roles.includes(userDetails?.roles && userDetails?.roles.toString().toLowerCase())

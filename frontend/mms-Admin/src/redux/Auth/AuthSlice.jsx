@@ -137,7 +137,6 @@ export const refreshAccessToken = () => async (dispatch) => {
     const response = await refreshAccessTokenApi({ refreshToken: refreshToken, accessToken: token });
     setToken(response?.data?.data?.accessToken);
     setRefreshToken(response?.data?.data?.refreshToken);
-    dispatch(getProfile());
     dispatch(refreshAccessTokenAction(response?.data?.data));
     return { success: true };
   } catch (e) {
