@@ -95,10 +95,33 @@
         .iconsDiv {
           gap: 1rem;
 
-          img {
-            width: 1.5rem;
-            object-fit: contain;
+          .container {
+            position: relative;
             cursor: pointer;
+
+            .count {
+              font-family: var(--regular);
+              color: #fff;
+              font-size: clamp(0.625rem, 0.5rem + 0.5vw, 0.75rem);
+              width: 1.125rem;
+              height: 1.125rem;
+              line-height: 1.125rem;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+              background-color: var(--primaryRedColor);
+              position: absolute;
+              top: 0;
+              right: 0;
+              transform: translate(25%, -25%);
+            }
+
+            img {
+              width: 1.75rem;
+              object-fit: contain;
+            }
           }
         }
 

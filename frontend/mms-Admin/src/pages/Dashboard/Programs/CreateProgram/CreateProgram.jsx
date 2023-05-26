@@ -8,11 +8,13 @@ import Button from "@/components/Button/Button";
 import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import closeIcon from "@/assets/icons/undo-icon.svg";
+import closeIconAlt from "@/assets/icons/close-icon.svg";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
+
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
 import { createProgramSchema } from "@/helpers/validation";
@@ -168,10 +170,12 @@ function CreateProgram() {
         name: "successNotification",
         modalData: {
           title: "Program Created Successfully!",
-          image: successImage
+          image: successImage,
+          redirectUrl: "/dashboard/programs"
         }
       })
     );
+    localStorage.removeItem("criteria");
   };
 
   const handleOpenSideBar = (e, open, category) => {
@@ -270,8 +274,9 @@ function CreateProgram() {
   return (
     <div className={cx(styles.createProgramContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
-        <div className={cx(styles.heading, "flexRow")}>
+        <div className={cx(styles.heading, "flexRow-space-between")}>
           <h3 className={cx(styles.title)}>Create New Program</h3>
+          <img src={closeIconAlt} alt='close-icon' onClick={() => navigate("/dashboard/programs")} />
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>

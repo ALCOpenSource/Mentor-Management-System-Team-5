@@ -1,6 +1,4 @@
 import jwtDecode from "jwt-decode";
-import store from "@/redux/store";
-import { refreshAccessToken } from "@/redux/Auth/AuthSlice";
 import { setAuthToken } from "@/utils/setAuthToken";
 
 export const isAuthenticated = () => {
@@ -24,8 +22,8 @@ export const getRefreshToken = () => {
   return null;
 };
 
-const setRefreshTokenInterval = (token) => {
-  const decoded = decodeToken(token);
+export const refreshTokenInterval = () => {
+  const decoded = decodeToken(getToken());
   const currentTime = Date.now() / 1000;
   const intervalTime = decoded?.exp - currentTime - 60;
   return intervalTime * 1000;
@@ -40,20 +38,10 @@ export const setToken = (token) => {
 };
 
 export const setRefreshToken = (token) => {
-  let refreshTokenTimeout = null;
-  let accessToken = getToken();
-
   if (token) {
     localStorage.setItem("refreshToken", JSON.stringify(token));
-    const intervalTime = setRefreshTokenInterval(accessToken);
-    refreshTokenTimeout =
-      intervalTime &&
-      setTimeout(() => {
-        store.dispatch(refreshAccessToken());
-      }, intervalTime);
   } else {
     localStorage.removeItem("refreshToken");
-    clearTimeout(refreshTokenTimeout);
   }
 };
 
@@ -85,7 +73,9 @@ export const checkAuth = () => {
     const decoded = jwtDecode(localStorage.accessToken);
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
-      store.dispatch(refreshAccessToken());
+      logout();
     }
+  } else {
+    logout();
   }
 };

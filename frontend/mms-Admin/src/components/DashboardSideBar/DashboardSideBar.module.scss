@@ -43,6 +43,24 @@
       font-family: var(--regular);
       font-size: 1rem !important;
 
+      .count {
+        font-family: var(--regular);
+        color: #fff;
+        font-size: clamp(0.5rem, 0.5rem + 0.5vw, 0.625rem);
+        width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: var(--primaryRedColor);
+        position: absolute;
+        top: 0.25rem;
+        left: 3.125rem;
+      }
+
       &:hover {
         background-color: #fff;
 

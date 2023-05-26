@@ -18,16 +18,28 @@ import userRoles from "@/constants/userRoles";
 import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
 const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
 const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
-const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
 
+// Certificates
+const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
+const ApprovedCertificates = lazy(() =>
+  import("@/pages/Dashboard/Certificates/ApprovedCertificates/ApprovedCertificates")
+);
+const GeneratedCertificates = lazy(() =>
+  import("@/pages/Dashboard/Certificates/GeneratedCertificates/GeneratedCertificates")
+);
+const PendingCertificates = lazy(() =>
+  import("@/pages/Dashboard/Certificates/PendingCertificates/PendingCertificates")
+);
+const CertificateDetails = lazy(() => import("@/pages/Dashboard/Certificates/CertificateDetails/CertificateDetails"));
 
 //Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
 const ProgramDetails = lazy(() => import("@/pages/Dashboard/Programs/ProgramDetails/ProgramDetails"));
 const CreateProgram = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateProgram"));
 const CreateCriteria = lazy(() => import("@/pages/Dashboard/Programs/CreateProgram/CreateCriteria/CreateCriteria"));
-
+const EditProgram = lazy(() => import("@/pages/Dashboard/Programs/EditProgram/EditProgram"));
+const EditCriteria = lazy(() => import("@/pages/Dashboard/Programs/EditProgram/EditCriteria/EditCriteria"));
 
 // Mentors
 const Mentors = lazy(() => import("@/pages/Dashboard/Mentors/Mentors"));
@@ -123,7 +135,13 @@ function RoutesComponent() {
             <Route path='notifications' element={<SettingsNotifications />} />
           </Route>
           <Route path='approval-requests' element={<ApprovalRequests />} />
-          <Route index path='certificates' element={<Certificates />} />
+          <Route path='certificates' element={<Certificates />}>
+            <Route index path='' element={<ApprovedCertificates />} />
+            <Route path='approved-certificates' element={<ApprovedCertificates />} />
+            <Route path='generated-certificates' element={<GeneratedCertificates />} />
+            <Route path='pending-certificates' element={<PendingCertificates />} />
+            <Route path='certificate-details/:id' element={<CertificateDetails />} />
+          </Route>
           <Route path='discussion-forum'>
             <Route index path='' element={<DiscussionForum />} />
             <Route path='post-details/:id' element={<PostDetails />} />
@@ -159,13 +177,17 @@ function RoutesComponent() {
           </Route>
           <Route index path='profile' element={<Profile />} />
           <Route path='programs'>
-              <Route path='' element={<Programs />}>
-                <Route path='program-details/:id' element={<ProgramDetails />} />
-                <Route path='create-program'>
-                  <Route path='' element={<CreateProgram />} />
-                  <Route path='create-criteria' element={<CreateCriteria />} />
-                </Route>
-              </Route>
+            <Route path='' element={<Programs />}>
+              <Route path='program-details/:id' element={<ProgramDetails />} />
+            </Route>
+            <Route path='create-program'>
+              <Route path='' element={<CreateProgram />} />
+              <Route path='create-criteria' element={<CreateCriteria />} />
+            </Route>
+            <Route path='edit-program/:id'>
+              <Route path='' element={<EditProgram />} />
+              <Route path='edit-criteria' element={<EditCriteria />} />
+            </Route>
           </Route>
 
           <Route path='reports'>

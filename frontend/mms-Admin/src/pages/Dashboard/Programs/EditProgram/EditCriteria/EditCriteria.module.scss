@@ -1,0 +1,227 @@
+.editCriteriaContainer {
+  gap: 0.75rem;
+  padding: 1rem 0.5rem;
+  position: relative;
+  height: calc(100vh - var(--topNavbarHeight));
+  overflow-y: auto;
+
+  .heading {
+    position: sticky;
+    top: 0;
+    gap: 0.5rem;
+
+    .backIcon {
+      width: 0.875rem;
+      cursor: pointer;
+    }
+
+    .title {
+      margin: 0;
+      font-family: var(--bold);
+      color: var(--blackTextColor);
+      font-size: 1.25rem;
+    }
+  }
+
+  .body {
+    height: 100%;
+    overflow-y: hidden;
+
+    .instructions {
+      margin-bottom: 1rem;
+      gap: 1rem;
+      background-color: var(--green3Color);
+      padding: 1rem;
+      border-radius: 10px;
+
+      p {
+        margin: 0;
+        font-family: var(--regular);
+        color: var(--grayText2Color);
+        font-size: 1rem;
+        text-align: justify;
+      }
+
+      button {
+        align-self: flex-end;
+      }
+    }
+
+    .formContainer {
+      height: 100%;
+      position: relative;
+      gap: 0.75rem;
+      overflow-y: auto;
+
+      .formBody {
+        gap: 1rem;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+
+        .contentWrapper {
+          gap: 1rem;
+          color: var(--grayTextColor);
+          font-size: 1rem;
+
+          .title {
+            font-family: var(--regular);
+            color: var(--grayTextColor);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+          }
+
+          .btnGroup {
+            gap: 1rem;
+
+            img {
+              width: 1.5rem;
+              cursor: pointer;
+            }
+          }
+
+          .singleInputWrapper {
+            width: 100%;
+          }
+
+          .multipleInputWrapper {
+            width: 100%;
+          }
+
+          .yesOrNoWrapper {
+            width: 100%;
+
+            .radioBtnGroup {
+              gap: 4rem;
+
+              .group {
+                align-items: center;
+                gap: 0.5rem;
+              }
+            }
+          }
+
+          .fileInputWrapper {
+            width: 100%;
+
+            .wrapper {
+              gap: 1rem;
+              margin-bottom: 0.5rem;
+              border: 1px solid var(--grayBorderColor);
+              border-radius: 0.25rem;
+              justify-content: space-between;
+              padding: 0.5rem 1rem 0.5rem 1rem;
+
+              .fileName {
+                margin: 0;
+                color: var(--grayTextColor);
+              }
+
+              .rightGroup {
+                gap: 1.5rem;
+                color: var(--primaryColor);
+
+                span,
+                img {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+
+          .multiChoiceWrapper {
+            width: 100%;
+
+            .wrapper {
+              gap: 1rem;
+              margin-bottom: 0.5rem;
+              border: 1px solid var(--grayBorderColor);
+              border-radius: 0.25rem;
+              justify-content: space-between;
+              padding: 0.5rem 1rem 0.5rem 1rem;
+
+              .fileName {
+                margin: 0;
+                color: var(--grayTextColor);
+              }
+
+              .rightGroup {
+                gap: 1.5rem;
+                color: var(--primaryColor);
+
+                img {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+
+        .addCriteriaBtnDiv {
+          justify-content: flex-start;
+        }
+
+        .submitBtnDiv {
+          justify-content: flex-end;
+          margin-top: auto;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .editCriteriaContainer {
+    gap: 0.875rem;
+    padding: 1rem;
+
+    .heading {
+      gap: 0.75rem;
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .body {
+      .instructions {
+        padding: 2rem;
+
+        p {
+          line-height: 2rem;
+          font-size: 1.25rem;
+        }
+      }
+
+      .formContainer {
+        .formBody {
+          gap: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .editCriteriaContainer {
+    gap: 1rem;
+    padding: 1.5rem;
+
+    .body {
+      .instructions {
+        padding: 3rem 5rem;
+
+        p {
+          line-height: 3rem;
+          font-size: 1.5rem;
+        }
+      }
+
+      .formContainer {
+        .formBody {
+          gap: 1rem;
+        }
+      }
+    }
+  }
+}
