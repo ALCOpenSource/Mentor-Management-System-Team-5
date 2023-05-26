@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import styles from "./CreateCriteria.module.scss";
+import styles from "./EditCriteria.module.scss";
 import { useNavigate } from "react-router-dom";
 import backIcon from "@/assets/icons/close-icon.svg";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { createProgramCriteriaSchema } from "@/helpers/validation";
+import { editProgramCriteriaSchema } from "@/helpers/validation";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import CriteriaTypesModal from "@/components/Modals/CriteriaTypes/CriteriaTypes";
@@ -23,7 +23,7 @@ import deleteIcon from "@/assets/icons/minus-icon-thin.svg";
 
 import successImage from "@/assets/images/default-success-notification-image.png";
 
-const CreateCriteria = () => {
+const EditCriteria = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ const CreateCriteria = () => {
     setDisableBtn({ ...disableBtn, addCriteria: false });
   };
 
-  const resolver = yupResolver(createProgramCriteriaSchema);
+  const resolver = yupResolver(editProgramCriteriaSchema);
 
   const defaultValues = {
     title: "",
@@ -72,7 +72,7 @@ const CreateCriteria = () => {
         modalData: {
           title: "Criteria Created Successfully!",
           image: successImage,
-          redirectUrl: "/dashboard/programs/create-program"
+          redirectUrl: "/dashboard/programs/edit-program/1"
         }
       })
     );
@@ -287,11 +287,11 @@ const CreateCriteria = () => {
   };
 
   return (
-    <div className={cx(styles.createCriteriaContainer, "flexCol")}>
+    <div className={cx(styles.editCriteriaContainer, "flexCol")}>
       <div className={cx(styles.heading, "flexRow-space-between")}>
         <h3 className={cx(styles.title)}>Criteria Setup</h3>
         <img
-          onClick={() => navigate("/dashboard/programs/create-program")}
+          onClick={() => navigate("/dashboard/programs/edit-program/1")}
           src={backIcon}
           className={cx(styles.backIcon)}
           alt='close-icon'
@@ -354,4 +354,4 @@ const CreateCriteria = () => {
   );
 };
 
-export default CreateCriteria;
+export default EditCriteria;

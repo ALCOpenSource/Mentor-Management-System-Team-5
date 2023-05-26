@@ -86,7 +86,8 @@ function DashboardSideBar() {
       {
         name: "Messages",
         link: "messages",
-        icon: <MessagesIcon />
+        icon: <MessagesIcon />,
+        count: 11
       },
       {
         name: "Discussion Forum",
@@ -145,6 +146,7 @@ function DashboardSideBar() {
                 active={activeIndex === index}
                 onClick={() => handleMenuClick(index, item.name)}
                 icon={item.icon}
+                prefix={item.count ? <span className={cx(styles.count)}>{item.count}</span> : null}
                 component={<Link to={item?.link} />}
               >
                 {" "}

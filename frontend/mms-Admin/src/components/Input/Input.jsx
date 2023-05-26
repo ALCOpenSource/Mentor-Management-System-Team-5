@@ -20,9 +20,12 @@ const Input = forwardRef(
       if (inputType === "password") {
         setShowPassword(true);
         return setInputType("text");
+      } else if (inputType === "text") {
+        setShowPassword(false);
+        return setInputType("password");
+      } else {
+        return setInputType(inputType);
       }
-      setShowPassword(false);
-      return setInputType("password");
     };
 
     return (

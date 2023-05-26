@@ -1,4 +1,4 @@
-.createCriteriaContainer {
+.editCriteriaContainer {
   gap: 0.75rem;
   padding: 1rem 0.5rem;
   position: relative;
@@ -171,7 +171,7 @@
 }
 
 @media all and (min-width: 768px) {
-  .createCriteriaContainer {
+  .editCriteriaContainer {
     gap: 0.875rem;
     padding: 1rem;
 
@@ -203,7 +203,7 @@
 }
 
 @media all and (min-width: 992px) {
-  .createCriteriaContainer {
+  .editCriteriaContainer {
     gap: 1rem;
     padding: 1.5rem;
 

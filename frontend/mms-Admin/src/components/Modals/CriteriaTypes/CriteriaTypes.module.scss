@@ -1,0 +1,75 @@
+.modalWrapper {
+  gap: 1.5rem;
+  background-color: var(--modalBgColor);
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+
+  .modalHeader {
+    align-items: flex-start;
+    gap: 1rem;
+
+    .headerTitle {
+      font-size: 1.25rem;
+      font-family: var(--semiBold);
+      color: var(--blackTextColor);
+    }
+  }
+
+  .modalBody {
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    .wrapper {
+      width: 100%;
+      box-shadow: 1px 3px 9px rgba(3, 93, 99, 0.2);
+      border-radius: 5px;
+
+      .inputType {
+        cursor: pointer;
+        line-height: 1rem;
+        font-size: 1rem;
+        font-family: var(--regular);
+        color: var(--grayTextColor);
+        margin: 0;
+        padding: 1.125rem 1rem;
+
+        &:hover {
+          background-color: var(--green3Color);
+        }
+      }
+    }
+
+    .btnGroup {
+      width: 100%;
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .modalWrapper {
+    padding: 2rem;
+
+    .modalHeader {
+      .headerTitle {
+        font-size: 1.5rem;
+      }
+    }
+
+    .modalBody {
+      gap: 3.5rem;
+
+      .wrapper {
+        .inputType {
+          font-size: 1.25rem;
+          padding: 1.5rem 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .modalWrapper {
+    padding: 3.5rem 4rem;
+  }
+}

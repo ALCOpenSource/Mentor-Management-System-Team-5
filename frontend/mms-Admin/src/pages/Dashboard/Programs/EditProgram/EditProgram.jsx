@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import styles from "./CreateProgram.module.scss";
+import styles from "./EditProgram.module.scss";
 import Button from "@/components/Button/Button";
 import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
@@ -16,7 +16,7 @@ import SuccessNotificationModal from "@/components/Modals/SuccessNotification/Su
 
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
-import { createProgramSchema } from "@/helpers/validation";
+import { editProgramSchema } from "@/helpers/validation";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
@@ -24,7 +24,7 @@ import programAvatar from "@/assets/images/program-avatar.svg";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
 
-function CreateProgram() {
+function EditProgram() {
   const navigate = useNavigate();
 
   const [openSideBar, setOpenSideBar] = useState({
@@ -149,7 +149,7 @@ function CreateProgram() {
     }
   ];
 
-  const resolver = yupResolver(createProgramSchema);
+  const resolver = yupResolver(editProgramSchema);
 
   const defaultValues = {
     title: "",
@@ -168,7 +168,7 @@ function CreateProgram() {
       showModal({
         name: "successNotification",
         modalData: {
-          title: "Program Created Successfully!",
+          title: "Program Saved Successfully!",
           image: successImage,
           redirectUrl: "/dashboard/programs"
         }
@@ -271,10 +271,10 @@ function CreateProgram() {
   };
 
   return (
-    <div className={cx(styles.createProgramContainer, "flexRow")}>
+    <div className={cx(styles.editProgramContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
         <div className={cx(styles.heading, "flexRow")}>
-          <h3 className={cx(styles.title)}>Create New Program</h3>
+          <h3 className={cx(styles.title)}>Edit Program</h3>
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
@@ -357,7 +357,7 @@ function CreateProgram() {
                     <ClearListIcon />
                   </div>
                 </div>
-                <Button title='Select' size='small' onClick={() => navigate("create-criteria")} />
+                <Button title='Select' size='small' onClick={() => navigate("edit-criteria")} />
               </div>
             </div>
 
@@ -366,7 +366,7 @@ function CreateProgram() {
                 onClick={handleSubmit((data) => sendMessage(data))}
                 // loading={loading}
                 // disabled={loading}
-                title='Create Program'
+                title='Save Changes'
                 type='primary'
               />
             </div>
@@ -389,4 +389,4 @@ function CreateProgram() {
   );
 }
 
-export default CreateProgram;
+export default EditProgram;
