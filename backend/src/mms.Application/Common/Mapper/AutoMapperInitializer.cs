@@ -23,6 +23,8 @@ using mms.Application.MentorManagers.Query;
 using mms.Application.UserTasks.Command.CreateTask;
 using mms.Application.Report.Command;
 using mms.Application.Programme.Command;
+using mms.Application.UserTasks.Command.UpdateTask;
+using mms.Application.Common.DTOs;
 
 namespace mms.Application.Common.Mapper
 {
@@ -55,6 +57,16 @@ namespace mms.Application.Common.Mapper
 
             CreateMap<ProgramsMentor, GetMentorsResponse>().ReverseMap();
             CreateMap<MentorManager, GetMentorManagersResponse>().ReverseMap();
+
+            //Mapping Domain Object to dto
+            CreateMap<ProgramsMentor, MentorDTO>().ReverseMap();
+            CreateMap<MentorManager, MentorManagerDTO>().ReverseMap();
+            CreateMap<CreateTaskCommand,List<MentorManagerDTO>>().ReverseMap();
+            CreateMap<CreateTaskCommand, List<MentorDTO>>().ReverseMap();
+            CreateMap<UserTask, List<MentorManager>>().ReverseMap();
+            CreateMap<UserTask, List<ProgramsMentor>>().ReverseMap();
+            CreateMap<UserTask, List<MentorManagerDTO>>().ReverseMap();
+            CreateMap<UserTask, List<MentorDTO>>().ReverseMap();
 
             CreateMap<FAQEntity, PostFAQCommand>().ReverseMap();
             CreateMap<FAQEntity, PutFAQCommand>().ReverseMap();

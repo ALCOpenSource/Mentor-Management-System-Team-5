@@ -16,8 +16,9 @@ namespace mms.Domain.Entities
         public DateTime DateCreated { get; set; }
         public DateTime? DateCompleted { get; set; }
         public DateTime? DateArchived { get; set; }
-        [Column(TypeName = "json")] public string Criteria { get; set; }
+        [Column(TypeName = "json")]
+        public string Criteria { get; set; }
         public IList<Report> Reports { get; set; }
-        public IList<AppUser> AppUsers { get; set; } //Note that this should only be managers
+        public IList<MentorManager> MentorManagers { get; set; } //Note that this should only be managers
     }
 }
