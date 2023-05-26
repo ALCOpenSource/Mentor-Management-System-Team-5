@@ -7,6 +7,7 @@ using mms.Application.Account.Login;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
+using mms.Infrastructure.Utility;
 
 namespace mms.Application.Account.PasswordReset
 {
@@ -42,6 +43,12 @@ namespace mms.Application.Account.PasswordReset
 
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var result = new ForgetPasswordResponseDto { Email = user.Email, Token = token };
+
+            var encodedToken = TokenConverter.EncodeToken(token);
+            var link = $"{_configuration["AppSettings:WebUrl"]}/reset-password?token={token}&email={user.Email}";
+            var emailBody = await GetEmailBody(user, "StaticsFiles/Html/ForgetPasswordEmail.html", link, null);
+
+            await SendEmail(user.Email, "Reset Password", emailBody);
 
             return await Result<ForgetPasswordResponseDto>.SuccessAsync(result);
         }

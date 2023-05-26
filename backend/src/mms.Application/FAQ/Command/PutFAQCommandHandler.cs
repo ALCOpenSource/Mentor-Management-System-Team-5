@@ -30,7 +30,7 @@ namespace mms.Application.FAQ.Command
                 return await Result<string>.FailAsync("Invalid user");
             }
 
-            if (string.IsNullOrEmpty(_currentUserService.UserRole) || _currentUserService.UserRole == Policies.Admin)
+            if (string.IsNullOrEmpty(_currentUserService.UserRole) || !_currentUserService.UserRole.Equals(Policies.Admin))
             {
                 return await Result<string>.FailAsync("Invalid user Account Role");
             }
