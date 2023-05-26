@@ -18,8 +18,20 @@ import userRoles from "@/constants/userRoles";
 import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
 const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
 const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
-const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
+
+// Certificates
+const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
+const ApprovedCertificates = lazy(() =>
+  import("@/pages/Dashboard/Certificates/ApprovedCertificates/ApprovedCertificates")
+);
+const GeneratedCertificates = lazy(() =>
+  import("@/pages/Dashboard/Certificates/GeneratedCertificates/GeneratedCertificates")
+);
+const PendingCertificates = lazy(() =>
+  import("@/pages/Dashboard/Certificates/PendingCertificates/PendingCertificates")
+);
+const CertificateDetails = lazy(() => import("@/pages/Dashboard/Certificates/CertificateDetails/CertificateDetails"));
 
 //Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
@@ -123,7 +135,13 @@ function RoutesComponent() {
             <Route path='notifications' element={<SettingsNotifications />} />
           </Route>
           <Route path='approval-requests' element={<ApprovalRequests />} />
-          <Route index path='certificates' element={<Certificates />} />
+          <Route path='certificates' element={<Certificates />}>
+            <Route index path='' element={<ApprovedCertificates />} />
+            <Route path='approved-certificates' element={<ApprovedCertificates />} />
+            <Route path='generated-certificates' element={<GeneratedCertificates />} />
+            <Route path='pending-certificates' element={<PendingCertificates />} />
+            <Route path='certificate-details/:id' element={<CertificateDetails />} />
+          </Route>
           <Route path='discussion-forum'>
             <Route index path='' element={<DiscussionForum />} />
             <Route path='post-details/:id' element={<PostDetails />} />
