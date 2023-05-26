@@ -13,8 +13,10 @@
 
   <ItemGroup>
     <None Remove="Mail\" />
+    <None Remove="Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mail\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>

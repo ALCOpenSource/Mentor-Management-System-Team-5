@@ -8,5 +8,6 @@ namespace mms.Domain.Entities
         public IList<ProgramsMentor> ProgramsMentors { get; set; }
         public IList<Programme> Programmes { get; set; }
         public AppUser AppUser { get; set; }
+        public IList<UserTask> UserTasks { get; set; }
     }
 }
