@@ -1,0 +1,188 @@
+.generateCertificateContainer {
+  gap: 1rem;
+  padding: 1rem 0.5rem;
+  position: relative;
+  height: calc(100vh - var(--topNavbarHeight));
+
+  .mainSection {
+    gap: 1.5rem;
+    flex-grow: 1;
+    height: 100%;
+    overflow-y: auto;
+
+    .heading {
+      position: sticky;
+      top: 0;
+
+      .title {
+        margin: 0;
+        font-family: var(--semiBold);
+        color: var(--blackTextColor);
+        font-size: 1.5rem;
+      }
+
+      img {
+        cursor: pointer;
+      }
+    }
+
+    .formWrapper {
+      overflow-y: auto;
+      padding-right: 0.5rem;
+
+      form {
+        .headerWrapper {
+          flex-wrap: nowrap;
+          width: 100%;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+
+          .selectionWrapper {
+            gap: 1rem;
+            padding: 0.625rem 1rem;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border: 1px solid var(--grayBorderColor);
+            border-radius: 5px;
+
+            .title {
+              font-size: 1.25rem;
+              font-family: var(--regular);
+              color: var(--black2TextColor);
+              margin: 0;
+              line-height: 1;
+            }
+
+            button {
+              padding: 0.25rem 0.5rem;
+              font-size: 0.875rem;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .previewDiv {
+          min-height: 30vh;
+          border: 1px solid var(--grayBorderColor);
+          border-radius: 5px;
+          width: 100%;
+          color: var(--grayTextColor);
+        }
+
+        .submitBtnDiv {
+          align-items: center;
+          justify-content: flex-start;
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+
+  .sideBarSection {
+    width: auto;
+
+    .filterAndSearchDiv {
+      width: 100%;
+      justify-content: flex-end;
+      gap: 1rem;
+      min-height: 3rem;
+
+      .searchWrapper {
+        flex-grow: 1;
+      }
+
+      .closeIcon {
+        width: 1rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media all and (min-width: 768px) {
+  .generateCertificateContainer {
+    padding: 2rem;
+
+    .mainSection {
+      .formWrapper {
+        form {
+          .headerWrapper {
+            .selectionWrapper {
+              gap: 1.125rem;
+              padding: 0.75rem 1.5rem;
+
+              button {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.875rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 992px) {
+  .generateCertificateContainer {
+    padding: 1rem 2rem;
+
+    .mainSection {
+      gap: 2.5rem;
+
+      .formWrapper {
+        form {
+          .headerWrapper {
+            .selectionWrapper {
+              gap: 1.125rem;
+              padding: 0.75rem 1.5rem;
+
+              button {
+                font-size: 0.75rem;
+              }
+            }
+          }
+
+          .previewDiv {
+            min-height: 40vh;
+          }
+
+          .submitBtnDiv {
+            margin-top: 2.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .generateCertificateContainer {
+    padding: 1rem 2rem;
+
+    .mainSection {
+      padding-top: 1rem;
+
+      .formWrapper {
+        form {
+          .headerWrapper {
+            gap: 1.5rem;
+
+            .selectionWrapper {
+              padding: 0.875rem 4.5rem;
+            }
+          }
+
+          .previewDiv {
+            min-height: 50vh;
+          }
+
+          .submitBtnDiv {
+            margin-top: 3rem;
+          }
+        }
+      }
+    }
+  }
+}
