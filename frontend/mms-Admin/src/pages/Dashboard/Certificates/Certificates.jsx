@@ -35,6 +35,9 @@ function Certificates() {
     } else if (currentSubPath === "generated-certificates") {
       setOutletTitle("Generated Certificates");
       setShowGenerateButton(true);
+    } else if (currentSubPath === "certificate-details") {
+      setOutletTitle("Certificate Details");
+      setShowGenerateButton(true);
     } else {
       setOutletTitle("Approved Certificates");
       setShowGenerateButton(true);
@@ -223,7 +226,9 @@ function Certificates() {
             </div>
             <h3 className={cx(styles.title)}>{outletTitle}</h3>
           </div>
-          {showGenerateButton && <Button title='Generate new certificate' size='small' onClick={() => navigate("#")} />}
+          {showGenerateButton && (
+            <Button title='Generate new certificate' size='small' onClick={() => navigate("generate-certificate")} />
+          )}
           <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
             {collapseInput && (
               <div className={cx(styles.paginationWrapper)}>

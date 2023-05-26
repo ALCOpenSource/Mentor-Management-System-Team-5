@@ -32,6 +32,9 @@ const PendingCertificates = lazy(() =>
   import("@/pages/Dashboard/Certificates/PendingCertificates/PendingCertificates")
 );
 const CertificateDetails = lazy(() => import("@/pages/Dashboard/Certificates/CertificateDetails/CertificateDetails"));
+const GenerateCertificate = lazy(() =>
+  import("@/pages/Dashboard/Certificates/GenerateCertificate/GenerateCertificate")
+);
 
 //Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
@@ -118,11 +121,13 @@ function RoutesComponent() {
 
         <Route
           path='/dashboard'
-          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={
+            <AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>}
+            </AuthenticatedRoutes>
+          }
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>
@@ -135,12 +140,16 @@ function RoutesComponent() {
             <Route path='notifications' element={<SettingsNotifications />} />
           </Route>
           <Route path='approval-requests' element={<ApprovalRequests />} />
-          <Route path='certificates' element={<Certificates />}>
-            <Route index path='' element={<ApprovedCertificates />} />
-            <Route path='approved-certificates' element={<ApprovedCertificates />} />
-            <Route path='generated-certificates' element={<GeneratedCertificates />} />
-            <Route path='pending-certificates' element={<PendingCertificates />} />
-            <Route path='certificate-details/:id' element={<CertificateDetails />} />
+          <Route path='certificates'>
+            <Route path='' element={<Certificates />}>
+              <Route path='' element={<ApprovedCertificates />} />
+              <Route path='approved-certificates' element={<ApprovedCertificates />} />
+
+              <Route path='generated-certificates' element={<GeneratedCertificates />} />
+              <Route path='pending-certificates' element={<PendingCertificates />} />
+              <Route path='certificate-details/:id' element={<CertificateDetails />} />
+            </Route>
+            <Route path='generate-certificate' element={<GenerateCertificate />} />
           </Route>
           <Route path='discussion-forum'>
             <Route index path='' element={<DiscussionForum />} />
