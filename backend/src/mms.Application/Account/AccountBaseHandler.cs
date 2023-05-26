@@ -59,7 +59,7 @@ namespace mms.Application.Account
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var encodedToken = TokenConverter.EncodeToken(token);
-                var link = $"{_configuration["AppSettings:WebUrl"]}/confirm-email/{user.Email}/{encodedToken}";
+                var link = $"{_configuration["AppSettings:WebUrl"]}/sign-up-confirmation?email={user.Email}&token={encodedToken}";
                 var emailBody = await GetEmailBody(user, "StaticsFiles/Html/ConfirmEmail.html", link, password);
 
                 await SendEmail(user.Email, subject, emailBody);
