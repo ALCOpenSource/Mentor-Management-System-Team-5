@@ -9,6 +9,7 @@ using mms.Infrastructure.Interface;
 using System.Net;
 using mms.Application.Account.ConfirmEmail;
 using mms.Application.Account.Registration.MentorManager;
+using mms.Domain.Entities;
 
 namespace mms.api.Controllers
 {
@@ -92,16 +93,6 @@ namespace mms.api.Controllers
             {
                 return BadRequest(result.Message);
             }
-
-            var forgetPasswordLink = Url.Action(nameof(ResetPassword), "Account",
-                new { token = result.Data.Token, email = result.Data.Email }, Request.Scheme);
-            var mail = new Domain.Mail.MailRequest
-            {
-                Subject = "Forgot Password Link",
-                ToEmail = result.Data.Email!,
-                Body = forgetPasswordLink!
-            };
-            await _mailService.SendEmailAsync(mail);
 
             return Ok(result);
         }

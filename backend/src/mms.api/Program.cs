@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using mms.api.Configurations;
 using mms.Application;
+using mms.Domain.Configuration;
 using mms.Domain.Mail;
 using mms.Infrastructure;
 using mms.Infrastructure.Context;
@@ -34,6 +35,7 @@ ApplicationInjection.ApplicationDiContainer(builder.Services);
 InfrastructureInjection.InjectInfrastructure(builder.Services);
 
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.Configure<Frontend>(builder.Configuration.GetSection("Frontend"));
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
