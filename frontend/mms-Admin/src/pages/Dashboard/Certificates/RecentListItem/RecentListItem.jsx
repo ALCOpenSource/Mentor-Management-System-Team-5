@@ -3,18 +3,19 @@ import cx from "classnames";
 import styles from "./RecentListItem.module.scss";
 import "./RecentListActiveItem.scss";
 import PropTypes from "prop-types";
+import Button from "@/components/Button/Button";
 
-function RecentListItem({ data }) {
+function RecentListItem({ data, onClick }) {
   return (
-    <div className={cx(styles.recentListItemContainer, "flexCol")}>
+    <div onClick={() => onClick(data)} className={cx(styles.recentListItemContainer, "flexCol")}>
       <div className={cx(styles.body, "flexRow-align-center")}>
         <img className={cx(styles.icon)} src={data?.icon} alt='icon' />
         <div className={cx(styles.mainContent, "flexCol")}>
           <h5 className={cx(styles.title)}>{data?.title}</h5>
-          <div className={cx(styles.metaData, "flexRow")}>
-            <img className={cx(styles.dateIcon)} src={data?.calendarIcon} alt='calendar-icon' />
-            <span className={cx(styles.date)}>{data?.date}</span>
-          </div>
+          <span className={cx(styles.description)}>{data?.description}</span>
+        </div>
+        <div className={cx(styles.btnDiv, "flexRow")}>
+          <Button title='View' type='primary' size='small' />
         </div>
       </div>
     </div>
@@ -22,7 +23,8 @@ function RecentListItem({ data }) {
 }
 
 RecentListItem.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  onClick: PropTypes.func
 };
 
 export default RecentListItem;

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import cx from "classnames";
-import { useNavigate, useParams, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import styles from "./Certificates.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import Button from "@/components/Button/Button";
-import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
-import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
+import certificateIcon from "@/assets/icons/certificate-thumbnail.svg";
 import backIcon from "@/assets/icons/close-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
-import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import approvedCertificateIcon from "@/assets/icons/new-entries-icon.svg";
 import generatedCertificateIcon from "@/assets/icons/blog-post-icon.svg";
 import RecentListItem from "./RecentListItem/RecentListItem";
@@ -20,10 +18,10 @@ import Pagination from "@/components/Pagination/Pagination";
 
 function Certificates() {
   const navigate = useNavigate();
-  const params = useParams();
   const isMobile = useIsMobile();
-  const [selectedMenuId, setSelectedMenuId] = useState(params.id);
+  const currentSubPath = useLocation().pathname.split("/")[3];
   const [openSideBar, setOpenSideBar] = useState(false);
+  const [outletTitle, setOutletTitle] = useState("Approved Certificates");
 
   useEffect(() => {
     isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
@@ -36,158 +34,36 @@ function Certificates() {
     {
       id: 1,
       title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      description: "GADS CLOUD 2022 - COMPLETION",
+      icon: certificateIcon
     },
     {
       id: 2,
       title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      description: "GADS CLOUD 2022 - COMPLETION",
+      icon: certificateIcon
     },
     {
       id: 3,
       title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      description: "GADS CLOUD 2022 - COMPLETION",
+      icon: certificateIcon
     },
     {
       id: 4,
       title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
+      description: "GADS CLOUD 2022 - COMPLETION",
+      icon: certificateIcon
     },
     {
       id: 5,
       title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 6,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 7,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 8,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 9,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 10,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 11,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 12,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 13,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 14,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 15,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 16,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 17,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 18,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 19,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 20,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 21,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now",
-      icon: cardIcon,
-      calendarIcon
-    },
-    {
-      id: 22,
-      title: "Room Library Article Written in Java",
-      date: "3 days from now last",
-      icon: cardIcon,
-      calendarIcon
+      description: "GADS CLOUD 2022 - COMPLETION",
+      icon: certificateIcon
     }
   ];
+
+  console.log(currentSubPath, "current sub path");
 
   const handleCloseSearchInput = (e) => {
     console.log(e, "handle close input");
@@ -201,17 +77,23 @@ function Certificates() {
 
   const handleCategoryClick = (item) => {
     console.log(item, "handle category click");
+    setOutletTitle(item.title);
     navigate(item.path);
   };
 
-  const getSideBarData = () => {
-    // let listItems = menuItemsArray.map((item, index) => {
-    //   return {
-    //     component: <TaskListItem key={index} data={item} />,
-    //     id: item.id
-    //   };
-    // });
+  const handlePendingClick = () => {
+    console.log("handle pending click");
+    setOutletTitle("Pending Certificates");
+    navigate("/dashboard/certificates/pending-certificates");
+  };
 
+  const handleRecentListClick = (item) => {
+    console.log(item, "handle recent list click");
+    setOutletTitle("Certificate Details");
+    navigate(`/dashboard/certificates/certificate-details/${item.id}`);
+  };
+
+  const getSideBarData = () => {
     let categoryData = [
       {
         id: 1,
@@ -240,11 +122,15 @@ function Certificates() {
               return <CategoryListItem onClick={handleCategoryClick} key={index} data={item} />;
             })}
             <div
-              onClick={() => navigate("/dashboard/certificates/pending-certificates")}
-              className={cx(styles.pendingDiv, "flexRow-space-between")}
+              onClick={() => handlePendingClick()}
+              className={cx(
+                styles.pendingDiv,
+                "flexRow-space-between",
+                currentSubPath === "pending-certificates" && styles.active
+              )}
             >
               <p>Certificates pending approval</p>
-              <span>50</span>
+              <span>500</span>
             </div>
           </div>
         ),
@@ -256,7 +142,7 @@ function Certificates() {
             <h3 className={cx(styles.title)}>Recent</h3>
             <div className={cx(styles.listWrapper, "flexCol")}>
               {recentDataArray.map((item, index) => {
-                return <RecentListItem key={index} data={item} />;
+                return <RecentListItem key={index} data={item} onClick={handleRecentListClick} />;
               })}
             </div>
           </div>
@@ -295,22 +181,12 @@ function Certificates() {
     console.log(item);
   };
 
-  const handleSelectedMenuItem = (id) => {
-    // setSelectedMenuId(id);
-    // navigate(`task-details/${id}`);
-  };
-
-  const handleSearchClick = () => {
-    console.log("search icon clicked");
-  };
-
   return (
     <div className={cx(styles.certificatesContainer, "flexRow")}>
       {openSideBar && (
         <div className={cx(styles.sidebarWrapper)}>
           <GenericSideBar
             data={getSideBarData()}
-            selectedMenuItem={handleSelectedMenuItem}
             activeMenuItemClass='active-task-item'
             closeGenericSideBar={() => setOpenSideBar(false)}
           />
@@ -329,9 +205,9 @@ function Certificates() {
               />
               <small className={cx(styles.togglerText)}>MENU</small>
             </div>
-            <h3 className={cx(styles.title)}>Approved Certificates</h3>
+            <h3 className={cx(styles.title)}>{outletTitle}</h3>
           </div>
-          <Button title='Generate new certificate' size='small' onClick={() => navigate("generate-certificate")} />
+          <Button title='Generate new certificate' size='small' onClick={() => navigate("#")} />
           <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
             {collapseInput && (
               <div className={cx(styles.paginationWrapper)}>
@@ -364,15 +240,6 @@ function Certificates() {
         </section>
 
         <div className={cx(styles.content)}>
-          {/* {selectedMenuId ? (
-            <Outlet />
-          ) : (
-            <div className={cx(styles.emptySelectionDiv, "flexCol-fully-centered")}>
-              <img src={emptySelectionIcon} alt='empty-selection-icon' />
-              <p>No item selected yet </p>
-              <p>Select an item from the list to view task details</p>
-            </div>
-          )} */}
           <Outlet />
         </div>
       </section>

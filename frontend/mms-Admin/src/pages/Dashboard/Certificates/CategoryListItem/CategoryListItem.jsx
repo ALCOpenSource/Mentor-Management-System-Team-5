@@ -1,12 +1,16 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./CategoryListItem.module.scss";
-import "./CategoryListActiveItem.scss";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 function CategoryListItem({ data, onClick }) {
+  const location = useLocation().pathname.split("/")[3] || "approved-certificates";
   return (
-    <div onClick={() => onClick(data)} className={cx(styles.categoryListItemContainer, "flexCol")}>
+    <div
+      onClick={() => onClick(data)}
+      className={cx(styles.categoryListItemContainer, "flexCol", data?.path.includes(location) && styles.active)}
+    >
       <div className={cx(styles.body, "flexRow-align-center")}>
         <img className={cx(styles.icon)} src={data?.icon} alt='icon' />
         <h5 className={cx(styles.title)}>{data?.title}</h5>

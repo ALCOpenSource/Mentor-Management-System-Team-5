@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import styles from "./TaskDetails.module.scss";
+import styles from "./CertificateDetails.module.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import headerIcon from "@/assets/icons/tasks-overview-card-icon.svg";
@@ -13,7 +13,7 @@ import deleteIcon from "@/assets/icons/delete-icon-red.svg";
 import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 
-function TaskDetails() {
+function CertificateDetails() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -56,7 +56,7 @@ function TaskDetails() {
   };
 
   return (
-    <div className={cx(styles.taskDetailsContainer, "flexCol")}>
+    <div className={cx(styles.certificateDetailsContainer, "flexCol")}>
       {taskId && (
         <>
           <div className={cx(styles.header, "flexCol")}>
@@ -119,4 +119,4 @@ function TaskDetails() {
   );
 }
 
-export default TaskDetails;
+export default CertificateDetails;

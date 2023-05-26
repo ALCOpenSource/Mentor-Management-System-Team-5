@@ -31,6 +31,7 @@ const GeneratedCertificates = lazy(() =>
 const PendingCertificates = lazy(() =>
   import("@/pages/Dashboard/Certificates/PendingCertificates/PendingCertificates")
 );
+const CertificateDetails = lazy(() => import("@/pages/Dashboard/Certificates/CertificateDetails/CertificateDetails"));
 
 //Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
@@ -117,13 +118,11 @@ function RoutesComponent() {
 
         <Route
           path='/dashboard'
-          element={
-            <AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>
-          }
+            </AuthenticatedRoutes>}
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>
@@ -141,6 +140,7 @@ function RoutesComponent() {
             <Route path='approved-certificates' element={<ApprovedCertificates />} />
             <Route path='generated-certificates' element={<GeneratedCertificates />} />
             <Route path='pending-certificates' element={<PendingCertificates />} />
+            <Route path='certificate-details/:id' element={<CertificateDetails />} />
           </Route>
           <Route path='discussion-forum'>
             <Route index path='' element={<DiscussionForum />} />

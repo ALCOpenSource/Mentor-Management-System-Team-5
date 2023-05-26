@@ -1,4 +1,4 @@
-.taskDetailsContainer {
+.certificateDetailsContainer {
   height: 100%;
   gap: 0.75rem;
   padding: 1rem 0;
@@ -138,7 +138,7 @@
 }
 
 @media all and (min-width: 768px) {
-  .taskDetailsContainer {
+  .certificateDetailsContainer {
     padding: 1rem 0;
 
     .header {
@@ -162,7 +162,7 @@
 }
 
 @media all and (min-width: 992px) {
-  .taskDetailsContainer {
+  .certificateDetailsContainer {
     .header {
       .wrapper {
         .icon {
