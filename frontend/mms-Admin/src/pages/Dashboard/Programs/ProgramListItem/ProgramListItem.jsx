@@ -13,12 +13,12 @@ function ProgramListItem({ data }) {
           <h5 className={cx(styles.title)}>{data?.title}</h5>
           <div className={cx(styles.metaData, "flexRow")}>
             <div className={cx(styles.info, "flexRow")}>
-                <data.CalendarIcon />
-                <span className={cx(styles.value)}>{data?.date}</span>
+              <data.CalendarIcon />
+              <span className={cx(styles.value)}>{data?.date}</span>
             </div>
             <div className={cx(styles.info, "flexRow")}>
-                <data.ClockIcon />
-                <span className={cx(styles.value)}>{data?.time}</span>
+              <data.ClockIcon />
+              <span className={cx(styles.value)}>{data?.time}</span>
             </div>
           </div>
         </div>
