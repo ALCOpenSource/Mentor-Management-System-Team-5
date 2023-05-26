@@ -8,7 +8,6 @@ namespace mms.Application.Common.DTOs
 {
     public class MentorManagerDTO
     {
-        public string Id { get; set; }
-        //public string Role { get; set; }
+        public string MentorManagerId { get; set; }
     }
 }
