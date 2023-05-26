@@ -3,7 +3,7 @@ import cx from "classnames";
 import styles from "./ApprovedCertificates.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { showModal } from "@/redux/Modal/ModalSlice";
-import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
+import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import certificate from "@/assets/images/certificate-full.png";
 import { ReactComponent as CertificateIcon } from "@/assets/icons/certificate-thumbnail.svg";
 import { ReactComponent as TogglerIconUp } from "@/assets/icons/arrow-circle-up.svg";
@@ -83,7 +83,7 @@ const ApprovedCertificates = () => {
   const handleDelete = () => {
     dispatch(
       showModal({
-        name: "successNotification",
+        name: "deleteNotification",
         modalData: {
           title: "Certificate Deleted!",
           image: successImage
@@ -141,7 +141,7 @@ const ApprovedCertificates = () => {
           )}
         </div>
       </div>
-      {displayModal && modalName === "successNotification" ? <SuccessNotificationModal show size='md' /> : null}
+      {displayModal && modalName === "deleteNotification" ? <DeleteNotificationModal show size='md' /> : null}
     </div>
   );
 };
