@@ -1,4 +1,4 @@
-.approvedCertificatesContainer {
+.pendingCertificatesContainer {
   gap: 0.5rem;
   position: relative;
   overflow: hidden;
@@ -84,7 +84,7 @@
 }
 
 @media all and (min-width: 768px) {
-  .approvedCertificatesContainer {
+  .pendingCertificatesContainer {
     gap: 1rem;
 
     .body {
@@ -127,7 +127,7 @@
 }
 
 @media all and (min-width: 1200px) {
-  .approvedCertificatesContainer {
+  .pendingCertificatesContainer {
     .body {
       .cardContainer {
         .cardWrapper {

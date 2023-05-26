@@ -22,10 +22,24 @@ function Certificates() {
   const currentSubPath = useLocation().pathname.split("/")[3];
   const [openSideBar, setOpenSideBar] = useState(false);
   const [outletTitle, setOutletTitle] = useState("Approved Certificates");
+  const [showGenerateButton, setShowGenerateButton] = useState(true);
 
   useEffect(() => {
     isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
   }, [isMobile]);
+
+  useEffect(() => {
+    if (currentSubPath === "pending-certificates") {
+      setOutletTitle("Certificates Pending Approval");
+      setShowGenerateButton(false);
+    } else if (currentSubPath === "generated-certificates") {
+      setOutletTitle("Generated Certificates");
+      setShowGenerateButton(true);
+    } else {
+      setOutletTitle("Approved Certificates");
+      setShowGenerateButton(true);
+    }
+  }, [currentSubPath]);
 
   const [collapseInput, setCollapseInput] = useState(true);
   const [closeSelectElement, setCloseSelectElement] = useState(false);
@@ -78,12 +92,14 @@ function Certificates() {
   const handleCategoryClick = (item) => {
     console.log(item, "handle category click");
     setOutletTitle(item.title);
+    setShowGenerateButton(true);
     navigate(item.path);
   };
 
   const handlePendingClick = () => {
     console.log("handle pending click");
-    setOutletTitle("Pending Certificates");
+    setOutletTitle("Certificates Pending Approval");
+    setShowGenerateButton(false);
     navigate("/dashboard/certificates/pending-certificates");
   };
 
@@ -207,7 +223,7 @@ function Certificates() {
             </div>
             <h3 className={cx(styles.title)}>{outletTitle}</h3>
           </div>
-          <Button title='Generate new certificate' size='small' onClick={() => navigate("#")} />
+          {showGenerateButton && <Button title='Generate new certificate' size='small' onClick={() => navigate("#")} />}
           <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
             {collapseInput && (
               <div className={cx(styles.paginationWrapper)}>
