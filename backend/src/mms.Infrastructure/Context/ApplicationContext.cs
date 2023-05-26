@@ -70,7 +70,7 @@ namespace mms.Infrastructure.Context
                 .HasMany(x => x.Reports);
 
             modelBuilder.Entity<Programme>()
-                .HasMany(x => x.AppUsers);
+                .HasMany(x => x.MentorManagers);
 
             modelBuilder.Entity<ProgrammeApplication>()
                 .HasIndex(p => p.ProgrammeId);
@@ -83,6 +83,17 @@ namespace mms.Infrastructure.Context
 
             modelBuilder.Entity<ProgramsMentor>()
                 .HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<MentorManager>()
+                .HasIndex(x => x.AppUserId);
+            modelBuilder.Entity<MentorManager>()
+                .HasMany(x => x.UserTasks);
+
+            modelBuilder.Entity<MentorManager>()
+             .HasMany(x => x.ProgramsMentors);
+
+            modelBuilder.Entity<MentorManager>()
+             .HasMany(x => x.Programmes).WithMany(y => y.MentorManagers);
 
             modelBuilder.Entity<Report>()
                 .HasIndex(x => x.UserTaskId);

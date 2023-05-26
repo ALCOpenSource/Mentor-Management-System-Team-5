@@ -27,7 +27,7 @@ namespace mms.Application.UserTasks.Command.CreateTask
             _currentUserService = currentUserService;
         }
 
-        public async Task<IResult> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+        public async Task<IResult<string>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             var taskEntity = _mapper.Map<Domain.Entities.UserTask>(request);
 
@@ -36,7 +36,7 @@ namespace mms.Application.UserTasks.Command.CreateTask
             taskEntity.CreatedBy = _currentUserService.AppUserId;
             await _context.UserTasks.AddAsync(taskEntity);
             await _context.SaveChangesAsync(cancellationToken);
-            return await Result.SuccessAsync();
+            return await Result<string>.SuccessAsync();
         }
     }
 }
