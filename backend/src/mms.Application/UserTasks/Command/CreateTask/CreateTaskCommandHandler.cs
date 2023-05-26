@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace mms.Application.UserTasks.Command.CreateTask
 {
-    public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, IResult>
+    public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, IResult<string>>
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
