@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getAllMentorsApi, createMentorInvitationApi, registerMentorApi, deleteMentorApi } from "../api/mentors";
+import { getAllMentorsApi, inviteMentorApi, registerMentorApi, deleteMentorApi } from "../api/mentors";
 
 import {
   getAllMentorsLoading,
-  createMentorInvitationLoading,
+  inviteMentorLoading,
   registerMentorLoading,
   deleteMentorLoading
 } from "@/redux/Loading/LoadingSlice";
@@ -12,7 +12,7 @@ import {
 const initialState = {
   error: false,
   getAllMentorsData: {},
-  createMentorInvitationData: {},
+  inviteMentorData: {},
   registerMentorData: {},
   deleteMentorData: {}
 };
@@ -31,8 +31,8 @@ export const mentorsSlice = createSlice({
       state.getAllMentorsData = action.payload;
     },
 
-    createMentorInvitationAction: (state, action) => {
-      state.createMentorInvitationData = action.payload;
+    inviteMentorAction: (state, action) => {
+      state.inviteMentorData = action.payload;
     },
 
     registerMentorAction: (state, action) => {
@@ -47,7 +47,7 @@ export const mentorsSlice = createSlice({
 export default mentorsSlice.reducer;
 
 // Actions
-const { hasError, getAllMentorsAction, createMentorInvitationAction, registerMentorAction, deleteMentorAction } =
+const { hasError, getAllMentorsAction, inviteMentorAction, registerMentorAction, deleteMentorAction } =
   mentorsSlice.actions;
 
 export const getAllMentors = (data) => async (dispatch) => {
@@ -64,16 +64,16 @@ export const getAllMentors = (data) => async (dispatch) => {
     return { success: false };
   }
 };
-export const createMentorInvitation = (data) => async (dispatch) => {
-  dispatch(createMentorInvitationLoading(true));
+export const inviteMentor = (data) => async (dispatch) => {
+  dispatch(inviteMentorLoading(true));
   try {
-    const response = await createMentorInvitationApi(data);
-    dispatch(createMentorInvitationLoading(false));
-    dispatch(createMentorInvitationAction(response?.data?.data));
+    const response = await inviteMentorApi(data);
+    dispatch(inviteMentorLoading(false));
+    dispatch(inviteMentorAction(response?.data?.data));
     return { success: true };
   } catch (e) {
     toast.error(e?.response?.data?.message);
-    dispatch(createMentorInvitationLoading(false));
+    dispatch(inviteMentorLoading(false));
     dispatch(hasError(e?.response?.data));
     return { success: false };
   }

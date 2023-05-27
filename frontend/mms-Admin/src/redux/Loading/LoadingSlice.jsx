@@ -30,7 +30,7 @@ const initialState = {
 
   //Mentors
   getAllMentorsLoading: false,
-  createMentorInvitationLoading: false,
+  inviteMentorLoading: false,
   registerMentorLoading: false,
   deleteMentorLoading: false
 };
@@ -114,8 +114,8 @@ export const loadingSlice = createSlice({
     getAllMentorsLoading: (state, action) => {
       state.getAllMentorsLoading = action.payload;
     },
-    createMentorInvitationLoading: (state, action) => {
-      state.createMentorInvitationLoading = action.payload;
+    inviteMentorLoading: (state, action) => {
+      state.inviteMentorLoading = action.payload;
     },
     registerMentorLoading: (state, action) => {
       state.registerMentorLoading = action.payload;
@@ -150,7 +150,7 @@ export const {
   getTechnicalFaqLoading,
   sendSupportMessageLoading,
   getAllMentorsLoading,
-  createMentorInvitationLoading,
+  inviteMentorLoading,
   registerMentorLoading,
   deleteMentorLoading
 } = loadingSlice.actions;

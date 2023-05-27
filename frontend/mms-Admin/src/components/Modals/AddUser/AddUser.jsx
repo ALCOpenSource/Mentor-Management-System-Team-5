@@ -12,14 +12,16 @@ import { showModal, hideModal } from "@/redux/Modal/ModalSlice";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addUserSchema } from "@/helpers/validation";
+import { inviteMentor } from "@/redux/Mentors/MentorsSlice";
 
 function AddUser({ show, size, modalName }) {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
   const modalData = useSelector((state) => state.modal.modalData);
-
-  console.log(modalData, "modal data");
+  const userCategory = modalData?.category;
+  const inviteMentorLoading = useSelector((state) => state?.loading?.inviteMentorLoading);
+  // const inviteMentorManagerLoading = useSelector((state) => state?.loading?.inviteMentorManagerLoading);
 
   const defaultValues = {
     email: ""
@@ -30,25 +32,29 @@ function AddUser({ show, size, modalName }) {
   const {
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   const handleCloseModal = () => {
     dispatch(hideModal({ name: "addUser" }));
   };
 
-  const handleAddUser = (data) => {
-    console.log(data);
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Add Mentor",
-          message: `An invitation has been sent to ${data.email}
+  const handleAddUser = async (data) => {
+    let response = await dispatch(inviteMentor(data));
+    if (response?.success) {
+      reset();
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: modalData?.title,
+            message: `An invitation has been sent to ${data.email}
           successfully`
-        }
-      })
-    );
+          }
+        })
+      );
+    }
   };
 
   return (
@@ -78,8 +84,8 @@ function AddUser({ show, size, modalName }) {
             <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
               <Button onClick={() => handleCloseModal()} title='Cancel' type='secondary' />
               <Button
-                // loading={loading}
-                // disabled={loading}
+                loading={userCategory === "mentor" ? inviteMentorLoading : false}
+                disabled={userCategory === "mentor" ? inviteMentorLoading : false}
                 onClick={handleSubmit((data) => handleAddUser(data))}
                 title='Send'
               />

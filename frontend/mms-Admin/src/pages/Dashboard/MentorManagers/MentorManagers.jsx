@@ -33,7 +33,8 @@ function MentorManagers() {
       showModal({
         name: "addUser",
         modalData: {
-          title: "Add MentorManager"
+          title: "Add Mentor Manager",
+          category: "mentorManager"
         }
       })
     );
