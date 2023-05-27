@@ -4,7 +4,7 @@ import styles from "./DashboardSideBar.module.scss";
 import "./DashboardActiveMenu.scss";
 
 import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { ReactComponent as ProfileIcon } from "@/assets/icons/profile-icon.svg";
 import { ReactComponent as DashboardIcon } from "@/assets/icons/dashboard-icon.svg";
@@ -30,6 +30,7 @@ import { getProfile } from "@/redux/Settings/SettingsSlice";
 function DashboardSideBar() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const isMobile = useIsMobile();
   const { toggleSidebar } = useProSidebar();
   const userData = userInfo();
@@ -121,6 +122,7 @@ function DashboardSideBar() {
   const handleMenuClick = (index, menuItem) => {
     if (menuItem.toLowerCase() === "logout") {
       logout();
+      navigate("/login");
     }
 
     setActiveIndex(index);

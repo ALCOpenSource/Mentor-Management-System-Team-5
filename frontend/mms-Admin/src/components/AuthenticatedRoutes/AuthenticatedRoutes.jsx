@@ -1,22 +1,36 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Navigate, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { isAuthenticated, isExpired, getToken } from "@/utils/auth";
+import { isAuthenticated, logout } from "@/utils/auth";
 import { refreshAccessToken } from "@/redux/Auth/AuthSlice";
+import { refreshTokenInterval } from "@/utils/auth";
 
 function AuthenticatedRoutes({ children, roles }) {
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const authError = useSelector((state) => state?.auth?.error?.failed) || false;
+
+  useEffect(() => {
+    const refreshInterval = setInterval(() => {
+      dispatch(refreshAccessToken());
+    }, refreshTokenInterval());
+
+    if (authError) {
+      clearInterval(refreshInterval);
+      logout();
+      navigate("/login");
+    }
+    return () => {
+      clearInterval(refreshInterval);
+    };
+  }, [authError, dispatch, navigate]);
+
   const checkIsAuthenticated = isAuthenticated();
-
-  const token = getToken();
   const userDetails = JSON.parse(localStorage.getItem("userData"));
-
-  if (isExpired(token)) {
-    dispatch(refreshAccessToken());
-  }
 
   const userHasRequiredRole = !!(
     userDetails && roles.includes(userDetails?.roles && userDetails?.roles.toString().toLowerCase())

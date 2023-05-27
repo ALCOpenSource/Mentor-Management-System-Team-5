@@ -9,7 +9,7 @@ import {
   confirmEmailApi
 } from "../api/auth";
 
-import { setToken, setRefreshToken, getToken, getRefreshToken, logout } from "@/utils/auth";
+import { setToken, setRefreshToken, getToken, getRefreshToken } from "@/utils/auth";
 
 import {
   loginLoading,
@@ -137,12 +137,11 @@ export const refreshAccessToken = () => async (dispatch) => {
     const response = await refreshAccessTokenApi({ refreshToken: refreshToken, accessToken: token });
     setToken(response?.data?.data?.accessToken);
     setRefreshToken(response?.data?.data?.refreshToken);
-    dispatch(getProfile());
     dispatch(refreshAccessTokenAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    dispatch(hasError(e?.response?.data));
-    logout();
+    dispatch(hasError({ failed: true }));
+    return { failed: true };
   }
 };
 

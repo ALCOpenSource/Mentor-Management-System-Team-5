@@ -32,6 +32,8 @@
     <None Remove="FAQ\" />
     <None Remove="FAQ\Command\" />
     <None Remove="FAQ\Query\" />
+    <None Remove="Mentors\Command\" />
+    <None Remove="MentorManagers\Command\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\PasswordReset\" />
@@ -42,5 +44,7 @@
     <Folder Include="FAQ\" />
     <Folder Include="FAQ\Command\" />
     <Folder Include="FAQ\Query\" />
+    <Folder Include="Mentors\Command\" />
+    <Folder Include="MentorManagers\Command\" />
   </ItemGroup>
 </Project>
