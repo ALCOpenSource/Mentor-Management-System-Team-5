@@ -31,7 +31,7 @@ namespace mms.api.Controllers
         }
 
         [HttpPost("programme")]
-        public async Task<IActionResult> CreateTask(CreateProgrammeCommand command)
+        public async Task<IActionResult> CreateProgramme(CreateProgrammeCommand command)
         {
             var result = await Mediator.Send(command);
             if (result.Succeeded == false)
