@@ -1,7 +1,7 @@
 ﻿using System;
 using mms.Domain.Entities;
 
-namespace mms.Application.Programme.Query
+namespace mms.Application.Programs.Query.ArchivedPrograms
 {
     public class GetArchiveProgramsResponse
     {

@@ -24,6 +24,7 @@ using mms.Application.Report.Command;
 using mms.Application.Programme.Command;
 using mms.Application.UserTasks.Command.UpdateTask;
 using mms.Application.Common.DTOs;
+using mms.Application.Programs.Query.ArchivedPrograms;
 
 namespace mms.Application.Common.Mapper
 {
