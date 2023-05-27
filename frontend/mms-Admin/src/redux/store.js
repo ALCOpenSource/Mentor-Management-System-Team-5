@@ -5,6 +5,7 @@ import LoadingReducer from "./Loading/LoadingSlice";
 import SettingsReducer from "./Settings/SettingsSlice";
 import ReportsReducer from "./Reports/ReportsSlice";
 import CriteriaSlice from "./Criteria/CriteriaSlice";
+import MentorsSlice from "./Mentors/MentorsSlice";
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     loading: LoadingReducer,
     settings: SettingsReducer,
     reports: ReportsReducer,
-    criteria: CriteriaSlice
+    criteria: CriteriaSlice,
+    mentors: MentorsSlice
   },
   devTools: process.env.NODE_ENV === "development"
 });
