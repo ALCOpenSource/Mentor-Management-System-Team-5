@@ -25,7 +25,7 @@ namespace mms.Application.MentorManagers.Query
             var startOfWeek = DateTime.Today.AddDays(-7);
             var today = DateTime.Today;
             var mentors = await _context.MentorManagers.Where(t => t.CreatedAt >= startOfWeek && t.CreatedAt <= today).OrderByDescending(x => x.CreatedAt).ToListAsync();
-            if (mentors == null)
+            if (!mentors.Any())
             {
                 return await Result<List<GetMentorManagersResponse>>.FailAsync("No one week old Mentor Managers Available");
             }

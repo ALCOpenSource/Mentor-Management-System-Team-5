@@ -24,7 +24,7 @@ namespace mms.Application.MentorManagers.Query
             //TODO:
             //Check how status are Inserted in the database for Tasks
             var mentors = await _context.MentorManagers.Where(m => m.CreatedAt.Month == DateTime.UtcNow.Month).OrderByDescending(x => x.CreatedAt).ToListAsync();
-            if (mentors == null)
+            if (!mentors.Any())
             {
                 return await Result<List<GetMentorManagersResponse>>.FailAsync("No One Month old Mentor Managers Available");
             }

@@ -32,7 +32,7 @@ namespace mms.Application.MentorManagers.Query
             }
 
             var mentors = await _context.MentorManagers.Include(M => M.ProgramsMentors).Include(y => y.Programmes).Include(x => x.AppUser).Where(x => x.AppUserId == _currentUserService.AppUserId).ToListAsync();
-            if (mentors == null)
+            if (!mentors.Any())
             {
                 return await Result<List<GetMentorManagersResponse>>.FailAsync("No Mentor Managers Available");
             }
