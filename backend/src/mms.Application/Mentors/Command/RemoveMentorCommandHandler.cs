@@ -1,14 +1,12 @@
-﻿using System;
-using AspNetCoreHero.Results;
+﻿using AspNetCoreHero.Results;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using mms.Application.UserTasks.Command.DeleteTask;
 using mms.Infrastructure.Context;
 
 namespace mms.Application.Mentors.Command
 {
-	public class RemoveMentorCommandHandler : IRequestHandler<RemoveMentorCommand, IResult<string>>
+    public class RemoveMentorCommandHandler : IRequestHandler<RemoveMentorCommand, IResult<string>>
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
