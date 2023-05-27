@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using mms.Application.Programme.Command;
 using mms.Application.Programme.Query;
+using mms.Application.Programs.Query.ActivePrograms;
+using mms.Application.Programs.Query.ArchivedPrograms;
 
 namespace mms.api.Controllers
 {
@@ -42,6 +44,48 @@ namespace mms.api.Controllers
         {
             var result = await Mediator.Send(new GetActiveProgrammesCommand());
             if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("get-active-programs-byweek")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetWeeklyActivePrograms()
+        {
+            var result = await Mediator.Send(new GetWeeklyActiveProgramCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("get-active-programs-bymonth")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetMonthlyActivePrograms()
+        {
+            var result = await Mediator.Send(new GetMonthlyActiveProgramCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("get-active-program-byyear")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetYearlyActiveProgram()
+        {
+            var result = await Mediator.Send(new GetYearlyActiveProgramCommand());
+            if (!result.Succeeded)
             {
                 return BadRequest(result);
             }
