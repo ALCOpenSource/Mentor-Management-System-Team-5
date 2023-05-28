@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "@/assets/icons/close-icon.svg";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createProgramCriteriaSchema } from "@/helpers/validation";
 import { showModal } from "@/redux/Modal/ModalSlice";
@@ -30,9 +30,7 @@ const CreateCriteria = () => {
   const criteriaData = useSelector((state) => state?.criteria?.getCriteriaFromStorageData);
 
   const [displayInstructions, setDisplayInstructions] = useState(true);
-  const [disableBtn, setDisableBtn] = useState({
-    createCriteria: true
-  });
+  const [disableCreateBtn, setDisableCreateBtn] = useState(true);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -42,10 +40,16 @@ const CreateCriteria = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (criteriaData && Object.keys(criteriaData).length > 0) {
-      setDisableBtn({ ...disableBtn, createCriteria: false });
+    if (!criteriaData) {
+      setDisableCreateBtn(true);
+    } else if (Object.keys(criteriaData).length > 0) {
+      if (Object.values(criteriaData).some((item) => item.length > 0)) {
+        setDisableCreateBtn(false);
+      } else {
+        setDisableCreateBtn(true);
+      }
     }
-  }, []);
+  }, [criteriaData]);
 
   const handleDisplayInstructions = () => {
     setDisplayInstructions(false);
@@ -326,7 +330,7 @@ const CreateCriteria = () => {
                   onClick={handleSubmit((data) => handleCreateCriteria(data))}
                   title='Create Criteria'
                   type='primary'
-                  disabled={disableBtn.createCriteria}
+                  disabled={disableCreateBtn}
                 />
               </div>
             </div>
