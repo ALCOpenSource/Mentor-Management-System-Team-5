@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using mms.api.Configurations;
 using mms.Application;
+using mms.Application.Common.ChatHub;
 using mms.Domain.Mail;
 using mms.Infrastructure;
 using mms.Infrastructure.Context;
@@ -20,6 +21,7 @@ builder.Logging.AddConsole();
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -66,5 +68,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseEndpoints(endpoints => { endpoints.MapHub<ChatHub>("/chatHub"); });
 
 app.Run();

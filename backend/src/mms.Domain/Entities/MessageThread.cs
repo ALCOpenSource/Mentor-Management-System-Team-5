@@ -7,7 +7,7 @@ namespace mms.Domain.Entities
     {
         [MaxLength(200)] public string Subject { get; set; }
         public string LastMessageId { get; set; }
-        public string PinnedMessageId { get; set; }
+        public string? PinnedMessageId { get; set; }
         public bool IsDeleted { get; set; }
         public string MessageThreadParticipantHash { get; set; }
     }

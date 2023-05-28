@@ -1,11 +1,14 @@
 ﻿using AspNetCoreHero.Results;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using mms.Application.Account.ChangePassword;
+using mms.Application.Common.ChatHub;
 using mms.Application.Common.Helper;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
+using mms.Infrastructure.Interface;
 using MessageEntity = mms.Domain.Entities.Message;
 
 namespace mms.Application.Message.Command.CreateMessage
@@ -14,22 +17,24 @@ namespace mms.Application.Message.Command.CreateMessage
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ApplicationContext _context;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IHubContext<ChatHub> _chatHub;
 
-        public CreateMessageCommandHandler(UserManager<AppUser> userManager, ApplicationContext context)
+        public CreateMessageCommandHandler(UserManager<AppUser> userManager, ApplicationContext context,
+            ICurrentUserService currentUserService, IHubContext<ChatHub> chatHub)
         {
             _userManager = userManager;
             _context = context;
+            _currentUserService = currentUserService;
+            _chatHub = chatHub;
         }
 
         public async Task<IResult<CreateMessageResult>> Handle(CreateMessageCommand request,
             CancellationToken cancellationToken)
         {
             var sender = await (from user in _userManager.Users
-                where user.Id == request.AppUserId
-                select new
-                {
-                    user.Id
-                }).FirstOrDefaultAsync(cancellationToken);
+                where user.Id == _currentUserService.AppUserId
+                select user).FirstOrDefaultAsync(cancellationToken);
 
             if (sender == null)
             {
@@ -40,7 +45,7 @@ namespace mms.Application.Message.Command.CreateMessage
             {
                 var existingThread =
                     await _context.MessageThreads.FirstOrDefaultAsync(x => x.Id == request.ThreadId, cancellationToken);
-                if (existingThread != null)
+                if (existingThread is null)
                 {
                     return Result<CreateMessageResult>.Fail("Thread not found");
                 }
@@ -62,6 +67,7 @@ namespace mms.Application.Message.Command.CreateMessage
 
                 var message = new MessageEntity()
                 {
+                    Id = Guid.NewGuid().ToString(),
                     SenderId = sender.Id,
                     Body = request.Body,
                     MessageThreadId = existingThread.Id
@@ -72,6 +78,8 @@ namespace mms.Application.Message.Command.CreateMessage
                 await _context.SaveChangesAsync(cancellationToken);
 
                 //TODO:Send Notification with SignalIr
+                await _chatHub.Clients.User(sender.UserName ?? $"{sender.FirstName}")
+                    .SendAsync(sender.Id, request.Body, cancellationToken);
 
                 return Result<CreateMessageResult>.Success(new CreateMessageResult()
                 {
@@ -91,7 +99,7 @@ namespace mms.Application.Message.Command.CreateMessage
                 return Result<CreateMessageResult>.Fail("Recipient does not exist");
             }
 
-            if (recipientId == request.AppUserId)
+            if (recipientId == _currentUserService.AppUserId)
             {
                 return Result<CreateMessageResult>.Fail("Message cannot be sent to same person");
             }
@@ -127,18 +135,21 @@ namespace mms.Application.Message.Command.CreateMessage
             {
                 thread = new MessageThread()
                 {
+                    Id = Guid.NewGuid().ToString(),
                     Subject = request.Subject,
                     MessageThreadParticipantHash = messageThreadParticipantsHash
                 };
 
                 var recipientParticipant = new MessageThreadParticipant()
                 {
+                    Id = Guid.NewGuid().ToString(),
                     MessageThread = thread,
                     AppUserId = recipientId
                 };
 
                 var senderParticipant = new MessageThreadParticipant()
                 {
+                    Id = Guid.NewGuid().ToString(),
                     MessageThread = thread,
                     AppUserId = sender.Id
                 };
@@ -153,6 +164,7 @@ namespace mms.Application.Message.Command.CreateMessage
 
             var newMessage = new MessageEntity()
             {
+                Id = Guid.NewGuid().ToString(),
                 SenderId = sender.Id,
                 Body = request.Body,
                 MessageThreadId = thread.Id
@@ -162,6 +174,9 @@ namespace mms.Application.Message.Command.CreateMessage
             await _context.SaveChangesAsync(cancellationToken);
 
             //TODO:Trigger Signalr
+            await _chatHub.Clients.User(sender.UserName ?? $"{sender.FirstName}")
+                .SendAsync(sender.Id, request.Body, cancellationToken);
+
             return Result<CreateMessageResult>.Success(new CreateMessageResult()
             {
                 Id = newMessage.Id,
