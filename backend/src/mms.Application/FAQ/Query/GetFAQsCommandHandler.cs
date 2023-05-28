@@ -1,14 +1,12 @@
-﻿using System;
-using AspNetCoreHero.Results;
+﻿using AspNetCoreHero.Results;
 using AutoMapper;
 using MediatR;
-using mms.Application.Program.Query;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
 
 namespace mms.Application.FAQ.Query
 {
-	public class GetFAQsCommandHandler : IRequestHandler<GetFAQsCommand,
+    public class GetFAQsCommandHandler : IRequestHandler<GetFAQsCommand,
             IResult<List<GetFAQsResponse>>>
     {
         private readonly ICurrentUserService _currentUserService;

@@ -8,7 +8,6 @@ using UserPrivacyEntity = mms.Domain.Entities.UserPrivacy;
 using SupportEntity = mms.Domain.Entities.Support;
 using ProgrammeEntity = mms.Domain.Entities.Programme;
 using mms.Application.Support.Command;
-using mms.Application.Program.Query;
 using AppUserEntity = mms.Domain.Entities.AppUser;
 using FAQEntity = mms.Domain.Entities.FAQ;
 using mms.Application.FAQ.Command;
@@ -25,6 +24,7 @@ using mms.Application.Report.Command;
 using mms.Application.Programme.Command;
 using mms.Application.UserTasks.Command.UpdateTask;
 using mms.Application.Common.DTOs;
+using mms.Application.Programs.Query.ArchivedPrograms;
 
 namespace mms.Application.Common.Mapper
 {

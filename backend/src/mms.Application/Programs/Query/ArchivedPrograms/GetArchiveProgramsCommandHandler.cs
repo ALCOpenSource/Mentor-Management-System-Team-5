@@ -6,9 +6,9 @@ using mms.Application.UserNotification.Query;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
 
-namespace mms.Application.Program.Query
+namespace mms.Application.Programs.Query.ArchivedPrograms
 {
-	public class GetArchiveProgramsCommandHandler : IRequestHandler<GetArchiveProgramsCommand,
+    public class GetArchiveProgramsCommandHandler : IRequestHandler<GetArchiveProgramsCommand,
             IResult<List<GetArchiveProgramsResponse>>>
     {
         private readonly ICurrentUserService _currentUserService;
@@ -31,7 +31,7 @@ namespace mms.Application.Program.Query
                 return await Result<List<GetArchiveProgramsResponse>>.FailAsync("Invalid user");
             }
 
-            var programs = _context.Programmes.ToList();
+            var programs = _context.Programmes.Where(y => y.Status == Domain.Enums.ProgramStatus.Archived).ToList();
 
             var result = _mapper.Map<List<GetArchiveProgramsResponse>>(programs);
 

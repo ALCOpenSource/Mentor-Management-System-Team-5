@@ -1,10 +1,10 @@
 ﻿using System;
 using mms.Domain.Entities;
 
-namespace mms.Application.Program.Query
+namespace mms.Application.Programs.Query.ArchivedPrograms
 {
-	public class GetArchiveProgramsResponse
-	{
+    public class GetArchiveProgramsResponse
+    {
         public string Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
