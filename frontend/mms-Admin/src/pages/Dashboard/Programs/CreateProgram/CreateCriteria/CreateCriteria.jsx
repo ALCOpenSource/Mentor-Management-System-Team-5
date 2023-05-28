@@ -31,8 +31,7 @@ const CreateCriteria = () => {
 
   const [displayInstructions, setDisplayInstructions] = useState(true);
   const [disableBtn, setDisableBtn] = useState({
-    createCriteria: true,
-    addCriteria: true
+    createCriteria: true
   });
 
   const displayModal = useSelector((state) => state.modal.show);
@@ -43,14 +42,13 @@ const CreateCriteria = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (criteriaData) {
+    if (criteriaData && Object.keys(criteriaData).length > 0) {
       setDisableBtn({ ...disableBtn, createCriteria: false });
     }
   }, []);
 
   const handleDisplayInstructions = () => {
     setDisplayInstructions(false);
-    setDisableBtn({ ...disableBtn, addCriteria: false });
   };
 
   const resolver = yupResolver(createProgramCriteriaSchema);
@@ -321,18 +319,11 @@ const CreateCriteria = () => {
                   })}
               </div>
               <div className={cx(styles.addCriteriaBtnDiv, "flexRow")}>
-                <Button
-                  onClick={(e) => displayCriteriaTypes(e)}
-                  title='Add Criteria'
-                  type='primary'
-                  size='small'
-                  disabled={disableBtn.addCriteria}
-                />
+                <Button onClick={(e) => displayCriteriaTypes(e)} title='Add Criteria' type='primary' size='small' />
               </div>
               <div className={cx(styles.submitBtnDiv, "flexRow")}>
                 <Button
                   onClick={handleSubmit((data) => handleCreateCriteria(data))}
-                  // loading={loading}
                   title='Create Criteria'
                   type='primary'
                   disabled={disableBtn.createCriteria}
