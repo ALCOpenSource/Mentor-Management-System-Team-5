@@ -9,8 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using mms.Domain.Enums;
+using mms.Application.Programme.Query;
 
-namespace mms.Application.Programme.Query
+namespace mms.Application.Programs.Query.ActivePrograms
 {
     public class GetActiveProgrammesCommandHandler : IRequestHandler<GetActiveProgrammesCommand,
         IResult<List<GetProgrammeResponse>>>

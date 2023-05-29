@@ -35,5 +35,47 @@ namespace mms.api.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("get-mentormanagers-byweek")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetWeeklyTasks()
+        {
+            var result = await Mediator.Send(new GetWeeklyMentorManagersCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("get-mentormanagers-bymonth")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetMonthlyTasks()
+        {
+            var result = await Mediator.Send(new GetMonthlyMentorManagersCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("get-mentormanagers-byyear")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetYearlyTasks()
+        {
+            var result = await Mediator.Send(new GetYearlyMentorManagersCommand());
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
     }
 }

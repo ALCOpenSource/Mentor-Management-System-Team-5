@@ -2,7 +2,6 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
 

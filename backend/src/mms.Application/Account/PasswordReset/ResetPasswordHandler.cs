@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
+using mms.Infrastructure.Utility;
 
 namespace mms.Application.Account.PasswordReset
 {
@@ -37,7 +38,8 @@ namespace mms.Application.Account.PasswordReset
                 return await Result<string>.FailAsync("Account not active");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+            var decodedToken = TokenConverter.DecodeToken(request.Token);
+            var result = await _userManager.ResetPasswordAsync(user, decodedToken, request.Password);
             if (!result.Succeeded)
             {
                 return await Result<string>.FailAsync(
