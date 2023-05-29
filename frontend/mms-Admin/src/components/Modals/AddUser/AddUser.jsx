@@ -41,7 +41,7 @@ function AddUser({ show, size, modalName }) {
   };
 
   const handleAddUser = async (data) => {
-    let response = await dispatch(inviteMentor(data));
+    let response = await dispatch(inviteMentor(data?.email));
     if (response?.success) {
       reset();
       dispatch(
