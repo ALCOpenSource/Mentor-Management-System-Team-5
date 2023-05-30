@@ -26,7 +26,13 @@ const initialState = {
   getUserPrivacyLoading: false,
   getGeneralFaqLoading: false,
   getTechnicalFaqLoading: false,
-  sendSupportMessageLoading: false
+  sendSupportMessageLoading: false,
+
+  //Mentors
+  getAllMentorsLoading: false,
+  inviteMentorLoading: false,
+  registerMentorLoading: false,
+  deleteMentorLoading: false
 };
 
 export const loadingSlice = createSlice({
@@ -102,6 +108,20 @@ export const loadingSlice = createSlice({
     },
     sendSupportMessageLoading: (state, action) => {
       state.sendSupportMessageLoading = action.payload;
+    },
+
+    //Mentors
+    getAllMentorsLoading: (state, action) => {
+      state.getAllMentorsLoading = action.payload;
+    },
+    inviteMentorLoading: (state, action) => {
+      state.inviteMentorLoading = action.payload;
+    },
+    registerMentorLoading: (state, action) => {
+      state.registerMentorLoading = action.payload;
+    },
+    deleteMentorLoading: (state, action) => {
+      state.deleteMentorLoading = action.payload;
     }
   }
 });
@@ -128,7 +148,11 @@ export const {
   getUserPrivacyLoading,
   getGeneralFaqLoading,
   getTechnicalFaqLoading,
-  sendSupportMessageLoading
+  sendSupportMessageLoading,
+  getAllMentorsLoading,
+  inviteMentorLoading,
+  registerMentorLoading,
+  deleteMentorLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;

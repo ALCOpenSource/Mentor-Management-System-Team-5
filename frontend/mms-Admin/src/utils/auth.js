@@ -76,6 +76,7 @@ export const checkAuth = () => {
       logout();
     }
   } else {
+    console.log("got here");
     logout();
   }
 };

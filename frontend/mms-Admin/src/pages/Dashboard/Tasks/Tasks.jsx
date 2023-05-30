@@ -264,7 +264,6 @@ function Tasks() {
           <GenericSideBar
             data={getSideBarData()}
             selectedMenuItem={handleSelectedMenuItem}
-            activeMenuItemClass='active-task-item'
             closeGenericSideBar={() => setOpenSideBar(false)}
           />
         </div>

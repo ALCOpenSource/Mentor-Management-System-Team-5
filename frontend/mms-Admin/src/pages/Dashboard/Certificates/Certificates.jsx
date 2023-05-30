@@ -5,6 +5,7 @@ import styles from "./Certificates.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import Button from "@/components/Button/Button";
 import certificateIcon from "@/assets/icons/certificate-thumbnail.svg";
+import certificateImage from "@/assets/images/certificate-full.png";
 import backIcon from "@/assets/icons/close-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import approvedCertificateIcon from "@/assets/icons/new-entries-icon.svg";
@@ -35,6 +36,9 @@ function Certificates() {
     } else if (currentSubPath === "generated-certificates") {
       setOutletTitle("Generated Certificates");
       setShowGenerateButton(true);
+    } else if (currentSubPath === "certificate-details") {
+      setOutletTitle("Certificate Details");
+      setShowGenerateButton(true);
     } else {
       setOutletTitle("Approved Certificates");
       setShowGenerateButton(true);
@@ -47,37 +51,40 @@ function Certificates() {
   const recentDataArray = [
     {
       id: 1,
-      title: "Room Library Article Written in Java",
+      name: "Alison Davis",
       description: "GADS CLOUD 2022 - COMPLETION",
-      icon: certificateIcon
+      icon: certificateIcon,
+      previewImage: certificateImage
     },
     {
       id: 2,
-      title: "Room Library Article Written in Java",
+      name: "Alison Davis",
       description: "GADS CLOUD 2022 - COMPLETION",
-      icon: certificateIcon
+      icon: certificateIcon,
+      previewImage: certificateImage
     },
     {
       id: 3,
-      title: "Room Library Article Written in Java",
+      name: "Alison Davis",
       description: "GADS CLOUD 2022 - COMPLETION",
-      icon: certificateIcon
+      icon: certificateIcon,
+      previewImage: certificateImage
     },
     {
       id: 4,
-      title: "Room Library Article Written in Java",
+      name: "Alison Davis",
       description: "GADS CLOUD 2022 - COMPLETION",
-      icon: certificateIcon
+      icon: certificateIcon,
+      previewImage: certificateImage
     },
     {
       id: 5,
-      title: "Room Library Article Written in Java",
+      name: "Alison Davis",
       description: "GADS CLOUD 2022 - COMPLETION",
-      icon: certificateIcon
+      icon: certificateIcon,
+      previewImage: certificateImage
     }
   ];
-
-  console.log(currentSubPath, "current sub path");
 
   const handleCloseSearchInput = (e) => {
     console.log(e, "handle close input");
@@ -90,7 +97,6 @@ function Certificates() {
   };
 
   const handleCategoryClick = (item) => {
-    console.log(item, "handle category click");
     setOutletTitle(item.title);
     setShowGenerateButton(true);
     navigate(item.path);
@@ -104,7 +110,6 @@ function Certificates() {
   };
 
   const handleRecentListClick = (item) => {
-    console.log(item, "handle recent list click");
     setOutletTitle("Certificate Details");
     navigate(`/dashboard/certificates/certificate-details/${item.id}`);
   };
@@ -197,13 +202,17 @@ function Certificates() {
     console.log(item);
   };
 
+  const handleSelectedMenu = () => {
+    // this is added to remove the warning of unused prop on the generic sidebar component
+  };
+
   return (
     <div className={cx(styles.certificatesContainer, "flexRow")}>
       {openSideBar && (
         <div className={cx(styles.sidebarWrapper)}>
           <GenericSideBar
+            selectedMenuItem={handleSelectedMenu}
             data={getSideBarData()}
-            activeMenuItemClass='active-task-item'
             closeGenericSideBar={() => setOpenSideBar(false)}
           />
         </div>
@@ -223,7 +232,9 @@ function Certificates() {
             </div>
             <h3 className={cx(styles.title)}>{outletTitle}</h3>
           </div>
-          {showGenerateButton && <Button title='Generate new certificate' size='small' onClick={() => navigate("#")} />}
+          {showGenerateButton && (
+            <Button title='Generate new certificate' size='small' onClick={() => navigate("generate-certificate")} />
+          )}
           <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
             {collapseInput && (
               <div className={cx(styles.paginationWrapper)}>

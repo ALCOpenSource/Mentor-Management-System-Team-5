@@ -70,6 +70,11 @@
   }
 }
 
+.activeItem {
+  background-color: var(--green3Color);
+  border: 1px solid var(--grayBorderColor);
+}
+
 @media all and (min-width: 992px) {
   .recentListItemContainer {
     padding: 0.75rem 0.5rem;

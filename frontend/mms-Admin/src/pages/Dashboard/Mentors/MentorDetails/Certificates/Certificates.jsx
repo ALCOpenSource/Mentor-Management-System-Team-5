@@ -21,7 +21,7 @@ const Certificates = () => {
       showModal({
         name: "successNotification",
         modalData: {
-          title: "Certificate Downloaded Successfully!",
+          title: "Certificate Downloaded Successfully!.",
           image: downloadSuccessImage
         }
       })

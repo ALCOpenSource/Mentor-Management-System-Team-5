@@ -20,6 +20,10 @@
         color: var(--blackTextColor);
         font-size: 1.5rem;
       }
+
+      img {
+        cursor: pointer;
+      }
     }
 
     .formWrapper {
@@ -151,8 +155,10 @@
         form {
           .selectionDiv {
             gap: 1.5rem;
-            flex-wrap: nowrap;
             margin-top: 3rem;
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
           }
         }
       }
@@ -169,10 +175,6 @@
 
       .formWrapper {
         form {
-          .selectionDiv {
-            gap: 1.5rem;
-          }
-
           .submitBtnDiv {
             margin-top: 3rem;
           }

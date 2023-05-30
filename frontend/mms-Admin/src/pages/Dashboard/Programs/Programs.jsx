@@ -196,7 +196,6 @@ function Programs() {
             <GenericSideBar
               data={getMenuItems()}
               selectedMenuItem={handleSelectedMenuItem}
-              activeMenuItemClass='active-program-item'
               closeGenericSideBar={() => setOpenSideBar(false)}
             />
           </div>
