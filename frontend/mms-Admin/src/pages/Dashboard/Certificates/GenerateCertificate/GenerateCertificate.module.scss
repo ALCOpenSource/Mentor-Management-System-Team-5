@@ -37,6 +37,128 @@
           gap: 1rem;
           margin-bottom: 1.5rem;
 
+          .beneficiaryDiv {
+            padding: 0.5rem 0.5rem;
+            background-color: var(--taskListBgColor);
+            border-radius: 5px;
+            justify-content: center;
+            border: 1px solid var(--grayBorderColor);
+            width: 100%;
+            gap: 0.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .imageDiv {
+              .avatar {
+                width: 4.5rem;
+                height: 4.5rem;
+                border-radius: 50%;
+              }
+            }
+
+            .userInfo {
+              flex-grow: 1;
+              flex-direction: row;
+              gap: 0.5rem;
+              height: 100%;
+              align-items: center;
+
+              .leftSection {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                .groupOne {
+                  .name {
+                    font-size: 1.25rem;
+                    color: var(--blackTextColor);
+                    font-family: var(--bold);
+                    margin: 0;
+                    line-height: 1;
+                  }
+
+                  .designation {
+                    font-size: 0.75rem;
+                    color: var(--grayTextColor);
+                    font-family: var(--regular);
+                    line-height: 1.25;
+                    margin: 0;
+                  }
+                }
+
+                .positionTags {
+                  gap: 0.5rem;
+
+                  span {
+                    font-size: 0.75rem;
+                    color: var(--black3TextColor);
+                    font-family: var(--regular);
+                    line-height: 1;
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 5px;
+                    background-color: var(--green4Color);
+                    text-transform: uppercase;
+                  }
+                }
+              }
+
+              .btnGroup {
+                height: 100%;
+
+                img {
+                  width: 0.75rem;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+
+          .programDiv {
+            padding: 0.5rem 0.5rem;
+            background-color: var(--taskListBgColor);
+            border-radius: 5px;
+            justify-content: center;
+            border: 1px solid var(--grayBorderColor);
+            width: 100%;
+            gap: 1.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .imageDiv {
+              justify-content: center;
+
+              .avatar {
+                width: 3.5rem;
+                height: 3.5rem;
+                border-radius: 50%;
+              }
+            }
+
+            .programInfo {
+              flex-grow: 1;
+              flex-direction: row;
+              gap: 0.5rem;
+              height: 100%;
+              align-items: center;
+
+              .title {
+                margin: 0;
+                font-family: var(--semiBold);
+                color: var(--black2TextColor);
+                font-size: 1.25rem;
+                line-height: 1.25rem;
+              }
+
+              img {
+                width: 0.75rem;
+                cursor: pointer;
+              }
+            }
+          }
+
           .selectionWrapper {
             gap: 1rem;
             padding: 0.625rem 1rem;
@@ -68,6 +190,12 @@
           border-radius: 5px;
           width: 100%;
           color: var(--grayTextColor);
+          padding: 1rem;
+
+          img {
+            max-width: 100%;
+            object-fit: cover;
+          }
         }
 
         .submitBtnDiv {
@@ -108,6 +236,39 @@
       .formWrapper {
         form {
           .headerWrapper {
+            .beneficiaryDiv {
+              padding: 0.5rem 2rem;
+
+              .userInfo {
+                align-items: center;
+
+                .leftSection {
+                  flex-grow: 1;
+                  display: flex;
+                  flex-direction: row;
+                  gap: 1.5rem;
+
+                  .groupOne {
+                    gap: 0.25rem;
+                  }
+
+                  .positionTags {
+                    align-items: center;
+                  }
+                }
+
+                .btnGroup {
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 1.5rem;
+                }
+              }
+            }
+
+            .programDiv {
+              padding: 0.5rem 2rem;
+            }
+
             .selectionWrapper {
               gap: 1.125rem;
               padding: 0.75rem 1.5rem;

@@ -1,12 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import styles from "./GenerateCertificate.module.scss";
 
 import Button from "@/components/Button/Button";
-import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import closeIcon from "@/assets/icons/undo-icon.svg";
 import closeIconAlt from "@/assets/icons/close-icon.svg";
@@ -16,11 +14,11 @@ import SuccessNotificationModal from "@/components/Modals/SuccessNotification/Su
 
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
-import { createProgramSchema } from "@/helpers/validation";
-import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
+import PersonelComponent from "./PersonelComponent/PersonelComponent";
 import ProgramListItem from "./ProgramListItem/ProgramListItem";
 
 import beneficiaryImage from "@/assets/images/sample-profile-image.svg";
+import previewImage from "@/assets/images/certificate-full.png";
 import programImage from "@/assets/images/program-avatar.svg";
 import { useNavigate } from "react-router-dom";
 
@@ -34,6 +32,8 @@ const GenerateCertificate = () => {
   const [collapseInput, setCollapseInput] = useState(true);
   const [closeSelectElement, setCloseSelectElement] = useState(false);
   const dispatch = useDispatch();
+  const [beneficiary, setBeneficiary] = useState(null);
+  const [program, setProgram] = useState(null);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -94,82 +94,101 @@ const GenerateCertificate = () => {
     {
       id: 1,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 2,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 3,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 4,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 5,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 6,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 7,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 8,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 9,
       name: "Google Africa Scholarship",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     },
     {
       id: 10,
       name: "Google Africa Scholarship",
       designation: "Program Assistant, Andela, He/Him",
-      image: programImage
+      icon: programImage,
+      previewImage: previewImage
     }
   ];
 
-  const resolver = yupResolver(createProgramSchema);
-
-  const defaultValues = {
-    title: "",
-    details: ""
-  };
-
   const {
     handleSubmit,
-    formState: { errors },
-    control
-  } = useForm({ defaultValues, resolver, mode: "all" });
+    formState: { errors }
+  } = useForm({ mode: "all" });
 
-  const sendMessage = (data) => {
-    console.log(data);
+  console.log(errors, "erros");
+
+  const handleGenerateCertificate = async () => {
+    console.log(beneficiary, "beneficiary data");
+    console.log(program, "program data");
+
+    // let response = await dispatch(generateCertificate({ beneficiary, program }));
+    // if (response?.success) {
+    // dispatch(
+    //   showModal({
+    //     name: "successNotification",
+    //     modalData: {
+    //       title: "Program Created Successfully!",
+    //       image: successImage,
+    //       redirectUrl: "/dashboard/programs"
+    //     }
+    //   })
+    // );
+    // }
+
     dispatch(
       showModal({
         name: "successNotification",
         modalData: {
-          title: "Program Created Successfully!",
+          title: "Certificate Generated Successfully!",
           image: successImage,
-          redirectUrl: "/dashboard/programs"
+          redirectUrl: "/dashboard/certificates"
         }
       })
     );
-    localStorage.removeItem("criteria");
   };
 
   const handleOpenSideBar = (e, open, category) => {
@@ -195,14 +214,22 @@ const GenerateCertificate = () => {
     setCloseSelectElement(true);
   };
 
-  const handleProgramListClick = (id) => {
-    console.log(id);
+  const handleProgramListClick = (data) => {
+    console.log(data);
+    setProgram(data);
+    setOpenSideBar({ open: false });
+  };
+
+  const handleBeneficiaryListClick = (data) => {
+    console.log(data);
+    setBeneficiary(data);
+    setOpenSideBar({ open: false });
   };
 
   const getListComponents = (data, type) => {
     const beneficiariesListItems = data.map((item, index) => {
       return {
-        component: <PersonelComponent key={index} data={item} />,
+        component: <PersonelComponent key={index} data={item} onClick={handleBeneficiaryListClick} />,
         id: item.id
       };
     });
@@ -261,25 +288,68 @@ const GenerateCertificate = () => {
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
-          <form onSubmit={handleSubmit((data) => sendMessage(data))}>
+          <form onSubmit={handleSubmit(() => handleGenerateCertificate())}>
             <div className={cx(styles.headerWrapper, "flexCol")}>
-              <div className={cx(styles.selectionWrapper, "flexRow-align-center")}>
-                <p className={cx(styles.title)}>Select a Beneficiary</p>
-                <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "beneficiaries")} />
-              </div>
-              <div className={cx(styles.selectionWrapper, "flexRow-align-center")}>
-                <p className={cx(styles.title)}>Select a Program</p>
-                <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "programs")} />
-              </div>
+              {beneficiary ? (
+                <div className={cx(styles.beneficiaryDiv)}>
+                  <div className={cx(styles.imageDiv, "flexRow")}>
+                    <img className={cx(styles.avatar)} src={beneficiary?.image} alt='user-image' />
+                  </div>
+                  <div className={cx(styles.userInfo, "flexRow")}>
+                    <div className={cx(styles.leftSection)}>
+                      <div className={cx(styles.groupOne, "flexCol")}>
+                        <h5 className={cx(styles.name)}>{beneficiary?.name}</h5>
+                        <p className={cx(styles.designation)}>{beneficiary?.designation}</p>
+                      </div>
+
+                      <div className={cx(styles.positionTags, "flexRow")}>
+                        {beneficiary?.positionTags &&
+                          beneficiary?.positionTags.map((tag, index) => (
+                            <span key={index} className={cx(styles.tag)}>
+                              {tag}
+                            </span>
+                          ))}
+                      </div>
+                    </div>
+
+                    <div className={cx(styles.btnGroup, "flexCol")}>
+                      <img src={closeIconAlt} alt='close-icon' onClick={() => setBeneficiary(null)} />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className={cx(styles.selectionWrapper, "flexRow-align-center")}>
+                  <p className={cx(styles.title)}>Select a Beneficiary</p>
+                  <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "beneficiaries")} />
+                </div>
+              )}
+              {program ? (
+                <div className={cx(styles.programDiv, "flexRow-align-center")}>
+                  <div className={cx(styles.imageDiv, "flexRow")}>
+                    <img className={cx(styles.avatar)} src={program?.icon} alt='user-image' />
+                  </div>
+                  <div className={cx(styles.programInfo, "flexRow-space-between")}>
+                    <p className={cx(styles.title)}>{program?.name}</p>
+                    <img src={closeIconAlt} alt='close-icon' onClick={() => setProgram(null)} />
+                  </div>
+                </div>
+              ) : (
+                <div className={cx(styles.selectionWrapper, "flexRow-align-center")}>
+                  <p className={cx(styles.title)}>Select a Program</p>
+                  <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "programs")} />
+                </div>
+              )}
             </div>
 
-            <div className={cx(styles.previewDiv, "flexRow-fully-centered")}>Certificate Preview</div>
+            <div className={cx(styles.previewDiv, "flexRow-fully-centered")}>
+              {program?.previewImage ? <img src={program?.previewImage} alt='preview-image' /> : "Preview Image"}
+            </div>
 
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
-                onClick={handleSubmit((data) => sendMessage(data))}
+                onClick={handleSubmit(() => handleGenerateCertificate())}
                 // loading={loading}
-                // disabled={loading}
+                disabled={!(beneficiary && program)}
                 title='Generate'
                 type='primary'
               />

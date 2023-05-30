@@ -1,12 +1,14 @@
 import React from "react";
 import cx from "classnames";
 import styles from "./TaskListItem.module.scss";
-import "./TaskListActiveItem.scss";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 
 function TaskListItem({ data }) {
+  const { id } = useParams();
+
   return (
-    <div className={cx(styles.taskListItemContainer, "flexCol")}>
+    <div className={cx(styles.taskListItemContainer, "flexCol", id === data?.id.toString() && styles.activeItem)}>
       <div className={cx(styles.body, "flexRow-align-center")}>
         <img className={cx(styles.icon)} src={data?.icon} alt='icon' />
         <div className={cx(styles.mainContent, "flexCol")}>

@@ -1,19 +1,27 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
-import styles from "./ProgramListItem.module.scss";
+import styles from "./PersonelComponent.module.scss";
 import { ReactComponent as AddIcon } from "@/assets/icons/add-icon.svg";
 // import { ReactComponent as CheckIcon } from "@/assets/icons/check-icon.svg";
 
-function ProgramListItem({ data, onClick }) {
+function PersonelComponent({ data, onClick }) {
   // const [toggleIcon, setToggleIcon] = useState(false);
 
   return (
-    <div className={cx(styles.programListItemContainer, "flexRow-align-center")}>
-      <img className={cx(styles.avatar)} src={data?.icon} alt='user-image' />
+    <div className={cx(styles.personelCompContainer, "flexRow-align-center")}>
+      <img className={cx(styles.avatar)} src={data?.image} alt='user-image' />
       <div className={cx(styles.userInfo, "flexCol")}>
         <h5 className={cx(styles.name)}>{data?.name}</h5>
+        <p className={cx(styles.designation)}>{data?.designation}</p>
+        <div className={cx(styles.positionTags, "flexRow")}>
+          {data?.positionTags &&
+            data?.positionTags.map((tag, index) => (
+              <span key={index} className={cx(styles.tag)}>
+                {tag}
+              </span>
+            ))}
+        </div>
       </div>
       {/* {toggleIcon ? (
         <CheckIcon className={cx(styles.icon)} onClick={() => setToggleIcon(!toggleIcon)} />
@@ -25,9 +33,9 @@ function ProgramListItem({ data, onClick }) {
   );
 }
 
-ProgramListItem.propTypes = {
+PersonelComponent.propTypes = {
   data: PropTypes.object.isRequired,
   onClick: PropTypes.func
 };
 
-export default ProgramListItem;
+export default PersonelComponent;

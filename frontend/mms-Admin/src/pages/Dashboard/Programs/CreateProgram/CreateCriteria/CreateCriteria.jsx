@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "@/assets/icons/close-icon.svg";
 import Button from "@/components/Button/Button";
 import InputField from "@/components/Input/Input";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createProgramCriteriaSchema } from "@/helpers/validation";
 import { showModal } from "@/redux/Modal/ModalSlice";
