@@ -44,7 +44,6 @@ namespace mms.Infrastructure.Context
                         item.Entity.UpdatedAt = DateTime.UtcNow;
                         break;
                     case EntityState.Added:
-                        item.Entity.Id = Guid.NewGuid().ToString();
                         item.Entity.CreatedAt = DateTime.UtcNow;
                         break;
                     default:
@@ -93,10 +92,10 @@ namespace mms.Infrastructure.Context
                 .HasMany(x => x.UserTasks);
 
             modelBuilder.Entity<MentorManager>()
-             .HasMany(x => x.ProgramsMentors);
+                .HasMany(x => x.ProgramsMentors);
 
             modelBuilder.Entity<MentorManager>()
-             .HasMany(x => x.Programmes).WithMany(y => y.MentorManagers);
+                .HasMany(x => x.Programmes).WithMany(y => y.MentorManagers);
 
             modelBuilder.Entity<Report>()
                 .HasIndex(x => x.UserTaskId);
@@ -112,8 +111,8 @@ namespace mms.Infrastructure.Context
                 .WithMany(x => x.UserTasks);
 
             modelBuilder.Entity<UserTask>()
-             .HasMany(x => x.Mentors)
-             .WithMany(x => x.UserTasks);
+                .HasMany(x => x.Mentors)
+                .WithMany(x => x.UserTasks);
 
             modelBuilder.Entity<UserTask>()
                 .HasMany(x => x.Reports)

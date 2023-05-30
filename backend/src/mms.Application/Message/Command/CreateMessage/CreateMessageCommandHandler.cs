@@ -67,7 +67,6 @@ namespace mms.Application.Message.Command.CreateMessage
 
                 var message = new MessageEntity()
                 {
-                    Id = Guid.NewGuid().ToString(),
                     SenderId = sender.Id,
                     Body = request.Body,
                     MessageThreadId = existingThread.Id
@@ -135,21 +134,18 @@ namespace mms.Application.Message.Command.CreateMessage
             {
                 thread = new MessageThread()
                 {
-                    Id = Guid.NewGuid().ToString(),
                     Subject = request.Subject,
                     MessageThreadParticipantHash = messageThreadParticipantsHash
                 };
 
                 var recipientParticipant = new MessageThreadParticipant()
                 {
-                    Id = Guid.NewGuid().ToString(),
                     MessageThread = thread,
                     AppUserId = recipientId
                 };
 
                 var senderParticipant = new MessageThreadParticipant()
                 {
-                    Id = Guid.NewGuid().ToString(),
                     MessageThread = thread,
                     AppUserId = sender.Id
                 };
@@ -164,7 +160,6 @@ namespace mms.Application.Message.Command.CreateMessage
 
             var newMessage = new MessageEntity()
             {
-                Id = Guid.NewGuid().ToString(),
                 SenderId = sender.Id,
                 Body = request.Body,
                 MessageThreadId = thread.Id
