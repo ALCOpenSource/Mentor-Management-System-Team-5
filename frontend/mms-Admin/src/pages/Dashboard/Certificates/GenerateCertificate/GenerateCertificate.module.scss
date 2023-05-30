@@ -37,6 +37,74 @@
           gap: 1rem;
           margin-bottom: 1.5rem;
 
+          .selectionWrapper {
+            gap: 1rem;
+            padding: 0.625rem 1rem;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border: 1px solid var(--grayBorderColor);
+            border-radius: 5px;
+
+            .title {
+              font-size: 1.25rem;
+              font-family: var(--regular);
+              color: var(--black2TextColor);
+              margin: 0;
+              line-height: 1;
+            }
+
+            button {
+              padding: 0.25rem 0.5rem;
+              font-size: 0.875rem;
+              cursor: pointer;
+            }
+          }
+
+          .programDiv {
+            padding: 0.5rem 0.5rem;
+            background-color: var(--taskListBgColor);
+            border-radius: 5px;
+            justify-content: center;
+            border: 1px solid var(--grayBorderColor);
+            width: 100%;
+            gap: 1.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .imageDiv {
+              justify-content: center;
+
+              .avatar {
+                width: 3.5rem;
+                height: 3.5rem;
+                border-radius: 50%;
+              }
+            }
+
+            .programInfo {
+              flex-grow: 1;
+              flex-direction: row;
+              gap: 0.5rem;
+              height: 100%;
+              align-items: center;
+
+              .title {
+                margin: 0;
+                font-family: var(--semiBold);
+                color: var(--black2TextColor);
+                font-size: 1.25rem;
+                line-height: 1.25rem;
+              }
+
+              img {
+                width: 0.75rem;
+                cursor: pointer;
+              }
+            }
+          }
+
           .beneficiaryDiv {
             padding: 0.5rem 0.5rem;
             background-color: var(--taskListBgColor);
@@ -112,74 +180,6 @@
                   cursor: pointer;
                 }
               }
-            }
-          }
-
-          .programDiv {
-            padding: 0.5rem 0.5rem;
-            background-color: var(--taskListBgColor);
-            border-radius: 5px;
-            justify-content: center;
-            border: 1px solid var(--grayBorderColor);
-            width: 100%;
-            gap: 1.5rem;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            .imageDiv {
-              justify-content: center;
-
-              .avatar {
-                width: 3.5rem;
-                height: 3.5rem;
-                border-radius: 50%;
-              }
-            }
-
-            .programInfo {
-              flex-grow: 1;
-              flex-direction: row;
-              gap: 0.5rem;
-              height: 100%;
-              align-items: center;
-
-              .title {
-                margin: 0;
-                font-family: var(--semiBold);
-                color: var(--black2TextColor);
-                font-size: 1.25rem;
-                line-height: 1.25rem;
-              }
-
-              img {
-                width: 0.75rem;
-                cursor: pointer;
-              }
-            }
-          }
-
-          .selectionWrapper {
-            gap: 1rem;
-            padding: 0.625rem 1rem;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            border: 1px solid var(--grayBorderColor);
-            border-radius: 5px;
-
-            .title {
-              font-size: 1.25rem;
-              font-family: var(--regular);
-              color: var(--black2TextColor);
-              margin: 0;
-              line-height: 1;
-            }
-
-            button {
-              padding: 0.25rem 0.5rem;
-              font-size: 0.875rem;
-              cursor: pointer;
             }
           }
         }
