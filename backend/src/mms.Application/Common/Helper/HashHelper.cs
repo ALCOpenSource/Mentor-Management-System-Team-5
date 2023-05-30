@@ -3,7 +3,7 @@ using System.Text;
 
 namespace mms.Application.Common.Helper
 {
-    public class HashHelper
+    public static class HashHelper
     {
         private static string Sha1(string input)
         {

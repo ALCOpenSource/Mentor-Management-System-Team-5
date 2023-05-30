@@ -21,7 +21,7 @@ namespace mms.api.Controllers
         [HttpGet("thread-messages{threadId}")]
         public async Task<IActionResult> ThreadMessages(string threadId)
         {
-            var result = await Mediator.Send(new GetThreadMessagesCommand()
+            var result = await Mediator.Send(new GetThreadMessagesCommand
             {
                 ThreadId = threadId
             });

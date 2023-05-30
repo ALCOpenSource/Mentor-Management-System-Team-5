@@ -42,7 +42,7 @@ namespace mms.Application.Message.Query
                       && thread.Id == request.ThreadId
                       && !message.IsDeleted
                       && !thread.IsDeleted
-                select new ThreadMessagesDto()
+                select new ThreadMessagesDto
                 {
                     Id = message.Id,
                     Body = message.Body,

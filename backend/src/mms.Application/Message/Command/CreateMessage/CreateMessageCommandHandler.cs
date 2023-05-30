@@ -65,7 +65,7 @@ namespace mms.Application.Message.Command.CreateMessage
                     return Result<CreateMessageResult>.Fail("Sender cannot send a message to this thread");
                 }
 
-                var message = new MessageEntity()
+                var message = new MessageEntity
                 {
                     SenderId = sender.Id,
                     Body = request.Body,
@@ -80,7 +80,7 @@ namespace mms.Application.Message.Command.CreateMessage
                 await _chatHub.Clients.User(sender.UserName ?? $"{sender.FirstName}")
                     .SendAsync(sender.Id, request.Body, cancellationToken);
 
-                return Result<CreateMessageResult>.Success(new CreateMessageResult()
+                return Result<CreateMessageResult>.Success(new CreateMessageResult
                 {
                     Id = message.Id,
                     MessageThreadId = existingThread.Id
@@ -132,19 +132,19 @@ namespace mms.Application.Message.Command.CreateMessage
 
             if (thread is null)
             {
-                thread = new MessageThread()
+                thread = new MessageThread
                 {
                     Subject = request.Subject,
                     MessageThreadParticipantHash = messageThreadParticipantsHash
                 };
 
-                var recipientParticipant = new MessageThreadParticipant()
+                var recipientParticipant = new MessageThreadParticipant
                 {
                     MessageThread = thread,
                     AppUserId = recipientId
                 };
 
-                var senderParticipant = new MessageThreadParticipant()
+                var senderParticipant = new MessageThreadParticipant
                 {
                     MessageThread = thread,
                     AppUserId = sender.Id
@@ -158,7 +158,7 @@ namespace mms.Application.Message.Command.CreateMessage
                 }, cancellationToken);
             }
 
-            var newMessage = new MessageEntity()
+            var newMessage = new MessageEntity
             {
                 SenderId = sender.Id,
                 Body = request.Body,
@@ -172,7 +172,7 @@ namespace mms.Application.Message.Command.CreateMessage
             await _chatHub.Clients.User(sender.UserName ?? $"{sender.FirstName}")
                 .SendAsync(sender.Id, request.Body, cancellationToken);
 
-            return Result<CreateMessageResult>.Success(new CreateMessageResult()
+            return Result<CreateMessageResult>.Success(new CreateMessageResult
             {
                 Id = newMessage.Id,
                 MessageThreadId = thread.Id
