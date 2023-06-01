@@ -9,7 +9,9 @@
     gap: 1rem;
     align-items: center;
 
-    .titleWrapper{
+    .titleWrapper {
+      padding: 0;
+
       .title {
         margin: 0;
         font-family: var(--semiBold);
@@ -18,15 +20,15 @@
       }
     }
     
-    .controlsWrapper{
-      .dropdownWrapper{
+    .controlsWrapper {
+      .dropdownWrapper {
         justify-content: flex-start;
         flex-wrap: nowrap;
         gap: 1rem;
         flex-direction: row;
       }
 
-      .paginationWrapper{
+      .paginationWrapper {
         justify-content: flex-end;
         flex-wrap: nowrap;
         gap: 1rem;
