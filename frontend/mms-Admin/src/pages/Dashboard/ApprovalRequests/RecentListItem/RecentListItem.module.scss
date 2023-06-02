@@ -1,0 +1,90 @@
+.recentListItemContainer {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--white1Color);
+  border: 1px solid var(--white1Color);
+  border-radius: 5px;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--green3Color);
+    border: 1px solid var(--grayBorderColor);
+  }
+
+  .body {
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: space-between;
+
+    .icon {
+      width: 2.5rem;
+    }
+
+    .mainContent {
+      gap: 0.5rem;
+      margin-right: auto;
+
+      .title,
+      .description {
+        color: var(--black2TextColor);
+        line-height: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-box;
+        display: -o-box;
+        display: box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        -moz-line-clamp: 1;
+        -ms-line-clamp: 1;
+        -o-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -ms-box-orient: vertical;
+        -o-box-orient: vertical;
+        white-space: normal;
+      }
+
+      .title {
+        font-family: var(--semiBold);
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      .description {
+        font-family: var(--regular);
+        font-size: 0.875rem;
+        margin: 0;
+      }
+    }
+
+    .btnDiv {
+      button {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+.activeItem {
+  background-color: var(--green3Color);
+  border: 1px solid var(--grayBorderColor);
+}
+
+@media all and (min-width: 992px) {
+  .recentListItemContainer {
+    padding: 0.75rem 0.5rem;
+
+    .body {
+      gap: 1rem;
+
+      .icon {
+        width: 3rem;
+      }
+    }
+  }
+}
