@@ -6,6 +6,7 @@ import SettingsReducer from "./Settings/SettingsSlice";
 import ReportsReducer from "./Reports/ReportsSlice";
 import CriteriaSlice from "./Criteria/CriteriaSlice";
 import MentorsSlice from "./Mentors/MentorsSlice";
+import TasksSlice from "./Tasks/TasksSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
     settings: SettingsReducer,
     reports: ReportsReducer,
     criteria: CriteriaSlice,
-    mentors: MentorsSlice
+    mentors: MentorsSlice,
+    tasks: TasksSlice
   },
   devTools: process.env.NODE_ENV === "development"
 });

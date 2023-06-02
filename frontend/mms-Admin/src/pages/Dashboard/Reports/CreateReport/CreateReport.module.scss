@@ -16,6 +16,14 @@
       gap: 1rem;
       padding-bottom: 1rem;
 
+      .header {
+        align-items: center;
+
+        img {
+          cursor: pointer;
+        }
+      }
+
       .title {
         margin: 0;
         font-family: var(--semiBold);
