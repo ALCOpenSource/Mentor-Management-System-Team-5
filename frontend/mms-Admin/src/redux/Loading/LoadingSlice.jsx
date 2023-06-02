@@ -39,6 +39,17 @@ const initialState = {
   getYearlyTasksLoading: false,
   createTaskLoading: false,
 
+  //Programs
+  deleteProgramLoading: false,
+  editProgramLoading: false,
+  getAllProgramsLoading: false,
+  getArchivedProgramsLoading: false,
+  getActiveProgramsLoading: false,
+  getActiveProgramsByWeekLoading: false,
+  getActiveProgramsByMonthLoading: false,
+  getActiveProgramsByYearLoading: false,
+  createProgramLoading: false,
+
   //Mentors
   getAllMentorsLoading: false,
   inviteMentorLoading: false,
@@ -150,6 +161,35 @@ export const loadingSlice = createSlice({
       state.createTaskLoading = action.payload;
     },
 
+    //Programs
+    deleteProgramLoading: (state, action) => {
+      state.deleteProgramLoading = action.payload;
+    },
+    editProgramLoading: (state, action) => {
+      state.editProgramLoading = action.payload;
+    },
+    getAllProgramsLoading: (state, action) => {
+      state.getAllProgramsLoading = action.payload;
+    },
+    getArchivedProgramsLoading: (state, action) => {
+      state.getArchivedProgramsLoading = action.payload;
+    },
+    getActiveProgramsLoading: (state, action) => {
+      state.getActiveProgramsLoading = action.payload;
+    },
+    getActiveProgramsByWeekLoading: (state, action) => {
+      state.getActiveProgramsByWeekLoading = action.payload;
+    },
+    getActiveProgramsByMonthLoading: (state, action) => {
+      state.getActiveProgramsByMonthLoading = action.payload;
+    },
+    getActiveProgramsByYearLoading: (state, action) => {
+      state.getActiveProgramsByYearLoading = action.payload;
+    },
+    createProgramLoading: (state, action) => {
+      state.createProgramLoading = action.payload;
+    },
+
     //Mentors
     getAllMentorsLoading: (state, action) => {
       state.getAllMentorsLoading = action.payload;
@@ -201,7 +241,16 @@ export const {
   getWeeklyTasksLoading,
   getMonthlyTasksLoading,
   getYearlyTasksLoading,
-  createTaskLoading
+  createTaskLoading,
+  deleteProgramLoading,
+  editProgramLoading,
+  getAllProgramsLoading,
+  getArchivedProgramsLoading,
+  getActiveProgramsLoading,
+  getActiveProgramsByWeekLoading,
+  getActiveProgramsByMonthLoading,
+  getActiveProgramsByYearLoading,
+  createProgramLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;
