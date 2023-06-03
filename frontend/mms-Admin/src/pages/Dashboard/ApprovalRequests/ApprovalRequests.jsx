@@ -204,7 +204,7 @@ function ApprovalRequests() {
   };
 
   return (
-    <div className={cx(styles.certificatesContainer, "flexRow")}>
+    <div className={cx(styles.approvalRequestsContainer, "flexRow")}>
       {openSideBar && (
         <div className={cx(styles.sidebarWrapper)}>
           <GenericSideBar
@@ -232,7 +232,6 @@ function ApprovalRequests() {
           {showAddUserButton && (
             <Button
               title={`Add New ${outletTitle ? outletTitle.replace(/requests/gi, "") : "User"}`}
-              size='small'
               onClick={() => handleAddUser(outletTitle)}
             />
           )}

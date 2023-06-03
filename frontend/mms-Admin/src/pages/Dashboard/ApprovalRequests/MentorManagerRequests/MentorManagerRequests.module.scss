@@ -7,7 +7,7 @@
   .body {
     position: relative;
     overflow-y: auto;
-    padding-right: 0.25rem;
+    padding: 0.25rem;
 
     .cardContainer {
       gap: 0.75rem;
@@ -53,24 +53,69 @@
           align-items: center;
           padding: 0.5rem;
 
-          .cardIcon {
-            svg {
-              width: 3rem;
-              height: auto;
-            }
-          }
-
-          .metaData {
-            gap: 0.625rem;
+          .userInfoDiv {
+            background-color: var(--taskListBgColor);
             justify-content: center;
+            width: 100%;
+            gap: 0.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
 
-            .name,
-            .metaDataTitle {
-              font-size: 1rem;
-              font-family: var(--bold);
-              color: var(--black2TextColor);
-              line-height: 1rem;
-              margin: 0;
+            .imageDiv {
+              .avatar {
+                width: 3.5rem;
+                height: 3.5rem;
+                border-radius: 50%;
+              }
+            }
+
+            .userInfo {
+              flex-grow: 1;
+              flex-direction: row;
+              gap: 0.5rem;
+              height: 100%;
+              align-items: center;
+
+              .leftSection {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                .groupOne {
+                  .name {
+                    font-size: 1.25rem;
+                    color: var(--blackTextColor);
+                    font-family: var(--bold);
+                    margin: 0;
+                    line-height: 1;
+                  }
+
+                  .designation {
+                    font-size: 0.75rem;
+                    color: var(--grayTextColor);
+                    font-family: var(--regular);
+                    line-height: 1.25;
+                    margin: 0;
+                  }
+                }
+
+                .positionTags {
+                  gap: 0.5rem;
+
+                  span {
+                    font-size: 0.75rem;
+                    color: var(--black3TextColor);
+                    font-family: var(--regular);
+                    line-height: 1;
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 5px;
+                    background-color: var(--green4Color);
+                    text-transform: uppercase;
+                  }
+                }
+              }
             }
           }
 
@@ -85,27 +130,98 @@
         }
 
         .cardBody {
-          padding: 1rem 0.5rem 0.5rem 0.5rem;
-          gap: 1rem;
+          gap: 1.5rem;
+          padding: 0.5rem;
           background-color: var(--green3Color);
 
-          .certificateDiv {
-            width: 75%;
-            align-self: center;
+          .subSectionWrapper {
+            gap: 0.5rem;
 
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
+            .title {
+              font-size: 1.25rem;
+              font-family: var(--semiBold);
+              color: var(--black2TextColor);
+              margin: 0;
+              line-height: 1;
+            }
+
+            .info {
+              font-size: 1rem;
+              font-family: var(--regular);
+              color: var(--grayTextColor);
+              flex-wrap: wrap;
+              gap: 0.5rem;
+              margin: 0;
+
+              .listItem {
+                gap: 0.25rem;
+              }
             }
           }
 
-          .btnGroup {
-            align-items: center;
-            justify-content: flex-end;
-            align-self: center;
+          .bio {
+            background-color: var(--green4Color);
+            font-size: 1rem;
+            font-family: var(--regular);
+            color: var(--black3TextColor);
+            padding: 0.5rem;
+            line-height: 1.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--green4Color);
+          }
+
+          .miscInfoDiv {
+            gap: 0.75rem !important;
+
+            .miscInfo {
+              gap: 0.125rem;
+              flex-direction: column;
+              align-items: flex-start;
+            }
+          }
+
+          .socialInfoDiv {
             gap: 1rem;
-            width: 75%;
+            margin: 1rem 0 0 0;
+
+            .wrapper {
+              gap: 1.25rem;
+
+              .socialInfo {
+                background-color: var(--gray4Color);
+                gap: 0.875rem;
+                padding: 0.5rem 0.875rem;
+                border-radius: 0.25rem;
+
+                .socialUserName {
+                  font-size: 1.25rem;
+                  font-family: var(--semiBold);
+                  color: var(--black3TextColor);
+                  margin: 0;
+                  line-height: 1;
+                }
+              }
+            }
+          }
+
+          .btnDiv {
+            margin-top: 1rem;
+            align-items: center;
+
+            span {
+              line-height: 1rem;
+              margin: 0;
+              padding: 0;
+              font-size: 0.875rem;
+              font-family: var(--semiBold);
+              cursor: pointer;
+              color: var(--green8Color);
+              text-decoration: underline;
+            }
+
+            .btnGroup {
+              gap: 0.5rem;
+            }
           }
         }
       }
@@ -127,27 +243,74 @@
         .cardWrapper {
           .cardHeader {
             gap: 0.875rem;
+            padding: 0.5rem 1rem;
 
-            .cardIcon {
-              svg {
-                width: 4rem;
-              }
-            }
+            .userInfoDiv {
+              gap: 1rem;
 
-            .metaData {
-              .metaDataTitle {
-                font-size: 1.125rem;
+              .userInfo {
+                align-items: center;
+
+                .leftSection {
+                  flex-grow: 1;
+                  display: flex;
+                  flex-direction: row;
+                  gap: 1.5rem;
+
+                  .groupOne {
+                    gap: 0.25rem;
+                  }
+
+                  .positionTags {
+                    align-items: center;
+                  }
+                }
               }
             }
           }
 
           .cardBody {
-            .certificateDiv {
-              width: 75%;
+            padding: 1rem;
+
+            .subSectionWrapper {
+              gap: 0.5rem;
+
+              .title {
+                font-size: 1.125rem;
+              }
+
+              .info {
+                font-size: 1rem;
+                gap: 0.875rem;
+
+                .listItem {
+                  gap: 0.25rem;
+                }
+              }
             }
 
-            .btnGroup {
-              width: 75%;
+            .miscInfoDiv {
+              .miscInfo {
+                flex-wrap: wrap;
+              }
+            }
+
+            .socialInfoDiv {
+              .wrapper {
+                gap: 1rem;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+              }
+            }
+
+            .btnDiv {
+              span {
+                font-size: 1.125rem;
+              }
+
+              .btnGroup {
+                gap: 1rem;
+              }
             }
           }
         }
@@ -163,22 +326,42 @@
         .cardWrapper {
           .cardHeader {
             gap: 1.5rem;
-            padding: 0.5rem 1.125rem;
+            padding: 0.5rem 1.5rem;
 
-            .cardIcon {
-              svg {
-                width: 3.5rem;
+            .userInfoDiv {
+              gap: 1.5rem;
+
+              .userInfo {
+                align-items: center;
+
+                .leftSection {
+                  flex-grow: 1;
+                  display: flex;
+                  flex-direction: row;
+                  gap: 1.5rem;
+
+                  .groupOne {
+                    gap: 0.25rem;
+                  }
+
+                  .positionTags {
+                    align-items: center;
+                  }
+                }
               }
             }
           }
 
           .cardBody {
-            padding: 1rem 1.5rem;
-            gap: 1rem;
+            padding-top: 1.5rem;
+            .miscInfoDiv {
+              gap: 1rem !important;
+            }
 
-            .certificateDiv,
-            .btnGroup {
-              width: 50%;
+            .socialInfoDiv {
+              .wrapper {
+                gap: 1.5rem;
+              }
             }
           }
         }

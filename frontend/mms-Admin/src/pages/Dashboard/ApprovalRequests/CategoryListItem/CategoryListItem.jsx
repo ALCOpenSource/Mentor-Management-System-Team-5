@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 
 function CategoryListItem({ data, onClick }) {
-  const location = useLocation().pathname.split("/")[3] || "approved-certificates";
+  const location = useLocation().pathname.split("/")[3] || "mentor-manager-requests";
   return (
     <div
       onClick={() => onClick(data)}
