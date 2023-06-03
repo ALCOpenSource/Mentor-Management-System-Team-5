@@ -63,7 +63,7 @@ function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar }) {
 }
 
 GenericSideBar.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
   selectedMenuItem: PropTypes.func,
   closeGenericSideBar: PropTypes.func
 };

@@ -28,6 +28,28 @@ const initialState = {
   getTechnicalFaqLoading: false,
   sendSupportMessageLoading: false,
 
+  //Tasks
+  deleteTaskLoading: false,
+  editTaskLoading: false,
+  getAllTasksLoading: false,
+  getCompletedTasksLoading: false,
+  getInprogressTasksLoading: false,
+  getWeeklyTasksLoading: false,
+  getMonthlyTasksLoading: false,
+  getYearlyTasksLoading: false,
+  createTaskLoading: false,
+
+  //Programs
+  deleteProgramLoading: false,
+  editProgramLoading: false,
+  getAllProgramsLoading: false,
+  getArchivedProgramsLoading: false,
+  getActiveProgramsLoading: false,
+  getActiveProgramsByWeekLoading: false,
+  getActiveProgramsByMonthLoading: false,
+  getActiveProgramsByYearLoading: false,
+  createProgramLoading: false,
+
   //Mentors
   getAllMentorsLoading: false,
   inviteMentorLoading: false,
@@ -110,6 +132,64 @@ export const loadingSlice = createSlice({
       state.sendSupportMessageLoading = action.payload;
     },
 
+    //Tasks
+    deleteTaskLoading: (state, action) => {
+      state.deleteTaskLoading = action.payload;
+    },
+    editTaskLoading: (state, action) => {
+      state.editTaskLoading = action.payload;
+    },
+    getAllTasksLoading: (state, action) => {
+      state.getAllTasksLoading = action.payload;
+    },
+    getCompletedTasksLoading: (state, action) => {
+      state.getCompletedTasksLoading = action.payload;
+    },
+    getInprogressTasksLoading: (state, action) => {
+      state.getInprogressTasksLoading = action.payload;
+    },
+    getWeeklyTasksLoading: (state, action) => {
+      state.getWeeklyTasksLoading = action.payload;
+    },
+    getMonthlyTasksLoading: (state, action) => {
+      state.getMonthlyTasksLoading = action.payload;
+    },
+    getYearlyTasksLoading: (state, action) => {
+      state.getYearlyTasksLoading = action.payload;
+    },
+    createTaskLoading: (state, action) => {
+      state.createTaskLoading = action.payload;
+    },
+
+    //Programs
+    deleteProgramLoading: (state, action) => {
+      state.deleteProgramLoading = action.payload;
+    },
+    editProgramLoading: (state, action) => {
+      state.editProgramLoading = action.payload;
+    },
+    getAllProgramsLoading: (state, action) => {
+      state.getAllProgramsLoading = action.payload;
+    },
+    getArchivedProgramsLoading: (state, action) => {
+      state.getArchivedProgramsLoading = action.payload;
+    },
+    getActiveProgramsLoading: (state, action) => {
+      state.getActiveProgramsLoading = action.payload;
+    },
+    getActiveProgramsByWeekLoading: (state, action) => {
+      state.getActiveProgramsByWeekLoading = action.payload;
+    },
+    getActiveProgramsByMonthLoading: (state, action) => {
+      state.getActiveProgramsByMonthLoading = action.payload;
+    },
+    getActiveProgramsByYearLoading: (state, action) => {
+      state.getActiveProgramsByYearLoading = action.payload;
+    },
+    createProgramLoading: (state, action) => {
+      state.createProgramLoading = action.payload;
+    },
+
     //Mentors
     getAllMentorsLoading: (state, action) => {
       state.getAllMentorsLoading = action.payload;
@@ -152,7 +232,25 @@ export const {
   getAllMentorsLoading,
   inviteMentorLoading,
   registerMentorLoading,
-  deleteMentorLoading
+  deleteMentorLoading,
+  deleteTaskLoading,
+  editTaskLoading,
+  getAllTasksLoading,
+  getCompletedTasksLoading,
+  getInprogressTasksLoading,
+  getWeeklyTasksLoading,
+  getMonthlyTasksLoading,
+  getYearlyTasksLoading,
+  createTaskLoading,
+  deleteProgramLoading,
+  editProgramLoading,
+  getAllProgramsLoading,
+  getArchivedProgramsLoading,
+  getActiveProgramsLoading,
+  getActiveProgramsByWeekLoading,
+  getActiveProgramsByMonthLoading,
+  getActiveProgramsByYearLoading,
+  createProgramLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;
