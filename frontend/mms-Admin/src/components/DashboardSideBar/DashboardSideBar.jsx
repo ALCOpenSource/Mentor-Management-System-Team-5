@@ -25,13 +25,13 @@ import { logout } from "@/utils/auth";
 import { titleCase } from "@/helpers/textTransform";
 import { useSelector, useDispatch } from "react-redux";
 import { getProfile } from "@/redux/Settings/SettingsSlice";
-// import useIsMobile from "@/hooks/useIsMobile";
+import useIsMobile from "@/hooks/useIsMobile";
 
 function DashboardSideBar() {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const isMobile = useIsMobile();
+  const isMobile = useIsMobile();
   const { toggleSidebar } = useProSidebar();
   const userData = userInfo();
   const currentPage = location.pathname.split("/")[2] || "";
@@ -108,6 +108,10 @@ function DashboardSideBar() {
     ],
     []
   );
+
+  useEffect(() => {
+    isMobile ? toggleSidebar(false) : toggleSidebar(true);
+  }, [isMobile, toggleSidebar]);
 
   useEffect(() => {
     dispatch(getProfile());
