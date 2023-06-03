@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./ApprovalRequests.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import Button from "@/components/Button/Button";
@@ -15,14 +16,20 @@ import RecentListItem from "./RecentListItem/RecentListItem";
 import CategoryListItem from "./CategoryListItem/CategoryListItem";
 import useIsMobile from "@/hooks/useIsMobile";
 import Pagination from "@/components/Pagination/Pagination";
+import AddUserModal from "@/components/Modals/AddUser/AddUser";
+import { showModal } from "@/redux/Modal/ModalSlice";
 
 function ApprovalRequests() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const isMobile = useIsMobile();
   const currentSubPath = useLocation().pathname.split("/")[3];
   const [openSideBar, setOpenSideBar] = useState(false);
   const [outletTitle, setOutletTitle] = useState("Mentor Manager Requests");
   const [showAddUserButton, setShowAddUserButton] = useState(true);
+
+  const displayModal = useSelector((state) => state.modal.show);
+  const modalName = useSelector((state) => state.modal.modalName);
 
   useEffect(() => {
     isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
@@ -173,8 +180,27 @@ function ApprovalRequests() {
     // this is added to remove the warning of unused prop on the generic sidebar component
   };
 
-  const handleAddUser = () => {
-    //dispatch modal
+  const handleAddUser = (data) => {
+    let title = "";
+    let category = "";
+
+    if (data === "Mentor Manager Requests") {
+      title = "Add Mentor Manager";
+      category = "mentorManager";
+    } else if (data === "Mentor Requests") {
+      title = "Add Mentor";
+      category = "mentor";
+    }
+
+    dispatch(
+      showModal({
+        name: "addUser",
+        modalData: {
+          title: title,
+          category: category
+        }
+      })
+    );
   };
 
   return (
@@ -207,7 +233,7 @@ function ApprovalRequests() {
             <Button
               title={`Add New ${outletTitle ? outletTitle.replace(/requests/gi, "") : "User"}`}
               size='small'
-              onClick={() => handleAddUser()}
+              onClick={() => handleAddUser(outletTitle)}
             />
           )}
           <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
@@ -221,6 +247,8 @@ function ApprovalRequests() {
           <Outlet />
         </div>
       </section>
+
+      {displayModal && modalName === "addUser" ? <AddUserModal show size='md' /> : null}
     </div>
   );
 }
