@@ -255,7 +255,9 @@ const MentorManagerRequests = () => {
                         </div>
 
                         <div className={cx(styles.btnDiv, "flexRow-space-between")}>
-                          <span onClick={() => handleSendMessage(userData?.id)}>Send Message</span>
+                          <span className={cx(styles.sendMessage)} onClick={() => handleSendMessage(userData?.id)}>
+                            Send Message
+                          </span>
                           <div className={cx(styles.btnGroup, "flexRow-right-centered")}>
                             <Button onClick={() => handleApproval("decline")} title='Decline' type='secondary' />
                             <Button onClick={() => handleApproval("approve")} title='Approve' />

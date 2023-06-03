@@ -208,7 +208,7 @@
             margin-top: 1rem;
             align-items: center;
 
-            span {
+            .sendMessage {
               line-height: 1rem;
               margin: 0;
               padding: 0;
@@ -304,7 +304,7 @@
             }
 
             .btnDiv {
-              span {
+              .sendMessage {
                 font-size: 1.125rem;
               }
 
@@ -354,6 +354,7 @@
 
           .cardBody {
             padding-top: 1.5rem;
+
             .miscInfoDiv {
               gap: 1rem !important;
             }
