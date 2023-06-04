@@ -26,6 +26,7 @@ const MentorManagerRequests = lazy(() =>
 );
 const MentorRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/MentorRequests/MentorRequests"));
 const ProgramRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ProgramRequests/ProgramRequests"));
+const RequestDetails = lazy(() => import("@/pages/Dashboard/ApprovalRequests/RequestDetails/RequestDetails"));
 
 // Certificates
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
@@ -83,9 +84,7 @@ const MentorManagerDetailsTasks = lazy(() =>
 );
 
 //Search Results
-const SearchResults = lazy(() => 
-  import("@/pages/Dashboard/SearchResults/SearchResults")
-);
+const SearchResults = lazy(() => import("@/pages/Dashboard/SearchResults/SearchResults"));
 
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
@@ -133,11 +132,13 @@ function RoutesComponent() {
 
         <Route
           path='/dashboard'
-          element={<AuthenticatedRoutes roles={[userRoles.admin]}>
+          element={
+            <AuthenticatedRoutes roles={[userRoles.admin]}>
               <DashboardContainer>
                 <Outlet />
               </DashboardContainer>
-            </AuthenticatedRoutes>}
+            </AuthenticatedRoutes>
+          }
         >
           <Route index path='' element={<Home />} />
           <Route path='settings' element={<Settings />}>
@@ -155,6 +156,7 @@ function RoutesComponent() {
               <Route path='mentor-manager-requests' element={<MentorManagerRequests />} />
               <Route path='mentor-requests' element={<MentorRequests />} />
               <Route path='program-requests' element={<ProgramRequests />} />
+              <Route path='request-details/:id' element={<RequestDetails />} />
             </Route>
           </Route>
           <Route path='certificates'>
