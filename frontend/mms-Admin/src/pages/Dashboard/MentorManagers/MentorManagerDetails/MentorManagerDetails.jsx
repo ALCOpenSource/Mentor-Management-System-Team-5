@@ -287,7 +287,7 @@ const MentorManagerDetails = () => {
         </div>
 
         <div className={cx(styles.outletBody, "flexCol")}>
-          <div className={cx(styles.tabsWrapper, "flexRow")}>
+          <div className={cx(styles.tabsWrapper, "flexCol")}>
             <Tabs data={getTabMenu()} onClick={handleTabMenuClick} />
           </div>
 

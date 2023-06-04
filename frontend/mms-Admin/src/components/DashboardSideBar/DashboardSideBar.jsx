@@ -110,7 +110,7 @@ function DashboardSideBar() {
   );
 
   useEffect(() => {
-    isMobile ? toggleSidebar(false) : toggleSidebar(true);
+    isMobile && toggleSidebar(false);
   }, [isMobile, toggleSidebar]);
 
   useEffect(() => {
