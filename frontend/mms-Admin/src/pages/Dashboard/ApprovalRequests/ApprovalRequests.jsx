@@ -117,11 +117,12 @@ function ApprovalRequests() {
   };
 
   const handleRecentListClick = (item) => {
-    console.log(item, "data");
+    if (item?.type === "program") return;
+
     setShowAddUserButton(false);
     setShowCloseIcon(true);
     setOutletTitle("Details");
-    navigate(`/dashboard/approval-requests/request-details/${item.id}`);
+    navigate(`/dashboard/approval-requests/request-details/${item.id}`, { state: { data: item } });
   };
 
   const getSideBarData = () => {

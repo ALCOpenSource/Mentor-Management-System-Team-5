@@ -122,19 +122,16 @@ const MentorManagerRequests = () => {
     misc: {
       technicalProficiency: {
         title: "Technical Proficiency",
-
         response: ["Javascript", "Django", "Android"]
       },
 
       previousPrograms: {
         title: "Previous Programs",
-
         response: ["GADS 2022", "Google I/O Extended 2021"]
       },
 
       previousRolesHeld: {
         title: "Previous Roles Held",
-
         response: [
           "Learner",
           "Mentor",
@@ -149,25 +146,21 @@ const MentorManagerRequests = () => {
 
       availability: {
         title: "Availability To Join Another Program",
-
         response: "Unavailable"
       },
 
       programOfInterest: {
         title: "Program Of Interest",
-
         response: "Google Africa Scholarship Program"
       },
 
       beenAMentorBefore: {
         title: "Been A Mentor Before",
-
         response: "Yes"
       },
 
       yearsOfTechnicalExperience: {
         title: "Years Of Technical Experience",
-
         response: "5years"
       }
     },
