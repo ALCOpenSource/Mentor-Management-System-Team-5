@@ -198,12 +198,23 @@
 }
 
 @media all and (min-width: 992px) {
+  .miniProfileContainer {
+    gap: 1.5rem;
+  }
   .gridView {
     padding: 0.75rem 2rem;
 
     .userInfo {
       .btnGroup {
         justify-content: space-between;
+      }
+    }
+  }
+
+  .listView {
+    .userInfo {
+      .leftSection {
+        gap: 2rem;
       }
     }
   }

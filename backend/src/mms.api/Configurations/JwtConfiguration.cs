@@ -19,6 +19,11 @@ namespace mms.api.Configurations
 
             // Register UserManager for dependency injection
             services.AddScoped<UserManager<AppUser>>();
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromDays(3);
+            });
+
 
             services.Configure<IdentityOptions>(options =>
             {

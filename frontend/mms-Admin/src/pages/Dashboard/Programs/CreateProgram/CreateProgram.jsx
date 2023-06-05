@@ -271,6 +271,11 @@ function CreateProgram() {
     e.preventDefault();
   };
 
+  const handleCreateCriteria = (e) => {
+    e.preventDefault();
+    navigate("create-criteria");
+  };
+
   return (
     <div className={cx(styles.createProgramContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
@@ -359,7 +364,7 @@ function CreateProgram() {
                     <ClearListIcon />
                   </div>
                 </div>
-                <Button title='Select' size='small' onClick={() => navigate("create-criteria")} />
+                <Button title='Select' size='small' onClick={(e) => handleCreateCriteria(e)} />
               </div>
             </div>
 

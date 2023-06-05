@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using mms.api.Configurations;
 using mms.Application;
+using mms.Application.Common.ChatHub;
 using mms.Domain.Configuration;
 using mms.Domain.Mail;
 using mms.Infrastructure;
@@ -29,6 +30,7 @@ var converter = new SynchronizedConverter(new PdfTools());
 builder.Services.AddSingleton(typeof(IConverter),
     new SynchronizedConverter(new PdfTools()));
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -76,5 +78,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseEndpoints(endpoints => { endpoints.MapHub<ChatHub>("/chatHub"); });
 
 app.Run();

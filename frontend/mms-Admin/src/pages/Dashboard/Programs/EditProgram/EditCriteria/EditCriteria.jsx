@@ -30,10 +30,7 @@ const EditCriteria = () => {
   const criteriaData = useSelector((state) => state?.criteria?.getCriteriaFromStorageData);
 
   const [displayInstructions, setDisplayInstructions] = useState(true);
-  const [disableBtn, setDisableBtn] = useState({
-    createCriteria: true,
-    addCriteria: true
-  });
+  const [disableCreateBtn, setDisableCreateBtn] = useState(true);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -43,14 +40,19 @@ const EditCriteria = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (criteriaData) {
-      setDisableBtn({ ...disableBtn, createCriteria: false });
+    if (!criteriaData) {
+      setDisableCreateBtn(true);
+    } else if (Object.keys(criteriaData).length > 0) {
+      if (Object.values(criteriaData).some((item) => item.length > 0)) {
+        setDisableCreateBtn(false);
+      } else {
+        setDisableCreateBtn(true);
+      }
     }
-  }, []);
+  }, [criteriaData]);
 
   const handleDisplayInstructions = () => {
     setDisplayInstructions(false);
-    setDisableBtn({ ...disableBtn, addCriteria: false });
   };
 
   const resolver = yupResolver(editProgramCriteriaSchema);
@@ -321,21 +323,14 @@ const EditCriteria = () => {
                   })}
               </div>
               <div className={cx(styles.addCriteriaBtnDiv, "flexRow")}>
-                <Button
-                  onClick={(e) => displayCriteriaTypes(e)}
-                  title='Add Criteria'
-                  type='primary'
-                  size='small'
-                  disabled={disableBtn.addCriteria}
-                />
+                <Button onClick={(e) => displayCriteriaTypes(e)} title='Add Criteria' type='primary' size='small' />
               </div>
               <div className={cx(styles.submitBtnDiv, "flexRow")}>
                 <Button
                   onClick={handleSubmit((data) => handleCreateCriteria(data))}
-                  // loading={loading}
                   title='Create Criteria'
                   type='primary'
-                  disabled={disableBtn.createCriteria}
+                  disabled={disableCreateBtn}
                 />
               </div>
             </div>

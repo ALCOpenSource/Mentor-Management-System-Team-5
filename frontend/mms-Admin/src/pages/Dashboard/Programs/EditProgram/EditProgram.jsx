@@ -8,6 +8,7 @@ import Button from "@/components/Button/Button";
 import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import closeIcon from "@/assets/icons/undo-icon.svg";
+import closeIconAlt from "@/assets/icons/close-icon.svg";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
@@ -270,11 +271,17 @@ function EditProgram() {
     e.preventDefault();
   };
 
+  const handleEditCriteria = (e) => {
+    e.preventDefault();
+    navigate("edit-criteria");
+  };
+
   return (
     <div className={cx(styles.editProgramContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
-        <div className={cx(styles.heading, "flexRow")}>
+        <div className={cx(styles.heading, "flexRow-space-between")}>
           <h3 className={cx(styles.title)}>Edit Program</h3>
+          <img src={closeIconAlt} alt='close-icon' onClick={() => navigate("/dashboard/programs")} />
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
@@ -357,7 +364,7 @@ function EditProgram() {
                     <ClearListIcon />
                   </div>
                 </div>
-                <Button title='Select' size='small' onClick={() => navigate("edit-criteria")} />
+                <Button title='Select' size='small' onClick={(e) => handleEditCriteria(e)} />
               </div>
             </div>
 

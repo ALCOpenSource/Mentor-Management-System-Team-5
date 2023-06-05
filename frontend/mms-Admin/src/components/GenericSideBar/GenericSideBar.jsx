@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
 import styles from "./GenericSideBar.module.scss";
 import useIsMobile from "@/hooks/useIsMobile";
 
-function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGenericSideBar }) {
-  const params = useParams();
-  const [activeLink, setActiveLink] = useState("");
+function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar }) {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(true);
-  const currentId = params?.id;
   const sidebarRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -18,11 +14,6 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
       setOpen(false);
     }
   };
-
-  useEffect(() => {
-    const active = data?.listItems.find((menuItem) => menuItem.id.toString() === currentId);
-    setActiveLink(active ? active.id : "");
-  }, [currentId, data]);
 
   useEffect(() => {
     if (isMobile && open) {
@@ -62,11 +53,7 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
       {data?.headerComponent && <div className={cx(styles.genericSideBarHeader)}>{data?.headerComponent}</div>}
       <ul>
         {data?.listItems.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => handleMenuClick(item.id)}
-            className={activeLink.toString() === item.id.toString() ? activeMenuItemClass : ""}
-          >
+          <li key={index} onClick={() => handleMenuClick(item?.id)}>
             {item?.component}
           </li>
         ))}
@@ -76,9 +63,8 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
 }
 
 GenericSideBar.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
   selectedMenuItem: PropTypes.func,
-  activeMenuItemClass: PropTypes.string,
   closeGenericSideBar: PropTypes.func
 };
 

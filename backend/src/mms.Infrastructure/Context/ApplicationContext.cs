@@ -25,6 +25,9 @@ namespace mms.Infrastructure.Context
         public DbSet<UserPrivacy> UserPrivacy { get; set; }
         public DbSet<Support> Supports { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<MessageThread> MessageThreads { get; set; }
+        public DbSet<MessageThreadParticipant> MessageThreadParticipants { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {
@@ -41,7 +44,6 @@ namespace mms.Infrastructure.Context
                         item.Entity.UpdatedAt = DateTime.UtcNow;
                         break;
                     case EntityState.Added:
-                        item.Entity.Id = Guid.NewGuid().ToString();
                         item.Entity.CreatedAt = DateTime.UtcNow;
                         break;
                     default:
@@ -96,10 +98,10 @@ namespace mms.Infrastructure.Context
                 .HasMany(x => x.UserTasks);
 
             modelBuilder.Entity<MentorManager>()
-             .HasMany(x => x.ProgramsMentors);
+                .HasMany(x => x.ProgramsMentors);
 
             modelBuilder.Entity<MentorManager>()
-             .HasMany(x => x.Programs).WithMany(y => y.MentorManagers);
+                .HasMany(x => x.Programmes).WithMany(y => y.MentorManagers);
 
             modelBuilder.Entity<Report>()
                 .HasIndex(x => x.UserTaskId);
@@ -115,8 +117,8 @@ namespace mms.Infrastructure.Context
                 .WithMany(x => x.UserTasks);
 
             modelBuilder.Entity<UserTask>()
-             .HasMany(x => x.Mentors)
-             .WithMany(x => x.UserTasks);
+                .HasMany(x => x.Mentors)
+                .WithMany(x => x.UserTasks);
 
             modelBuilder.Entity<UserTask>()
                 .HasMany(x => x.Reports)
@@ -128,6 +130,22 @@ namespace mms.Infrastructure.Context
 
             modelBuilder.Entity<UserPrivacy>()
                 .HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<Message>().HasIndex(x => x.SenderId);
+
+            modelBuilder.Entity<Message>().HasIndex(x => x.MessageThreadId);
+
+            modelBuilder.Entity<MessageThread>().HasIndex(x => x.LastMessageId);
+
+            modelBuilder.Entity<MessageThread>().HasIndex(x => x.PinnedMessageId);
+
+            modelBuilder.Entity<MessageThread>().HasIndex(x => x.MessageThreadParticipantHash).IsUnique();
+
+            modelBuilder.Entity<MessageThreadParticipant>().HasIndex(x => x.MessageThreadId);
+
+            modelBuilder.Entity<MessageThreadParticipant>().HasIndex(x => x.AppUserId);
+
+            modelBuilder.Entity<MessageThreadParticipant>().HasOne(x => x.MessageThread);
 
             base.OnModelCreating(modelBuilder);
         }
