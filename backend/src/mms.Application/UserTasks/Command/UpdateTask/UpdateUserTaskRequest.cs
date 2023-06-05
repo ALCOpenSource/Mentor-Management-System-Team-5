@@ -1,4 +1,4 @@
-﻿using mms.Application.Common.DTOs;
+﻿using mms.Application.Common.DTOs.Mentors;
 using mms.Domain.Enums;
 
 namespace mms.Application.UserTasks.Command.UpdateTask

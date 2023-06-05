@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mms.Application.Common.DTOs
+namespace mms.Application.Common.DTOs.Tasks
 {
-    public class MentorDTO
+    public class UserTaskDTO
     {
-        public string MentoId { get; set; }
+        public string UserTaskId { get; set; }
     }
 }

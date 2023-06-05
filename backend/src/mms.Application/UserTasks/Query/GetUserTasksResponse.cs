@@ -10,6 +10,8 @@ namespace mms.Application.UserTasks.Query
 {
     public class GetUserTasksResponse
     {
+        public string Id { get; set; }
+        public DateTime CreatedAt { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }

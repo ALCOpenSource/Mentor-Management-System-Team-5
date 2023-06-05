@@ -7,7 +7,7 @@ namespace mms.Domain.Entities
         public string ProgramId { get; set; }
         public string AppUserId { get; set; }
         public IList<UserTask> UserTasks { get; set; }
-        public Programme Programme { get; set; }
+        public Program Programme { get; set; }
         public AppUser AppUser { get; set; }
     }
 }

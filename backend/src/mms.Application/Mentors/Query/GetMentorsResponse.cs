@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProgrammEntity = mms.Domain.Entities.Programme;
+using ProgrammEntity = mms.Domain.Entities.Program;
 
 namespace mms.Application.Mentors.Query
 {

@@ -25,7 +25,7 @@ namespace mms.Application.Programs.Query.ActivePrograms
         {
             var startOfWeek = DateTime.Today.AddDays(-7);
             var today = DateTime.Today;
-            var programmes = await _context.Programmes.Where(t => (t.CreatedAt >= startOfWeek && t.CreatedAt <= today) && t.Status == Domain.Enums.ProgramStatus.Active).OrderByDescending(x => x.CreatedAt).ToListAsync();
+            var programmes = await _context.Programs.Where(t => (t.CreatedAt >= startOfWeek && t.CreatedAt <= today) && t.Status == Domain.Enums.ProgramStatus.Active).OrderByDescending(x => x.CreatedAt).ToListAsync();
             if (!programmes.Any())
             {
                 return await Result<List<GetProgrammeResponse>>.FailAsync("No one week old Active Program Available");

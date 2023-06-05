@@ -29,7 +29,7 @@ namespace mms.Application.Programs.Query.ActivePrograms
         public async Task<IResult<List<GetProgrammeResponse>>> Handle(GetActiveProgrammesCommand request,
             CancellationToken cancellationToken)
         {
-            var programmes = await _context.Programmes.Where(x => x.Status == ProgramStatus.Active)
+            var programmes = await _context.Programs.Where(x => x.Status == ProgramStatus.Active)
                 .OrderByDescending(x => x.DateCreated).ToListAsync(cancellationToken);
             if (programmes == null)
             {

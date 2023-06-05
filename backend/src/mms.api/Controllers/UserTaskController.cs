@@ -135,7 +135,6 @@ namespace mms.api.Controllers
                 UpdatedAt = DateTime.Now,
                 Description = request.Description,
                 Status = request.Status,
-                ProgramId = request.ProgramId,
                 Title = request.Title,
                 Managers = request.Managers,
                 Mentors = request.Mentors

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mms.Domain.Entities
 {
-    public class Programme : BaseEntity
+    public class Program : BaseEntity
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -12,13 +12,15 @@ namespace mms.Domain.Entities
         public ProgramStatus Status { get; set; }
         public string ArchivedBy { get; set; }
         public string ProgrammePicture { get; set; }
-        public IList<UserTask> UserTasks { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateCompleted { get; set; }
         public DateTime? DateArchived { get; set; }
         [Column(TypeName = "json")]
         public string Criteria { get; set; }
+        public IList<UserTask> UserTasks { get; set; }
         public IList<Report> Reports { get; set; }
-        public IList<MentorManager> MentorManagers { get; set; } //Note that this should only be managers
+        public IList<MentorManager> MentorManagers { get; set; } 
+        public IList<ProgramsMentor> Mentors { get; set; } 
+
     }
 }
