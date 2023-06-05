@@ -101,7 +101,7 @@ namespace mms.Infrastructure.Context
                 .HasMany(x => x.ProgramsMentors);
 
             modelBuilder.Entity<MentorManager>()
-                .HasMany(x => x.Programmes).WithMany(y => y.MentorManagers);
+                .HasMany(x => x.Programs).WithMany(y => y.MentorManagers);
 
             modelBuilder.Entity<Report>()
                 .HasIndex(x => x.UserTaskId);
