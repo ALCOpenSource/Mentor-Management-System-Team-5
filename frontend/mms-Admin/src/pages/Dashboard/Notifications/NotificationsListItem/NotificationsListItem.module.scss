@@ -118,6 +118,10 @@
   }
 }
 
+.cardWrapperRead {
+  opacity: 0.5;
+}
+
 @media all and (min-width: 992px) {
   .cardWrapper {
     padding: 0.1rem 2.5rem 0.1rem 2.5rem;
@@ -162,8 +166,4 @@
       }
     }
   }
-}
-
-.cardWrapperRead {
-  opacity: 0.5;
 }
