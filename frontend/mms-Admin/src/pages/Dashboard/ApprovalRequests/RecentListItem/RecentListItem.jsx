@@ -14,14 +14,21 @@ function RecentListItem({ data, onClick }) {
       className={cx(styles.recentListItemContainer, "flexCol", id === data?.id.toString() && styles.activeItem)}
     >
       <div className={cx(styles.body, "flexRow-align-center")}>
-        <img className={cx(styles.icon)} src={data?.icon} alt='icon' />
+        <div className={cx(styles.imageDiv, "flexRow-fully-centered")}>
+          <img className={cx(styles.cardImage)} src={data?.cardImage} alt='icon' />
+          <img className={cx(styles.icon)} src={data?.icon} alt='icon' />
+        </div>
         <div className={cx(styles.mainContent, "flexCol")}>
-          <h5 className={cx(styles.title)}>{data?.name}</h5>
-          <span className={cx(styles.description)}>{data?.description}</span>
+          <h5 className={cx(styles.title, data?.type === "program" && styles.multiLine)}>{data?.name}</h5>
+          {data?.description && <span className={cx(styles.description)}>{data?.description}</span>}
         </div>
-        <div className={cx(styles.btnDiv, "flexRow")}>
-          <Button title='View' type='primary' size='small' />
-        </div>
+        {data?.type === "program" ? (
+          data?.count && <span className={cx(styles.count, "flexRow-fully-centered")}>{data?.count}</span>
+        ) : (
+          <div className={cx(styles.btnDiv, "flexRow")}>
+            <Button title='View' type='primary' size='small' />
+          </div>
+        )}
       </div>
     </div>
   );
