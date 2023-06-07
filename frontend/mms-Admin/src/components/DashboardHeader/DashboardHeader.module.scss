@@ -1,11 +1,13 @@
 .dashboardHeaderContainer {
   width: 100%;
+  height: 100%;
 
   .navbarContainer {
     padding: 0.5rem 0.5rem;
     margin: 0;
     justify-content: space-between;
     width: 100%;
+    height: 100%;
     flex-wrap: nowrap;
 
     .logoDiv {
@@ -35,9 +37,9 @@
 
     .navbarToggler {
       font-size: 1rem;
+      background-color: var(--whiteTextColor);
       margin: 0;
       padding: 0;
-      background-color: var(--whiteTextColor);
       z-index: 10;
 
       &:focus,

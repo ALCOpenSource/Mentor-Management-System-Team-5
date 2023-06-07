@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import cx from "classnames";
 import styles from "./SearchResults.module.scss";
 
@@ -13,6 +13,7 @@ import { ReactComponent as CalendarIcon } from "@/assets/icons/tasks-overview-ca
 import { ReactComponent as ClockIcon } from "@/assets/icons/clock-icon.svg";
 
 function SearchResults() {
+
   const dropdownArray = ["All", "All"]; 
   const [selected, setSelected] = useState("All");
   const searchResultsArray = [
@@ -36,7 +37,7 @@ function SearchResults() {
     },
     {
       id: 3,
-      title: `Google Africa Scholarship`,
+      title: "Google Africa Scholarship",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
       icon: reportIcon,
@@ -68,7 +69,7 @@ function SearchResults() {
     },
     {
       id: 7,
-      title: `Google Africa Scholarship`,
+      title: "Google Africa Scholarship",
       author: "Ibrahim Kabir",
       date: "19th - 25th Oct 23",
       icon: reportIcon,
@@ -120,16 +121,14 @@ function SearchResults() {
           </div>
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
             <Pagination />
-          </div>     
+          </div>
         </div>
       </section>
       <section className={cx(styles.body, "flexRow")}>
         <div className={cx(styles.content, "flexCol")}>
-        {searchResultsArray.map((item, index) => {
-              return (
-                 <ResultListItem key={index} data={item} />
-              );
-            })}
+          {searchResultsArray.map((item, index) => {
+            return <ResultListItem key={index} data={item} />;
+          })}
         </div>
       </section>
     </div>
