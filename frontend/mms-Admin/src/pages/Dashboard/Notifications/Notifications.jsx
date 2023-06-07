@@ -18,8 +18,7 @@ import Baba from "@/assets/images/baba.svg";
 function Notifications() {
   const dropdownArray = ["All", "All"]; 
   const [selected, setSelected] = useState("All");
-
-  const notificationsArray = [
+  const [notificationsArray, setNotificationsArray] = useState([
     {
       id: 1,
       name: "Lex Murphy",
@@ -47,16 +46,22 @@ function Notifications() {
       post: "All Mentor Manager Task Report",
       status: false
     }
-  ];
+  ]);
  
-  const handleMarkAllAsRead = () => {
-    
-  }
 
   const handleSelected = (itemSelected) => {
     setSelected(itemSelected);
 
   }
+
+  const handleMarkAllAsRead = () => {
+    const updatedNotifications = notificationsArray.map((notification) => ({
+      ...notification,
+      status: true,
+    }));
+
+    setNotificationsArray(updatedNotifications);
+  };
 
   return (
     <div className={cx(styles.NotificationsContainer, "flexCol")}>
@@ -73,7 +78,7 @@ function Notifications() {
             />
           </div>
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
-            <Button onClick={handleMarkAllAsRead()} title='Mark all as read' type='secondary' size='small' suffixIcon={<CheckmarkIcon />}  />
+            <Button onClick={handleMarkAllAsRead} title='Mark all as read' type='secondary' size='small' suffixIcon={<CheckmarkIcon />}  />
             <Pagination />
           </div>     
         </div>
@@ -82,7 +87,7 @@ function Notifications() {
         <div className={cx(styles.content, "flexCol")}>
         {notificationsArray.map((item, index) => {
               return (
-                <NotificationsListItem key={index} data={item} /> 
+                <NotificationsListItem key={index} data={item} setItemStatus={setNotificationsArray} /> 
               );
             })}
         </div>

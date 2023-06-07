@@ -7,8 +7,7 @@ import PropTypes from "prop-types";
 
 
 
-function NotificationsListItem({data}) {
-    const [statusItem, setItemStatus ] = useState(data);
+function NotificationsListItem({ data, setItemStatus }) {
     
     const [isDropdownOpen, setIsDropdownOpen] = useState({
         status: false,
@@ -34,13 +33,12 @@ function NotificationsListItem({data}) {
         });
       };
     
-    const toggleDataStatus = (item, statusValue) => {
-        setItemStatus({
-            ...statusItem,
-            status: statusValue,
-            id: item.id
-        });
-    }
+      const toggleDataStatus = (item, statusValue) => {
+        const updatedNotifications = { ...item, status: statusValue };
+        setItemStatus((prevNotifications) =>
+          prevNotifications.map((notification) => (notification.id === item.id ? updatedNotifications : notification))
+        );
+      };
 
     const handleDropdownListClick = (type, data) => {
         setIsDropdownOpen(false);
@@ -53,7 +51,7 @@ function NotificationsListItem({data}) {
     };
     
     return (
-        <div className={cx([styles.cardWrapper, statusItem.status===true ? styles.cardWrapperRead : ''] , "flexCol")}>
+        <div className={cx([styles.cardWrapper, data.status===true ? styles.cardWrapperRead : ''] , "flexCol")}>
             <div className={cx(styles.cardHeader, "flexRow-space-between")}>
                 <div className={cx(styles.cardIcon)}>
                     <img src={data.avatar} alt={`${data.name}'s avatar`} />
@@ -96,6 +94,7 @@ function NotificationsListItem({data}) {
 }
 
 NotificationsListItem.propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object,
+    setItemStatus: PropTypes.func,
 };
 export default NotificationsListItem
