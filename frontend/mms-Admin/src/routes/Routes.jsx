@@ -17,8 +17,16 @@ import userRoles from "@/constants/userRoles";
 // Dashboard
 import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
 const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
-const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
+
+// ApprovalRequests
+const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
+const MentorManagerRequests = lazy(() =>
+  import("@/pages/Dashboard/ApprovalRequests/MentorManagerRequests/MentorManagerRequests")
+);
+const MentorRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/MentorRequests/MentorRequests"));
+const ProgramRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ProgramRequests/ProgramRequests"));
+const RequestDetails = lazy(() => import("@/pages/Dashboard/ApprovalRequests/RequestDetails/RequestDetails"));
 
 // Certificates
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
@@ -76,9 +84,7 @@ const MentorManagerDetailsTasks = lazy(() =>
 );
 
 //Search Results
-const SearchResults = lazy(() => 
-  import("@/pages/Dashboard/SearchResults/SearchResults")
-);
+const SearchResults = lazy(() => import("@/pages/Dashboard/SearchResults/SearchResults"));
 
 //Notifications
 const Notifications = lazy(() => 
@@ -147,7 +153,15 @@ function RoutesComponent() {
             <Route path='privacy' element={<SettingsPrivacy />} />
             <Route path='notifications' element={<SettingsNotifications />} />
           </Route>
-          <Route path='approval-requests' element={<ApprovalRequests />} />
+          <Route path='approval-requests'>
+            <Route path='' element={<ApprovalRequests />}>
+              <Route path='' element={<MentorManagerRequests />} />
+              <Route path='mentor-manager-requests' element={<MentorManagerRequests />} />
+              <Route path='mentor-requests' element={<MentorRequests />} />
+              <Route path='program-requests' element={<ProgramRequests />} />
+              <Route path='request-details/:id' element={<RequestDetails />} />
+            </Route>
+          </Route>
           <Route path='certificates'>
             <Route path='' element={<Certificates />}>
               <Route path='' element={<ApprovedCertificates />} />

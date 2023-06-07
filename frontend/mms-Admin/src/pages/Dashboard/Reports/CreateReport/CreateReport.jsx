@@ -17,8 +17,11 @@ import { createReportSchema } from "@/helpers/validation";
 import ProgramListItem from "./ProgramListItem/ProgramListItem";
 import mentorImage from "@/assets/images/reports-program-thumbnail.svg";
 import successImage from "@/assets/images/default-success-notification-image.png";
+import closeIconAlt from "@/assets/icons/close-icon.svg";
+import { useNavigate } from "react-router-dom";
 
 function CreateReport() {
+  const navigate = useNavigate();
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
@@ -204,7 +207,10 @@ function CreateReport() {
     <div className={cx(styles.createReportContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
         <div className={cx(styles.heading, "flexCol")}>
-          <h3 className={cx(styles.title)}>Compose Report</h3>
+          <div className={cx(styles.header, "flexRow-space-between")}>
+            <h3 className={cx(styles.title)}>Compose Report</h3>
+            <img onClick={() => navigate(-1)} src={closeIconAlt} alt='close-icon' />
+          </div>
 
           <div className={cx(styles.selectionDiv, "flexRow-space-between")}>
             <select className={cx(styles.reportTypeSelector)} name='reportType' id='reportType'>
