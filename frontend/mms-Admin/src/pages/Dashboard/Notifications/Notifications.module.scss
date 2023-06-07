@@ -2,16 +2,16 @@
     gap: 1rem;
     height: calc(100dvh - var(--topNavbarHeight));
     overflow: hidden;
-  
+
     .heading {
       padding: 1rem 1rem 0 1rem;
       flex-wrap: nowrap;
       gap: 1rem;
       align-items: center;
-  
+
       .titleWrapper {
         padding: 0;
-  
+
         .title {
           margin: 0;
           font-family: var(--semiBold);
@@ -19,7 +19,7 @@
           font-size: 1.5rem;
         }
       }
-  
+
       .controlsWrapper {
         flex-wrap: wrap;
         gap: 0.5rem;
@@ -32,14 +32,14 @@
           gap: 1rem;
           flex-direction: row;
         }
-  
+
         .paginationWrapper {
           justify-content: flex-end;
           flex-wrap: nowrap;
           gap: 1rem;
           flex-direction: row;
 
-          button{
+          button {
             padding: 0.2rem;
           }
         }
@@ -51,7 +51,7 @@
       overflow: auto;
       height: 100%;
       padding-right: 0.125rem;
-  
+
       .content {
         overflow: auto;
         position: relative;
@@ -63,7 +63,7 @@
       }
     }
   }
-  
+
   @media all and (min-width: 768px) {
     .NotificationsContainer {
       .heading {
@@ -71,12 +71,12 @@
         flex-wrap: nowrap;
         align-items: center;
 
-        .controlsWrapper{
+        .controlsWrapper {
           justify-content: space-between;
           align-items: center;
         }
       }
-  
+
       .body {
         gap: 1rem;
         padding-right: 1rem;
@@ -87,13 +87,13 @@
       }
     }
   }
-  
+
   @media all and (min-width: 992px) {
     .NotificationsContainer {
       .heading {
         padding: 1rem 2rem 0 2rem;
       }
-  
+
       .body {
         gap: 1rem;
         padding-right: 1rem;
@@ -104,13 +104,13 @@
       }
     }
   }
-  
+
   @media all and (min-width: 1200px) {
     .NotificationsContainer {
       .heading {
         padding: 1.5rem 2rem 0 2rem;
       }
-  
+
       .body {
         gap: 2rem;
         padding-right: 2rem;
@@ -122,4 +122,3 @@
       }
     }
   }
-  
