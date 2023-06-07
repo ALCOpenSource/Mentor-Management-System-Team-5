@@ -21,6 +21,11 @@
       }
   
       .controlsWrapper {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: space-between;
+        align-items: center;
+
         .dropdownWrapper {
           justify-content: flex-start;
           flex-wrap: nowrap;
@@ -33,6 +38,10 @@
           flex-wrap: nowrap;
           gap: 1rem;
           flex-direction: row;
+
+          button{
+            padding: 0.2rem;
+          }
         }
       }
     }
@@ -61,6 +70,11 @@
         padding: 1rem 1rem 0 3rem;
         flex-wrap: nowrap;
         align-items: center;
+
+        .controlsWrapper{
+          justify-content: space-between;
+          align-items: center;
+        }
       }
   
       .body {
