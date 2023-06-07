@@ -10,9 +10,7 @@ import {ReactComponent as CheckmarkIcon} from "@/assets/icons/checkmark-circled.
 import Lex from "@/assets/images/lex.svg";
 import Peculiar from "@/assets/images/peculiar.svg";
 import Baba from "@/assets/images/baba.svg";
-import Alison from "@/assets/images/alison.svg";
-import Kabiru from "@/assets/images/kabiru.svg";
-import Ferdinand from "@/assets/images/ferdinand.svg";
+
 
 
 
@@ -20,9 +18,8 @@ import Ferdinand from "@/assets/images/ferdinand.svg";
 function Notifications() {
   const dropdownArray = ["All", "All"]; 
   const [selected, setSelected] = useState("All");
- 
 
-  let notificationsArray = [
+  const notificationsArray = [
     {
       id: 1,
       name: "Lex Murphy",
@@ -51,9 +48,9 @@ function Notifications() {
       status: false
     }
   ];
-
-  const handleMarkAllAsRead = () => {
  
+  const handleMarkAllAsRead = () => {
+    
   }
 
   const handleSelected = (itemSelected) => {
@@ -85,7 +82,7 @@ function Notifications() {
         <div className={cx(styles.content, "flexCol")}>
         {notificationsArray.map((item, index) => {
               return (
-                 <NotificationsListItem key={index} data={item} />
+                <NotificationsListItem key={index} data={item} /> 
               );
             })}
         </div>
