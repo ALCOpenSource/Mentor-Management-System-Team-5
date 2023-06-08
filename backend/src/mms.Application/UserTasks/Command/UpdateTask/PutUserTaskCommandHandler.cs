@@ -21,64 +21,56 @@ namespace mms.Application.UserTasks.Command.UpdateTask
 
         public async Task<IResult<string>> Handle(PutUserTaskCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
-                var task =
+
+            var task =
                 await _context.UserTasks.Include(x => x.MentorManagers).Include(y => y.Mentors).FirstOrDefaultAsync(x => x.Id.Equals(request.Id),
                     cancellationToken);
-                if (task == null)
-                {
-                    return await Result<string>.FailAsync($"Task with Id {request.Id} does not exist");
-                }
-
-
-                // Update the mentors
-                var updatedMentorIds = request.Mentors.Select(mentorDto => mentorDto.ProgramsMentorId);
-
-                var existingMentorIds = task.Mentors.Select(m => m.Id).ToList();
-
-                var mentorsToAdd = await _context.ProgramsMentors.Where(m => updatedMentorIds.Contains(m.Id) && !existingMentorIds.Contains(m.Id)).ToListAsync();
-                var mentorsToRemove = task.Mentors.Where(m => !updatedMentorIds.Contains(m.Id)).ToList();
-
-                foreach (var mentorToRemove in mentorsToRemove)
-                {
-                    task.Mentors.Remove(mentorToRemove);
-                }
-
-                foreach (var mentorToAdd in mentorsToAdd)
-                {
-                    task.Mentors.Add(mentorToAdd);
-                }
-
-                // Update the mentor managers
-                var updatedMentorManagerIds = request.Managers.Select(mangerDto => mangerDto.MentorManagerId);
-                var existingMentorManagerIds = task.MentorManagers.Select(mm => mm.Id).ToList();
-
-                var mentorManagersToAdd = await _context.MentorManagers.Where(mm => updatedMentorManagerIds.Contains(mm.Id) && !existingMentorManagerIds.Contains(mm.Id)).ToListAsync();
-                var mentorManagersToRemove = task.MentorManagers.Where(mm => !updatedMentorManagerIds.Contains(mm.Id)).ToList();
-
-                foreach (var mentorManagerToRemove in mentorManagersToRemove)
-                {
-                    task.MentorManagers.Remove(mentorManagerToRemove);
-                }
-
-                foreach (var mentorManagerToAdd in mentorManagersToAdd)
-                {
-                    task.MentorManagers.Add(mentorManagerToAdd);
-                }
-
-                var entity = _mapper.Map(request, task);
-
-                _context.UserTasks.Update(entity);
-                await _context.SaveChangesAsync(cancellationToken);
-                return await Result<string>.SuccessAsync("Successful");
-            }
-            catch (Exception)
+            if (task == null)
             {
-
-                throw;
+                return await Result<string>.FailAsync($"Task with Id {request.Id} does not exist");
             }
-            
+
+
+            // Update the mentors
+            var updatedMentorIds = request.Mentors.Select(mentorDto => mentorDto.ProgramsMentorId);
+
+            var existingMentorIds = task.Mentors.Select(m => m.Id).ToList();
+
+            var mentorsToAdd = await _context.ProgramsMentors.Where(m => updatedMentorIds.Contains(m.Id) && !existingMentorIds.Contains(m.Id)).ToListAsync();
+            var mentorsToRemove = task.Mentors.Where(m => !updatedMentorIds.Contains(m.Id)).ToList();
+
+            foreach (var mentorToRemove in mentorsToRemove)
+            {
+                task.Mentors.Remove(mentorToRemove);
+            }
+
+            foreach (var mentorToAdd in mentorsToAdd)
+            {
+                task.Mentors.Add(mentorToAdd);
+            }
+
+            // Update the mentor managers
+            var updatedMentorManagerIds = request.Managers.Select(mangerDto => mangerDto.MentorManagerId);
+            var existingMentorManagerIds = task.MentorManagers.Select(mm => mm.Id).ToList();
+
+            var mentorManagersToAdd = await _context.MentorManagers.Where(mm => updatedMentorManagerIds.Contains(mm.Id) && !existingMentorManagerIds.Contains(mm.Id)).ToListAsync();
+            var mentorManagersToRemove = task.MentorManagers.Where(mm => !updatedMentorManagerIds.Contains(mm.Id)).ToList();
+
+            foreach (var mentorManagerToRemove in mentorManagersToRemove)
+            {
+                task.MentorManagers.Remove(mentorManagerToRemove);
+            }
+
+            foreach (var mentorManagerToAdd in mentorManagersToAdd)
+            {
+                task.MentorManagers.Add(mentorManagerToAdd);
+            }
+
+            var entity = _mapper.Map(request, task);
+
+            _context.UserTasks.Update(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+            return await Result<string>.SuccessAsync("Successful");
         }
     }
 }

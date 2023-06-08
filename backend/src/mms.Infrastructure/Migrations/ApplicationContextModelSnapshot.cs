@@ -962,6 +962,9 @@ namespace mms.Infrastructure.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -976,6 +979,9 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ProgramId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -987,6 +993,10 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ProgramId");
 
                     b.ToTable("UserTasks", (string)null);
                 });
@@ -1156,6 +1166,17 @@ namespace mms.Infrastructure.Migrations
                     b.Navigation("Program");
 
                     b.Navigation("UserTask");
+                });
+
+            modelBuilder.Entity("mms.Domain.Entities.UserTask", b =>
+                {
+                    b.HasOne("mms.Domain.Entities.AppUser", null)
+                        .WithMany("UserTasks")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("mms.Domain.Entities.Program", null)
+                        .WithMany("UserTasks")
+                        .HasForeignKey("ProgramId");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.AppUser", b =>
