@@ -19,19 +19,19 @@ namespace mms.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("MentorManagerProgramme", b =>
+            modelBuilder.Entity("MentorManagerProgram", b =>
                 {
                     b.Property<string>("MentorManagersId")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ProgrammesId")
+                    b.Property<string>("ProgramsId")
                         .HasColumnType("varchar(255)");
 
-                    b.HasKey("MentorManagersId", "ProgrammesId");
+                    b.HasKey("MentorManagersId", "ProgramsId");
 
-                    b.HasIndex("ProgrammesId");
+                    b.HasIndex("ProgramsId");
 
-                    b.ToTable("MentorManagerProgramme", (string)null);
+                    b.ToTable("MentorManagerProgram", (string)null);
                 });
 
             modelBuilder.Entity("MentorManagerUserTask", b =>
@@ -602,7 +602,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Programmes", (string)null);
+                    b.ToTable("Programs", (string)null);
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.ProgrammeApplication", b =>
@@ -625,7 +625,7 @@ namespace mms.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("ProgrammeId")
+                    b.Property<string>("ProgramId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
@@ -639,7 +639,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ProgrammeId");
+                    b.HasIndex("ProgramId");
 
                     b.ToTable("ProgrammeApplications", (string)null);
                 });
@@ -663,10 +663,6 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ProgrammeId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -677,8 +673,6 @@ namespace mms.Infrastructure.Migrations
                     b.HasIndex("MentorManagerId");
 
                     b.HasIndex("ProgramId");
-
-                    b.HasIndex("ProgrammeId");
 
                     b.ToTable("ProgramsMentors", (string)null);
                 });
@@ -710,10 +704,6 @@ namespace mms.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ProgrammeId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("Recommendations")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -736,8 +726,6 @@ namespace mms.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProgramId");
-
-                    b.HasIndex("ProgrammeId");
 
                     b.HasIndex("UserTaskId");
 
@@ -992,10 +980,6 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ProgramId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ProgrammeId")
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
@@ -1012,12 +996,12 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("ProgrammeId");
+                    b.HasIndex("ProgramId");
 
                     b.ToTable("UserTasks", (string)null);
                 });
 
-            modelBuilder.Entity("MentorManagerProgramme", b =>
+            modelBuilder.Entity("MentorManagerProgram", b =>
                 {
                     b.HasOne("mms.Domain.Entities.MentorManager", null)
                         .WithMany()
@@ -1025,9 +1009,9 @@ namespace mms.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mms.Domain.Entities.Programme", null)
+                    b.HasOne("mms.Domain.Entities.Program", null)
                         .WithMany()
-                        .HasForeignKey("ProgrammesId")
+                        .HasForeignKey("ProgramsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1138,7 +1122,7 @@ namespace mms.Infrastructure.Migrations
             modelBuilder.Entity("mms.Domain.Entities.Programme", b =>
                 {
                     b.HasOne("mms.Domain.Entities.AppUser", null)
-                        .WithMany("Programmes")
+                        .WithMany("Programs")
                         .HasForeignKey("AppUserId");
                 });
 
@@ -1154,9 +1138,9 @@ namespace mms.Infrastructure.Migrations
                         .WithMany("ProgramsMentors")
                         .HasForeignKey("MentorManagerId");
 
-                    b.HasOne("mms.Domain.Entities.Programme", "Programme")
+                    b.HasOne("mms.Domain.Entities.Program", "Programme")
                         .WithMany()
-                        .HasForeignKey("ProgrammeId")
+                        .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1167,9 +1151,9 @@ namespace mms.Infrastructure.Migrations
 
             modelBuilder.Entity("mms.Domain.Entities.Report", b =>
                 {
-                    b.HasOne("mms.Domain.Entities.Programme", "Programme")
+                    b.HasOne("mms.Domain.Entities.Program", "Program")
                         .WithMany("Reports")
-                        .HasForeignKey("ProgrammeId")
+                        .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1179,7 +1163,7 @@ namespace mms.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Programme");
+                    b.Navigation("Program");
 
                     b.Navigation("UserTask");
                 });
@@ -1190,14 +1174,14 @@ namespace mms.Infrastructure.Migrations
                         .WithMany("UserTasks")
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("mms.Domain.Entities.Programme", null)
+                    b.HasOne("mms.Domain.Entities.Program", null)
                         .WithMany("UserTasks")
-                        .HasForeignKey("ProgrammeId");
+                        .HasForeignKey("ProgramId");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.AppUser", b =>
                 {
-                    b.Navigation("Programmes");
+                    b.Navigation("Programs");
 
                     b.Navigation("UserTasks");
                 });
@@ -1207,7 +1191,7 @@ namespace mms.Infrastructure.Migrations
                     b.Navigation("ProgramsMentors");
                 });
 
-            modelBuilder.Entity("mms.Domain.Entities.Programme", b =>
+            modelBuilder.Entity("mms.Domain.Entities.Program", b =>
                 {
                     b.Navigation("Reports");
 

@@ -1,5 +1,5 @@
 ﻿using mms.Domain.Entities;
-using ProgrammeEntity = mms.Domain.Entities.Programme;
+using ProgrammeEntity = mms.Domain.Entities.Program;
 
 namespace mms.Application.MentorManagers.Query
 {

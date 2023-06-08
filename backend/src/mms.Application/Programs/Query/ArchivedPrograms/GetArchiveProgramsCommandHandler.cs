@@ -31,7 +31,7 @@ namespace mms.Application.Programs.Query.ArchivedPrograms
                 return await Result<List<GetArchiveProgramsResponse>>.FailAsync("Invalid user");
             }
 
-            var programs = _context.Programmes.Where(y => y.Status == Domain.Enums.ProgramStatus.Archived).ToList();
+            var programs = _context.Programs.Where(y => y.Status == Domain.Enums.ProgramStatus.Archived).ToList();
 
             var result = _mapper.Map<List<GetArchiveProgramsResponse>>(programs);
 

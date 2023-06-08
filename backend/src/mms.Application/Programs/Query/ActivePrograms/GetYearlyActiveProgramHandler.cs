@@ -25,7 +25,7 @@ namespace mms.Application.Programs.Query.ActivePrograms
         {
             //TODO:
             //Check how status are Inserted in the database for Tasks
-            var programmes = await _context.Programmes.Where(y => y.CreatedAt.Year == DateTime.UtcNow.Year && y.Status == Domain.Enums.ProgramStatus.Active).ToListAsync();
+            var programmes = await _context.Programs.Where(y => y.CreatedAt.Year == DateTime.UtcNow.Year && y.Status == Domain.Enums.ProgramStatus.Active).ToListAsync();
             if (!programmes.Any())
             {
                 return await Result<List<GetProgrammeResponse>>.FailAsync("No Yearly Active Programs Available");

@@ -13,7 +13,7 @@ namespace mms.Infrastructure.Context
 
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<JobRole> JobRoles { get; set; }
-        public DbSet<Programme> Programmes { get; set; }
+        public DbSet<Program> Programs { get; set; }
         public DbSet<ProgrammeApplication> ProgrammeApplications { get; set; }
         public DbSet<ProgramsMentor> ProgramsMentors { get; set; }
         public DbSet<MentorManager> MentorManagers { get; set; }
@@ -65,17 +65,23 @@ namespace mms.Infrastructure.Context
             modelBuilder.Entity<Certificate>()
                 .HasIndex(x => x.ProgramId);
 
-            modelBuilder.Entity<Programme>()
+            modelBuilder.Entity<Program>()
+                 .Property(p => p.Criteria)
+                 .HasColumnType("json");
+
+            modelBuilder.Entity<Program>()
                 .HasMany(x => x.UserTasks);
 
-            modelBuilder.Entity<Programme>()
+            modelBuilder.Entity<Program>()
                 .HasMany(x => x.Reports);
 
-            modelBuilder.Entity<Programme>()
+            modelBuilder.Entity<Program>()
                 .HasMany(x => x.MentorManagers);
+            modelBuilder.Entity<Program>()
+              .HasMany(x => x.Mentors);
 
             modelBuilder.Entity<ProgrammeApplication>()
-                .HasIndex(p => p.ProgrammeId);
+                .HasIndex(p => p.ProgramId);
 
             modelBuilder.Entity<ProgrammeApplication>()
                 .HasIndex(x => x.AppUserId);
@@ -95,7 +101,7 @@ namespace mms.Infrastructure.Context
                 .HasMany(x => x.ProgramsMentors);
 
             modelBuilder.Entity<MentorManager>()
-                .HasMany(x => x.Programmes).WithMany(y => y.MentorManagers);
+                .HasMany(x => x.Programs).WithMany(y => y.MentorManagers);
 
             modelBuilder.Entity<Report>()
                 .HasIndex(x => x.UserTaskId);
