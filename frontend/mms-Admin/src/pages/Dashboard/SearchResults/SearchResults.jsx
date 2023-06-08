@@ -3,6 +3,7 @@ import cx from "classnames";
 import styles from "./SearchResults.module.scss";
 
 import Pagination from "@/components/Pagination/Pagination";
+import BorderlessDropDownList from "@/components/BorderlessDropDownList/BorderlessDropDownList";
 import ResultListItem from "./ResultListItem/ResultListItem";
 import { ReactComponent as taskIcon } from "@/assets/icons/tasks-overview-card-icon.svg";
 import { ReactComponent as programIcon } from "@/assets/icons/google-filled-icon.svg";
@@ -12,6 +13,9 @@ import { ReactComponent as CalendarIcon } from "@/assets/icons/tasks-overview-ca
 import { ReactComponent as ClockIcon } from "@/assets/icons/clock-icon.svg";
 
 function SearchResults() {
+
+  const dropdownArray = ["All", "All"]; 
+  const [selected, setSelected] = useState("All");
   const searchResultsArray = [
     {
       id: 1,
@@ -97,6 +101,11 @@ function SearchResults() {
     }
   ];
 
+  const handleSelected = (itemSelected) => {
+    setSelected(itemSelected);
+    
+  }
+
   return (
     <div className={cx(styles.searchResultsContainer, "flexCol")}>
       <section className={cx(styles.heading)}>
@@ -104,7 +113,12 @@ function SearchResults() {
           <h3 className={cx(styles.title)}>Search results</h3>
         </div>
         <div className={cx(styles.controlsWrapper, "flexRow-space-between")}>
-          <div className={cx(styles.dropdownWrapper, "flexRow-left-centered")}>{/** Dropdown Component  */}</div>
+          <div className={cx(styles.dropdownWrapper, "flexRow-left-centered")}>
+            <BorderlessDropDownList
+              menu = {dropdownArray} 
+              selectedRecipient={selected}
+              setSelectedRecipient={handleSelected} />
+          </div>
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
             <Pagination />
           </div>

@@ -86,6 +86,11 @@ const MentorManagerDetailsTasks = lazy(() =>
 //Search Results
 const SearchResults = lazy(() => import("@/pages/Dashboard/SearchResults/SearchResults"));
 
+//Notifications
+const Notifications = lazy(() => 
+  import("@/pages/Dashboard/Notifications/Notifications")
+);
+
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
 const BroadcastMessage = lazy(() => import("@/pages/Dashboard/Messages/BroadcastMessage/BroadcastMessage"));
@@ -230,6 +235,7 @@ function RoutesComponent() {
             <Route path='edit-task/:id' element={<EditTask />} />
           </Route>
           <Route path='search-results' element={<SearchResults />} />
+          <Route path='notifications' element={<Notifications />} />
         </Route>
       </Routes>
     </BrowserRouter>
