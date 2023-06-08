@@ -47,23 +47,6 @@ namespace mms.Application.Report.Command
                   </body>
                   </html>
                   ";
-
-            var html = $@"
-                   <!DOCTYPE html>
-                   <html lang=""en"">
-                   <head>
-                       report.ReportTitle
-                   </head>
-                  <body>
-                  <h1>Major Achievements</h1>
-                  <p>report.Achievements.</p>
-                   h1>Major Blockers</h1>
-                  <p>report.Blocker.</p>
-                   <h1>Major Recommendations</h1>
-                  <p>report.Recommendations.</p>
-                  </body>
-                  </html>
-                  ";
             GlobalSettings globalSettings = new GlobalSettings();
             globalSettings.ColorMode = ColorMode.Color;
             globalSettings.Orientation = Orientation.Portrait;
