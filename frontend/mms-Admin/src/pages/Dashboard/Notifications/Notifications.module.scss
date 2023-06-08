@@ -1,4 +1,4 @@
-.searchResultsContainer {
+.NotificationsContainer {
   gap: 1rem;
   height: calc(100dvh - var(--topNavbarHeight));
   overflow: hidden;
@@ -21,6 +21,11 @@
     }
 
     .controlsWrapper {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+
       .dropdownWrapper {
         justify-content: flex-start;
         flex-wrap: nowrap;
@@ -33,6 +38,10 @@
         flex-wrap: nowrap;
         gap: 1rem;
         flex-direction: row;
+
+        button {
+          padding: 0.2rem;
+        }
       }
     }
   }
@@ -55,11 +64,16 @@
 }
 
 @media all and (min-width: 768px) {
-  .searchResultsContainer {
+  .NotificationsContainer {
     .heading {
       padding: 1rem 1rem 0 3rem;
       flex-wrap: nowrap;
       align-items: center;
+
+      .controlsWrapper {
+        justify-content: space-between;
+        align-items: center;
+      }
     }
 
     .body {
@@ -74,7 +88,7 @@
 }
 
 @media all and (min-width: 992px) {
-  .searchResultsContainer {
+  .NotificationsContainer {
     .heading {
       padding: 1rem 2rem 0 2rem;
     }
@@ -91,7 +105,7 @@
 }
 
 @media all and (min-width: 1200px) {
-  .searchResultsContainer {
+  .NotificationsContainer {
     .heading {
       padding: 1.5rem 2rem 0 2rem;
     }
