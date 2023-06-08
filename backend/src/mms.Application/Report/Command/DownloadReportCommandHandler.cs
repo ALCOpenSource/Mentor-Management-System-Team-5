@@ -30,27 +30,23 @@ namespace mms.Application.Report.Command
         {
 
             var report = await _context.Reports.Where(a => a.Id == request.Id).FirstOrDefaultAsync();
-            //if (report == null)
-            //{
-            //    return await Result<string>.FailAsync($"Report with Id {request.Id} does not exist");
-            //}
 
-            //var html = $@"
-            //       <!DOCTYPE html>
-            //       <html lang=""en"">
-            //       <head>
-            //           {report.ReportTitle}
-            //       </head>
-            //      <body>
-            //      <h1>Major Achievements</h1>
-            //      <p>{report.Achievements}.</p>
-            //       h1>Major Blockers</h1>
-            //      <p>{report.Blocker}.</p>
-            //       <h1>Major Recommendations</h1>
-            //      <p>{report.Recommendations}.</p>
-            //      </body>
-            //      </html>
-            //      ";
+            var html = $@"
+                   <!DOCTYPE html>
+                   <html lang=""en"">
+                   <head>
+                       {report.ReportTitle}
+                   </head>
+                  <body>
+                  <h1>Major Achievements</h1>
+                  <p>{report.Achievements}.</p>
+                   h1>Major Blockers</h1>
+                  <p>{report.Blocker}.</p>
+                   <h1>Major Recommendations</h1>
+                  <p>{report.Recommendations}.</p>
+                  </body>
+                  </html>
+                  ";
 
             var html = $@"
                    <!DOCTYPE html>

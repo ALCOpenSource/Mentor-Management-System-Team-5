@@ -26,7 +26,6 @@ builder.Logging.AddConsole();
 // Add services to the container.
 CustomAssemblyLoadContext context = new CustomAssemblyLoadContext();
 context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libraries/libwkhtmltox.dll"));
-var converter = new SynchronizedConverter(new PdfTools());
 builder.Services.AddSingleton(typeof(IConverter),
     new SynchronizedConverter(new PdfTools()));
 builder.Services.AddControllers();
