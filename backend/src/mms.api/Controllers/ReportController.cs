@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using mms.Application.Report.Command;
 using mms.Application.Report.Query;
-using Outlook = Microsoft.Office.Interop.Outlook;
-using Office = Microsoft.Office.Core;
-using MimeKit;
-using Org.BouncyCastle.Utilities;
-using System.Net.Mail;
 
 namespace mms.api.Controllers
 {
@@ -74,31 +69,7 @@ namespace mms.api.Controllers
             return File(result,"application/octet-stream", "report.pdf");
         }
 
-        [HttpGet("shareReport/{reportId}")]
-        public async Task  ShareReportViaEmail(string reportId)
-        {
-            var result = await Mediator.Send(new DownloadReportCommand { Id = reportId });
-            var file =  File(result, "application/octet-stream", "report.pdf");
-
-            Outlook.Application app = new Outlook.Application();
-            Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-            mailItem.BodyFormat = Microsoft.Office.Interop.Outlook.OlBodyFormat.olFormatHTML;
-
-            mailItem.GetInspector.Activate();
-            var signature = mailItem.HTMLBody;
-            mailItem.HTMLBody = signature;
-            mailItem.Subject = "Repost Summary";
-
-            MemoryStream ms = new MemoryStream(file.FileContents);
-            ms.Position = 0;
-
-
-
-            mailItem.Attachments.Add(new Attachment(new MemoryStream(result), "report.pdf"));
-            mailItem.Display(false);
-            mailItem.Display(true);
-        }
-
+      
         [HttpPost("report")]
         public async Task<IActionResult> CreateTask(CreateReportCommand command)
         {

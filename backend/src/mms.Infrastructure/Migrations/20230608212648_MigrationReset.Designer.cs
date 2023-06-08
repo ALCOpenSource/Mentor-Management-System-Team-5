@@ -11,8 +11,8 @@ using mms.Infrastructure.Context;
 namespace mms.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230602125953_ProgramEntityRename")]
-    partial class ProgramEntityRename
+    [Migration("20230608212648_MigrationReset")]
+    partial class MigrationReset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -429,6 +429,126 @@ namespace mms.Infrastructure.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("MentorManagers");
+                });
+
+            modelBuilder.Entity("mms.Domain.Entities.Message", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("MessageThreadId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MessageThreadId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("mms.Domain.Entities.MessageThread", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LastMessageId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("MessageThreadParticipantHash")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("PinnedMessageId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LastMessageId");
+
+                    b.HasIndex("MessageThreadParticipantHash")
+                        .IsUnique();
+
+                    b.HasIndex("PinnedMessageId");
+
+                    b.ToTable("MessageThreads");
+                });
+
+            modelBuilder.Entity("mms.Domain.Entities.MessageThreadParticipant", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsPinned")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("LastReadTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("MessageThreadId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime?>("PinnedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("MessageThreadId");
+
+                    b.ToTable("MessageThreadParticipants");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.Program", b =>
@@ -863,7 +983,6 @@ namespace mms.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ProgramId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("Status")
@@ -992,6 +1111,17 @@ namespace mms.Infrastructure.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("mms.Domain.Entities.MessageThreadParticipant", b =>
+                {
+                    b.HasOne("mms.Domain.Entities.MessageThread", "MessageThread")
+                        .WithMany()
+                        .HasForeignKey("MessageThreadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MessageThread");
+                });
+
             modelBuilder.Entity("mms.Domain.Entities.Program", b =>
                 {
                     b.HasOne("mms.Domain.Entities.AppUser", null)
@@ -1012,7 +1142,7 @@ namespace mms.Infrastructure.Migrations
                         .HasForeignKey("MentorManagerId");
 
                     b.HasOne("mms.Domain.Entities.Program", "Programme")
-                        .WithMany()
+                        .WithMany("Mentors")
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1049,9 +1179,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasOne("mms.Domain.Entities.Program", null)
                         .WithMany("UserTasks")
-                        .HasForeignKey("ProgramId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProgramId");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.AppUser", b =>
@@ -1068,6 +1196,8 @@ namespace mms.Infrastructure.Migrations
 
             modelBuilder.Entity("mms.Domain.Entities.Program", b =>
                 {
+                    b.Navigation("Mentors");
+
                     b.Navigation("Reports");
 
                     b.Navigation("UserTasks");

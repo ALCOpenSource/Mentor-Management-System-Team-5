@@ -7,10 +7,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace mms.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class MigrationReset : Migration
     {
         /// <inheritdoc />
-        /// 
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
@@ -169,12 +168,58 @@ namespace mms.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MessageThreadId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SenderId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Body = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "MessageThreads",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Subject = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastMessageId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PinnedMessageId = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    MessageThreadParticipantHash = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MessageThreads", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "ProgrammeApplications",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProgrammeId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    ProgramId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AppUserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -473,7 +518,7 @@ namespace mms.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Programmes",
+                name: "Programs",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
@@ -501,9 +546,9 @@ namespace mms.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Programmes", x => x.Id);
+                    table.PrimaryKey("PK_Programs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Programmes_AspNetUsers_AppUserId",
+                        name: "FK_Programs_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -511,27 +556,57 @@ namespace mms.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "MentorManagerProgramme",
+                name: "MessageThreadParticipants",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MessageThreadId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LastReadTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    AppUserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsPinned = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IsArchived = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    PinnedDate = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MessageThreadParticipants", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MessageThreadParticipants_MessageThreads_MessageThreadId",
+                        column: x => x.MessageThreadId,
+                        principalTable: "MessageThreads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "MentorManagerProgram",
                 columns: table => new
                 {
                     MentorManagersId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProgrammesId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    ProgramsId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MentorManagerProgramme", x => new { x.MentorManagersId, x.ProgrammesId });
+                    table.PrimaryKey("PK_MentorManagerProgram", x => new { x.MentorManagersId, x.ProgramsId });
                     table.ForeignKey(
-                        name: "FK_MentorManagerProgramme_MentorManagers_MentorManagersId",
+                        name: "FK_MentorManagerProgram_MentorManagers_MentorManagersId",
                         column: x => x.MentorManagersId,
                         principalTable: "MentorManagers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MentorManagerProgramme_Programmes_ProgrammesId",
-                        column: x => x.ProgrammesId,
-                        principalTable: "Programmes",
+                        name: "FK_MentorManagerProgram_Programs_ProgramsId",
+                        column: x => x.ProgramsId,
+                        principalTable: "Programs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -546,8 +621,6 @@ namespace mms.Infrastructure.Migrations
                     ProgramId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AppUserId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProgrammeId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MentorManagerId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -569,9 +642,9 @@ namespace mms.Infrastructure.Migrations
                         principalTable: "MentorManagers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProgramsMentors_Programmes_ProgrammeId",
-                        column: x => x.ProgrammeId,
-                        principalTable: "Programmes",
+                        name: "FK_ProgramsMentors_Programs_ProgramId",
+                        column: x => x.ProgramId,
+                        principalTable: "Programs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -591,11 +664,9 @@ namespace mms.Infrastructure.Migrations
                     CreatedBy = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    ProgramId = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     AppUserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProgrammeId = table.Column<string>(type: "varchar(255)", nullable: true)
+                    ProgramId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
@@ -609,9 +680,9 @@ namespace mms.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_UserTasks_Programmes_ProgrammeId",
-                        column: x => x.ProgrammeId,
-                        principalTable: "Programmes",
+                        name: "FK_UserTasks_Programs_ProgramId",
+                        column: x => x.ProgramId,
+                        principalTable: "Programs",
                         principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -693,8 +764,6 @@ namespace mms.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProgramId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ProgrammeId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
@@ -702,9 +771,9 @@ namespace mms.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Reports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reports_Programmes_ProgrammeId",
-                        column: x => x.ProgrammeId,
-                        principalTable: "Programmes",
+                        name: "FK_Reports_Programs_ProgramId",
+                        column: x => x.ProgramId,
+                        principalTable: "Programs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -764,9 +833,9 @@ namespace mms.Infrastructure.Migrations
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MentorManagerProgramme_ProgrammesId",
-                table: "MentorManagerProgramme",
-                column: "ProgrammesId");
+                name: "IX_MentorManagerProgram_ProgramsId",
+                table: "MentorManagerProgram",
+                column: "ProgramsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MentorManagers_AppUserId",
@@ -779,18 +848,54 @@ namespace mms.Infrastructure.Migrations
                 column: "UserTasksId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Messages_MessageThreadId",
+                table: "Messages",
+                column: "MessageThreadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderId",
+                table: "Messages",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageThreadParticipants_AppUserId",
+                table: "MessageThreadParticipants",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageThreadParticipants_MessageThreadId",
+                table: "MessageThreadParticipants",
+                column: "MessageThreadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageThreads_LastMessageId",
+                table: "MessageThreads",
+                column: "LastMessageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageThreads_MessageThreadParticipantHash",
+                table: "MessageThreads",
+                column: "MessageThreadParticipantHash",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageThreads_PinnedMessageId",
+                table: "MessageThreads",
+                column: "PinnedMessageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProgrammeApplications_AppUserId",
                 table: "ProgrammeApplications",
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgrammeApplications_ProgrammeId",
+                name: "IX_ProgrammeApplications_ProgramId",
                 table: "ProgrammeApplications",
-                column: "ProgrammeId");
+                column: "ProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Programmes_AppUserId",
-                table: "Programmes",
+                name: "IX_Programs_AppUserId",
+                table: "Programs",
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
@@ -809,11 +914,6 @@ namespace mms.Infrastructure.Migrations
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramsMentors_ProgrammeId",
-                table: "ProgramsMentors",
-                column: "ProgrammeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProgramsMentorUserTask_UserTasksId",
                 table: "ProgramsMentorUserTask",
                 column: "UserTasksId");
@@ -822,11 +922,6 @@ namespace mms.Infrastructure.Migrations
                 name: "IX_Reports_ProgramId",
                 table: "Reports",
                 column: "ProgramId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reports_ProgrammeId",
-                table: "Reports",
-                column: "ProgrammeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reports_UserTaskId",
@@ -854,9 +949,9 @@ namespace mms.Infrastructure.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserTasks_ProgrammeId",
+                name: "IX_UserTasks_ProgramId",
                 table: "UserTasks",
-                column: "ProgrammeId");
+                column: "ProgramId");
         }
 
         /// <inheritdoc />
@@ -887,10 +982,16 @@ namespace mms.Infrastructure.Migrations
                 name: "JobRoles");
 
             migrationBuilder.DropTable(
-                name: "MentorManagerProgramme");
+                name: "MentorManagerProgram");
 
             migrationBuilder.DropTable(
                 name: "MentorManagerUserTask");
+
+            migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
+                name: "MessageThreadParticipants");
 
             migrationBuilder.DropTable(
                 name: "ProgrammeApplications");
@@ -920,6 +1021,9 @@ namespace mms.Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "MessageThreads");
+
+            migrationBuilder.DropTable(
                 name: "ProgramsMentors");
 
             migrationBuilder.DropTable(
@@ -929,7 +1033,7 @@ namespace mms.Infrastructure.Migrations
                 name: "MentorManagers");
 
             migrationBuilder.DropTable(
-                name: "Programmes");
+                name: "Programs");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

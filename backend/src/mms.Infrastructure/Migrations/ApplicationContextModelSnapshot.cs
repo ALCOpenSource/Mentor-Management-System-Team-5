@@ -31,7 +31,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("ProgramsId");
 
-                    b.ToTable("MentorManagerProgram", (string)null);
+                    b.ToTable("MentorManagerProgram");
                 });
 
             modelBuilder.Entity("MentorManagerUserTask", b =>
@@ -46,7 +46,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("UserTasksId");
 
-                    b.ToTable("MentorManagerUserTask", (string)null);
+                    b.ToTable("MentorManagerUserTask");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -189,7 +189,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("UserTasksId");
 
-                    b.ToTable("ProgramsMentorUserTask", (string)null);
+                    b.ToTable("ProgramsMentorUserTask");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.AppUser", b =>
@@ -356,7 +356,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("Certificates", (string)null);
+                    b.ToTable("Certificates");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.FAQ", b =>
@@ -383,7 +383,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FAQs", (string)null);
+                    b.ToTable("FAQs");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.JobRole", b =>
@@ -403,7 +403,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobRoles", (string)null);
+                    b.ToTable("JobRoles");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.MentorManager", b =>
@@ -425,7 +425,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("MentorManagers", (string)null);
+                    b.ToTable("MentorManagers");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.Message", b =>
@@ -460,7 +460,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.MessageThread", b =>
@@ -502,7 +502,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("PinnedMessageId");
 
-                    b.ToTable("MessageThreads", (string)null);
+                    b.ToTable("MessageThreads");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.MessageThreadParticipant", b =>
@@ -545,10 +545,10 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("MessageThreadId");
 
-                    b.ToTable("MessageThreadParticipants", (string)null);
+                    b.ToTable("MessageThreadParticipants");
                 });
 
-            modelBuilder.Entity("mms.Domain.Entities.Programme", b =>
+            modelBuilder.Entity("mms.Domain.Entities.Program", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
@@ -602,7 +602,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Programs", (string)null);
+                    b.ToTable("Programs");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.ProgrammeApplication", b =>
@@ -641,7 +641,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgrammeApplications", (string)null);
+                    b.ToTable("ProgrammeApplications");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.ProgramsMentor", b =>
@@ -674,7 +674,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgramsMentors", (string)null);
+                    b.ToTable("ProgramsMentors");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.Report", b =>
@@ -729,7 +729,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("UserTaskId");
 
-                    b.ToTable("Reports", (string)null);
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.Support", b =>
@@ -765,7 +765,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Supports", (string)null);
+                    b.ToTable("Supports");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.TechStack", b =>
@@ -785,7 +785,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TechStacks", (string)null);
+                    b.ToTable("TechStacks");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.UserDetail", b =>
@@ -835,7 +835,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("UserDetails", (string)null);
+                    b.ToTable("UserDetails");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.UserNotification", b =>
@@ -917,7 +917,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("UserNotifications", (string)null);
+                    b.ToTable("UserNotifications");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.UserPrivacy", b =>
@@ -954,7 +954,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("UserPrivacy", (string)null);
+                    b.ToTable("UserPrivacy");
                 });
 
             modelBuilder.Entity("mms.Domain.Entities.UserTask", b =>
@@ -998,7 +998,7 @@ namespace mms.Infrastructure.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("UserTasks", (string)null);
+                    b.ToTable("UserTasks");
                 });
 
             modelBuilder.Entity("MentorManagerProgram", b =>
@@ -1119,7 +1119,7 @@ namespace mms.Infrastructure.Migrations
                     b.Navigation("MessageThread");
                 });
 
-            modelBuilder.Entity("mms.Domain.Entities.Programme", b =>
+            modelBuilder.Entity("mms.Domain.Entities.Program", b =>
                 {
                     b.HasOne("mms.Domain.Entities.AppUser", null)
                         .WithMany("Programs")
@@ -1139,7 +1139,7 @@ namespace mms.Infrastructure.Migrations
                         .HasForeignKey("MentorManagerId");
 
                     b.HasOne("mms.Domain.Entities.Program", "Programme")
-                        .WithMany()
+                        .WithMany("Mentors")
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1193,6 +1193,8 @@ namespace mms.Infrastructure.Migrations
 
             modelBuilder.Entity("mms.Domain.Entities.Program", b =>
                 {
+                    b.Navigation("Mentors");
+
                     b.Navigation("Reports");
 
                     b.Navigation("UserTasks");
