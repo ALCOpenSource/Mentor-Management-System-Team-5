@@ -26,6 +26,7 @@ const MentorManagerRequests = lazy(() =>
 );
 const MentorRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/MentorRequests/MentorRequests"));
 const ProgramRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ProgramRequests/ProgramRequests"));
+const RequestDetails = lazy(() => import("@/pages/Dashboard/ApprovalRequests/RequestDetails/RequestDetails"));
 
 // Certificates
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
@@ -83,8 +84,11 @@ const MentorManagerDetailsTasks = lazy(() =>
 );
 
 //Search Results
-const SearchResults = lazy(() => 
-  import("@/pages/Dashboard/SearchResults/SearchResults")
+const SearchResults = lazy(() => import("@/pages/Dashboard/SearchResults/SearchResults"));
+
+//Notifications
+const Notifications = lazy(() => 
+  import("@/pages/Dashboard/Notifications/Notifications")
 );
 
 // Messages
@@ -155,6 +159,7 @@ function RoutesComponent() {
               <Route path='mentor-manager-requests' element={<MentorManagerRequests />} />
               <Route path='mentor-requests' element={<MentorRequests />} />
               <Route path='program-requests' element={<ProgramRequests />} />
+              <Route path='request-details/:id' element={<RequestDetails />} />
             </Route>
           </Route>
           <Route path='certificates'>
@@ -230,6 +235,7 @@ function RoutesComponent() {
             <Route path='edit-task/:id' element={<EditTask />} />
           </Route>
           <Route path='search-results' element={<SearchResults />} />
+          <Route path='notifications' element={<Notifications />} />
         </Route>
       </Routes>
     </BrowserRouter>

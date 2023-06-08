@@ -172,8 +172,13 @@ function Mentors() {
                       </div>
                     </div>
                     <div className={cx(styles.tagsDiv, "flexRow")}>
-                      <h6>PROGRAM ASST.</h6>
-                      <h6>MENTOR-GADS</h6>
+                      {item.positionTags.map((tag, index) => {
+                        return (
+                          <h6 className={cx(styles.tag, "flexRow-fully-centered")} key={index}>
+                            {tag}
+                          </h6>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -199,39 +204,39 @@ function Mentors() {
                       </p>
 
                       <div className={cx(styles.infoDiv, "flexCol")}>
-                        <div className={cx(styles.info, "flexRow-fully-centered")}>
+                        <div className={cx(styles.info, "flexCol")}>
                           <h6 className={cx(styles.infoTitle)}>Technical Proficiency:</h6>
                           <h6 className={cx(styles.infoAnswer)}>Java Script, Django, Mysql, Android</h6>
                         </div>
-                        <div className={cx(styles.info, "flexRow-fully-centered")}>
+                        <div className={cx(styles.info, "flexCol")}>
                           <h6 className={cx(styles.infoTitle)}>Previous Programs:</h6>
                           <h6 className={cx(styles.infoAnswer)}>GADS 2022, Google I/O Extended 2021</h6>
                         </div>
-                        <div className={cx(styles.info, "flexRow-fully-centered")}>
+                        <div className={cx(styles.info, "flexCol")}>
                           <h6 className={cx(styles.infoTitle)}>Previous Roles Held:</h6>
                           <h6 className={cx(styles.infoAnswer)}>
                             Learner, Mentor, Program Assistant, Program Assistant Lead
                           </h6>
                         </div>
-                        <div className={cx(styles.info, "flexRow-fully-centered")}>
+                        <div className={cx(styles.info, "flexCol")}>
                           <h6 className={cx(styles.infoTitle)}>Availability to join a new program:</h6>
                           <h6 className={cx(styles.infoAnswer)}>Unavailable</h6>
                         </div>
-                        <div className={cx(styles.info, "flexRow-fully-centered")}>
+                        <div className={cx(styles.info, "flexCol")}>
                           <h6 className={cx(styles.infoTitle)}>Program of interest:</h6>
                           <h6 className={cx(styles.infoAnswer)}>Google Africa Scholarship Program</h6>
                         </div>
-                        <div className={cx(styles.info, "flexRow-fully-centered")}>
+                        <div className={cx(styles.info, "flexCol")}>
                           <h6 className={cx(styles.infoTitle)}>Been a Mentor Before?</h6>
                           <h6 className={cx(styles.infoAnswer)}>Yes</h6>
                         </div>
-                        <div className={cx(styles.info, "flexRow-fully-centered")}>
+                        <div className={cx(styles.info, "flexCol")}>
                           <h6 className={cx(styles.infoTitle)}>Years of Technical Experience:</h6>
                           <h6 className={cx(styles.infoAnswer)}>3years</h6>
                         </div>
                         <div className={cx(styles.documentDiv, "flexCol")}>
                           <h6 className={cx(styles.documentTitle)}>Documents</h6>
-                          <div className={cx(styles.documentDiv, "flexRow")}>
+                          <div className={cx(styles.documentDivInner, "flexRow")}>
                             <span>
                               <img src={paperIcon} alt='paper-icon' />
                               My resume.doc

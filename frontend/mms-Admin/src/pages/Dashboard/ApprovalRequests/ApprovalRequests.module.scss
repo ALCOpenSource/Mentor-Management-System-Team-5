@@ -236,6 +236,10 @@
 
         .titleAndToggler {
           flex-grow: 2;
+
+          .title {
+            font-size: 1.25rem;
+          }
         }
 
         button {

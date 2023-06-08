@@ -5,11 +5,17 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./ApprovalRequests.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import Button from "@/components/Button/Button";
-import certificateIcon from "@/assets/icons/certificate-thumbnail.svg";
 import certificateImage from "@/assets/images/certificate-full.png";
+import mentorIcon from "@/assets/icons/mentor-icon-circle.svg";
+import mentorManagerIcon from "@/assets/icons/mentor-manager-icon-circle.svg";
+import programIcon from "@/assets/icons/program-icon-circle.svg";
+import mentorImage from "@/assets/images/sample-profile-image.svg";
+import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
+import programImage from "@/assets/images/program-avatar.svg";
 import backIcon from "@/assets/icons/close-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import mentorManagerCardImage from "@/assets/icons/new-entries-icon.svg";
+import closeIcon from "@/assets/icons/close-icon.svg";
 import mentorCardImage from "@/assets/icons/blog-post-icon.svg";
 import programCardImage from "@/assets/icons/timeline-icon.svg";
 import RecentListItem from "./RecentListItem/RecentListItem";
@@ -27,6 +33,8 @@ function ApprovalRequests() {
   const [openSideBar, setOpenSideBar] = useState(false);
   const [outletTitle, setOutletTitle] = useState("Mentor Manager Requests");
   const [showAddUserButton, setShowAddUserButton] = useState(true);
+  const [showPagination, setShowPagination] = useState(true);
+  const [showCloseIcon, setShowCloseIcon] = useState(false);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -39,53 +47,66 @@ function ApprovalRequests() {
     if (currentSubPath === "program-requests") {
       setOutletTitle("Program Requests");
       setShowAddUserButton(false);
+      setShowCloseIcon(false);
     } else if (currentSubPath === "mentor-requests") {
       setOutletTitle("Mentor Requests");
       setShowAddUserButton(true);
+      setShowCloseIcon(false);
     } else if (currentSubPath === "request-details") {
       setOutletTitle("Details");
-      setShowAddUserButton(true);
+      setShowAddUserButton(false);
+      setShowCloseIcon(true);
+      setShowPagination(false);
     } else {
       setOutletTitle("Mentor Manager Requests");
       setShowAddUserButton(true);
+      setShowCloseIcon(false);
     }
   }, [currentSubPath]);
 
   const recentDataArray = [
-    // {
-    //   id: 1,
-    //   name: "Kabiru Ibrahim",
-    //   description: "Program Assistant, Andela, She/her",
-    //   icon: mentorManagerIcon,
-    //   previewImage: certificateImage
-    // },
-    // {
-    //   id: 2,
-    //   name: "Alison Davis",
-    //   description: "Program Assistant, Andela, She/her",
-    //   icon: mentorIcon,
-    //   previewImage: certificateImage
-    // },
-    // {
-    //   id: 3,
-    //   name: "Kabiru Ibrahim",
-    //   description: "Program Assistant, Andela, She/her",
-    //   icon: mentorIcon,
-    //   previewImage: certificateImage
-    // },
     {
-      id: 4,
+      id: 1,
+      name: "Kabiru Ibrahim",
+      description: "Program Assistant, Andela, She/her",
+      icon: mentorManagerIcon,
+      cardImage: mentorManagerImage,
+      previewImage: certificateImage,
+      type: "mentorManager"
+    },
+    {
+      id: 2,
       name: "Alison Davis",
       description: "Program Assistant, Andela, She/her",
-      icon: certificateIcon,
-      previewImage: certificateImage
+      icon: mentorIcon,
+      cardImage: mentorImage,
+      previewImage: certificateImage,
+      type: "mentor"
+    },
+    {
+      id: 3,
+      name: "Kabiru Ibrahim",
+      description: "Program Assistant, Andela, She/her",
+      icon: mentorIcon,
+      cardImage: mentorImage,
+      previewImage: certificateImage,
+      type: "mentor"
+    },
+    {
+      id: 4,
+      name: "Google Africa Developer Scholarship",
+      icon: programIcon,
+      cardImage: programImage,
+      count: 290,
+      type: "program"
     },
     {
       id: 5,
-      name: "Alison Davis",
-      description: "Program Assistant, Andela, She/her",
-      icon: certificateIcon,
-      previewImage: certificateImage
+      name: "Google Africa Developer Scholarship",
+      icon: programIcon,
+      cardImage: programImage,
+      count: 30,
+      type: "program"
     }
   ];
 
@@ -96,10 +117,12 @@ function ApprovalRequests() {
   };
 
   const handleRecentListClick = (item) => {
-    console.log(item, "data");
+    if (item?.type === "program") return;
+
     setShowAddUserButton(false);
+    setShowCloseIcon(true);
     setOutletTitle("Details");
-    // navigate(`/dashboard/certificates/certificate-details/${item.id}`);
+    navigate(`/dashboard/approval-requests/request-details/${item.id}`, { state: { data: item } });
   };
 
   const getSideBarData = () => {
@@ -235,11 +258,18 @@ function ApprovalRequests() {
               onClick={() => handleAddUser(outletTitle)}
             />
           )}
-          <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
-            <div className={cx(styles.paginationWrapper)}>
-              <Pagination />
+
+          {showPagination && (
+            <div className={cx(styles.paginationAndSearchDiv, "flexRow")}>
+              <div className={cx(styles.paginationWrapper)}>
+                <Pagination />
+              </div>
             </div>
-          </div>
+          )}
+
+          {showCloseIcon && (
+            <img src={closeIcon} alt='close-icon' onClick={() => navigate("/dashboard/approval-requests")} />
+          )}
         </section>
 
         <div className={cx(styles.content)}>
