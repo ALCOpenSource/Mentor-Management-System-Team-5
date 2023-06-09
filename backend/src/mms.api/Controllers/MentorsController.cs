@@ -51,7 +51,7 @@ namespace mms.api.Controllers
                                                     $"<p style=\"font-size: 16px; margin-bottom: 20px; line-height: 1.5;\"> Hi {email}, " +
                                                     $"<br /> You have received an invite to be added to Our network. " +
                                                     $"<br /> Please click the button below to Accept Invitation. </p>" +
-                                                    $"<a href={_ui.SignUpUrl} style=\"display: inline-block; padding: 10px 20px; margin-top: 20px; background-color: #3366cc; color: #ffffff; font-size: 16px; text-decoration: none; border-radius: 5px;\">Confirm Email</a>" +
+                                                    $"<a href={_ui.SignUpUrl} style=\"display: inline-block; padding: 10px 20px; margin-top: 20px; background-color: #058b94; color: #ffffff; font-size: 16px; text-decoration: none; border-radius: 5px;\">Register Now</a>" +
                                                     $" <p style=\"font-size: 16px; margin-bottom: 20px; line-height: 1.5;\"> If you did not make this request, please ignore this email and your account will remain inactive. </p>" +
                                                     $"<p style=\"font-size: 16px; line-height: 1.5;\">Thank you for using our service!</p>" +
                                                  $"</div>" +
