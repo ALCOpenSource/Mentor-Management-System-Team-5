@@ -6,8 +6,8 @@ namespace mms.Domain.Entities
     {
         public string AppUserId { get; set; }
         public virtual IList<ProgramsMentor> ProgramsMentors { get; set; }
-        public virtual IList<ProgramMentorManager> ProgramMentorManagers { get; set; }
+        public virtual IList<Program> Programs { get; set; }
         public AppUser AppUser { get; set; }
-        public  virtual IList<UserTaskMentorManager> UserTaskMentorManagers { get; set; }
+        public virtual IList<UserTask> UserTasks { get; set; }
     }
 }

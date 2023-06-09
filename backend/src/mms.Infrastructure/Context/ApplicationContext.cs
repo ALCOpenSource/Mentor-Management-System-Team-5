@@ -14,14 +14,11 @@ namespace mms.Infrastructure.Context
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<JobRole> JobRoles { get; set; }
         public DbSet<Program> Programs { get; set; }
-        public DbSet<ProgramMentorManager> ProgramMentorManagers { get; set; }
         public DbSet<ProgrammeApplication> ProgrammeApplications { get; set; }
         public DbSet<ProgramsMentor> ProgramsMentors { get; set; }
         public DbSet<MentorManager> MentorManagers { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<UserTask> UserTasks { get; set; }
-        public DbSet<UserTaskProgramsMentor> UserTaskProgramsMentors { get; set; }
-        public DbSet<UserTaskMentorManager> UserTaskMentorManagers { get; set; }
         public DbSet<TechStack> TechStacks { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
         public DbSet<UserNotification> UserNotifications { get; set; }
@@ -79,7 +76,7 @@ namespace mms.Infrastructure.Context
                 .HasMany(x => x.Reports);
 
             modelBuilder.Entity<Program>()
-                .HasMany(x => x.ProgramMentorManagers);
+                .HasMany(x => x.MentorManagers);
             modelBuilder.Entity<Program>()
               .HasMany(x => x.Mentors);
 
@@ -98,13 +95,13 @@ namespace mms.Infrastructure.Context
             modelBuilder.Entity<MentorManager>()
                 .HasIndex(x => x.AppUserId);
             modelBuilder.Entity<MentorManager>()
-                .HasMany(x => x.UserTaskMentorManagers);
+                .HasMany(x => x.UserTasks);
 
             modelBuilder.Entity<MentorManager>()
                 .HasMany(x => x.ProgramsMentors);
 
             modelBuilder.Entity<MentorManager>()
-                .HasMany(x => x.ProgramMentorManagers);
+                .HasMany(x => x.Programs).WithMany(y => y.MentorManagers);
 
             modelBuilder.Entity<Report>()
                 .HasIndex(x => x.UserTaskId);
@@ -116,55 +113,17 @@ namespace mms.Infrastructure.Context
                 .HasIndex(x => x.AppUserId);
 
             modelBuilder.Entity<UserTask>()
-                .HasMany(x => x.UserTaskMentorManagers);
+                .HasMany(x => x.MentorManagers)
+                .WithMany(x => x.UserTasks);
+
+            modelBuilder.Entity<UserTask>()
+                .HasMany(x => x.Mentors)
+                .WithMany(x => x.UserTasks);
 
             modelBuilder.Entity<UserTask>()
                 .HasMany(x => x.Reports)
                 .WithOne(x => x.UserTask)
                 .HasForeignKey(x => x.UserTaskId);
-
-            //Fixing Migration Problems
-            modelBuilder.Entity<UserTaskProgramsMentor>(entity => {
-                entity.HasKey(mp => new { mp.UserTaskId, mp.ProgramsMentorId });
-
-                entity.HasOne(mp => mp.UserTask)
-                      .WithMany(p => p.UserTaskProgramsMentors)
-                      .HasForeignKey(mp => mp.UserTaskId)
-                      .OnDelete(DeleteBehavior.Restrict); // Restrict or Cascade
-
-                entity.HasOne(mp => mp.ProgramsMentor)
-                      .WithMany(p => p.UserTaskProgramsMentors)
-                      .HasForeignKey(mp => mp.ProgramsMentorId)
-                      .OnDelete(DeleteBehavior.Restrict); // Restrict or Cascade
-            });
-
-            modelBuilder.Entity<UserTaskMentorManager>(entity => {
-                entity.HasKey(mp => new { mp.UserTaskId, mp.MentorManagerId });
-
-                entity.HasOne(mp => mp.UserTask)
-                      .WithMany(p => p.UserTaskMentorManagers)
-                      .HasForeignKey(mp => mp.UserTaskId)
-                      .OnDelete(DeleteBehavior.Restrict); // Restrict or Cascade
-
-                entity.HasOne(mp => mp.MentorManager)
-                      .WithMany(p => p.UserTaskMentorManagers)
-                      .HasForeignKey(mp => mp.MentorManagerId)
-                      .OnDelete(DeleteBehavior.Restrict); // Restrict or Cascade
-            });
-
-            modelBuilder.Entity<ProgramMentorManager>(entity => {
-                entity.HasKey(mp => new { mp.ProgramId, mp.MentorManagerId });
-
-                entity.HasOne(mp => mp.Program)
-                      .WithMany(p => p.ProgramMentorManagers)
-                      .HasForeignKey(mp => mp.ProgramId)
-                      .OnDelete(DeleteBehavior.Restrict); // Restrict or Cascade
-
-                entity.HasOne(mp => mp.MentorManager)
-                      .WithMany(p => p.ProgramMentorManagers)
-                      .HasForeignKey(mp => mp.MentorManagerId)
-                      .OnDelete(DeleteBehavior.Restrict); // Restrict or Cascade
-            });
 
             modelBuilder.Entity<UserNotification>()
                 .HasIndex(x => x.AppUserId);

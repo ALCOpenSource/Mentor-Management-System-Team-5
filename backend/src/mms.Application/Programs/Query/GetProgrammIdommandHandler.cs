@@ -23,7 +23,7 @@ namespace mms.Application.Programs.Query
         public async Task<IResult<GetProgrammeResponse>> Handle(GetprogramByIdCommand request,
             CancellationToken cancellationToken)
         {
-            var programmes = await _context.Programs.Where(x => x.Id == request.Id).Include(x => x.UserTasks).Include(y => y.ProgramMentorManagers).ThenInclude(x => x.MentorManager).Include(x => x.Reports).Include(x => x.Mentors).FirstOrDefaultAsync();
+            var programmes = await _context.Programs.Where(x => x.Id == request.Id).Include(x => x.UserTasks).Include(y => y.MentorManagers).Include(x => x.Reports).Include(x => x.Mentors).FirstOrDefaultAsync();
             if (programmes == null)
             {
                 return await Result<GetProgrammeResponse>.FailAsync($"No Programme with The Id {request.Id} Available");
