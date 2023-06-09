@@ -62,6 +62,20 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("reports/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetReportById(string id)
+        {
+            var result = await Mediator.Send(new GetReportByIdCommand { Id = id});
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpGet("downloadReport/{reportId}")]
         public async Task<IActionResult> GetDownloadPdf(string reportId)
         {

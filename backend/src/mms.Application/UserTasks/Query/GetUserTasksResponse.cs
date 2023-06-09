@@ -1,10 +1,4 @@
-﻿using mms.Domain.Entities;
-using mms.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using mms.Domain.Enums;
 
 namespace mms.Application.UserTasks.Query
 {

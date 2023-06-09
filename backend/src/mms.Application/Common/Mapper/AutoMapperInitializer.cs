@@ -48,6 +48,7 @@ namespace mms.Application.Common.Mapper
             CreateMap<UserTask, GetUserTasksResponse>().ReverseMap();
             CreateMap<UserTask, CreateTaskCommand>().ReverseMap();
             CreateMap<UserTask, PutUserTaskCommand>().ReverseMap();
+            CreateMap<UserTask, GetTaskByIdCommand>().ReverseMap();
 
             CreateMap<ProgrammeEntity, GetProgrammeResponse>().ReverseMap();
             CreateMap<ProgrammeEntity, CreateProgrammeCommand>().ReverseMap();

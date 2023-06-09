@@ -2,10 +2,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using mms.Application.UserPrivacy.Query;
-using mms.Application.UserTasks.Query;
 using mms.Infrastructure.Context;
-using mms.Infrastructure.Interface;
 
 namespace mms.Application.Programme.Query
 {
