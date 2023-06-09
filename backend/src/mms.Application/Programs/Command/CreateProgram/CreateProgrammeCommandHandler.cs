@@ -53,7 +53,7 @@ namespace mms.Application.Programs.Command.CreateProgram
             var mentorIds = request.Mentors.Select(mentorDto => mentorDto.ProgramsMentorId);
             var mentorManagerIds = request.Managers.Select(mangerDto => mangerDto.MentorManagerId);
             var mentors = await _context.ProgramsMentors.Where(m => mentorIds.Contains(m.Id)).ToListAsync();
-            var mentorManagers = await _context.MentorManagers.Where(mm => mentorManagerIds.Contains(mm.Id)).ToListAsync();
+            var mentorManagers = await _context.ProgramMentorManagers.Where(mm => mentorManagerIds.Contains(mm.MentorManagerId)).ToListAsync();
 
             if (mentors.Any())
             {
@@ -61,7 +61,7 @@ namespace mms.Application.Programs.Command.CreateProgram
             }
             if (mentorManagers.Any())
             {
-                programme.MentorManagers = mentorManagers;
+                programme.ProgramMentorManagers = mentorManagers;
             }
             await _context.Programs.AddAsync(programme);
             await _context.SaveChangesAsync(cancellationToken);

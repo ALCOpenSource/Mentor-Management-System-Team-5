@@ -33,16 +33,16 @@ namespace mms.Application.UserTasks.Command.CreateTask
             };
             var mentorIds = request.Mentors.Select(mentorDto => mentorDto.ProgramsMentorId);
             var mentorManagerIds = request.Managers.Select(mangerDto => mangerDto.MentorManagerId);
-            var mentors = await _context.ProgramsMentors.Where(m => mentorIds.Contains(m.Id)).ToListAsync();
-            var mentorManagers = await _context.MentorManagers.Where(mm => mentorManagerIds.Contains(mm.Id)).ToListAsync();
+            var mentors = await _context.UserTaskProgramsMentors.Where(m => mentorIds.Contains(m.ProgramsMentorId)).ToListAsync();
+            var mentorManagers = await _context.UserTaskMentorManagers.Where(mm => mentorManagerIds.Contains(mm.MentorManagerId)).ToListAsync();
 
             if(mentors.Any())
             {
-                task.Mentors = mentors;
+                task.UserTaskProgramsMentors = mentors;
             }
             if(mentorManagers.Any())
             {
-                task.MentorManagers = mentorManagers;
+                task.UserTaskMentorManagers = mentorManagers;
             }
 
             task.Id = Guid.NewGuid().ToString();

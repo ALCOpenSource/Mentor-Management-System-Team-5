@@ -22,7 +22,7 @@ namespace mms.Application.UserTasks.Command.UpdateTask
         {
 
             var program =
-                await _context.Programs.Include(x => x.MentorManagers).Include(y => y.Mentors).FirstOrDefaultAsync(x => x.Id.Equals(request.Id),
+                await _context.Programs.Include(x => x.ProgramMentorManagers).ThenInclude(t => t.MentorManager).Include(y => y.Mentors).FirstOrDefaultAsync(x => x.Id.Equals(request.Id),
                     cancellationToken);
             if (program == null)
             {
@@ -50,19 +50,19 @@ namespace mms.Application.UserTasks.Command.UpdateTask
 
             // Update the mentor managers
             var updatedMentorManagerIds = request.Managers.Select(mangerDto => mangerDto.MentorManagerId);
-            var existingMentorManagerIds = program.MentorManagers.Select(mm => mm.Id).ToList();
+            var existingMentorManagerIds = program.ProgramMentorManagers.Select(mm => mm.Id).ToList();
 
-            var mentorManagersToAdd = await _context.MentorManagers.Where(mm => updatedMentorManagerIds.Contains(mm.Id) && !existingMentorManagerIds.Contains(mm.Id)).ToListAsync();
-            var mentorManagersToRemove = program.MentorManagers.Where(mm => !updatedMentorManagerIds.Contains(mm.Id)).ToList();
+            var mentorManagersToAdd = await _context.ProgramMentorManagers.Where(mm => updatedMentorManagerIds.Contains(mm.MentorManagerId) && !existingMentorManagerIds.Contains(mm.MentorManagerId)).ToListAsync();
+            var mentorManagersToRemove = program.ProgramMentorManagers.Where(mm => !updatedMentorManagerIds.Contains(mm.MentorManagerId)).ToList();
 
             foreach (var mentorManagerToRemove in mentorManagersToRemove)
             {
-                program.MentorManagers.Remove(mentorManagerToRemove);
+                program.ProgramMentorManagers.Remove(mentorManagerToRemove);
             }
 
             foreach (var mentorManagerToAdd in mentorManagersToAdd)
             {
-                program.MentorManagers.Add(mentorManagerToAdd);
+                program.ProgramMentorManagers.Add(mentorManagerToAdd);
             }
 
             var entity = _mapper.Map(request, program);
