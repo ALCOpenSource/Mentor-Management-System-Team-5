@@ -26,6 +26,7 @@ using mms.Application.Programs.Query.ArchivedPrograms;
 using mms.Application.Common.DTOs.Mentors;
 using mms.Application.Programs.Command.CreateProgram;
 using mms.Application.Programs.Command.UpdateTask;
+using mms.Application.UserTasks.Command.DeleteTask;
 
 namespace mms.Application.Common.Mapper
 {
@@ -48,6 +49,8 @@ namespace mms.Application.Common.Mapper
             CreateMap<UserTask, GetUserTasksResponse>().ReverseMap();
             CreateMap<UserTask, CreateTaskCommand>().ReverseMap();
             CreateMap<UserTask, PutUserTaskCommand>().ReverseMap();
+            CreateMap<UserTask, GetTaskByIdCommand>().ReverseMap();
+            CreateMap<UserTask, DeleteTaskCommand>().ReverseMap();
 
             CreateMap<ProgrammeEntity, GetProgrammeResponse>().ReverseMap();
             CreateMap<ProgrammeEntity, CreateProgrammeCommand>().ReverseMap();

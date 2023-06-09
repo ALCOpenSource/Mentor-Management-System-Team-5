@@ -23,7 +23,7 @@ namespace mms.Application.UserTasks.Query
             CancellationToken cancellationToken)
         {
 
-            var usertasks =  await _context.UserTasks.OrderByDescending(x => x.DateCreated).ToListAsync();
+            var usertasks =  await _context.UserTasks.Include(x => x.MentorManagers).Include(d => d.Mentors).OrderByDescending(x => x.DateCreated).ToListAsync();
             if (usertasks == null)
             {
                 return await Result<List<GetUserTasksResponse>>.FailAsync("No User Tasks Available");

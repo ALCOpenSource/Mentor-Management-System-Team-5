@@ -4,6 +4,7 @@ using mms.Application.Programme.Query;
 using mms.Application.Programs.Command.CreateProgram;
 using mms.Application.Programs.Command.DeleteProgram;
 using mms.Application.Programs.Command.UpdateTask;
+using mms.Application.Programs.Query;
 using mms.Application.Programs.Query.ActivePrograms;
 using mms.Application.Programs.Query.ArchivedPrograms;
 using System.Net;
@@ -110,6 +111,21 @@ namespace mms.api.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("programs/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetReportById(string id)
+        {
+            var result = await Mediator.Send(new GetprogramByIdCommand { Id = id });
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
 
         [HttpPost("programs")]
         public async Task<IActionResult> CreateProgramme(CreateProgrammeCommand command)

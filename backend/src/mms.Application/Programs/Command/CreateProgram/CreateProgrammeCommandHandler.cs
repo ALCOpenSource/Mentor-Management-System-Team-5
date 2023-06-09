@@ -65,7 +65,7 @@ namespace mms.Application.Programs.Command.CreateProgram
             }
             await _context.Programs.AddAsync(programme);
             await _context.SaveChangesAsync(cancellationToken);
-            return await Result.SuccessAsync();
+            return await Result.SuccessAsync(programme.Id);
         }
     }
 }

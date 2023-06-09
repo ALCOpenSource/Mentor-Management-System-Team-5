@@ -1,12 +1,10 @@
 ﻿using AspNetCoreHero.Results;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using mms.Application.UserTasks.Command.CreateTask;
 using mms.Application.UserTasks.Command.DeleteTask;
 using mms.Application.UserTasks.Command.UpdateTask;
 using mms.Application.UserTasks.Query;
 using System.Net;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace mms.api.Controllers
 {
@@ -112,6 +110,19 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("tasks/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetTaskById(string id)
+        {
+            var result = await Mediator.Send(new GetTaskByIdCommand { Id = id });
+            if (!result.Succeeded)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
         [HttpPost("task")]
         public async Task<IActionResult> CreateTask(CreateTaskCommand command)
         {

@@ -46,6 +46,8 @@ namespace mms.Infrastructure.Context
                     case EntityState.Added:
                         item.Entity.CreatedAt = DateTime.UtcNow;
                         break;
+                    case EntityState.Deleted:
+                        break;
                     default:
                         throw new NotSupportedException();
                 }
@@ -68,9 +70,6 @@ namespace mms.Infrastructure.Context
             modelBuilder.Entity<Program>()
                  .Property(p => p.Criteria)
                  .HasColumnType("json");
-
-            modelBuilder.Entity<Program>()
-                .HasMany(x => x.UserTasks);
 
             modelBuilder.Entity<Program>()
                 .HasMany(x => x.Reports);
@@ -102,6 +101,10 @@ namespace mms.Infrastructure.Context
 
             modelBuilder.Entity<MentorManager>()
                 .HasMany(x => x.Programs).WithMany(y => y.MentorManagers);
+            modelBuilder.Entity<Report>()
+                .Property(m => m.UserTaskId).IsRequired(false); 
+            modelBuilder.Entity<Report>()
+                .Property(m => m.ProgramId).IsRequired(false);
 
             modelBuilder.Entity<Report>()
                 .HasIndex(x => x.UserTaskId);

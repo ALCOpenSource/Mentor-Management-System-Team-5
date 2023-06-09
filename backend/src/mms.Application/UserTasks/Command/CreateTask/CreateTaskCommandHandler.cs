@@ -2,16 +2,9 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using mms.Application.Support.Command;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
-using Org.BouncyCastle.Crypto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mms.Application.UserTasks.Command.CreateTask
 {
@@ -57,7 +50,7 @@ namespace mms.Application.UserTasks.Command.CreateTask
             task.CreatedBy = _currentUserService.AppUserId;
             await _context.UserTasks.AddAsync(task);
             await _context.SaveChangesAsync(cancellationToken);
-            return await Result<string>.SuccessAsync();
+            return await Result<string>.SuccessAsync(task.Id, "Task  Created Successfully");
         }
     }
 }
