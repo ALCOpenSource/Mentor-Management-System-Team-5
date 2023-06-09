@@ -1,4 +1,6 @@
-﻿namespace mms.Application.Programme.Query
+﻿using mms.Domain.Entities;
+
+namespace mms.Application.Programme.Query
 {
     public class GetProgrammeResponse
     {
@@ -15,5 +17,8 @@
         public DateTime? DateCompleted { get; set; }
         public DateTime? DateArchived { get; set; }
         public string Criteria { get; set; }
+        public IList<mms.Domain.Entities.Report> Reports { get; set; }
+        public IList<MentorManager> MentorManagers { get; set; }
+        public IList<ProgramsMentor> Mentors { get; set; }
     }
 }

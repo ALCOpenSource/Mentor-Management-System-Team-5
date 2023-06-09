@@ -20,7 +20,7 @@ namespace mms.Application.UserTasks.Query
         public async Task<IResult<GetUserTasksResponse>> Handle(GetTaskByIdCommand request, CancellationToken cancellationToken)
         {
 
-            var usertask = await _context.UserTasks.Where(t => t.Id == request.Id).Include(x => x.MentorManagers).Include(d => d.Mentors).FirstOrDefaultAsync();
+            var usertask = await _context.UserTasks.Where(t => t.Id == request.Id).Include(x => x.MentorManagers).Include(d => d.Mentors).Include(x => x.Reports).FirstOrDefaultAsync();
             if (usertask == null)
             {
                 return await Result<GetUserTasksResponse>.FailAsync("No User Task Available with the Id provided");

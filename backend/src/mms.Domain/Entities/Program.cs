@@ -17,7 +17,6 @@ namespace mms.Domain.Entities
         public DateTime? DateArchived { get; set; }
         [Column(TypeName = "json")]
         public string Criteria { get; set; }
-        public IList<UserTask> UserTasks { get; set; }
         public IList<Report> Reports { get; set; }
         public IList<MentorManager> MentorManagers { get; set; } 
         public IList<ProgramsMentor> Mentors { get; set; } 

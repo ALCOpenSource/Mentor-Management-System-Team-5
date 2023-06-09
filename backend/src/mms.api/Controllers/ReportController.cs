@@ -1,11 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.Results;
+using Microsoft.AspNetCore.Mvc;
 using mms.Application.Report.Command;
 using mms.Application.Report.Query;
+using System.Net;
 
 namespace mms.api.Controllers
 {
     public class ReportController : BaseController
     {
+        [HttpDelete("reports/{id}")]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<string>), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var result = await Mediator.Send(new DeleteReportCommand { Id = id });
+
+            if (result.Succeeded == false)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+
         [HttpGet("reports")]
         public async Task<IActionResult> GetReports()
         {
