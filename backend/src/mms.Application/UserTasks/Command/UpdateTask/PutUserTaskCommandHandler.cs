@@ -21,9 +21,6 @@ namespace mms.Application.UserTasks.Command.UpdateTask
 
         public async Task<IResult<string>> Handle(PutUserTaskCommand request, CancellationToken cancellationToken)
         {
-
-            try
-            {
                 var task =
               await _context.UserTasks.Include(x => x.MentorManagers).Include(y => y.Mentors).FirstOrDefaultAsync(x => x.Id.Equals(request.Id),
                   cancellationToken);
@@ -82,12 +79,8 @@ namespace mms.Application.UserTasks.Command.UpdateTask
                 _context.UserTasks.Update(entity);
                 await _context.SaveChangesAsync(cancellationToken);
                 return await Result<string>.SuccessAsync("Successful");
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            
+            
           
         }
     }
