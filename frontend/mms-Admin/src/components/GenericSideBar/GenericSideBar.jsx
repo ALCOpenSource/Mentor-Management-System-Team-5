@@ -3,8 +3,9 @@ import cx from "classnames";
 import PropTypes from "prop-types";
 import styles from "./GenericSideBar.module.scss";
 import useIsMobile from "@/hooks/useIsMobile";
+import Loader from "@/components/Loader/Loader";
 
-function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar }) {
+function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar, loading }) {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(true);
   const sidebarRef = useRef(null);
@@ -51,14 +52,22 @@ function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar }) {
       }}
     >
       {data?.headerComponent && <div className={cx(styles.genericSideBarHeader)}>{data?.headerComponent}</div>}
-      <ul>
-        {Array.isArray(data?.listItems) &&
-          data?.listItems.map((item, index) => (
-            <li key={index} onClick={() => handleMenuClick(item?.id)}>
-              {item?.component}
-            </li>
-          ))}
-      </ul>
+      {loading ? (
+        <Loader />
+      ) : Array.isArray(data?.listItems) && data?.listItems.length > 0 ? (
+        <ul>
+          {Array.isArray(data?.listItems) &&
+            data?.listItems.map((item, index) => (
+              <li key={index} onClick={() => handleMenuClick(item?.id)}>
+                {item?.component}
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <div className={cx(styles.noDataDiv, "flexRow-fully-centered")}>
+          <h6 className={cx(styles.noDataText)}>No data available</h6>
+        </div>
+      )}
     </div>
   );
 }
@@ -66,7 +75,8 @@ function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar }) {
 GenericSideBar.propTypes = {
   data: PropTypes.object,
   selectedMenuItem: PropTypes.func,
-  closeGenericSideBar: PropTypes.func
+  closeGenericSideBar: PropTypes.func,
+  loading: PropTypes.bool
 };
 
 export default GenericSideBar;

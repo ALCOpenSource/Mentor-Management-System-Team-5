@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import calendarIcon from "@/assets/icons/tasks-overview-calendar-icon.svg";
 import cardIcon from "@/assets/icons/tasks-overview-card-icon.svg";
 import { formatDistanceToNow } from "date-fns";
+import { capitalizeFirstWord } from "@/helpers/textTransform";
 
 function TaskListItem({ data }) {
   const { id } = useParams();
@@ -19,7 +20,8 @@ function TaskListItem({ data }) {
           <div className={cx(styles.metaData, "flexRow")}>
             <img className={cx(styles.dateIcon)} src={calendarIcon} alt='calendar-icon' />
             <span className={cx(styles.date)}>
-              {formatDistanceToNow(new Date(data?.createdAt), { addSuffix: true })}
+              {data?.createdAt &&
+                capitalizeFirstWord(formatDistanceToNow(new Date(data?.createdAt), { addSuffix: true }))}
             </span>
           </div>
         </div>

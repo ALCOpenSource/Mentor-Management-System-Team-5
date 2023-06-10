@@ -87,9 +87,7 @@ const MentorManagerDetailsTasks = lazy(() =>
 const SearchResults = lazy(() => import("@/pages/Dashboard/SearchResults/SearchResults"));
 
 //Notifications
-const Notifications = lazy(() => 
-  import("@/pages/Dashboard/Notifications/Notifications")
-);
+const Notifications = lazy(() => import("@/pages/Dashboard/Notifications/Notifications"));
 
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
