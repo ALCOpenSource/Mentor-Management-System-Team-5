@@ -166,31 +166,20 @@ const EditTask = () => {
   useEffect(() => {
     reset({
       title: taskDetails?.title,
-      description: taskDetails?.description,
-      mentors: taskDetails?.mentors,
-      managers: taskDetails?.managers
+      description: taskDetails?.description
     });
   }, [reset, taskDetails]);
 
   const handleEditTask = async (data) => {
     console.log(data);
     let payload = {
-      ...data,
-      managers: [
-        {
-          mentorManagerId: "1"
-        }
-      ],
-      mentors: [
-        {
-          programMentorId: "1"
-        }
-      ]
+      ...data
     };
 
-    const response = await dispatch(editTask(payload));
-    console.log(response, "response");
-
+    // const response = await dispatch(editTask(payload));
+    // console.log(response, "response");
+    // if (response.success) {
+    reset();
     dispatch(
       showModal({
         name: "successNotification",
@@ -201,6 +190,7 @@ const EditTask = () => {
         }
       })
     );
+    // }
   };
 
   const handleOpenSideBar = (e, open, category) => {
