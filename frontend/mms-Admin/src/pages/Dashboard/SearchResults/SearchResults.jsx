@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import cx from "classnames";
 import styles from "./SearchResults.module.scss";
 
@@ -13,8 +13,7 @@ import { ReactComponent as CalendarIcon } from "@/assets/icons/tasks-overview-ca
 import { ReactComponent as ClockIcon } from "@/assets/icons/clock-icon.svg";
 
 function SearchResults() {
-
-  const dropdownArray = ["All", "All"]; 
+  const dropdownArray = ["All", "All"];
   const [selected, setSelected] = useState("All");
   const searchResultsArray = [
     {
@@ -103,8 +102,7 @@ function SearchResults() {
 
   const handleSelected = (itemSelected) => {
     setSelected(itemSelected);
-    
-  }
+  };
 
   return (
     <div className={cx(styles.searchResultsContainer, "flexCol")}>
@@ -115,9 +113,10 @@ function SearchResults() {
         <div className={cx(styles.controlsWrapper, "flexRow-space-between")}>
           <div className={cx(styles.dropdownWrapper, "flexRow-left-centered")}>
             <BorderlessDropDownList
-              menu = {dropdownArray} 
+              menu={dropdownArray}
               selectedRecipient={selected}
-              setSelectedRecipient={handleSelected} />
+              setSelectedRecipient={handleSelected}
+            />
           </div>
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
             <Pagination />

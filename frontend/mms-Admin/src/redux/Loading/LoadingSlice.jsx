@@ -38,6 +38,7 @@ const initialState = {
   getMonthlyTasksLoading: false,
   getYearlyTasksLoading: false,
   createTaskLoading: false,
+  getTaskDetailsLoading: false,
 
   //Programs
   deleteProgramLoading: false,
@@ -160,6 +161,9 @@ export const loadingSlice = createSlice({
     createTaskLoading: (state, action) => {
       state.createTaskLoading = action.payload;
     },
+    getTaskDetailsLoading: (state, action) => {
+      state.getTaskDetailsLoading = action.payload;
+    },
 
     //Programs
     deleteProgramLoading: (state, action) => {
@@ -242,6 +246,7 @@ export const {
   getMonthlyTasksLoading,
   getYearlyTasksLoading,
   createTaskLoading,
+  getTaskDetailsLoading,
   deleteProgramLoading,
   editProgramLoading,
   getAllProgramsLoading,

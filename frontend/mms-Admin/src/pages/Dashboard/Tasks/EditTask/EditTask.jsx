@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./EditTask.module.scss";
@@ -11,16 +11,21 @@ import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
-import { showModal } from "@/redux/Modal/ModalSlice";
-import successImage from "@/assets/images/create-task-success-image.svg";
+// import { showModal } from "@/redux/Modal/ModalSlice";
+// import successImage from "@/assets/images/create-task-success-image.svg";
 import { useForm, Controller } from "react-hook-form";
 import { editTaskSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
+import { getTaskDetails, editTask } from "@/redux/Tasks/TasksSlice";
+import { useParams } from "react-router-dom";
 
 const EditTask = () => {
+  const params = useParams();
+  const taskId = params.id;
+
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
@@ -31,6 +36,12 @@ const EditTask = () => {
   const dispatch = useDispatch();
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+  const taskDetails = useSelector((state) => state.tasks.getTaskDetailsData);
+  console.log(taskDetails, "task details");
+
+  useEffect(() => {
+    dispatch(getTaskDetails(taskId));
+  }, [dispatch, taskId]);
 
   const mentorsArray = [
     {
@@ -145,28 +156,50 @@ const EditTask = () => {
 
   const resolver = yupResolver(editTaskSchema);
 
-  const defaultValues = {
-    title: "",
-    details: ""
-  };
-
   const {
     handleSubmit,
     formState: { errors },
-    control
-  } = useForm({ defaultValues, resolver, mode: "all" });
+    control,
+    reset
+  } = useForm({ resolver, mode: "all" });
 
-  const sendMessage = (data) => {
+  useEffect(() => {
+    reset({
+      title: taskDetails?.title,
+      description: taskDetails?.description,
+      mentors: taskDetails?.mentors,
+      managers: taskDetails?.managers
+    });
+  }, [reset, taskDetails]);
+
+  const handleEditTask = async (data) => {
     console.log(data);
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Task updated successfully",
-          image: successImage
+    let payload = {
+      ...data,
+      managers: [
+        {
+          mentorManagerId: "1"
         }
-      })
-    );
+      ],
+      mentors: [
+        {
+          programMentorId: "1"
+        }
+      ]
+    };
+
+    const response = await dispatch(editTask(payload));
+    console.log(response, "response");
+
+    // dispatch(
+    //   showModal({
+    //     name: "successNotification",
+    //     modalData: {
+    //       title: "Task updated successfully",
+    //       image: successImage
+    //     }
+    //   })
+    // );
   };
 
   const handleOpenSideBar = (e, open, category) => {
@@ -246,7 +279,7 @@ const EditTask = () => {
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
-          <form onSubmit={handleSubmit((data) => sendMessage(data))}>
+          <form onSubmit={handleSubmit((data) => handleEditTask(data))}>
             <label htmlFor='title'>Title</label>
             <Controller
               name='title'
@@ -261,16 +294,16 @@ const EditTask = () => {
               )}
             />
 
-            <label htmlFor='details'>Details</label>
+            <label htmlFor='description'>Details</label>
             <Controller
-              name='details'
+              name='description'
               control={control}
               render={({ field }) => (
                 <TextArea
                   {...field}
-                  placeholder={"Enter task details"}
+                  placeholder={"Enter task description"}
                   minHeight='150px'
-                  error={errors?.details && errors?.details?.message}
+                  error={errors?.description && errors?.description?.message}
                 />
               )}
             />
@@ -301,7 +334,7 @@ const EditTask = () => {
 
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
-                onClick={handleSubmit((data) => sendMessage(data))}
+                onClick={handleSubmit((data) => handleEditTask(data))}
                 // loading={loading}
                 // disabled={loading}
                 title='Update Task'
