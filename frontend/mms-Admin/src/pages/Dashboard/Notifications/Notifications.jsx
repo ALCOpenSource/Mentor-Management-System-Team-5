@@ -6,17 +6,13 @@ import Pagination from "@/components/Pagination/Pagination";
 import BorderlessDropDownList from "@/components/BorderlessDropDownList/BorderlessDropDownList";
 import NotificationsListItem from "./NotificationsListItem/NotificationsListItem";
 import Button from "@/components/Button/Button";
-import {ReactComponent as CheckmarkIcon} from "@/assets/icons/checkmark-circled.svg";
+import { ReactComponent as CheckmarkIcon } from "@/assets/icons/checkmark-circled.svg";
 import Lex from "@/assets/images/lex.svg";
 import Peculiar from "@/assets/images/peculiar.svg";
 import Baba from "@/assets/images/baba.svg";
 
-
-
-
-
 function Notifications() {
-  const dropdownArray = ["All", "All"]; 
+  const dropdownArray = ["All", "All"];
   const [selected, setSelected] = useState("All");
   const [notificationsArray, setNotificationsArray] = useState([
     {
@@ -26,7 +22,7 @@ function Notifications() {
       avatar: Lex,
       date: "Today at 5:42pm",
       certificate_owner: "Roseline Anapuna",
-      status: true
+      status: false
     },
     {
       id: 2,
@@ -47,17 +43,15 @@ function Notifications() {
       status: false
     }
   ]);
- 
 
   const handleSelected = (itemSelected) => {
     setSelected(itemSelected);
-
-  }
+  };
 
   const handleMarkAllAsRead = () => {
     const updatedNotifications = notificationsArray.map((notification) => ({
       ...notification,
-      status: true,
+      status: true
     }));
 
     setNotificationsArray(updatedNotifications);
@@ -71,25 +65,29 @@ function Notifications() {
         </div>
         <div className={cx(styles.controlsWrapper, "flexRow-space-between")}>
           <div className={cx(styles.dropdownWrapper, "flexRow-left-centered")}>
-            <BorderlessDropDownList 
-              menu = {dropdownArray} 
+            <BorderlessDropDownList
+              menu={dropdownArray}
               selectedRecipient={selected}
               setSelectedRecipient={handleSelected}
             />
           </div>
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
-            <Button onClick={handleMarkAllAsRead} title='Mark all as read' type='secondary' size='small' suffixIcon={<CheckmarkIcon />}  />
+            <Button
+              onClick={handleMarkAllAsRead}
+              title='Mark all as read'
+              type='secondary'
+              size='small'
+              suffixIcon={<CheckmarkIcon />}
+            />
             <Pagination />
-          </div>     
+          </div>
         </div>
       </section>
       <section className={cx(styles.body, "flexRow")}>
         <div className={cx(styles.content, "flexCol")}>
-        {notificationsArray.map((item, index) => {
-              return (
-                <NotificationsListItem key={index} data={item} setItemStatus={setNotificationsArray} /> 
-              );
-            })}
+          {notificationsArray.map((item, index) => {
+            return <NotificationsListItem key={index} data={item} setItemStatus={setNotificationsArray} />;
+          })}
         </div>
       </section>
     </div>
