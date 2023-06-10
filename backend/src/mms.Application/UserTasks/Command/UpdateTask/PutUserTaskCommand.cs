@@ -1,13 +1,7 @@
 ﻿using AspNetCoreHero.Results;
 using MediatR;
 using mms.Application.Common.DTOs.Mentors;
-using mms.Domain.Entities;
 using mms.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mms.Application.UserTasks.Command.UpdateTask
 {

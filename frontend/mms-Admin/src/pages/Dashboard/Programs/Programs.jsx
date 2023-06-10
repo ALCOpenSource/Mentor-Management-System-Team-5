@@ -219,48 +219,47 @@ function Programs() {
   };
 
   return (
-
     <div className={cx(styles.programsContainer, "flexRow")}>
-    {openSideBar && (
-      <div className={cx(styles.sidebarWrapper)}>
-        <GenericSideBar
-          data={getMenuItems()}
-          selectedMenuItem={handleSelectedMenuItem}
-          closeGenericSideBar={() => setOpenSideBar(false)}
-        />
-      </div>
-    )}
-
-    <section className={cx(styles.mainBody, "flexCol")}>
-      <section className={cx(styles.heading, "flexRow-space-between")}>
-        <div className={cx(styles.titleAndToggler, "flexRow")}>
-          <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
-            <img
-              className={cx(styles.toggler)}
-              src={subMenuIcon}
-              alt='toggler'
-              onClick={() => setOpenSideBar(!openSideBar)}
-            />
-            <small className={cx(styles.togglerText)}>MENU</small>
-          </div>
-          <h3 className={cx(styles.title)}>Programs</h3>
+      {openSideBar && (
+        <div className={cx(styles.sidebarWrapper)}>
+          <GenericSideBar
+            data={getMenuItems()}
+            selectedMenuItem={handleSelectedMenuItem}
+            closeGenericSideBar={() => setOpenSideBar(false)}
+          />
         </div>
-        <Button title='Create New Program' onClick={() => navigate("create-program")} />
-      </section>
+      )}
 
-      <div className={cx(styles.content)}>
-        {selectedMenuId ? (
-          <Outlet />
-        ) : (
-          <div className={cx(styles.emptySelectionDiv, "flexCol-fully-centered")}>
-            <img src={emptySelectionIcon} alt='empty-selection-icon' />
-            <p>No item selected yet </p>
-            <p>Select an item from the list to view program details</p>
+      <section className={cx(styles.mainBody, "flexCol")}>
+        <section className={cx(styles.heading, "flexRow-space-between")}>
+          <div className={cx(styles.titleAndToggler, "flexRow")}>
+            <div className={cx(styles.togglerDiv, "flexCol-fully-centered")}>
+              <img
+                className={cx(styles.toggler)}
+                src={subMenuIcon}
+                alt='toggler'
+                onClick={() => setOpenSideBar(!openSideBar)}
+              />
+              <small className={cx(styles.togglerText)}>MENU</small>
+            </div>
+            <h3 className={cx(styles.title)}>Programs</h3>
           </div>
-        )}
-      </div>
-    </section>
-  </div>
+          <Button title='Create New Program' onClick={() => navigate("create-program")} />
+        </section>
+
+        <div className={cx(styles.content)}>
+          {selectedMenuId ? (
+            <Outlet />
+          ) : (
+            <div className={cx(styles.emptySelectionDiv, "flexCol-fully-centered")}>
+              <img src={emptySelectionIcon} alt='empty-selection-icon' />
+              <p>No item selected yet </p>
+              <p>Select an item from the list to view program details</p>
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
     // <div className={cx(styles.programsContainer, "flexCol")}>
     //   <section className={cx(styles.heading, "flexRow-space-between")}>
     //     <div className={cx(styles.titleAndToggler, "flexRow")}>

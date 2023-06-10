@@ -1,10 +1,6 @@
 ﻿using mms.Domain.Entities;
 using mms.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace mms.Application.UserTasks.Query
 {
@@ -17,7 +13,9 @@ namespace mms.Application.UserTasks.Query
         public DateTime DateCreated { get; set; }
         public string CreatedBy { get; set; }
         public UserTaskStatus Status { get; set; }
-        public string ProgramId { get; set; }
+        public virtual IList<ProgramsMentor> Mentors { get; set; }
+        public virtual IList<MentorManager> MentorManagers { get; set; }
+        public virtual IList<Domain.Entities.Report> Reports { get; set; }
 
     }
 }

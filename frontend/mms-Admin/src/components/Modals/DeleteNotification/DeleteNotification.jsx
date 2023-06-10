@@ -11,14 +11,17 @@ import successImage from "@/assets/images/task-delete-success.png";
 import Button from "@/components/Button/Button";
 
 import { hideModal } from "@/redux/Modal/ModalSlice";
+import { useNavigate } from "react-router-dom";
 
 function DeleteNotification({ show, size, modalName }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const modalData = useSelector((state) => state.modal.modalData);
 
   const handleClick = () => {
     dispatch(hideModal({ name: "taskDeleteNotification" }));
+    modalData?.redirectUrl && navigate(modalData?.redirectUrl);
   };
 
   return (
@@ -34,7 +37,7 @@ function DeleteNotification({ show, size, modalName }) {
 
         <div className={cx(styles.modalFooter)}>
           <div className={cx(styles.btnDiv, "flexRow-fully-centered")}>
-            <Button onClick={handleClick} title='Undo' type='secondary' />
+            {/* <Button onClick={handleClick} title='Undo' type='secondary' /> */}
             <Button onClick={handleClick} title='Done' />
           </div>
         </div>
