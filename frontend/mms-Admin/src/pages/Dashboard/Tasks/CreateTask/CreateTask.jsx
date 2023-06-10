@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { useForm, Controller } from "react-hook-form";
@@ -19,6 +19,8 @@ import { createTaskSchema } from "@/helpers/validation";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
+import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
+import { createTask } from "@/redux/Tasks/TasksSlice";
 
 function CreateTask() {
   const [openSideBar, setOpenSideBar] = useState({
@@ -31,6 +33,13 @@ function CreateTask() {
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+  const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
+
+  console.log(allMentorsData, "all mentors data");
+
+  useEffect(() => {
+    dispatch(getAllMentors());
+  }, [dispatch]);
 
   const mentorsArray = [
     {
@@ -147,7 +156,7 @@ function CreateTask() {
 
   const defaultValues = {
     title: "",
-    details: ""
+    description: ""
   };
 
   const {
@@ -156,17 +165,34 @@ function CreateTask() {
     control
   } = useForm({ defaultValues, resolver, mode: "all" });
 
-  const sendMessage = (data) => {
+  const handleCreateTask = async (data) => {
     console.log(data);
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Task created successfully",
-          image: successImage
+    let payload = {
+      ...data,
+      status: 3,
+      managers: [
+        {
+          mentorManagerId: "2"
         }
-      })
-    );
+      ],
+      mentors: [
+        {
+          programMentorId: "2"
+        }
+      ]
+    };
+    const response = await dispatch(createTask(payload));
+    console.log(response, "response");
+
+    // dispatch(
+    //   showModal({
+    //     name: "successNotification",
+    //     modalData: {
+    //       title: "Task created successfully",
+    //       image: successImage
+    //     }
+    //   })
+    // );
   };
 
   const handleOpenSideBar = (e, open, category) => {
@@ -246,7 +272,7 @@ function CreateTask() {
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
-          <form onSubmit={handleSubmit((data) => sendMessage(data))}>
+          <form onSubmit={handleSubmit((data) => handleCreateTask(data))}>
             <label htmlFor='title'>Title</label>
             <Controller
               name='title'
@@ -261,16 +287,16 @@ function CreateTask() {
               )}
             />
 
-            <label htmlFor='details'>Details</label>
+            <label htmlFor='description'>Details</label>
             <Controller
-              name='details'
+              name='description'
               control={control}
               render={({ field }) => (
                 <TextArea
                   {...field}
-                  placeholder='Enter task details'
+                  placeholder='Enter task description'
                   minHeight='150px'
-                  error={errors?.details && errors?.details?.message}
+                  error={errors?.description && errors?.description?.message}
                 />
               )}
             />
@@ -301,7 +327,7 @@ function CreateTask() {
 
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
-                onClick={handleSubmit((data) => sendMessage(data))}
+                onClick={handleSubmit((data) => handleCreateTask(data))}
                 // loading={loading}
                 // disabled={loading}
                 title='Create Task'

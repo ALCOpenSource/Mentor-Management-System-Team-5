@@ -52,11 +52,12 @@ function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar }) {
     >
       {data?.headerComponent && <div className={cx(styles.genericSideBarHeader)}>{data?.headerComponent}</div>}
       <ul>
-        {data?.listItems.map((item, index) => (
-          <li key={index} onClick={() => handleMenuClick(item?.id)}>
-            {item?.component}
-          </li>
-        ))}
+        {Array.isArray(data?.listItems) &&
+          data?.listItems.map((item, index) => (
+            <li key={index} onClick={() => handleMenuClick(item?.id)}>
+              {item?.component}
+            </li>
+          ))}
       </ul>
     </div>
   );

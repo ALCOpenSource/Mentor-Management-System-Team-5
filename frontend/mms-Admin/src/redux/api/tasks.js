@@ -35,3 +35,7 @@ export const getYearlyTasksApi = async (data) => {
 export const createTaskApi = async (data) => {
   return await axios.post("/UserTask/task", data);
 };
+
+export const getTaskDetailsApi = async (data) => {
+  return await axios.get(`/UserTask/tasks/${data}`, data);
+};

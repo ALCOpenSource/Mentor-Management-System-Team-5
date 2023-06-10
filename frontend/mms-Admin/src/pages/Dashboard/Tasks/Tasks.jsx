@@ -13,12 +13,23 @@ import TaskListItem from "./TaskListItem/TaskListItem";
 import useIsMobile from "@/hooks/useIsMobile";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
+import { getAllTasks } from "@/redux/Tasks/TasksSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 function Tasks() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const params = useParams();
   const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
   const [openSideBar, setOpenSideBar] = useState(false);
+
+  const allTasksData = useSelector((state) => state.tasks.getAllTasksData);
+  console.log(allTasksData, "allTasksData");
+
+  useEffect(() => {
+    dispatch(getAllTasks());
+  }, [dispatch]);
 
   useEffect(() => {
     isMobile ? setOpenSideBar(false) : setOpenSideBar(true);
@@ -195,12 +206,14 @@ function Tasks() {
   };
 
   const getSideBarData = () => {
-    let listItems = menuItemsArray.map((item, index) => {
-      return {
-        component: <TaskListItem key={index} data={item} />,
-        id: item.id
-      };
-    });
+    let listItems =
+      Array.isArray(allTasksData) &&
+      allTasksData.map((item, index) => {
+        return {
+          component: <TaskListItem key={index} data={item} />,
+          id: item.id
+        };
+      });
 
     const headerComponent = (
       <div className={cx(styles.sideBarHeader, "flexRow-align-center")}>

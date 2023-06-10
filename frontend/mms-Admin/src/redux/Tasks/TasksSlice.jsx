@@ -9,7 +9,8 @@ import {
   getWeeklyTasksApi,
   getMonthlyTasksApi,
   getYearlyTasksApi,
-  createTaskApi
+  createTaskApi,
+  getTaskDetailsApi
 } from "../api/tasks";
 
 import {
@@ -21,7 +22,8 @@ import {
   getWeeklyTasksLoading,
   getMonthlyTasksLoading,
   getYearlyTasksLoading,
-  createTaskLoading
+  createTaskLoading,
+  getTaskDetailsLoading
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
@@ -34,7 +36,8 @@ const initialState = {
   getWeeklyTasksData: {},
   getMonthlyTasksData: {},
   getYearlyTasksData: {},
-  createTaskData: {}
+  createTaskData: {},
+  getTaskDetailsData: {}
 };
 
 export const tasksSlice = createSlice({
@@ -81,6 +84,10 @@ export const tasksSlice = createSlice({
 
     createTaskAction: (state, action) => {
       state.createTaskData = action.payload;
+    },
+
+    getTaskDetailsAction: (state, action) => {
+      state.getTaskDetailsData = action.payload;
     }
   }
 });
@@ -97,7 +104,8 @@ const {
   getWeeklyTasksAction,
   getMonthlyTasksAction,
   getYearlyTasksAction,
-  createTaskAction
+  createTaskAction,
+  getTaskDetailsAction
 } = tasksSlice.actions;
 
 export const deleteTask = (data) => async (dispatch) => {
@@ -227,10 +235,10 @@ export const getYearlyTasks = () => async (dispatch) => {
   }
 };
 
-export const createTask = () => async (dispatch) => {
+export const createTask = (data) => async (dispatch) => {
   dispatch(createTaskLoading(true));
   try {
-    const response = await createTaskApi();
+    const response = await createTaskApi(data);
     dispatch(createTaskLoading(false));
     dispatch(createTaskAction(response?.data?.data));
     return { success: true };
@@ -238,6 +246,21 @@ export const createTask = () => async (dispatch) => {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(createTaskLoading(false));
+    return { success: false };
+  }
+};
+
+export const getTaskDetails = (data) => async (dispatch) => {
+  dispatch(getTaskDetailsLoading(true));
+  try {
+    const response = await getTaskDetailsApi(data);
+    dispatch(getTaskDetailsLoading(false));
+    dispatch(getTaskDetailsAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(getTaskDetailsLoading(false));
     return { success: false };
   }
 };
