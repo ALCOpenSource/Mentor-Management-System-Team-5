@@ -11,25 +11,30 @@ import closeIcon from "@/assets/icons/undo-icon.svg";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
-import Filter from "@/components/Filter/Filter";
+// import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
-// import { showModal } from "@/redux/Modal/ModalSlice";
-// import successImage from "@/assets/images/create-task-success-image.svg";
+import { showModal } from "@/redux/Modal/ModalSlice";
+import successImage from "@/assets/images/create-task-success-image.svg";
 import { createTaskSchema } from "@/helpers/validation";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
 import { createTask } from "@/redux/Tasks/TasksSlice";
+import closeIconAlt from "@/assets/icons/close-icon.svg";
+import { useNavigate } from "react-router-dom";
 
 function CreateTask() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
   });
   const [collapseInput, setCollapseInput] = useState(true);
-  const [closeSelectElement, setCloseSelectElement] = useState(false);
-  const dispatch = useDispatch();
+  // const [closeSelectElement, setCloseSelectElement] = useState(false);
+  const [selectedMentorManagers, setSelectedMentorManagers] = useState([]);
+  const [selectedMentors, setSelectedMentors] = useState([]);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -43,70 +48,70 @@ function CreateTask() {
 
   const mentorsArray = [
     {
-      id: 1,
+      id: "1",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 2,
+      id: "2",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 3,
+      id: "3",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 4,
+      id: "4",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 5,
+      id: "5",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 6,
+      id: "6",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 7,
+      id: "7",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 8,
+      id: "8",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 9,
+      id: "9",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 10,
+      id: "10",
       name: "Kabiru Omo Isaka",
       designation: "Program Assistant, Andela, He/Him",
       image: mentorImage,
@@ -116,35 +121,35 @@ function CreateTask() {
 
   const mentorManagersArray = [
     {
-      id: 1,
+      id: "91",
       name: "Alice Davies",
       designation: "Program Assistant, Andela, Her/She",
       image: mentorManagerImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 2,
+      id: "92",
       name: "Alice Davies",
       designation: "Program Assistant, Andela, Her/She",
       image: mentorManagerImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 3,
+      id: "93",
       name: "Alice Davies",
       designation: "Program Assistant, Andela, Her/She",
       image: mentorManagerImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 4,
+      id: "94",
       name: "Alice Davies",
       designation: "Program Assistant, Andela, Her/She",
       image: mentorManagerImage,
       positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
     },
     {
-      id: 5,
+      id: "95",
       name: "Alice Davies",
       designation: "Program Assistant, Andela, Her/She",
       image: mentorManagerImage,
@@ -162,37 +167,41 @@ function CreateTask() {
   const {
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   const handleCreateTask = async (data) => {
     console.log(data);
+    let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
+      return { mentorManagerId: id };
+    });
+    let formattedMentorIds = selectedMentors.map((id) => {
+      return { programsMentorId: id };
+    });
+
     let payload = {
       ...data,
       status: 3,
-      managers: [
-        {
-          mentorManagerId: "2"
-        }
-      ],
-      mentors: [
-        {
-          programMentorId: "2"
-        }
-      ]
+      managers: formattedMentorManagerIds,
+      mentors: formattedMentorIds
     };
     const response = await dispatch(createTask(payload));
-    console.log(response, "response");
 
-    // dispatch(
-    //   showModal({
-    //     name: "successNotification",
-    //     modalData: {
-    //       title: "Task created successfully",
-    //       image: successImage
-    //     }
-    //   })
-    // );
+    if (response?.success) {
+      reset();
+      setSelectedMentorManagers([]);
+      setSelectedMentors([]);
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Task created successfully",
+            image: successImage
+          }
+        })
+      );
+    }
   };
 
   const handleOpenSideBar = (e, open, category) => {
@@ -204,40 +213,50 @@ function CreateTask() {
     console.log(e.target.value);
   };
 
-  const handleSelectedFilterItem = (item) => {
-    console.log(item);
-  };
+  // const handleSelectedFilterItem = (item) => {
+  //   console.log(item);
+  // };
 
-  const handleCloseSearchInput = (e) => {
-    console.log(e, "handle close input");
-    setCollapseInput(true);
-  };
+  // const handleCloseSearchInput = (e) => {
+  //   console.log(e, "handle close input");
+  //   setCollapseInput(true);
+  // };
 
-  const handleCloseSelectElement = (e) => {
-    console.log(e, "handle close select");
-    setCloseSelectElement(true);
-  };
+  // const handleCloseSelectElement = (e) => {
+  //   console.log(e, "handle close select");
+  //   setCloseSelectElement(true);
+  // };
 
-  const getListComponents = (data) => {
-    const listItems = data.map((item, index) => {
+  const getListComponents = (data, selectedUsers) => {
+    const listItems = data.map((item) => {
       return {
-        component: <PersonelComponent key={index} data={item} />,
+        component: (
+          <PersonelComponent
+            key={item?.id}
+            data={item}
+            checked={selectedUsers.find((userId) => userId === item?.id)}
+            handleChecked={handleSelectedItem}
+          />
+        ),
         id: item.id
       };
     });
 
     const headerComponent = (
       <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
+        <h6 className={cx(styles.title)}>
+          {openSideBar?.category === "mentor-manager" ? "Add Mentor Manager(s)" : "Add Mentor(s)"}
+        </h6>
         <div className={cx(styles.searchWrapper)}>
           <Search
             inputPlaceholder='Search for mentor...'
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}
-            closeSelectElement={handleCloseSelectElement}
+            // closeSelectElement={handleCloseSelectElement}
           />
         </div>
-        <Filter
+        {/* <Filter
           dropdownItems={[
             { name: "All", id: 1 },
             { name: "Mentors", id: 2 },
@@ -247,7 +266,7 @@ function CreateTask() {
           closeSearchInput={handleCloseSearchInput}
           closeSelectElement={closeSelectElement}
           setCloseSelectElement={setCloseSelectElement}
-        />
+        /> */}
         <img
           src={closeIcon}
           className={cx(styles.closeIcon)}
@@ -260,15 +279,41 @@ function CreateTask() {
     return { listItems, headerComponent };
   };
 
-  const handleSelectedItem = (item) => {
-    console.log(item);
+  const handleSelectedItem = (itemId) => {
+    console.log(itemId, "item id");
+    console.log(selectedMentorManagers, "selected mentor managers");
+    if (openSideBar.category === "mentor-manager") {
+      if (selectedMentorManagers.find((userId) => userId === itemId)) {
+        let filteredMentorManagers = selectedMentorManagers.filter((id) => id !== itemId);
+        setSelectedMentorManagers(filteredMentorManagers);
+      } else {
+        setSelectedMentorManagers([...selectedMentorManagers, `${itemId}`]);
+      }
+    }
+    if (openSideBar.category === "mentor") {
+      if (selectedMentors.find((userId) => userId === itemId)) {
+        let filteredMentors = selectedMentors.filter((id) => id !== itemId);
+        setSelectedMentors(filteredMentors);
+      } else {
+        setSelectedMentors([...selectedMentors, `${itemId}`]);
+      }
+    }
+  };
+
+  const handleClearList = (category) => {
+    if (category === "mentorManager") {
+      setSelectedMentorManagers([]);
+    } else if (category === "mentor") {
+      setSelectedMentors([]);
+    }
   };
 
   return (
     <div className={cx(styles.createTaskContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
-        <div className={cx(styles.heading, "flexRow")}>
+        <div className={cx(styles.heading, "flexRow-space-between")}>
           <h3 className={cx(styles.title)}>New Task</h3>
+          <img onClick={() => navigate("/dashboard/tasks")} src={closeIconAlt} alt='close-icon' />
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
@@ -306,8 +351,8 @@ function CreateTask() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor Manager</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>10 selected</span>
-                    <ClearListIcon />
+                    <span className={cx(styles.stats)}>{selectedMentorManagers.length} selected</span>
+                    <ClearListIcon onClick={() => handleClearList("mentorManager")} />
                   </div>
                 </div>
                 <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor-manager")} />
@@ -317,8 +362,8 @@ function CreateTask() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>5 selected</span>
-                    <ClearListIcon />
+                    <span className={cx(styles.stats)}>{selectedMentors.length} selected</span>
+                    <ClearListIcon onClick={() => handleClearList("mentor")} />
                   </div>
                 </div>
                 <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor")} />
@@ -340,11 +385,17 @@ function CreateTask() {
 
       {openSideBar.open && openSideBar.category === "mentor-manager" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorManagersArray)} />
+          <SelectionSideBar
+            // selectedMenuItem={handleSelectedItem}
+            data={getListComponents(mentorManagersArray, selectedMentorManagers)}
+          />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
+          <SelectionSideBar
+            // selectedMenuItem={handleSelectedItem}
+            data={getListComponents(mentorsArray, selectedMentors)}
+          />
         </div>
       ) : null}
 

@@ -12,26 +12,6 @@ function SelectionSideBar({ data, selectedMenuItem, activeClassName }) {
   const currentId = params?.id;
   console.log(currentId);
 
-  // const handleClickOutside = (event) => {
-  //     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-  //         setOpen(false);
-  //     }
-  // };
-
-  // useEffect(() => {
-  //     if (isMobile && open) {
-  //         document.body.style.overflow = "hidden";
-  //         document.addEventListener("mousedown", handleClickOutside);
-  //     } else {
-  //         document.body.style.overflow = "auto";
-  //         document.removeEventListener("mousedown", handleClickOutside);
-  //     }
-
-  //     return () => {
-  //         document.removeEventListener("mousedown", handleClickOutside);
-  //     };
-  // }, [isMobile, open]);
-
   const sidebarWidth = isMobile ? "100%" : "300px";
 
   const handleMenuClick = (itemId) => {
@@ -54,7 +34,7 @@ function SelectionSideBar({ data, selectedMenuItem, activeClassName }) {
         {data.listItems.map((item, index) => (
           <li
             key={index}
-            onClick={() => handleMenuClick(item.id)}
+            onClick={() => handleMenuClick(item?.id)}
             className={currentId === item.id.toString() ? activeClassName : ""}
           >
             {item?.component}
