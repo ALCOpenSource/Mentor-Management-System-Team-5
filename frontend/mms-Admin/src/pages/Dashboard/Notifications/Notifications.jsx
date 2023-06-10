@@ -22,7 +22,7 @@ function Notifications() {
       avatar: Lex,
       date: "Today at 5:42pm",
       certificate_owner: "Roseline Anapuna",
-      status: true
+      status: false
     },
     {
       id: 2,
