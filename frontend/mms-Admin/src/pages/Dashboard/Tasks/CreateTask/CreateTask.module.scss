@@ -14,12 +14,17 @@
     .heading {
       position: sticky;
       top: 0;
+      align-items: center;
 
       .title {
         margin: 0;
         font-family: var(--semiBold);
         color: var(--blackTextColor);
         font-size: 1.5rem;
+      }
+
+      img {
+        cursor: pointer;
       }
     }
 

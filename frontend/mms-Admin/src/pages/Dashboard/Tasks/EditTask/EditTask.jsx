@@ -11,8 +11,8 @@ import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
-// import { showModal } from "@/redux/Modal/ModalSlice";
-// import successImage from "@/assets/images/create-task-success-image.svg";
+import { showModal } from "@/redux/Modal/ModalSlice";
+import successImage from "@/assets/images/create-task-success-image.svg";
 import { useForm, Controller } from "react-hook-form";
 import { editTaskSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -191,15 +191,16 @@ const EditTask = () => {
     const response = await dispatch(editTask(payload));
     console.log(response, "response");
 
-    // dispatch(
-    //   showModal({
-    //     name: "successNotification",
-    //     modalData: {
-    //       title: "Task updated successfully",
-    //       image: successImage
-    //     }
-    //   })
-    // );
+    dispatch(
+      showModal({
+        name: "successNotification",
+        modalData: {
+          title: "Task updated successfully",
+          image: successImage,
+          redirectUrl: "/dashboard/tasks"
+        }
+      })
+    );
   };
 
   const handleOpenSideBar = (e, open, category) => {

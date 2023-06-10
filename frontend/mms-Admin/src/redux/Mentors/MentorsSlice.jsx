@@ -58,8 +58,7 @@ export const getAllMentors = (data) => async (dispatch) => {
     dispatch(getAllMentorsAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    console.log("here");
-    toast.error(e?.response?.data?.message);
+    // toast.error(e?.response?.data?.message);
     dispatch(getAllMentorsLoading(false));
     dispatch(hasError(e?.response?.data));
     return { success: false };
