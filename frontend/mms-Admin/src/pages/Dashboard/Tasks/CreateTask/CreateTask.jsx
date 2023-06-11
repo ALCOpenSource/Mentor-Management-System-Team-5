@@ -11,7 +11,6 @@ import closeIcon from "@/assets/icons/undo-icon.svg";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
-// import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
@@ -20,6 +19,7 @@ import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/Persone
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
+// import getAllMentorManagers from "@/redux/MentorManagers/MentorManagersSlice";
 import { createTask } from "@/redux/Tasks/TasksSlice";
 import closeIconAlt from "@/assets/icons/close-icon.svg";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,6 @@ function CreateTask() {
     category: ""
   });
   const [collapseInput, setCollapseInput] = useState(true);
-  // const [closeSelectElement, setCloseSelectElement] = useState(false);
   const [selectedMentorManagers, setSelectedMentorManagers] = useState([]);
   const [selectedMentors, setSelectedMentors] = useState([]);
 
@@ -253,20 +252,9 @@ function CreateTask() {
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}
-            // closeSelectElement={handleCloseSelectElement}
           />
         </div>
-        {/* <Filter
-          dropdownItems={[
-            { name: "All", id: 1 },
-            { name: "Mentors", id: 2 },
-            { name: "Mentor Managers", id: 3 }
-          ]}
-          selectedFilterItem={handleSelectedFilterItem}
-          closeSearchInput={handleCloseSearchInput}
-          closeSelectElement={closeSelectElement}
-          setCloseSelectElement={setCloseSelectElement}
-        /> */}
+
         <img
           src={closeIcon}
           className={cx(styles.closeIcon)}
