@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./TaskDetails.module.scss";
@@ -15,12 +15,18 @@ import { showModal } from "@/redux/Modal/ModalSlice";
 import { getTaskDetails, deleteTask, getAllTasks } from "@/redux/Tasks/TasksSlice";
 import { formatDistanceToNow } from "date-fns";
 import { capitalizeFirstWord } from "@/helpers/textTransform";
+import arrayToString from "@/helpers/arrayToString";
 
 function TaskDetails() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const taskId = params.id;
+
+  const [toggleBody, setToggleBody] = useState({
+    index: null,
+    open: false
+  });
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
@@ -36,18 +42,21 @@ function TaskDetails() {
     {
       icon: mentorManagersIcon,
       value: taskDetails?.mentorManagers?.length,
-      caption: "Mentor Managers assigned to this task"
+      caption: "Mentor Managers assigned to this task",
+      data: taskDetails?.mentorManagers.map((item) => item?.name)
     },
     {
       icon: mentorsIcon,
       value: taskDetails?.mentors?.length,
-      caption: "Mentors assigned to this task"
+      caption: "Mentors assigned to this task",
+      data: taskDetails?.mentors.map((item) => item?.name)
     },
     {
       icon: reportIcon,
       value: taskDetails?.reports?.length,
       caption: "Task / Reports",
-      count: taskDetails?.reports?.length
+      count: taskDetails?.reports?.length,
+      data: taskDetails?.reports.map((item) => item?.name)
     }
   ];
 
@@ -65,6 +74,20 @@ function TaskDetails() {
         })
       );
       dispatch(getAllTasks());
+    }
+  };
+
+  const handleToggleBody = (index) => {
+    if (toggleBody.index === index) {
+      setToggleBody({
+        index: null,
+        open: false
+      });
+    } else {
+      setToggleBody({
+        index: index,
+        open: true
+      });
     }
   };
 
@@ -94,21 +117,32 @@ function TaskDetails() {
 
             {summaryDivData.map((item, index) => {
               return (
-                <div className={cx(styles.summaryDiv, "flexRow")} key={index}>
-                  <div className={cx(styles.iconDiv, "flexRow")}>
-                    <img src={item.icon} alt='icon' />
-                  </div>
-                  <div className={cx(styles.summary, "flexRow")}>
-                    <span className={cx(styles.summaryValue)}>{item.value}</span>
-                    <span className={cx(styles.caption)}>{item.caption}</span>
-                    {item?.caption.toLowerCase().includes("report") && (
-                      <div>
-                        <span className={cx(styles.count)}>{item.count}</span>
-                      </div>
-                    )}
-                  </div>
+                <div className={cx(styles.summaryDiv, "flexCol")} key={index}>
+                  <div className={cx(styles.heading, "flexRow")}>
+                    <div className={cx(styles.iconDiv, "flexRow")}>
+                      <img src={item.icon} alt='icon' />
+                    </div>
+                    <div className={cx(styles.summary, "flexRow")}>
+                      <span className={cx(styles.summaryValue)}>{item.value}</span>
+                      <span className={cx(styles.caption)}>{item.caption}</span>
+                      {item?.caption.toLowerCase().includes("report") && (
+                        <div>
+                          <span className={cx(styles.count)}>{item.count}</span>
+                        </div>
+                      )}
+                    </div>
 
-                  <Button title='View' size='small' />
+                    <Button title='View' size='small' onClick={() => handleToggleBody(index)} />
+                  </div>
+                  {toggleBody.open && toggleBody.index === index && (
+                    <div className={cx(styles.body, "flexCol")}>
+                      {Array.isArray(item.data) && item.data.length > 0 ? (
+                        <div>{arrayToString(item?.data)}</div>
+                      ) : (
+                        <div>No Data Found</div>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
