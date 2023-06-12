@@ -43,20 +43,20 @@ function TaskDetails() {
       icon: mentorManagersIcon,
       value: taskDetails?.mentorManagers?.length,
       caption: "Mentor Managers assigned to this task",
-      data: taskDetails?.mentorManagers.map((item) => item?.name)
+      data: Array.isArray(taskDetails.mentorManagers) && taskDetails?.mentorManagers.map((item) => item?.name)
     },
     {
       icon: mentorsIcon,
       value: taskDetails?.mentors?.length,
       caption: "Mentors assigned to this task",
-      data: taskDetails?.mentors.map((item) => item?.name)
+      data: Array.isArray(taskDetails.mentors) && taskDetails?.mentors.map((item) => item?.name)
     },
     {
       icon: reportIcon,
       value: taskDetails?.reports?.length,
       caption: "Task / Reports",
       count: taskDetails?.reports?.length,
-      data: taskDetails?.reports.map((item) => item?.name)
+      data: Array.isArray(taskDetails.reports) && taskDetails?.reports.map((item) => item?.name)
     }
   ];
 

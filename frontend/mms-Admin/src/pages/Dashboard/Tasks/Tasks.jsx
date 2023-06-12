@@ -132,6 +132,7 @@ function Tasks() {
 
   const handleSelectedFilterItem = (value) => {
     setFilterValue(value);
+    navigate("/dashboard/tasks");
     value === "All"
       ? dispatch(getAllTasks())
       : value === "Completed"
