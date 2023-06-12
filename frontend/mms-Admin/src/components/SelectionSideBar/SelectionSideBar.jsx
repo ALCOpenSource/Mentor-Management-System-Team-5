@@ -10,7 +10,6 @@ function SelectionSideBar({ data, selectedMenuItem, activeClassName }) {
   const sidebarRef = useRef(null);
   const params = useParams();
   const currentId = params?.id;
-  console.log(currentId);
 
   const sidebarWidth = isMobile ? "100%" : "300px";
 

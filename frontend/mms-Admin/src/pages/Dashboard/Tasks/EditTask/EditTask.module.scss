@@ -12,11 +12,18 @@
     padding-right: 0.5rem;
 
     .heading {
+      align-items: flex-end;
+
       .title {
         margin: 0;
         font-family: var(--semiBold);
         color: var(--blackTextColor);
         font-size: 1.5rem;
+        line-height: 1rem;
+      }
+
+      img {
+        cursor: pointer;
       }
     }
 
@@ -89,6 +96,13 @@
       gap: 1rem;
       min-height: 3rem;
 
+      .title {
+        font-family: var(--semiBold);
+        font-size: 1rem;
+        color: var(--black2TextColor);
+        margin: 0;
+      }
+
       .searchWrapper {
         flex-grow: 1;
       }
@@ -123,6 +137,7 @@
   .editTaskContainer {
     .mainSection {
       gap: 2.5rem;
+      padding-top: 0.875rem;
 
       .formWrapper {
         form {

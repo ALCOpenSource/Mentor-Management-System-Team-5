@@ -19,7 +19,7 @@ import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/Persone
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
-// import getAllMentorManagers from "@/redux/MentorManagers/MentorManagersSlice";
+import { getAllMentorManagers } from "@/redux/MentorManagers/MentorManagersSlice";
 import { createTask } from "@/redux/Tasks/TasksSlice";
 import closeIconAlt from "@/assets/icons/close-icon.svg";
 import { useNavigate } from "react-router-dom";
@@ -38,11 +38,15 @@ function CreateTask() {
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
   const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
+  const allMentorManagersData = useSelector((state) => state.mentorManagers.getAllMentorManagersData);
+  const createTaskLoading = useSelector((state) => state.loading.createTaskLoading);
 
+  console.log(allMentorManagersData, "all mentor managers data");
   console.log(allMentorsData, "all mentors data");
 
   useEffect(() => {
     dispatch(getAllMentors());
+    dispatch(getAllMentorManagers());
   }, [dispatch]);
 
   const mentorsArray = [
@@ -171,7 +175,6 @@ function CreateTask() {
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   const handleCreateTask = async (data) => {
-    console.log(data);
     let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
       return { mentorManagerId: id };
     });
@@ -212,20 +215,6 @@ function CreateTask() {
     console.log(e.target.value);
   };
 
-  // const handleSelectedFilterItem = (item) => {
-  //   console.log(item);
-  // };
-
-  // const handleCloseSearchInput = (e) => {
-  //   console.log(e, "handle close input");
-  //   setCollapseInput(true);
-  // };
-
-  // const handleCloseSelectElement = (e) => {
-  //   console.log(e, "handle close select");
-  //   setCloseSelectElement(true);
-  // };
-
   const getListComponents = (data, selectedUsers) => {
     const listItems = data.map((item) => {
       return {
@@ -233,7 +222,7 @@ function CreateTask() {
           <PersonelComponent
             key={item?.id}
             data={item}
-            checked={selectedUsers.find((userId) => userId === item?.id)}
+            checked={selectedUsers.some((userId) => userId === item?.id)}
             handleChecked={handleSelectedItem}
           />
         ),
@@ -243,12 +232,14 @@ function CreateTask() {
 
     const headerComponent = (
       <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
-        <h6 className={cx(styles.title)}>
-          {openSideBar?.category === "mentor-manager" ? "Add Mentor Manager(s)" : "Add Mentor(s)"}
-        </h6>
+        {collapseInput && (
+          <h6 className={cx(styles.title)}>
+            {openSideBar?.category === "mentor-manager" ? "Add Mentor Manager(s)" : "Add Mentor(s)"}
+          </h6>
+        )}
         <div className={cx(styles.searchWrapper)}>
           <Search
-            inputPlaceholder='Search for mentor...'
+            inputPlaceholder={openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"}
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}
@@ -268,8 +259,6 @@ function CreateTask() {
   };
 
   const handleSelectedItem = (itemId) => {
-    console.log(itemId, "item id");
-    console.log(selectedMentorManagers, "selected mentor managers");
     if (openSideBar.category === "mentor-manager") {
       if (selectedMentorManagers.find((userId) => userId === itemId)) {
         let filteredMentorManagers = selectedMentorManagers.filter((id) => id !== itemId);
@@ -286,6 +275,10 @@ function CreateTask() {
         setSelectedMentors([...selectedMentors, `${itemId}`]);
       }
     }
+  };
+
+  const handleSideBarMenuClick = () => {
+    // This is added to remove the warning of unused function in the selection sidebar component
   };
 
   const handleClearList = (category) => {
@@ -361,8 +354,8 @@ function CreateTask() {
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
                 onClick={handleSubmit((data) => handleCreateTask(data))}
-                // loading={loading}
-                // disabled={loading}
+                loading={createTaskLoading}
+                disabled={createTaskLoading}
                 title='Create Task'
                 type='primary'
               />
@@ -374,14 +367,14 @@ function CreateTask() {
       {openSideBar.open && openSideBar.category === "mentor-manager" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
-            // selectedMenuItem={handleSelectedItem}
+            selectedMenuItem={handleSideBarMenuClick}
             data={getListComponents(mentorManagersArray, selectedMentorManagers)}
           />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
-            // selectedMenuItem={handleSelectedItem}
+            selectedMenuItem={handleSideBarMenuClick}
             data={getListComponents(mentorsArray, selectedMentors)}
           />
         </div>

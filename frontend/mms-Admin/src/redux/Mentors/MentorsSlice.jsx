@@ -1,12 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getAllMentorsApi, inviteMentorApi, registerMentorApi, deleteMentorApi } from "../api/mentors";
+import {
+  getAllMentorsApi,
+  inviteMentorApi,
+  registerMentorApi,
+  deleteMentorApi,
+  getMentorDetailsApi
+} from "../api/mentors";
 
 import {
   getAllMentorsLoading,
   inviteMentorLoading,
   registerMentorLoading,
-  deleteMentorLoading
+  deleteMentorLoading,
+  getMentorDetailsLoading
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
@@ -14,7 +21,8 @@ const initialState = {
   getAllMentorsData: {},
   inviteMentorData: {},
   registerMentorData: {},
-  deleteMentorData: {}
+  deleteMentorData: {},
+  getMentorDetailsData: {}
 };
 
 export const mentorsSlice = createSlice({
@@ -41,14 +49,24 @@ export const mentorsSlice = createSlice({
 
     deleteMentorAction: (state, action) => {
       state.deleteMentorData = action.payload;
+    },
+
+    getMentorDetailsAction: (state, action) => {
+      state.getMentorDetailsData = action.payload;
     }
   }
 });
 export default mentorsSlice.reducer;
 
 // Actions
-const { hasError, getAllMentorsAction, inviteMentorAction, registerMentorAction, deleteMentorAction } =
-  mentorsSlice.actions;
+const {
+  hasError,
+  getAllMentorsAction,
+  inviteMentorAction,
+  registerMentorAction,
+  deleteMentorAction,
+  getMentorDetailsAction
+} = mentorsSlice.actions;
 
 export const getAllMentors = (data) => async (dispatch) => {
   dispatch(getAllMentorsLoading(true));
@@ -58,7 +76,7 @@ export const getAllMentors = (data) => async (dispatch) => {
     dispatch(getAllMentorsAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    // toast.error(e?.response?.data?.message);
+    toast.error(e?.response?.data?.message);
     dispatch(getAllMentorsLoading(false));
     dispatch(hasError(e?.response?.data));
     return { success: false };
@@ -105,6 +123,21 @@ export const deleteMentor = () => async (dispatch) => {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(deleteMentorLoading(false));
+    return { success: false };
+  }
+};
+
+export const getMentorDetails = (data) => async (dispatch) => {
+  dispatch(getMentorDetailsLoading(true));
+  try {
+    const response = await getMentorDetailsApi(data);
+    dispatch(getMentorDetailsLoading(false));
+    dispatch(getMentorDetailsAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(getMentorDetailsLoading(false));
     return { success: false };
   }
 };

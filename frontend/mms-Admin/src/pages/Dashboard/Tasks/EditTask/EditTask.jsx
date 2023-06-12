@@ -19,6 +19,7 @@ import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/Persone
 import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
 import mentorImage from "@/assets/images/sample-profile-image.svg";
 import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
+import { getAllMentorManagers } from "@/redux/MentorManagers/MentorManagersSlice";
 import { getTaskDetails, editTask } from "@/redux/Tasks/TasksSlice";
 import { useParams } from "react-router-dom";
 import closeIconAlt from "@/assets/icons/close-icon.svg";
@@ -42,11 +43,15 @@ const EditTask = () => {
   const modalName = useSelector((state) => state.modal.modalName);
   const taskDetails = useSelector((state) => state.tasks.getTaskDetailsData);
   const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
+  const allMentorManagersData = useSelector((state) => state.mentorManagers.getAllMentorManagersData);
+  const editTaskLoading = useSelector((state) => state.loading.editTaskLoading);
 
-  console.log(taskDetails, "task details");
+  console.log(allMentorManagersData, "all mentor managers data");
+  console.log(allMentorsData, "all mentors data");
 
   useEffect(() => {
     dispatch(getAllMentors());
+    dispatch(getAllMentorManagers());
   }, [dispatch]);
 
   useEffect(() => {
@@ -178,11 +183,11 @@ const EditTask = () => {
       title: taskDetails?.title,
       description: taskDetails?.description
     });
+    setSelectedMentorManagers(taskDetails?.mentorManagers.map((data) => data?.id));
+    setSelectedMentors(taskDetails?.mentors.map((data) => data?.id));
   }, [reset, taskDetails]);
 
   const handleEditTask = async (data) => {
-    console.log(data);
-
     let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
       return { mentorManagerId: id };
     });
@@ -198,9 +203,7 @@ const EditTask = () => {
     };
 
     const response = await dispatch(editTask(payload));
-    console.log(response, "response");
     if (response.success) {
-      reset();
       setSelectedMentorManagers([]);
       setSelectedMentors([]);
 
@@ -233,7 +236,7 @@ const EditTask = () => {
           <PersonelComponent
             key={item?.id}
             data={item}
-            checked={selectedUsers.find((userId) => userId === item?.id)}
+            checked={selectedUsers.some((userId) => userId === item?.id)}
             handleChecked={handleSelectedItem}
           />
         ),
@@ -243,12 +246,14 @@ const EditTask = () => {
 
     const headerComponent = (
       <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
-        <h6 className={cx(styles.title)}>
-          {openSideBar?.category === "mentor-manager" ? "Add Mentor Manager(s)" : "Add Mentor(s)"}
-        </h6>
+        {collapseInput && (
+          <h6 className={cx(styles.title)}>
+            {openSideBar?.category === "mentor-manager" ? "Select Mentor Manager(s)" : "Select Mentor(s)"}
+          </h6>
+        )}
         <div className={cx(styles.searchWrapper)}>
           <Search
-            inputPlaceholder='Search for mentor...'
+            inputPlaceholder={openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"}
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}
@@ -268,8 +273,6 @@ const EditTask = () => {
   };
 
   const handleSelectedItem = (itemId) => {
-    console.log(itemId, "item id");
-    console.log(selectedMentorManagers, "selected mentor managers");
     if (openSideBar.category === "mentor-manager") {
       if (selectedMentorManagers.find((userId) => userId === itemId)) {
         let filteredMentorManagers = selectedMentorManagers.filter((id) => id !== itemId);
@@ -288,6 +291,10 @@ const EditTask = () => {
     }
   };
 
+  const handleSideBarMenuClick = () => {
+    // This is added to remove the warning of unused function in the selection sidebar component
+  };
+
   const handleClearList = (category) => {
     if (category === "mentorManager") {
       setSelectedMentorManagers([]);
@@ -299,7 +306,7 @@ const EditTask = () => {
   return (
     <div className={cx(styles.editTaskContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
-        <div className={cx(styles.heading, "flexRow")}>
+        <div className={cx(styles.heading, "flexRow-space-between")}>
           <h3 className={cx(styles.title)}>Edit Task</h3>
           <img onClick={() => navigate("/dashboard/tasks")} src={closeIconAlt} alt='close-icon' />
         </div>
@@ -339,7 +346,9 @@ const EditTask = () => {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor Manager</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>{selectedMentorManagers.length} selected</span>
+                    <span className={cx(styles.stats)}>
+                      {Array.isArray(selectedMentorManagers) && selectedMentorManagers.length} selected
+                    </span>
                     <ClearListIcon onClick={() => handleClearList("mentorManager")} />
                   </div>
                 </div>
@@ -350,7 +359,9 @@ const EditTask = () => {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>{selectedMentors.length} selected</span>
+                    <span className={cx(styles.stats)}>
+                      {Array.isArray(selectedMentors) && selectedMentors.length} selected
+                    </span>
                     <ClearListIcon onClick={() => handleClearList("mentor")} />
                   </div>
                 </div>
@@ -361,8 +372,8 @@ const EditTask = () => {
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
                 onClick={handleSubmit((data) => handleEditTask(data))}
-                // loading={loading}
-                // disabled={loading}
+                loading={editTaskLoading}
+                disabled={editTaskLoading}
                 title='Update Task'
                 type='primary'
               />
@@ -374,14 +385,14 @@ const EditTask = () => {
       {openSideBar.open && openSideBar.category === "mentor-manager" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
-            // selectedMenuItem={handleSelectedItem}
+            selectedMenuItem={handleSideBarMenuClick}
             data={getListComponents(mentorManagersArray, selectedMentorManagers)}
           />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
-            // selectedMenuItem={handleSelectedItem}
+            selectedMenuItem={handleSideBarMenuClick}
             data={getListComponents(mentorsArray, selectedMentors)}
           />
         </div>

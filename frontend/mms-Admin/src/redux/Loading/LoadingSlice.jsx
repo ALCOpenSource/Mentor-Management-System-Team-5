@@ -55,7 +55,13 @@ const initialState = {
   getAllMentorsLoading: false,
   inviteMentorLoading: false,
   registerMentorLoading: false,
-  deleteMentorLoading: false
+  deleteMentorLoading: false,
+  getMentorDetailsLoading: false,
+
+  //Mentor Managers
+  getAllMentorManagersLoading: false,
+  deleteMentorManagerLoading: false,
+  getMentorManagerDetailsLoading: false
 };
 
 export const loadingSlice = createSlice({
@@ -206,6 +212,20 @@ export const loadingSlice = createSlice({
     },
     deleteMentorLoading: (state, action) => {
       state.deleteMentorLoading = action.payload;
+    },
+    getMentorDetailsLoading: (state, action) => {
+      state.getMentorDetailsLoading = action.payload;
+    },
+
+    //Mentor Managers
+    getAllMentorManagersLoading: (state, action) => {
+      state.getAllMentorManagersLoading = action.payload;
+    },
+    deleteMentorManagerLoading: (state, action) => {
+      state.deleteMentorManagerLoading = action.payload;
+    },
+    getMentorManagerDetailsLoading: (state, action) => {
+      state.getMentorManagerDetailsLoading = action.payload;
     }
   }
 });
@@ -255,7 +275,11 @@ export const {
   getActiveProgramsByWeekLoading,
   getActiveProgramsByMonthLoading,
   getActiveProgramsByYearLoading,
-  createProgramLoading
+  createProgramLoading,
+  getMentorDetailsLoading,
+  getAllMentorManagersLoading,
+  deleteMentorManagerLoading,
+  getMentorManagerDetailsLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;
