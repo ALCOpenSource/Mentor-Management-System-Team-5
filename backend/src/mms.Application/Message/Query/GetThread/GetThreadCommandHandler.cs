@@ -35,7 +35,7 @@ namespace mms.Application.Message.Query.GetThread
                       && !participant.IsArchived
                       && !participant.IsDeleted
                       && !thread.IsDeleted
-                select new MessageThreadDto()
+                select new MessageThreadDto
                 {
                     ThreadId = thread.Id,
                     CreatedAt = thread.CreatedAt,
@@ -45,7 +45,7 @@ namespace mms.Application.Message.Query.GetThread
                     IsPinned = participant.IsPinned,
                     PinnedDate = participant.PinnedDate,
                     LastReadTime = participant.LastReadTime,
-                    LastMessage = new ThreadMessagesDto()
+                    LastMessage = new ThreadMessagesDto
                     {
                         MessageId = message.Id,
                         Body = message.Body,
@@ -82,7 +82,7 @@ namespace mms.Application.Message.Query.GetThread
                 join appUser in _context.Users on participant.AppUserId equals appUser.Id
                 where allThreadIds.Contains(thread.Id)
                       && !participant.IsDeleted
-                select new ThreadParticipantDto()
+                select new ThreadParticipantDto
                 {
                     ThreadId = thread.Id,
                     ParticipantId = participant.Id,
@@ -109,7 +109,11 @@ namespace mms.Application.Message.Query.GetThread
                 participant.IsCurrentPerson = participant.AppUserId == _currentUserService.AppUserId;
                 var thread = allThreads[participant.ThreadId];
 
-                if (participant.AppUserId != _currentUserService.AppUserId) continue;
+                if (participant.AppUserId != _currentUserService.AppUserId)
+                {
+                    continue;
+                }
+
                 thread.UnReadMessageCount = unreadMessages.Count(m => m.ThreadId == thread.ThreadId
                                                                       && m.ParticipantId ==
                                                                       participant.ParticipantId);

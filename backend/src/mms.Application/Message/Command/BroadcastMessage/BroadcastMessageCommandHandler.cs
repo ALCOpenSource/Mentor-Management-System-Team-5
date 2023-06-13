@@ -40,7 +40,7 @@ namespace mms.Application.Message.Command.BroadcastMessage
             foreach (var message in request.Messages)
             {
                 var handler = new CreateMessageCommandHandler(_userManager, _context, _currentUserService, _chatHub);
-                var response = await handler.Handle(new CreateMessageCommand()
+                var response = await handler.Handle(new CreateMessageCommand
                 {
                     Subject = request.Subject,
                     Body = request.Body,
