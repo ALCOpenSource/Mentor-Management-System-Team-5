@@ -1,4 +1,4 @@
-﻿namespace mms.Application.Message.Query
+﻿namespace mms.Application.Message.Query.GetThreadMessages
 {
     public class GetThreadMessagesResponse
     {
