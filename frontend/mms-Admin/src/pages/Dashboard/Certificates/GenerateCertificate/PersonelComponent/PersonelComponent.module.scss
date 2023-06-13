@@ -1,0 +1,101 @@
+.personelCompContainer {
+  padding: 0.5rem 0.5rem;
+  background-color: var(--taskListBgColor);
+  border-radius: 5px;
+  justify-content: center;
+  border: 1px solid var(--grayBorderColor);
+  width: 100%;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--green3Color);
+    border: 1px solid var(--green3Color);
+  }
+
+  .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
+
+  .userInfo {
+    gap: 0.25rem;
+    flex-grow: 1;
+
+    .name {
+      font-size: 1rem;
+      color: var(--blackTextColor);
+      font-family: var(--bold);
+      margin: 0;
+      line-height: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-box;
+      display: -o-box;
+      display: box;
+      -webkit-line-clamp: 1; /* number of lines to show */
+      -moz-line-clamp: 1;
+      -ms-line-clamp: 1;
+      -o-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+      -ms-box-orient: vertical;
+      -o-box-orient: vertical;
+      white-space: normal;
+    }
+
+    .designation {
+      font-size: 0.75rem;
+      color: var(--grayTextColor);
+      font-family: var(--regular);
+      line-height: 1.25;
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-box;
+      display: -o-box;
+      display: box;
+      -webkit-line-clamp: 1; /* number of lines to show */
+      -moz-line-clamp: 1;
+      -ms-line-clamp: 1;
+      -o-line-clamp: 1;
+      line-clamp: 1;
+      -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+      -ms-box-orient: vertical;
+      -o-box-orient: vertical;
+      white-space: normal;
+    }
+
+    .positionTags {
+      gap: 0.5rem;
+
+      span {
+        font-size: 0.75rem;
+        color: var(--black3TextColor);
+        font-family: var(--regular);
+        line-height: 1;
+        padding: 0.25rem 0.5rem;
+        border-radius: 5px;
+        background-color: var(--green4Color);
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .icon {
+    width: 1rem;
+  }
+}
+
+@media all and (min-width: 992px) {
+  .personelCompContainer {
+    padding: 0.5rem 0.5rem;
+  }
+}

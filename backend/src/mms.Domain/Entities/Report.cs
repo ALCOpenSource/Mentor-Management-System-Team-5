@@ -11,9 +11,9 @@ namespace mms.Domain.Entities
         public string Recommendations { get; set; }
         public DateTime DateCreated { get; set; }
         public string CreatedBy { get; set; }
-        public string UserTaskId { get; set; }
+        public string? UserTaskId { get; set; }
         public UserTask UserTask { get; set; }
-        public string ProgramId { get; set; }
-        public Programme Programme { get; set; }
+        public string? ProgramId { get; set; }
+        public Program Program { get; set; }
     }
 }

@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
 import styles from "./GenericSideBar.module.scss";
 import useIsMobile from "@/hooks/useIsMobile";
+import Loader from "@/components/Loader/Loader";
 
-function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGenericSideBar }) {
-  const params = useParams();
-  const [activeLink, setActiveLink] = useState("");
+function GenericSideBar({ data, selectedMenuItem, closeGenericSideBar, loading }) {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(true);
-  const currentId = params?.id;
   const sidebarRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -18,11 +15,6 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
       setOpen(false);
     }
   };
-
-  useEffect(() => {
-    const active = data?.listItems.find((menuItem) => menuItem.id.toString() === currentId);
-    setActiveLink(active ? active.id : "");
-  }, [currentId, data]);
 
   useEffect(() => {
     if (isMobile && open) {
@@ -60,26 +52,31 @@ function GenericSideBar({ data, selectedMenuItem, activeMenuItemClass, closeGene
       }}
     >
       {data?.headerComponent && <div className={cx(styles.genericSideBarHeader)}>{data?.headerComponent}</div>}
-      <ul>
-        {data?.listItems.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => handleMenuClick(item.id)}
-            className={activeLink.toString() === item.id.toString() ? activeMenuItemClass : ""}
-          >
-            {item?.component}
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <Loader />
+      ) : Array.isArray(data?.listItems) && data?.listItems.length > 0 ? (
+        <ul>
+          {Array.isArray(data?.listItems) &&
+            data?.listItems.map((item, index) => (
+              <li key={index} onClick={() => handleMenuClick(item?.id)}>
+                {item?.component}
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <div className={cx(styles.noDataDiv, "flexRow-fully-centered")}>
+          <h6 className={cx(styles.noDataText)}>No data available</h6>
+        </div>
+      )}
     </div>
   );
 }
 
 GenericSideBar.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.object,
   selectedMenuItem: PropTypes.func,
-  activeMenuItemClass: PropTypes.string,
-  closeGenericSideBar: PropTypes.func
+  closeGenericSideBar: PropTypes.func,
+  loading: PropTypes.bool
 };
 
 export default GenericSideBar;

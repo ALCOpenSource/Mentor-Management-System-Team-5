@@ -1,0 +1,47 @@
+.categoryListItemContainer {
+  padding: 1rem;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--white1Color);
+  }
+
+  .body {
+    gap: 1rem;
+
+    .icon {
+      width: 2.5rem;
+    }
+
+    .title {
+      font-size: 1rem;
+      color: var(--black2TextColor);
+      font-family: var(--bold);
+      margin: 0;
+    }
+
+    .count {
+      font-size: 1.5rem;
+      color: var(--blackTextColor);
+      font-family: var(--bold);
+      line-height: 1;
+      margin-left: auto;
+    }
+  }
+}
+
+.active {
+  background-color: var(--white1Color);
+}
+
+@media all and (min-width: 992px) {
+  .categoryListItemContainer {
+    .body {
+      .icon {
+        width: 2.5rem;
+      }
+    }
+  }
+}

@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import styles from "./PersonelComponent.module.scss";
 import { ReactComponent as AddIcon } from "@/assets/icons/add-icon.svg";
 import { ReactComponent as CheckIcon } from "@/assets/icons/check-icon.svg";
 
-function PersonelComponent({ data }) {
+function PersonelComponent({ data, checked, handleChecked }) {
   const [toggleIcon, setToggleIcon] = useState(false);
+
+  useEffect(() => {
+    setToggleIcon(checked);
+  }, [checked]);
+
+  const handleToggleIcon = () => {
+    setToggleIcon(!toggleIcon);
+    handleChecked(data?.id);
+  };
 
   return (
     <div className={cx(styles.personelCompContainer, "flexRow-align-center")}>
@@ -24,16 +33,18 @@ function PersonelComponent({ data }) {
         </div>
       </div>
       {toggleIcon ? (
-        <CheckIcon className={cx(styles.icon)} onClick={() => setToggleIcon(!toggleIcon)} />
+        <CheckIcon className={cx(styles.icon)} onClick={() => handleToggleIcon()} />
       ) : (
-        <AddIcon className={cx(styles.icon)} onClick={() => setToggleIcon(!toggleIcon)} />
+        <AddIcon className={cx(styles.icon)} onClick={() => handleToggleIcon()} />
       )}
     </div>
   );
 }
 
 PersonelComponent.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  checked: PropTypes.bool,
+  handleChecked: PropTypes.func
 };
 
 export default PersonelComponent;

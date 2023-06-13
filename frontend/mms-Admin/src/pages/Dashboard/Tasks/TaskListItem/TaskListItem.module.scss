@@ -68,6 +68,11 @@
   }
 }
 
+.activeItem {
+  background-color: var(--green3Color);
+  border: 1px solid #e6fdfe;
+}
+
 @media all and (min-width: 992px) {
   .taskListItemContainer {
     padding: 0.875rem 0.75rem;

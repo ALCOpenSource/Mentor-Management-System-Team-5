@@ -1,15 +1,10 @@
 ﻿using AspNetCoreHero.Results;
 using AutoMapper;
 using MediatR;
-using mms.Application.Support.Command;
+using Microsoft.EntityFrameworkCore;
 using mms.Domain.Entities;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mms.Application.UserTasks.Command.CreateTask
 {
@@ -30,13 +25,32 @@ namespace mms.Application.UserTasks.Command.CreateTask
         public async Task<IResult<string>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             var taskEntity = _mapper.Map<Domain.Entities.UserTask>(request);
+            var task = new UserTask
+            {
+                Description = taskEntity.Description,
+                Status = request.Status,
+                Title = request.Title
+            };
+            var mentorIds = request.Mentors.Select(mentorDto => mentorDto.ProgramsMentorId);
+            var mentorManagerIds = request.Managers.Select(mangerDto => mangerDto.MentorManagerId);
+            var mentors = await _context.ProgramsMentors.Where(m => mentorIds.Contains(m.Id)).ToListAsync();
+            var mentorManagers = await _context.MentorManagers.Where(mm => mentorManagerIds.Contains(mm.Id)).ToListAsync();
 
-            taskEntity.Id = Guid.NewGuid().ToString();
-            taskEntity.CreatedAt = DateTime.Now;
-            taskEntity.CreatedBy = _currentUserService.AppUserId;
-            await _context.UserTasks.AddAsync(taskEntity);
+            if(mentors.Any())
+            {
+                task.Mentors = mentors;
+            }
+            if(mentorManagers.Any())
+            {
+                task.MentorManagers = mentorManagers;
+            }
+
+            task.Id = Guid.NewGuid().ToString();
+            task.CreatedAt = DateTime.Now;
+            task.CreatedBy = _currentUserService.AppUserId;
+            await _context.UserTasks.AddAsync(task);
             await _context.SaveChangesAsync(cancellationToken);
-            return await Result<string>.SuccessAsync();
+            return await Result<string>.SuccessAsync(task.Id, "Task  Created Successfully");
         }
     }
 }

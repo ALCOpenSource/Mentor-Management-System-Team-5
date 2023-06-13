@@ -4,7 +4,7 @@ import cx from "classnames";
 import styles from "./Reports.module.scss";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 
-import Button from "@/components/Button/Button";
+// import Button from "@/components/Button/Button";
 import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
@@ -262,7 +262,7 @@ function Reports() {
             />
             <small className={cx(styles.togglerText)}>MENU</small>
           </div>
-          <Button onClick={() => navigate("create-report")} title='Compose Report' />
+          {/* <Button onClick={() => navigate("create-report")} title='Compose Report' /> */}
         </div>
 
         <div style={{ height: selectedMenuId ? "auto" : "100%" }} className={cx(styles.contentBody, "flexCol")}>

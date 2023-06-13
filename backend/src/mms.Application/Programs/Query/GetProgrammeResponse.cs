@@ -1,15 +1,11 @@
 ﻿using mms.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mms.Application.Programme.Query
 {
     public class GetProgrammeResponse
     {
-
+        public string Id { get; set; }
+        public DateTime CreatedAt { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string CreatedBy { get; set; }
@@ -21,5 +17,8 @@ namespace mms.Application.Programme.Query
         public DateTime? DateCompleted { get; set; }
         public DateTime? DateArchived { get; set; }
         public string Criteria { get; set; }
+        public IList<mms.Domain.Entities.Report> Reports { get; set; }
+        public IList<MentorManager> MentorManagers { get; set; }
+        public IList<ProgramsMentor> Mentors { get; set; }
     }
 }

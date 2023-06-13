@@ -33,7 +33,7 @@ namespace mms.Application.Mentors.Query
 
             var mentors = await (from user in _context.Users.Where(x => x.Id == _currentUserService.AppUserId)
                 join programMentor in _context.ProgramsMentors on user.Id equals programMentor.AppUserId
-                join program in _context.Programmes on programMentor.ProgramId equals program.Id
+                join program in _context.Programs on programMentor.ProgramId equals program.Id
                 select new GetMentorsResponse
                 {
                     AppUser = user,

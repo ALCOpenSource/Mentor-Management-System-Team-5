@@ -17,8 +17,16 @@ import userRoles from "@/constants/userRoles";
 // Dashboard
 import DashboardContainer from "@/components/DashboardContainer/DashboardContainer";
 const Home = lazy(() => import("@/pages/Dashboard/Home/Home"));
-const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
 const Profile = lazy(() => import("@/pages/Dashboard/Profile/Profile"));
+
+// ApprovalRequests
+const ApprovalRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ApprovalRequests"));
+const MentorManagerRequests = lazy(() =>
+  import("@/pages/Dashboard/ApprovalRequests/MentorManagerRequests/MentorManagerRequests")
+);
+const MentorRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/MentorRequests/MentorRequests"));
+const ProgramRequests = lazy(() => import("@/pages/Dashboard/ApprovalRequests/ProgramRequests/ProgramRequests"));
+const RequestDetails = lazy(() => import("@/pages/Dashboard/ApprovalRequests/RequestDetails/RequestDetails"));
 
 // Certificates
 const Certificates = lazy(() => import("@/pages/Dashboard/Certificates/Certificates"));
@@ -32,6 +40,9 @@ const PendingCertificates = lazy(() =>
   import("@/pages/Dashboard/Certificates/PendingCertificates/PendingCertificates")
 );
 const CertificateDetails = lazy(() => import("@/pages/Dashboard/Certificates/CertificateDetails/CertificateDetails"));
+const GenerateCertificate = lazy(() =>
+  import("@/pages/Dashboard/Certificates/GenerateCertificate/GenerateCertificate")
+);
 
 //Programs
 const Programs = lazy(() => import("@/pages/Dashboard/Programs/Programs"));
@@ -71,6 +82,12 @@ const MentorManagerDetailsCertificates = lazy(() =>
 const MentorManagerDetailsTasks = lazy(() =>
   import("@/pages/Dashboard/MentorManagers/MentorManagerDetails/Tasks/Tasks")
 );
+
+//Search Results
+const SearchResults = lazy(() => import("@/pages/Dashboard/SearchResults/SearchResults"));
+
+//Notifications
+const Notifications = lazy(() => import("@/pages/Dashboard/Notifications/Notifications"));
 
 // Messages
 const Messages = lazy(() => import("@/pages/Dashboard/Messages/Messages"));
@@ -134,13 +151,25 @@ function RoutesComponent() {
             <Route path='privacy' element={<SettingsPrivacy />} />
             <Route path='notifications' element={<SettingsNotifications />} />
           </Route>
-          <Route path='approval-requests' element={<ApprovalRequests />} />
-          <Route path='certificates' element={<Certificates />}>
-            <Route index path='' element={<ApprovedCertificates />} />
-            <Route path='approved-certificates' element={<ApprovedCertificates />} />
-            <Route path='generated-certificates' element={<GeneratedCertificates />} />
-            <Route path='pending-certificates' element={<PendingCertificates />} />
-            <Route path='certificate-details/:id' element={<CertificateDetails />} />
+          <Route path='approval-requests'>
+            <Route path='' element={<ApprovalRequests />}>
+              <Route path='' element={<MentorManagerRequests />} />
+              <Route path='mentor-manager-requests' element={<MentorManagerRequests />} />
+              <Route path='mentor-requests' element={<MentorRequests />} />
+              <Route path='program-requests' element={<ProgramRequests />} />
+              <Route path='request-details/:id' element={<RequestDetails />} />
+            </Route>
+          </Route>
+          <Route path='certificates'>
+            <Route path='' element={<Certificates />}>
+              <Route path='' element={<ApprovedCertificates />} />
+              <Route path='approved-certificates' element={<ApprovedCertificates />} />
+
+              <Route path='generated-certificates' element={<GeneratedCertificates />} />
+              <Route path='pending-certificates' element={<PendingCertificates />} />
+              <Route path='certificate-details/:id' element={<CertificateDetails />} />
+            </Route>
+            <Route path='generate-certificate' element={<GenerateCertificate />} />
           </Route>
           <Route path='discussion-forum'>
             <Route index path='' element={<DiscussionForum />} />
@@ -203,6 +232,8 @@ function RoutesComponent() {
             <Route path='create-task' element={<CreateTask />} />
             <Route path='edit-task/:id' element={<EditTask />} />
           </Route>
+          <Route path='search-results' element={<SearchResults />} />
+          <Route path='notifications' element={<Notifications />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -2,10 +2,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using mms.Application.UserPrivacy.Query;
-using mms.Application.UserTasks.Query;
 using mms.Infrastructure.Context;
-using mms.Infrastructure.Interface;
 
 namespace mms.Application.Programme.Query
 {
@@ -25,7 +22,7 @@ namespace mms.Application.Programme.Query
         public async Task<IResult<List<GetProgrammeResponse>>> Handle(GetProgrammesCommand request,
             CancellationToken cancellationToken)
         {
-            var programmes = await _context.Programmes.OrderByDescending(x => x.DateCreated).ToListAsync();
+            var programmes = await _context.Programs.OrderByDescending(x => x.DateCreated).ToListAsync();
             if (programmes == null)
             {
                 return await Result<List<GetProgrammeResponse>>.FailAsync("No Programme Available");

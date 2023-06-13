@@ -219,7 +219,6 @@ const Chats = () => {
           <GenericSideBar
             data={getMenuItems()}
             selectedMenuItem={handleSelectedMenuItem}
-            activeMenuItemClass='active-task-item'
             closeGenericSideBar={() => setOpenSideBar(false)}
           />
         </div>

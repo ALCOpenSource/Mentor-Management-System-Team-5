@@ -21,8 +21,14 @@ function Header() {
 
   const userProfile = useSelector((state) => state.settings.getProfileData);
 
+  const handleMenuClick = (e, path) => {
+    e.preventDefault();
+    navigate(path);
+    setExpanded(false);
+  };
+
   return (
-    <section className={cx(styles.dashboardHeaderContainer)}>
+    <section className={cx(styles.dashboardHeaderContainer, "flexRow-fully-centered")}>
       <Navbar expanded={expanded} expand='lg' className={cx(styles.navbarContainer, "flexRow")}>
         <div className={cx(styles.sideBarToggler)}>
           <Icon onClick={() => toggleSidebar()} icon='bi:layout-text-sidebar-reverse' color='#fff' width={24} />
@@ -42,25 +48,37 @@ function Header() {
           className={cx(styles.navbarToggler)}
           aria-controls='responsive-navbar-nav'
         />
+        {/* <Navbar.Toggle className={cx(styles.navbarToggler)}>
+          <div
+            onClick={() => navigate("/dashboard/settings")}
+            className={cx(styles.profileImageDiv, "flexRow-fully-centered")}
+          >
+            {userProfile?.profilePicture ? (
+              <img className={cx(styles.profileImage)} src={userProfile?.profilePicture} alt='profile-image' />
+            ) : (
+              <span className={cx(styles.profileImageText)}>{initialsCase(userProfile?.firstName)}</span>
+            )}
+          </div>
+        </Navbar.Toggle> */}
 
         <Navbar.Collapse className={cx(styles.navbarCollapse, "flexRow")} id='responsive-navbar-nav'>
           <Nav className={cx(styles.primaryNavigation, "flexRow-space-between")}>
             <div className={cx(styles.inputDiv, "flexRow-align-center")}>
-              <img className={cx(styles.searchIcon)} src={searchIcon} alt='search-icon' />
+              <img onClick={(e) => handleMenuClick(e, "/dashboard/search-results")} className={cx(styles.searchIcon)} src={searchIcon} alt='search-icon' />
               <input type='text' placeholder='Search for anything' />
             </div>
             <div className={cx(styles.iconsDiv, "flexRow-fully-centered")}>
               <div className={cx(styles.container, "flexRow-align-center")}>
                 <span className={cx(styles.count)}>11</span>
-                <img onClick={() => navigate("/dashboard/messages")} src={messageIcon} alt='message-icon' />
+                <img onClick={(e) => handleMenuClick(e, "/dashboard/messages")} src={messageIcon} alt='message-icon' />
               </div>
               <div className={cx(styles.container, "flexRow-align-center")}>
                 <span className={cx(styles.count)}>11</span>
-                <img src={notificationIcon} alt='notification-icon' />
+                <img onClick={(e) => handleMenuClick(e, "/dashboard/notifications")} src={notificationIcon} alt='notification-icon' />
               </div>
             </div>
             <div
-              onClick={() => navigate("/dashboard/settings")}
+              onClick={(e) => handleMenuClick(e, "/dashboard/settings")}
               className={cx(styles.profileImageDiv, "flexRow-fully-centered")}
             >
               {userProfile?.profilePicture ? (

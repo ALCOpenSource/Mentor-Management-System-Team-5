@@ -6,7 +6,7 @@ using mms.Application.UserPrivacy.Query;
 using UserNotificationEntity = mms.Domain.Entities.UserNotification;
 using UserPrivacyEntity = mms.Domain.Entities.UserPrivacy;
 using SupportEntity = mms.Domain.Entities.Support;
-using ProgrammeEntity = mms.Domain.Entities.Programme;
+using ProgrammeEntity = mms.Domain.Entities.Program;
 using mms.Application.Support.Command;
 using AppUserEntity = mms.Domain.Entities.AppUser;
 using FAQEntity = mms.Domain.Entities.FAQ;
@@ -21,10 +21,12 @@ using mms.Application.Mentors.Query;
 using mms.Application.MentorManagers.Query;
 using mms.Application.UserTasks.Command.CreateTask;
 using mms.Application.Report.Command;
-using mms.Application.Programme.Command;
 using mms.Application.UserTasks.Command.UpdateTask;
-using mms.Application.Common.DTOs;
 using mms.Application.Programs.Query.ArchivedPrograms;
+using mms.Application.Common.DTOs.Mentors;
+using mms.Application.Programs.Command.CreateProgram;
+using mms.Application.Programs.Command.UpdateTask;
+using mms.Application.UserTasks.Command.DeleteTask;
 
 namespace mms.Application.Common.Mapper
 {
@@ -47,9 +49,12 @@ namespace mms.Application.Common.Mapper
             CreateMap<UserTask, GetUserTasksResponse>().ReverseMap();
             CreateMap<UserTask, CreateTaskCommand>().ReverseMap();
             CreateMap<UserTask, PutUserTaskCommand>().ReverseMap();
+            CreateMap<UserTask, GetTaskByIdCommand>().ReverseMap();
+            CreateMap<UserTask, DeleteTaskCommand>().ReverseMap();
 
             CreateMap<ProgrammeEntity, GetProgrammeResponse>().ReverseMap();
             CreateMap<ProgrammeEntity, CreateProgrammeCommand>().ReverseMap();
+            CreateMap<ProgrammeEntity, PutProgramCommand>().ReverseMap();
 
             CreateMap<Reports, GetReportsResponse>().ReverseMap();
             CreateMap<Reports, CreateReportCommand>().ReverseMap();
@@ -61,12 +66,19 @@ namespace mms.Application.Common.Mapper
             //Mapping Domain Object to dto
             CreateMap<ProgramsMentor, MentorDTO>().ReverseMap();
             CreateMap<MentorManager, MentorManagerDTO>().ReverseMap();
-            CreateMap<CreateTaskCommand,List<MentorManagerDTO>>().ReverseMap();
-            CreateMap<CreateTaskCommand, List<MentorDTO>>().ReverseMap();
+            CreateMap<CreateTaskCommand,List<string>>().ReverseMap();
+            CreateMap<CreateTaskCommand, List<string>>().ReverseMap();
             CreateMap<UserTask, List<MentorManager>>().ReverseMap();
             CreateMap<UserTask, List<ProgramsMentor>>().ReverseMap();
             CreateMap<UserTask, List<MentorManagerDTO>>().ReverseMap();
             CreateMap<UserTask, List<MentorDTO>>().ReverseMap();
+            CreateMap<CreateProgrammeCommand, List<string>>().ReverseMap();
+            CreateMap<CreateProgrammeCommand, List<string>>().ReverseMap();
+
+            CreateMap<ProgrammeEntity, List<MentorManager>>().ReverseMap();
+            CreateMap<ProgrammeEntity, List<ProgramsMentor>>().ReverseMap();
+            CreateMap<ProgrammeEntity, List<MentorManagerDTO>>().ReverseMap();
+            CreateMap<ProgrammeEntity, List<MentorDTO>>().ReverseMap();
 
             CreateMap<FAQEntity, PostFAQCommand>().ReverseMap();
             CreateMap<FAQEntity, PutFAQCommand>().ReverseMap();

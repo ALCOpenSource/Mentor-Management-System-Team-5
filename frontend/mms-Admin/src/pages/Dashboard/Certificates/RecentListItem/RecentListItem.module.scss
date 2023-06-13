@@ -22,13 +22,12 @@
     }
 
     .mainContent {
-      gap: 0.5rem;
+      gap: 0;
       margin-right: auto;
 
       .title,
       .description {
         color: var(--black2TextColor);
-        line-height: 1;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -68,6 +67,11 @@
       }
     }
   }
+}
+
+.activeItem {
+  background-color: var(--green3Color);
+  border: 1px solid var(--grayBorderColor);
 }
 
 @media all and (min-width: 992px) {
