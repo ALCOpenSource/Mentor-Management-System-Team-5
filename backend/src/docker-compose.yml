@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  mms.api:
-    image: ${DOCKER_REGISTRY-}mmsapi
-    build:
-      context: .
-      dockerfile: mms.api/Dockerfile
