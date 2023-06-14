@@ -15,7 +15,7 @@ import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import useIsMobile from "@/hooks/useIsMobile";
 import SwitcherTab from "@/pages/Dashboard/Reports/SwitcherTab/SwitcherTab";
 import ReportListItem from "./ReportListItem/ReportListItem";
-import { getAllReports } from "@/redux/Reports/ReportsSlice";
+import { getAllReports, getYearlyReports, getMonthlyReports } from "@/redux/Reports/ReportsSlice";
 
 function Reports() {
   const navigate = useNavigate();
@@ -27,10 +27,15 @@ function Reports() {
   // const displayModal = useSelector((state) => state.modal.show);
   // const modalName = useSelector((state) => state.modal.modalName);
   const allReportsData = useSelector((state) => state.reports.getAllReportsData);
-  console.log(allReportsData, "all reports data");
+  const programReportArray = useSelector((state) => state.reports.getYearlyReportsData);
+  const taskReportArray = useSelector((state) => state.reports.getMonthlyReportsData);
+  console.log(programReportArray, "all reports data");
+  // console.log(yearlyReportsData, "yearly reports data");
 
   useEffect(() => {
     dispatch(getAllReports());
+    dispatch(getYearlyReports());
+    dispatch(getMonthlyReports());
     setSelectedMenuId(params.id);
   }, [navigate, dispatch, params.id]);
 
@@ -63,7 +68,7 @@ function Reports() {
       : setOpenSideBar({ open: true, category: reportsCategoryArray[0].key });
   }, [isMobile, reportsCategoryArray]);
 
-  const programReportArray = [
+  const programReportArrayOld = [
     {
       id: 1,
       title: "Google Africa Scholarship",
@@ -87,7 +92,7 @@ function Reports() {
     }
   ];
 
-  const taskReportArray = [
+  const taskReportArrayOld = [
     {
       id: 1,
       title: "Google Africa Scholarship",
@@ -171,6 +176,7 @@ function Reports() {
     setCloseSelectElement(true);
   };
   const getListComponents = (data) => {
+    console.log(data, "list comp data");
     const listItems = data.map((item, index) => {
       return {
         component: <ReportListItem key={index} data={item} />,
@@ -234,21 +240,29 @@ function Reports() {
   return (
     <div className={cx(styles.reportsContainer, "flexRow")}>
       {openSideBar.open && openSideBar.category === "taskReport" ? (
-        <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar
-            selectedMenuItem={handleSelectedItem}
-            data={getListComponents(taskReportArray)}
-            activeClassName='active-report-item'
-          />
-        </div>
+        Array.isArray(taskReportArray) && taskReportArray.length > 0 ? (
+          <div className={cx(styles.sideBarSection)}>
+            <SelectionSideBar
+              selectedMenuItem={handleSelectedItem}
+              data={getListComponents(taskReportArray)}
+              activeClassName='active-report-item'
+            />
+          </div>
+        ) : (
+          <div className={cx(styles.sideBarSection)}>No Data Found</div>
+        )
       ) : openSideBar.open && openSideBar.category === "programReport" ? (
-        <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar
-            selectedMenuItem={handleSelectedItem}
-            data={getListComponents(programReportArray)}
-            activeClassName='active-report-item'
-          />
-        </div>
+        Array.isArray(programReportArray) && programReportArray.length > 0 ? (
+          <div className={cx(styles.sideBarSection)}>
+            <SelectionSideBar
+              selectedMenuItem={handleSelectedItem}
+              data={getListComponents(programReportArray)}
+              activeClassName='active-report-item'
+            />
+          </div>
+        ) : (
+          <div className={cx(styles.sideBarSection)}>No Data Found</div>
+        )
       ) : null}
 
       <div className={cx(styles.content, "flexCol")}>

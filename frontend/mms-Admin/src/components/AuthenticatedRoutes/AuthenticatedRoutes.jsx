@@ -13,6 +13,7 @@ function AuthenticatedRoutes({ children, roles }) {
 
   const navigate = useNavigate();
   const authError = useSelector((state) => state?.auth?.error?.failed) || false;
+  console.log(authError, "auth error");
 
   useEffect(() => {
     const refreshInterval = setInterval(() => {

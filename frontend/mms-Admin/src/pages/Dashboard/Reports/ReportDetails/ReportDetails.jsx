@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import cx from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./ReportDetails.module.scss";
@@ -10,38 +10,47 @@ import ShareReportModal from "@/components/Modals/ShareReport/ShareReport";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/default-success-notification-image.png";
+import { getReportDetails } from "@/redux/Reports/ReportsSlice";
+import formatDate from "@/helpers/formatDate";
+import html2pdf from "html2pdf.js";
 
 const ReportDetails = () => {
   const dispatch = useDispatch();
+  const contentRef = useRef();
+  const btnGroupRef = useRef();
   const params = useParams();
   const reportId = params.id;
   const navigate = useNavigate();
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+  const reportDetails = useSelector((state) => state.reports.getReportDetailsData);
+
+  console.log(reportDetails, "report details");
+
+  useEffect(() => {
+    dispatch(getReportDetails(reportId));
+  }, [dispatch, reportId]);
 
   const authorMetaData = {
     id: reportId,
-    title: `Google Africa Scholarship ${reportId}`,
-    author: "Ibrahim Kabir",
-    date: "19th - 25th Oct 23"
+    title: reportDetails?.reportTitle,
+    author: reportDetails?.createdBy,
+    date: reportDetails?.createdAt ? formatDate(reportDetails?.createdAt) : ""
   };
 
   const reportDetailsObj = {
     achievements: {
       title: "Major Achievements",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. "
+      content: reportDetails?.achievements
     },
     blockers: {
       title: "Major Blockers",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. "
+      content: reportDetails?.blockers
     },
     recommendations: {
       title: "Major Recommendations",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. "
+      content: reportDetails?.recommendations
     }
   };
 
@@ -54,6 +63,7 @@ const ReportDetails = () => {
   };
 
   const handleDownloadReport = () => {
+    handleDownloadPDF();
     dispatch(
       showModal({
         name: "successNotification",
@@ -65,8 +75,20 @@ const ReportDetails = () => {
     );
   };
 
+  const handleDownloadPDF = () => {
+    const parentElement = contentRef.current;
+    const clonedElement = parentElement.cloneNode(true);
+    const excludedElements = clonedElement.querySelectorAll(".exclude");
+
+    excludedElements.forEach((element) => {
+      element.remove();
+    });
+
+    html2pdf().set({ filename: "report.pdf" }).from(clonedElement).save();
+  };
+
   return (
-    <div className={cx(styles.reportDetailsContainer, "flexCol")}>
+    <div ref={contentRef} className={cx(styles.reportDetailsContainer, "flexCol")}>
       <div className={cx(styles.heading, "flexRow-space-between")}>
         <div className={cx(styles.body, "flexRow-align-center")}>
           <img className={cx(styles.icon)} src={reportIcon} alt='icon' />
@@ -79,7 +101,12 @@ const ReportDetails = () => {
           </div>
         </div>
 
-        <img className={cx(styles.closeIcon)} onClick={() => handleCloseReport()} src={closeIcon} alt='close-icon' />
+        <img
+          className={cx(styles.closeIcon, "exclude")}
+          onClick={() => handleCloseReport()}
+          src={closeIcon}
+          alt='close-icon'
+        />
       </div>
 
       <div className={cx(styles.mainBody, "flexCol")}>
@@ -92,7 +119,7 @@ const ReportDetails = () => {
           );
         })}
 
-        <div className={cx(styles.btnGroup, "flexRow-space-between")}>
+        <div ref={btnGroupRef} className={cx(styles.btnGroup, "flexRow-space-between", "exclude")}>
           <Button onClick={() => handleShareReport()} title='Share' type='secondary' />
           <Button onClick={() => handleDownloadReport()} title='Download' />
         </div>

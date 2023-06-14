@@ -12,6 +12,7 @@ import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 import { loginSchema } from "@/helpers/validation";
 
 import { login } from "@/redux/Auth/AuthSlice";
+import { getProfile } from "@/redux/Settings/SettingsSlice";
 import Button from "@/components/Button/Button";
 
 // import { useGoogleLogin } from "@react-oauth/google";
@@ -25,7 +26,10 @@ function Login() {
 
   const signIn = async (data) => {
     const response = await dispatch(login(data));
-    response?.success && navigate("/dashboard");
+    if (response?.success) {
+      dispatch(getProfile());
+      navigate("/dashboard");
+    }
   };
 
   const resolver = yupResolver(loginSchema);

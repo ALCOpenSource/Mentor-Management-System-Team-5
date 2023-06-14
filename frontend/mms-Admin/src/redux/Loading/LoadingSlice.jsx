@@ -14,7 +14,7 @@ const initialState = {
   getMonthlyReportsLoading: false,
   getYearlyReportsLoading: false,
   createNewReportLoading: false,
-  editReportLoading: false,
+  getReportDetailsLoading: false,
 
   //Settings
   changePasswordLoading: false,
@@ -103,8 +103,8 @@ export const loadingSlice = createSlice({
     createNewReportLoading: (state, action) => {
       state.createNewReportLoading = action.payload;
     },
-    editReportLoading: (state, action) => {
-      state.editReportLoading = action.payload;
+    getReportDetailsLoading: (state, action) => {
+      state.getReportDetailsLoading = action.payload;
     },
 
     //Settings
@@ -242,7 +242,7 @@ export const {
   getMonthlyReportsLoading,
   getYearlyReportsLoading,
   createNewReportLoading,
-  editReportLoading,
+  getReportDetailsLoading,
   changePasswordLoading,
   updateProfileLoading,
   getProfileLoading,
