@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Interface;
 
-namespace mms.Application.Message.Query
+namespace mms.Application.Message.Query.GetThreadMessages
 {
     public class
         GetThreadMessagesCommandHandler : IRequestHandler<GetThreadMessagesCommand, IResult<GetThreadMessagesResponse>>
@@ -58,7 +58,7 @@ namespace mms.Application.Message.Query
                 ThreadId = request.ThreadId,
                 OtherMessages = allMessages
             };
-            return Result<GetThreadMessagesResponse>.Success(result, "Successful");
+            return Result<GetThreadMessagesResponse>.Success(result, "Successful retrieved messages");
         }
     }
 }
