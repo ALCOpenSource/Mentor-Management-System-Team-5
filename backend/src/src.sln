@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mms.api", "mms.api\mms.api.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mms.Infrastructure", "mms.Infrastructure\mms.Infrastructure.csproj", "{D3E5523F-EFA8-4A87-96DA-D29474B5B850}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E6A7BB26-9184-4D40-A185-53B47BB0797A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mms.UnitTest", "..\tests\mms.UnitTest\mms.UnitTest.csproj", "{F22FA67B-FD78-41DC-A689-1C945BBADEB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mms.Domain", "mms.Domain\mms.Domain.csproj", "{3B261E9A-44A9-4E7F-A058-614AF4CBC220}"
@@ -29,10 +27,6 @@ Global
 		{D3E5523F-EFA8-4A87-96DA-D29474B5B850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3E5523F-EFA8-4A87-96DA-D29474B5B850}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3E5523F-EFA8-4A87-96DA-D29474B5B850}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6A7BB26-9184-4D40-A185-53B47BB0797A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6A7BB26-9184-4D40-A185-53B47BB0797A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6A7BB26-9184-4D40-A185-53B47BB0797A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6A7BB26-9184-4D40-A185-53B47BB0797A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F22FA67B-FD78-41DC-A689-1C945BBADEB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F22FA67B-FD78-41DC-A689-1C945BBADEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F22FA67B-FD78-41DC-A689-1C945BBADEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
