@@ -31,4 +31,4 @@ jobs:
             cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/appsettings.Production.json Mentor-Management-System-Team-5/backend/src/mms.api/appsettings.Production.json
             cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/Properties/launchSettings.json Mentor-Management-System-Team-5/backend/src/mms.api/Properties/launchSettings.json
             cd Mentor-Management-System-Team-5/
-            docker compose up -d
+            docker compose up -d --force-recreate
