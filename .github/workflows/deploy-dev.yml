@@ -16,11 +16,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd ${{ secrets.WORK_DIR }}/Mentor-Management-System-Team-5
-            docker compose down
-            cd ..
+            cd ${{ secrets.WORK_DIR }}
             rm -rf Mentor-Management-System-Team-5/
             git clone -b develop https://github.com/Honeyloveet/Mentor-Management-System-Team-5.git
+            cd ${{ secrets.WORK_DIR }}/Mentor-Management-System-Team-5
+            docker compose down
+            cd ${{ secrets.WORK_DIR }}
             cp ${{ secrets.FILES_DIR }}/docker-compose.yml Mentor-Management-System-Team-5/docker-compose.yml
             cp ${{ secrets.FILES_DIR }}/frontend/mms-Admin/.dockerignore Mentor-Management-System-Team-5/frontend/mms-Admin/.dockerignore
             cp ${{ secrets.FILES_DIR }}/frontend/mms-Admin/.env Mentor-Management-System-Team-5/frontend/mms-Admin/.env
