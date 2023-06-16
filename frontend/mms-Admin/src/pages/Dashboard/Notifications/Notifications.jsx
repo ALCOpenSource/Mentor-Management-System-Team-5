@@ -14,6 +14,7 @@ import Baba from "@/assets/images/baba.svg";
 function Notifications() {
   const dropdownArray = ["All", "All"];
   const [selected, setSelected] = useState("All");
+  const [buttonLabel, setButtonLabel] = useState("Mark all as read");
   const [notificationsArray, setNotificationsArray] = useState([
     {
       id: 1,
@@ -51,10 +52,11 @@ function Notifications() {
   const handleMarkAllAsRead = () => {
     const updatedNotifications = notificationsArray.map((notification) => ({
       ...notification,
-      status: true
+      status: !notification.status
     }));
 
     setNotificationsArray(updatedNotifications);
+    setButtonLabel("Mark all as unread");
   };
 
   return (
@@ -74,7 +76,7 @@ function Notifications() {
           <div className={cx(styles.paginationWrapper, "flexRow-right-centered")}>
             <Button
               onClick={handleMarkAllAsRead}
-              title='Mark all as read'
+              title={buttonLabel}
               type='secondary'
               size='small'
               suffixIcon={<CheckmarkIcon />}
