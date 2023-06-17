@@ -119,7 +119,15 @@
 }
 
 .cardWrapperRead {
-  opacity: 0.5;
+  .cardHeader {
+    .cardIcon {
+      opacity: 0.5;
+    }
+
+    .metaData {
+      opacity: 0.5;
+    }
+  }
 }
 
 @media all and (min-width: 992px) {
