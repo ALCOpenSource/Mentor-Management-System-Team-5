@@ -20,13 +20,13 @@ To get it up and running on your local machine, follow the steps below:
 
 *   Clone the repo with the command \`git clone\`
 
-*   Indicate your interest to work on any issue. "eg. I want to work on this issue or I am interested in this issue"
+*   Indicate your interest to work on any issue. "eg. I want to work on this issue, or I am interested in this issue"
 
-*   Open a feature branch from the 'develop' branch. eg feat/
+*   Open a feature branch from the 'develop' branch. e.g. feat/
 
-*   Make sure the name is descriptive for your branch but not too long. Lead with what the the branch is doing eg new feature or bug but follow this pattern `type/branch-description` eg `feature/add-login-functionality`.
+*   Make sure the name describes your branch but is not too long. Lead with what the branch is doing, e.g. new feature or bug but follow this pattern `type/branch-description` eg `feature/add-login-functionality`.
 
-*   Ensure your branch is up to date with latest changes before pushing
+*   Ensure your branch is up to date with the latest changes before pushing
 
 *   Create a pull request against develop branch
 
@@ -50,16 +50,17 @@ To get it up and running on your local machine, follow the steps below:
 
 #### Backend
 
-*   Beckend
+*   Backend
 
 ## Design
 
-The design can be find [here](https://www.figma.com/file/JNZKj3lachPypSOMBOhC1e/MMS-ALC-0pen-Source-Project?node-id=6784%3A7593\&t=dnwBBGHPZRxryUnJ-0)
-Find the Prototype [here](https://www.figma.com/proto/JNZKj3lachPypSOMBOhC1e/MMS-ALC-0pen-Source-Project?page-id=6782%3A4428\&node-id=6784%3A6712\&viewport=565%2C382%2C0.02\&scaling=min-zoom\&starting-point-node-id=6784%3A6712)
+The design can be found [here](https://www.figma.com/proto/Uyj0o0nX8f5QdXfGzO3ZCZ/MMS-Project-Official?page-id=121%3A20&node-id=2919-69751&starting-point-node-id=2527%3A72409&show-proto-sidebar=1)
+Find the Prototype [here](
+https://www.figma.com/proto/Uyj0o0nX8f5QdXfGzO3ZCZ/MMS-Project-Official?page-id=121%3A20&node-id=2919-69751&starting-point-node-id=2527%3A72409&show-proto-sidebar=1)
 
-Work on your Team assigned task eg. Team 1, Team 2 etc.
+Work on your Team assigned task, e.g. Team 1, Team 2 etc.
 
-NOTE: Stickly adhere to the style guide on the design, buttons, texts etc.
+NOTE: Strictly adhere to the style guide on the design, buttons, texts etc.
 
 ### Creating issue
 
