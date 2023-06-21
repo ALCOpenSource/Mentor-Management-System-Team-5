@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace mms.Application.Report.Command
 {
-    public class DownloadReportCommandHandler : IRequestHandler<DownloadReportCommand, byte[]>
+    public class DownloadReportCommandHandler : IRequestHandler<DownloadReportCommand, IResult<byte[]>>
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ namespace mms.Application.Report.Command
             _converter = converter;
         }
 
-        public async Task<byte[]> Handle(DownloadReportCommand request, CancellationToken cancellationToken)
+        public async Task<IResult<byte[]>> Handle(DownloadReportCommand request, CancellationToken cancellationToken)
         {
             var report = await _context.Reports.Where(a => a.Id == request.Id).FirstOrDefaultAsync();
 
@@ -78,7 +78,7 @@ namespace mms.Application.Report.Command
 
             var pdfDocument = _converter.Convert(htmlToPdfDocument);
 
-            return pdfDocument;
+            return Result<byte[]>.Success(pdfDocument, "Success");
         }
     }
 }
