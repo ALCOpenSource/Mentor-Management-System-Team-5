@@ -1,5 +1,3 @@
-using DinkToPdf.Contracts;
-using DinkToPdf;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using mms.api.Configurations;
@@ -10,8 +8,6 @@ using mms.Domain.Mail;
 using mms.Infrastructure;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Seeder;
-using mms.Application.Report.Command;
-using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +20,6 @@ configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: t
 builder.Logging.AddConsole();
 
 // Add services to the container.
-CustomAssemblyLoadContext context = new CustomAssemblyLoadContext();
-context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libraries/libwkhtmltox.dll"));
-builder.Services.AddSingleton(typeof(IConverter),
-    new SynchronizedConverter(new PdfTools()));
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
