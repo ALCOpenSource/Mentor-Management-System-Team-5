@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using mms.Domain.Entities;
-using mms.Domain.Enums;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Policy;
 
@@ -39,6 +38,9 @@ namespace mms.Infrastructure.Seeder
                     List<UserNotification> usersNotifications = new();
                     List<UserPrivacy> userPrivacy = new();
 
+                    DataGenerator.InitMentorsAndManagersData();
+
+                    var mentorsAndManagers = DataGenerator.MentorsAndManagers;
 
                     var user = new AppUser
                     {
@@ -129,24 +131,41 @@ namespace mms.Infrastructure.Seeder
                         AppUserId = user2.Id,
                     });
 
-                    for (var index = 0; index < users.Count; index++)
+                    foreach (AppUser appUser in users)
                     {
-                        switch (index)
+                        await userManager.CreateAsync(appUser, Password);
+                        await userManager.AddToRoleAsync(appUser, Policies.Admin);
+                    }
+
+                    foreach (AppUser appUser in mentorsAndManagers)
+                    {
+                        usersNotifications.Add(new UserNotification()
                         {
-                            case 0:
-                                await userManager.CreateAsync(users[index], Password);
-                                await userManager.AddToRoleAsync(users[index], Policies.Admin);
-                                break;
-                            case 1:
-                                await userManager.CreateAsync(users[index], Password);
-                                await userManager.AddToRoleAsync(users[index], Policies.Mentor);
-                                break;
-                            default:
-                                await userManager.CreateAsync(users[index], Password);
-                                await userManager.AddToRoleAsync(users[index], Policies.Manager);
-                                break;
+                            Id = Guid.NewGuid().ToString(),
+                            AppUserId = appUser.Id,
+                        });
+                        
+                        userPrivacy.Add(new UserPrivacy()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            AppUserId = appUser.Id,
+                        });
+                    }
+
+                    for (int i = 0; i < mentorsAndManagers.Count; i++)
+                    {
+                        if (i <= 30) {
+                            await userManager.CreateAsync(mentorsAndManagers[i], Password);
+                            await userManager.AddToRoleAsync(mentorsAndManagers[i], Policies.Mentor);
+                        } else if (i > 30 && i <= 50) {
+                            await userManager.CreateAsync(mentorsAndManagers[i], Password);
+                            await userManager.AddToRoleAsync(mentorsAndManagers[i], Policies.Manager);
+                        } else {
+                            await userManager.CreateAsync(mentorsAndManagers[i], Password);
+                            await userManager.AddToRoleAsync(mentorsAndManagers[i], Policies.Admin);
                         }
                     }
+
 
                     await context.UserNotifications.AddRangeAsync(usersNotifications);
                     await context.UserPrivacy.AddRangeAsync(userPrivacy);
