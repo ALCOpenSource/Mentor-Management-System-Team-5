@@ -128,22 +128,5 @@ namespace mms.api.Controllers
 
             return Ok(result);
         }
-
-        [HttpGet("report/{id}")]
-        public async Task<IActionResult> PutReport(string id)
-        {
-            DownloadReportCommand command = new()
-            {
-                Id = id
-            };
-
-            var result = await Mediator.Send(command);
-            if (result.Succeeded == false)
-            {
-                return BadRequest(result);
-            }
-
-            return Ok(result);
-        }
     }
 }
