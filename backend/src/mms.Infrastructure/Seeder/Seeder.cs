@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using mms.Domain.Entities;
+using mms.Domain.Enums;
 using mms.Infrastructure.Context;
 using mms.Infrastructure.Policy;
 
@@ -128,10 +129,23 @@ namespace mms.Infrastructure.Seeder
                         AppUserId = user2.Id,
                     });
 
-                    foreach (AppUser appUser in users)
+                    for (var index = 0; index < users.Count; index++)
                     {
-                        await userManager.CreateAsync(appUser, Password);
-                        await userManager.AddToRoleAsync(appUser, Policies.Admin);
+                        switch (index)
+                        {
+                            case 0:
+                                await userManager.CreateAsync(users[index], Password);
+                                await userManager.AddToRoleAsync(users[index], Policies.Admin);
+                                break;
+                            case 1:
+                                await userManager.CreateAsync(users[index], Password);
+                                await userManager.AddToRoleAsync(users[index], Policies.Mentor);
+                                break;
+                            default:
+                                await userManager.CreateAsync(users[index], Password);
+                                await userManager.AddToRoleAsync(users[index], Policies.Manager);
+                                break;
+                        }
                     }
 
                     await context.UserNotifications.AddRangeAsync(usersNotifications);
