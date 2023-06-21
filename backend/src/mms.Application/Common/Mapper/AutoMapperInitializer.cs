@@ -24,6 +24,7 @@ using mms.Application.Report.Command;
 using mms.Application.UserTasks.Command.UpdateTask;
 using mms.Application.Programs.Query.ArchivedPrograms;
 using mms.Application.Common.DTOs.Mentors;
+using mms.Application.Profile.Query.GetAllProfiles;
 using mms.Application.Programs.Command.CreateProgram;
 using mms.Application.Programs.Command.UpdateTask;
 using mms.Application.UserTasks.Command.DeleteTask;
@@ -66,7 +67,7 @@ namespace mms.Application.Common.Mapper
             //Mapping Domain Object to dto
             CreateMap<ProgramsMentor, MentorDTO>().ReverseMap();
             CreateMap<MentorManager, MentorManagerDTO>().ReverseMap();
-            CreateMap<CreateTaskCommand,List<string>>().ReverseMap();
+            CreateMap<CreateTaskCommand, List<string>>().ReverseMap();
             CreateMap<CreateTaskCommand, List<string>>().ReverseMap();
             CreateMap<UserTask, List<MentorManager>>().ReverseMap();
             CreateMap<UserTask, List<ProgramsMentor>>().ReverseMap();
@@ -83,6 +84,8 @@ namespace mms.Application.Common.Mapper
             CreateMap<FAQEntity, PostFAQCommand>().ReverseMap();
             CreateMap<FAQEntity, PutFAQCommand>().ReverseMap();
             CreateMap<FAQEntity, GetFAQsResponse>().ReverseMap();
+
+            CreateMap<AppUserEntity, GetAllProfilesResponse>().ReverseMap();
         }
     }
 }

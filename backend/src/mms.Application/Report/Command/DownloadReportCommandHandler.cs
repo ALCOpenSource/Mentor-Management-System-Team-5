@@ -19,6 +19,7 @@ namespace mms.Application.Report.Command
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
         private readonly IConverter _converter;
+
         public DownloadReportCommandHandler(ApplicationContext context, IMapper mapper, IConverter converter)
         {
             _context = context;
@@ -28,7 +29,6 @@ namespace mms.Application.Report.Command
 
         public async Task<byte[]> Handle(DownloadReportCommand request, CancellationToken cancellationToken)
         {
-
             var report = await _context.Reports.Where(a => a.Id == request.Id).FirstOrDefaultAsync();
 
             var html = $@"
