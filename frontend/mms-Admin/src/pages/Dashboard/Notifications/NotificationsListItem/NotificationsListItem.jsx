@@ -17,8 +17,8 @@ function NotificationsListItem({ data, setItemStatus }) {
       key: "read"
     },
     {
-      name: "Unread",
-      key: "unread"
+      name: "Delete",
+      key: "delete"
     }
   ];
 
@@ -30,8 +30,8 @@ function NotificationsListItem({ data, setItemStatus }) {
     });
   };
 
-  const toggleDataStatus = (item, statusValue) => {
-    const updatedNotifications = { ...item, status: statusValue };
+  const toggleDataStatus = (item) => {
+    const updatedNotifications = { ...item, status: !item.status };
     setItemStatus((prevNotifications) =>
       prevNotifications.map((notification) => (notification.id === item.id ? updatedNotifications : notification))
     );
@@ -40,10 +40,11 @@ function NotificationsListItem({ data, setItemStatus }) {
   const handleDropdownListClick = (type, data) => {
     setIsDropdownOpen(false);
     if (type === "read") {
-      toggleDataStatus(data, true);
+      toggleDataStatus(data);
     }
-    if (type === "unread") {
-      toggleDataStatus(data, false);
+
+    if(type === "delete"){
+      // Do something
     }
   };
 
@@ -81,7 +82,7 @@ function NotificationsListItem({ data, setItemStatus }) {
                       key={listItem.key}
                       className={cx(styles.dropdownListItem)}
                     >
-                      {listItem.name}
+                      {(listItem.key === "read" && data.status === true) ? "Unread" : listItem.name}
                     </li>
                   );
                 })}

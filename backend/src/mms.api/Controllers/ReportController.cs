@@ -94,14 +94,6 @@ namespace mms.api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("downloadReport/{reportId}")]
-        public async Task<IActionResult> GetDownloadPdf(string reportId)
-        {
-            var result = await Mediator.Send(new DownloadReportCommand { Id = reportId });
-            return File(result,"application/octet-stream", "report.pdf");
-        }
-
-      
         [HttpPost("report")]
         public async Task<IActionResult> CreateTask(CreateReportCommand command)
         {
