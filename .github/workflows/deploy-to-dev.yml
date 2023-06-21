@@ -1,8 +1,10 @@
-name: Deploy to test server
+name: Deploy test server
 on:
+  workflow_dispatch:
   push:
     branches:
       - develop
+
 jobs:
   build:
     name: Build
@@ -32,4 +34,5 @@ jobs:
             cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/appsettings.Production.json Mentor-Management-System-Team-5/backend/src/mms.api/appsettings.Production.json
             cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/Properties/launchSettings.json Mentor-Management-System-Team-5/backend/src/mms.api/Properties/launchSettings.json
             cd Mentor-Management-System-Team-5/
-            docker compose up -d --force-recreate
+            docker compose build --no-cache
+            docker compose up -d

@@ -37,7 +37,6 @@ namespace mms.api.Controllers
         }
 
 
-
         [HttpGet("get-weekly-reports")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -85,7 +84,7 @@ namespace mms.api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetReportById(string id)
         {
-            var result = await Mediator.Send(new GetReportByIdCommand { Id = id});
+            var result = await Mediator.Send(new GetReportByIdCommand { Id = id });
             if (!result.Succeeded)
             {
                 return BadRequest(result);
