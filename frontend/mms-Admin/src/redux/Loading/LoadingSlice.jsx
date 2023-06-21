@@ -18,8 +18,6 @@ const initialState = {
 
   //Settings
   changePasswordLoading: false,
-  updateProfileLoading: false,
-  getProfileLoading: false,
   editUserNotificationsLoading: false,
   getUserNotificationsLoading: false,
   editUserPrivacyLoading: false,
@@ -61,7 +59,12 @@ const initialState = {
   //Mentor Managers
   getAllMentorManagersLoading: false,
   deleteMentorManagerLoading: false,
-  getMentorManagerDetailsLoading: false
+  getMentorManagerDetailsLoading: false,
+
+  //Profile
+  updateProfileLoading: false,
+  getProfileLoading: false,
+  getAllUserProfilesLoading: false
 };
 
 export const loadingSlice = createSlice({
@@ -111,12 +114,7 @@ export const loadingSlice = createSlice({
     changePasswordLoading: (state, action) => {
       state.changePasswordLoading = action.payload;
     },
-    updateProfileLoading: (state, action) => {
-      state.updateProfileLoading = action.payload;
-    },
-    getProfileLoading: (state, action) => {
-      state.getProfileLoading = action.payload;
-    },
+
     editUserNotificationsLoading: (state, action) => {
       state.editUserNotificationsLoading = action.payload;
     },
@@ -226,6 +224,17 @@ export const loadingSlice = createSlice({
     },
     getMentorManagerDetailsLoading: (state, action) => {
       state.getMentorManagerDetailsLoading = action.payload;
+    },
+
+    //Profile
+    getProfileLoading: (state, action) => {
+      state.getProfileLoading = action.payload;
+    },
+    updateProfileLoading: (state, action) => {
+      state.updateProfileLoading = action.payload;
+    },
+    getAllUserProfilesLoading: (state, action) => {
+      state.getAllUserProfilesLoading = action.payload;
     }
   }
 });
@@ -244,8 +253,6 @@ export const {
   createNewReportLoading,
   getReportDetailsLoading,
   changePasswordLoading,
-  updateProfileLoading,
-  getProfileLoading,
   editUserNotificationsLoading,
   getUserNotificationsLoading,
   editUserPrivacyLoading,
@@ -279,7 +286,10 @@ export const {
   getMentorDetailsLoading,
   getAllMentorManagersLoading,
   deleteMentorManagerLoading,
-  getMentorManagerDetailsLoading
+  getMentorManagerDetailsLoading,
+  updateProfileLoading,
+  getProfileLoading,
+  getAllUserProfilesLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;

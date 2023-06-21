@@ -9,6 +9,7 @@ import MentorsSlice from "./Mentors/MentorsSlice";
 import MentorManagersSlice from "./MentorManagers/MentorManagersSlice";
 import TasksSlice from "./Tasks/TasksSlice";
 import ProgramsSlice from "./Programs/ProgramsSlice";
+import ProfileSlice from "./Profile/ProfileSlice";
 
 const store = configureStore({
   reducer: {
@@ -21,7 +22,8 @@ const store = configureStore({
     mentors: MentorsSlice,
     mentorManagers: MentorManagersSlice,
     tasks: TasksSlice,
-    programs: ProgramsSlice
+    programs: ProgramsSlice,
+    profile: ProfileSlice
   },
   devTools: process.env.NODE_ENV === "development"
 });

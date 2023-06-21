@@ -12,7 +12,7 @@ import AuthSideHero from "@/components/AuthSideHero/AuthSideHero";
 import { loginSchema } from "@/helpers/validation";
 
 import { login } from "@/redux/Auth/AuthSlice";
-import { getProfile } from "@/redux/Settings/SettingsSlice";
+import { getProfile } from "@/redux/Profile/ProfileSlice";
 import Button from "@/components/Button/Button";
 
 // import { useGoogleLogin } from "@react-oauth/google";
