@@ -1,0 +1,38 @@
+name: Deploy test server
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd ${{ secrets.WORK_DIR }}
+            rm -rf Mentor-Management-System-Team-5/
+            git clone -b develop https://github.com/Honeyloveet/Mentor-Management-System-Team-5.git
+            cd ${{ secrets.WORK_DIR }}/Mentor-Management-System-Team-5
+            docker compose down
+            cd ${{ secrets.WORK_DIR }}
+            cp ${{ secrets.FILES_DIR }}/docker-compose.yml Mentor-Management-System-Team-5/docker-compose.yml
+            cp ${{ secrets.FILES_DIR }}/frontend/mms-Admin/.dockerignore Mentor-Management-System-Team-5/frontend/mms-Admin/.dockerignore
+            cp ${{ secrets.FILES_DIR }}/frontend/mms-Admin/.env Mentor-Management-System-Team-5/frontend/mms-Admin/.env
+            cp ${{ secrets.FILES_DIR }}/frontend/mms-Admin/Dockerfile Mentor-Management-System-Team-5/frontend/mms-Admin/Dockerfile
+            cp ${{ secrets.FILES_DIR }}/backend/src/Dockerfile.deploy Mentor-Management-System-Team-5/backend/src/Dockerfile.deploy
+            cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/appsettings.json Mentor-Management-System-Team-5/backend/src/mms.api/appsettings.json
+            cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/appsettings.Development.json Mentor-Management-System-Team-5/backend/src/mms.api/appsettings.Development.json
+            cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/appsettings.Production.json Mentor-Management-System-Team-5/backend/src/mms.api/appsettings.Production.json
+            cp ${{ secrets.FILES_DIR }}/backend/src/mms.api/Properties/launchSettings.json Mentor-Management-System-Team-5/backend/src/mms.api/Properties/launchSettings.json
+            cd Mentor-Management-System-Team-5/
+            docker compose build --no-cache
+            docker compose up -d
