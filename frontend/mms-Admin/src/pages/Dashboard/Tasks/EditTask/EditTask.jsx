@@ -16,14 +16,13 @@ import { useForm, Controller } from "react-hook-form";
 import { editTaskSchema } from "@/helpers/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
-import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
-import mentorImage from "@/assets/images/sample-profile-image.svg";
-import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
-import { getAllMentorManagers } from "@/redux/MentorManagers/MentorManagersSlice";
+// import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
+// import { getAllMentorManagers } from "@/redux/MentorManagers/MentorManagersSlice";
 import { getTaskDetails, editTask } from "@/redux/Tasks/TasksSlice";
 import { useParams } from "react-router-dom";
 import closeIconAlt from "@/assets/icons/close-icon.svg";
 import { useNavigate } from "react-router-dom";
+import { getAllUserProfiles } from "@/redux/Profile/ProfileSlice";
 
 const EditTask = () => {
   const params = useParams();
@@ -42,132 +41,21 @@ const EditTask = () => {
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
   const taskDetails = useSelector((state) => state.tasks.getTaskDetailsData);
-  const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
-  const allMentorManagersData = useSelector((state) => state.mentorManagers.getAllMentorManagersData);
+  // const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
+  // const allMentorManagersData = useSelector((state) => state.mentorManagers.getAllMentorManagersData);
   const editTaskLoading = useSelector((state) => state.loading.editTaskLoading);
 
-  console.log(allMentorManagersData, "all mentor managers data");
-  console.log(allMentorsData, "all mentors data");
+  const allUserProfilesData = useSelector((state) => state.profile.getAllUserProfilesData);
 
   useEffect(() => {
-    dispatch(getAllMentors());
-    dispatch(getAllMentorManagers());
+    // dispatch(getAllMentors());
+    // dispatch(getAllMentorManagers());
+    dispatch(getAllUserProfiles());
   }, [dispatch]);
 
   useEffect(() => {
     dispatch(getTaskDetails(taskId));
   }, [dispatch, taskId]);
-
-  const mentorsArray = [
-    {
-      id: "1",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "2",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "3",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "4",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "5",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "6",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "7",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "8",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "9",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "10",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
-
-  const mentorManagersArray = [
-    {
-      id: "91",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "92",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "93",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "94",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "95",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
 
   const resolver = yupResolver(editTaskSchema);
 
@@ -188,18 +76,18 @@ const EditTask = () => {
   }, [reset, taskDetails]);
 
   const handleEditTask = async (data) => {
-    let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
-      return { mentorManagerId: id };
-    });
-    let formattedMentorIds = selectedMentors.map((id) => {
-      return { programsMentorId: id };
-    });
+    // let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
+    //   return { mentorManagerId: id };
+    // });
+    // let formattedMentorIds = selectedMentors.map((id) => {
+    //   return { programsMentorId: id };
+    // });
 
     let payload = {
       ...data,
       id: taskId,
-      managers: formattedMentorManagerIds,
-      mentors: formattedMentorIds
+      managers: [],
+      mentors: []
     };
 
     const response = await dispatch(editTask(payload));
@@ -253,7 +141,9 @@ const EditTask = () => {
         )}
         <div className={cx(styles.searchWrapper)}>
           <Search
-            inputPlaceholder={openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"}
+            inputPlaceholder={
+              openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"
+            }
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}
@@ -300,6 +190,21 @@ const EditTask = () => {
       setSelectedMentorManagers([]);
     } else if (category === "mentor") {
       setSelectedMentors([]);
+    }
+  };
+
+  const getUsers = (category) => {
+    if (category === "mentorManager") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "manager"))
+      );
+    }
+    if (category === "mentor") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "mentor"))
+      );
     }
   };
 
@@ -386,14 +291,14 @@ const EditTask = () => {
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
             selectedMenuItem={handleSideBarMenuClick}
-            data={getListComponents(mentorManagersArray, selectedMentorManagers)}
+            data={getListComponents(getUsers("mentorManager"), selectedMentorManagers)}
           />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
             selectedMenuItem={handleSideBarMenuClick}
-            data={getListComponents(mentorsArray, selectedMentors)}
+            data={getListComponents(getUsers("mentor"), selectedMentors)}
           />
         </div>
       ) : null}

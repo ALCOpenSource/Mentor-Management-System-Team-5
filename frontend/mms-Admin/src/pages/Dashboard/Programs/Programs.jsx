@@ -3,7 +3,6 @@ import cx from "classnames";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 import styles from "./Programs.module.scss";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
-// import FilterAndSearch from "@/components/FilterAndSearch/FilterAndSearch";
 import backIcon from "@/assets/icons/back-icon.svg";
 import Search from "@/components/Search/Search";
 import Filter from "@/components/Filter/Filter";

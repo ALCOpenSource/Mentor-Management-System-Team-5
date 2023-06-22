@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import { getProfile, getAllUserProfiles } from "@/redux/Profile/ProfileSlice";
+import { getProfile } from "@/redux/Profile/ProfileSlice";
 
 import { Container, Row } from "react-bootstrap";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
@@ -25,9 +25,6 @@ function Profile() {
 
   const userProfile = useSelector((state) => state.profile.getProfileData);
   const getProfileLoading = useSelector((state) => state.loading.getProfileLoading);
-  const getAllUserProfilesData = useSelector((state) => state.profile.getAllUserProfilesData);
-
-  console.log(getAllUserProfilesData, "all users data");
 
   useEffect(() => {
     if (Object.keys(userProfile).length > 0) {
@@ -93,7 +90,6 @@ function Profile() {
 
   useEffect(() => {
     dispatch(getProfile());
-    dispatch(getAllUserProfiles());
   }, [dispatch]);
 
   return (

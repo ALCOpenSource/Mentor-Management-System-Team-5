@@ -19,6 +19,15 @@
     border-radius: 50%;
   }
 
+  .avatarText {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--green4Color);
+    font-size: 1.125rem;
+    font-family: var(--semiBold);
+  }
+
   .userInfo {
     gap: 0.25rem;
     flex-grow: 1;
