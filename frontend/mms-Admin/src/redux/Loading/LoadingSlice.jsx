@@ -14,12 +14,10 @@ const initialState = {
   getMonthlyReportsLoading: false,
   getYearlyReportsLoading: false,
   createNewReportLoading: false,
-  editReportLoading: false,
+  getReportDetailsLoading: false,
 
   //Settings
   changePasswordLoading: false,
-  updateProfileLoading: false,
-  getProfileLoading: false,
   editUserNotificationsLoading: false,
   getUserNotificationsLoading: false,
   editUserPrivacyLoading: false,
@@ -50,12 +48,24 @@ const initialState = {
   getActiveProgramsByMonthLoading: false,
   getActiveProgramsByYearLoading: false,
   createProgramLoading: false,
+  getProgramDetailsLoading: false,
 
   //Mentors
   getAllMentorsLoading: false,
   inviteMentorLoading: false,
   registerMentorLoading: false,
-  deleteMentorLoading: false
+  deleteMentorLoading: false,
+  getMentorDetailsLoading: false,
+
+  //Mentor Managers
+  getAllMentorManagersLoading: false,
+  deleteMentorManagerLoading: false,
+  getMentorManagerDetailsLoading: false,
+
+  //Profile
+  updateProfileLoading: false,
+  getProfileLoading: false,
+  getAllUserProfilesLoading: false
 };
 
 export const loadingSlice = createSlice({
@@ -97,20 +107,15 @@ export const loadingSlice = createSlice({
     createNewReportLoading: (state, action) => {
       state.createNewReportLoading = action.payload;
     },
-    editReportLoading: (state, action) => {
-      state.editReportLoading = action.payload;
+    getReportDetailsLoading: (state, action) => {
+      state.getReportDetailsLoading = action.payload;
     },
 
     //Settings
     changePasswordLoading: (state, action) => {
       state.changePasswordLoading = action.payload;
     },
-    updateProfileLoading: (state, action) => {
-      state.updateProfileLoading = action.payload;
-    },
-    getProfileLoading: (state, action) => {
-      state.getProfileLoading = action.payload;
-    },
+
     editUserNotificationsLoading: (state, action) => {
       state.editUserNotificationsLoading = action.payload;
     },
@@ -193,6 +198,9 @@ export const loadingSlice = createSlice({
     createProgramLoading: (state, action) => {
       state.createProgramLoading = action.payload;
     },
+    getProgramDetailsLoading: (state, action) => {
+      state.getProgramDetailsLoading = action.payload;
+    },
 
     //Mentors
     getAllMentorsLoading: (state, action) => {
@@ -206,6 +214,31 @@ export const loadingSlice = createSlice({
     },
     deleteMentorLoading: (state, action) => {
       state.deleteMentorLoading = action.payload;
+    },
+    getMentorDetailsLoading: (state, action) => {
+      state.getMentorDetailsLoading = action.payload;
+    },
+
+    //Mentor Managers
+    getAllMentorManagersLoading: (state, action) => {
+      state.getAllMentorManagersLoading = action.payload;
+    },
+    deleteMentorManagerLoading: (state, action) => {
+      state.deleteMentorManagerLoading = action.payload;
+    },
+    getMentorManagerDetailsLoading: (state, action) => {
+      state.getMentorManagerDetailsLoading = action.payload;
+    },
+
+    //Profile
+    getProfileLoading: (state, action) => {
+      state.getProfileLoading = action.payload;
+    },
+    updateProfileLoading: (state, action) => {
+      state.updateProfileLoading = action.payload;
+    },
+    getAllUserProfilesLoading: (state, action) => {
+      state.getAllUserProfilesLoading = action.payload;
     }
   }
 });
@@ -222,10 +255,8 @@ export const {
   getMonthlyReportsLoading,
   getYearlyReportsLoading,
   createNewReportLoading,
-  editReportLoading,
+  getReportDetailsLoading,
   changePasswordLoading,
-  updateProfileLoading,
-  getProfileLoading,
   editUserNotificationsLoading,
   getUserNotificationsLoading,
   editUserPrivacyLoading,
@@ -255,7 +286,15 @@ export const {
   getActiveProgramsByWeekLoading,
   getActiveProgramsByMonthLoading,
   getActiveProgramsByYearLoading,
-  createProgramLoading
+  createProgramLoading,
+  getProgramDetailsLoading,
+  getMentorDetailsLoading,
+  getAllMentorManagersLoading,
+  deleteMentorManagerLoading,
+  getMentorManagerDetailsLoading,
+  updateProfileLoading,
+  getProfileLoading,
+  getAllUserProfilesLoading
 } = loadingSlice.actions;
 
 export default loadingSlice.reducer;

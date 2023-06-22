@@ -24,7 +24,7 @@ import arrayToString from "@/helpers/arrayToString";
 import { logout } from "@/utils/auth";
 import { titleCase } from "@/helpers/textTransform";
 import { useSelector, useDispatch } from "react-redux";
-import { getProfile } from "@/redux/Settings/SettingsSlice";
+import { getProfile } from "@/redux/Profile/ProfileSlice";
 import useIsMobile from "@/hooks/useIsMobile";
 
 function DashboardSideBar() {
@@ -35,7 +35,7 @@ function DashboardSideBar() {
   const { toggleSidebar } = useProSidebar();
   const userData = userInfo();
   const currentPage = location.pathname.split("/")[2] || "";
-  const userProfile = useSelector((state) => state.settings.getProfileData);
+  const userProfile = useSelector((state) => state.profile.getProfileData);
 
   const menuItemsArray = useMemo(
     () => [

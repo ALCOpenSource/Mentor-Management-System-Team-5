@@ -5,7 +5,7 @@ export const deleteProgramApi = async (data) => {
 };
 
 export const editProgramApi = async (data) => {
-  return await axios.put(`/Programs/program/${data}`, data);
+  return await axios.put(`/Programs/program/${data?.id}`, data);
 };
 
 export const getAllProgramsApi = async (data) => {
@@ -34,4 +34,8 @@ export const getActiveProgramsByYearApi = async (data) => {
 
 export const createProgramApi = async (data) => {
   return await axios.post("/Programs/programs", data);
+};
+
+export const getProgramDetailsApi = async (data) => {
+  return await axios.get(`/Programs/programs/${data}`, data);
 };

@@ -54,13 +54,13 @@ export const settingsSupportSchema = Yup.object().shape({
 });
 
 export const createTaskSchema = Yup.object().shape({
-  title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
+  title: Yup.string().required("Title is required"),
   description: Yup.string().required("Task description is required")
 });
 
 export const createProgramSchema = Yup.object().shape({
-  programName: Yup.string().required("Program name is required"),
-  programDescription: Yup.string().required("Program description is required")
+  name: Yup.string().required("Program name is required"),
+  description: Yup.string().required("Program description is required")
 });
 
 export const createProgramCriteriaSchema = Yup.object().shape({
@@ -69,8 +69,8 @@ export const createProgramCriteriaSchema = Yup.object().shape({
 });
 
 export const editProgramSchema = Yup.object().shape({
-  programName: Yup.string().required("Program name is required"),
-  programDescription: Yup.string().required("Program description is required")
+  name: Yup.string().required("Program name is required"),
+  description: Yup.string().required("Program description is required")
 });
 
 export const editProgramCriteriaSchema = Yup.object().shape({
@@ -79,12 +79,12 @@ export const editProgramCriteriaSchema = Yup.object().shape({
 });
 
 export const editTaskSchema = Yup.object().shape({
-  title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
+  title: Yup.string().required("Title is required"),
   description: Yup.string().required("Task description is required")
 });
 
 export const createReportSchema = Yup.object().shape({
-  title: Yup.string().required("Title is required").max(32, "The title must contain a maximum of 32 characters"),
+  title: Yup.string().required("Title is required"),
   achievements: Yup.string(),
   blockers: Yup.string(),
   recommendations: Yup.string()

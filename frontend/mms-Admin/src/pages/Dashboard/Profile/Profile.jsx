@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
-import { getProfile } from "@/redux/Settings/SettingsSlice";
+import { getProfile } from "@/redux/Profile/ProfileSlice";
 
 import { Container, Row } from "react-bootstrap";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
@@ -23,7 +23,7 @@ function Profile() {
   const [profileHeaderData, setProfileHeaderData] = useState({});
   const [profileDetailData, setProfileDetailData] = useState({});
 
-  const userProfile = useSelector((state) => state.settings.getProfileData);
+  const userProfile = useSelector((state) => state.profile.getProfileData);
   const getProfileLoading = useSelector((state) => state.loading.getProfileLoading);
 
   useEffect(() => {

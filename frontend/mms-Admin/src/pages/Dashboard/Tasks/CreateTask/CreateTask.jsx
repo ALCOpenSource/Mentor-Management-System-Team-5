@@ -11,18 +11,17 @@ import closeIcon from "@/assets/icons/undo-icon.svg";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
-// import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
 import { createTaskSchema } from "@/helpers/validation";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
-import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
-import mentorImage from "@/assets/images/sample-profile-image.svg";
-import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
+// import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
+// import { getAllMentorManagers } from "@/redux/MentorManagers/MentorManagersSlice";
 import { createTask } from "@/redux/Tasks/TasksSlice";
 import closeIconAlt from "@/assets/icons/close-icon.svg";
 import { useNavigate } from "react-router-dom";
+import { getAllUserProfiles } from "@/redux/Profile/ProfileSlice";
 
 function CreateTask() {
   const navigate = useNavigate();
@@ -32,130 +31,22 @@ function CreateTask() {
     category: ""
   });
   const [collapseInput, setCollapseInput] = useState(true);
-  // const [closeSelectElement, setCloseSelectElement] = useState(false);
   const [selectedMentorManagers, setSelectedMentorManagers] = useState([]);
   const [selectedMentors, setSelectedMentors] = useState([]);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
-  const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
+  // const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
+  // const allMentorManagersData = useSelector((state) => state.mentorManagers.getAllMentorManagersData);
+  const createTaskLoading = useSelector((state) => state.loading.createTaskLoading);
 
-  console.log(allMentorsData, "all mentors data");
+  const allUserProfilesData = useSelector((state) => state.profile.getAllUserProfilesData);
 
   useEffect(() => {
-    dispatch(getAllMentors());
+    // dispatch(getAllMentors());
+    // dispatch(getAllMentorManagers());
+    dispatch(getAllUserProfiles());
   }, [dispatch]);
-
-  const mentorsArray = [
-    {
-      id: "1",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "2",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "3",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "4",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "5",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "6",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "7",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "8",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "9",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "10",
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
-
-  const mentorManagersArray = [
-    {
-      id: "91",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "92",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "93",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "94",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: "95",
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
 
   const resolver = yupResolver(createTaskSchema);
 
@@ -172,7 +63,6 @@ function CreateTask() {
   } = useForm({ defaultValues, resolver, mode: "all" });
 
   const handleCreateTask = async (data) => {
-    console.log(data);
     let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
       return { mentorManagerId: id };
     });
@@ -182,7 +72,7 @@ function CreateTask() {
 
     let payload = {
       ...data,
-      status: 3,
+      status: 3, // this would be changed later
       managers: formattedMentorManagerIds,
       mentors: formattedMentorIds
     };
@@ -213,20 +103,6 @@ function CreateTask() {
     console.log(e.target.value);
   };
 
-  // const handleSelectedFilterItem = (item) => {
-  //   console.log(item);
-  // };
-
-  // const handleCloseSearchInput = (e) => {
-  //   console.log(e, "handle close input");
-  //   setCollapseInput(true);
-  // };
-
-  // const handleCloseSelectElement = (e) => {
-  //   console.log(e, "handle close select");
-  //   setCloseSelectElement(true);
-  // };
-
   const getListComponents = (data, selectedUsers) => {
     const listItems = data.map((item) => {
       return {
@@ -234,7 +110,7 @@ function CreateTask() {
           <PersonelComponent
             key={item?.id}
             data={item}
-            checked={selectedUsers.find((userId) => userId === item?.id)}
+            checked={selectedUsers.some((userId) => userId === item?.id)}
             handleChecked={handleSelectedItem}
           />
         ),
@@ -244,29 +120,20 @@ function CreateTask() {
 
     const headerComponent = (
       <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
-        <h6 className={cx(styles.title)}>
-          {openSideBar?.category === "mentor-manager" ? "Add Mentor Manager(s)" : "Add Mentor(s)"}
-        </h6>
+        {collapseInput && (
+          <h6 className={cx(styles.title)}>
+            {openSideBar?.category === "mentor-manager" ? "Add Mentor Manager(s)" : "Add Mentor(s)"}
+          </h6>
+        )}
         <div className={cx(styles.searchWrapper)}>
           <Search
-            inputPlaceholder='Search for mentor...'
+            inputPlaceholder={openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"}
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}
-            // closeSelectElement={handleCloseSelectElement}
           />
         </div>
-        {/* <Filter
-          dropdownItems={[
-            { name: "All", id: 1 },
-            { name: "Mentors", id: 2 },
-            { name: "Mentor Managers", id: 3 }
-          ]}
-          selectedFilterItem={handleSelectedFilterItem}
-          closeSearchInput={handleCloseSearchInput}
-          closeSelectElement={closeSelectElement}
-          setCloseSelectElement={setCloseSelectElement}
-        /> */}
+
         <img
           src={closeIcon}
           className={cx(styles.closeIcon)}
@@ -280,8 +147,6 @@ function CreateTask() {
   };
 
   const handleSelectedItem = (itemId) => {
-    console.log(itemId, "item id");
-    console.log(selectedMentorManagers, "selected mentor managers");
     if (openSideBar.category === "mentor-manager") {
       if (selectedMentorManagers.find((userId) => userId === itemId)) {
         let filteredMentorManagers = selectedMentorManagers.filter((id) => id !== itemId);
@@ -300,11 +165,30 @@ function CreateTask() {
     }
   };
 
+  const handleSideBarMenuClick = () => {
+    // This is added to remove the warning of unused function in the selection sidebar component
+  };
+
   const handleClearList = (category) => {
     if (category === "mentorManager") {
       setSelectedMentorManagers([]);
     } else if (category === "mentor") {
       setSelectedMentors([]);
+    }
+  };
+
+  const getUsers = (category) => {
+    if (category === "mentorManager") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "manager"))
+      );
+    }
+    if (category === "mentor") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "mentor"))
+      );
     }
   };
 
@@ -373,8 +257,8 @@ function CreateTask() {
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
                 onClick={handleSubmit((data) => handleCreateTask(data))}
-                // loading={loading}
-                // disabled={loading}
+                loading={createTaskLoading}
+                disabled={createTaskLoading}
                 title='Create Task'
                 type='primary'
               />
@@ -386,15 +270,15 @@ function CreateTask() {
       {openSideBar.open && openSideBar.category === "mentor-manager" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
-            // selectedMenuItem={handleSelectedItem}
-            data={getListComponents(mentorManagersArray, selectedMentorManagers)}
+            selectedMenuItem={handleSideBarMenuClick}
+            data={getListComponents(getUsers("mentorManager"), selectedMentorManagers)}
           />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
           <SelectionSideBar
-            // selectedMenuItem={handleSelectedItem}
-            data={getListComponents(mentorsArray, selectedMentors)}
+            selectedMenuItem={handleSideBarMenuClick}
+            data={getListComponents(getUsers("mentor"), selectedMentors)}
           />
         </div>
       ) : null}

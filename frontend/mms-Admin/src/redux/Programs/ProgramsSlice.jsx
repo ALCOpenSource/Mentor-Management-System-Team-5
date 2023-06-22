@@ -9,7 +9,8 @@ import {
   getActiveProgramsByWeekApi,
   getActiveProgramsByMonthApi,
   getActiveProgramsByYearApi,
-  createProgramApi
+  createProgramApi,
+  getProgramDetailsApi
 } from "../api/programs";
 
 import {
@@ -21,7 +22,8 @@ import {
   getActiveProgramsByWeekLoading,
   getActiveProgramsByMonthLoading,
   getActiveProgramsByYearLoading,
-  createProgramLoading
+  createProgramLoading,
+  getProgramDetailsLoading
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
@@ -34,7 +36,8 @@ const initialState = {
   getActiveProgramsByWeekData: {},
   getActiveProgramsByMonthData: {},
   getActiveProgramsByYearData: {},
-  createProgramData: {}
+  createProgramData: {},
+  getProgramDetailsData: {}
 };
 
 export const programsSlice = createSlice({
@@ -81,6 +84,10 @@ export const programsSlice = createSlice({
 
     createProgramAction: (state, action) => {
       state.createProgramData = action.payload;
+    },
+
+    getProgramDetailsAction: (state, action) => {
+      state.getProgramDetailsData = action.payload;
     }
   }
 });
@@ -97,7 +104,8 @@ const {
   getActiveProgramsByWeekAction,
   getActiveProgramsByMonthAction,
   getActiveProgramsByYearAction,
-  createProgramAction
+  createProgramAction,
+  getProgramDetailsAction
 } = programsSlice.actions;
 
 export const deleteProgram = (data) => async (dispatch) => {
@@ -151,12 +159,14 @@ export const getArchivedPrograms = (data) => async (dispatch) => {
   dispatch(getArchivedProgramsLoading(true));
   try {
     const response = await getArchivedProgramsApi(data);
+    console.log(response, "archie");
     // toast.success(response?.data?.data?.message);
     toast.success("Notification programs updated successfully");
     dispatch(getArchivedProgramsLoading(false));
     dispatch(getArchivedProgramsAction(response?.data?.data));
     return { success: true };
   } catch (e) {
+    console.log(e.response, "error");
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(getArchivedProgramsLoading(false));
@@ -227,10 +237,10 @@ export const getActiveProgramsByYear = () => async (dispatch) => {
   }
 };
 
-export const createProgram = () => async (dispatch) => {
+export const createProgram = (data) => async (dispatch) => {
   dispatch(createProgramLoading(true));
   try {
-    const response = await createProgramApi();
+    const response = await createProgramApi(data);
     dispatch(createProgramLoading(false));
     dispatch(createProgramAction(response?.data?.data));
     return { success: true };
@@ -238,6 +248,21 @@ export const createProgram = () => async (dispatch) => {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(createProgramLoading(false));
+    return { success: false };
+  }
+};
+
+export const getProgramDetails = (data) => async (dispatch) => {
+  dispatch(getProgramDetailsLoading(true));
+  try {
+    const response = await getProgramDetailsApi(data);
+    dispatch(getProgramDetailsLoading(false));
+    dispatch(getProgramDetailsAction(response?.data?.data));
+    return { success: true };
+  } catch (e) {
+    toast.error(e?.response?.data?.message);
+    dispatch(hasError(e?.response?.data));
+    dispatch(getProgramDetailsLoading(false));
     return { success: false };
   }
 };

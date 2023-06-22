@@ -10,7 +10,6 @@ function SelectionSideBar({ data, selectedMenuItem, activeClassName }) {
   const sidebarRef = useRef(null);
   const params = useParams();
   const currentId = params?.id;
-  console.log(currentId);
 
   const sidebarWidth = isMobile ? "100%" : "300px";
 
@@ -31,15 +30,19 @@ function SelectionSideBar({ data, selectedMenuItem, activeClassName }) {
       <div className={cx(styles.selectionSideBarHeader, "flexCol")}>{data?.headerComponent}</div>
 
       <ul>
-        {data.listItems.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => handleMenuClick(item?.id)}
-            className={currentId === item.id.toString() ? activeClassName : ""}
-          >
-            {item?.component}
-          </li>
-        ))}
+        {Array.isArray(data?.listItems) && data?.listItems.length > 0 ? (
+          data.listItems.map((item, index) => (
+            <li
+              key={index}
+              onClick={() => handleMenuClick(item?.id)}
+              className={currentId === item.id.toString() ? activeClassName : ""}
+            >
+              {item?.component}
+            </li>
+          ))
+        ) : (
+          <span>Data is not available</span>
+        )}
       </ul>
     </div>
   );

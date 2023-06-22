@@ -36,16 +36,16 @@ function Tasks() {
 
   const [taskData, setTaskData] = useState(allTasksData);
   const [taskDataLoading, setTaskDataLoading] = useState(allTasksDataLoading);
-  const [filterValue, setFilterValue] = useState("All");
+  const [filterValue, setFilterValue] = useState("all");
 
   useEffect(() => {
-    if (filterValue === "All") {
+    if (filterValue === "all") {
       setTaskData(allTasksData);
       setTaskDataLoading(allTasksDataLoading);
-    } else if (filterValue === "Completed") {
+    } else if (filterValue === "completed") {
       setTaskData(allCompletedTasksData);
       setTaskDataLoading(allCompletedTasksDataLoading);
-    } else if (filterValue === "In-progress") {
+    } else if (filterValue === "in-progress") {
       setTaskData(allInprogressTasksData);
       setTaskDataLoading(allInprogressTasksDataLoading);
     }
@@ -111,9 +111,9 @@ function Tasks() {
         </div>
         <Filter
           dropdownItems={[
-            { name: "All", id: 1 },
-            { name: "Completed", id: 2 },
-            { name: "In-progress", id: 3 }
+            { label: "All", value: "all" },
+            { label: "Completed", value: "completed" },
+            { label: "In-progress", value: "in-progress" }
           ]}
           selectedFilterItem={handleSelectedFilterItem}
           closeSearchInput={handleCloseSearchInput}
@@ -132,9 +132,10 @@ function Tasks() {
 
   const handleSelectedFilterItem = (value) => {
     setFilterValue(value);
-    value === "All"
+    navigate("/dashboard/tasks");
+    value === "all"
       ? dispatch(getAllTasks())
-      : value === "Completed"
+      : value === "completed"
       ? dispatch(getCompletedTasks())
       : dispatch(getInprogressTasks());
     setSelectedMenuId(null);

@@ -165,7 +165,7 @@ export const getCompletedTasks = (data) => async (dispatch) => {
     dispatch(getCompletedTasksAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    toast.error(e?.response?.data?.message);
+    // toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(getCompletedTasksLoading(false));
     return { success: false };
@@ -181,7 +181,7 @@ export const getInprogressTasks = () => async (dispatch) => {
     dispatch(getInprogressTasksAction(response?.data?.data));
     return { success: true };
   } catch (e) {
-    toast.error(e?.response?.data?.message);
+    // toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
     dispatch(getInprogressTasksLoading(false));
     return { success: false };

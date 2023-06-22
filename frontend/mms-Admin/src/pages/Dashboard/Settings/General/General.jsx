@@ -17,7 +17,7 @@ import instagramIcon from "@/assets/icons/settings-instagram-icon.svg";
 import linkedinIcon from "@/assets/icons/settings-linkedin-icon.svg";
 import twitterIcon from "@/assets/icons/settings-twitter-icon.svg";
 import { updateProfileSchema } from "@/helpers/validation";
-import { updateProfile, getProfile } from "@/redux/Settings/SettingsSlice";
+import { updateProfile, getProfile } from "@/redux/Profile/ProfileSlice";
 import { initialsCase } from "@/helpers/textTransform";
 import Loader from "@/components/Loader/Loader";
 import allCountries from "@/utils/countriesAndFlags";
@@ -30,7 +30,7 @@ function General() {
   const [city, setCity] = useState([]);
 
   const loading = useSelector((state) => state?.loading?.updateProfileLoading);
-  const userProfile = useSelector((state) => state.settings.getProfileData);
+  const userProfile = useSelector((state) => state.profile.getProfileData);
   const getProfileLoading = useSelector((state) => state?.loading?.getProfileLoading);
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);

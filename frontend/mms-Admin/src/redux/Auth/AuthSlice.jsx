@@ -18,7 +18,6 @@ import {
   signUpLoading,
   confirmEmailLoading
 } from "@/redux/Loading/LoadingSlice";
-import { getProfile } from "@/redux/Settings/SettingsSlice";
 
 const initialState = {
   error: false,
@@ -89,7 +88,6 @@ export const login = (data) => async (dispatch) => {
     toast.success(response?.data?.message);
     dispatch(loginLoading(false));
     dispatch(loginAction(response?.data?.data));
-    dispatch(getProfile());
     return { success: true };
   } catch (e) {
     toast.error(e?.response?.data?.message);

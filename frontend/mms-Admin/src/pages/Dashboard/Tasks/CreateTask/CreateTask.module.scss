@@ -4,6 +4,44 @@
   position: relative;
   height: calc(100vh - var(--topNavbarHeight));
 
+  .sideBarSection {
+    width: auto;
+
+    .noUserFound {
+      width: 100%;
+
+      h6 {
+        font-family: var(--semiBold);
+        font-size: 1rem;
+        color: var(--black2TextColor);
+        margin: 0;
+      }
+    }
+
+    .filterAndSearchDiv {
+      width: 100%;
+      justify-content: flex-end;
+      gap: 1rem;
+      min-height: 3rem;
+
+      .title {
+        font-family: var(--semiBold);
+        font-size: 1rem;
+        color: var(--black2TextColor);
+        margin: 0;
+      }
+
+      .searchWrapper {
+        flex-grow: 1;
+      }
+
+      .closeIcon {
+        width: 1rem;
+        cursor: pointer;
+      }
+    }
+  }
+
   .mainSection {
     gap: 1.5rem;
     flex-grow: 1;
@@ -14,13 +52,14 @@
     .heading {
       position: sticky;
       top: 0;
-      align-items: center;
+      align-items: flex-end;
 
       .title {
         margin: 0;
         font-family: var(--semiBold);
         color: var(--blackTextColor);
         font-size: 1.5rem;
+        line-height: 1rem;
       }
 
       img {
@@ -90,26 +129,6 @@
       }
     }
   }
-
-  .sideBarSection {
-    width: auto;
-
-    .filterAndSearchDiv {
-      width: 100%;
-      justify-content: flex-end;
-      gap: 1rem;
-      min-height: 3rem;
-
-      .searchWrapper {
-        flex-grow: 1;
-      }
-
-      .closeIcon {
-        width: 1rem;
-        cursor: pointer;
-      }
-    }
-  }
 }
 
 @media all and (min-width: 768px) {
@@ -136,6 +155,7 @@
 
     .mainSection {
       gap: 2.5rem;
+      padding-top: 0.875rem;
 
       .formWrapper {
         form {

@@ -19,7 +19,7 @@ function Header() {
   const { toggleSidebar } = useProSidebar();
   const navigate = useNavigate();
 
-  const userProfile = useSelector((state) => state.settings.getProfileData);
+  const userProfile = useSelector((state) => state.profile.getProfileData);
 
   const handleMenuClick = (e, path) => {
     e.preventDefault();
@@ -64,7 +64,12 @@ function Header() {
         <Navbar.Collapse className={cx(styles.navbarCollapse, "flexRow")} id='responsive-navbar-nav'>
           <Nav className={cx(styles.primaryNavigation, "flexRow-space-between")}>
             <div className={cx(styles.inputDiv, "flexRow-align-center")}>
-              <img onClick={(e) => handleMenuClick(e, "/dashboard/search-results")} className={cx(styles.searchIcon)} src={searchIcon} alt='search-icon' />
+              <img
+                onClick={(e) => handleMenuClick(e, "/dashboard/search-results")}
+                className={cx(styles.searchIcon)}
+                src={searchIcon}
+                alt='search-icon'
+              />
               <input type='text' placeholder='Search for anything' />
             </div>
             <div className={cx(styles.iconsDiv, "flexRow-fully-centered")}>
@@ -74,7 +79,11 @@ function Header() {
               </div>
               <div className={cx(styles.container, "flexRow-align-center")}>
                 <span className={cx(styles.count)}>11</span>
-                <img onClick={(e) => handleMenuClick(e, "/dashboard/notifications")} src={notificationIcon} alt='notification-icon' />
+                <img
+                  onClick={(e) => handleMenuClick(e, "/dashboard/notifications")}
+                  src={notificationIcon}
+                  alt='notification-icon'
+                />
               </div>
             </div>
             <div

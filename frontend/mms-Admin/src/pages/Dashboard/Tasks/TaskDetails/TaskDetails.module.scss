@@ -64,58 +64,61 @@
 
     .summaryDiv {
       background-color: var(--dashboardSummaryCardBgColor);
-      align-items: center;
-      padding: 0.5rem;
-      width: 100%;
-      gap: 0.5rem;
 
-      .iconDiv {
-        width: 7.5%;
-        display: none;
-      }
-
-      .summary {
-        width: 75%;
-        gap: 0.5rem;
-        color: var(--black2TextColor);
-        font-family: var(--semiBold);
-        font-size: 1rem;
+      .heading {
         align-items: center;
+        padding: 0.5rem;
+        width: 100%;
+        gap: 0.5rem;
 
-        span {
-          line-height: 1;
-          margin: 0;
+        .iconDiv {
+          width: 7.5%;
+          display: none;
         }
 
-        .summaryValue {
-          font-size: 1.25rem;
-          font-family: var(--bold);
+        .summary {
+          width: 75%;
+          gap: 0.5rem;
           color: var(--black2TextColor);
-        }
-
-        .caption {
-          font-size: 0.875rem;
           font-family: var(--semiBold);
-          color: var(--black2TextColor);
-          white-space: wrap;
+          font-size: 1rem;
+          align-items: center;
+
+          span {
+            line-height: 1;
+            margin: 0;
+          }
+
+          .summaryValue {
+            font-size: 1.25rem;
+            font-family: var(--bold);
+            color: var(--black2TextColor);
+          }
+
+          .caption {
+            font-size: 0.875rem;
+            font-family: var(--semiBold);
+            color: var(--black2TextColor);
+            white-space: wrap;
+          }
+
+          .count {
+            font-size: 0.875rem;
+            text-align: center;
+            width: 1.5rem;
+            line-height: 1.5rem;
+            border-radius: 50%;
+            font-family: var(--semiBold);
+            color: var(--whiteTextColor);
+            background-color: var(--primaryRedColor);
+            margin-left: 0.5rem;
+            display: block;
+          }
         }
 
-        .count {
-          font-size: 0.875rem;
-          text-align: center;
-          width: 1.5rem;
-          line-height: 1.5rem;
-          border-radius: 50%;
-          font-family: var(--semiBold);
-          color: var(--whiteTextColor);
-          background-color: var(--primaryRedColor);
-          margin-left: 0.5rem;
-          display: block;
+        button {
+          margin-left: auto;
         }
-      }
-
-      button {
-        margin-left: auto;
       }
     }
   }
@@ -149,8 +152,10 @@
       padding: 1rem;
 
       .summaryDiv {
-        .iconDiv {
-          display: block;
+        .heading {
+          .iconDiv {
+            display: block;
+          }
         }
       }
     }
@@ -193,30 +198,32 @@
       }
 
       .summaryDiv {
-        padding: 1rem;
-        gap: 1rem;
-
-        .iconDiv {
-          width: 2.5%;
-        }
-
-        .summary {
+        .heading {
+          padding: 1rem;
           gap: 1rem;
-          font-size: 1.25rem;
 
-          .summaryValue {
-            font-size: 2rem;
+          .iconDiv {
+            width: 2.5%;
           }
 
-          .caption {
+          .summary {
+            gap: 1rem;
             font-size: 1.25rem;
-          }
 
-          .count {
-            font-size: 1rem;
-            width: 1.5rem;
-            line-height: 1.5rem;
-            margin-left: 1.5rem;
+            .summaryValue {
+              font-size: 2rem;
+            }
+
+            .caption {
+              font-size: 1.25rem;
+            }
+
+            .count {
+              font-size: 1rem;
+              width: 1.5rem;
+              line-height: 1.5rem;
+              margin-left: 1.5rem;
+            }
           }
         }
       }

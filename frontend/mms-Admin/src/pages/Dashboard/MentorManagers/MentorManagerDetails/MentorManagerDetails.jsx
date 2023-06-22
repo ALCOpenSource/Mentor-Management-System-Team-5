@@ -1,101 +1,48 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import cx from "classnames";
 import styles from "./MentorManagerDetails.module.scss";
-import mentorImage from "@/assets/images/sample-profile-image.svg";
+import profileImage from "@/assets/images/sample-profile-image.svg";
 import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import UserComponent from "../UserComponent/UserComponent";
 import Button from "@/components/Button/Button";
 import backIcon from "@/assets/icons/back-icon.svg";
 import Search from "@/components/Search/Search";
-import Filter from "@/components/Filter/Filter";
 import useIsMobile from "@/hooks/useIsMobile";
 import Tabs from "@/components/Tabs/Tabs";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import flagIcon from "@/assets/icons/flag-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import editIcon from "@/assets/icons/edit-icon.svg";
 import EditUserRoleModal from "@/components/Modals/EditUserRole/EditUserRole";
+import { getAllUserProfiles } from "@/redux/Profile/ProfileSlice";
 
 const MentorManagerDetails = () => {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userId = useParams()?.id;
 
   const [openSideBar, setOpenSideBar] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
   const [collapseInput, setCollapseInput] = useState(true);
-  const [closeSelectElement, setCloseSelectElement] = useState(false);
+  const [mentorManagersArray, setMentorManagersArray] = useState([]);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+  const allUserProfilesData = useSelector((state) => state.profile.getAllUserProfilesData);
 
-  const mentorsArray = useMemo(
-    () => [
-      {
-        id: 1,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 2,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 3,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 4,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 5,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 6,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 7,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 8,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 9,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      },
-      {
-        id: 10,
-        name: "Alison Davis",
-        image: mentorImage,
-        dateAdded: "May 05, 2023"
-      }
-    ],
-    []
-  );
+  useEffect(() => {
+    dispatch(getAllUserProfiles());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setMentorManagersArray(
+      Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "manager"))
+    );
+  }, [allUserProfilesData]);
 
   useEffect(() => {
     if (isMobile) {
@@ -103,8 +50,11 @@ const MentorManagerDetails = () => {
     } else {
       setOpenSideBar(true);
     }
-    setSelectedUser(mentorsArray[0]);
-  }, [isMobile, mentorsArray]);
+  }, [isMobile]);
+
+  useEffect(() => {
+    setSelectedUser(Array.isArray(mentorManagersArray) && mentorManagersArray.find((item) => item.id === userId));
+  }, [mentorManagersArray, userId]);
 
   const handleSelectedItem = (item) => {
     console.log(item);
@@ -119,18 +69,8 @@ const MentorManagerDetails = () => {
     console.log(e);
   };
 
-  const handleSelectedFilterItem = (item) => {
-    console.log(item);
-  };
-
-  const handleCloseSearchInput = (e) => {
-    console.log(e, "handle close input");
-    setCollapseInput(true);
-  };
-
-  const handleCloseSelectElement = (e) => {
-    console.log(e, "handle close select");
-    setCloseSelectElement(true);
+  const handleCloseSelectElement = () => {
+    // Added to clear console errors
   };
 
   const handleViewUser = (user) => {
@@ -183,24 +123,24 @@ const MentorManagerDetails = () => {
           </div>
           <div className={cx(styles.searchWrapper)}>
             <Search
-              inputPlaceholder='Search for tasks...'
+              inputPlaceholder='Search for Mentor manager...'
               onChange={handleSearchInput}
               collapseInput={collapseInput}
               setCollapseInput={setCollapseInput}
               closeSelectElement={handleCloseSelectElement}
             />
           </div>
-          <Filter
+          {/* <Filter
             dropdownItems={[
-              { name: "All", id: 1 },
-              { name: "Mentors", id: 2 },
-              { name: "Mentor Managers", id: 3 }
+              { label: "All", value: "all" },
+              { label: "Mentors", value: "mentor" },
+              { label: "Mentor Managers", value: "mentor-manager" }
             ]}
             selectedFilterItem={handleSelectedFilterItem}
             closeSearchInput={handleCloseSearchInput}
             closeSelectElement={closeSelectElement}
             setCloseSelectElement={setCloseSelectElement}
-          />
+          /> */}
         </div>
       </>
     );
@@ -235,7 +175,7 @@ const MentorManagerDetails = () => {
     <div className={cx(styles.mentorManagerDetailsContainer, "flexCol")}>
       {openSideBar ? (
         <div className={cx(styles.sideBarSection)}>
-          <GenericSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
+          <GenericSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorManagersArray)} />
         </div>
       ) : null}
 
@@ -243,14 +183,21 @@ const MentorManagerDetails = () => {
         <div className={cx(styles.outletHeading, "flexRow")}>
           <div className={cx(styles.profile, "flexCol")}>
             <div className={cx(styles.bioSummary, "flexRow-align-center")}>
-              <img className={cx(styles.profileImage)} src={selectedUser?.image} alt='profile-image' />
+              <img
+                className={cx(styles.profileImage)}
+                src={selectedUser?.profileImage || profileImage}
+                alt='profile-image'
+              />
 
               <div className={cx(styles.info, "flexRow")}>
                 <div className={cx(styles.nameAndRole, "flexCol")}>
-                  <p className={cx(styles.name)}>{selectedUser?.name}</p>
+                  <p className={cx(styles.name)}>
+                    {" "}
+                    {selectedUser?.firstName && selectedUser?.firstName}{" "}
+                    {selectedUser?.lastName && selectedUser?.lastName}
+                  </p>
                   <p className={cx(styles.role)}>
-                    {selectedUser?.role || "Mentor Manager"}{" "}
-                    <img onClick={() => editUserRole()} src={editIcon} alt='edit-icon' />{" "}
+                    {"Mentor Manager"} <img onClick={() => editUserRole()} src={editIcon} alt='edit-icon' />{" "}
                   </p>
                 </div>
 

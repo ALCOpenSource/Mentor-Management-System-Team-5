@@ -10,6 +10,7 @@ import GenericSideBar from "@/components/GenericSideBar/GenericSideBar";
 import cardIcon from "@/assets/images/mentor-manager-thumbnail.svg";
 import ChatListItem from "../ChatListItem/ChatListItem";
 import Search from "@/components/Search/Search";
+import { startSignalRConnection, addSignalRMessageListener } from "@/utils/signalrService";
 
 const Chats = () => {
   const navigate = useNavigate();
@@ -18,10 +19,21 @@ const Chats = () => {
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
   const [openSideBar, setOpenSideBar] = useState(true);
   const [collapseInput, setCollapseInput] = useState(true);
+  const [messages, setMessages] = useState([]);
+
+  console.log(messages, "messages");
 
   // Temp fix for handling empty message history
   // const [messageHistory, setMessageHistory] = useState([]);
   const messageHistory = [];
+
+  useEffect(() => {
+    startSignalRConnection();
+
+    addSignalRMessageListener((message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  }, []);
 
   useEffect(() => {
     !isMobile && setOpenSideBar(true);

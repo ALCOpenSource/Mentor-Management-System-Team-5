@@ -16,6 +16,13 @@
         align-self: flex-start;
       }
 
+      .programIcon {
+        width: 3rem;
+        height: 3rem;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
       .mainContent {
         gap: 0.5rem;
 
@@ -86,7 +93,7 @@
       }
 
       .summary {
-        width: 75%;
+        width: 85%;
         gap: 0.5rem;
         color: var(--black2TextColor);
         font-family: var(--semiBold);
@@ -178,6 +185,11 @@
       .wrapper {
         .icon {
           width: 2.25rem;
+        }
+
+        .programIcon {
+          width: 2.25rem;
+          height: 2.25rem;
         }
 
         .mainContent {

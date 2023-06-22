@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import styles from "./ProgramDetails.module.scss";
@@ -13,40 +13,60 @@ import mentorManagersIcon from "@/assets/icons/mentor-manager-icon-green.png";
 import deleteArchiveIcon from "@/assets/icons/clear-list-reversed.svg";
 import DeleteNotificationModal from "@/components/Modals/DeleteNotification/DeleteNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
+import { getProgramDetails } from "@/redux/Programs/ProgramsSlice";
+import formatDate from "@/helpers/formatDate";
 
 function ProgramDetails() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const programId = params.id;
+
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+  const programDetails = useSelector((state) => state.programs.getProgramDetailsData);
+
+  useEffect(() => {
+    dispatch(getProgramDetails(programId));
+  }, [dispatch, programId]);
 
   const programDetailsData = [
     {
       // icon: <ReportIcon />,
       icon: mentorManagersIcon,
-      value: 12,
-      caption: "Mentor Managers assigned to this program",
-      count: 2
+      value: Array.isArray(programDetails?.mentorManagers) && programDetails?.mentorManagers.length,
+      caption: "Mentor Managers assigned to this program"
     },
     {
       // icon: <ReportIcon />,
       icon: mentorsIcon,
-      value: 80,
-      caption: "Mentors assigned to this program",
-      count: 3
+      value: Array.isArray(programDetails?.mentors) && programDetails?.mentors.length,
+      caption: "Mentors assigned to this program"
     },
     {
       // icon: <ReportIcon />,
       icon: reportIcon,
-      value: 35,
+      value: Array.isArray(programDetails?.reports) && programDetails?.reports.length,
       caption: "Program / Reports",
-      count: 3
+      count: Array.isArray(programDetails?.reports) && programDetails?.reports.length
     }
   ];
 
-  const handleDeleteTask = () => {
+  const handleDeleteTask = async () => {
+    // this will be used when the endpoint is fixed
+    // const response = await dispatch(deleteProgram(programId));
+    // if (response.success) {
+    //   dispatch(
+    //     showModal({
+    //       name: "programDeleteNotification",
+    //       modalData: {
+    //         title: "Program Deleted Successfully",
+    //         type: "program"
+    //       }
+    //     })
+    //   );
+    //   navigate("/dashboard/programs");
+    // }
     dispatch(
       showModal({
         name: "programDeleteNotification",
@@ -64,17 +84,26 @@ function ProgramDetails() {
         <>
           <div className={cx(styles.header, "flexCol")}>
             <div className={cx(styles.wrapper, "flexRow-align-center")}>
-              <img className={cx(styles.icon)} src={headerIcon} alt='program-icon' />
+              <img
+                className={cx(styles.icon, styles.programIcon)}
+                src={programDetails?.programmePicture || headerIcon}
+                alt='program-icon'
+              />
               <div className={cx(styles.mainContent, "flexCol")}>
-                <h5 className={cx(styles.title)}>{"Google Africa Scholarship Program"}</h5>
+                <h5 className={cx(styles.title)}>{programDetails?.name}</h5>
                 <div className={cx(styles.metaData, "flexRow")}>
                   <div className={cx(styles.info, "flexRow")}>
                     <img className={cx(styles.icon)} src={calendarIcon} alt='calendar-icon' />
-                    <span className={cx(styles.value)}>Dec 12, 2022</span>
+                    <span className={cx(styles.value)}>{formatDate(programDetails?.createdAt)}</span>
                   </div>
                   <div className={cx(styles.info, "flexRow")}>
                     <img className={cx(styles.icon)} src={clockIcon} alt='clock-icon' />
-                    <span className={cx(styles.value)}>6:00pm</span>
+                    <span className={cx(styles.value)}>
+                      {new Date(programDetails?.createdAt).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit"
+                      })}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -83,12 +112,7 @@ function ProgramDetails() {
 
           <div className={cx(styles.body, "flexCol")}>
             <h6 className={cx(styles.subHeading)}>About:</h6>
-            <p className={cx(styles.description)}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.
-              Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis
-              tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu.
-              Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque
-            </p>
+            <p className={cx(styles.description)}>{programDetails?.description}</p>
 
             {programDetailsData.map((item, index) => {
               return (

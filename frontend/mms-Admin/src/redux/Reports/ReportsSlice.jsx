@@ -6,7 +6,7 @@ import {
   getMonthlyReportsApi,
   getYearlyReportsApi,
   createNewReportApi,
-  editReportApi
+  getReportDetailsApi
 } from "../api/reports";
 
 import {
@@ -15,7 +15,7 @@ import {
   getMonthlyReportsLoading,
   getYearlyReportsLoading,
   createNewReportLoading,
-  editReportLoading
+  getReportDetailsLoading
 } from "@/redux/Loading/LoadingSlice";
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
   getMonthlyReportsData: {},
   getYearlyReportsData: {},
   createNewReportData: {},
-  editReportData: {}
+  getReportDetailsData: {}
 };
 
 export const reportsSlice = createSlice({
@@ -58,8 +58,8 @@ export const reportsSlice = createSlice({
       state.createNewReportData = action.payload;
     },
 
-    editReportAction: (state, action) => {
-      state.editReportData = action.payload;
+    getReportDetailsAction: (state, action) => {
+      state.getReportDetailsData = action.payload;
     }
   }
 });
@@ -73,7 +73,7 @@ const {
   getMonthlyReportsAction,
   getYearlyReportsAction,
   createNewReportAction,
-  editReportAction
+  getReportDetailsAction
 } = reportsSlice.actions;
 
 export const getAllReports = (data) => async (dispatch) => {
@@ -150,17 +150,17 @@ export const createNewReport = (data) => async (dispatch) => {
   }
 };
 
-export const editReport = (data) => async (dispatch) => {
-  dispatch(editReportLoading(true));
+export const getReportDetails = (data) => async (dispatch) => {
+  dispatch(getReportDetailsLoading(true));
   try {
-    const response = await editReportApi(data);
-    dispatch(editReportLoading(false));
-    dispatch(editReportAction(response?.data?.data));
+    const response = await getReportDetailsApi(data);
+    dispatch(getReportDetailsLoading(false));
+    dispatch(getReportDetailsAction(response?.data?.data));
     return { success: true };
   } catch (e) {
     toast.error(e?.response?.data?.message);
     dispatch(hasError(e?.response?.data));
-    dispatch(editReportLoading(false));
+    dispatch(getReportDetailsLoading(false));
     return { success: false };
   }
 };
