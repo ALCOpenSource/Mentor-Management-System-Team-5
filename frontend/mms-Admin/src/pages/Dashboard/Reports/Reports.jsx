@@ -4,8 +4,6 @@ import cx from "classnames";
 import styles from "./Reports.module.scss";
 import { useNavigate, useParams, Outlet } from "react-router-dom";
 
-// import Button from "@/components/Button/Button";
-import cardIcon from "@/assets/icons/reports-overview-card-icon.svg";
 import subMenuIcon from "@/assets/icons/sub-menu-icon.svg";
 import emptySelectionIcon from "@/assets/icons/empty-selection-icon.svg";
 import closeIcon from "@/assets/icons/undo-icon.svg";
@@ -15,7 +13,8 @@ import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
 import useIsMobile from "@/hooks/useIsMobile";
 import SwitcherTab from "@/pages/Dashboard/Reports/SwitcherTab/SwitcherTab";
 import ReportListItem from "./ReportListItem/ReportListItem";
-import { getAllReports, getYearlyReports, getMonthlyReports } from "@/redux/Reports/ReportsSlice";
+import { getAllReports, getYearlyReports, getMonthlyReports, getWeeklyReports } from "@/redux/Reports/ReportsSlice";
+import { getAllUserProfiles } from "@/redux/Profile/ProfileSlice";
 
 function Reports() {
   const navigate = useNavigate();
@@ -23,21 +22,16 @@ function Reports() {
   const params = useParams();
   const isMobile = useIsMobile();
   const [selectedMenuId, setSelectedMenuId] = useState(params.id);
+  const [reportDataArray, setReportDataArray] = useState([]);
 
-  // const displayModal = useSelector((state) => state.modal.show);
-  // const modalName = useSelector((state) => state.modal.modalName);
-  const allReportsData = useSelector((state) => state.reports.getAllReportsData);
-  const programReportArray = useSelector((state) => state.reports.getYearlyReportsData);
-  const taskReportArray = useSelector((state) => state.reports.getMonthlyReportsData);
-  console.log(programReportArray, "all reports data");
-  // console.log(yearlyReportsData, "yearly reports data");
+  const allProfilesData = useSelector((state) => state.profile.getAllUserProfilesData);
 
-  useEffect(() => {
-    dispatch(getAllReports());
-    dispatch(getYearlyReports());
-    dispatch(getMonthlyReports());
-    setSelectedMenuId(params.id);
-  }, [navigate, dispatch, params.id]);
+  // This allReportsData will be used when the endpoint is fixed and it returns the actual needed values
+  // const allReportsData = useSelector((state) => state.reports.getAllReportsData);
+  const allReportsData = useSelector((state) => state.reports.getYearlyReportsData); // This is a temporary fix
+  const allMonthlyReportsData = useSelector((state) => state.reports.getMonthlyReportsData); // This is a temporary fix
+  const allYearlyReportsData = useSelector((state) => state.reports.getYearlyReportsData); // This is a temporary fix
+  const allWeeklyReportsData = useSelector((state) => state.reports.getWeeklyReportsData); // This is a temporary fix
 
   const reportsCategoryArray = useMemo(
     () => [
@@ -57,6 +51,23 @@ function Reports() {
 
   const [activeTab, setActiveTab] = useState(reportsCategoryArray[0].key);
 
+  useEffect(() => {
+    dispatch(getAllReports());
+    dispatch(getWeeklyReports());
+    dispatch(getYearlyReports());
+    dispatch(getMonthlyReports());
+    setSelectedMenuId(params.id);
+    dispatch(getAllUserProfiles());
+  }, [navigate, dispatch, params.id]);
+
+  useEffect(() => {
+    if (activeTab === "programReport") {
+      Array.isArray(allReportsData) && setReportDataArray(allReportsData.filter((item) => item.type === "program"));
+    } else if (activeTab === "taskReport") {
+      Array.isArray(allReportsData) && setReportDataArray(allReportsData.filter((item) => item.type === "task"));
+    }
+  }, [activeTab, allReportsData]);
+
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
@@ -67,75 +78,6 @@ function Reports() {
       ? setOpenSideBar({ open: false, category: "" })
       : setOpenSideBar({ open: true, category: reportsCategoryArray[0].key });
   }, [isMobile, reportsCategoryArray]);
-
-  const programReportArrayOld = [
-    {
-      id: 1,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    },
-    {
-      id: 2,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    },
-    {
-      id: 3,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    }
-  ];
-
-  const taskReportArrayOld = [
-    {
-      id: 1,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    },
-    {
-      id: 2,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    },
-    {
-      id: 3,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    },
-    {
-      id: 4,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    },
-    {
-      id: 5,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    },
-    {
-      id: 6,
-      title: "Google Africa Scholarship",
-      author: "Ibrahim Kabir",
-      date: "19th - 25th Oct 23",
-      icon: cardIcon
-    }
-  ];
 
   const handleOpenSideBar = (e, open, category) => {
     e.preventDefault();
@@ -150,8 +92,40 @@ function Reports() {
     console.log(e.target.value);
   };
 
-  const handleSelectedFilterItem = (item) => {
-    console.log(item);
+  const handleSelectedFilterItem = (data) => {
+    switch (data) {
+      case "year": {
+        Array.isArray(allYearlyReportsData) &&
+          setReportDataArray(
+            allYearlyReportsData.filter((item) => item.type === (activeTab === "programReport" ? "program" : "task"))
+          );
+        break;
+      }
+
+      case "month": {
+        Array.isArray(allMonthlyReportsData) &&
+          setReportDataArray(
+            allMonthlyReportsData.filter((item) => item.type === (activeTab === "programReport" ? "program" : "task"))
+          );
+        break;
+      }
+
+      case "week": {
+        Array.isArray(allWeeklyReportsData) &&
+          setReportDataArray(
+            allWeeklyReportsData.filter((item) => item.type === (activeTab === "programReport" ? "program" : "task"))
+          );
+        break;
+      }
+
+      default: {
+        Array.isArray(allReportsData) &&
+          setReportDataArray(
+            allReportsData.filter((item) => item.type === (activeTab === "programReport" ? "program" : "task"))
+          );
+        break;
+      }
+    }
   };
 
   const handleCloseSideBar = () => {
@@ -176,13 +150,14 @@ function Reports() {
     setCloseSelectElement(true);
   };
   const getListComponents = (data) => {
-    console.log(data, "list comp data");
-    const listItems = data.map((item, index) => {
-      return {
-        component: <ReportListItem key={index} data={item} />,
-        id: item.id
-      };
-    });
+    const listItems =
+      Array.isArray(data) &&
+      data.map((item, index) => {
+        return {
+          component: <ReportListItem key={index} data={item} userProfiles={allProfilesData} />,
+          id: item.id
+        };
+      });
 
     const headerComponent = (
       <div className={cx(styles.sideBarHeader, "flexCol")}>
@@ -191,7 +166,7 @@ function Reports() {
         <div className={cx(styles.searchAndFilterDiv, "flexRow")}>
           <div className={cx(styles.searchWrapper)}>
             <Search
-              inputPlaceholder='Search for tasks...'
+              inputPlaceholder='Search for report...'
               onChange={handleSearchInput}
               collapseInput={collapseInput}
               setCollapseInput={setCollapseInput}
@@ -201,9 +176,10 @@ function Reports() {
 
           <Filter
             dropdownItems={[
-              { name: "All Reports", id: 1 },
-              { name: "Assigned", id: 2 },
-              { name: "Completed", id: 3 }
+              { label: "All Reports", value: "all" },
+              { label: "Weekly Reports", value: "week" },
+              { label: "Monthly Reports", value: "month" },
+              { label: "Yearly Reports", value: "year" }
             ]}
             selectedFilterItem={handleSelectedFilterItem}
             closeSearchInput={handleCloseSearchInput}
@@ -227,42 +203,34 @@ function Reports() {
   };
 
   const handleSelectedItem = (item) => {
-    console.log(item);
     setSelectedMenuId(() => {
       return item;
     });
     isMobile && handleCloseSideBar();
-    navigate(`report-details/${item}`);
-  };
 
-  console.log(selectedMenuId, "selectedMenuId");
+    // temporary fix for the report details
+    let reportData = reportDataArray.find((report) => report.id === item);
+    navigate(`report-details/${item}`, { state: { data: reportData } });
+  };
 
   return (
     <div className={cx(styles.reportsContainer, "flexRow")}>
       {openSideBar.open && openSideBar.category === "taskReport" ? (
-        Array.isArray(taskReportArray) && taskReportArray.length > 0 ? (
-          <div className={cx(styles.sideBarSection)}>
-            <SelectionSideBar
-              selectedMenuItem={handleSelectedItem}
-              data={getListComponents(taskReportArray)}
-              activeClassName='active-report-item'
-            />
-          </div>
-        ) : (
-          <div className={cx(styles.sideBarSection)}>No Data Found</div>
-        )
+        <div className={cx(styles.sideBarSection)}>
+          <SelectionSideBar
+            selectedMenuItem={handleSelectedItem}
+            data={getListComponents(reportDataArray)}
+            activeClassName='active-report-item'
+          />
+        </div>
       ) : openSideBar.open && openSideBar.category === "programReport" ? (
-        Array.isArray(programReportArray) && programReportArray.length > 0 ? (
-          <div className={cx(styles.sideBarSection)}>
-            <SelectionSideBar
-              selectedMenuItem={handleSelectedItem}
-              data={getListComponents(programReportArray)}
-              activeClassName='active-report-item'
-            />
-          </div>
-        ) : (
-          <div className={cx(styles.sideBarSection)}>No Data Found</div>
-        )
+        <div className={cx(styles.sideBarSection)}>
+          <SelectionSideBar
+            selectedMenuItem={handleSelectedItem}
+            data={getListComponents(reportDataArray)}
+            activeClassName='active-report-item'
+          />
+        </div>
       ) : null}
 
       <div className={cx(styles.content, "flexCol")}>

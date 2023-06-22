@@ -43,7 +43,7 @@ function NotificationsListItem({ data, setItemStatus }) {
       toggleDataStatus(data);
     }
 
-    if(type === "delete"){
+    if (type === "delete") {
       // Do something
     }
   };
@@ -82,7 +82,7 @@ function NotificationsListItem({ data, setItemStatus }) {
                       key={listItem.key}
                       className={cx(styles.dropdownListItem)}
                     >
-                      {(listItem.key === "read" && data.status === true) ? "Unread" : listItem.name}
+                      {listItem.key === "read" && data.status === true ? "Unread" : listItem.name}
                     </li>
                   );
                 })}

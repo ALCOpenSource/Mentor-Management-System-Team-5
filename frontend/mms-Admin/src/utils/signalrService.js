@@ -2,9 +2,7 @@ import { HubConnectionBuilder } from "@microsoft/signalr";
 
 const hubUrl = "https://your-signalr-server-url";
 
-const connection = new HubConnectionBuilder()
-  .withUrl(hubUrl)
-  .build();
+const connection = new HubConnectionBuilder().withUrl(hubUrl).build();
 
 export const startSignalRConnection = async () => {
   try {

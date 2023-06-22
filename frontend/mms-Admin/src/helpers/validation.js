@@ -59,8 +59,8 @@ export const createTaskSchema = Yup.object().shape({
 });
 
 export const createProgramSchema = Yup.object().shape({
-  programName: Yup.string().required("Program name is required"),
-  programDescription: Yup.string().required("Program description is required")
+  name: Yup.string().required("Program name is required"),
+  description: Yup.string().required("Program description is required")
 });
 
 export const createProgramCriteriaSchema = Yup.object().shape({
@@ -69,8 +69,8 @@ export const createProgramCriteriaSchema = Yup.object().shape({
 });
 
 export const editProgramSchema = Yup.object().shape({
-  programName: Yup.string().required("Program name is required"),
-  programDescription: Yup.string().required("Program description is required")
+  name: Yup.string().required("Program name is required"),
+  description: Yup.string().required("Program description is required")
 });
 
 export const editProgramCriteriaSchema = Yup.object().shape({

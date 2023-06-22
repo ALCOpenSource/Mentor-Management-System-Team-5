@@ -23,7 +23,7 @@ function AuthenticatedRoutes({ children, roles }) {
     if (authError) {
       clearInterval(refreshInterval);
       logout();
-      navigate("/login");
+      navigate("/");
     }
     return () => {
       clearInterval(refreshInterval);

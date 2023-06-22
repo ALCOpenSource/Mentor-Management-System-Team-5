@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { useForm, Controller } from "react-hook-form";
@@ -7,175 +7,112 @@ import styles from "./EditProgram.module.scss";
 import Button from "@/components/Button/Button";
 import { ReactComponent as ClearListIcon } from "@/assets/icons/clear-list-icon.svg";
 import SelectionSideBar from "@/components/SelectionSideBar/SelectionSideBar";
+import { useParams, useNavigate } from "react-router-dom";
 import closeIcon from "@/assets/icons/undo-icon.svg";
 import closeIconAlt from "@/assets/icons/close-icon.svg";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
-import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
-
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
 import { editProgramSchema } from "@/helpers/validation";
 import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
-import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
-import mentorImage from "@/assets/images/sample-profile-image.svg";
-import programAvatar from "@/assets/images/program-avatar.svg";
 import { useDropzone } from "react-dropzone";
-import { useNavigate } from "react-router-dom";
+import { getProgramDetails, editProgram } from "@/redux/Programs/ProgramsSlice";
+import { getAllUserProfiles } from "@/redux/Profile/ProfileSlice";
 
 function EditProgram() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+  const programId = params.id;
 
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
   });
   const [collapseInput, setCollapseInput] = useState(true);
-  const [closeSelectElement, setCloseSelectElement] = useState(false);
-  const dispatch = useDispatch();
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+  const programDetails = useSelector((state) => state.programs.getProgramDetailsData);
+  const allUserProfilesData = useSelector((state) => state.profile.getAllUserProfilesData);
+  const editProgramLoading = useSelector((state) => state.loading.editProgramLoading);
 
-  const mentorsArray = [
-    {
-      id: 1,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 2,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 3,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 4,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 5,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 6,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 7,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 8,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 9,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 10,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
+  const [selectedMentorManagers, setSelectedMentorManagers] = useState(programDetails?.managers || []);
+  const [selectedMentors, setSelectedMentors] = useState(programDetails?.mentors || []);
+  const criteriaData = JSON.parse(localStorage.getItem("criteria")) || {};
+  console.log(criteriaData, "criteria data here");
 
-  const mentorManagersArray = [
-    {
-      id: 1,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 2,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 3,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 4,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 5,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
+  useEffect(() => {
+    // dispatch(getAllMentors());
+    // dispatch(getAllMentorManagers());
+    dispatch(getAllUserProfiles());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getProgramDetails(programId));
+  }, [dispatch, programId]);
 
   const resolver = yupResolver(editProgramSchema);
 
-  const defaultValues = {
-    title: "",
-    details: ""
-  };
-
   const {
     handleSubmit,
+    reset,
     formState: { errors },
     control
-  } = useForm({ defaultValues, resolver, mode: "all" });
+  } = useForm({ resolver, mode: "all" });
 
-  const sendMessage = (data) => {
-    console.log(data);
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Program Saved Successfully!",
-          image: successImage,
-          redirectUrl: "/dashboard/programs"
-        }
-      })
-    );
-    localStorage.removeItem("criteria");
+  useEffect(() => {
+    reset({
+      name: programDetails?.name || "",
+      description: programDetails?.description || ""
+    });
+    setSelectedMentorManagers(programDetails?.managers || []);
+    setSelectedMentors(programDetails?.mentors || []);
+  }, [
+    programDetails?.criteria,
+    programDetails?.description,
+    programDetails?.managers,
+    programDetails?.mentors,
+    programDetails?.name,
+    reset
+  ]);
+
+  const handleEditProgram = async (data) => {
+    // let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
+    //   return { mentorManagerId: id };
+    // });
+    // let formattedMentorIds = selectedMentors.map((id) => {
+    //   return { programsMentorId: id };
+    // });
+    let payload = {
+      ...data,
+      id: programId,
+      programmePicture: uploadedFile?.imagePreviewUrl || programDetails?.programmePicture,
+      archivedBy: programDetails?.archivedBy || "", // this will be replaced later - it ought to be done at the backend
+      createdBy: programDetails?.createdBy || "", // this will be replaced later - it ought to be done at the backend
+      status: 1, // this will be replaced later - it ought to be done at the backend
+      criteria: JSON.stringify(localStorage.getItem("criteria")) || "",
+      managers: [],
+      mentors: []
+    };
+
+    let response = await dispatch(editProgram(payload));
+    if (response.success) {
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Program Edited Successfully!",
+            image: successImage,
+            redirectUrl: "/dashboard/programs"
+          }
+        })
+      );
+      localStorage.removeItem("criteria");
+    }
   };
 
   const handleOpenSideBar = (e, open, category) => {
@@ -187,27 +124,26 @@ function EditProgram() {
     console.log(e.target.value);
   };
 
-  const handleSelectedFilterItem = (item) => {
-    console.log(item);
+  const handleCloseSelectElement = () => {
+    // Added to prevent console errors
   };
 
-  const handleCloseSearchInput = (e) => {
-    console.log(e, "handle close input");
-    setCollapseInput(true);
-  };
-
-  const handleCloseSelectElement = (e) => {
-    console.log(e, "handle close select");
-    setCloseSelectElement(true);
-  };
-
-  const getListComponents = (data) => {
-    const listItems = data.map((item, index) => {
-      return {
-        component: <PersonelComponent key={index} data={item} />,
-        id: item.id
-      };
-    });
+  const getListComponents = (data, selectedUsers) => {
+    const listItems =
+      Array.isArray(data) &&
+      data.map((item, index) => {
+        return {
+          component: (
+            <PersonelComponent
+              key={index}
+              data={item}
+              checked={selectedUsers.some((userId) => userId === item?.id)}
+              handleChecked={handleSelectedItem}
+            />
+          ),
+          id: item.id
+        };
+      });
 
     const headerComponent = (
       <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
@@ -220,7 +156,7 @@ function EditProgram() {
             closeSelectElement={handleCloseSelectElement}
           />
         </div>
-        <Filter
+        {/* <Filter
           dropdownItems={[
             { name: "All", id: 1 },
             { name: "Mentors", id: 2 },
@@ -230,7 +166,7 @@ function EditProgram() {
           closeSearchInput={handleCloseSearchInput}
           closeSelectElement={closeSelectElement}
           setCloseSelectElement={setCloseSelectElement}
-        />
+        /> */}
         <img
           src={closeIcon}
           className={cx(styles.closeIcon)}
@@ -243,8 +179,23 @@ function EditProgram() {
     return { listItems, headerComponent };
   };
 
-  const handleSelectedItem = (item) => {
-    console.log(item);
+  const handleSelectedItem = (itemId) => {
+    if (openSideBar.category === "mentor-manager") {
+      if (selectedMentorManagers.find((userId) => userId === itemId)) {
+        let filteredMentorManagers = selectedMentorManagers.filter((id) => id !== itemId);
+        setSelectedMentorManagers(filteredMentorManagers);
+      } else {
+        setSelectedMentorManagers([...selectedMentorManagers, `${itemId}`]);
+      }
+    }
+    if (openSideBar.category === "mentor") {
+      if (selectedMentors.find((userId) => userId === itemId)) {
+        let filteredMentors = selectedMentors.filter((id) => id !== itemId);
+        setSelectedMentors(filteredMentors);
+      } else {
+        setSelectedMentors([...selectedMentors, `${itemId}`]);
+      }
+    }
   };
 
   const [uploadedFile, setUploadedFile] = useState({
@@ -276,6 +227,33 @@ function EditProgram() {
     navigate("edit-criteria");
   };
 
+  const handleClearList = (category) => {
+    if (category === "mentorManager") {
+      setSelectedMentorManagers([]);
+    } else if (category === "mentor") {
+      setSelectedMentors([]);
+    }
+  };
+
+  const handleSideBarMenuClick = () => {
+    // This is added to remove the warning of unused function in the selection sidebar component
+  };
+
+  const getUsers = (category) => {
+    if (category === "mentorManager") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "manager"))
+      );
+    }
+    if (category === "mentor") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "mentor"))
+      );
+    }
+  };
+
   return (
     <div className={cx(styles.editProgramContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
@@ -285,14 +263,24 @@ function EditProgram() {
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
-          <form onSubmit={handleSubmit((data) => sendMessage(data))}>
+          <form onSubmit={handleSubmit((data) => handleEditProgram(data))}>
             <div className={cx(styles.headerWrapper, "flexRow")}>
               <div className={cx(styles.leftSection, styles.imageDiv)}>
-                <img
-                  {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}
-                  src={uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : programAvatar}
-                  alt='profile-image'
-                />
+                {programDetails.programmePicture || uploadedFile?.imagePreviewUrl ? (
+                  <img
+                    {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}
+                    src={programDetails.programmePicture
+                        ? programDetails.programmePicture
+                        : uploadedFile?.imagePreviewUrl
+                        ? uploadedFile?.imagePreviewUrl
+                        : null}
+                    alt='profile-image'
+                  />
+                ) : (
+                  <span {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}>
+                    Select Image
+                  </span>
+                )}
               </div>
               <div className={cx(styles.rightSection, "flexCol")}>
                 <h5 className={cx(styles.title)}>Set Program Avatar</h5>
@@ -305,30 +293,30 @@ function EditProgram() {
               </div>
             </div>
 
-            <label htmlFor='title'>Program Name</label>
+            <label htmlFor='name'>Program Name</label>
             <Controller
-              name='programName'
+              name='name'
               control={control}
               render={({ field }) => (
                 <InputField
                   {...field}
                   placeholder='Enter program name'
                   type='text'
-                  error={errors?.programName && errors?.programName?.message}
+                  error={errors?.name && errors?.name?.message}
                 />
               )}
             />
 
-            <label htmlFor='details'>Program Description</label>
+            <label htmlFor='description'>Program Description</label>
             <Controller
-              name='programDescription'
+              name='description'
               control={control}
               render={({ field }) => (
                 <TextArea
                   {...field}
                   placeholder='Enter description'
                   minHeight='150px'
-                  error={errors?.programDescription && errors?.programDescription?.message}
+                  error={errors?.description && errors?.description?.message}
                 />
               )}
             />
@@ -338,8 +326,8 @@ function EditProgram() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor Manager</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>10 selected</span>
-                    <ClearListIcon />
+                    <span className={cx(styles.stats)}>{selectedMentorManagers.length} selected</span>
+                    <ClearListIcon onClick={() => handleClearList("mentorManager")} />
                   </div>
                 </div>
                 <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor-manager")} />
@@ -349,8 +337,8 @@ function EditProgram() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>5 selected</span>
-                    <ClearListIcon />
+                    <span className={cx(styles.stats)}>{selectedMentors.length} selected</span>
+                    <ClearListIcon onClick={() => handleClearList("mentor")} />
                   </div>
                 </div>
                 <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor")} />
@@ -360,7 +348,9 @@ function EditProgram() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Set Criteria</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>5 selected</span>
+                    <span className={cx(styles.stats)}>
+                      {criteriaData && Object.keys(criteriaData).length} selected
+                    </span>
                     <ClearListIcon />
                   </div>
                 </div>
@@ -370,9 +360,9 @@ function EditProgram() {
 
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
-                onClick={handleSubmit((data) => sendMessage(data))}
-                // loading={loading}
-                // disabled={loading}
+                onClick={handleSubmit((data) => handleEditProgram(data))}
+                loading={editProgramLoading}
+                disabled={editProgramLoading}
                 title='Save Changes'
                 type='primary'
               />
@@ -383,11 +373,17 @@ function EditProgram() {
 
       {openSideBar.open && openSideBar.category === "mentor-manager" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorManagersArray)} />
+          <SelectionSideBar
+            selectedMenuItem={handleSideBarMenuClick}
+            data={getListComponents(getUsers("mentorManager"), selectedMentorManagers)}
+          />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
+          <SelectionSideBar
+            selectedMenuItem={handleSideBarMenuClick}
+            data={getListComponents(getUsers("mentor"), selectedMentors)}
+          />
         </div>
       ) : null}
 

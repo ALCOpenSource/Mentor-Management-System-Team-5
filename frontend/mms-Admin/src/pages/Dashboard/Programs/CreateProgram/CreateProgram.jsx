@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import cx from "classnames";
 import { useForm, Controller } from "react-hook-form";
@@ -12,149 +12,55 @@ import closeIconAlt from "@/assets/icons/close-icon.svg";
 import InputField from "@/components/Input/Input";
 import TextArea from "@/components/TextArea/TextArea";
 import Search from "@/components/Search/Search";
-import Filter from "@/components/Filter/Filter";
+// import Filter from "@/components/Filter/Filter";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/create-task-success-image.svg";
 import { createProgramSchema } from "@/helpers/validation";
-import PersonelComponent from "@/pages/Dashboard/Tasks/PersonelComponent/PersonelComponent";
-import mentorManagerImage from "@/assets/images/mentor-manager-thumbnail.svg";
-import mentorImage from "@/assets/images/sample-profile-image.svg";
-import programAvatar from "@/assets/images/program-avatar.svg";
+import PersonelComponent from "./PersonelComponent/PersonelComponent";
+// import { getAllMentors } from "@/redux/Mentors/MentorsSlice";
+// import { getAllMentorManagers } from "@/redux/MentorManagers/MentorManagersSlice";
+// import programAvatar from "@/assets/images/program-avatar.svg";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
+import { createProgram } from "@/redux/Programs/ProgramsSlice";
+import { getAllUserProfiles } from "@/redux/Profile/ProfileSlice";
 
 function CreateProgram() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [openSideBar, setOpenSideBar] = useState({
     open: false,
     category: ""
   });
   const [collapseInput, setCollapseInput] = useState(true);
-  const [closeSelectElement, setCloseSelectElement] = useState(false);
-  const dispatch = useDispatch();
+  const [selectedMentorManagers, setSelectedMentorManagers] = useState([]);
+  const [selectedMentors, setSelectedMentors] = useState([]);
+  const criteriaData = JSON.parse(localStorage.getItem("criteria")) || {};
+  console.log(criteriaData, "criteria data here");
+
+  // const [closeSelectElement, setCloseSelectElement] = useState(false);
 
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
+  const createProgramLoading = useSelector((state) => state.loading.createProgramLoading);
+  const allUserProfilesData = useSelector((state) => state.profile.getAllUserProfilesData);
+  // const allMentorsData = useSelector((state) => state.mentors.getAllMentorsData);
+  // const allMentorManagersData = useSelector((state) => state.mentorManagers.getAllMentorManagersData);
 
-  const mentorsArray = [
-    {
-      id: 1,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 2,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 3,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 4,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 5,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 6,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 7,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 8,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 9,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 10,
-      name: "Kabiru Omo Isaka",
-      designation: "Program Assistant, Andela, He/Him",
-      image: mentorImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
-
-  const mentorManagersArray = [
-    {
-      id: 1,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 2,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 3,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 4,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    },
-    {
-      id: 5,
-      name: "Alice Davies",
-      designation: "Program Assistant, Andela, Her/She",
-      image: mentorManagerImage,
-      positionTags: ["PROGRAM ASST.", "MENTOR-GADS"]
-    }
-  ];
+  useEffect(() => {
+    // dispatch(getAllMentors());
+    // dispatch(getAllMentorManagers());
+    dispatch(getAllUserProfiles());
+  }, [dispatch]);
 
   const resolver = yupResolver(createProgramSchema);
 
   const defaultValues = {
-    title: "",
-    details: ""
+    name: "",
+    description: ""
   };
 
   const {
@@ -163,19 +69,36 @@ function CreateProgram() {
     control
   } = useForm({ defaultValues, resolver, mode: "all" });
 
-  const sendMessage = (data) => {
+  const handleCreateProgram = async (data) => {
     console.log(data);
-    dispatch(
-      showModal({
-        name: "successNotification",
-        modalData: {
-          title: "Program Created Successfully!",
-          image: successImage,
-          redirectUrl: "/dashboard/programs"
-        }
-      })
-    );
-    localStorage.removeItem("criteria");
+    let formattedMentorManagerIds = selectedMentorManagers.map((id) => {
+      return { mentorManagerId: id };
+    });
+    let formattedMentorIds = selectedMentors.map((id) => {
+      return { programsMentorId: id };
+    });
+    let payload = {
+      ...data,
+      programmePicture: uploadedFile?.imagePreviewUrl || "",
+      status: 1, // this will be replaced later - it ought to be done at the backend
+      criteria: JSON.stringify(localStorage.getItem("criteria")) || "",
+      managers: formattedMentorManagerIds,
+      mentors: formattedMentorIds
+    };
+    const response = await dispatch(createProgram(payload));
+    if (response.success) {
+      dispatch(
+        showModal({
+          name: "successNotification",
+          modalData: {
+            title: "Program Created Successfully!",
+            image: successImage,
+            redirectUrl: "/dashboard/programs"
+          }
+        })
+      );
+      localStorage.removeItem("criteria");
+    }
   };
 
   const handleOpenSideBar = (e, open, category) => {
@@ -187,40 +110,48 @@ function CreateProgram() {
     console.log(e.target.value);
   };
 
-  const handleSelectedFilterItem = (item) => {
-    console.log(item);
+  // const handleSelectedFilterItem = (item) => {
+  //   console.log(item);
+  // };
+
+  // const handleCloseSearchInput = (e) => {
+  //   console.log(e, "handle close input");
+  //   setCollapseInput(true);
+  // };
+
+  const handleCloseSelectElement = () => {
+    // Added to prevent console errors
   };
 
-  const handleCloseSearchInput = (e) => {
-    console.log(e, "handle close input");
-    setCollapseInput(true);
-  };
-
-  const handleCloseSelectElement = (e) => {
-    console.log(e, "handle close select");
-    setCloseSelectElement(true);
-  };
-
-  const getListComponents = (data) => {
-    const listItems = data.map((item, index) => {
-      return {
-        component: <PersonelComponent key={index} data={item} />,
-        id: item.id
-      };
-    });
+  const getListComponents = (data, selectedUsers) => {
+    const listItems =
+      Array.isArray(data) &&
+      data.map((item, index) => {
+        return {
+          component: (
+            <PersonelComponent
+              key={index}
+              data={item}
+              checked={selectedUsers.some((userId) => userId === item?.id)}
+              handleChecked={handleSelectedItem}
+            />
+          ),
+          id: item.id
+        };
+      });
 
     const headerComponent = (
       <div className={cx(styles.filterAndSearchDiv, "flexRow-align-center")}>
         <div className={cx(styles.searchWrapper)}>
           <Search
-            inputPlaceholder='Search for mentor...'
+            inputPlaceholder={openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"}
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}
             closeSelectElement={handleCloseSelectElement}
           />
         </div>
-        <Filter
+        {/* <Filter
           dropdownItems={[
             { name: "All", id: 1 },
             { name: "Mentors", id: 2 },
@@ -230,7 +161,7 @@ function CreateProgram() {
           closeSearchInput={handleCloseSearchInput}
           closeSelectElement={closeSelectElement}
           setCloseSelectElement={setCloseSelectElement}
-        />
+        /> */}
         <img
           src={closeIcon}
           className={cx(styles.closeIcon)}
@@ -243,8 +174,23 @@ function CreateProgram() {
     return { listItems, headerComponent };
   };
 
-  const handleSelectedItem = (item) => {
-    console.log(item);
+  const handleSelectedItem = (itemId) => {
+    if (openSideBar.category === "mentor-manager") {
+      if (selectedMentorManagers.find((userId) => userId === itemId)) {
+        let filteredMentorManagers = selectedMentorManagers.filter((id) => id !== itemId);
+        setSelectedMentorManagers(filteredMentorManagers);
+      } else {
+        setSelectedMentorManagers([...selectedMentorManagers, `${itemId}`]);
+      }
+    }
+    if (openSideBar.category === "mentor") {
+      if (selectedMentors.find((userId) => userId === itemId)) {
+        let filteredMentors = selectedMentors.filter((id) => id !== itemId);
+        setSelectedMentors(filteredMentors);
+      } else {
+        setSelectedMentors([...selectedMentors, `${itemId}`]);
+      }
+    }
   };
 
   const [uploadedFile, setUploadedFile] = useState({
@@ -276,6 +222,33 @@ function CreateProgram() {
     navigate("create-criteria");
   };
 
+  const handleClearList = (category) => {
+    if (category === "mentorManager") {
+      setSelectedMentorManagers([]);
+    } else if (category === "mentor") {
+      setSelectedMentors([]);
+    }
+  };
+
+  const handleSideBarMenuClick = () => {
+    // This is added to remove the warning of unused function in the selection sidebar component
+  };
+
+  const getUsers = (category) => {
+    if (category === "mentorManager") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "manager"))
+      );
+    }
+    if (category === "mentor") {
+      return (
+        Array.isArray(allUserProfilesData) &&
+        allUserProfilesData.filter((item) => item.roles.find((role) => role.toLowerCase() === "mentor"))
+      );
+    }
+  };
+
   return (
     <div className={cx(styles.createProgramContainer, "flexRow")}>
       <div className={cx(styles.mainSection, "flexCol")}>
@@ -285,14 +258,20 @@ function CreateProgram() {
         </div>
 
         <div className={cx(styles.formWrapper, "flexCol")}>
-          <form onSubmit={handleSubmit((data) => sendMessage(data))}>
+          <form onSubmit={handleSubmit((data) => handleCreateProgram(data))}>
             <div className={cx(styles.headerWrapper, "flexRow")}>
               <div className={cx(styles.leftSection, styles.imageDiv)}>
-                <img
-                  {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}
-                  src={uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : programAvatar}
-                  alt='profile-image'
-                />
+                {uploadedFile?.imagePreviewUrl ? (
+                  <img
+                    {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}
+                    src={uploadedFile?.imagePreviewUrl ? uploadedFile?.imagePreviewUrl : null}
+                    alt='profile-image'
+                  />
+                ) : (
+                  <span {...getRootProps({ onDragOver: handleDragOver, onClick: handleDropzoneClick })}>
+                    Select Image
+                  </span>
+                )}
               </div>
               <div className={cx(styles.rightSection, "flexCol")}>
                 <h5 className={cx(styles.title)}>Set Program Avatar</h5>
@@ -305,30 +284,30 @@ function CreateProgram() {
               </div>
             </div>
 
-            <label htmlFor='title'>Program Name</label>
+            <label htmlFor='name'>Program Name</label>
             <Controller
-              name='programName'
+              name='name'
               control={control}
               render={({ field }) => (
                 <InputField
                   {...field}
                   placeholder='Enter program name'
                   type='text'
-                  error={errors?.programName && errors?.programName?.message}
+                  error={errors?.name && errors?.name?.message}
                 />
               )}
             />
 
-            <label htmlFor='details'>Program Description</label>
+            <label htmlFor='description'>Program Description</label>
             <Controller
-              name='programDescription'
+              name='description'
               control={control}
               render={({ field }) => (
                 <TextArea
                   {...field}
                   placeholder='Enter description'
                   minHeight='150px'
-                  error={errors?.programDescription && errors?.programDescription?.message}
+                  error={errors?.description && errors?.description?.message}
                 />
               )}
             />
@@ -338,8 +317,8 @@ function CreateProgram() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor Manager</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>10 selected</span>
-                    <ClearListIcon />
+                    <span className={cx(styles.stats)}>{selectedMentorManagers.length} selected</span>
+                    <ClearListIcon onClick={() => handleClearList("mentorManager")} />
                   </div>
                 </div>
                 <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor-manager")} />
@@ -349,8 +328,8 @@ function CreateProgram() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Add Mentor</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>5 selected</span>
-                    <ClearListIcon />
+                    <span className={cx(styles.stats)}>{selectedMentors.length} selected</span>
+                    <ClearListIcon onClick={() => handleClearList("mentor")} />
                   </div>
                 </div>
                 <Button title='Select' size='small' onClick={(e) => handleOpenSideBar(e, true, "mentor")} />
@@ -360,7 +339,9 @@ function CreateProgram() {
                 <div className={cx(styles.leftSide, "flexCol")}>
                   <h6 className={cx(styles.title)}>Set Criteria</h6>
                   <div className={cx(styles.statsDiv, "flexRow")}>
-                    <span className={cx(styles.stats)}>5 selected</span>
+                    <span className={cx(styles.stats)}>
+                      {criteriaData && Object.keys(criteriaData).length} selected
+                    </span>
                     <ClearListIcon />
                   </div>
                 </div>
@@ -370,9 +351,9 @@ function CreateProgram() {
 
             <div className={cx(styles.submitBtnDiv, "flexRow")}>
               <Button
-                onClick={handleSubmit((data) => sendMessage(data))}
-                // loading={loading}
-                // disabled={loading}
+                onClick={handleSubmit((data) => handleCreateProgram(data))}
+                loading={createProgramLoading}
+                disabled={createProgramLoading}
                 title='Create Program'
                 type='primary'
               />
@@ -383,11 +364,17 @@ function CreateProgram() {
 
       {openSideBar.open && openSideBar.category === "mentor-manager" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorManagersArray)} />
+          <SelectionSideBar
+            selectedMenuItem={handleSideBarMenuClick}
+            data={getListComponents(getUsers("mentorManager"), selectedMentorManagers)}
+          />
         </div>
       ) : openSideBar.open && openSideBar.category === "mentor" ? (
         <div className={cx(styles.sideBarSection)}>
-          <SelectionSideBar selectedMenuItem={handleSelectedItem} data={getListComponents(mentorsArray)} />
+          <SelectionSideBar
+            selectedMenuItem={handleSideBarMenuClick}
+            data={getListComponents(getUsers("mentor"), selectedMentors)}
+          />
         </div>
       ) : null}
 

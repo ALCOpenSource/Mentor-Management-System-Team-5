@@ -48,6 +48,7 @@ const initialState = {
   getActiveProgramsByMonthLoading: false,
   getActiveProgramsByYearLoading: false,
   createProgramLoading: false,
+  getProgramDetailsLoading: false,
 
   //Mentors
   getAllMentorsLoading: false,
@@ -197,6 +198,9 @@ export const loadingSlice = createSlice({
     createProgramLoading: (state, action) => {
       state.createProgramLoading = action.payload;
     },
+    getProgramDetailsLoading: (state, action) => {
+      state.getProgramDetailsLoading = action.payload;
+    },
 
     //Mentors
     getAllMentorsLoading: (state, action) => {
@@ -283,6 +287,7 @@ export const {
   getActiveProgramsByMonthLoading,
   getActiveProgramsByYearLoading,
   createProgramLoading,
+  getProgramDetailsLoading,
   getMentorDetailsLoading,
   getAllMentorManagersLoading,
   deleteMentorManagerLoading,

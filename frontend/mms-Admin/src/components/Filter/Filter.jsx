@@ -49,8 +49,8 @@ const Filter = ({ selectedFilterItem, dropdownItems, closeSearchInput, closeSele
         >
           {dropdownItems &&
             dropdownItems.map((item, index) => (
-              <option key={index} value={item.name}>
-                {item.name}
+              <option key={index} value={item.value}>
+                {item.label}
               </option>
             ))}
         </select>
@@ -72,9 +72,9 @@ const Filter = ({ selectedFilterItem, dropdownItems, closeSearchInput, closeSele
                   <div
                     key={index}
                     className={cx(styles.dropdownItem, "flexRow-align-center")}
-                    onClick={() => handleCustomDropdownClick(item.name)}
+                    onClick={() => handleCustomDropdownClick(item.value)}
                   >
-                    <span className={cx(styles.item)}>{item.name}</span>
+                    <span className={cx(styles.item)}>{item.label}</span>
                   </div>
                 ))}
             </div>

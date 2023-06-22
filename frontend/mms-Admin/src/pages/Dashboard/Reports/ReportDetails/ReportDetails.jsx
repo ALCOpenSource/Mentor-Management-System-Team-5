@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import cx from "classnames";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./ReportDetails.module.scss";
 import reportIcon from "@/assets/icons/reports-overview-card-icon.svg";
 import closeIcon from "@/assets/icons/close-icon.svg";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Button from "@/components/Button/Button";
 import ShareReportModal from "@/components/Modals/ShareReport/ShareReport";
 import SuccessNotificationModal from "@/components/Modals/SuccessNotification/SuccessNotification";
 import { showModal } from "@/redux/Modal/ModalSlice";
 import successImage from "@/assets/images/default-success-notification-image.png";
-import { getReportDetails } from "@/redux/Reports/ReportsSlice";
+// import { getReportDetails } from "@/redux/Reports/ReportsSlice";
 import formatDate from "@/helpers/formatDate";
 import html2pdf from "html2pdf.js";
 
@@ -22,20 +22,30 @@ const ReportDetails = () => {
   const reportId = params.id;
   const navigate = useNavigate();
 
+  const [userFullName, setUserFullName] = useState("");
+
   const displayModal = useSelector((state) => state.modal.show);
   const modalName = useSelector((state) => state.modal.modalName);
-  const reportDetails = useSelector((state) => state.reports.getReportDetailsData);
+  const userProfiles = useSelector((state) => state.profile.getAllUserProfilesData);
+  // const reportDetails = useSelector((state) => state.reports.getReportDetailsData);
 
-  console.log(reportDetails, "report details");
+  // Temporary fix for report details. It will be removed when the endpoint is fixed
+  const location = useLocation();
+  const reportDetails = location?.state?.data;
 
   useEffect(() => {
-    dispatch(getReportDetails(reportId));
+    // dispatch(getReportDetails(reportId));
   }, [dispatch, reportId]);
+
+  useEffect(() => {
+    let user = Array.isArray(userProfiles) && userProfiles.find((profile) => profile.id === reportDetails?.createdBy);
+    setUserFullName(`${user?.firstName} ${user?.lastName}`);
+  }, [userProfiles, reportDetails?.createdBy]);
 
   const authorMetaData = {
     id: reportId,
     title: reportDetails?.reportTitle,
-    author: reportDetails?.createdBy,
+    author: userFullName,
     date: reportDetails?.createdAt ? formatDate(reportDetails?.createdAt) : ""
   };
 
@@ -46,7 +56,7 @@ const ReportDetails = () => {
     },
     blockers: {
       title: "Major Blockers",
-      content: reportDetails?.blockers
+      content: reportDetails?.blocker
     },
     recommendations: {
       title: "Major Recommendations",

@@ -141,9 +141,7 @@ const EditTask = () => {
         )}
         <div className={cx(styles.searchWrapper)}>
           <Search
-            inputPlaceholder={
-              openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"
-            }
+            inputPlaceholder={openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"}
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}

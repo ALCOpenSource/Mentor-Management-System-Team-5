@@ -72,7 +72,7 @@ function CreateTask() {
 
     let payload = {
       ...data,
-      status: 3,
+      status: 3, // this would be changed later
       managers: formattedMentorManagerIds,
       mentors: formattedMentorIds
     };
@@ -127,9 +127,7 @@ function CreateTask() {
         )}
         <div className={cx(styles.searchWrapper)}>
           <Search
-            inputPlaceholder={
-              openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"
-            }
+            inputPlaceholder={openSideBar?.category === "mentor-manager" ? "Search for Mentor Manager" : "Search for Mentor"}
             onChange={handleSearchInput}
             collapseInput={collapseInput}
             setCollapseInput={setCollapseInput}

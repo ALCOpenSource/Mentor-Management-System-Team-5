@@ -21,6 +21,8 @@ const Chats = () => {
   const [collapseInput, setCollapseInput] = useState(true);
   const [messages, setMessages] = useState([]);
 
+  console.log(messages, "messages");
+
   // Temp fix for handling empty message history
   // const [messageHistory, setMessageHistory] = useState([]);
   const messageHistory = [];
