@@ -43,7 +43,7 @@ const Input = forwardRef(
           />
           {type === "password" && (
             <img
-              src={showPassword ? eyeIconShow : eyeIconHide}
+              src={showPassword ? eyeIconHide : eyeIconShow}
               alt='eye-icon'
               className='eye-icon'
               onClick={handleVisibility}
